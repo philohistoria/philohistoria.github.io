@@ -1,0 +1,4 @@
+[submodule "philohistoria.github.io"]
+	path = philohistoria.github.io
+	url = https://github.com/philohistoria/philohistoria.github.io.git
+	branch = master
