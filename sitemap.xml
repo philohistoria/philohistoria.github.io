@@ -3,24 +3,24 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://philohistoria.github.io/talk/asa-2019/</loc>
+    <lastmod>2019-08-13T14:30:00-04:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://philohistoria.github.io/</loc>
-    <lastmod>2019-07-09T20:35:41-04:00</lastmod>
+    <lastmod>2019-08-13T14:30:00-04:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://philohistoria.github.io/talk/icsa-2019/</loc>
-    <lastmod>2019-07-09T20:35:41-04:00</lastmod>
-  </url>
-  
-  <url>
     <loc>https://philohistoria.github.io/talk/</loc>
-    <lastmod>2019-07-09T20:35:41-04:00</lastmod>
+    <lastmod>2019-08-13T14:30:00-04:00</lastmod>
   </url>
   
   <url>
-    <loc>https://philohistoria.github.io/talk/asa-2019/</loc>
-    <lastmod>2019-07-09T17:29:23-04:00</lastmod>
+    <loc>https://philohistoria.github.io/talk/icsa-2019/</loc>
+    <lastmod>2019-08-09T14:30:00-04:00</lastmod>
   </url>
   
   <url>
@@ -61,6 +61,77 @@
   <url>
     <loc>https://philohistoria.github.io/publication/</loc>
     <lastmod>2019-01-01T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://philohistoria.github.io/publication/zhang-addressing-2018/</loc>
+    <lastmod>2018-05-01T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://philohistoria.github.io/authors/david-rothschild/</loc>
+    <lastmod>2018-05-01T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://philohistoria.github.io/authors/shawndra-hill/</loc>
+    <lastmod>2018-05-01T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://philohistoria.github.io/tags/</loc>
+    <lastmod>2018-05-01T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://philohistoria.github.io/tags/twitter/</loc>
+    <lastmod>2018-05-01T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://philohistoria.github.io/tags/coverage-bias/</loc>
+    <lastmod>2018-05-01T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://philohistoria.github.io/tags/geolocation/</loc>
+    <lastmod>2018-05-01T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://philohistoria.github.io/tags/non-response-bias/</loc>
+    <lastmod>2018-05-01T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://philohistoria.github.io/tags/panels/</loc>
+    <lastmod>2018-05-01T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://philohistoria.github.io/tags/selection-bias/</loc>
+    <lastmod>2018-05-01T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://philohistoria.github.io/tags/social-media/</loc>
+    <lastmod>2018-05-01T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://philohistoria.github.io/tags/survey/</loc>
+    <lastmod>2018-05-01T00:00:00+00:00</lastmod>
+    <priority>0</priority>
   </url>
   
   <url>
@@ -105,25 +176,7 @@
   </url>
   
   <url>
-    <loc>https://philohistoria.github.io/tags/</loc>
-    <lastmod>2016-03-01T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
     <loc>https://philohistoria.github.io/tags/democracy/</loc>
-    <lastmod>2016-03-01T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://philohistoria.github.io/tags/geolocation/</loc>
-    <lastmod>2016-03-01T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://philohistoria.github.io/tags/social-media/</loc>
     <lastmod>2016-03-01T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
