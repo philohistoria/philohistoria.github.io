@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>David Rothschild on Han Zhang | Sociology</title>
+    <title>David Rothschild | Han Zhang | Sociology</title>
     <link>https://philohistoria.github.io/authors/david-rothschild/</link>
-    <description>Recent content in David Rothschild on Han Zhang | Sociology</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language>
-    <lastBuildDate>Tue, 01 May 2018 00:00:00 +0000</lastBuildDate>
-    
-	<atom:link href="https://philohistoria.github.io/authors/david-rothschild/index.xml" rel="self" type="application/rss+xml" />
-    
+      <atom:link href="https://philohistoria.github.io/authors/david-rothschild/index.xml" rel="self" type="application/rss+xml" />
+    <description>David Rothschild</description>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Tue, 01 May 2018 00:00:00 +0000</lastBuildDate>
+    <image>
+      <url>https://philohistoria.github.io/img/icon-192.png</url>
+      <title>David Rothschild</title>
+      <link>https://philohistoria.github.io/authors/david-rothschild/</link>
+    </image>
     
     <item>
       <title>Addressing Selection Bias in Event Studies with General-Purpose Social Media Panels</title>
       <link>https://philohistoria.github.io/publication/zhang-addressing-2018/</link>
       <pubDate>Tue, 01 May 2018 00:00:00 +0000</pubDate>
-      
       <guid>https://philohistoria.github.io/publication/zhang-addressing-2018/</guid>
       <description></description>
     </item>

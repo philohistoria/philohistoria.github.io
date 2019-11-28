@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Recent &amp; Upcoming Talks on Han Zhang | Sociology</title>
+    <title>Recent &amp; Upcoming Talks | Han Zhang | Sociology</title>
     <link>https://philohistoria.github.io/talk/</link>
-    <description>Recent content in Recent &amp; Upcoming Talks on Han Zhang | Sociology</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language>
-    <lastBuildDate>Tue, 13 Aug 2019 14:30:00 -0400</lastBuildDate>
-    
-	<atom:link href="https://philohistoria.github.io/talk/index.xml" rel="self" type="application/rss+xml" />
-    
+      <atom:link href="https://philohistoria.github.io/talk/index.xml" rel="self" type="application/rss+xml" />
+    <description>Recent &amp; Upcoming Talks</description>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Tue, 13 Aug 2019 14:30:00 -0400</lastBuildDate>
+    <image>
+      <url>https://philohistoria.github.io/img/icon-192.png</url>
+      <title>Recent &amp; Upcoming Talks</title>
+      <link>https://philohistoria.github.io/talk/</link>
+    </image>
     
     <item>
       <title>ASA 2019</title>
       <link>https://philohistoria.github.io/talk/asa-2019/</link>
       <pubDate>Tue, 13 Aug 2019 14:30:00 -0400</pubDate>
-      
       <guid>https://philohistoria.github.io/talk/asa-2019/</guid>
       <description></description>
     </item>
@@ -24,7 +24,6 @@
       <title>ICSA 2019</title>
       <link>https://philohistoria.github.io/talk/icsa-2019/</link>
       <pubDate>Fri, 09 Aug 2019 14:30:00 -0400</pubDate>
-      
       <guid>https://philohistoria.github.io/talk/icsa-2019/</guid>
       <description></description>
     </item>

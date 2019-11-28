@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>selection bias on Han Zhang | Sociology</title>
+    <title>selection bias | Han Zhang | Sociology</title>
     <link>https://philohistoria.github.io/tags/selection-bias/</link>
-    <description>Recent content in selection bias on Han Zhang | Sociology</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language>
-    <lastBuildDate>Tue, 01 May 2018 00:00:00 +0000</lastBuildDate>
-    
-	<atom:link href="https://philohistoria.github.io/tags/selection-bias/index.xml" rel="self" type="application/rss+xml" />
-    
+      <atom:link href="https://philohistoria.github.io/tags/selection-bias/index.xml" rel="self" type="application/rss+xml" />
+    <description>selection bias</description>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Tue, 01 May 2018 00:00:00 +0000</lastBuildDate>
+    <image>
+      <url>https://philohistoria.github.io/img/icon-192.png</url>
+      <title>selection bias</title>
+      <link>https://philohistoria.github.io/tags/selection-bias/</link>
+    </image>
     
     <item>
       <title>Addressing Selection Bias in Event Studies with General-Purpose Social Media Panels</title>
       <link>https://philohistoria.github.io/publication/zhang-addressing-2018/</link>
       <pubDate>Tue, 01 May 2018 00:00:00 +0000</pubDate>
-      
       <guid>https://philohistoria.github.io/publication/zhang-addressing-2018/</guid>
       <description></description>
     </item>
