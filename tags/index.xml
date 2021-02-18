@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Tags | Han Zhang | Sociology</title>
+    <title>Tags | Han Zhang</title>
     <link>https://hanzhang.xyz/tags/</link>
       <atom:link href="https://hanzhang.xyz/tags/index.xml" rel="self" type="application/rss+xml" />
     <description>Tags</description>
@@ -11,118 +11,6 @@
       <title>Tags</title>
       <link>https://hanzhang.xyz/tags/</link>
     </image>
-    
-    <item>
-      <title>coverage bias</title>
-      <link>https://hanzhang.xyz/tags/coverage-bias/</link>
-      <pubDate>Tue, 01 May 2018 00:00:00 +0000</pubDate>
-      <guid>https://hanzhang.xyz/tags/coverage-bias/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>geolocation</title>
-      <link>https://hanzhang.xyz/tags/geolocation/</link>
-      <pubDate>Tue, 01 May 2018 00:00:00 +0000</pubDate>
-      <guid>https://hanzhang.xyz/tags/geolocation/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>non-response bias</title>
-      <link>https://hanzhang.xyz/tags/non-response-bias/</link>
-      <pubDate>Tue, 01 May 2018 00:00:00 +0000</pubDate>
-      <guid>https://hanzhang.xyz/tags/non-response-bias/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>panels</title>
-      <link>https://hanzhang.xyz/tags/panels/</link>
-      <pubDate>Tue, 01 May 2018 00:00:00 +0000</pubDate>
-      <guid>https://hanzhang.xyz/tags/panels/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>selection bias</title>
-      <link>https://hanzhang.xyz/tags/selection-bias/</link>
-      <pubDate>Tue, 01 May 2018 00:00:00 +0000</pubDate>
-      <guid>https://hanzhang.xyz/tags/selection-bias/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>social media</title>
-      <link>https://hanzhang.xyz/tags/social-media/</link>
-      <pubDate>Tue, 01 May 2018 00:00:00 +0000</pubDate>
-      <guid>https://hanzhang.xyz/tags/social-media/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>survey</title>
-      <link>https://hanzhang.xyz/tags/survey/</link>
-      <pubDate>Tue, 01 May 2018 00:00:00 +0000</pubDate>
-      <guid>https://hanzhang.xyz/tags/survey/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Twitter</title>
-      <link>https://hanzhang.xyz/tags/twitter/</link>
-      <pubDate>Tue, 01 May 2018 00:00:00 +0000</pubDate>
-      <guid>https://hanzhang.xyz/tags/twitter/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>China</title>
-      <link>https://hanzhang.xyz/tags/china/</link>
-      <pubDate>Tue, 01 Mar 2016 00:00:00 +0000</pubDate>
-      <guid>https://hanzhang.xyz/tags/china/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Civic Engagement</title>
-      <link>https://hanzhang.xyz/tags/civic-engagement/</link>
-      <pubDate>Tue, 01 Mar 2016 00:00:00 +0000</pubDate>
-      <guid>https://hanzhang.xyz/tags/civic-engagement/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>democracy</title>
-      <link>https://hanzhang.xyz/tags/democracy/</link>
-      <pubDate>Tue, 01 Mar 2016 00:00:00 +0000</pubDate>
-      <guid>https://hanzhang.xyz/tags/democracy/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Hong Kong</title>
-      <link>https://hanzhang.xyz/tags/hong-kong/</link>
-      <pubDate>Tue, 01 Mar 2016 00:00:00 +0000</pubDate>
-      <guid>https://hanzhang.xyz/tags/hong-kong/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Protest</title>
-      <link>https://hanzhang.xyz/tags/protest/</link>
-      <pubDate>Tue, 01 Mar 2016 00:00:00 +0000</pubDate>
-      <guid>https://hanzhang.xyz/tags/protest/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Quasi Experiment</title>
-      <link>https://hanzhang.xyz/tags/quasi-experiment/</link>
-      <pubDate>Tue, 01 Mar 2016 00:00:00 +0000</pubDate>
-      <guid>https://hanzhang.xyz/tags/quasi-experiment/</guid>
-      <description></description>
-    </item>
     
   </channel>
 </rss>

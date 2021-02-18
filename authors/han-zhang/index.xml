@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Han Zhang | Han Zhang | Sociology</title>
+    <title>Han Zhang</title>
     <link>https://hanzhang.xyz/authors/han-zhang/</link>
       <atom:link href="https://hanzhang.xyz/authors/han-zhang/index.xml" rel="self" type="application/rss+xml" />
     <description>Han Zhang</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Tue, 01 Jan 2019 00:00:00 +0000</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Fri, 01 Jan 2021 00:00:00 +0000</lastBuildDate>
     <image>
       <url>https://hanzhang.xyz/images/icon_hua15c664b061421785ed57a8119f33794_4367_512x512_fill_lanczos_center_2.png</url>
       <title>Han Zhang</title>
@@ -13,11 +13,34 @@
     </image>
     
     <item>
+      <title>Image Clustering: An Unsupervised Approach to Categorize Visual Data in Social Science Research</title>
+      <link>https://hanzhang.xyz/publication/zhang-image-2021/</link>
+      <pubDate>Fri, 01 Jan 2021 00:00:00 +0000</pubDate>
+      <guid>https://hanzhang.xyz/publication/zhang-image-2021/</guid>
+      <description>&lt;p&gt;Automated image analysis has received increasing attention in social scientific
+research, yet existing scholarship has focused on the application of supervised
+machine learning to classify images into predefined categories. This study focuses
+on the task of unsupervised image clustering, which automatically finds categories
+from image data. First, we review the steps to perform image clustering, and then
+we focus on the key challenge of performing unsupervised image clustering&amp;mdash;finding
+low-dimensional representations of images. We present several methods of extracting
+low-dimensional representations of images, including the traditional bag-of-visual-words
+model, self-supervised learning, and transfer learning. We compare these methods
+using two datasets containing images related to protests in China (from Sina Weibo,
+Chinese Twitter) and to climate change(from Instagram). Results show that transfer
+learning significantly outperforms other methods. The dataset used in the pretrained
+model critically determines what categories algorithms can discover.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
       <title>CASM: A Deep Learning Approach for Identifying Collective Action Events with Text and Image Data from Social Media</title>
       <link>https://hanzhang.xyz/publication/zhang-casm-2019/</link>
       <pubDate>Tue, 01 Jan 2019 00:00:00 +0000</pubDate>
       <guid>https://hanzhang.xyz/publication/zhang-casm-2019/</guid>
-      <description></description>
+      <description>&lt;p&gt;There are three great invited commentaries to our article by &lt;a href=&#34;https://zacharyst.com/&#34;&gt;Zachary C. Steinert-Threlkeld&lt;/a&gt;, &lt;a href=&#34;https://www.wzb.eu/en/persons/swen-hutter&#34;&gt;Swen Hutter&lt;/a&gt;, and &lt;a href=&#34;https://www.ssc.wisc.edu/~oliver/&#34;&gt;Pamela Oliver&lt;/a&gt;. &lt;a href=&#34;https://journals.sagepub.com/doi/citedby/10.1177/0081175019860244&#34;&gt;Read them and our response here&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Abstract&lt;/em&gt;: Protest event analysis is an important method for the study of collective action and social movements and typically draws on traditional media reports as the data source. We introduce collective action from social media (CASM)—a system that uses convolutional neural networks on image data and recurrent neural networks with long short-term memory on text data in a two-stage classifier to identify social media posts about offline collective action. We implement CASM on Chinese social media data and identify more than 100,000 collective action events from 2010 to 2017 (CASM-China). We evaluate the performance of CASM through cross-validation, out-of-sample validation, and comparisons with other protest data sets. We assess the effect of online censorship and find it does not substantially limit our identification of events. Compared to other protest data sets, CASM-China identifies relatively more rural, land-related protests and relatively few collective action events related to ethnic and religious conflict.&lt;/p&gt;
+</description>
     </item>
     
     <item>
@@ -25,7 +48,8 @@
       <link>https://hanzhang.xyz/publication/zhang-addressing-2018/</link>
       <pubDate>Tue, 01 May 2018 00:00:00 +0000</pubDate>
       <guid>https://hanzhang.xyz/publication/zhang-addressing-2018/</guid>
-      <description></description>
+      <description>&lt;p&gt;Data from Twitter have been employed in prior research to study the impacts of events. Conventionally, researchers use keyword-based samples of tweets to create a panel of Twitter users who mention event-related keywords during and aer an event. However, the keyword-based sampling is limited in its objectivity dimension of data and information quality. First, the technique suers from selection bias since users who discuss an event are already more likely to discuss event-related topics beforehand. Second, there are no viable control groups for comparison to a keyword-based sample of Twitter users. We propose an alternative sampling approach to construct panels of users defined by their geolocation. Geolocated panels are exogenous to the keywords in users&#39; tweets, resulting in less selection bias than the keyword panel method. Geolocated panels allow us to follow within-person changes over time and enable the creation of comparison groups. We compare different panels in two real-world settings: response to mass shootings and TV advertising. We show the strength of the selection biases of keyword-panels. Then, we empirically illustrate how geolocated panels reduce selection biases and allow meaningful comparison groups regarding the impact of the studied events. We are the first to provide a clear, empirical example of how a better panel-selection design, based on an exogenous variable such as geography, both reduces selection bias compared to the current state of the art and increases the value of Twitter research for studying events. While we advocate for the use of geolocated panels, we also discuss its weaknesses and application scenario seriously. This paper also calls attention to the importance of selection bias in impacting the objectivity of social media data&lt;/p&gt;
+</description>
     </item>
     
     <item>
