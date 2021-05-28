@@ -1,192 +1,131 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
-  
   <url>
     <loc>https://hanzhang.xyz/publication_types/0/</loc>
-    <lastmod>2021-02-18T16:55:20+08:00</lastmod>
-  </url>
-  
-  <url>
+    <lastmod>2021-05-28T15:58:11+08:00</lastmod>
+  </url><url>
+    <loc>https://hanzhang.xyz/publication_types/2/</loc>
+    <lastmod>2021-05-28T16:26:26+08:00</lastmod>
+  </url><url>
+    <loc>https://hanzhang.xyz/publication/zhang-authoritarian-2021/</loc>
+    <lastmod>2021-05-28T15:30:49+08:00</lastmod>
+  </url><url>
     <loc>https://hanzhang.xyz/authors/</loc>
-    <lastmod>2021-02-18T16:55:20+08:00</lastmod>
-  </url>
-  
-  <url>
+    <lastmod>2021-05-28T16:26:26+08:00</lastmod>
+  </url><url>
+    <loc>https://hanzhang.xyz/authors/elaine-yao/</loc>
+    <lastmod>2021-05-28T15:30:49+08:00</lastmod>
+  </url><url>
     <loc>https://hanzhang.xyz/authors/han-zhang/</loc>
-    <lastmod>2021-02-18T16:55:20+08:00</lastmod>
-  </url>
-  
-  <url>
+    <lastmod>2021-05-28T16:26:26+08:00</lastmod>
+  </url><url>
     <loc>https://hanzhang.xyz/</loc>
-    <lastmod>2021-02-18T16:55:20+08:00</lastmod>
-  </url>
-  
-  <url>
+    <lastmod>2021-05-28T16:26:26+08:00</lastmod>
+  </url><url>
+    <loc>https://hanzhang.xyz/publication/zhang-how-2021/</loc>
+    <lastmod>2021-05-28T15:18:11+08:00</lastmod>
+  </url><url>
     <loc>https://hanzhang.xyz/publication/zhang-image-2021/</loc>
-    <lastmod>2021-02-18T16:55:20+08:00</lastmod>
-  </url>
-  
-  <url>
+    <lastmod>2021-05-28T16:26:26+08:00</lastmod>
+  </url><url>
+    <loc>https://hanzhang.xyz/authors/lai-wei/</loc>
+    <lastmod>2021-05-28T15:30:49+08:00</lastmod>
+  </url><url>
+    <loc>https://hanzhang.xyz/authors/larry-liu/</loc>
+    <lastmod>2021-05-28T15:58:11+08:00</lastmod>
+  </url><url>
     <loc>https://hanzhang.xyz/publication_types/</loc>
-    <lastmod>2021-02-18T16:55:20+08:00</lastmod>
-  </url>
-  
-  <url>
+    <lastmod>2021-05-28T16:26:26+08:00</lastmod>
+  </url><url>
     <loc>https://hanzhang.xyz/publication/</loc>
-    <lastmod>2021-02-18T16:55:20+08:00</lastmod>
-  </url>
-  
-  <url>
+    <lastmod>2021-05-28T16:26:26+08:00</lastmod>
+  </url><url>
+    <loc>https://hanzhang.xyz/publication/zhang-robot-2021/</loc>
+    <lastmod>2021-05-28T15:58:11+08:00</lastmod>
+  </url><url>
     <loc>https://hanzhang.xyz/authors/yilang-peng/</loc>
-    <lastmod>2021-02-18T16:55:20+08:00</lastmod>
-  </url>
-  
-  <url>
+    <lastmod>2021-05-28T16:26:26+08:00</lastmod>
+  </url><url>
     <loc>https://hanzhang.xyz/talk/asa-2019/</loc>
     <lastmod>2019-08-13T14:30:00-04:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://hanzhang.xyz/talk/</loc>
     <lastmod>2019-08-13T14:30:00-04:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://hanzhang.xyz/talk/icsa-2019/</loc>
     <lastmod>2019-08-09T14:30:00-04:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://hanzhang.xyz/publication_types/3/</loc>
-    <lastmod>2019-01-01T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://hanzhang.xyz/publication/zhang-casm-2019/</loc>
     <lastmod>2019-01-01T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://hanzhang.xyz/authors/jennifer-pan/</loc>
     <lastmod>2019-01-01T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://hanzhang.xyz/tags/coverage-bias/</loc>
     <lastmod>2018-05-01T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://hanzhang.xyz/tags/geolocation/</loc>
     <lastmod>2018-05-01T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://hanzhang.xyz/tags/non-response-bias/</loc>
     <lastmod>2018-05-01T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://hanzhang.xyz/tags/panels/</loc>
     <lastmod>2018-05-01T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://hanzhang.xyz/tags/selection-bias/</loc>
     <lastmod>2018-05-01T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://hanzhang.xyz/tags/social-media/</loc>
     <lastmod>2018-05-01T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://hanzhang.xyz/tags/survey/</loc>
     <lastmod>2018-05-01T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://hanzhang.xyz/tags/twitter/</loc>
     <lastmod>2018-05-01T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://hanzhang.xyz/publication_types/2/</loc>
-    <lastmod>2018-05-01T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://hanzhang.xyz/publication/zhang-addressing-2018/</loc>
     <lastmod>2018-05-01T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://hanzhang.xyz/authors/david-rothschild/</loc>
     <lastmod>2018-05-01T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://hanzhang.xyz/authors/shawndra-hill/</loc>
     <lastmod>2018-05-01T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://hanzhang.xyz/tags/</loc>
     <lastmod>2018-05-01T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://hanzhang.xyz/tags/china/</loc>
     <lastmod>2016-03-01T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://hanzhang.xyz/tags/civic-engagement/</loc>
     <lastmod>2016-03-01T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://hanzhang.xyz/tags/democracy/</loc>
     <lastmod>2016-03-01T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://hanzhang.xyz/tags/hong-kong/</loc>
     <lastmod>2016-03-01T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://hanzhang.xyz/tags/protest/</loc>
     <lastmod>2016-03-01T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://hanzhang.xyz/tags/quasi-experiment/</loc>
     <lastmod>2016-03-01T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://hanzhang.xyz/publication_types/4/</loc>
     <lastmod>2016-03-01T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://hanzhang.xyz/publication/zhang-causal-2016/</loc>
     <lastmod>2016-03-01T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://hanzhang.xyz/authors/admin/</loc>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://hanzhang.xyz/categories/</loc>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://hanzhang.xyz/post/</loc>
   </url>
-  
 </urlset>

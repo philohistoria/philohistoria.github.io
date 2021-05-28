@@ -1,24 +1,16 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>0 | Han Zhang</title>
-    <link>https://hanzhang.xyz/publication_types/0/</link>
-      <atom:link href="https://hanzhang.xyz/publication_types/0/index.xml" rel="self" type="application/rss+xml" />
-    <description>0</description>
+    <title>Larry Liu | Han Zhang</title>
+    <link>https://hanzhang.xyz/authors/larry-liu/</link>
+      <atom:link href="https://hanzhang.xyz/authors/larry-liu/index.xml" rel="self" type="application/rss+xml" />
+    <description>Larry Liu</description>
     <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Fri, 01 Jan 2021 00:00:00 +0000</lastBuildDate>
     <image>
       <url>https://hanzhang.xyz/images/icon_hua15c664b061421785ed57a8119f33794_4367_512x512_fill_lanczos_center_2.png</url>
-      <title>0</title>
-      <link>https://hanzhang.xyz/publication_types/0/</link>
+      <title>Larry Liu</title>
+      <link>https://hanzhang.xyz/authors/larry-liu/</link>
     </image>
-    
-    <item>
-      <title>Authoritarian Responsiveness and Political Attitudes during COVID-19: Evidence from Weibo and a Survey Experiment</title>
-      <link>https://hanzhang.xyz/publication/zhang-authoritarian-2021/</link>
-      <pubDate>Fri, 01 Jan 2021 00:00:00 +0000</pubDate>
-      <guid>https://hanzhang.xyz/publication/zhang-authoritarian-2021/</guid>
-      <description></description>
-    </item>
     
     <item>
       <title>Robots and Protest: Does Increased Protest Among Chinese Workers Result in More Automation?</title>
