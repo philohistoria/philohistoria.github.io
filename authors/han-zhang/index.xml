@@ -5,12 +5,20 @@
     <link>https://hanzhang.xyz/authors/han-zhang/</link>
       <atom:link href="https://hanzhang.xyz/authors/han-zhang/index.xml" rel="self" type="application/rss+xml" />
     <description>Han Zhang</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Sat, 01 Jan 2022 00:00:00 +0000</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Fri, 08 Apr 2022 01:47:38 +0000</lastBuildDate>
     <image>
       <url>https://hanzhang.xyz/images/icon_hua15c664b061421785ed57a8119f33794_4367_512x512_fill_lanczos_center_3.png</url>
       <title>Han Zhang</title>
       <link>https://hanzhang.xyz/authors/han-zhang/</link>
     </image>
+    
+    <item>
+      <title>Robots and Protest: Does Increased Protest Among Chinese Workers Result in More Automation?</title>
+      <link>https://hanzhang.xyz/publication/zhang-robot-2022/</link>
+      <pubDate>Fri, 08 Apr 2022 01:47:38 +0000</pubDate>
+      <guid>https://hanzhang.xyz/publication/zhang-robot-2022/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>Image Clustering: An Unsupervised Approach to Categorize Visual Data in Social Science Research</title>
@@ -47,14 +55,6 @@ The estimators require the existence of validation data, of which researchers ha
 Monte Carlo simulations demonstrate the effectiveness of the proposed estimators.
 Finally, we summarize the usage pattern of machine learning predictions in 18 recent publications in top social science journals, apply our proposed estimators to two of them, and offer some practical recommendations.&lt;/p&gt;
 </description>
-    </item>
-    
-    <item>
-      <title>Robots and Protest: Does Increased Protest Among Chinese Workers Result in More Automation?</title>
-      <link>https://hanzhang.xyz/publication/zhang-robot-2021/</link>
-      <pubDate>Fri, 01 Jan 2021 00:00:00 +0000</pubDate>
-      <guid>https://hanzhang.xyz/publication/zhang-robot-2021/</guid>
-      <description></description>
     </item>
     
     <item>
