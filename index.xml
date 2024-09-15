@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Han Zhang</title>
-    <link>http://localhost:1313/</link>
-      <atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
+    <link>https://hanzhang.xyz/</link>
+      <atom:link href="https://hanzhang.xyz/index.xml" rel="self" type="application/rss+xml" />
     <description>Han Zhang</description>
     <generator>Hugo Blox Builder (https://hugoblox.com)</generator><language>en-us</language><lastBuildDate>Mon, 24 Oct 2022 00:00:00 +0000</lastBuildDate>
     <image>
-      <url>http://localhost:1313/media/icon_hu6741429377955683711.png</url>
+      <url>https://hanzhang.xyz/media/icon_hu6741429377955683711.png</url>
       <title>Han Zhang</title>
-      <link>http://localhost:1313/</link>
+      <link>https://hanzhang.xyz/</link>
     </image>
     
     <item>
       <title>Example Talk</title>
-      <link>http://localhost:1313/event/example/</link>
+      <link>https://hanzhang.xyz/event/example/</link>
       <pubDate>Sat, 01 Jun 2030 13:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/event/example/</guid>
+      <guid>https://hanzhang.xyz/event/example/</guid>
       <description>&lt;div class=&#34;flex px-4 py-3 mb-6 rounded-md bg-primary-100 dark:bg-primary-900&#34;&gt;
 &lt;span class=&#34;pr-3 pt-1 text-primary-600 dark:text-primary-300&#34;&gt;
   &lt;svg height=&#34;24&#34; xmlns=&#34;http://www.w3.org/2000/svg&#34; viewBox=&#34;0 0 24 24&#34;&gt;&lt;path fill=&#34;none&#34; stroke=&#34;currentColor&#34; stroke-linecap=&#34;round&#34; stroke-linejoin=&#34;round&#34; stroke-width=&#34;1.5&#34; d=&#34;m11.25 11.25l.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0a9 9 0 0 1 18 0m-9-3.75h.008v.008H12z&#34;/&gt;&lt;/svg&gt;
@@ -38,18 +38,18 @@
     
     <item>
       <title>IAPA 1801X: Surveillance: State, Capitalism, and Society</title>
-      <link>http://localhost:1313/teaching/iapa1801x/</link>
+      <link>https://hanzhang.xyz/teaching/iapa1801x/</link>
       <pubDate>Sun, 01 Sep 2024 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/teaching/iapa1801x/</guid>
+      <guid>https://hanzhang.xyz/teaching/iapa1801x/</guid>
       <description>&lt;p&gt;I am teaching &lt;em&gt;IAPA 1801X: Surveillance: State, Capitalism, and Society&lt;/em&gt; at Brown in Fall 2024.&lt;/p&gt;
 </description>
     </item>
     
     <item>
       <title>updates</title>
-      <link>http://localhost:1313/post/data-visualization/</link>
+      <link>https://hanzhang.xyz/post/data-visualization/</link>
       <pubDate>Tue, 27 Aug 2024 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/post/data-visualization/</guid>
+      <guid>https://hanzhang.xyz/post/data-visualization/</guid>
       <description>&lt;h1 id=&#34;updates&#34;&gt;updates&lt;/h1&gt;
 &lt;p&gt;&lt;span class=&#34;timestamp-wrapper&#34;&gt;&lt;span class=&#34;timestamp&#34;&gt;[2024-08-14 Wed]&lt;/span&gt;&lt;/span&gt;
 the previous website (theme) is kind of broken. I don’t know why
@@ -83,17 +83,17 @@ which will be pusshed to the Github pages
     
     <item>
       <title>Projects</title>
-      <link>http://localhost:1313/projects/</link>
+      <link>https://hanzhang.xyz/projects/</link>
       <pubDate>Sun, 19 May 2024 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/projects/</guid>
+      <guid>https://hanzhang.xyz/projects/</guid>
       <description></description>
     </item>
     
     <item>
       <title>SOSC 4300 &amp; 5500 : Computational Social Science</title>
-      <link>http://localhost:1313/teaching/sosc4300/</link>
+      <link>https://hanzhang.xyz/teaching/sosc4300/</link>
       <pubDate>Wed, 01 May 2024 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/teaching/sosc4300/</guid>
+      <guid>https://hanzhang.xyz/teaching/sosc4300/</guid>
       <description>&lt;p&gt;I have taught &lt;em&gt;SOSC 4300 / 5500: Computational Social Science&lt;/em&gt; at HKUST from 2020 - 2024. You can view the 
 .&lt;/p&gt;
 </description>
@@ -101,9 +101,9 @@ which will be pusshed to the Github pages
     
     <item>
       <title>SOSC 5340 : Econometric Approaches to Social Science Research</title>
-      <link>http://localhost:1313/teaching/sosc5340/</link>
+      <link>https://hanzhang.xyz/teaching/sosc5340/</link>
       <pubDate>Wed, 01 May 2024 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/teaching/sosc5340/</guid>
+      <guid>https://hanzhang.xyz/teaching/sosc5340/</guid>
       <description>&lt;p&gt;I have taught &lt;em&gt;SOSC 5340: Econometric Approaches to Social Science Research&lt;/em&gt; at HKUST from 2020 - 2024. You can view the 
 .&lt;/p&gt;
 </description>
@@ -111,9 +111,9 @@ which will be pusshed to the Github pages
     
     <item>
       <title>🎉 Easily create your own simple yet highly customizable blog</title>
-      <link>http://localhost:1313/post/get-started/</link>
+      <link>https://hanzhang.xyz/post/get-started/</link>
       <pubDate>Fri, 27 Oct 2023 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/post/get-started/</guid>
+      <guid>https://hanzhang.xyz/post/get-started/</guid>
       <description>&lt;p&gt;Welcome 👋&lt;/p&gt;
 
 
@@ -221,33 +221,33 @@ which will be pusshed to the Github pages
     
     <item>
       <title>Pandas</title>
-      <link>http://localhost:1313/project/pandas/</link>
+      <link>https://hanzhang.xyz/project/pandas/</link>
       <pubDate>Thu, 26 Oct 2023 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/project/pandas/</guid>
+      <guid>https://hanzhang.xyz/project/pandas/</guid>
       <description>&lt;p&gt;Flexible and powerful data analysis / manipulation library for Python, providing labeled data structures.&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>PyTorch</title>
-      <link>http://localhost:1313/project/pytorch/</link>
+      <link>https://hanzhang.xyz/project/pytorch/</link>
       <pubDate>Thu, 26 Oct 2023 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/project/pytorch/</guid>
+      <guid>https://hanzhang.xyz/project/pytorch/</guid>
       <description>&lt;p&gt;PyTorch is a Python package that provides tensor computation (like NumPy) with strong GPU acceleration.&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>scikit-learn</title>
-      <link>http://localhost:1313/project/scikit/</link>
+      <link>https://hanzhang.xyz/project/scikit/</link>
       <pubDate>Thu, 26 Oct 2023 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/project/scikit/</guid>
+      <guid>https://hanzhang.xyz/project/scikit/</guid>
       <description>&lt;p&gt;scikit-learn is a Python module for machine learning built on top of SciPy and is distributed under the 3-Clause BSD license.&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>🧠 Sharpen your thinking with a second brain</title>
-      <link>http://localhost:1313/post/second-brain/</link>
+      <link>https://hanzhang.xyz/post/second-brain/</link>
       <pubDate>Thu, 26 Oct 2023 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/post/second-brain/</guid>
+      <guid>https://hanzhang.xyz/post/second-brain/</guid>
       <description>&lt;p&gt;Create a personal knowledge base and share your knowledge with your peers.&lt;/p&gt;
 &lt;p&gt;Hugo Blox web framework empowers you with one of the most flexible note-taking capabilities out there.&lt;/p&gt;
 &lt;p&gt;Create a powerful knowledge base that works on top of a local folder of plain text Markdown files.&lt;/p&gt;
@@ -358,9 +358,9 @@ which will be pusshed to the Github pages
     
     <item>
       <title>👩🏼‍🏫 Teach academic courses</title>
-      <link>http://localhost:1313/post/teach-courses/</link>
+      <link>https://hanzhang.xyz/post/teach-courses/</link>
       <pubDate>Tue, 24 Oct 2023 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/post/teach-courses/</guid>
+      <guid>https://hanzhang.xyz/post/teach-courses/</guid>
       <description>&lt;p&gt;
  is designed to give technical content creators a seamless experience. You can focus on the content and the Hugo Blox Builder which this template is built upon handles the rest.&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Embed videos, podcasts, code, LaTeX math, and even test students!&lt;/strong&gt;&lt;/p&gt;
@@ -415,7 +415,7 @@ which will be pusshed to the Github pages
 
 
 &lt;audio controls &gt;
-  &lt;source src=&#34;http://localhost:1313/post/teach-courses/ambient-piano.mp3&#34; type=&#34;audio/mpeg&#34;&gt;
+  &lt;source src=&#34;https://hanzhang.xyz/post/teach-courses/ambient-piano.mp3&#34; type=&#34;audio/mpeg&#34;&gt;
 &lt;/audio&gt;
 
 &lt;h2 id=&#34;test-students&#34;&gt;Test students&lt;/h2&gt;
@@ -474,17 +474,17 @@ data.head()
     
     <item>
       <title>Advising</title>
-      <link>http://localhost:1313/advising/</link>
+      <link>https://hanzhang.xyz/advising/</link>
       <pubDate>Tue, 24 Oct 2023 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/advising/</guid>
+      <guid>https://hanzhang.xyz/advising/</guid>
       <description></description>
     </item>
     
     <item>
       <title>✅ Manage your projects</title>
-      <link>http://localhost:1313/post/project-management/</link>
+      <link>https://hanzhang.xyz/post/project-management/</link>
       <pubDate>Mon, 23 Oct 2023 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/post/project-management/</guid>
+      <guid>https://hanzhang.xyz/post/project-management/</guid>
       <description>&lt;p&gt;Easily manage your projects - create ideation mind maps, Gantt charts, todo lists, and more!&lt;/p&gt;
 &lt;h2 id=&#34;ideation&#34;&gt;Ideation&lt;/h2&gt;
 &lt;p&gt;Hugo Blox supports a Markdown extension for mindmaps.&lt;/p&gt;
@@ -557,26 +557,26 @@ Parallel 4   :         des6, after des4, 1d
     
     <item>
       <title>Underrepresentation and Misrepresentation: Selection and Description Bias in Protest Reporting by Government and News Media on Weibo</title>
-      <link>http://localhost:1313/publication/journal-article/zhang-underrepresentation-2023/</link>
+      <link>https://hanzhang.xyz/publication/journal-article/zhang-underrepresentation-2023/</link>
       <pubDate>Sat, 28 Jan 2023 22:00:58 +0800</pubDate>
-      <guid>http://localhost:1313/publication/journal-article/zhang-underrepresentation-2023/</guid>
+      <guid>https://hanzhang.xyz/publication/journal-article/zhang-underrepresentation-2023/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Robots and Protest: Does Increased Protest Among Chinese Workers Result in More Automation?</title>
-      <link>http://localhost:1313/publication/journal-article/zhang-robot-2022/</link>
+      <link>https://hanzhang.xyz/publication/journal-article/zhang-robot-2022/</link>
       <pubDate>Fri, 08 Apr 2022 01:47:38 +0000</pubDate>
-      <guid>http://localhost:1313/publication/journal-article/zhang-robot-2022/</guid>
+      <guid>https://hanzhang.xyz/publication/journal-article/zhang-robot-2022/</guid>
       <description>&lt;p&gt;&lt;em&gt;Abstract&lt;/em&gt;: The rising level of automation has increasingly attracted scholar’s attention. On the other hand, there are many studies of the consequences of social movements, but relatively fewer studies focus on their economic consequences, and even fewer studies have examined their consequences on automation. This article bridges the gap between the two literatures by hypothesizing that a rising number of labor protests will lead to a higher level of automation.  We argue that political economy factors influence the adoption of more automation. Protests anticipate higher wages and labor costs; contest for social power with employers and the state, and, in extreme cases, pose a public relations challenge to employers, which will likely push employers to replace human workers with robots. We empirically test the relationship by using two protest event datasets in China, the China Labour Bulletin (CLB) and Collective Action from Social Media (CASM), and robot data from the International Federation of Robotics (IFR). Statistical analysis shows that provinces and industries that have more protests also tend to concentrate more robots, and the results are robust to different specifications and placebo tests. The findings have implications for both understanding the causes of rising automation and the consequences of social protests.&lt;/p&gt;
 </description>
     </item>
     
     <item>
       <title>Image Clustering: An Unsupervised Approach to Categorize Visual Data in Social Science Research</title>
-      <link>http://localhost:1313/publication/journal-article/zhang-image-2022/</link>
+      <link>https://hanzhang.xyz/publication/journal-article/zhang-image-2022/</link>
       <pubDate>Sat, 01 Jan 2022 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/publication/journal-article/zhang-image-2022/</guid>
+      <guid>https://hanzhang.xyz/publication/journal-article/zhang-image-2022/</guid>
       <description>&lt;p&gt;&lt;em&gt;Abstract&lt;/em&gt;: Automated image analysis has received increasing attention in social scientific
 research, yet existing scholarship has focused on the application of supervised
 machine learning to classify images into predefined categories. This study focuses
@@ -595,18 +595,18 @@ model critically determines what categories algorithms can discover.&lt;/p&gt;
     
     <item>
       <title>Authoritarian Responsiveness and Political Attitudes during COVID-19: Evidence from Weibo and a Survey Experiment</title>
-      <link>http://localhost:1313/publication/journal-article/wei-authoritarian-2021/</link>
+      <link>https://hanzhang.xyz/publication/journal-article/wei-authoritarian-2021/</link>
       <pubDate>Fri, 01 Jan 2021 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/publication/journal-article/wei-authoritarian-2021/</guid>
+      <guid>https://hanzhang.xyz/publication/journal-article/wei-authoritarian-2021/</guid>
       <description>&lt;p&gt;&lt;em&gt;Abstract&lt;/em&gt;: How do citizens react to authoritarian responsiveness? To investigate this question, we study how Chinese citizens reacted to a novel government initiative which enabled social media users to publicly post requests for COVID-related medical assistance. To understand the effect of this initiative on public perceptions of government effectiveness, we employ a two-part empirical strategy. First, we conduct a survey experiment in which we directly expose subjects to real help-seeking posts, in which we find that viewing posts did not improve subjects’ ratings of government effectiveness, and in some cases worsened them. Second, we analyze over 10,000 real-world Weibo posts to understand the political orientation of the discourse around help-seekers. We find that negative and politically critical posts far outweighed positive and laudatory posts, complementing our survey experiment results. To contextualize our results, we develop a theoretic framework to understand the effects of different types of responsiveness on citizens’ political attitudes. We suggest that citizens’ negative reactions in this case were primarily influenced by public demands for help, which illuminated existing problems and failures of governance.&lt;/p&gt;
 </description>
     </item>
     
     <item>
       <title>How Using Machine Learning Classification as a Variable in Regression Leads to Attenuation Bias and What to Do About It</title>
-      <link>http://localhost:1313/publication/journal-article/zhang-how-2021/</link>
+      <link>https://hanzhang.xyz/publication/journal-article/zhang-how-2021/</link>
       <pubDate>Fri, 01 Jan 2021 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/publication/journal-article/zhang-how-2021/</guid>
+      <guid>https://hanzhang.xyz/publication/journal-article/zhang-how-2021/</guid>
       <description>&lt;p&gt;&lt;em&gt;Abstract&lt;/em&gt;: Social scientists have increasingly been applying machine learning algorithms to &amp;ldquo;big data&amp;rdquo; to measure theoretical concepts they cannot easily measure before, and then been using these machine-predicted variables in a regression. This article first demonstrates that directly inserting binary predictions (i.e., classification) without regard for prediction error will generally lead to attenuation biases of either slope coefficients or marginal effect estimates.
 We then propose several estimators to obtain consistent estimates of coefficients.
 The estimators require the existence of validation data, of which researchers have both machine prediction and true values.This validation data is either automatically available during training algorithms or can be easily obtained.
@@ -617,9 +617,9 @@ Finally, we summarize the usage pattern of machine learning predictions in 18 re
     
     <item>
       <title>CASM: A Deep Learning Approach for Identifying Collective Action Events with Text and Image Data from Social Media</title>
-      <link>http://localhost:1313/publication/journal-article/zhang-casm-2019/</link>
+      <link>https://hanzhang.xyz/publication/journal-article/zhang-casm-2019/</link>
       <pubDate>Tue, 01 Jan 2019 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/publication/journal-article/zhang-casm-2019/</guid>
+      <guid>https://hanzhang.xyz/publication/journal-article/zhang-casm-2019/</guid>
       <description>&lt;p&gt;There are three great invited commentaries to our article by 
 , 
 , and 
@@ -631,18 +631,18 @@ Finally, we summarize the usage pattern of machine learning predictions in 18 re
     
     <item>
       <title>Addressing Selection Bias in Event Studies with General-Purpose Social Media Panels</title>
-      <link>http://localhost:1313/publication/journal-article/zhang-addressing-2018/</link>
+      <link>https://hanzhang.xyz/publication/journal-article/zhang-addressing-2018/</link>
       <pubDate>Tue, 01 May 2018 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/publication/journal-article/zhang-addressing-2018/</guid>
+      <guid>https://hanzhang.xyz/publication/journal-article/zhang-addressing-2018/</guid>
       <description>&lt;p&gt;&lt;em&gt;Abstract&lt;/em&gt;: Data from Twitter have been employed in prior research to study the impacts of events. Conventionally, researchers use keyword-based samples of tweets to create a panel of Twitter users who mention event-related keywords during and aer an event. However, the keyword-based sampling is limited in its objectivity dimension of data and information quality. First, the technique suers from selection bias since users who discuss an event are already more likely to discuss event-related topics beforehand. Second, there are no viable control groups for comparison to a keyword-based sample of Twitter users. We propose an alternative sampling approach to construct panels of users defined by their geolocation. Geolocated panels are exogenous to the keywords in users&amp;rsquo; tweets, resulting in less selection bias than the keyword panel method. Geolocated panels allow us to follow within-person changes over time and enable the creation of comparison groups. We compare different panels in two real-world settings: response to mass shootings and TV advertising. We show the strength of the selection biases of keyword-panels. Then, we empirically illustrate how geolocated panels reduce selection biases and allow meaningful comparison groups regarding the impact of the studied events. We are the first to provide a clear, empirical example of how a better panel-selection design, based on an exogenous variable such as geography, both reduces selection bias compared to the current state of the art and increases the value of Twitter research for studying events. While we advocate for the use of geolocated panels, we also discuss its weaknesses and application scenario seriously. This paper also calls attention to the importance of selection bias in impacting the objectivity of social media data&lt;/p&gt;
 </description>
     </item>
     
     <item>
       <title>Causal Effect of Witnessing Political Protest on Civic Engagement</title>
-      <link>http://localhost:1313/publication/journal-article/zhang-causal-2016/</link>
+      <link>https://hanzhang.xyz/publication/journal-article/zhang-causal-2016/</link>
       <pubDate>Tue, 01 Mar 2016 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/publication/journal-article/zhang-causal-2016/</guid>
+      <guid>https://hanzhang.xyz/publication/journal-article/zhang-causal-2016/</guid>
       <description></description>
     </item>
     

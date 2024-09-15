@@ -2,239 +2,239 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>http://localhost:1313/event/example/</loc>
+    <loc>https://hanzhang.xyz/event/example/</loc>
     <lastmod>2030-06-01T13:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
   </url><url>
-    <loc>http://localhost:1313/event/</loc>
+    <loc>https://hanzhang.xyz/event/</loc>
     <lastmod>2030-06-01T13:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
   </url><url>
-    <loc>http://localhost:1313/teaching/iapa1801x/</loc>
+    <loc>https://hanzhang.xyz/teaching/iapa1801x/</loc>
     <lastmod>2024-09-01T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
   </url><url>
-    <loc>http://localhost:1313/tags/surveillance/</loc>
+    <loc>https://hanzhang.xyz/tags/surveillance/</loc>
     <lastmod>2024-09-01T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
   </url><url>
-    <loc>http://localhost:1313/tags/</loc>
+    <loc>https://hanzhang.xyz/tags/</loc>
     <lastmod>2024-09-01T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
   </url><url>
-    <loc>http://localhost:1313/teaching/</loc>
+    <loc>https://hanzhang.xyz/teaching/</loc>
     <lastmod>2024-09-01T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
   </url><url>
-    <loc>http://localhost:1313/tags/academic/</loc>
+    <loc>https://hanzhang.xyz/tags/academic/</loc>
     <lastmod>2024-08-27T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
   </url><url>
-    <loc>http://localhost:1313/post/</loc>
+    <loc>https://hanzhang.xyz/post/</loc>
     <lastmod>2024-08-27T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
   </url><url>
-    <loc>http://localhost:1313/tags/hugo-blox/</loc>
+    <loc>https://hanzhang.xyz/tags/hugo-blox/</loc>
     <lastmod>2024-08-27T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
   </url><url>
-    <loc>http://localhost:1313/tags/markdown/</loc>
+    <loc>https://hanzhang.xyz/tags/markdown/</loc>
     <lastmod>2024-08-27T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
   </url><url>
-    <loc>http://localhost:1313/post/data-visualization/</loc>
+    <loc>https://hanzhang.xyz/post/data-visualization/</loc>
     <lastmod>2024-08-27T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
   </url><url>
-    <loc>http://localhost:1313/projects/</loc>
+    <loc>https://hanzhang.xyz/projects/</loc>
     <lastmod>2024-05-19T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
   </url><url>
-    <loc>http://localhost:1313/tags/computational-social-science/</loc>
+    <loc>https://hanzhang.xyz/tags/computational-social-science/</loc>
     <lastmod>2024-05-01T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
   </url><url>
-    <loc>http://localhost:1313/teaching/sosc4300/</loc>
+    <loc>https://hanzhang.xyz/teaching/sosc4300/</loc>
     <lastmod>2024-05-01T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
   </url><url>
-    <loc>http://localhost:1313/teaching/sosc5340/</loc>
+    <loc>https://hanzhang.xyz/teaching/sosc5340/</loc>
     <lastmod>2024-05-01T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
   </url><url>
-    <loc>http://localhost:1313/tags/statistics/</loc>
+    <loc>https://hanzhang.xyz/tags/statistics/</loc>
     <lastmod>2024-05-01T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
   </url><url>
-    <loc>http://localhost:1313/post/get-started/</loc>
+    <loc>https://hanzhang.xyz/post/get-started/</loc>
     <lastmod>2023-10-27T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
   </url><url>
-    <loc>http://localhost:1313/tags/hugo/</loc>
+    <loc>https://hanzhang.xyz/tags/hugo/</loc>
     <lastmod>2023-10-26T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
   </url><url>
-    <loc>http://localhost:1313/project/pandas/</loc>
+    <loc>https://hanzhang.xyz/project/pandas/</loc>
     <lastmod>2023-10-26T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
   </url><url>
-    <loc>http://localhost:1313/project/</loc>
+    <loc>https://hanzhang.xyz/project/</loc>
     <lastmod>2023-10-26T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
   </url><url>
-    <loc>http://localhost:1313/project/pytorch/</loc>
+    <loc>https://hanzhang.xyz/project/pytorch/</loc>
     <lastmod>2023-10-26T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
   </url><url>
-    <loc>http://localhost:1313/project/scikit/</loc>
+    <loc>https://hanzhang.xyz/project/scikit/</loc>
     <lastmod>2023-10-26T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
   </url><url>
-    <loc>http://localhost:1313/tags/second-brain/</loc>
+    <loc>https://hanzhang.xyz/tags/second-brain/</loc>
     <lastmod>2023-10-26T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
   </url><url>
-    <loc>http://localhost:1313/tags/wowchemy/</loc>
+    <loc>https://hanzhang.xyz/tags/wowchemy/</loc>
     <lastmod>2023-10-26T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
   </url><url>
-    <loc>http://localhost:1313/post/second-brain/</loc>
+    <loc>https://hanzhang.xyz/post/second-brain/</loc>
     <lastmod>2023-10-26T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
   </url><url>
-    <loc>http://localhost:1313/post/teach-courses/</loc>
+    <loc>https://hanzhang.xyz/post/teach-courses/</loc>
     <lastmod>2023-10-24T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
   </url><url>
-    <loc>http://localhost:1313/advising/</loc>
+    <loc>https://hanzhang.xyz/advising/</loc>
     <lastmod>2023-10-24T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
   </url><url>
-    <loc>http://localhost:1313/tags/hugo-blox-builder/</loc>
+    <loc>https://hanzhang.xyz/tags/hugo-blox-builder/</loc>
     <lastmod>2023-10-24T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
   </url><url>
-    <loc>http://localhost:1313/post/project-management/</loc>
+    <loc>https://hanzhang.xyz/post/project-management/</loc>
     <lastmod>2023-10-23T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
   </url><url>
-    <loc>http://localhost:1313/publication_types/2/</loc>
+    <loc>https://hanzhang.xyz/publication_types/2/</loc>
     <lastmod>2023-01-28T22:00:58+08:00</lastmod>
     <changefreq>weekly</changefreq>
   </url><url>
-    <loc>http://localhost:1313/publication_types/</loc>
+    <loc>https://hanzhang.xyz/publication_types/</loc>
     <lastmod>2023-01-28T22:00:58+08:00</lastmod>
     <changefreq>weekly</changefreq>
   </url><url>
-    <loc>http://localhost:1313/publication/</loc>
+    <loc>https://hanzhang.xyz/publication/</loc>
     <lastmod>2023-01-28T22:00:58+08:00</lastmod>
     <changefreq>weekly</changefreq>
   </url><url>
-    <loc>http://localhost:1313/publication/journal-article/zhang-underrepresentation-2023/</loc>
+    <loc>https://hanzhang.xyz/publication/journal-article/zhang-underrepresentation-2023/</loc>
     <lastmod>2023-01-28T22:00:58+08:00</lastmod>
     <changefreq>weekly</changefreq>
   </url><url>
-    <loc>http://localhost:1313/</loc>
+    <loc>https://hanzhang.xyz/</loc>
     <lastmod>2022-10-24T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
   </url><url>
-    <loc>http://localhost:1313/tags/casm/</loc>
+    <loc>https://hanzhang.xyz/tags/casm/</loc>
     <lastmod>2021-05-28T15:58:11+08:00</lastmod>
     <changefreq>weekly</changefreq>
   </url><url>
-    <loc>http://localhost:1313/tags/china/</loc>
+    <loc>https://hanzhang.xyz/tags/china/</loc>
     <lastmod>2021-10-12T14:47:10+08:00</lastmod>
     <changefreq>weekly</changefreq>
   </url><url>
-    <loc>http://localhost:1313/tags/hong-kong/</loc>
+    <loc>https://hanzhang.xyz/tags/hong-kong/</loc>
     <lastmod>2021-05-28T15:58:11+08:00</lastmod>
     <changefreq>weekly</changefreq>
   </url><url>
-    <loc>http://localhost:1313/tags/protest/</loc>
+    <loc>https://hanzhang.xyz/tags/protest/</loc>
     <lastmod>2021-10-12T14:47:10+08:00</lastmod>
     <changefreq>weekly</changefreq>
   </url><url>
-    <loc>http://localhost:1313/tags/social-media/</loc>
+    <loc>https://hanzhang.xyz/tags/social-media/</loc>
     <lastmod>2021-10-12T14:47:10+08:00</lastmod>
     <changefreq>weekly</changefreq>
   </url><url>
-    <loc>http://localhost:1313/publication_types/0/</loc>
+    <loc>https://hanzhang.xyz/publication_types/0/</loc>
     <lastmod>2021-05-28T15:58:11+08:00</lastmod>
     <changefreq>weekly</changefreq>
   </url><url>
-    <loc>http://localhost:1313/publication/journal-article/zhang-robot-2022/</loc>
+    <loc>https://hanzhang.xyz/publication/journal-article/zhang-robot-2022/</loc>
     <lastmod>2021-05-28T15:58:11+08:00</lastmod>
     <changefreq>weekly</changefreq>
   </url><url>
-    <loc>http://localhost:1313/publication/journal-article/zhang-image-2022/</loc>
+    <loc>https://hanzhang.xyz/publication/journal-article/zhang-image-2022/</loc>
     <lastmod>2022-04-08T09:47:38+08:00</lastmod>
     <changefreq>weekly</changefreq>
   </url><url>
-    <loc>http://localhost:1313/tags/experiment/</loc>
+    <loc>https://hanzhang.xyz/tags/experiment/</loc>
     <lastmod>2021-10-12T14:47:10+08:00</lastmod>
     <changefreq>weekly</changefreq>
   </url><url>
-    <loc>http://localhost:1313/publication/journal-article/wei-authoritarian-2021/</loc>
+    <loc>https://hanzhang.xyz/publication/journal-article/wei-authoritarian-2021/</loc>
     <lastmod>2021-10-12T14:47:10+08:00</lastmod>
     <changefreq>weekly</changefreq>
   </url><url>
-    <loc>http://localhost:1313/publication/journal-article/zhang-how-2021/</loc>
+    <loc>https://hanzhang.xyz/publication/journal-article/zhang-how-2021/</loc>
     <lastmod>2021-05-28T15:18:11+08:00</lastmod>
     <changefreq>weekly</changefreq>
   </url><url>
-    <loc>http://localhost:1313/publication/journal-article/zhang-casm-2019/</loc>
+    <loc>https://hanzhang.xyz/publication/journal-article/zhang-casm-2019/</loc>
     <lastmod>2019-01-01T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
   </url><url>
-    <loc>http://localhost:1313/tags/coverage-bias/</loc>
+    <loc>https://hanzhang.xyz/tags/coverage-bias/</loc>
     <lastmod>2018-05-01T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
   </url><url>
-    <loc>http://localhost:1313/tags/geolocation/</loc>
+    <loc>https://hanzhang.xyz/tags/geolocation/</loc>
     <lastmod>2018-05-01T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
   </url><url>
-    <loc>http://localhost:1313/tags/non-response-bias/</loc>
+    <loc>https://hanzhang.xyz/tags/non-response-bias/</loc>
     <lastmod>2018-05-01T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
   </url><url>
-    <loc>http://localhost:1313/tags/panels/</loc>
+    <loc>https://hanzhang.xyz/tags/panels/</loc>
     <lastmod>2018-05-01T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
   </url><url>
-    <loc>http://localhost:1313/tags/selection-bias/</loc>
+    <loc>https://hanzhang.xyz/tags/selection-bias/</loc>
     <lastmod>2018-05-01T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
   </url><url>
-    <loc>http://localhost:1313/tags/survey/</loc>
+    <loc>https://hanzhang.xyz/tags/survey/</loc>
     <lastmod>2018-05-01T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
   </url><url>
-    <loc>http://localhost:1313/tags/twitter/</loc>
+    <loc>https://hanzhang.xyz/tags/twitter/</loc>
     <lastmod>2018-05-01T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
   </url><url>
-    <loc>http://localhost:1313/publication/journal-article/zhang-addressing-2018/</loc>
+    <loc>https://hanzhang.xyz/publication/journal-article/zhang-addressing-2018/</loc>
     <lastmod>2018-05-01T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
   </url><url>
-    <loc>http://localhost:1313/tags/civic-engagement/</loc>
+    <loc>https://hanzhang.xyz/tags/civic-engagement/</loc>
     <lastmod>2016-03-01T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
   </url><url>
-    <loc>http://localhost:1313/tags/democracy/</loc>
+    <loc>https://hanzhang.xyz/tags/democracy/</loc>
     <lastmod>2016-03-01T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
   </url><url>
-    <loc>http://localhost:1313/tags/quasi-experiment/</loc>
+    <loc>https://hanzhang.xyz/tags/quasi-experiment/</loc>
     <lastmod>2016-03-01T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
   </url><url>
-    <loc>http://localhost:1313/publication_types/4/</loc>
+    <loc>https://hanzhang.xyz/publication_types/4/</loc>
     <lastmod>2016-03-01T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
   </url><url>
-    <loc>http://localhost:1313/publication/journal-article/zhang-causal-2016/</loc>
+    <loc>https://hanzhang.xyz/publication/journal-article/zhang-causal-2016/</loc>
     <lastmod>2016-03-01T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
   </url>
