@@ -1,6 +1,6 @@
 <!doctype html>
 <!-- This site was created with Hugo Blox. https://hugoblox.com -->
-<!-- Last Published: August 29, 2024 --><html lang="en-us" dir="ltr"
+<!-- Last Published: September 14, 2024 --><html lang="en-us" dir="ltr"
       data-wc-theme-default="system">
   
 <head>
@@ -41,7 +41,11 @@
   
     
   
-  <meta name="description" content="Abstract: Social scientists have increasingly been applying machine learning algorithms to &ldquo;big data&rdquo; to measure theoretical concepts they cannot easily measure before, and then been using these machine-predicted variables in a regression." />
+  <meta name="description" content="Abstract: Social scientists have increasingly been applying machine learning algorithms to &ldquo;big data&rdquo; to measure theoretical concepts they cannot easily measure before, and then been using these machine-predicted variables in a regression. This article first demonstrates that directly inserting binary predictions (i.e., classification) without regard for prediction error will generally lead to attenuation biases of either slope coefficients or marginal effect estimates.
+We then propose several estimators to obtain consistent estimates of coefficients.
+The estimators require the existence of validation data, of which researchers have both machine prediction and true values.This validation data is either automatically available during training algorithms or can be easily obtained.
+Monte Carlo simulations demonstrate the effectiveness of the proposed estimators.
+Finally, we summarize the usage pattern of machine learning predictions in 18 recent publications in top social science journals, apply our proposed estimators to two of them, and offer some practical recommendations." />
 
   
   <link rel="alternate" hreflang="en-us" href="https://example.com/publication/journal-article/zhang-how-2021/" />
@@ -189,7 +193,11 @@
   <meta property="og:site_name" content="Han Zhang" />
   <meta property="og:url" content="https://example.com/publication/journal-article/zhang-how-2021/" />
   <meta property="og:title" content="How Using Machine Learning Classification as a Variable in Regression Leads to Attenuation Bias and What to Do About It | Han Zhang" />
-  <meta property="og:description" content="Abstract: Social scientists have increasingly been applying machine learning algorithms to &ldquo;big data&rdquo; to measure theoretical concepts they cannot easily measure before, and then been using these machine-predicted variables in a regression." /><meta property="og:image" content="https://example.com/media/icon_hu6741429377955683711.png" />
+  <meta property="og:description" content="Abstract: Social scientists have increasingly been applying machine learning algorithms to &ldquo;big data&rdquo; to measure theoretical concepts they cannot easily measure before, and then been using these machine-predicted variables in a regression. This article first demonstrates that directly inserting binary predictions (i.e., classification) without regard for prediction error will generally lead to attenuation biases of either slope coefficients or marginal effect estimates.
+We then propose several estimators to obtain consistent estimates of coefficients.
+The estimators require the existence of validation data, of which researchers have both machine prediction and true values.This validation data is either automatically available during training algorithms or can be easily obtained.
+Monte Carlo simulations demonstrate the effectiveness of the proposed estimators.
+Finally, we summarize the usage pattern of machine learning predictions in 18 recent publications in top social science journals, apply our proposed estimators to two of them, and offer some practical recommendations." /><meta property="og:image" content="https://example.com/media/icon_hu6741429377955683711.png" />
     <meta property="twitter:image" content="https://example.com/media/icon_hu6741429377955683711.png" /><meta property="og:locale" content="en-us" />
   
     
@@ -240,7 +248,7 @@
       "url": "https://example.com/media/icon_hu3882754035353854128.png"
     }
   },
-  "description": "Abstract: Social scientists have increasingly been applying machine learning algorithms to \u0026ldquo;big data\u0026rdquo; to measure theoretical concepts they cannot easily measure before, and then been using these machine-predicted variables in a regression."
+  "description": "\u003cp\u003e\u003cem\u003eAbstract\u003c/em\u003e: Social scientists have increasingly been applying machine learning algorithms to \u0026ldquo;big data\u0026rdquo; to measure theoretical concepts they cannot easily measure before, and then been using these machine-predicted variables in a regression. This article first demonstrates that directly inserting binary predictions (i.e., classification) without regard for prediction error will generally lead to attenuation biases of either slope coefficients or marginal effect estimates.\nWe then propose several estimators to obtain consistent estimates of coefficients.\nThe estimators require the existence of validation data, of which researchers have both machine prediction and true values.This validation data is either automatically available during training algorithms or can be easily obtained.\nMonte Carlo simulations demonstrate the effectiveness of the proposed estimators.\nFinally, we summarize the usage pattern of machine learning predictions in 18 recent publications in top social science journals, apply our proposed estimators to two of them, and offer some practical recommendations.\u003c/p\u003e"
 }
 </script>
 
@@ -281,6 +289,29 @@
   
   
   
+  
+  
+  
+    
+      
+      
+        
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+        
+        
+      
+    
+  
     
       
       
@@ -318,10 +349,6 @@
   
   
   
-    
-  
-  
-  
   
   
   
@@ -344,6 +371,7 @@
         
       
     
+  
   
   
   
@@ -608,6 +636,34 @@
       
       
       
+      
+      
+      
+      <li class="nav-item">
+        <a
+          class="nav-link "
+          
+          href="/advising/"
+        >Advising</a
+        >
+      </li>
+      
+      
+      
+      
+      
+      
+      <li class="nav-item">
+        <a
+          class="nav-link "
+          
+          href="/teaching/"
+        >Teaching</a
+        >
+      </li>
+      
+      
+      
     </ul>
 
     <div class="order-1 ml-auto flex items-center md:order-2 lg:ml-0">
@@ -716,6 +772,42 @@
         <li class=""><a
     class="hb-sidebar-custom-link
       text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-primary-800 dark:hover:text-gray-50"
+    href="/teaching/"
+    
+  >Teaching
+        <span data-hb-sidebar-toggle>
+            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" class="h-[18px] min-w-[18px] rounded-sm p-0.5 hover:bg-gray-800/5 dark:hover:bg-gray-100/5"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" class="origin-center transition-transform rtl:-rotate-180"></path></svg>
+        </span>
+    </a><div class="ltr:pr-0 overflow-hidden">
+        <ul class="hb-sidebar-list"><li class="flex flex-col "><a
+    class="hb-sidebar-custom-link
+      text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-primary-800 dark:hover:text-gray-50"
+    href="/teaching/iapa1801x/"
+    
+  >IAPA 1801X: Surveillance: State, Capitalism, and Society
+    </a>
+              
+            </li><li class="flex flex-col "><a
+    class="hb-sidebar-custom-link
+      text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-primary-800 dark:hover:text-gray-50"
+    href="/teaching/sosc4300/"
+    
+  >SOSC 4300 &amp; 5500 : Computational Social Science
+    </a>
+              
+            </li><li class="flex flex-col "><a
+    class="hb-sidebar-custom-link
+      text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-primary-800 dark:hover:text-gray-50"
+    href="/teaching/sosc5340/"
+    
+  >SOSC 5340 : Econometric Approaches to Social Science Research
+    </a>
+              
+            </li></ul>
+      </div></li>
+        <li class=""><a
+    class="hb-sidebar-custom-link
+      text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-primary-800 dark:hover:text-gray-50"
     href="/projects/"
     
   >Projects
@@ -811,38 +903,10 @@
         <li class=""><a
     class="hb-sidebar-custom-link
       text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-primary-800 dark:hover:text-gray-50"
-    href="/experience/"
+    href="/advising/"
     
-  >Experience
+  >Advising
     </a></li>
-        <li class=""><a
-    class="hb-sidebar-custom-link
-      text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-primary-800 dark:hover:text-gray-50"
-    href="/teaching/"
-    
-  >Teaching
-        <span data-hb-sidebar-toggle>
-            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" class="h-[18px] min-w-[18px] rounded-sm p-0.5 hover:bg-gray-800/5 dark:hover:bg-gray-100/5"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" class="origin-center transition-transform rtl:-rotate-180"></path></svg>
-        </span>
-    </a><div class="ltr:pr-0 overflow-hidden">
-        <ul class="hb-sidebar-list"><li class="flex flex-col "><a
-    class="hb-sidebar-custom-link
-      text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-primary-800 dark:hover:text-gray-50"
-    href="/teaching/js/"
-    
-  >Learn JavaScript
-    </a>
-              
-            </li><li class="flex flex-col "><a
-    class="hb-sidebar-custom-link
-      text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-primary-800 dark:hover:text-gray-50"
-    href="/teaching/python/"
-    
-  >Learn Python
-    </a>
-              
-            </li></ul>
-      </div></li>
         <li class="open"><a
     class="hb-sidebar-custom-link
       text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-primary-800 dark:hover:text-gray-50"

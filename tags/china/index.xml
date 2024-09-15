@@ -35,7 +35,11 @@
       <link>https://example.com/publication/journal-article/zhang-casm-2019/</link>
       <pubDate>Tue, 01 Jan 2019 00:00:00 +0000</pubDate>
       <guid>https://example.com/publication/journal-article/zhang-casm-2019/</guid>
-      <description>&lt;p&gt;There are three great invited commentaries to our article by &lt;a href=&#34;https://zacharyst.com/&#34;&gt;Zachary C. Steinert-Threlkeld&lt;/a&gt;, &lt;a href=&#34;https://www.wzb.eu/en/persons/swen-hutter&#34;&gt;Swen Hutter&lt;/a&gt;, and &lt;a href=&#34;https://www.ssc.wisc.edu/~oliver/&#34;&gt;Pamela Oliver&lt;/a&gt;. &lt;a href=&#34;https://journals.sagepub.com/doi/citedby/10.1177/0081175019860244&#34;&gt;Read them and our response here&lt;/a&gt;.&lt;/p&gt;
+      <description>&lt;p&gt;There are three great invited commentaries to our article by 
+, 
+, and 
+. 
+.&lt;/p&gt;
 &lt;p&gt;&lt;em&gt;Abstract&lt;/em&gt;: Protest event analysis is an important method for the study of collective action and social movements and typically draws on traditional media reports as the data source. We introduce collective action from social media (CASM)—a system that uses convolutional neural networks on image data and recurrent neural networks with long short-term memory on text data in a two-stage classifier to identify social media posts about offline collective action. We implement CASM on Chinese social media data and identify more than 100,000 collective action events from 2010 to 2017 (CASM-China). We evaluate the performance of CASM through cross-validation, out-of-sample validation, and comparisons with other protest data sets. We assess the effect of online censorship and find it does not substantially limit our identification of events. Compared to other protest data sets, CASM-China identifies relatively more rural, land-related protests and relatively few collective action events related to ethnic and religious conflict.&lt;/p&gt;
 </description>
     </item>
