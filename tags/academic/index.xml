@@ -2,21 +2,57 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Academic | Han Zhang</title>
-    <link>https://example.com/tags/academic/</link>
-      <atom:link href="https://example.com/tags/academic/index.xml" rel="self" type="application/rss+xml" />
+    <link>http://localhost:1313/tags/academic/</link>
+      <atom:link href="http://localhost:1313/tags/academic/index.xml" rel="self" type="application/rss+xml" />
     <description>Academic</description>
-    <generator>Hugo Blox Builder (https://hugoblox.com)</generator><language>en-us</language><lastBuildDate>Fri, 27 Oct 2023 00:00:00 +0000</lastBuildDate>
+    <generator>Hugo Blox Builder (https://hugoblox.com)</generator><language>en-us</language><lastBuildDate>Tue, 27 Aug 2024 00:00:00 +0000</lastBuildDate>
     <image>
-      <url>https://example.com/media/icon_hu6741429377955683711.png</url>
+      <url>http://localhost:1313/media/icon_hu6741429377955683711.png</url>
       <title>Academic</title>
-      <link>https://example.com/tags/academic/</link>
+      <link>http://localhost:1313/tags/academic/</link>
     </image>
     
     <item>
+      <title>updates</title>
+      <link>http://localhost:1313/post/data-visualization/</link>
+      <pubDate>Tue, 27 Aug 2024 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/post/data-visualization/</guid>
+      <description>&lt;h1 id=&#34;updates&#34;&gt;updates&lt;/h1&gt;
+&lt;p&gt;&lt;span class=&#34;timestamp-wrapper&#34;&gt;&lt;span class=&#34;timestamp&#34;&gt;[2024-08-14 Wed]&lt;/span&gt;&lt;/span&gt;
+the previous website (theme) is kind of broken. I don’t know why
+has a complete migration to new ones&lt;/p&gt;
+&lt;p&gt;procedures are mostly similar&lt;/p&gt;
+&lt;p&gt;It is based on 
+&lt;/p&gt;
+&lt;p&gt;see original files here if you break down anything  
+&lt;/p&gt;
+&lt;p&gt;New folders are stored at:&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Users/han/Dropbox/newhomepage&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;the only difference:&lt;/p&gt;
+&lt;p&gt;after compile (hugo)
+the geneerated website is stored at
+&lt;em&gt;Users/han/Dropbox/newhomepage/public&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;but the github repo is stored at a &lt;strong&gt;different&lt;/strong&gt; subfolder&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Users/han/Dropbox/newhomepage/philohistoria/philohistoria.github.io&lt;/em&gt;
+which will be pusshed to the Github pages
+
+&lt;/p&gt;
+&lt;p&gt;The reason for doing is that I did not know how to properly add submodules.&lt;/p&gt;
+&lt;p&gt;so we either manually copy public/ to philohistoria.github.io/&lt;/p&gt;
+&lt;p&gt;or run&lt;/p&gt;
+&lt;p&gt;rsync -r public/ philohistoria/philohistoria.github.io&lt;/p&gt;
+&lt;p&gt;or run it here (directly in emacs)&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;rsync -r /Users/han/Dropbox/newhomepage/public/  /Users/han/Dropbox/newhomepage/philohistoria/philohistoria.github.io/
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;And then use git or GUI to commit (Github Desktop)&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
       <title>🎉 Easily create your own simple yet highly customizable blog</title>
-      <link>https://example.com/post/get-started/</link>
+      <link>http://localhost:1313/post/get-started/</link>
       <pubDate>Fri, 27 Oct 2023 00:00:00 +0000</pubDate>
-      <guid>https://example.com/post/get-started/</guid>
+      <guid>http://localhost:1313/post/get-started/</guid>
       <description>&lt;p&gt;Welcome 👋&lt;/p&gt;
 
 
