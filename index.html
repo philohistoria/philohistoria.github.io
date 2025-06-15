@@ -1,13 +1,13 @@
 <!doctype html>
 <!-- This site was created with Hugo Blox. https://hugoblox.com -->
-<!-- Last Published: October 14, 2024 --><html lang="en-us" dir="ltr"
+<!-- Last Published: June 15, 2025 --><html lang="en-us" dir="ltr"
       data-wc-theme-default="system">
   
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="generator" content="Hugo Blox Builder 0.2.0" />
+  <meta name="generator" content="Hugo Blox Builder 0.3.2" />
 
   
   
@@ -57,7 +57,7 @@
   
   
     
-    <link href="/dist/wc.min.css" rel="stylesheet" />
+    <link href="/dist/wc.min.05570f1deda629d4e2d77f73534a63aa04471f012db6735c59424372f467db85.css" rel="stylesheet" />
   
 
   
@@ -321,26 +321,26 @@
   
   
   
-    
-      
-      
-        
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-        
-        
-      
-    
   
+    
+      
+      
+        
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+        
+        
+      
+    
   
   
   
@@ -434,40 +434,67 @@
     --pagefind-ui-border: #152028;
     --pagefind-ui-tag: #152028;
   }
+
+   
+  .search-close > svg {
+    height: calc(64px * var(--pagefind-ui-scale));
+    width: calc(64px * var(--pagefind-ui-scale));
+  }
 </style>
 
 <script>
+  
+  let searchWrapper = null;
+
   window.addEventListener('DOMContentLoaded', (event) => {
+    
     new PagefindUI({
       element: "#search",
       showSubResults: true,
       baseUrl: window.hbb.pagefind.baseUrl,
       bundlePath: window.hbb.pagefind.baseUrl + "pagefind/",
     });
+
+    
+    searchWrapper = document.getElementById('search-wrapper');
+
+    
+    let triggers = document.querySelectorAll('[data-search-toggle]');
+    triggers.forEach(trigger =>
+      trigger.addEventListener('click', handleSearchToggle)
+    );
   });
-  document.addEventListener('DOMContentLoaded', () => {
-    let element = document.getElementById('search');
-    let trigger = document.getElementById('search_toggle');
 
-    if (trigger) {
-      trigger.addEventListener('click', () => {
-        element.classList.toggle('hidden');
-        element.querySelector("input").value = ""
-        element.querySelector("input").focus()
+  function handleSearchToggle(event) {
+    if (!searchWrapper) return;
 
-        if (!element.classList.contains('hidden')) {
-          let clear_trigger = document.querySelector('.pagefind-ui__search-clear');
+    const isHidden = searchWrapper.classList.contains('hidden');
+    searchWrapper.classList.toggle('hidden');
+    document.body.style.overflow = isHidden ? 'hidden' : '';
 
-          if (clear_trigger && !clear_trigger.hasAttribute('listenerOnClick')) {
-            clear_trigger.setAttribute('listenerOnClick', 'true');
+    const searchInput = searchWrapper.querySelector("input");
+    if (searchInput) {
+      searchInput.value = "";
+      searchInput.focus();
+    }
 
-            clear_trigger.addEventListener('click', () => {
-              element.classList.toggle('hidden');
-            });
-          }
-        }
+    if (!searchWrapper.classList.contains('hidden')) {
+      let clearTrigger = document.querySelector('.pagefind-ui__search-clear');
 
-      });
+      if (clearTrigger && !clearTrigger.hasAttribute('listenerOnClick')) {
+        clearTrigger.setAttribute('listenerOnClick', 'true');
+
+        clearTrigger.addEventListener('click', () => {
+          searchInput.focus();
+        });
+      }
+    }
+  }
+
+  
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape' && searchWrapper && !searchWrapper.classList.contains('hidden')) {
+      searchWrapper.classList.add('hidden');
     }
   });
 </script>
@@ -495,8 +522,8 @@
   
   <script
     defer
-    src="/js/hugo-blox-en.min.e5fa931947cac2d947732ea37a770aae2b5bd4a50b6048060cd129b46159a06d.js"
-    integrity="sha256-5fqTGUfKwtlHcy6jencKritb1KULYEgGDNEptGFZoG0="
+    src="/js/hugo-blox-en.min.47736f84e20cae1bb2224dc4605239689e913811575e32b5f86a700ee9d6529d.js"
+    integrity="sha256-R3NvhOIMrhuyIk3EYFI5aJ6ROBFXXjK1&#43;GpwDunWUp0="
   ></script>
 
   
@@ -509,13 +536,6 @@
 
 
 
-  
-    
-      
-      <script async defer src="https://buttons.github.io/buttons.js"></script>
-
-      
-    
   
 
 
@@ -631,9 +651,9 @@
       
       
       <button
-        aria-label="search"
+        aria-label="toggle search"
         class="text-black hover:text-primary  inline-block px-3 text-xl dark:text-white"
-        id="search_toggle">
+        data-search-toggle>
         <svg xmlns="http://www.w3.org/2000/svg" height="16" width="16" viewBox="0 0 512 512" fill="currentColor"><path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z"/></svg>
       </button>
       
@@ -674,8 +694,26 @@
   </nav>
 </header>
 
+<div
+  id="search-wrapper"
+  class="hidden fixed inset-0 z-50 bg-white dark:bg-gray-900 flex flex-col overflow-hidden"
+>
+  <div class="flex justify-end p-3">
+    <button
+      aria-label="search"
+      class="search-close text-black hover:text-primary dark:text-white"
+      data-search-toggle
+    >
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+      </svg>
+    </button>
+  </div>
 
-<div id="search" class="hidden p-3"></div>
+  <div id="search" class="flex-1 overflow-y-auto p-3">
+    
+  </div>
+</div>
 
 
         
@@ -722,6 +760,7 @@
 
 
 
+  
 
 
 
@@ -731,6 +770,27 @@
 
 
 
+  
+  
+  
+    
+    
+      
+    
+    
+  
+  
+    
+    
+  
+  
+    
+    
+  
+
+
+
+  
 
 
 
@@ -768,8 +828,8 @@
 
 
 
-<section id="section-resume-biography-3" class="relative hbb-section blox-resume-biography-3  white" style="padding: 4rem 0 4rem 0;" >
- <div class="home-section-bg " >
+<section id="section-resume-biography-3" class="relative hbb-section blox-resume-biography-3  white" style="padding: 2rem 0 2rem 0;" >
+ <div class="home-section-bg  bg-image" style="background-color: black;background-image: url(&#39;https://hanzhang.xyz/media/background_hu10570984734778525308.webp&#39;);background-size: cover;background-position: center;filter: brightness(1);">
    
  </div>
   
@@ -805,7 +865,7 @@
 
     <div class="avatar-wrapper mt-10">
       
-      <img class="avatar rounded-full bg-white dark:bg-gray-800 p-1" src="/author/han-zhang/avatar_hu5077147518192665917.jpg" alt="Han Zhang"
+      <img class="avatar rounded-full bg-white dark:bg-gray-800 p-1" src="/author/han-zhang/avatar_hu12236666678216841324.jpg" alt="Han Zhang"
            width="150" height="150">
       
     </div>
@@ -907,26 +967,29 @@
     <div class="pt-2 justify-content-center prose prose-slate dark:prose-invert">
       <div class="bio-text" >
         <h2 id="heading"></h2>
-<p>I am an Assistant Professor jointly appointed in the <a href="https://www.brown.edu/academics/sociology/people/faculty" target="_blank" rel="noopener">Department of Sociology</a> and <a href="https://home.watson.brown.edu/people/faculty/watson-faculty/han-zhang" target="_blank" rel="noopener">the Watson Institute for International and Public Affairs</a> at Brown University.</p>
-<p>Before joining Brown, I worked as an Assistant Professor in the <a href="https://sosc.ust.hk/" target="_blank" rel="noopener">Division of Social Science</a>, The Hong Kong University of Science and Technology (HKUST). I have also worked as a research intern at Microsoft Research, once at MSRA (Beijing) and once at MSR NYC.</p>
-<p>If you are interested in working with me as a research assistant, please send an email with your CV and a brief description of your research interests. My previous students have a <a href="/advising">great placement records</a> into top programs.</p>
-<p>If you would like to work with me as a PhD student, please apply to <a href="https://www.brown.edu/academics/sociology/programs/phd" target="_blank" rel="noopener">Brown&rsquo;s Sociology PhD program</a>.</p>
+<p>I am a political sociologist and computational social scientist. My research examines how digital surveillance technologies—such as street cameras, social media monitoring, and algorithmic systems—shape political behavior. I focus especially on how surveillance influences protest, compliance, and perceptions of state control. Methodologically, I combine computer vision, causal inference, and experimental design to analyze large-scale visual data, including street-view imagery and social media content.</p>
+<p>I am an Assistant Professor jointly appointed in the <a href="https://www.brown.edu/academics/sociology/people/faculty" target="_blank" rel="noopener">Department of Sociology</a> and <a href="https://home.watson.brown.edu/people/faculty/watson-faculty/han-zhang" target="_blank" rel="noopener">the Watson Institute for International and Public Affairs</a> at Brown University.
+Before joining Brown, I worked as an Assistant Professor in the <a href="https://sosc.ust.hk/" target="_blank" rel="noopener">Division of Social Science</a>, The Hong Kong University of Science and Technology (HKUST).</p>
+<!-- raw HTML omitted -->
+<p>Feel free to send me an email with your CV if you are interested in working with me.</p>
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
 
       </div>
     </div>
     
 
     
-    <a href="files/zhanghan-cv-full.pdf" target="_blank" class="inline-flex items-center px-4 py-2 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg hover:bg-gray-100 hover:text-primary-700 focus:z-10 focus:ring-4 focus:outline-none focus:ring-gray-200 focus:text-primary-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700 dark:focus:ring-gray-700"><svg class="w-3.5 h-3.5 me-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+    <a href="files/zhanghan-cv-full.pdf" target="_blank" class="inline-flex items-center px-4 py-2 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg hover:bg-gray-100 hover:text-primary-700 focus:z-10 focus:ring-4 focus:outline-none focus:ring-gray-200 focus:text-primary-700 dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700 dark:focus:ring-gray-700"><svg class="w-3.5 h-3.5 me-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
       <path d="M14.707 7.793a1 1 0 0 0-1.414 0L11 10.086V1.5a1 1 0 0 0-2 0v8.586L6.707 7.793a1 1 0 1 0-1.414 1.414l4 4a1 1 0 0 0 1.416 0l4-4a1 1 0 0 0-.002-1.414Z"/>
       <path d="M18 12h-2.55l-2.975 2.975a3.5 3.5 0 0 1-4.95 0L4.55 12H2a2 2 0 0 0-2 2v4a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-4a2 2 0 0 0-2-2Zm-3 5a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"/>
-    </svg> Download CV</a>
+    </svg> Download CV Here</a>
     
 
 
 
 
-  <div class="grid grid-cols-2 gap-4 justify-between mt-6 dark:text-gray-300">
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-4 justify-between mt-6 dark:text-gray-300">
 
     
     <div class="">
@@ -934,7 +997,7 @@
       <ul class="list-disc list-inside space-y-1 pl-5">
         
         <li>
-          Social Movements and Collective Action
+          Social Movements
         </li>
         
         <li>
@@ -942,7 +1005,7 @@
         </li>
         
         <li>
-          Surveillance
+          Digital Surveillance and AI
         </li>
         
         <li>
@@ -950,11 +1013,7 @@
         </li>
         
         <li>
-          Quantitative Methodology
-        </li>
-        
-        <li>
-          Social Networks
+          Image and text analysis
         </li>
         
       </ul>
@@ -977,23 +1036,7 @@
         <li class="flex items-start gap-3">
           <svg style="" class='flex-shrink-0 w-5 h-5 me-2 mt-1' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4.26 10.147a60.436 60.436 0 0 0-.491 6.347A48.627 48.627 0 0 1 12 20.904a48.627 48.627 0 0 1 8.232-4.41a60.46 60.46 0 0 0-.491-6.347m-15.482 0a50.57 50.57 0 0 0-2.658-.813A59.905 59.905 0 0 1 12 3.493a59.902 59.902 0 0 1 10.399 5.84a51.39 51.39 0 0 0-2.658.814m-15.482 0A50.697 50.697 0 0 1 12 13.489a50.702 50.702 0 0 1 7.74-3.342M6.75 15a.75.75 0 1 0 0-1.5a.75.75 0 0 0 0 1.5m0 0v-3.675A55.378 55.378 0 0 1 12 8.443m-7.007 11.55A5.981 5.981 0 0 0 6.75 15.75v-1.5"/></svg>
           <div class="description">
-            <p class="course">M.A. in Sociology, 2018</p>
-            <p class="text-sm">Princeton University</p>
-          </div>
-        </li>
-        
-        <li class="flex items-start gap-3">
-          <svg style="" class='flex-shrink-0 w-5 h-5 me-2 mt-1' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4.26 10.147a60.436 60.436 0 0 0-.491 6.347A48.627 48.627 0 0 1 12 20.904a48.627 48.627 0 0 1 8.232-4.41a60.46 60.46 0 0 0-.491-6.347m-15.482 0a50.57 50.57 0 0 0-2.658-.813A59.905 59.905 0 0 1 12 3.493a59.902 59.902 0 0 1 10.399 5.84a51.39 51.39 0 0 0-2.658.814m-15.482 0A50.697 50.697 0 0 1 12 13.489a50.702 50.702 0 0 1 7.74-3.342M6.75 15a.75.75 0 1 0 0-1.5a.75.75 0 0 0 0 1.5m0 0v-3.675A55.378 55.378 0 0 1 12 8.443m-7.007 11.55A5.981 5.981 0 0 0 6.75 15.75v-1.5"/></svg>
-          <div class="description">
-            <p class="course">B.A. in History (minor), 2013</p>
-            <p class="text-sm">Peking University</p>
-          </div>
-        </li>
-        
-        <li class="flex items-start gap-3">
-          <svg style="" class='flex-shrink-0 w-5 h-5 me-2 mt-1' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4.26 10.147a60.436 60.436 0 0 0-.491 6.347A48.627 48.627 0 0 1 12 20.904a48.627 48.627 0 0 1 8.232-4.41a60.46 60.46 0 0 0-.491-6.347m-15.482 0a50.57 50.57 0 0 0-2.658-.813A59.905 59.905 0 0 1 12 3.493a59.902 59.902 0 0 1 10.399 5.84a51.39 51.39 0 0 0-2.658.814m-15.482 0A50.697 50.697 0 0 1 12 13.489a50.702 50.702 0 0 1 7.74-3.342M6.75 15a.75.75 0 1 0 0-1.5a.75.75 0 0 0 0 1.5m0 0v-3.675A55.378 55.378 0 0 1 12 8.443m-7.007 11.55A5.981 5.981 0 0 0 6.75 15.75v-1.5"/></svg>
-          <div class="description">
-            <p class="course">B.S. in Computer Science, 2013</p>
+            <p class="course">B.S. in Computer Science and B.A. in History (minor), 2013</p>
             <p class="text-sm">Peking University</p>
           </div>
         </li>
@@ -1099,7 +1142,7 @@
 
 
 
-<section id="section-collection" class="relative hbb-section blox-collection  " style="padding: 4rem 0 4rem 0;" >
+<section id="section-collection" class="relative hbb-section blox-collection  " style="padding: 2rem 0 2rem 0;" >
  <div class="home-section-bg " >
    
  </div>
@@ -1162,7 +1205,7 @@
 
 
 
-<div class="flex flex-col items-center max-w-prose mx-auto gap-3 justify-center">
+<div class="flex flex-col items-center max-w-prose mx-auto gap-3 justify-center px-6 md:px-0">
 
   <div class="mb-6 text-3xl font-bold text-gray-900 dark:text-white">
     Recent Publications
@@ -1172,7 +1215,7 @@
 </div>
 
 
-<div class="flex flex-col items-center">
+<div class="flex flex-col items-center px-6">
 
   
   
@@ -1204,7 +1247,7 @@
   
 
   
-  <div class="flex space-x-3">
+  <div class="flex flex-wrap space-x-3">
     
 
 
@@ -1258,7 +1301,7 @@
   
   <a class="hb-attachment-link hb-attachment-small" href="https://doi.org/10.17813/1086-671X-29-3-309" target="_blank" rel="noopener">
     <svg style="height: 1em" class='inline-block' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13.19 8.688a4.5 4.5 0 0 1 1.242 7.244l-4.5 4.5a4.5 4.5 0 0 1-6.364-6.364l1.757-1.757m13.35-.622l1.757-1.757a4.5 4.5 0 0 0-6.364-6.364l-4.5 4.5a4.5 4.5 0 0 0 1.242 7.244"/></svg>
-    DOI</a>
+    View Online</a>
 
 
   </div>
@@ -1292,7 +1335,7 @@
   
 
   
-  <div class="flex space-x-3">
+  <div class="flex flex-wrap space-x-3">
     
 
 
@@ -1346,7 +1389,7 @@
   
   <a class="hb-attachment-link hb-attachment-small" href="https://www.cambridge.org/core/product/identifier/S0305741023001042/type/journal_article" target="_blank" rel="noopener">
     <svg style="height: 1em" class='inline-block' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13.19 8.688a4.5 4.5 0 0 1 1.242 7.244l-4.5 4.5a4.5 4.5 0 0 1-6.364-6.364l1.757-1.757m13.35-.622l1.757-1.757a4.5 4.5 0 0 0-6.364-6.364l-4.5 4.5a4.5 4.5 0 0 0 1.242 7.244"/></svg>
-    DOI</a>
+    View Online</a>
 
 
   </div>
@@ -1378,7 +1421,7 @@
   
 
   
-  <div class="flex space-x-3">
+  <div class="flex flex-wrap space-x-3">
     
 
 
@@ -1432,7 +1475,7 @@
   
   <a class="hb-attachment-link hb-attachment-small" href="https://doi.org/10.1093/oxfordhb/9780197653609.013.17" target="_blank" rel="noopener">
     <svg style="height: 1em" class='inline-block' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13.19 8.688a4.5 4.5 0 0 1 1.242 7.244l-4.5 4.5a4.5 4.5 0 0 1-6.364-6.364l1.757-1.757m13.35-.622l1.757-1.757a4.5 4.5 0 0 0-6.364-6.364l-4.5 4.5a4.5 4.5 0 0 0 1.242 7.244"/></svg>
-    DOI</a>
+    View Online</a>
 
 
   </div>
@@ -1465,7 +1508,7 @@
   
 
   
-  <div class="flex space-x-3">
+  <div class="flex flex-wrap space-x-3">
     
 
 
@@ -1519,7 +1562,7 @@
   
   <a class="hb-attachment-link hb-attachment-small" href="https://doi.org/10.1093/ser/mwac027" target="_blank" rel="noopener">
     <svg style="height: 1em" class='inline-block' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13.19 8.688a4.5 4.5 0 0 1 1.242 7.244l-4.5 4.5a4.5 4.5 0 0 1-6.364-6.364l1.757-1.757m13.35-.622l1.757-1.757a4.5 4.5 0 0 0-6.364-6.364l-4.5 4.5a4.5 4.5 0 0 0 1.242 7.244"/></svg>
-    DOI</a>
+    View Online</a>
 
 
   </div>
@@ -1552,7 +1595,7 @@
   
 
   
-  <div class="flex space-x-3">
+  <div class="flex flex-wrap space-x-3">
     
 
 
@@ -1606,7 +1649,7 @@
   
   <a class="hb-attachment-link hb-attachment-small" href="https://doi.org/10.1177/00491241221082603" target="_blank" rel="noopener">
     <svg style="height: 1em" class='inline-block' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13.19 8.688a4.5 4.5 0 0 1 1.242 7.244l-4.5 4.5a4.5 4.5 0 0 1-6.364-6.364l1.757-1.757m13.35-.622l1.757-1.757a4.5 4.5 0 0 0-6.364-6.364l-4.5 4.5a4.5 4.5 0 0 0 1.242 7.244"/></svg>
-    DOI</a>
+    View Online</a>
 
 
   </div>
@@ -1715,7 +1758,7 @@
 
   
   <p class="powered-by text-center">
-    © 2024 Me. This work is licensed under <a href="https://creativecommons.org/licenses/by-nc-nd/4.0" rel="noopener noreferrer" target="_blank">CC BY NC ND 4.0</a>
+    © 2025 Me. This work is licensed under <!-- raw HTML omitted -->CC BY NC ND 4.0<!-- raw HTML omitted -->
   </p>
   
 
@@ -1746,7 +1789,7 @@
       
       
       
-      Published with <a href="https://hugoblox.com/?utm_campaign=poweredby" target="_blank" rel="noopener">Hugo Blox Builder</a> — the free, <a href="https://github.com/HugoBlox/hugo-blox-builder" target="_blank" rel="noopener">open source</a> website builder that empowers creators.
+      Published with <!-- raw HTML omitted -->Hugo Blox Builder<!-- raw HTML omitted --> — the free, <!-- raw HTML omitted -->open source<!-- raw HTML omitted --> website builder that empowers creators.
     
   </p>
 
