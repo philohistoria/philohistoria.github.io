@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Recent &amp; Upcoming Talks | Han Zhang</title>
-    <link>http://localhost:1313/event/</link>
-      <atom:link href="http://localhost:1313/event/index.xml" rel="self" type="application/rss+xml" />
+    <link>https://hanzhang.xyz/event/</link>
+      <atom:link href="https://hanzhang.xyz/event/index.xml" rel="self" type="application/rss+xml" />
     <description>Recent &amp; Upcoming Talks</description>
     <generator>Hugo Blox Builder (https://hugoblox.com)</generator><language>en-us</language><lastBuildDate>Sat, 01 Jun 2030 13:00:00 +0000</lastBuildDate>
     <image>
-      <url>http://localhost:1313/media/icon_hu_db3bead160fce7e0.png</url>
+      <url>https://hanzhang.xyz/media/icon_hu_db3bead160fce7e0.png</url>
       <title>Recent &amp; Upcoming Talks</title>
-      <link>http://localhost:1313/event/</link>
+      <link>https://hanzhang.xyz/event/</link>
     </image>
     
     <item>
       <title>Example Talk</title>
-      <link>http://localhost:1313/event/example/</link>
+      <link>https://hanzhang.xyz/event/example/</link>
       <pubDate>Sat, 01 Jun 2030 13:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/event/example/</guid>
+      <guid>https://hanzhang.xyz/event/example/</guid>
       <description>
 
 

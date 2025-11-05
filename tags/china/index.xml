@@ -2,45 +2,45 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>&#34;China&#34; | Han Zhang</title>
-    <link>http://localhost:1313/tags/china/</link>
-      <atom:link href="http://localhost:1313/tags/china/index.xml" rel="self" type="application/rss+xml" />
+    <link>https://hanzhang.xyz/tags/china/</link>
+      <atom:link href="https://hanzhang.xyz/tags/china/index.xml" rel="self" type="application/rss+xml" />
     <description>&#34;China&#34;</description>
     <generator>Hugo Blox Builder (https://hugoblox.com)</generator><language>en-us</language><lastBuildDate>Sun, 01 Sep 2024 00:00:00 +0000</lastBuildDate>
     <image>
-      <url>http://localhost:1313/media/icon_hu_db3bead160fce7e0.png</url>
+      <url>https://hanzhang.xyz/media/icon_hu_db3bead160fce7e0.png</url>
       <title>&#34;China&#34;</title>
-      <link>http://localhost:1313/tags/china/</link>
+      <link>https://hanzhang.xyz/tags/china/</link>
     </image>
     
     <item>
       <title>Patriarchal Erasure and Manufactured Passivity: Asymmetric Government and News Media Attention to Protests in China</title>
-      <link>http://localhost:1313/publication/journal-article/cheng-patriarchal-2024/</link>
+      <link>https://hanzhang.xyz/publication/journal-article/cheng-patriarchal-2024/</link>
       <pubDate>Sun, 01 Sep 2024 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/publication/journal-article/cheng-patriarchal-2024/</guid>
+      <guid>https://hanzhang.xyz/publication/journal-article/cheng-patriarchal-2024/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Robots and Protest: Does Increased Protest Among Chinese Workers Result in More Automation?</title>
-      <link>http://localhost:1313/publication/journal-article/zhang-robot-2022/</link>
+      <link>https://hanzhang.xyz/publication/journal-article/zhang-robot-2022/</link>
       <pubDate>Sat, 01 Jul 2023 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/publication/journal-article/zhang-robot-2022/</guid>
+      <guid>https://hanzhang.xyz/publication/journal-article/zhang-robot-2022/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Authoritarian Responsiveness and Political Attitudes during COVID-19: Evidence from Weibo and a Survey Experiment</title>
-      <link>http://localhost:1313/publication/journal-article/wei-authoritarian-2021/</link>
+      <link>https://hanzhang.xyz/publication/journal-article/wei-authoritarian-2021/</link>
       <pubDate>Fri, 01 Jan 2021 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/publication/journal-article/wei-authoritarian-2021/</guid>
+      <guid>https://hanzhang.xyz/publication/journal-article/wei-authoritarian-2021/</guid>
       <description></description>
     </item>
     
     <item>
       <title>CASM: A Deep Learning Approach for Identifying Collective Action Events with Text and Image Data from Social Media</title>
-      <link>http://localhost:1313/publication/journal-article/zhang-casm-2019/</link>
+      <link>https://hanzhang.xyz/publication/journal-article/zhang-casm-2019/</link>
       <pubDate>Tue, 01 Jan 2019 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/publication/journal-article/zhang-casm-2019/</guid>
+      <guid>https://hanzhang.xyz/publication/journal-article/zhang-casm-2019/</guid>
       <description>&lt;p&gt;&lt;strong&gt;NOTE&lt;/strong&gt;:
 There are three great invited commentaries to our article by 
 , 
@@ -52,9 +52,9 @@ There are three great invited commentaries to our article by
     
     <item>
       <title>Causal Effect of Witnessing Political Protest on Civic Engagement</title>
-      <link>http://localhost:1313/publication/journal-article/zhang-causal-2016/</link>
+      <link>https://hanzhang.xyz/publication/journal-article/zhang-causal-2016/</link>
       <pubDate>Tue, 01 Mar 2016 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/publication/journal-article/zhang-causal-2016/</guid>
+      <guid>https://hanzhang.xyz/publication/journal-article/zhang-causal-2016/</guid>
       <description></description>
     </item>
     

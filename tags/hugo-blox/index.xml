@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Hugo Blox | Han Zhang</title>
-    <link>http://localhost:1313/tags/hugo-blox/</link>
-      <atom:link href="http://localhost:1313/tags/hugo-blox/index.xml" rel="self" type="application/rss+xml" />
+    <link>https://hanzhang.xyz/tags/hugo-blox/</link>
+      <atom:link href="https://hanzhang.xyz/tags/hugo-blox/index.xml" rel="self" type="application/rss+xml" />
     <description>Hugo Blox</description>
     <generator>Hugo Blox Builder (https://hugoblox.com)</generator><language>en-us</language><lastBuildDate>Tue, 27 Aug 2024 00:00:00 +0000</lastBuildDate>
     <image>
-      <url>http://localhost:1313/media/icon_hu_db3bead160fce7e0.png</url>
+      <url>https://hanzhang.xyz/media/icon_hu_db3bead160fce7e0.png</url>
       <title>Hugo Blox</title>
-      <link>http://localhost:1313/tags/hugo-blox/</link>
+      <link>https://hanzhang.xyz/tags/hugo-blox/</link>
     </image>
     
     <item>
       <title>updates</title>
-      <link>http://localhost:1313/post/data-visualization/</link>
+      <link>https://hanzhang.xyz/post/data-visualization/</link>
       <pubDate>Tue, 27 Aug 2024 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/post/data-visualization/</guid>
+      <guid>https://hanzhang.xyz/post/data-visualization/</guid>
       <description>&lt;h1 id=&#34;updates&#34;&gt;updates&lt;/h1&gt;
 &lt;p&gt;&lt;span class=&#34;timestamp-wrapper&#34;&gt;&lt;span class=&#34;timestamp&#34;&gt;[2024-08-14 Wed]&lt;/span&gt;&lt;/span&gt;
 the previous website (theme) is kind of broken. I don’t know why
@@ -50,9 +50,9 @@ which will be pusshed to the Github pages
     
     <item>
       <title>🎉 Easily create your own simple yet highly customizable blog</title>
-      <link>http://localhost:1313/post/get-started/</link>
+      <link>https://hanzhang.xyz/post/get-started/</link>
       <pubDate>Fri, 27 Oct 2023 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/post/get-started/</guid>
+      <guid>https://hanzhang.xyz/post/get-started/</guid>
       <description>&lt;p&gt;Welcome 👋&lt;/p&gt;
 
 
@@ -160,9 +160,9 @@ which will be pusshed to the Github pages
     
     <item>
       <title>✅ Manage your projects</title>
-      <link>http://localhost:1313/post/project-management/</link>
+      <link>https://hanzhang.xyz/post/project-management/</link>
       <pubDate>Mon, 23 Oct 2023 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/post/project-management/</guid>
+      <guid>https://hanzhang.xyz/post/project-management/</guid>
       <description>&lt;p&gt;Easily manage your projects - create ideation mind maps, Gantt charts, todo lists, and more!&lt;/p&gt;
 &lt;h2 id=&#34;ideation&#34;&gt;Ideation&lt;/h2&gt;
 &lt;p&gt;Hugo Blox supports a Markdown extension for mindmaps.&lt;/p&gt;
