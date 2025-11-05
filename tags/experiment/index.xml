@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>&#34;Experiment&#34; | Han Zhang</title>
-    <link>https://hanzhang.xyz/tags/experiment/</link>
-      <atom:link href="https://hanzhang.xyz/tags/experiment/index.xml" rel="self" type="application/rss+xml" />
+    <link>http://localhost:1313/tags/experiment/</link>
+      <atom:link href="http://localhost:1313/tags/experiment/index.xml" rel="self" type="application/rss+xml" />
     <description>&#34;Experiment&#34;</description>
     <generator>Hugo Blox Builder (https://hugoblox.com)</generator><language>en-us</language><lastBuildDate>Fri, 01 Jan 2021 00:00:00 +0000</lastBuildDate>
     <image>
-      <url>https://hanzhang.xyz/media/icon_hu6741429377955683711.png</url>
+      <url>http://localhost:1313/media/icon_hu_db3bead160fce7e0.png</url>
       <title>&#34;Experiment&#34;</title>
-      <link>https://hanzhang.xyz/tags/experiment/</link>
+      <link>http://localhost:1313/tags/experiment/</link>
     </image>
     
     <item>
       <title>Authoritarian Responsiveness and Political Attitudes during COVID-19: Evidence from Weibo and a Survey Experiment</title>
-      <link>https://hanzhang.xyz/publication/journal-article/wei-authoritarian-2021/</link>
+      <link>http://localhost:1313/publication/journal-article/wei-authoritarian-2021/</link>
       <pubDate>Fri, 01 Jan 2021 00:00:00 +0000</pubDate>
-      <guid>https://hanzhang.xyz/publication/journal-article/wei-authoritarian-2021/</guid>
+      <guid>http://localhost:1313/publication/journal-article/wei-authoritarian-2021/</guid>
       <description></description>
     </item>
     

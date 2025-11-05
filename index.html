@@ -1,13 +1,13 @@
 <!doctype html>
 <!-- This site was created with Hugo Blox. https://hugoblox.com -->
-<!-- Last Published: November 4, 2025 --><html lang="en-us" dir="ltr"
+<!-- Last Published: November 5, 2025 --><html lang="en-us" dir="ltr"
       data-wc-theme-default="light">
   
-<head>
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="generator" content="Hugo Blox Builder 0.3.2" />
+  <meta name="generator" content="Hugo Blox Builder 0.9.0" />
 
   
   
@@ -18,6 +18,8 @@
 
 
 
+
+  
 
 
 
@@ -44,7 +46,7 @@
   <meta name="description" content="The highly-customizable Hugo Academic theme powered by Hugo Blox Builder. Easily create your personal academic website." />
 
   
-  <link rel="alternate" hreflang="en-us" href="https://hanzhang.xyz/" />
+  <link rel="alternate" hreflang="en-us" href="http://localhost:1313/" />
 
   
   
@@ -56,64 +58,31 @@
 
   
   
+  
     
-    <link href="/dist/wc.min.05570f1deda629d4e2d77f73534a63aa04471f012db6735c59424372f467db85.css" rel="stylesheet" />
-  
 
   
   
   
-
   
-
-  <script>
-     
-    window.hbb = {
-       defaultTheme: document.documentElement.dataset.wcThemeDefault,
-       setDarkTheme: () => {
-        document.documentElement.classList.add("dark");
-        document.documentElement.style.colorScheme = "dark";
-      },
-       setLightTheme: () => {
-        document.documentElement.classList.remove("dark");
-        document.documentElement.style.colorScheme = "light";
-      }
-    }
-
-    console.debug(`Default Hugo Blox Builder theme is ${window.hbb.defaultTheme}`);
-
-    if ("wc-color-theme" in localStorage) {
-      localStorage.getItem("wc-color-theme") === "dark" ? window.hbb.setDarkTheme() : window.hbb.setLightTheme();
-    } else {
-      window.hbb.defaultTheme === "dark" ? window.hbb.setDarkTheme() : window.hbb.setLightTheme();
-      if (window.hbb.defaultTheme === "system") {
-        window.matchMedia("(prefers-color-scheme: dark)").matches ? window.hbb.setDarkTheme() : window.hbb.setLightTheme();
-      }
-    }
-  </script>
-
-  <script>
+  
+  
+  
     
-    document.addEventListener('DOMContentLoaded', function () {
-      
-      let checkboxes = document.querySelectorAll('li input[type=\'checkbox\'][disabled]');
-      checkboxes.forEach(e => {
-        e.parentElement.parentElement.classList.add('task-list');
-      });
+      <link rel="stylesheet" href="/css/_entry.css">
+    
+  
 
-      
-      const liNodes = document.querySelectorAll('.task-list li');
-      liNodes.forEach(nodes => {
-        let textNodes = Array.from(nodes.childNodes).filter(node => node.nodeType === 3 && node.textContent.trim().length > 1);
-        if (textNodes.length > 0) {
-          const span = document.createElement('label');
-          textNodes[0].after(span);  
-          span.appendChild(nodes.querySelector('input[type=\'checkbox\']'));
-          span.appendChild(textNodes[0]);
-        }
-      });
-    });
-  </script>
+
+  
+
+  
+  
+  
+
+  
+
+  <script src="/js/hb-head.min.js"></script>
 
   
   
@@ -160,10 +129,10 @@
   
 
   
-  <link rel="icon" type="image/png" href="/media/icon_hu9897027397959387935.png" />
-  <link rel="apple-touch-icon" type="image/png" href="/media/icon_hu7176428415324072203.png" />
+  <link rel="icon" type="image/png" href="/media/icon_hu_19d75f640a46164e.png" />
+  <link rel="apple-touch-icon" type="image/png" href="/media/icon_hu_678a654b4605efdb.png" />
 
-  <link rel="canonical" href="https://hanzhang.xyz/" />
+  <link rel="canonical" href="http://localhost:1313/" />
 
   
   
@@ -189,10 +158,10 @@
     <meta property="twitter:creator" content="@GetResearchDev" />
   
   <meta property="og:site_name" content="Han Zhang" />
-  <meta property="og:url" content="https://hanzhang.xyz/" />
+  <meta property="og:url" content="http://localhost:1313/" />
   <meta property="og:title" content="Han Zhang" />
-  <meta property="og:description" content="The highly-customizable Hugo Academic theme powered by Hugo Blox Builder. Easily create your personal academic website." /><meta property="og:image" content="https://hanzhang.xyz/media/icon_hu6741429377955683711.png" />
-    <meta property="twitter:image" content="https://hanzhang.xyz/media/icon_hu6741429377955683711.png" /><meta property="og:locale" content="en-us" />
+  <meta property="og:description" content="The highly-customizable Hugo Academic theme powered by Hugo Blox Builder. Easily create your personal academic website." /><meta property="og:image" content="http://localhost:1313/media/icon_hu_db3bead160fce7e0.png" />
+    <meta property="twitter:image" content="http://localhost:1313/media/icon_hu_db3bead160fce7e0.png" /><meta property="og:locale" content="en-us" />
   
     
       <meta property="og:updated_time" content="2022-10-24T00:00:00&#43;00:00" />
@@ -204,7 +173,7 @@
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "WebSite","url": "https://hanzhang.xyz/"
+  "@type": "WebSite","url": "http://localhost:1313/"
 }
 </script>
 
@@ -239,166 +208,171 @@
   
 
 
+
+
   
   
+
   
   
+
   
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
+
   
   
     
+    
       
       
-        
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-        
-        
+      
+    
+    
+  
+
+  
+    
+    
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
       
     
   
   
   
+
   
   
+
   
-  
-    
-      
-      
-        
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-        
-        
-      
-    
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
+
   
   
     
+    
       
       
-        
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-        
-        
+      
+    
+    
+  
+
+  
+    
+    
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
       
     
   
   
   
+
   
   
+
+  
+
   
   
     
-      
-      
-        
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-        
-        
-      
     
       
       
-        
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-        
-        
+      
+    
+    
+  
+
+  
+    
+    
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
       
     
   
   
   
+
+  
+  
+
+  
+
+  
+  
+    
+    
+      
+      
+      
+    
+      
+      
+      
+    
+    
+  
+
+  
+    
+    
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+    
+  
+    
+    
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+    
   
   
   
@@ -408,20 +382,19 @@
   
   
   
+
+  <script
+    defer
+    src="/js/hugo-blox-en.min.js"
+    integrity=""
+  ></script>
+
   
   
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
+
+
+
+
 
 
 
@@ -435,7 +408,7 @@
 <script src="/dist/pagefind/pagefind-ui.87693d7c6f2b3b347ce359d0ede762c033419f0a32b22ce508c335a81d841f1b.js" integrity="sha256-h2k9fG8rOzR841nQ7ediwDNBnwoysizlCMM1qB2EHxs="></script>
 
 
-<script>window.hbb.pagefind = {"baseUrl":"/"};</script>
+<script id="search-config" type="application/json">{"baseUrl":"/"}</script>
 
 <style>
   html.dark {
@@ -453,62 +426,7 @@
   }
 </style>
 
-<script>
-  
-  let searchWrapper = null;
-
-  window.addEventListener('DOMContentLoaded', (event) => {
-    
-    new PagefindUI({
-      element: "#search",
-      showSubResults: true,
-      baseUrl: window.hbb.pagefind.baseUrl,
-      bundlePath: window.hbb.pagefind.baseUrl + "pagefind/",
-    });
-
-    
-    searchWrapper = document.getElementById('search-wrapper');
-
-    
-    let triggers = document.querySelectorAll('[data-search-toggle]');
-    triggers.forEach(trigger =>
-      trigger.addEventListener('click', handleSearchToggle)
-    );
-  });
-
-  function handleSearchToggle(event) {
-    if (!searchWrapper) return;
-
-    const isHidden = searchWrapper.classList.contains('hidden');
-    searchWrapper.classList.toggle('hidden');
-    document.body.style.overflow = isHidden ? 'hidden' : '';
-
-    const searchInput = searchWrapper.querySelector("input");
-    if (searchInput) {
-      searchInput.value = "";
-      searchInput.focus();
-    }
-
-    if (!searchWrapper.classList.contains('hidden')) {
-      let clearTrigger = document.querySelector('.pagefind-ui__search-clear');
-
-      if (clearTrigger && !clearTrigger.hasAttribute('listenerOnClick')) {
-        clearTrigger.setAttribute('listenerOnClick', 'true');
-
-        clearTrigger.addEventListener('click', () => {
-          searchInput.focus();
-        });
-      }
-    }
-  }
-
-  
-  document.addEventListener('keydown', (event) => {
-    if (event.key === 'Escape' && searchWrapper && !searchWrapper.classList.contains('hidden')) {
-      searchWrapper.classList.add('hidden');
-    }
-  });
-</script>
+<script defer src="/js/hb-search.min.js"></script>
 
 
 
@@ -522,20 +440,6 @@
 
 
 
-
-
-  
-  
-  
-  
-  
-  
-  
-  <script
-    defer
-    src="/js/hugo-blox-en.min.47736f84e20cae1bb2224dc4605239689e913811575e32b5f86a700ee9d6529d.js"
-    integrity="sha256-R3NvhOIMrhuyIk3EYFI5aJ6ROBFXXjK1&#43;GpwDunWUp0="
-  ></script>
 
   
   
@@ -561,11 +465,9 @@
       
       
         
-        
-        
           <header id="site-header" class="header">
-  <nav class="navbar px-3 flex justify-left">
-    <div class="order-0 h-100">
+  <nav class="navbar px-3 flex justify-start">
+    <div class="order-0 h-full">
       
       <a class="navbar-brand" href="/" title="Han Zhang">
         Han Zhang
@@ -593,7 +495,7 @@
     
     <ul
       id="nav-menu"
-      class="navbar-nav order-3 hidden lg:flex w-full pb-6 lg:order-1 lg:w-auto lg:space-x-2 lg:pb-0 xl:space-x-8 justify-left
+      class="navbar-nav order-3 hidden lg:flex w-full pb-6 lg:order-1 lg:w-auto lg:space-x-2 lg:pb-0 xl:space-x-8 justify-start
       ">
       
       
@@ -676,12 +578,12 @@
         <button class="theme-toggle mt-1" accesskey="t" title="appearance">
           <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-               stroke-linejoin="round" class="dark:hidden">
+               stroke-linejoin="round" class="block dark:hidden">
             <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
           </svg>
           <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-               stroke-linejoin="round" class=" dark:block [&:not(dark)]:hidden">
+               stroke-linejoin="round" class="hidden dark:block">
             <circle cx="12" cy="12" r="5"></circle>
             <line x1="12" y1="1" x2="12" y2="3"></line>
             <line x1="12" y1="21" x2="12" y2="23"></line>
@@ -766,47 +668,34 @@
 
 
 
-
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-  
   
   
     
+    
+  
+
+
+
+
+
+
+
+
+
+  
+  
     
       
     
     
-  
-  
-    
-    
-  
-  
-    
     
   
 
 
 
   
-
-
-
   
-    
+  
     
     
   
@@ -822,31 +711,20 @@
 
 
 
+  
+  
+  
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<section id="section-resume-biography-3" class="relative hbb-section blox-resume-biography-3  white" style="padding: 2rem 0 2rem 0;" >
- <div class="home-section-bg  bg-image" style="background-color: black;background-image: url(&#39;https://hanzhang.xyz/media/background_hu10570984734778525308.webp&#39;);background-size: cover;background-position: center;filter: brightness(1);">
-   
- </div>
+  
   
 
   
 
+  
+
+  
+  <section id="section-resume-biography-3" class="relative hbb-section blox-resume-biography-3  white" >
+    <div class="home-section-bg  bg-image" style="background-color: black;background-image: url(&#39;http://localhost:1313/media/background_hu_e27cb55094356bd9.webp&#39;);"></div>
     
 
 
@@ -865,207 +743,288 @@
 
 
 
-<div class="resume-biography px-3 flex flex-col md:flex-row justify-center gap-12">
-  <div class="flex-none m-w-[130px] mx-auto md:mx-0">
 
+
+
+
+
+
+
+
+
+
+
+
+<div class="resume-biography py-8 px-4 sm:py-12 md:py-16 lg:py-24 xl:py-32 relative overflow-hidden">
   
-  
-
-  <div id="profile" class="flex justify-center items-center flex-col">
-    
-
-    <div class="avatar-wrapper mt-10">
+  <div class="max-w-7xl mx-auto">
+    <div class="grid grid-cols-1 md:grid-cols-12 gap-6 md:gap-8 items-start">
       
-      <img class="avatar rounded-full bg-white dark:bg-gray-800 p-1" src="/author/han-zhang/avatar_hu12236666678216841324.jpg" alt="Han Zhang"
-           width="150" height="150">
       
-    </div>
-    
+      <div class="md:col-span-4 flex flex-col items-center text-center space-y-6 md:space-y-8">
+        
+        
+        
+        
 
-    <div class="portrait-title dark:text-white">
+        
+        
+        <div class="avatar-wrapper mb-4" style="width: 320px; height: 320px;">
+          
+          <img class="avatar rounded-full border-4 border-white shadow-2xl" 
+               src="/author/han-zhang/avatar_hu_3273ddbeb1caa034.jpg" 
+               alt="Han Zhang"
+               width="320" 
+               height="320"
+               style="width: 320px; height: 320px; object-fit: cover;">
+          
+        </div>
+        
 
-      <div class="text-3xl font-bold mb-2 mt-6">Han Zhang</div>
+        
+        <div class="space-y-3">
+          <h1 class="text-5xl lg:text-6xl font-black text-gray-900 dark:text-white leading-tight">Han Zhang</h1>
+            <p class="text-2xl font-semibold text-primary-600 dark:text-primary-400">Assistant Professor</p>
+          
+          
+          
+            <p class="text-lg text-gray-700 dark:text-gray-300">
+              <a href="https://www.brown.edu" target="_blank" rel="noopener" class="hover:text-primary-600 dark:hover:text-primary-400 transition-colors">
+              Brown University
+              </a>
+            </p>
+          
+        </div>
 
-      <h3 class="font-semibold mb-1">Assistant Professor</h3>
-
-      
-      <div class="mb-2">
-        <a href="https://www.brown.edu" target="_blank" rel="noopener">
-        <div>Brown University</div>
-        </a>
+        
+        <div class="flex flex-wrap justify-center gap-4">
+          
+          
+          
+          
+            
+          
+          
+          
+          
+          
+          <a href="mailto:han_zhang4@brown.edu"  
+             aria-label="at-symbol"
+              title="E-mail Me"
+             class="w-12 h-12 flex items-center justify-center rounded-full bg-white dark:bg-gray-800 text-gray-600 dark:text-gray-400 
+                    shadow-md hover:shadow-xl hover:scale-110 hover:-translate-y-1 
+                    transition-all duration-300 border border-gray-200 dark:border-gray-700">
+            <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.5" d="M16.5 12a4.5 4.5 0 1 1-9 0a4.5 4.5 0 0 1 9 0Zm0 0c0 1.657 1.007 3 2.25 3S21 13.657 21 12a9 9 0 1 0-2.636 6.364M16.5 12V8.25"/></svg>
+          </a>
+          
+          
+          
+          
+            
+          
+          
+          
+          
+          
+            
+          
+          <a href="https://github.com/philohistoria/" target="_blank" rel="noopener" 
+             aria-label="brands/github"
+             
+             class="w-12 h-12 flex items-center justify-center rounded-full bg-white dark:bg-gray-800 text-gray-600 dark:text-gray-400 
+                    shadow-md hover:shadow-xl hover:scale-110 hover:-translate-y-1 
+                    transition-all duration-300 border border-gray-200 dark:border-gray-700">
+            <svg class="w-6 h-6" fill="currentColor" viewBox="3 3 18 18"><path d="M12 3C7.0275 3 3 7.12937 3 12.2276C3 16.3109 5.57625 19.7597 9.15374 20.9824C9.60374 21.0631 9.77249 20.7863 9.77249 20.5441C9.77249 20.3249 9.76125 19.5982 9.76125 18.8254C7.5 19.2522 6.915 18.2602 6.735 17.7412C6.63375 17.4759 6.19499 16.6569 5.8125 16.4378C5.4975 16.2647 5.0475 15.838 5.80124 15.8264C6.51 15.8149 7.01625 16.4954 7.18499 16.7723C7.99499 18.1679 9.28875 17.7758 9.80625 17.5335C9.885 16.9337 10.1212 16.53 10.38 16.2993C8.3775 16.0687 6.285 15.2728 6.285 11.7432C6.285 10.7397 6.63375 9.9092 7.20749 9.26326C7.1175 9.03257 6.8025 8.08674 7.2975 6.81794C7.2975 6.81794 8.05125 6.57571 9.77249 7.76377C10.4925 7.55615 11.2575 7.45234 12.0225 7.45234C12.7875 7.45234 13.5525 7.55615 14.2725 7.76377C15.9937 6.56418 16.7475 6.81794 16.7475 6.81794C17.2424 8.08674 16.9275 9.03257 16.8375 9.26326C17.4113 9.9092 17.76 10.7281 17.76 11.7432C17.76 15.2843 15.6563 16.0687 13.6537 16.2993C13.98 16.5877 14.2613 17.1414 14.2613 18.0065C14.2613 19.2407 14.25 20.2326 14.25 20.5441C14.25 20.7863 14.4188 21.0746 14.8688 20.9824C16.6554 20.364 18.2079 19.1866 19.3078 17.6162C20.4077 16.0457 20.9995 14.1611 21 12.2276C21 7.12937 16.9725 3 12 3Z"></path></svg>
+          </a>
+          
+          
+          
+          
+            
+          
+          
+          
+          
+          
+            
+          
+          <a href="https://scholar.google.com/citations?hl=en&amp;user=2X10gDIAAAAJ" target="_blank" rel="noopener" 
+             aria-label="academicons/google-scholar"
+             
+             class="w-12 h-12 flex items-center justify-center rounded-full bg-white dark:bg-gray-800 text-gray-600 dark:text-gray-400 
+                    shadow-md hover:shadow-xl hover:scale-110 hover:-translate-y-1 
+                    transition-all duration-300 border border-gray-200 dark:border-gray-700">
+            <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M343.759 106.662V79.43L363.524 64h-213.89L20.476 176.274h85.656a82.339 82.339 0 0 0-.219 6.225c0 20.845 7.22 38.087 21.672 51.861c14.453 13.797 32.252 20.648 53.327 20.648c4.923 0 9.75-.368 14.438-1.024c-2.907 6.5-4.374 12.523-4.374 18.142c0 9.875 4.499 20.43 13.467 31.642c-39.234 2.67-68.061 9.732-86.437 21.163c-10.531 6.5-19 14.704-25.39 24.531c-6.391 9.9-9.578 20.515-9.578 31.962c0 9.648 2.062 18.336 6.219 26.062c4.156 7.726 9.578 14.07 16.312 18.984c6.718 4.968 14.469 9.101 23.219 12.469c8.734 3.344 17.406 5.718 26.061 7.062A167.052 167.052 0 0 0 180.555 448c13.469 0 26.953-1.734 40.547-5.187c13.562-3.485 26.28-8.642 38.171-15.493c11.86-6.805 21.515-16.086 28.922-27.718c7.39-11.68 11.094-24.805 11.094-39.336c0-11.016-2.25-21.039-6.75-30.14c-4.468-9.073-9.938-16.542-16.452-22.345c-6.501-5.813-13-11.155-19.516-15.968c-6.5-4.845-12-9.75-16.468-14.813c-4.485-5.046-6.735-10.054-6.735-14.984c0-4.921 1.734-9.672 5.216-14.265c3.455-4.61 7.674-9.048 12.61-13.306c4.937-4.25 9.875-8.968 14.796-14.133c4.922-5.147 9.141-11.827 12.61-20.008c3.485-8.18 5.203-17.445 5.203-27.757c0-13.453-2.547-24.46-7.547-33.314c-.594-1.022-1.218-1.803-1.875-3.022l56.907-46.672v17.119c-7.393.93-6.624 5.345-6.624 10.635V245.96c0 5.958 4.875 10.834 10.834 10.834h3.989c5.958 0 10.833-4.875 10.833-10.834V117.293c0-5.277.778-9.688-6.561-10.63zm-107.36 222.48c1.14.75 3.704 2.78 7.718 6.038c4.05 3.243 6.797 5.695 8.266 7.414a443.553 443.553 0 0 1 6.376 7.547c2.813 3.375 4.718 6.304 5.718 8.734c1 2.477 2.016 5.461 3.047 8.946a38.27 38.27 0 0 1 1.485 10.562c0 17.048-6.564 29.68-19.656 37.859c-13.125 8.18-28.767 12.274-46.938 12.274c-9.187 0-18.203-1.093-27.063-3.196c-8.843-2.116-17.311-5.336-25.39-9.601c-8.078-4.258-14.577-10.204-19.5-17.797c-4.938-7.64-7.407-16.415-7.407-26.25c0-10.32 2.797-19.29 8.422-26.906c5.594-7.625 12.938-13.391 22.032-17.315c9.063-3.946 18.25-6.742 27.562-8.398a157.865 157.865 0 0 1 28.438-2.555c4.47 0 7.936.25 10.405.696c.455.219 3.032 2.07 7.735 5.563c4.704 3.462 7.625 5.595 8.75 6.384zm-3.359-100.579c-7.406 8.86-17.734 13.288-30.953 13.288c-11.86 0-22.298-4.764-31.266-14.312c-9-9.523-15.422-20.328-19.344-32.43c-3.937-12.109-5.906-23.984-5.906-35.648c0-13.694 3.596-25.352 10.781-34.976c7.187-9.65 17.5-14.485 30.938-14.485c11.875 0 22.374 5.038 31.437 15.157c9.094 10.085 15.61 21.413 19.517 33.968c3.922 12.54 5.873 24.53 5.873 35.984c0 13.446-3.702 24.61-11.076 33.454z"/></svg>
+          </a>
+          
+          
+          
+          
+            
+          
+          
+          
+          
+          
+            
+          
+          <a href="https://twitter.com/hanzhang_pton" target="_blank" rel="noopener" 
+             aria-label="brands/x"
+             
+             class="w-12 h-12 flex items-center justify-center rounded-full bg-white dark:bg-gray-800 text-gray-600 dark:text-gray-400 
+                    shadow-md hover:shadow-xl hover:scale-110 hover:-translate-y-1 
+                    transition-all duration-300 border border-gray-200 dark:border-gray-700">
+            <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M389.2 48h70.6L305.6 224.2 487 464H345L233.7 318.6 106.5 464H35.8L200.7 275.5 26.8 48H172.4L272.9 180.9 389.2 48zM364.4 421.8h39.1L151.1 88h-42L364.4 421.8z"/></svg>
+          </a>
+          
+        </div>
       </div>
-      
-    </div>
 
-    <ul class="network-icon dark:text-zinc-100">
       
-      
-      
-      
+      <div class="md:col-span-8">
         
-      
-      
-      
-      
-      
-      <li>
-        <a href="mailto:han_zhang4@brown.edu"  aria-label="at-symbol"
-            data-toggle="tooltip" data-placement="top" title="E-mail Me">
-          <svg style="height: 1.5rem;" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.5" d="M16.5 12a4.5 4.5 0 1 1-9 0a4.5 4.5 0 0 1 9 0Zm0 0c0 1.657 1.007 3 2.25 3S21 13.657 21 12a9 9 0 1 0-2.636 6.364M16.5 12V8.25"/></svg>
-        </a>
-      </li>
-      
-      
-      
-      
         
-      
-      
-      
-      
-      
         
-      
-      <li>
-        <a href="https://github.com/philohistoria/" target="_blank" rel="noopener" aria-label="brands/github"
-           >
-          <svg style="height: 1.5rem;" fill="currentColor" viewBox="3 3 18 18"><path d="M12 3C7.0275 3 3 7.12937 3 12.2276C3 16.3109 5.57625 19.7597 9.15374 20.9824C9.60374 21.0631 9.77249 20.7863 9.77249 20.5441C9.77249 20.3249 9.76125 19.5982 9.76125 18.8254C7.5 19.2522 6.915 18.2602 6.735 17.7412C6.63375 17.4759 6.19499 16.6569 5.8125 16.4378C5.4975 16.2647 5.0475 15.838 5.80124 15.8264C6.51 15.8149 7.01625 16.4954 7.18499 16.7723C7.99499 18.1679 9.28875 17.7758 9.80625 17.5335C9.885 16.9337 10.1212 16.53 10.38 16.2993C8.3775 16.0687 6.285 15.2728 6.285 11.7432C6.285 10.7397 6.63375 9.9092 7.20749 9.26326C7.1175 9.03257 6.8025 8.08674 7.2975 6.81794C7.2975 6.81794 8.05125 6.57571 9.77249 7.76377C10.4925 7.55615 11.2575 7.45234 12.0225 7.45234C12.7875 7.45234 13.5525 7.55615 14.2725 7.76377C15.9937 6.56418 16.7475 6.81794 16.7475 6.81794C17.2424 8.08674 16.9275 9.03257 16.8375 9.26326C17.4113 9.9092 17.76 10.7281 17.76 11.7432C17.76 15.2843 15.6563 16.0687 13.6537 16.2993C13.98 16.5877 14.2613 17.1414 14.2613 18.0065C14.2613 19.2407 14.25 20.2326 14.25 20.5441C14.25 20.7863 14.4188 21.0746 14.8688 20.9824C16.6554 20.364 18.2079 19.1866 19.3078 17.6162C20.4077 16.0457 20.9995 14.1611 21 12.2276C21 7.12937 16.9725 3 12 3Z"></path></svg>
-        </a>
-      </li>
-      
-      
-      
-      
-        
-      
-      
-      
-      
-      
-        
-      
-      <li>
-        <a href="https://scholar.google.com/citations?hl=en&amp;user=2X10gDIAAAAJ" target="_blank" rel="noopener" aria-label="academicons/google-scholar"
-           >
-          <svg style="height: 1.5rem;" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M343.759 106.662V79.43L363.524 64h-213.89L20.476 176.274h85.656a82.339 82.339 0 0 0-.219 6.225c0 20.845 7.22 38.087 21.672 51.861c14.453 13.797 32.252 20.648 53.327 20.648c4.923 0 9.75-.368 14.438-1.024c-2.907 6.5-4.374 12.523-4.374 18.142c0 9.875 4.499 20.43 13.467 31.642c-39.234 2.67-68.061 9.732-86.437 21.163c-10.531 6.5-19 14.704-25.39 24.531c-6.391 9.9-9.578 20.515-9.578 31.962c0 9.648 2.062 18.336 6.219 26.062c4.156 7.726 9.578 14.07 16.312 18.984c6.718 4.968 14.469 9.101 23.219 12.469c8.734 3.344 17.406 5.718 26.061 7.062A167.052 167.052 0 0 0 180.555 448c13.469 0 26.953-1.734 40.547-5.187c13.562-3.485 26.28-8.642 38.171-15.493c11.86-6.805 21.515-16.086 28.922-27.718c7.39-11.68 11.094-24.805 11.094-39.336c0-11.016-2.25-21.039-6.75-30.14c-4.468-9.073-9.938-16.542-16.452-22.345c-6.501-5.813-13-11.155-19.516-15.968c-6.5-4.845-12-9.75-16.468-14.813c-4.485-5.046-6.735-10.054-6.735-14.984c0-4.921 1.734-9.672 5.216-14.265c3.455-4.61 7.674-9.048 12.61-13.306c4.937-4.25 9.875-8.968 14.796-14.133c4.922-5.147 9.141-11.827 12.61-20.008c3.485-8.18 5.203-17.445 5.203-27.757c0-13.453-2.547-24.46-7.547-33.314c-.594-1.022-1.218-1.803-1.875-3.022l56.907-46.672v17.119c-7.393.93-6.624 5.345-6.624 10.635V245.96c0 5.958 4.875 10.834 10.834 10.834h3.989c5.958 0 10.833-4.875 10.833-10.834V117.293c0-5.277.778-9.688-6.561-10.63zm-107.36 222.48c1.14.75 3.704 2.78 7.718 6.038c4.05 3.243 6.797 5.695 8.266 7.414a443.553 443.553 0 0 1 6.376 7.547c2.813 3.375 4.718 6.304 5.718 8.734c1 2.477 2.016 5.461 3.047 8.946a38.27 38.27 0 0 1 1.485 10.562c0 17.048-6.564 29.68-19.656 37.859c-13.125 8.18-28.767 12.274-46.938 12.274c-9.187 0-18.203-1.093-27.063-3.196c-8.843-2.116-17.311-5.336-25.39-9.601c-8.078-4.258-14.577-10.204-19.5-17.797c-4.938-7.64-7.407-16.415-7.407-26.25c0-10.32 2.797-19.29 8.422-26.906c5.594-7.625 12.938-13.391 22.032-17.315c9.063-3.946 18.25-6.742 27.562-8.398a157.865 157.865 0 0 1 28.438-2.555c4.47 0 7.936.25 10.405.696c.455.219 3.032 2.07 7.735 5.563c4.704 3.462 7.625 5.595 8.75 6.384zm-3.359-100.579c-7.406 8.86-17.734 13.288-30.953 13.288c-11.86 0-22.298-4.764-31.266-14.312c-9-9.523-15.422-20.328-19.344-32.43c-3.937-12.109-5.906-23.984-5.906-35.648c0-13.694 3.596-25.352 10.781-34.976c7.187-9.65 17.5-14.485 30.938-14.485c11.875 0 22.374 5.038 31.437 15.157c9.094 10.085 15.61 21.413 19.517 33.968c3.922 12.54 5.873 24.53 5.873 35.984c0 13.446-3.702 24.61-11.076 33.454z"/></svg>
-        </a>
-      </li>
-      
-      
-      
-      
-        
-      
-      
-      
-      
-      
-        
-      
-      <li>
-        <a href="https://twitter.com/hanzhang_pton" target="_blank" rel="noopener" aria-label="brands/x"
-           >
-          <svg style="height: 1.5rem;" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M389.2 48h70.6L305.6 224.2 487 464H345L233.7 318.6 106.5 464H35.8L200.7 275.5 26.8 48H172.4L272.9 180.9 389.2 48zM364.4 421.8h39.1L151.1 88h-42L364.4 421.8z"/></svg>
-        </a>
-      </li>
-      
-    </ul>
-  </div>
-  </div>
-
-  <div class="flex-auto max-w-prose md:mt-12">
-    
-    <div class="pt-2 justify-content-center prose prose-slate dark:prose-invert">
-      <div class="bio-text" >
-        <h2 id="heading"></h2>
+        <div class="mb-12">
+          <div class="flex items-center gap-4 mb-8">
+            <div class="flex-shrink-0 w-12 h-12 bg-primary-100 dark:bg-primary-900/50 rounded-full flex items-center justify-center">
+              <svg class='w-6 h-6 text-primary-600 dark:text-primary-400' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 9h3.75M15 12h3.75M15 15h3.75M4.5 19.5h15a2.25 2.25 0 0 0 2.25-2.25V6.75A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25v10.5A2.25 2.25 0 0 0 4.5 19.5m6-10.125a1.875 1.875 0 1 1-3.75 0a1.875 1.875 0 0 1 3.75 0m1.294 6.336a6.721 6.721 0 0 1-3.17.789a6.721 6.721 0 0 1-3.168-.789a3.376 3.376 0 0 1 6.338 0"/></svg>
+            </div>
+            
+            
+            
+            <h2 class="text-xl sm:text-2xl lg:text-3xl font-bold text-gray-900 dark:text-white tracking-tight">Professional Summary</h2>
+          </div>
+          <div class="prose prose-lg dark:prose-invert text-gray-800 dark:text-gray-200 text-base sm:text-lg leading-relaxed">
+            <div class="bio-text" >
+              <h2></h2>
 <p>I am a political sociologist and computational social scientist. My research examines how digital surveillance technologies—such as street cameras, social media monitoring, and algorithmic systems—shape political behavior. I focus especially on how surveillance influences protest, compliance, and perceptions of state control. Methodologically, I combine computer vision, causal inference, and experimental design to analyze large-scale visual data, including street-view imagery and social media content.</p>
 <p>I am the Young Family Assistant Professor of Sociology and International and Public Affairs at Brown University. I am jointly appointed in the <a href="https://www.brown.edu/academics/sociology/people/faculty" target="_blank" rel="noopener">Department of Sociology</a> and <a href="https://home.watson.brown.edu/people/faculty/watson-faculty/han-zhang" target="_blank" rel="noopener">the Watson School of International and Public Affairs</a> at Brown University.</p>
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
+<!-- Before joining Brown, I worked as an Assistant Professor in the [Division of Social Science](https://sosc.ust.hk/), The Hong Kong University of Science and Technology (HKUST).  -->
+<!-- I have also worked as a research intern at Microsoft Research, once at MSRA (Beijing) and once at MSR NYC.  -->
 <p>Feel free to send me an email with your CV if you are interested in working with me.</p>
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
+<!-- as a research assistant, please send an email with your CV and a brief description of your research interests. My previous students have a [great placement records](/advising) into top programs. -->
+<!-- If you would like to work with me as a PhD student, please apply to [Brown's Sociology PhD program](https://www.brown.edu/academics/sociology/programs/phd). -->
 
+            </div>
+          </div>
+        </div>
+        
+
+        
+        
+        <div class="mb-16">
+          <a href="files/zhanghan-cv-full-Brown-detailed.pdf" target="_blank" 
+             class="inline-flex items-center px-8 py-4 bg-gradient-to-r from-primary-600 to-secondary-600 hover:from-primary-700 hover:to-secondary-700 text-white font-bold text-lg rounded-xl shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300">
+            <svg class='w-5 h-5 mr-3' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m.75 12l3 3m0 0l3-3m-3 3v-6m-1.5-9H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9"/></svg>
+            Download CV Here
+          </a>
+        </div>
+        
+
+        
+        
+        <div class="mb-16">
+          <div class="flex items-center gap-4 mb-8">
+            <div class="flex-shrink-0 w-12 h-12 bg-primary-100 dark:bg-primary-900/50 rounded-full flex items-center justify-center">
+              <svg class='w-6 h-6 text-primary-600 dark:text-primary-400' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4.26 10.147a60.436 60.436 0 0 0-.491 6.347A48.627 48.627 0 0 1 12 20.904a48.627 48.627 0 0 1 8.232-4.41a60.46 60.46 0 0 0-.491-6.347m-15.482 0a50.57 50.57 0 0 0-2.658-.813A59.905 59.905 0 0 1 12 3.493a59.902 59.902 0 0 1 10.399 5.84a51.39 51.39 0 0 0-2.658.814m-15.482 0A50.697 50.697 0 0 1 12 13.489a50.702 50.702 0 0 1 7.74-3.342M6.75 15a.75.75 0 1 0 0-1.5a.75.75 0 0 0 0 1.5m0 0v-3.675A55.378 55.378 0 0 1 12 8.443m-7.007 11.55A5.981 5.981 0 0 0 6.75 15.75v-1.5"/></svg>
+            </div>
+            
+            <h3 class="text-xl sm:text-2xl lg:text-3xl font-bold text-gray-900 dark:text-white tracking-tight">Education</h3>
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+            
+            <div class="group h-full flex flex-col bg-gradient-to-br from-white/90 to-primary-50/30 dark:from-gray-800/90 dark:to-primary-900/20 rounded-xl p-6 shadow-md hover:shadow-xl transition-all duration-300 border border-transparent hover:border-primary-200 dark:hover:border-primary-800 backdrop-blur-md">
+              <div class="flex gap-4">
+                <div class="flex-shrink-0 w-12 h-12 bg-white dark:bg-gray-800 ring-1 ring-gray-200 dark:ring-gray-700 rounded-full flex items-center justify-center shadow-md">
+                  
+                    <svg class='w-6 h-6 text-primary-600 dark:text-primary-400' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4.26 10.147a60.436 60.436 0 0 0-.491 6.347A48.627 48.627 0 0 1 12 20.904a48.627 48.627 0 0 1 8.232-4.41a60.46 60.46 0 0 0-.491-6.347m-15.482 0a50.57 50.57 0 0 0-2.658-.813A59.905 59.905 0 0 1 12 3.493a59.902 59.902 0 0 1 10.399 5.84a51.39 51.39 0 0 0-2.658.814m-15.482 0A50.697 50.697 0 0 1 12 13.489a50.702 50.702 0 0 1 7.74-3.342M6.75 15a.75.75 0 1 0 0-1.5a.75.75 0 0 0 0 1.5m0 0v-3.675A55.378 55.378 0 0 1 12 8.443m-7.007 11.55A5.981 5.981 0 0 0 6.75 15.75v-1.5"/></svg>
+                  
+                </div>
+                <div class="flex-1 flex-grow">
+                  <p class="text-xl font-bold text-gray-900 dark:text-white group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors">
+                    Ph.D. in Sociology, 2020
+                  </p>
+                  <p class="text-gray-600 dark:text-gray-400 font-medium mt-1">Princeton University</p>
+                </div>
+              </div>
+            </div>
+            
+            <div class="group h-full flex flex-col bg-gradient-to-br from-white/90 to-primary-50/30 dark:from-gray-800/90 dark:to-primary-900/20 rounded-xl p-6 shadow-md hover:shadow-xl transition-all duration-300 border border-transparent hover:border-primary-200 dark:hover:border-primary-800 backdrop-blur-md">
+              <div class="flex gap-4">
+                <div class="flex-shrink-0 w-12 h-12 bg-white dark:bg-gray-800 ring-1 ring-gray-200 dark:ring-gray-700 rounded-full flex items-center justify-center shadow-md">
+                  
+                    <svg class='w-6 h-6 text-primary-600 dark:text-primary-400' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4.26 10.147a60.436 60.436 0 0 0-.491 6.347A48.627 48.627 0 0 1 12 20.904a48.627 48.627 0 0 1 8.232-4.41a60.46 60.46 0 0 0-.491-6.347m-15.482 0a50.57 50.57 0 0 0-2.658-.813A59.905 59.905 0 0 1 12 3.493a59.902 59.902 0 0 1 10.399 5.84a51.39 51.39 0 0 0-2.658.814m-15.482 0A50.697 50.697 0 0 1 12 13.489a50.702 50.702 0 0 1 7.74-3.342M6.75 15a.75.75 0 1 0 0-1.5a.75.75 0 0 0 0 1.5m0 0v-3.675A55.378 55.378 0 0 1 12 8.443m-7.007 11.55A5.981 5.981 0 0 0 6.75 15.75v-1.5"/></svg>
+                  
+                </div>
+                <div class="flex-1 flex-grow">
+                  <p class="text-xl font-bold text-gray-900 dark:text-white group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors">
+                    B.S. in Computer Science and B.A. in History (minor), 2013
+                  </p>
+                  <p class="text-gray-600 dark:text-gray-400 font-medium mt-1">Peking University</p>
+                </div>
+              </div>
+            </div>
+            
+          </div>
+        </div>
+        
+
+        
+        
+        <div>
+          <div class="flex items-center gap-4 mb-8">
+            <div class="flex-shrink-0 w-12 h-12 bg-primary-100 dark:bg-primary-900/50 rounded-full flex items-center justify-center">
+              <svg class='w-6 h-6 text-primary-600 dark:text-primary-400' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 0 0-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 0 0 3.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 0 0 3.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 0 0-3.09 3.09m8.445-7.188L18 9.75l-.259-1.035a3.375 3.375 0 0 0-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 0 0 2.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 0 0 2.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 0 0-2.456 2.456m-1.365 11.852L16.5 21.75l-.394-1.183a2.25 2.25 0 0 0-1.423-1.423L13.5 18.75l1.183-.394a2.25 2.25 0 0 0 1.423-1.423l.394-1.183l.394 1.183a2.25 2.25 0 0 0 1.423 1.423l1.183.394l-1.183.394a2.25 2.25 0 0 0-1.423 1.423"/></svg>
+            </div>
+            
+            <h3 class="text-xl font-bold text-gray-900 dark:text-white tracking-tight">Interests</h3>
+          </div>
+          <div class="flex flex-wrap gap-3">
+            
+            <span class="inline-block bg-primary-50 dark:bg-gray-800 text-primary-800 dark:text-primary-200 text-base font-medium px-4 py-2 rounded-full border border-primary-200/50 dark:border-primary-800/50
+                           hover:bg-primary-100 
+                           dark:hover:bg-primary-500 dark:hover:text-gray-900 dark:hover:border-primary-500
+                           transition-all duration-200 cursor-default">
+              Social Movements
+            </span>
+            
+            <span class="inline-block bg-primary-50 dark:bg-gray-800 text-primary-800 dark:text-primary-200 text-base font-medium px-4 py-2 rounded-full border border-primary-200/50 dark:border-primary-800/50
+                           hover:bg-primary-100 
+                           dark:hover:bg-primary-500 dark:hover:text-gray-900 dark:hover:border-primary-500
+                           transition-all duration-200 cursor-default">
+              Political Sociology
+            </span>
+            
+            <span class="inline-block bg-primary-50 dark:bg-gray-800 text-primary-800 dark:text-primary-200 text-base font-medium px-4 py-2 rounded-full border border-primary-200/50 dark:border-primary-800/50
+                           hover:bg-primary-100 
+                           dark:hover:bg-primary-500 dark:hover:text-gray-900 dark:hover:border-primary-500
+                           transition-all duration-200 cursor-default">
+              Digital Surveillance and AI
+            </span>
+            
+            <span class="inline-block bg-primary-50 dark:bg-gray-800 text-primary-800 dark:text-primary-200 text-base font-medium px-4 py-2 rounded-full border border-primary-200/50 dark:border-primary-800/50
+                           hover:bg-primary-100 
+                           dark:hover:bg-primary-500 dark:hover:text-gray-900 dark:hover:border-primary-500
+                           transition-all duration-200 cursor-default">
+              Computational Social Science
+            </span>
+            
+            <span class="inline-block bg-primary-50 dark:bg-gray-800 text-primary-800 dark:text-primary-200 text-base font-medium px-4 py-2 rounded-full border border-primary-200/50 dark:border-primary-800/50
+                           hover:bg-primary-100 
+                           dark:hover:bg-primary-500 dark:hover:text-gray-900 dark:hover:border-primary-500
+                           transition-all duration-200 cursor-default">
+              Image and text analysis
+            </span>
+            
+          </div>
+        </div>
+        
       </div>
     </div>
-    
-
-    
-    <a href="files/zhanghan-cv-full-Brown-detailed.pdf" target="_blank" class="inline-flex items-center px-4 py-2 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg hover:bg-gray-100 hover:text-primary-700 focus:z-10 focus:ring-4 focus:outline-none focus:ring-gray-200 focus:text-primary-700 dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700 dark:focus:ring-gray-700"><svg class="w-3.5 h-3.5 me-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
-      <path d="M14.707 7.793a1 1 0 0 0-1.414 0L11 10.086V1.5a1 1 0 0 0-2 0v8.586L6.707 7.793a1 1 0 1 0-1.414 1.414l4 4a1 1 0 0 0 1.416 0l4-4a1 1 0 0 0-.002-1.414Z"/>
-      <path d="M18 12h-2.55l-2.975 2.975a3.5 3.5 0 0 1-4.95 0L4.55 12H2a2 2 0 0 0-2 2v4a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-4a2 2 0 0 0-2-2Zm-3 5a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"/>
-    </svg> Download CV Here</a>
-    
-
-
-
-
-  <div class="grid grid-cols-1 md:grid-cols-2 gap-4 justify-between mt-6 dark:text-gray-300">
-
-    
-    <div class="">
-      <div class="section-subheading mb-3">Interests</div>
-      <ul class="list-disc list-inside space-y-1 pl-5">
-        
-        <li>
-          Social Movements
-        </li>
-        
-        <li>
-          Political Sociology
-        </li>
-        
-        <li>
-          Digital Surveillance and AI
-        </li>
-        
-        <li>
-          Computational Social Science
-        </li>
-        
-        <li>
-          Image and text analysis
-        </li>
-        
-      </ul>
-    </div>
-    
-
-    
-    <div class="">
-      <div class="section-subheading mb-3">Education</div>
-      <ul class="">
-        
-        <li class="flex items-start gap-3">
-          <svg style="" class='flex-shrink-0 w-5 h-5 me-2 mt-1' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4.26 10.147a60.436 60.436 0 0 0-.491 6.347A48.627 48.627 0 0 1 12 20.904a48.627 48.627 0 0 1 8.232-4.41a60.46 60.46 0 0 0-.491-6.347m-15.482 0a50.57 50.57 0 0 0-2.658-.813A59.905 59.905 0 0 1 12 3.493a59.902 59.902 0 0 1 10.399 5.84a51.39 51.39 0 0 0-2.658.814m-15.482 0A50.697 50.697 0 0 1 12 13.489a50.702 50.702 0 0 1 7.74-3.342M6.75 15a.75.75 0 1 0 0-1.5a.75.75 0 0 0 0 1.5m0 0v-3.675A55.378 55.378 0 0 1 12 8.443m-7.007 11.55A5.981 5.981 0 0 0 6.75 15.75v-1.5"/></svg>
-          <div class="description">
-            <p class="course">Ph.D. in Sociology, 2020</p>
-            <p class="text-sm">Princeton University</p>
-          </div>
-        </li>
-        
-        <li class="flex items-start gap-3">
-          <svg style="" class='flex-shrink-0 w-5 h-5 me-2 mt-1' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4.26 10.147a60.436 60.436 0 0 0-.491 6.347A48.627 48.627 0 0 1 12 20.904a48.627 48.627 0 0 1 8.232-4.41a60.46 60.46 0 0 0-.491-6.347m-15.482 0a50.57 50.57 0 0 0-2.658-.813A59.905 59.905 0 0 1 12 3.493a59.902 59.902 0 0 1 10.399 5.84a51.39 51.39 0 0 0-2.658.814m-15.482 0A50.697 50.697 0 0 1 12 13.489a50.702 50.702 0 0 1 7.74-3.342M6.75 15a.75.75 0 1 0 0-1.5a.75.75 0 0 0 0 1.5m0 0v-3.675A55.378 55.378 0 0 1 12 8.443m-7.007 11.55A5.981 5.981 0 0 0 6.75 15.75v-1.5"/></svg>
-          <div class="description">
-            <p class="course">B.S. in Computer Science and B.A. in History (minor), 2013</p>
-            <p class="text-sm">Peking University</p>
-          </div>
-        </li>
-        
-      </ul>
-    </div>
-    
-
   </div>
-
 </div>
-</div>
-
-
-  
-
-  
-</section>
+  </section>
 
   
 
@@ -1119,48 +1078,24 @@
 
 
 
+
+
+
+
   
-    
-    
-    
+  
   
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<section id="section-collection" class="relative hbb-section blox-collection  " style="padding: 2rem 0 2rem 0;" >
- <div class="home-section-bg " >
-   
- </div>
+  
   
 
   
 
+  
+
+  
+  <section id="section-collection" class="relative hbb-section blox-collection  " >
+    <div class="home-section-bg " ></div>
     
 
 
@@ -1183,6 +1118,9 @@
 
 
 
+
+
+
   
   
   
@@ -1209,6 +1147,20 @@
 
 
 
+
+
+  
+
+
+
+
+  
+
+  
+
+  
+
+  
 
   
 
@@ -1247,6 +1199,7 @@
   <span class="article-metadata li-cite-author">
     
 
+
   <span >
       Han Zhang</span>
   </span>
@@ -1273,6 +1226,7 @@
 
   <span class="article-metadata li-cite-author">
     
+
 
   <span >
       Jean Hong</span>, <span >
@@ -1304,6 +1258,7 @@
   <span class="article-metadata li-cite-author">
     
 
+
   <span >
       Han Zhang</span>, <span >
       Ryan Leung</span>
@@ -1324,29 +1279,37 @@
 
 
 
+ 
+
+
   
+    
+    
+    
+    
+    
+    
+      
+        
+      
+    
 
+    
+    
+    
+      
+        
+      
+    
+    
 
-
-
-
-<a class="hb-attachment-link hb-attachment-small" href="/publication/journal-article/zhang-joint-2025/cite.bib" target="_blank" data-filename="/publication/journal-article/zhang-joint-2025/cite.bib">
-  <svg style="height: 1em" class='inline-block' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15.75 17.25v3.375c0 .621-.504 1.125-1.125 1.125h-9.75a1.125 1.125 0 0 1-1.125-1.125V7.875c0-.621.504-1.125 1.125-1.125H6.75a9.06 9.06 0 0 1 1.5.124m7.5 10.376h3.375c.621 0 1.125-.504 1.125-1.125V11.25c0-4.46-3.243-8.161-7.5-8.876a9.06 9.06 0 0 0-1.5-.124H9.375c-.621 0-1.125.504-1.125 1.125v3.5m7.5 10.375H9.375a1.125 1.125 0 0 1-1.125-1.125v-9.25m12 6.625v-1.875a3.375 3.375 0 0 0-3.375-3.375h-1.5a1.125 1.125 0 0 1-1.125-1.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H9.75"/></svg>
-  Cite
-</a>
-
-
-
-
-
-
-
-
-
-
-
-
-
+    
+      <button class="hb-attachment-link hb-attachment-link-small js-cite-clipboard cursor-pointer" type="button" data-filename="/publication/journal-article/zhang-joint-2025/cite.bib">
+        <svg style="height: 1em" class='inline-block' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15.75 17.25v3.375c0 .621-.504 1.125-1.125 1.125h-9.75a1.125 1.125 0 0 1-1.125-1.125V7.875c0-.621.504-1.125 1.125-1.125H6.75a9.06 9.06 0 0 1 1.5.124m7.5 10.376h3.375c.621 0 1.125-.504 1.125-1.125V11.25c0-4.46-3.243-8.161-7.5-8.876a9.06 9.06 0 0 0-1.5-.124H9.375c-.621 0-1.125.504-1.125 1.125v3.5m7.5 10.375H9.375a1.125 1.125 0 0 1-1.125-1.125v-9.25m12 6.625v-1.875a3.375 3.375 0 0 0-3.375-3.375h-1.5a1.125 1.125 0 0 1-1.125-1.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H9.75"/></svg>
+        <span>Cite</span>
+      </button>
+    
+  
 
 
   </div>
@@ -1368,6 +1331,7 @@
 
   <span class="article-metadata li-cite-author">
     
+
 
   <span >
       Linda Hong Cheng</span>, <span >
@@ -1390,51 +1354,90 @@
 
 
 
+ 
+
+
   
+    
+    
+    
+    
+    
+    
+      
+      
+    
+
+    
+    
+    
+    
+
+    
+      <a class="hb-attachment-link hb-attachment-link-small" href="https://doi.org/10.17813/1086-671X-29-3-309" target="_blank" rel="noopener">
+        <svg style="height: 1em" class='inline-block' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13.19 8.688a4.5 4.5 0 0 1 1.242 7.244l-4.5 4.5a4.5 4.5 0 0 1-6.364-6.364l1.757-1.757m13.35-.622l1.757-1.757a4.5 4.5 0 0 0-6.364-6.364l-4.5 4.5a4.5 4.5 0 0 0 1.242 7.244"/></svg>
+        View Online
+      </a>
     
   
 
-
-
-<a class="hb-attachment-link hb-attachment-small" href="/files/Cheng%20et%20al.%20-%202024%20-%20Patriarchal%20Erasure%20and%20Manufactured%20Passivity%20Asymmetric%20Government%20and%20News%20Media%20Attention%20to%20Pr.pdf" target="_blank" rel="noopener">
-  <svg style="height: 1em" class='inline-block' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9"/></svg>
-  PDF
-</a>
-
-
-
-<a class="hb-attachment-link hb-attachment-small" href="/publication/journal-article/cheng-patriarchal-2024/cite.bib" target="_blank" data-filename="/publication/journal-article/cheng-patriarchal-2024/cite.bib">
-  <svg style="height: 1em" class='inline-block' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15.75 17.25v3.375c0 .621-.504 1.125-1.125 1.125h-9.75a1.125 1.125 0 0 1-1.125-1.125V7.875c0-.621.504-1.125 1.125-1.125H6.75a9.06 9.06 0 0 1 1.5.124m7.5 10.376h3.375c.621 0 1.125-.504 1.125-1.125V11.25c0-4.46-3.243-8.161-7.5-8.876a9.06 9.06 0 0 0-1.5-.124H9.375c-.621 0-1.125.504-1.125 1.125v3.5m7.5 10.375H9.375a1.125 1.125 0 0 1-1.125-1.125v-9.25m12 6.625v-1.875a3.375 3.375 0 0 0-3.375-3.375h-1.5a1.125 1.125 0 0 1-1.125-1.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H9.75"/></svg>
-  Cite
-</a>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-  
   
     
-  
-  
-  
-  
-  
+    
+    
+    
+    
+    
+      
+        
+      
+    
+
+    
+    
+    
+      
+        
+      
+    
+    
+
+    
+      <a class="hb-attachment-link hb-attachment-link-small" href="/files/Cheng%20et%20al.%20-%202024%20-%20Patriarchal%20Erasure%20and%20Manufactured%20Passivity%20Asymmetric%20Government%20and%20News%20Media%20Attention%20to%20Pr.pdf"  >
+        <svg style="height: 1em" class='inline-block' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9"/></svg>
+        PDF
+      </a>
     
   
-  <a class="hb-attachment-link hb-attachment-small" href="https://doi.org/10.17813/1086-671X-29-3-309" target="_blank" rel="noopener">
-    <svg style="height: 1em" class='inline-block' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13.19 8.688a4.5 4.5 0 0 1 1.242 7.244l-4.5 4.5a4.5 4.5 0 0 1-6.364-6.364l1.757-1.757m13.35-.622l1.757-1.757a4.5 4.5 0 0 0-6.364-6.364l-4.5 4.5a4.5 4.5 0 0 0 1.242 7.244"/></svg>
-    View Online</a>
+
+  
+    
+    
+    
+    
+    
+    
+      
+        
+      
+    
+
+    
+    
+    
+      
+        
+      
+    
+    
+
+    
+      <button class="hb-attachment-link hb-attachment-link-small js-cite-clipboard cursor-pointer" type="button" data-filename="/publication/journal-article/cheng-patriarchal-2024/cite.bib">
+        <svg style="height: 1em" class='inline-block' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15.75 17.25v3.375c0 .621-.504 1.125-1.125 1.125h-9.75a1.125 1.125 0 0 1-1.125-1.125V7.875c0-.621.504-1.125 1.125-1.125H6.75a9.06 9.06 0 0 1 1.5.124m7.5 10.376h3.375c.621 0 1.125-.504 1.125-1.125V11.25c0-4.46-3.243-8.161-7.5-8.876a9.06 9.06 0 0 0-1.5-.124H9.375c-.621 0-1.125.504-1.125 1.125v3.5m7.5 10.375H9.375a1.125 1.125 0 0 1-1.125-1.125v-9.25m12 6.625v-1.875a3.375 3.375 0 0 0-3.375-3.375h-1.5a1.125 1.125 0 0 1-1.125-1.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H9.75"/></svg>
+        <span>Cite</span>
+      </button>
+    
+  
 
 
   </div>
@@ -1457,6 +1460,7 @@
   <span class="article-metadata li-cite-author">
     
 
+
   <span >
       Han Zhang</span>, <span >
       Yao Lu</span>, <span >
@@ -1478,51 +1482,90 @@
 
 
 
+ 
+
+
   
+    
+    
+    
+    
+    
+    
+      
+      
+    
+
+    
+    
+    
+    
+
+    
+      <a class="hb-attachment-link hb-attachment-link-small" href="https://www.cambridge.org/core/product/identifier/S0305741023001042/type/journal_article" target="_blank" rel="noopener">
+        <svg style="height: 1em" class='inline-block' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13.19 8.688a4.5 4.5 0 0 1 1.242 7.244l-4.5 4.5a4.5 4.5 0 0 1-6.364-6.364l1.757-1.757m13.35-.622l1.757-1.757a4.5 4.5 0 0 0-6.364-6.364l-4.5 4.5a4.5 4.5 0 0 0 1.242 7.244"/></svg>
+        View Online
+      </a>
     
   
 
-
-
-<a class="hb-attachment-link hb-attachment-small" href="/files/Zhang%20et%20al.%20-%202024%20-%20Selection%20and%20Description%20Bias%20in%20Protest%20Reporting%20by%20Government%20and%20News%20Media%20on%20Weibo.pdf" target="_blank" rel="noopener">
-  <svg style="height: 1em" class='inline-block' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9"/></svg>
-  PDF
-</a>
-
-
-
-<a class="hb-attachment-link hb-attachment-small" href="/publication/journal-article/zhang-underrepresentation-2023/cite.bib" target="_blank" data-filename="/publication/journal-article/zhang-underrepresentation-2023/cite.bib">
-  <svg style="height: 1em" class='inline-block' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15.75 17.25v3.375c0 .621-.504 1.125-1.125 1.125h-9.75a1.125 1.125 0 0 1-1.125-1.125V7.875c0-.621.504-1.125 1.125-1.125H6.75a9.06 9.06 0 0 1 1.5.124m7.5 10.376h3.375c.621 0 1.125-.504 1.125-1.125V11.25c0-4.46-3.243-8.161-7.5-8.876a9.06 9.06 0 0 0-1.5-.124H9.375c-.621 0-1.125.504-1.125 1.125v3.5m7.5 10.375H9.375a1.125 1.125 0 0 1-1.125-1.125v-9.25m12 6.625v-1.875a3.375 3.375 0 0 0-3.375-3.375h-1.5a1.125 1.125 0 0 1-1.125-1.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H9.75"/></svg>
-  Cite
-</a>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-  
   
     
-  
-  
-  
-  
-  
+    
+    
+    
+    
+    
+      
+        
+      
+    
+
+    
+    
+    
+      
+        
+      
+    
+    
+
+    
+      <a class="hb-attachment-link hb-attachment-link-small" href="/files/Zhang%20et%20al.%20-%202024%20-%20Selection%20and%20Description%20Bias%20in%20Protest%20Reporting%20by%20Government%20and%20News%20Media%20on%20Weibo.pdf"  >
+        <svg style="height: 1em" class='inline-block' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9"/></svg>
+        PDF
+      </a>
     
   
-  <a class="hb-attachment-link hb-attachment-small" href="https://www.cambridge.org/core/product/identifier/S0305741023001042/type/journal_article" target="_blank" rel="noopener">
-    <svg style="height: 1em" class='inline-block' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13.19 8.688a4.5 4.5 0 0 1 1.242 7.244l-4.5 4.5a4.5 4.5 0 0 1-6.364-6.364l1.757-1.757m13.35-.622l1.757-1.757a4.5 4.5 0 0 0-6.364-6.364l-4.5 4.5a4.5 4.5 0 0 0 1.242 7.244"/></svg>
-    View Online</a>
+
+  
+    
+    
+    
+    
+    
+    
+      
+        
+      
+    
+
+    
+    
+    
+      
+        
+      
+    
+    
+
+    
+      <button class="hb-attachment-link hb-attachment-link-small js-cite-clipboard cursor-pointer" type="button" data-filename="/publication/journal-article/zhang-underrepresentation-2023/cite.bib">
+        <svg style="height: 1em" class='inline-block' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15.75 17.25v3.375c0 .621-.504 1.125-1.125 1.125h-9.75a1.125 1.125 0 0 1-1.125-1.125V7.875c0-.621.504-1.125 1.125-1.125H6.75a9.06 9.06 0 0 1 1.5.124m7.5 10.376h3.375c.621 0 1.125-.504 1.125-1.125V11.25c0-4.46-3.243-8.161-7.5-8.876a9.06 9.06 0 0 0-1.5-.124H9.375c-.621 0-1.125.504-1.125 1.125v3.5m7.5 10.375H9.375a1.125 1.125 0 0 1-1.125-1.125v-9.25m12 6.625v-1.875a3.375 3.375 0 0 0-3.375-3.375h-1.5a1.125 1.125 0 0 1-1.125-1.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H9.75"/></svg>
+        <span>Cite</span>
+      </button>
+    
+  
 
 
   </div>
@@ -1570,11 +1613,7 @@
 
 
 
-
-  
-
-  
-</section>
+  </section>
 
   
 
@@ -1592,12 +1631,12 @@
 
 
 
-
-
-
-
   
-  
+
+
+
+
+
   
   
   
@@ -1631,7 +1670,7 @@
 
   
   <p class="powered-by text-center">
-    © 2025 Me. This work is licensed under <!-- raw HTML omitted -->CC BY NC ND 4.0<!-- raw HTML omitted -->
+    © 2025 Me. This work is licensed under <a href="https://creativecommons.org/licenses/by-nc-nd/4.0" rel="noopener noreferrer" target="_blank">CC BY NC ND 4.0</a>
   </p>
   
 
@@ -1652,21 +1691,32 @@
 
 
 
-  <p class="powered-by text-center">
+  
     
     
+      
+      
+        
+        
+      
     
-      
-      
-      
-      
-      
-      
-      Published with <!-- raw HTML omitted -->Hugo Blox Builder<!-- raw HTML omitted --> — the free, <!-- raw HTML omitted -->open source<!-- raw HTML omitted --> website builder that empowers creators.
-    
-  </p>
 
-</footer>
+    <p class="powered-by text-center text-sm opacity-80 py-1">
+      
+      
+      
+      
+      
+        
+      
+      
+      
+      
+      
+      Made with <a class="underline hover:opacity-100" href="https://hugoblox.com?utm_source=site_footer&utm_medium=referral&utm_campaign=poweredby_oss&utm_content=brand_na" target="_blank" rel="noopener" data-hbx="poweredby_brand">Hugo Blox Builder</a>.
+      <a class="inline-flex items-center rounded px-2 py-0.5 border border-current ms-2 text-xs hover:opacity-100"
+         href="https://hugoblox.com/start?utm_source=site_footer&amp;utm_medium=referral&amp;utm_campaign=poweredby_oss&amp;utm_content=cta_na" target="_blank" rel="noopener" data-hbx="poweredby_cta">Create yours →</a>
+    </p></footer>
 
     </div>
 
@@ -1674,6 +1724,11 @@
     
 
 
+<div id="hb-notification-container" class="fixed top-20 right-4 z-[9999] pointer-events-none" aria-live="polite" aria-atomic="true"></div>
+
+
+    
+    
 
 
 
@@ -1682,6 +1737,310 @@
 
 
 
+  
 
+
+
+
+
+    
+    <script>
+    window.__HBX_LOGS__ = {"currentPage":{"buildId":"1762366043","file":"_index.md","kind":"home","layout":"","path":"/","section":"","title":"","type":"landing"},"deps":[{"path":"github.com/HugoBlox/hugo-blox-builder/starters/academic-cv","vendor":false,"version":""},{"owner_path":"github.com/HugoBlox/hugo-blox-builder/starters/academic-cv","path":"github.com/HugoBlox/hugo-blox-builder/modules/blox-plugin-netlify","time":"2025-08-20 00:03:08 +0000 UTC","vendor":false,"version":"v1.1.2"},{"owner_path":"github.com/HugoBlox/hugo-blox-builder/starters/academic-cv","path":"github.com/HugoBlox/hugo-blox-builder/modules/blox-tailwind","time":"2025-10-23 19:12:07 +0000 UTC","vendor":false,"version":"v0.9.0"},{"owner_path":"github.com/HugoBlox/hugo-blox-builder/modules/blox-tailwind","path":"github.com/HugoBlox/hugo-blox-builder/modules/blox-analytics","time":"2025-08-20 00:03:08 +0000 UTC","vendor":false,"version":"v0.2.0"}],"entries":[{"buildId":"1762366043","id":"","level":"info","message":"✅  Using sections from front matter for page /projects/ (found 1 sections)","page":"/","source":{"name":"hbx/sections","type":"partial"},"timestamp":1762366043},{"buildId":"1762366043","id":"","level":"info","message":"✅  Using sections from front matter for page /advising/ (found 1 sections)","page":"/","source":{"name":"hbx/sections","type":"partial"},"timestamp":1762366043},{"buildId":"1762366043","id":"","level":"info","message":"✅  Using sections from front matter for page / (found 2 sections)","page":"/","source":{"name":"hbx/sections","type":"partial"},"timestamp":1762366043}],"generatedAt":"2025-11-05T18:07:23Z","hugo":{"goVersion":"go1.25.3","version":"0.152.2"},"modules":{"bloxTailwind":{"path":"github.com/HugoBlox/hugo-blox-builder/modules/blox-tailwind","version":"v0.9.0"}},"version":1};
+  </script>
+    <script>
+    (function(){
+      try {
+        const PLACEMENT = "\"bottom-left\"";
+        const OPACITY = "1";
+
+        const root = document.createElement('div');
+        root.id = 'hbx-dev-hud-root';
+        root.style.all = 'initial';
+        root.style.position = 'fixed';
+        root.style.zIndex = '2147483647';
+        root.style.pointerEvents = 'none';
+        root.style.bottom = '16px';
+        if (PLACEMENT === 'bottom-right') root.style.right = '16px';
+        else if (PLACEMENT === 'bottom-center') { root.style.left = '50%'; root.style.transform = 'translateX(-50%)'; }
+        else root.style.left = '16px';
+
+        const shadow = root.attachShadow({ mode: 'open' });
+        const style = document.createElement('style');
+        style.textContent = `
+          :host { all: initial; }
+          .btn { pointer-events: auto; position:relative; display:inline-flex; align-items:center; justify-content:center; width:44px; height:44px; border-radius:9999px; background:#111418; color:#e6eaf0; border:1px solid #2a2f38; box-shadow: 0 10px 20px rgba(0,0,0,.25); cursor:pointer; }
+          .btn:hover { filter: brightness(1.1); }
+          .badge { position:absolute; top:-4px; right:-4px; min-width:18px; height:18px; padding:0 4px; border-radius:9999px; background:#ef4444; color:white; font: 600 11px/18px system-ui, sans-serif; text-align:center; }
+          .panel { pointer-events:auto; position:fixed; inset:auto auto 72px 16px; width:min(92vw, 1200px); max-height:min(80vh, 800px); background:#0d1117; color:#e6eaf0; border:1px solid #21262d; border-radius:12px; box-shadow: 0 20px 40px rgba(0,0,0,.4); overflow:hidden; display:none; }
+          .panel.open { display:flex; flex-direction:column; }
+          .panel-header { display:flex; align-items:center; gap:12px; padding:12px 16px; border-bottom:1px solid #21262d; background:#161b22; }
+          .panel-header h2 { margin:0; font: 700 16px system-ui, sans-serif; letter-spacing:-0.01em; color:#f0f6fc; }
+          .panel-header .close-btn { margin-left:auto; width:32px; height:32px; border:none; background:#21262d; color:#8b949e; border-radius:6px; cursor:pointer; font-size:16px; display:flex; align-items:center; justify-content:center; }
+          .panel-header .close-btn:hover { background:#30363d; color:#f0f6fc; }
+          .page-info { padding:16px; background:#0d1117; border-bottom:1px solid #21262d; }
+          .page-info h3 { margin:0 0 12px 0; font: 600 14px system-ui, sans-serif; color:#f0f6fc; display:flex; align-items:center; gap:8px; }
+          .page-info h3::before { content:'🔍'; font-size:16px; }
+          .page-meta { display:grid; grid-template-columns:repeat(auto-fit, minmax(200px, 1fr)); gap:12px; }
+          .meta-item { display:flex; flex-direction:column; gap:4px; }
+          .meta-label { font: 500 11px system-ui, sans-serif; color:#8b949e; text-transform:uppercase; letter-spacing:0.5px; }
+          .meta-value { font: 600 13px "SF Mono", Monaco, "Cascadia Code", "Roboto Mono", monospace; color:#79c0ff; background:#161b22; padding:6px 8px; border-radius:6px; border:1px solid #21262d; word-break:break-all; }
+          .meta-value.type { color:#a5f3fc; }
+          .meta-value.layout { color:#fbbf24; }
+          .tabs { display:flex; background:#161b22; border-bottom:1px solid #21262d; }
+          .tab { padding:12px 16px; font: 500 14px system-ui, sans-serif; color:#8b949e; cursor:pointer; border-bottom:2px solid transparent; }
+          .tab:hover { color:#f0f6fc; }
+          .tab.active { color:#58a6ff; border-bottom-color:#58a6ff; }
+          .tab-content { flex:1; overflow:auto; }
+          .env-info { padding:12px 16px; font: 500 11px system-ui, sans-serif; color:#8b949e; background:#0d1117; border-bottom:1px solid #21262d; display:flex; align-items:center; gap:16px; }
+          .filters { display:flex; gap:12px; align-items:center; margin-left:auto; }
+          .filters label { display:inline-flex; gap:6px; align-items:center; font: 500 12px system-ui, sans-serif; color:#c9d2e1; cursor:pointer; }
+          .logs-content { overflow:auto; }
+          .entry { display:grid; grid-template-columns:auto 1fr auto; gap:12px; padding:12px 16px; border-bottom:1px solid #21262d; }
+          .entry:hover { background:#161b22; }
+          .entry .lvl { font:700 11px system-ui, sans-serif; text-transform:uppercase; padding:4px 6px; border-radius:4px; }
+          .entry.error .lvl { color:#ffffff; background:#da3633; }
+          .entry.warn .lvl { color:#1f2937; background:#f59e0b; }
+          .entry.info .lvl { color:#ffffff; background:#1f6feb; }
+          .entry .msg { white-space:pre-wrap; word-break:break-word; font: 400 13px system-ui, sans-serif; line-height:1.5; }
+          .entry .meta { color:#8b949e; font: 500 11px "SF Mono", Monaco, monospace; }
+          .page-group-header { padding:12px 16px; font: 600 12px system-ui, sans-serif; color:#58a6ff; border-bottom:1px solid #21262d; background:#0d1117; }
+          @media (prefers-reduced-motion:no-preference) {
+            .panel { transition: all .25s cubic-bezier(0.4, 0, 0.2, 1); transform: translateY(8px) scale(0.95); opacity:0; }
+            .panel.open { transform: translateY(0) scale(1); opacity:1; }
+          }
+        `;
+        shadow.appendChild(style);
+
+        const btnWrap = document.createElement('div');
+        btnWrap.style.position = 'relative';
+        const btn = document.createElement('button');
+        btn.className = 'btn';
+        btn.style.opacity = String(OPACITY);
+        btn.setAttribute('aria-label', 'Hugo Blox Dev HUD');
+        btn.textContent = 'HB';
+        const badge = document.createElement('span');
+        badge.className = 'badge';
+        badge.hidden = true;
+        btnWrap.append(btn, badge);
+
+        const panel = document.createElement('div');
+        panel.className = 'panel';
+        
+        
+        const header = document.createElement('div');
+        header.className = 'panel-header';
+        const title = document.createElement('h2'); 
+        title.textContent = 'Hugo Blox – Dev Tools';
+        const close = document.createElement('button'); 
+        close.className = 'close-btn'; 
+        close.textContent = '×'; 
+        close.title = 'Close';
+        header.append(title, close);
+        
+        
+        const pageInfo = document.createElement('div');
+        pageInfo.className = 'page-info';
+        const pageTitle = document.createElement('h3');
+        pageTitle.textContent = 'Current Page';
+        const pageMeta = document.createElement('div');
+        pageMeta.className = 'page-meta';
+        pageInfo.append(pageTitle, pageMeta);
+        
+        
+        const envInfo = document.createElement('div');
+        envInfo.className = 'env-info';
+        const env = document.createElement('div');
+        env.textContent = '';
+        const filters = document.createElement('div'); 
+        filters.className = 'filters';
+        const chkInfo = document.createElement('input'); 
+        chkInfo.type='checkbox'; 
+        chkInfo.id='hbx-info'; 
+        chkInfo.checked = !!(localStorage.getItem('hbx-show-info')||'');
+        const lblInfo = document.createElement('label'); 
+        lblInfo.htmlFor='hbx-info'; 
+        lblInfo.textContent='Show info';
+        const chkAuto = document.createElement('input');
+        chkAuto.type='checkbox';
+        chkAuto.id='hbx-auto-open';
+        chkAuto.checked = !!(localStorage.getItem('hbx-auto-open')||'');
+        const lblAuto = document.createElement('label');
+        lblAuto.htmlFor='hbx-auto-open';
+        lblAuto.textContent='Auto open';
+        filters.append(lblInfo, chkInfo, lblAuto, chkAuto);
+        envInfo.append(env, filters);
+        
+        
+        const tabs = document.createElement('div');
+        tabs.className = 'tabs';
+        const logsTab = document.createElement('div');
+        logsTab.className = 'tab active';
+        logsTab.textContent = 'Logs';
+        logsTab.dataset.tab = 'logs';
+        tabs.append(logsTab);
+        
+        
+        const tabContent = document.createElement('div');
+        tabContent.className = 'tab-content';
+        const logsContent = document.createElement('div');
+        logsContent.className = 'logs-content';
+        tabContent.append(logsContent);
+        
+        panel.append(header, pageInfo, envInfo, tabs, tabContent);
+
+        shadow.append(btnWrap, panel);
+
+        const attach = () => { if (!document.body.contains(root)) document.body.appendChild(root); };
+        if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', attach);
+        else attach();
+
+        let logs = [];
+        let meta = null;
+        const setLogs = (payload) => { 
+          if (payload) { 
+            logs = Array.isArray(payload.entries) ? payload.entries : []; 
+            meta = payload; 
+          } else { 
+            logs = []; 
+            meta = null; 
+          } 
+        };
+        const shouldShowInfo = () => chkInfo.checked;
+        const createMetaItem = (label, value, className = '') => {
+          const item = document.createElement('div');
+          item.className = 'meta-item';
+          const labelEl = document.createElement('div');
+          labelEl.className = 'meta-label';
+          labelEl.textContent = label;
+          const valueEl = document.createElement('div');
+          valueEl.className = `meta-value ${className}`;
+          valueEl.textContent = value || '(not set)';
+          item.append(labelEl, valueEl);
+          return item;
+        };
+
+        const render = () => {
+          
+          
+          if (meta && meta.hugo) {
+            const hv = meta.hugo.version || '';
+            const gvRaw = meta.hugo.goVersion || '';
+            const gv = gvRaw.replace(/^go/i, '');
+            const tw = meta.modules && meta.modules.bloxTailwind ? meta.modules.bloxTailwind.version : '';
+            env.textContent = `Hugo ${hv} · Go ${gv}${tw ? ` · blox-tailwind ${tw}` : ''}`;
+          }
+
+          
+          pageMeta.replaceChildren();
+          if (meta && meta.currentPage) {
+            const page = meta.currentPage;
+            pageMeta.append(
+              createMetaItem('Type', page.type || 'unknown', 'type'),
+              createMetaItem('Layout', page.layout || '(none)', 'layout'),
+              createMetaItem('Kind', page.kind || 'unknown'),
+              createMetaItem('Section', page.section || '(none)'),
+              createMetaItem('Path', page.path || window.location.pathname),
+              createMetaItem('File', page.file || '(virtual page)'),
+              createMetaItem('Build ID', page.buildId || 'unknown')
+            );
+          } else {
+            
+            pageMeta.append(
+              createMetaItem('Type', 'loading...', 'type'),
+              createMetaItem('Layout', 'loading...', 'layout'),
+              createMetaItem('Kind', 'loading...'),
+              createMetaItem('Section', 'loading...'),
+              createMetaItem('Path', window.location.pathname),
+              createMetaItem('File', 'loading...'),
+              createMetaItem('Build ID', 'loading...')
+            );
+          }
+
+          
+          const visible = logs.filter(e => e.level==='error' || e.level==='warn' || (e.level==='info' && shouldShowInfo()));
+          const errs = visible.filter(e => e.level==='error').length;
+          const warns = visible.filter(e => e.level==='warn').length;
+          const total = errs + warns + (shouldShowInfo()? visible.filter(e=>e.level==='info').length : 0);
+          badge.textContent = String(total);
+          badge.hidden = total === 0;
+          
+          
+          logsTab.textContent = `Logs${total > 0 ? ` (${total})` : ''}`;
+          
+          logsContent.replaceChildren();
+          const groupByPage = new Map();
+          for (const e of visible) {
+            const key = e.page || '/';
+            if (!groupByPage.has(key)) groupByPage.set(key, []);
+            groupByPage.get(key).push(e);
+          }
+          for (const [page, entries] of groupByPage) {
+            const h = document.createElement('div');
+            h.className = 'page-group-header';
+            h.textContent = page;
+            logsContent.appendChild(h);
+            for (const e of entries.sort((a,b)=> (a.level>b.level?-1:1) || (a.timestamp-b.timestamp))) {
+              const row = document.createElement('div');
+              row.className = `entry ${e.level}`;
+              const lvl = document.createElement('div'); 
+              lvl.className='lvl'; 
+              lvl.textContent=e.level;
+              const msg = document.createElement('div'); 
+              msg.className='msg'; 
+              msg.textContent = e.message || '';
+              const metaEl = document.createElement('div'); 
+              metaEl.className='meta'; 
+              metaEl.textContent = new Date(e.timestamp*1000).toLocaleTimeString();
+              row.append(lvl, msg, metaEl);
+              logsContent.appendChild(row);
+            }
+          }
+        };
+
+        const refreshFromWindow = () => { 
+          if (window.__HBX_LOGS__) { 
+            setLogs(window.__HBX_LOGS__); 
+          }
+        };
+        const fetchLogs = async () => {
+          try {
+            const res = await fetch('/hbx-debug.json?cb=' + Date.now());
+            if (res.ok) { const data = await res.json(); setLogs(data); render(); }
+          } catch (e) {   }
+        };
+
+        btn.addEventListener('click', () => { 
+          panel.classList.toggle('open'); 
+          if (panel.classList.contains('open')) { 
+            refreshFromWindow(); 
+            render(); 
+            fetchLogs(); 
+          } 
+        });
+        close.addEventListener('click', () => panel.classList.remove('open'));
+        chkInfo.addEventListener('change', () => { 
+          localStorage.setItem('hbx-show-info', chkInfo.checked ? '1' : ''); 
+          render(); 
+        });
+        chkAuto.addEventListener('change', () => {
+          localStorage.setItem('hbx-auto-open', chkAuto.checked ? '1' : '');
+        });
+
+        
+        refreshFromWindow();
+        render(); 
+
+        
+        if (chkAuto.checked) {
+          panel.classList.add('open');
+          render();
+          fetchLogs();
+        }
+
+        
+        setInterval(() => { refreshFromWindow(); }, 3000);
+      } catch(e) {   }
+    })();
+  </script>
   </body>
 </html>

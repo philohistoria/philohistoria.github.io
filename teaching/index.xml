@@ -2,40 +2,42 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Teaching | Han Zhang</title>
-    <link>https://hanzhang.xyz/teaching/</link>
-      <atom:link href="https://hanzhang.xyz/teaching/index.xml" rel="self" type="application/rss+xml" />
+    <link>http://localhost:1313/teaching/</link>
+      <atom:link href="http://localhost:1313/teaching/index.xml" rel="self" type="application/rss+xml" />
     <description>Teaching</description>
     <generator>Hugo Blox Builder (https://hugoblox.com)</generator><language>en-us</language><lastBuildDate>Sun, 01 Sep 2024 00:00:00 +0000</lastBuildDate>
     <image>
-      <url>https://hanzhang.xyz/media/icon_hu6741429377955683711.png</url>
+      <url>http://localhost:1313/media/icon_hu_db3bead160fce7e0.png</url>
       <title>Teaching</title>
-      <link>https://hanzhang.xyz/teaching/</link>
+      <link>http://localhost:1313/teaching/</link>
     </image>
     
     <item>
       <title>IAPA 1801X: Surveillance: State, Capitalism, and Society</title>
-      <link>https://hanzhang.xyz/teaching/iapa1801x/</link>
+      <link>http://localhost:1313/teaching/iapa1801x/</link>
       <pubDate>Sun, 01 Sep 2024 00:00:00 +0000</pubDate>
-      <guid>https://hanzhang.xyz/teaching/iapa1801x/</guid>
+      <guid>http://localhost:1313/teaching/iapa1801x/</guid>
       <description>&lt;p&gt;I am teaching &lt;em&gt;IAPA 1801X: Surveillance: State, Capitalism, and Society&lt;/em&gt; at Brown in Fall 2024.&lt;/p&gt;
 </description>
     </item>
     
     <item>
       <title>SOSC 4300 &amp; 5500 : Computational Social Science</title>
-      <link>https://hanzhang.xyz/teaching/sosc4300/</link>
+      <link>http://localhost:1313/teaching/sosc4300/</link>
       <pubDate>Wed, 01 May 2024 00:00:00 +0000</pubDate>
-      <guid>https://hanzhang.xyz/teaching/sosc4300/</guid>
-      <description>&lt;p&gt;I have taught &lt;em&gt;SOSC 4300 / 5500: Computational Social Science&lt;/em&gt; at HKUST from 2020 - 2024. You can view the &lt;a href=&#34;https://github.com/HKUST-SOSC-5340/sosc5340spring2024&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;complete class slides in Spring 2024 semester here&lt;/a&gt;.&lt;/p&gt;
+      <guid>http://localhost:1313/teaching/sosc4300/</guid>
+      <description>&lt;p&gt;I have taught &lt;em&gt;SOSC 4300 / 5500: Computational Social Science&lt;/em&gt; at HKUST from 2020 - 2024. You can view the 
+.&lt;/p&gt;
 </description>
     </item>
     
     <item>
       <title>SOSC 5340 : Econometric Approaches to Social Science Research</title>
-      <link>https://hanzhang.xyz/teaching/sosc5340/</link>
+      <link>http://localhost:1313/teaching/sosc5340/</link>
       <pubDate>Wed, 01 May 2024 00:00:00 +0000</pubDate>
-      <guid>https://hanzhang.xyz/teaching/sosc5340/</guid>
-      <description>&lt;p&gt;I have taught &lt;em&gt;SOSC 5340: Econometric Approaches to Social Science Research&lt;/em&gt; at HKUST from 2020 - 2024. You can view the &lt;a href=&#34;https://github.com/HKUST-SOSC4300-5500/Lecture2024&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;complete class slides in Spring 2024 semester here&lt;/a&gt;.&lt;/p&gt;
+      <guid>http://localhost:1313/teaching/sosc5340/</guid>
+      <description>&lt;p&gt;I have taught &lt;em&gt;SOSC 5340: Econometric Approaches to Social Science Research&lt;/em&gt; at HKUST from 2020 - 2024. You can view the 
+.&lt;/p&gt;
 </description>
     </item>
     

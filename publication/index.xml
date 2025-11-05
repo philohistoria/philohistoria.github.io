@@ -2,93 +2,93 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Publications | Han Zhang</title>
-    <link>https://hanzhang.xyz/publication/</link>
-      <atom:link href="https://hanzhang.xyz/publication/index.xml" rel="self" type="application/rss+xml" />
+    <link>http://localhost:1313/publication/</link>
+      <atom:link href="http://localhost:1313/publication/index.xml" rel="self" type="application/rss+xml" />
     <description>Publications</description>
     <generator>Hugo Blox Builder (https://hugoblox.com)</generator><language>en-us</language><lastBuildDate>Thu, 01 Jan 2026 00:00:00 +0000</lastBuildDate>
     <image>
-      <url>https://hanzhang.xyz/media/icon_hu6741429377955683711.png</url>
+      <url>http://localhost:1313/media/icon_hu_db3bead160fce7e0.png</url>
       <title>Publications</title>
-      <link>https://hanzhang.xyz/publication/</link>
+      <link>http://localhost:1313/publication/</link>
     </image>
     
     <item>
       <title>Two-Layer Panopticon: How the Chinese Government Uses Digital Surveillance to Prevent Collective Action</title>
-      <link>https://hanzhang.xyz/publication/journal-article/zhang-how-2025/</link>
+      <link>http://localhost:1313/publication/journal-article/zhang-how-2025/</link>
       <pubDate>Thu, 01 Jan 2026 00:00:00 +0000</pubDate>
-      <guid>https://hanzhang.xyz/publication/journal-article/zhang-how-2025/</guid>
+      <guid>http://localhost:1313/publication/journal-article/zhang-how-2025/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Hug Fans or Follow Celebrities? How Nationalism Is Reinforced on Chinese Social Media</title>
-      <link>https://hanzhang.xyz/publication/journal-article/jean-hug-2025/</link>
+      <link>http://localhost:1313/publication/journal-article/jean-hug-2025/</link>
       <pubDate>Mon, 01 Sep 2025 00:00:00 +0000</pubDate>
-      <guid>https://hanzhang.xyz/publication/journal-article/jean-hug-2025/</guid>
+      <guid>http://localhost:1313/publication/journal-article/jean-hug-2025/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Joint Text-and-Image Clustering for Social Science Research</title>
-      <link>https://hanzhang.xyz/publication/journal-article/zhang-joint-2025/</link>
+      <link>http://localhost:1313/publication/journal-article/zhang-joint-2025/</link>
       <pubDate>Mon, 01 Sep 2025 00:00:00 +0000</pubDate>
-      <guid>https://hanzhang.xyz/publication/journal-article/zhang-joint-2025/</guid>
+      <guid>http://localhost:1313/publication/journal-article/zhang-joint-2025/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Patriarchal Erasure and Manufactured Passivity: Asymmetric Government and News Media Attention to Protests in China</title>
-      <link>https://hanzhang.xyz/publication/journal-article/cheng-patriarchal-2024/</link>
+      <link>http://localhost:1313/publication/journal-article/cheng-patriarchal-2024/</link>
       <pubDate>Sun, 01 Sep 2024 00:00:00 +0000</pubDate>
-      <guid>https://hanzhang.xyz/publication/journal-article/cheng-patriarchal-2024/</guid>
+      <guid>http://localhost:1313/publication/journal-article/cheng-patriarchal-2024/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Underrepresentation and Misrepresentation: Selection and Description Bias in Protest Reporting by Government and News Media on Weibo</title>
-      <link>https://hanzhang.xyz/publication/journal-article/zhang-underrepresentation-2023/</link>
+      <link>http://localhost:1313/publication/journal-article/zhang-underrepresentation-2023/</link>
       <pubDate>Fri, 01 Mar 2024 00:00:00 +0000</pubDate>
-      <guid>https://hanzhang.xyz/publication/journal-article/zhang-underrepresentation-2023/</guid>
+      <guid>http://localhost:1313/publication/journal-article/zhang-underrepresentation-2023/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Analyzing Image Data with Machine Learning</title>
-      <link>https://hanzhang.xyz/publication/journal-article/zhang-image-2023/</link>
+      <link>http://localhost:1313/publication/journal-article/zhang-image-2023/</link>
       <pubDate>Mon, 25 Dec 2023 00:00:00 +0000</pubDate>
-      <guid>https://hanzhang.xyz/publication/journal-article/zhang-image-2023/</guid>
+      <guid>http://localhost:1313/publication/journal-article/zhang-image-2023/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Robots and Protest: Does Increased Protest Among Chinese Workers Result in More Automation?</title>
-      <link>https://hanzhang.xyz/publication/journal-article/zhang-robot-2022/</link>
+      <link>http://localhost:1313/publication/journal-article/zhang-robot-2022/</link>
       <pubDate>Sat, 01 Jul 2023 00:00:00 +0000</pubDate>
-      <guid>https://hanzhang.xyz/publication/journal-article/zhang-robot-2022/</guid>
+      <guid>http://localhost:1313/publication/journal-article/zhang-robot-2022/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Image Clustering: An Unsupervised Approach to Categorize Visual Data in Social Science Research</title>
-      <link>https://hanzhang.xyz/publication/journal-article/zhang-image-2022/</link>
+      <link>http://localhost:1313/publication/journal-article/zhang-image-2022/</link>
       <pubDate>Sat, 01 Jan 2022 00:00:00 +0000</pubDate>
-      <guid>https://hanzhang.xyz/publication/journal-article/zhang-image-2022/</guid>
+      <guid>http://localhost:1313/publication/journal-article/zhang-image-2022/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Authoritarian Responsiveness and Political Attitudes during COVID-19: Evidence from Weibo and a Survey Experiment</title>
-      <link>https://hanzhang.xyz/publication/journal-article/wei-authoritarian-2021/</link>
+      <link>http://localhost:1313/publication/journal-article/wei-authoritarian-2021/</link>
       <pubDate>Fri, 01 Jan 2021 00:00:00 +0000</pubDate>
-      <guid>https://hanzhang.xyz/publication/journal-article/wei-authoritarian-2021/</guid>
+      <guid>http://localhost:1313/publication/journal-article/wei-authoritarian-2021/</guid>
       <description></description>
     </item>
     
     <item>
       <title>How Using Machine Learning Classification as a Variable in Regression Leads to Attenuation Bias and What to Do About It</title>
-      <link>https://hanzhang.xyz/publication/journal-article/zhang-how-2021/</link>
+      <link>http://localhost:1313/publication/journal-article/zhang-how-2021/</link>
       <pubDate>Fri, 01 Jan 2021 00:00:00 +0000</pubDate>
-      <guid>https://hanzhang.xyz/publication/journal-article/zhang-how-2021/</guid>
+      <guid>http://localhost:1313/publication/journal-article/zhang-how-2021/</guid>
       <description>&lt;p&gt;&lt;em&gt;Abstract&lt;/em&gt;: Social scientists have increasingly been applying machine learning algorithms to &amp;ldquo;big data&amp;rdquo; to measure theoretical concepts they cannot easily measure before, and then been using these machine-predicted variables in a regression. This article first demonstrates that directly inserting binary predictions (i.e., classification) without regard for prediction error will generally lead to attenuation biases of either slope coefficients or marginal effect estimates.
 We then propose several estimators to obtain consistent estimates of coefficients.
 The estimators require the existence of validation data, of which researchers have both machine prediction and true values.This validation data is either automatically available during training algorithms or can be easily obtained.
@@ -99,27 +99,31 @@ Finally, we summarize the usage pattern of machine learning predictions in 18 re
     
     <item>
       <title>CASM: A Deep Learning Approach for Identifying Collective Action Events with Text and Image Data from Social Media</title>
-      <link>https://hanzhang.xyz/publication/journal-article/zhang-casm-2019/</link>
+      <link>http://localhost:1313/publication/journal-article/zhang-casm-2019/</link>
       <pubDate>Tue, 01 Jan 2019 00:00:00 +0000</pubDate>
-      <guid>https://hanzhang.xyz/publication/journal-article/zhang-casm-2019/</guid>
+      <guid>http://localhost:1313/publication/journal-article/zhang-casm-2019/</guid>
       <description>&lt;p&gt;&lt;strong&gt;NOTE&lt;/strong&gt;:
-There are three great invited commentaries to our article by &lt;a href=&#34;https://zacharyst.com/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Zachary C. Steinert-Threlkeld&lt;/a&gt;, &lt;a href=&#34;https://www.wzb.eu/en/persons/swen-hutter&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Swen Hutter&lt;/a&gt;, and &lt;a href=&#34;https://www.ssc.wisc.edu/~oliver/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Pamela Oliver&lt;/a&gt;. &lt;a href=&#34;https://journals.sagepub.com/doi/citedby/10.1177/0081175019860244&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Read them and our response here&lt;/a&gt;.&lt;/p&gt;
+There are three great invited commentaries to our article by 
+, 
+, and 
+. 
+.&lt;/p&gt;
 </description>
     </item>
     
     <item>
       <title>Addressing Selection Bias in Event Studies with General-Purpose Social Media Panels</title>
-      <link>https://hanzhang.xyz/publication/journal-article/zhang-addressing-2018/</link>
+      <link>http://localhost:1313/publication/journal-article/zhang-addressing-2018/</link>
       <pubDate>Tue, 01 May 2018 00:00:00 +0000</pubDate>
-      <guid>https://hanzhang.xyz/publication/journal-article/zhang-addressing-2018/</guid>
+      <guid>http://localhost:1313/publication/journal-article/zhang-addressing-2018/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Causal Effect of Witnessing Political Protest on Civic Engagement</title>
-      <link>https://hanzhang.xyz/publication/journal-article/zhang-causal-2016/</link>
+      <link>http://localhost:1313/publication/journal-article/zhang-causal-2016/</link>
       <pubDate>Tue, 01 Mar 2016 00:00:00 +0000</pubDate>
-      <guid>https://hanzhang.xyz/publication/journal-article/zhang-causal-2016/</guid>
+      <guid>http://localhost:1313/publication/journal-article/zhang-causal-2016/</guid>
       <description></description>
     </item>
     
