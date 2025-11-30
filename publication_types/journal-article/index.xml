@@ -5,7 +5,7 @@
     <link>https://hanzhang.xyz/publication_types/journal-article/</link>
       <atom:link href="https://hanzhang.xyz/publication_types/journal-article/index.xml" rel="self" type="application/rss+xml" />
     <description>Journal Article</description>
-    <generator>Hugo Blox Builder (https://hugoblox.com)</generator><language>en-us</language><lastBuildDate>Thu, 01 Jan 2026 00:00:00 +0000</lastBuildDate>
+    <generator>Hugo Blox Builder (https://hugoblox.com)</generator><language>en-us</language><lastBuildDate>Mon, 01 Dec 2025 00:00:00 +0000</lastBuildDate>
     <image>
       <url>https://hanzhang.xyz/media/icon_hu_db3bead160fce7e0.png</url>
       <title>Journal Article</title>
@@ -13,18 +13,18 @@
     </image>
     
     <item>
-      <title>Two-Layer Panopticon: How the Chinese Government Uses Digital Surveillance to Prevent Collective Action</title>
-      <link>https://hanzhang.xyz/publication/journal-article/zhang-two-2025/</link>
-      <pubDate>Thu, 01 Jan 2026 00:00:00 +0000</pubDate>
-      <guid>https://hanzhang.xyz/publication/journal-article/zhang-two-2025/</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title>Joint Text-and-Image Clustering for Social Science Research</title>
       <link>https://hanzhang.xyz/publication/journal-article/zhang-joint-2025/</link>
       <pubDate>Mon, 01 Dec 2025 00:00:00 +0000</pubDate>
       <guid>https://hanzhang.xyz/publication/journal-article/zhang-joint-2025/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Two-Layer Panopticon: How the Chinese Government Uses Digital Surveillance to Prevent Collective Action</title>
+      <link>https://hanzhang.xyz/publication/journal-article/zhang-two-2025/</link>
+      <pubDate>Sat, 29 Nov 2025 00:00:00 +0000</pubDate>
+      <guid>https://hanzhang.xyz/publication/journal-article/zhang-two-2025/</guid>
       <description></description>
     </item>
     
