@@ -1,23 +1,24 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>&#34;Surveillance&#34; | Han Zhang</title>
+    <title>Surveillance | Han Zhang</title>
     <link>https://hanzhang.xyz/tags/surveillance/</link>
       <atom:link href="https://hanzhang.xyz/tags/surveillance/index.xml" rel="self" type="application/rss+xml" />
-    <description>&#34;Surveillance&#34;</description>
-    <generator>Hugo Blox Builder (https://hugoblox.com)</generator><language>en-us</language><lastBuildDate>Sat, 29 Nov 2025 00:00:00 +0000</lastBuildDate>
+    <description>Surveillance</description>
+    <generator>Hugo Blox Builder (https://hugoblox.com)</generator><language>en-us</language><lastBuildDate>Sun, 01 Sep 2024 00:00:00 +0000</lastBuildDate>
     <image>
       <url>https://hanzhang.xyz/media/icon_hu_db3bead160fce7e0.png</url>
-      <title>&#34;Surveillance&#34;</title>
+      <title>Surveillance</title>
       <link>https://hanzhang.xyz/tags/surveillance/</link>
     </image>
     
     <item>
-      <title>Two-Layer Panopticon: How the Chinese Government Uses Digital Surveillance to Prevent Collective Action</title>
-      <link>https://hanzhang.xyz/publication/journal-article/zhang-two-2025/</link>
-      <pubDate>Sat, 29 Nov 2025 00:00:00 +0000</pubDate>
-      <guid>https://hanzhang.xyz/publication/journal-article/zhang-two-2025/</guid>
-      <description></description>
+      <title>IAPA 1801X: Surveillance: State, Capitalism, and Society</title>
+      <link>https://hanzhang.xyz/teaching/iapa1801x/</link>
+      <pubDate>Sun, 01 Sep 2024 00:00:00 +0000</pubDate>
+      <guid>https://hanzhang.xyz/teaching/iapa1801x/</guid>
+      <description>&lt;p&gt;I am teaching &lt;em&gt;IAPA 1801X: Surveillance: State, Capitalism, and Society&lt;/em&gt; at Brown in Fall 2024.&lt;/p&gt;
+</description>
     </item>
     
   </channel>
