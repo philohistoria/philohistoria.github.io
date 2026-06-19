@@ -1,6 +1,6 @@
 <!doctype html>
 <!-- This site was created with Hugo Blox. https://hugoblox.com -->
-<!-- Last Published: November 29, 2025 --><html lang="en-us" dir="ltr"
+<!-- Last Published: June 19, 2026 --><html lang="en-us" dir="ltr"
       data-wc-theme-default="light">
   
 <head>
@@ -70,7 +70,7 @@
   
     
       
-        <link rel="stylesheet" href="/css/_entry.114f58a0fdc5bdfdcfa13761668eaf7cbf2f09d97390056d897306c32593bace.css" integrity="sha256-EU9YoP3Fvf3PoTdhZo6vfL8vCdlzkAVtiXMGwyWTus4=" crossorigin="anonymous">
+        <link rel="stylesheet" href="/css/_entry.84bdca2c9795470cd52f6f62922da5c1834e77b3bd990a1cfd103dcf89f6da4c.css" integrity="sha256-hL3KLJeVRwzVL29iki2lwYNOd7O9mQoc/RA9z4n22kw=" crossorigin="anonymous">
       
     
   
@@ -82,6 +82,9 @@
   
   
 
+  
+    
+    <link href="/css/custom.min.c6aaa3b37fb723ef918ccd0642036aacd53d90087d4455ec0899db033eb08823.css" rel="stylesheet" />
   
 
   <script src="/js/hb-head.min.4f709a77731090398c609176d6a8ca70c152ef89185db97631774ffe9011d746.js" integrity="sha256-T3Cad3MQkDmMYJF21qjKcMFS74kYXbl2MXdP/pAR10Y=" crossorigin="anonymous"></script>
@@ -129,8 +132,8 @@
   
 
   
-  <link rel="icon" type="image/png" href="/media/icon_hu_19d75f640a46164e.png" />
-  <link rel="apple-touch-icon" type="image/png" href="/media/icon_hu_678a654b4605efdb.png" />
+  <link rel="icon" type="image/png" href="/media/icon_hu_f071fc73775b5409.png" />
+  <link rel="apple-touch-icon" type="image/png" href="/media/icon_hu_b9c3e803b6cc2e4b.png" />
 
   <link rel="canonical" href="https://hanzhang.xyz/publication/journal-article/zhang-joint-2025/" />
 
@@ -160,8 +163,8 @@
   <meta property="og:site_name" content="Han Zhang" />
   <meta property="og:url" content="https://hanzhang.xyz/publication/journal-article/zhang-joint-2025/" />
   <meta property="og:title" content="Joint Text-and-Image Clustering for Social Science Research | Han Zhang" />
-  <meta property="og:description" content="While automated text analysis is getting extremely popular and image analysis is gaining interest, multi-modal analysis that combines both text and image information remains rare. However, many text or image data are intrinsically multi-modal, such as social media posts. This study compares three practical workflows for clustering text– image pairs: (1) label-level combination, which clusters text and image separately and combines the resulting labels; (2) vector-level combination, which clusters concatenated embeddings extracted from each modality; and (3) joint embedding, which clusters unified representations from multimodal embedding models such as CLIP. We also introduce a set of reusable evaluation tools to help researchers compare, validate, and benchmark multimodal clustering workflows: the Adjusted Mutual Information (AMI). to assess text-image alignment, the S_DbW index to evaluate number of clusters, and the within-cluster consistency to validate interpretability. We validate the methods on a Chinese protest dataset from social media with 336,921 text-image pairs, and test robustness and scope conditions using a smaller U.S. news dataset on gun violence with 1,297 news headlines. We find that when text and image provide distinct, non- overlapping information, the second and third methods outperform the first. This study serves as a bridge between the text-as-data and image-as-data communities, as well as computational social science." /><meta property="og:image" content="https://hanzhang.xyz/media/icon_hu_db3bead160fce7e0.png" />
-    <meta property="twitter:image" content="https://hanzhang.xyz/media/icon_hu_db3bead160fce7e0.png" /><meta property="og:locale" content="en-us" />
+  <meta property="og:description" content="While automated text analysis is getting extremely popular and image analysis is gaining interest, multi-modal analysis that combines both text and image information remains rare. However, many text or image data are intrinsically multi-modal, such as social media posts. This study compares three practical workflows for clustering text– image pairs: (1) label-level combination, which clusters text and image separately and combines the resulting labels; (2) vector-level combination, which clusters concatenated embeddings extracted from each modality; and (3) joint embedding, which clusters unified representations from multimodal embedding models such as CLIP. We also introduce a set of reusable evaluation tools to help researchers compare, validate, and benchmark multimodal clustering workflows: the Adjusted Mutual Information (AMI). to assess text-image alignment, the S_DbW index to evaluate number of clusters, and the within-cluster consistency to validate interpretability. We validate the methods on a Chinese protest dataset from social media with 336,921 text-image pairs, and test robustness and scope conditions using a smaller U.S. news dataset on gun violence with 1,297 news headlines. We find that when text and image provide distinct, non- overlapping information, the second and third methods outperform the first. This study serves as a bridge between the text-as-data and image-as-data communities, as well as computational social science." /><meta property="og:image" content="https://hanzhang.xyz/media/icon_hu_f9a4133fef468c2c.png" />
+    <meta property="twitter:image" content="https://hanzhang.xyz/media/icon_hu_f9a4133fef468c2c.png" /><meta property="og:locale" content="en-us" />
   
     
       <meta
@@ -296,6 +299,70 @@
       
       
     
+      
+      
+      
+    
+    
+  
+
+  
+    
+    
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+    
+  
+    
+    
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+    
+  
+  
+  
+
+  
+  
+
+  
+
+  
+  
+    
+    
+      
+      
+      
+    
+      
+      
+      
+    
+      
+      
+      
+    
     
   
 
@@ -315,30 +382,6 @@
       
       
     
-  
-  
-  
-
-  
-  
-
-  
-
-  
-  
-    
-    
-      
-      
-      
-    
-      
-      
-      
-    
-    
-  
-
   
     
     
@@ -533,6 +576,20 @@
         <a
           class="nav-link "
           
+          href="/event/"
+        >Conferences</a
+        >
+      </li>
+      
+      
+      
+      
+      
+      
+      <li class="nav-item">
+        <a
+          class="nav-link "
+          
           href="/advising/"
         >Advising</a
         >
@@ -662,7 +719,7 @@
       text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-primary-800 dark:hover:text-gray-50"
     href="/event/"
     
-  >Recent &amp; Upcoming Talks
+  >Conferences
         <span data-hb-sidebar-toggle>
             <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" class="h-[18px] min-w-[18px] rounded-sm p-0.5 hover:bg-gray-800/5 dark:hover:bg-gray-100/5"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" class="origin-center transition-transform rtl:-rotate-180"></path></svg>
         </span>
@@ -670,9 +727,17 @@
         <ul class="hb-sidebar-list"><li class="flex flex-col "><a
     class="hb-sidebar-custom-link
       text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-primary-800 dark:hover:text-gray-50"
-    href="/event/example/"
+    href="/event/apsa-2026/"
     
-  >Example Talk
+  >American Political Science Association Annual Meeting &amp; Exhibition 2026
+    </a>
+              
+            </li><li class="flex flex-col "><a
+    class="hb-sidebar-custom-link
+      text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-primary-800 dark:hover:text-gray-50"
+    href="/event/asa-2026/"
+    
+  >American Sociological Association Annual Meeting 2026
     </a>
               
             </li></ul>
@@ -1438,7 +1503,7 @@
 
   
   <p class="powered-by text-center">
-    © 2025 Han Zhang. This work is licensed under <a href="https://creativecommons.org/licenses/by-nc-nd/4.0" rel="noopener noreferrer" target="_blank">CC BY NC ND 4.0</a>
+    © 2026 Han Zhang. This work is licensed under <a href="https://creativecommons.org/licenses/by-nc-nd/4.0" rel="noopener noreferrer" target="_blank">CC BY NC ND 4.0</a>
   </p>
   
 
