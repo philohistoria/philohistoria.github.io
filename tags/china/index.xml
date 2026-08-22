@@ -1,22 +1,60 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>&#34;China | Han Zhang</title>
+    <title>&#34;China&#34; | Han Zhang</title>
     <link>https://hanzhang.xyz/tags/china/</link>
       <atom:link href="https://hanzhang.xyz/tags/china/index.xml" rel="self" type="application/rss+xml" />
-    <description>&#34;China</description>
-    <generator>Hugo Blox Builder (https://hugoblox.com)</generator><language>en-us</language><lastBuildDate>Fri, 07 Nov 2025 00:00:00 +0000</lastBuildDate>
+    <description>&#34;China&#34;</description>
+    <generator>Hugo Blox Builder (https://hugoblox.com)</generator><language>en-us</language><lastBuildDate>Sun, 01 Sep 2024 00:00:00 +0000</lastBuildDate>
     <image>
       <url>https://hanzhang.xyz/media/icon_hu_f9a4133fef468c2c.png</url>
-      <title>&#34;China</title>
+      <title>&#34;China&#34;</title>
       <link>https://hanzhang.xyz/tags/china/</link>
     </image>
     
     <item>
-      <title>Hug Fans or Follow Celebrities? How Nationalism Is Reinforced on Chinese Social Media</title>
-      <link>https://hanzhang.xyz/publication/journal-article/jean-hug-2025/</link>
-      <pubDate>Fri, 07 Nov 2025 00:00:00 +0000</pubDate>
-      <guid>https://hanzhang.xyz/publication/journal-article/jean-hug-2025/</guid>
+      <title>Patriarchal Erasure and Manufactured Passivity: Asymmetric Government and News Media Attention to Protests in China</title>
+      <link>https://hanzhang.xyz/publication/journal-article/cheng-patriarchal-2024/</link>
+      <pubDate>Sun, 01 Sep 2024 00:00:00 +0000</pubDate>
+      <guid>https://hanzhang.xyz/publication/journal-article/cheng-patriarchal-2024/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Robots and Protest: Does Increased Protest Among Chinese Workers Result in More Automation?</title>
+      <link>https://hanzhang.xyz/publication/journal-article/zhang-robot-2022/</link>
+      <pubDate>Sat, 01 Jul 2023 00:00:00 +0000</pubDate>
+      <guid>https://hanzhang.xyz/publication/journal-article/zhang-robot-2022/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Authoritarian Responsiveness and Political Attitudes during COVID-19: Evidence from Weibo and a Survey Experiment</title>
+      <link>https://hanzhang.xyz/publication/journal-article/wei-authoritarian-2021/</link>
+      <pubDate>Fri, 01 Jan 2021 00:00:00 +0000</pubDate>
+      <guid>https://hanzhang.xyz/publication/journal-article/wei-authoritarian-2021/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>CASM: A Deep Learning Approach for Identifying Collective Action Events with Text and Image Data from Social Media</title>
+      <link>https://hanzhang.xyz/publication/journal-article/zhang-casm-2019/</link>
+      <pubDate>Tue, 01 Jan 2019 00:00:00 +0000</pubDate>
+      <guid>https://hanzhang.xyz/publication/journal-article/zhang-casm-2019/</guid>
+      <description>&lt;p&gt;&lt;strong&gt;NOTE&lt;/strong&gt;:
+There are three great invited commentaries to our article by 
+, 
+, and 
+. 
+.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Causal Effect of Witnessing Political Protest on Civic Engagement</title>
+      <link>https://hanzhang.xyz/publication/journal-article/zhang-causal-2016/</link>
+      <pubDate>Tue, 01 Mar 2016 00:00:00 +0000</pubDate>
+      <guid>https://hanzhang.xyz/publication/journal-article/zhang-causal-2016/</guid>
       <description></description>
     </item>
     
