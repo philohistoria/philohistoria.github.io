@@ -1,0 +1,575 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Session 2 · AI for Data Analysis II</title>
+<style>
+  :root{
+    --bg:#fcfcfb; --fg:#1c1c1a; --muted:#6b6b66; --line:#e6e5e1;
+    --accent:#2f6f4f; --accent-weak:#eaf3ee; --ex:#b5651d; --ex-weak:#fbf1e7;
+    --code-bg:#f4f5f3; --card:#fff;
+    --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--sans)}
+  .layout{display:grid;grid-template-columns:180px minmax(0,1fr) 360px;max-width:1320px;margin:0 auto}
+
+  /* ---- left nav ---- */
+  nav{position:sticky;top:0;align-self:start;height:100vh;overflow:auto;
+      padding:26px 14px;border-right:1px solid var(--line);font-size:14px}
+  nav .days{display:flex;flex-direction:column;gap:2px;margin-bottom:22px}
+  nav .days a{color:var(--muted);text-decoration:none;padding:3px 0;font-size:13px}
+  nav .days a.cur{color:var(--fg);font-weight:700}
+  nav .home{display:block;font-size:14px;font-weight:800;color:var(--fg);text-decoration:none;line-height:1.25;margin-bottom:18px}
+  nav .home:hover{color:var(--accent)}
+  nav .lbl{font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin:0 0 8px}
+  nav .toc a{display:block;color:var(--fg);text-decoration:none;padding:6px 0 6px 12px;
+             border-left:2px solid transparent;margin-left:-2px}
+  nav .toc a:hover{color:var(--accent)}
+  nav .toc a.active{color:var(--accent);border-left-color:var(--accent);font-weight:600}
+  nav .toc .has{color:var(--ex);font-size:11px;margin-left:6px}
+
+  /* ---- center content ---- */
+  main{padding:30px 32px 160px;min-width:0}
+  .kicker{font-size:13px;letter-spacing:.07em;text-transform:uppercase;color:var(--accent);font-weight:700;margin:0}
+  h1{margin:4px 0 6px;font-size:32px}
+  .goal{color:var(--muted);font-size:16px;margin:0 0 20px}
+  h2.sec{font-size:28px;font-weight:700;color:var(--fg);line-height:1.2;
+         margin:52px 0 12px;padding-top:22px;border-top:1px solid var(--line)}
+  h2.sec .hastag{color:var(--ex);font-weight:600;font-size:14px}
+
+  .card{background:var(--card);border:1px solid var(--line);border-radius:14px;
+        padding:20px 24px;margin:16px 0;box-shadow:0 1px 2px rgba(0,0,0,.03)}
+  .card h3{margin:0 0 12px;font-size:21px;line-height:1.25}
+  .card ul{list-style:none;padding:0;margin:0}
+  .card li{font-size:17px;line-height:1.45;padding:9px 0 9px 26px;position:relative;border-top:1px solid var(--line)}
+  .card li:first-child{border-top:0}
+  .card li::before{content:"";position:absolute;left:4px;top:17px;width:8px;height:8px;border-radius:50%;background:var(--accent)}
+  .card ul ul{margin:6px 0 0}
+  .card li li{font-size:15px;padding:5px 0 5px 24px;border-top:0;color:var(--muted)}
+  .card li li::before{width:5px;height:5px;top:14px;background:var(--muted)}
+  .card.demo{border-left:4px solid var(--accent)}
+  .card.demo .tag{display:inline-block;font-size:12px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;
+                  color:var(--accent);margin-bottom:8px}
+  .quote{background:var(--code-bg);border-left:3px solid var(--accent);border-radius:0 8px 8px 0;
+         padding:12px 16px;margin:12px 0;font-style:italic;line-height:1.5}
+  code{background:var(--code-bg);padding:1px 5px;border-radius:4px;font-family:ui-monospace,Menlo,monospace;font-size:.85em}
+  strong{color:#111}
+  table{border-collapse:collapse;width:100%;margin:10px 0;font-size:16px}
+  th,td{border:1px solid var(--line);padding:8px 12px;text-align:left}
+  th{background:var(--accent-weak);font-size:14px}
+  .src{font-size:13px;color:var(--muted)} .src a{color:var(--accent)}
+
+  /* ---- right contextual hands-on ---- */
+  aside{position:sticky;top:0;align-self:start;height:100vh;overflow:auto;
+        border-left:1px solid var(--line);padding:26px 18px 60px;background:#fbfaf8}
+  aside .railhead{font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--ex)}
+  aside .railctx{font-size:13px;color:var(--muted);margin:2px 0 16px}
+  .hands{display:none} .hands.on{display:block}
+  .hands.none-msg{color:var(--muted);font-size:14px;line-height:1.6;
+                  border:1px dashed var(--line);border-radius:10px;padding:16px;background:#fff}
+  .exi{border:1px solid #e8d3ba;background:var(--ex-weak);border-radius:10px;margin:10px 0;padding:12px 14px}
+  .exi .step{display:inline-block;font-size:10px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;
+             color:#fff;background:var(--ex);border-radius:20px;padding:2px 9px;margin-bottom:8px}
+  .exi h4{margin:0 0 6px;font-size:15px}
+  .exi ul{margin:6px 0;padding-left:18px;font-size:13.5px;line-height:1.5}
+  .exi li{margin:4px 0}
+  .exi p{font-size:13.5px;line-height:1.5;margin:6px 0}
+  .save{font-size:13px;color:var(--muted);background:#fff;border:1px solid var(--line);
+        border-radius:8px;padding:9px 12px;margin:10px 0}
+
+  .tabs{display:flex;gap:5px;margin:8px 0 0}
+  .tabs button{border:1px solid #e8d3ba;background:#fff;border-radius:7px;padding:4px 10px;
+               font-size:12px;cursor:pointer;color:var(--ex)}
+  .tabs button.on{background:var(--ex);color:#fff}
+  .panel{display:none} .panel.on{display:block}
+
+  .code{position:relative;background:#fff;border:1px solid #e8d3ba;border-radius:8px;
+        padding:9px 34px 9px 11px;font-family:ui-monospace,Menlo,monospace;font-size:12px;
+        white-space:pre-wrap;margin:8px 0;line-height:1.45}
+  .code .copy{position:absolute;top:6px;right:6px;font-size:10px;border:1px solid #e8d3ba;
+              background:#fff;border-radius:6px;padding:2px 7px;cursor:pointer;color:var(--ex)}
+  .guidelink{display:inline-block;margin-top:6px;font-size:13px;color:var(--ex);font-weight:600}
+
+  @media(max-width:1080px){
+    .layout{grid-template-columns:1fr}
+    nav{display:none}
+    aside{position:static;height:auto;border-left:0;border-top:1px solid var(--line)}
+    .hands{display:block !important;border-top:1px solid var(--line);padding-top:10px;margin-top:10px}
+    .hands.none-msg{display:none !important}
+  }
+</style>
+</head>
+<body>
+<div class="layout">
+
+  <!-- ================= LEFT NAV ================= -->
+  <nav>
+    <a class="home" href="session1_full.html">AI-Assisted Coding for Social Data Analysis</a>
+    <div class="days">
+      <div class="lbl">Sessions</div>
+      <a href="session1_full.html">1 · AI for Data Analysis I</a>
+      <a href="session2_full.html" class="cur">2 · AI for Data Analysis II</a>
+      <a href="session3_full.html">3 · Harnessing AI Agents</a>
+      <a href="session4_full.html">4 · AI for Data Collection and Literature Review</a>
+      <a href="session5_full.html">5 · AI for Building Apps</a>
+    </div>
+    <div class="lbl">Today</div>
+    <div class="toc">
+      <a href="#opening">Opening</a>
+      <a href="#steps">Breaking work into clear steps <span class="has">hands-on</span></a>
+      <a href="#coding">Coding data with the agent <span class="has">hands-on</span></a>
+      <a href="#verify">Verifying your results <span class="has">hands-on</span></a>
+      <a href="#faster">Working faster: several agents at once <span class="has">hands-on</span></a>
+      <a href="#discuss">Discussion and wrap</a>
+    </div>
+  </nav>
+
+  <!-- ================= CENTER CONTENT ================= -->
+  <main>
+    <p class="kicker">Session 2 · Tuesday</p>
+    <h1>AI for Data Analysis II</h1>
+    <p class="goal">Do a real analysis with the agent: break the work into clear steps, code your text into data, and check every result. When a section has something to do, it appears in the panel on the right.</p>
+
+    <!-- OPENING -->
+    <section data-hands="none">
+    <h2 class="sec" id="opening">Opening</h2>
+
+    <div class="card">
+      <h3>Today</h3>
+      <ul>
+        <li>Breaking work into clear steps.</li>
+        <li>Coding data with the agent.</li>
+        <li>Break.</li>
+        <li>Verifying your results.</li>
+        <li>Working faster: several agents at once.</li>
+        <li>Discussion.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Where we left off</h3>
+      <ul>
+        <li>You have a repository with a README, protected data, one script, and one commit.</li>
+        <li>You know what an agent is: tools, a loop, and code execution.</li>
+        <li>You wrote one sentence last night: the analysis you want to run.</li>
+        <li>Today you do two things: run several agents at once to go faster, then direct one analysis carefully to get it right.</li>
+      </ul>
+    </div>
+    </section>
+
+    <!-- BREAKING WORK INTO CLEAR STEPS -->
+    <section data-hands="steps">
+    <h2 class="sec" id="steps">Breaking work into clear steps <span class="hastag">· do it on the right</span></h2>
+
+    <div class="card">
+      <h3>Five stages of any analysis</h3>
+      <ul>
+        <li>Every empirical project moves through the same five stages:
+          <ul>
+            <li><strong>Data preparation.</strong> Where does the data come from, and is it clean?</li>
+            <li><strong>Exploratory analysis.</strong> What patterns are there?</li>
+            <li><strong>Statistical modeling.</strong> Does the hypothesis hold?</li>
+            <li><strong>Output and reporting.</strong> How do you present it?</li>
+            <li><strong>Reproducible publication.</strong> Can someone else replicate it?</li>
+          </ul>
+        </li>
+        <li>Today you drive stages 1 through 4 on your own data. Stage 5 is Wednesday.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>What the agent contributes at each stage</h3>
+      <table>
+        <tr><th>Stage</th><th>What you delegate</th><th>What you keep</th></tr>
+        <tr><td>Prepare</td><td>recoding, merging, type fixes</td><td>what counts as missing</td></tr>
+        <tr><td>Explore</td><td>summaries, distributions, diagnostics</td><td>which patterns matter</td></tr>
+        <tr><td>Model</td><td>writing and running the estimation</td><td>the specification</td></tr>
+        <tr><td>Report</td><td>formatting tables and figures</td><td>what the result means</td></tr>
+      </table>
+      <ul><li>The pattern in one line: the agent does the typing, and you make the choices.</li></ul>
+    </div>
+    <div class="card">
+      <h3>Three ways to run the agent</h3>
+      <ul><li>The agent runs at one of three levels of freedom:</li></ul>
+      <table>
+        <tr><th>Level</th><th>What it can do</th><th>Best for</th></tr>
+        <tr><td><strong>Read-only</strong></td><td>looks and plans; changes nothing</td><td>thinking first</td></tr>
+        <tr><td><strong>Standard</strong></td><td>edits and runs in your project</td><td>day-to-day work</td></tr>
+        <tr><td><strong>Full auto</strong></td><td>edits, runs, and reaches out; no asking</td><td>trusted, repeat work</td></tr>
+      </table>
+      <ul>
+        <li>Claude Code and Codex both have these three; the names and the key to switch differ, so check your tool.</li>
+        <li>Ask yourself how much you would let a brand-new RA do <strong>unsupervised</strong>.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Explore, Plan, Execute, Commit</h3>
+      <ul><li>The workflow for any task with real stakes:</li></ul>
+      <table>
+        <tr><th>Phase</th><th>What happens</th><th>Research parallel</th></tr>
+        <tr><td>Explore</td><td>reads data and files, touches none</td><td>literature review, EDA</td></tr>
+        <tr><td>Plan</td><td>proposes; you review and approve</td><td>pre-registration</td></tr>
+        <tr><td>Execute</td><td>runs the approved plan, step by step</td><td>running the analysis</td></tr>
+        <tr><td>Commit</td><td>a labeled save point, clear message</td><td>methods write-up</td></tr>
+      </table>
+      <ul><li>Explore and Plan are cheap; a wrong plan costs one rewrite, and a wrong execution costs an afternoon.</li></ul>
+    </div>
+    <div class="card demo">
+      <span class="tag">Live demo</span>
+      <h3>Take 1: the vague prompt</h3>
+      <div class="quote">Analyze how the importance of politics varies across countries and make me publication-ready output.</div>
+      <ul>
+        <li>What comes back looks like an answer:
+          <ul>
+            <li>It runs, and it produces something plausible.</li>
+            <li>Which variable did it pick? How did it treat missing values? Did it weight? You cannot tell without excavating the code.</li>
+          </ul>
+        </li>
+        <li>It looks plausible, and you cannot check any of it.</li>
+      </ul>
+    </div>
+    <div class="card demo">
+      <span class="tag">Live demo</span>
+      <h3>Take 2: the same task, directed</h3>
+      <ul>
+        <li>Explore: "Look at the data and the codebook. What politics items are there, and what are their missing codes?"</li>
+        <li>Plan: "Propose an analysis plan for country-level differences. Include variable choice, missing handling, and weights."</li>
+        <li>Review the plan, and change one thing you disagree with.</li>
+        <li>Execute stage by stage, committing after each stage.</li>
+        <li>The output is similar, and the difference is that every choice passed through your hands.</li>
+      </ul>
+    </div>
+    </section>
+
+    <!-- CODING DATA WITH THE AGENT -->
+    <section data-hands="coding">
+    <h2 class="sec" id="coding">Coding data with the agent <span class="hastag">· do it on the right</span></h2>
+
+    <div class="card">
+      <h3>Turning text into variables</h3>
+      <ul>
+        <li>A lot of social-science data starts as text: open-ended answers, interview transcripts, documents, news.</li>
+        <li>The agent can read each case and assign a code, the way a research assistant would.</li>
+        <li>That turns text into a variable you can count and model.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>How to set it up</h3>
+      <ul>
+        <li>Write the codebook first: the categories, each with a clear rule and an example.</li>
+        <li>Give the agent the codebook and a handful of cases, and read what it returns.</li>
+        <li>Fix the codebook where it was unclear, until the agent codes the way you mean.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>The catch: check it against human coding</h3>
+      <ul>
+        <li>Hand-code a random sample yourself, then compare the agent's codes to yours.</li>
+        <li>Report the agreement, the same way you would for two human coders.</li>
+        <li>Low agreement means the codebook is vague or the task is too hard; fix that before you trust the rest.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Then code at scale</h3>
+      <ul>
+        <li>Once agreement is high enough, let the agent code the full dataset.</li>
+        <li>Keep the sample and the agreement number; they are your evidence the measure is sound.</li>
+        <li>Spot-check a few more as it goes.</li>
+      </ul>
+    </div>
+    </section>
+
+    <!-- VERIFYING YOUR RESULTS -->
+    <section data-hands="verify">
+    <h2 class="sec" id="verify">Verifying your results <span class="hastag">· do it on the right</span></h2>
+
+    <div class="card">
+      <h3>Why you always check</h3>
+      <ul>
+        <li>The agent is fluent, and fluent output can still be wrong.</li>
+        <li>It will not tell you when it guessed; a wrong number looks exactly like a right one.</li>
+        <li>Nothing counts as a result until you have checked it yourself.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Ways to check a result</h3>
+      <ul>
+        <li>Recompute one number a second way, in software you already trust, and see if it matches.</li>
+        <li>Compare it against something you already know: a published figure, a total that must add up, or a number you expected.</li>
+        <li>Read the code and the choices it made: which cases it dropped, how it treated missing values, whether it weighted.</li>
+        <li>Look at the data at its edges: the row count, the missing counts, the smallest and largest values.</li>
+        <li>Change one input, and check the output moves the way it should.</li>
+        <li>Have a fresh session or a second agent redo the step, and compare the two.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Worked example: Monday's chart</h3>
+      <ul>
+        <li>Monday's WVS chart looked convincing. It was probably wrong in at least one place:
+          <ul>
+            <li><strong>Right variable?</strong> WVS has several politics items: interest, importance, action. Check the codebook.</li>
+            <li><strong>Missing values?</strong> WVS codes "don't know / refused" as -1 to -5; averaging those in corrupts every country mean.</li>
+            <li><strong>Weights?</strong> WVS has survey weights; unweighted means can mislead.</li>
+            <li><strong>Scale direction?</strong> 1 = very important, 4 = not at all; the chart may be upside-down in meaning.</li>
+          </ul>
+        </li>
+        <li>Every one of these is invisible in the picture and visible in the code.</li>
+      </ul>
+    </div>
+    </section>
+
+    <!-- WORKING FASTER -->
+    <section data-hands="faster">
+    <h2 class="sec" id="faster">Working faster: several agents at once <span class="hastag">· do it on the right</span></h2>
+
+    <div class="card">
+      <h3>You can run more than one agent</h3>
+      <ul>
+        <li>You are not limited to a single agent; you can open several at once.</li>
+        <li>Give each one a separate job, and they work at the same time.</li>
+        <li>One cleans the data, one draws a figure, one looks up the codebook, all at once.</li>
+        <li>The jobs have to be independent, so none of them waits on another.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Or let one agent run the others</h3>
+      <ul>
+        <li>You do not have to open and manage the agents yourself.</li>
+        <li>You can tell one agent to do it: "clean the data, draw the figure, and look up the codebook, using a separate helper for each."</li>
+        <li>It opens the helpers, hands them the jobs, and brings back the results.</li>
+        <li>You will hear these helpers called subagents; the only difference is who manages them, you or the main agent.</li>
+      </ul>
+    </div>
+    <div class="card demo">
+      <span class="tag">Live demo</span>
+      <h3>Three agents at once</h3>
+      <ul>
+        <li>I open three agents and give each a different task on the same project.</li>
+        <li>You watch all three run together and finish sooner than one agent would in a row.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>What running them costs</h3>
+      <ul>
+        <li>The tool charges by usage, measured in units called tokens, and each plan has a limit.</li>
+        <li>Several agents at once, or one agent working for a long time, spend that usage faster.</li>
+        <li>Check your usage now and then, because going faster spends it faster.</li>
+      </ul>
+    </div>
+    </section>
+
+    <!-- DISCUSSION AND WRAP -->
+    <section data-hands="none">
+    <h2 class="sec" id="discuss">Discussion and wrap</h2>
+    <div class="card">
+      <h3>Discussion</h3>
+      <ul>
+        <li>Where did the agent surprise you, for better and for worse?</li>
+        <li>What did you catch when you read the code?</li>
+        <li>Would you have caught it without being told to look?</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Why long sessions drift</h3>
+      <ul>
+        <li>As a session grows, the agent's working memory fills with files, outputs, and errors.</li>
+        <li>Your instructions from the first hour get crowded out, and the agent slowly reverts to its own defaults.</li>
+        <li>Tomorrow morning it remembers nothing at all.</li>
+        <li>Tomorrow's session builds the fix: instructions that <strong>persist</strong> outside the conversation.</li>
+      </ul>
+    </div>
+    </section>
+
+  </main>
+
+  <!-- ================= RIGHT CONTEXTUAL HANDS-ON ================= -->
+  <aside>
+    <p class="railhead" id="railhead">Hands-on</p>
+
+    <!-- none: nothing shown -->
+    <div class="hands" data-for="none"></div>
+
+    <!-- steps -->
+    <div class="hands" data-for="steps">
+      <div class="exi">
+        <span class="step">Exercise</span>
+        <h4>Which mode would you pick?</h4>
+        <p>For each task, decide which of the three modes fits:</p>
+        <ul>
+          <li>First look at a collaborator's undocumented dataset.</li>
+          <li>Rerunning your validated cleaning script on this month's new wave.</li>
+          <li>Changing how your script treats missing income.</li>
+          <li>"Plan the analysis for my one-sentence question from last night."</li>
+        </ul>
+        <p>There is a defensible answer for each; the point is that you choose the mode on purpose.</p>
+      </div>
+      <div class="exi">
+        <span class="step">The task</span>
+        <h4>Direct one analysis on your data</h4>
+        <p>Start from the sentence you wrote last night, on your own data. Work through three stages, and commit after each:</p>
+        <ul>
+          <li><strong>Clean.</strong> Missing codes, variable types, sample filters.</li>
+          <li><strong>Describe.</strong> The descriptives that matter for your question.</li>
+          <li><strong>Model.</strong> One model suited to your question.</li>
+        </ul>
+        <p>Two requirements:</p>
+        <ul>
+          <li>Use your tool's read-only planning mode at least once, and change at least one thing in the plan before you run it.</li>
+          <li>Every commit message must be readable by a colleague.</li>
+        </ul>
+      </div>
+      <div class="exi">
+        <span class="step">Stage 1</span>
+        <h4>Clean</h4>
+        <p>Ask the agent to explore first:</p>
+        <div class="code">What are the missing codes in my key variables? What types are they stored as?<span class="copy">copy</span></div>
+        <p>Common traps it should surface for you:</p>
+        <ul>
+          <li>missing values coded as numbers (for example -1 to -5, or 999)</li>
+          <li>numbers stored as text</li>
+          <li>filters you meant to apply but never wrote down</li>
+        </ul>
+        <p>Commit when the cleaned data prints sensible summaries.</p>
+      </div>
+      <div class="exi">
+        <span class="step">Stage 2</span>
+        <h4>Describe</h4>
+        <ul>
+          <li>Ask for the summaries that answer your question.</li>
+          <li>For each table or figure, ask yourself: would I show this to a co-author as evidence?</li>
+          <li>Commit when the descriptives match what you know about your data.</li>
+        </ul>
+      </div>
+      <div class="exi">
+        <span class="step">Stage 3</span>
+        <h4>Model</h4>
+        <ul>
+          <li>State the model in your own words first, then ask for a plan.</li>
+          <li>Review the plan for the choices that are yours: specification, standard errors, weights, sample.</li>
+          <li>Execute, read the output, and ask the agent to explain anything unexpected.</li>
+          <li>Commit with a message that names the model and the headline result.</li>
+        </ul>
+      </div>
+      <div class="exi">
+        <span class="step">If stuck</span>
+        <h4>When you get stuck</h4>
+        <ul>
+          <li>When a command fails, let the agent read the error and fix it; if you are stuck yourself, describe what happened.</li>
+          <li>If the plan has a step you do not understand, ask the agent to explain that step; do not approve what you cannot explain.</li>
+          <li>Flag one of us; unfixable environments pair up.</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- coding -->
+    <div class="hands" data-for="coding">
+      <div class="exi">
+        <span class="step">Try it</span>
+        <h4>Code a slice of your own text</h4>
+        <ul>
+          <li>Take twenty text cases from your project and write a two-category codebook.</li>
+          <li>Have the agent code them, and hand-code the same twenty yourself.</li>
+          <li>Compare, and note where you and the agent disagree.</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- verify -->
+    <div class="hands" data-for="verify">
+      <div class="exi">
+        <span class="step">Try it</span>
+        <h4>Check one result on your data</h4>
+        <ul>
+          <li>Take one number from this morning's analysis.</li>
+          <li>Check it a second way: recompute it, or compare it to a source you trust.</li>
+          <li>Ask the agent to explain that step, and find one choice you would have made differently.</li>
+          <li>If your two numbers do not agree, find out why before you go on.</li>
+        </ul>
+      </div>
+      <div class="exi">
+        <span class="step">Then</span>
+        <h4>One formatted output</h4>
+        <ul>
+          <li>Produce one polished output from your model or descriptives: a table or a chart, styled the way your field expects.</li>
+          <li>The agent handles the formatting; you check the numbers.</li>
+          <li>Commit it to <code>output/</code>.</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- faster -->
+    <div class="hands" data-for="faster">
+      <div class="exi">
+        <span class="step">Try it</span>
+        <h4>A second agent on your data</h4>
+        <ul>
+          <li>Keep your main agent open, and start a second one beside it.</li>
+          <li>Ask the second agent to open your dataset and summarize its codebook while you keep working.</li>
+          <li>You finished two things in the time of one.</li>
+        </ul>
+      </div>
+    </div>
+  </aside>
+
+</div>
+
+<script>
+  // contextual hands-on driven by which section is in view
+  const sections=[...document.querySelectorAll('main section')];
+  const panels=[...document.querySelectorAll('.hands')];
+  const railhead=document.getElementById('railhead');
+  function show(key){
+    panels.forEach(p=>p.classList.toggle('on',p.dataset.for===key));
+    railhead.style.display = key==='none' ? 'none' : '';
+  }
+  const io=new IntersectionObserver((entries)=>{
+    let best=null,bestR=0;
+    entries.forEach(e=>{if(e.intersectionRatio>bestR){bestR=e.intersectionRatio;best=e.target;}});
+    // pick the section whose top is nearest the upper third
+    let cur=sections[0];
+    sections.forEach(s=>{const t=s.getBoundingClientRect().top; if(t<window.innerHeight*0.35) cur=s;});
+    show(cur.dataset.hands);
+  },{threshold:[0,0.1,0.5,1]});
+  sections.forEach(s=>io.observe(s));
+  addEventListener('scroll',()=>{
+    let cur=sections[0];
+    sections.forEach(s=>{const t=s.getBoundingClientRect().top; if(t<window.innerHeight*0.35) cur=s;});
+    show(cur.dataset.hands);
+  },{passive:true});
+  show('none');
+
+  // setup tool tabs (Codex / Claude Code) switch the command panels
+  let tool='codex';
+  function syncPanels(){
+    document.querySelectorAll('.hands[data-for="setup"] .panel').forEach(p=>{
+      p.classList.toggle('on', p.dataset.p===tool);
+    });
+  }
+  document.querySelectorAll('.tabs[data-g="tool"] button').forEach(b=>{
+    b.onclick=()=>{
+      document.querySelectorAll('.tabs[data-g="tool"] button').forEach(x=>x.classList.toggle('on',x===b));
+      tool=b.dataset.t;
+      syncPanels();
+    };
+  });
+  syncPanels();
+
+  // active toc
+  const links=[...document.querySelectorAll('.toc a')];
+  addEventListener('scroll',()=>{
+    let cur=null;
+    links.forEach(a=>{const el=document.querySelector(a.getAttribute('href'));
+      if(el && el.getBoundingClientRect().top<140)cur=a;});
+    links.forEach(a=>a.classList.toggle('active',a===cur));
+  },{passive:true});
+
+  // copy
+  document.addEventListener('click',e=>{
+    if(!e.target.classList.contains('copy'))return;
+    const x=e.target.parentNode.childNodes[0].textContent.trim();
+    navigator.clipboard.writeText(x).then(()=>{e.target.textContent='copied';
+      setTimeout(()=>e.target.textContent='copy',1200);});
+  });
+</script>
+</body>
+</html>

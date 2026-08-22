@@ -1,0 +1,478 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Setup Guide — AI Coding Agent</title>
+<style>
+  :root {
+    --paper:#f4f4f0; --surface:#ffffff; --raise:#fbfbf8; --ink:#1a1d21; --ink-2:#4a4f56;
+    --ink-3:#767b82; --line:#e2e1da; --line-2:#d3d2c9; --accent:#115e6e; --accent-2:#0c4a58;
+    --accent-soft:#e0edef; --warn:#8a5a00; --warn-bg:#f8edd6; --warn-line:#e6cf97;
+    --danger:#9c3a2b; --danger-bg:#f6e3de; --danger-line:#e3b6ab; --good:#2c6740;
+    --good-bg:#e2efe5; --good-line:#b5d5bd; --term-bg:#0f1518; --term-ink:#d5dee0;
+    --term-dim:#8b989c; --term-accent:#5cc0d1; --shot-bg:#f0efe8; --shot-line:#bdbcb2;
+    --anthropic:#b8552e; --openai:#137a6b;
+    --mono: ui-monospace, "SF Mono", "Cascadia Code", "JetBrains Mono", Menlo, Consolas, monospace;
+    --sans: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    --measure: 44rem; --radius: 12px;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --paper:#12161a; --surface:#191d22; --raise:#1e232a; --ink:#ececE6; --ink-2:#b3b9c0;
+      --ink-3:#838a92; --line:#2a2f36; --line-2:#363c44; --accent:#56b8ca; --accent-2:#7fcdda;
+      --accent-soft:#14313a; --warn:#e0b25f; --warn-bg:#2c2413; --warn-line:#524217;
+      --danger:#e39485; --danger-bg:#2f1c18; --danger-line:#5a3129; --good:#8fd0a0;
+      --good-bg:#17281c; --good-line:#2f4a37; --term-bg:#0c1013; --shot-bg:#181c21;
+      --shot-line:#3a4048; --anthropic:#e0895f; --openai:#4bb7a6;
+    }
+  }
+  :root[data-theme="light"] { --paper:#f4f4f0; --surface:#ffffff; --raise:#fbfbf8; --ink:#1a1d21; --ink-2:#4a4f56; --ink-3:#767b82; --line:#e2e1da; --line-2:#d3d2c9; --accent:#115e6e; --accent-2:#0c4a58; --accent-soft:#e0edef; --warn:#8a5a00; --warn-bg:#f8edd6; --warn-line:#e6cf97; --danger:#9c3a2b; --danger-bg:#f6e3de; --danger-line:#e3b6ab; --good:#2c6740; --good-bg:#e2efe5; --good-line:#b5d5bd; --term-bg:#0f1518; --shot-bg:#f0efe8; --shot-line:#bdbcb2; --anthropic:#b8552e; --openai:#137a6b; }
+  :root[data-theme="dark"] { --paper:#12161a; --surface:#191d22; --raise:#1e232a; --ink:#ecece6; --ink-2:#b3b9c0; --ink-3:#838a92; --line:#2a2f36; --line-2:#363c44; --accent:#56b8ca; --accent-2:#7fcdda; --accent-soft:#14313a; --warn:#e0b25f; --warn-bg:#2c2413; --warn-line:#524217; --danger:#e39485; --danger-bg:#2f1c18; --danger-line:#5a3129; --good:#8fd0a0; --good-bg:#17281c; --good-line:#2f4a37; --term-bg:#0c1013; --shot-bg:#181c21; --shot-line:#3a4048; --anthropic:#e0895f; --openai:#4bb7a6; }
+
+  * { box-sizing: border-box; }
+  img { max-width: 100%; height: auto; display: block; }
+  html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+  body { margin:0; background:var(--paper); color:var(--ink); font-family:var(--sans); font-size:17px; line-height:1.62; -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility; }
+  ::selection { background: var(--accent-soft); }
+  .wrap { max-width: var(--measure); margin: 0 auto; padding: 0 22px; }
+
+  nav.top { position: sticky; top: 0; z-index: 50; background: color-mix(in srgb, var(--paper) 88%, transparent); backdrop-filter: saturate(1.2) blur(8px); border-bottom: 1px solid var(--line); }
+  nav.top .wrap { display: flex; align-items: center; gap: 6px; min-height: 52px; flex-wrap: wrap; }
+  nav.top .brand { font-family: var(--mono); font-size: 13px; font-weight: 600; color: var(--ink); margin-right: auto; display: flex; align-items: center; gap: 8px; }
+  nav.top .brand b { color: var(--accent); }
+  nav.top a.link { font-family: var(--mono); font-size: 12px; color: var(--ink-2); text-decoration: none; padding: 5px 8px; border-radius: 7px; white-space: nowrap; }
+  nav.top a.link:hover { color: var(--ink); background: var(--accent-soft); }
+  nav.top a.link:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  @media (max-width: 760px) { nav.top .links { display: none; } }
+
+  header.hero { padding: 58px 0 30px; border-bottom: 1px solid var(--line); }
+  .eyebrow { font-family: var(--mono); font-size: 12.5px; letter-spacing: .14em; text-transform: uppercase; color: var(--accent); font-weight: 600; margin: 0 0 16px; }
+  h1 { font-size: clamp(2rem, 6vw, 2.85rem); line-height: 1.05; letter-spacing: -.02em; margin: 0 0 16px; font-weight: 720; text-wrap: balance; }
+  .lede { font-size: 1.16rem; color: var(--ink-2); margin: 0 0 26px; max-width: 38rem; }
+  .meta-row { display: flex; flex-wrap: wrap; gap: 8px; }
+  .chip { font-family: var(--mono); font-size: 12px; color: var(--ink-2); border: 1px solid var(--line-2); border-radius: 999px; padding: 4px 12px; background: var(--raise); }
+  .chip b { color: var(--ink); font-weight: 600; }
+
+  section { padding: 44px 0; border-bottom: 1px solid var(--line); }
+  .sec-num { font-family: var(--mono); font-size: 12.5px; letter-spacing: .1em; color: var(--ink-3); font-weight: 600; margin: 0 0 6px; }
+  h2 { font-size: 1.62rem; line-height: 1.15; letter-spacing: -.015em; margin: 0 0 8px; font-weight: 680; text-wrap: balance; }
+  h3 { font-size: 1.1rem; margin: 30px 0 10px; font-weight: 660; letter-spacing: -.01em; }
+  p { margin: 0 0 14px; }
+  p.sub { color: var(--ink-2); margin-bottom: 22px; max-width: 40rem; }
+  a.inline { color: var(--accent); text-underline-offset: 2px; }
+  strong { font-weight: 640; }
+  code.k { font-family: var(--mono); font-size: .9em; background: var(--accent-soft); color: var(--accent-2); padding: 1.5px 6px; border-radius: 5px; white-space: nowrap; }
+
+  .reach { overflow-x: auto; margin: 8px 0 4px; border: 1px solid var(--line); border-radius: var(--radius); }
+  table.reach-t { border-collapse: collapse; width: 100%; min-width: 420px; font-size: 15px; }
+  table.reach-t th, table.reach-t td { padding: 13px 15px; text-align: left; border-bottom: 1px solid var(--line); }
+  table.reach-t thead th { font-family: var(--mono); font-size: 12px; letter-spacing: .04em; text-transform: uppercase; color: var(--ink-3); font-weight: 600; background: var(--raise); }
+  table.reach-t tbody tr:last-child td { border-bottom: none; }
+  table.reach-t td.who { font-weight: 600; }
+  table.reach-t td.who small { display: block; font-weight: 400; color: var(--ink-3); font-family: var(--mono); font-size: 11.5px; margin-top: 2px; }
+  .yes { color: var(--good); font-weight: 600; } .no { color: var(--ink-3); } .mid { color: var(--warn); font-weight: 600; }
+
+  .note { border: 1px solid var(--line-2); border-left: 3px solid var(--accent); background: var(--raise); border-radius: 10px; padding: 14px 16px; margin: 20px 0; font-size: 15.5px; }
+  .note .tag { font-family: var(--mono); font-size: 11px; letter-spacing: .08em; text-transform: uppercase; font-weight: 700; display: block; margin-bottom: 4px; color: var(--accent); }
+  .note.warn { border-left-color: var(--warn); background: var(--warn-bg); border-color: var(--warn-line); }
+  .note.warn .tag { color: var(--warn); }
+  .note p:last-child { margin-bottom: 0; }
+
+  /* Tool choice cards */
+  .tools2 { display: grid; gap: 16px; margin: 8px 0; }
+  @media (min-width: 620px) { .tools2 { grid-template-columns: 1fr 1fr; } }
+  .toolcard { border: 1px solid var(--line-2); border-radius: var(--radius); background: var(--surface); overflow: hidden; }
+  .toolcard .top { height: 5px; }
+  .toolcard.cc .top { background: var(--anthropic); }
+  .toolcard.cx .top { background: var(--openai); }
+  .toolcard .in { padding: 16px 17px 18px; }
+  .toolcard .nm { font-weight: 680; font-size: 1.05rem; margin: 0 0 2px; }
+  .toolcard .by { font-family: var(--mono); font-size: 12px; margin: 0 0 12px; }
+  .toolcard.cc .by { color: var(--anthropic); } .toolcard.cx .by { color: var(--openai); }
+  .toolcard ul { margin: 0; padding: 0; list-style: none; }
+  .toolcard li { font-size: 14.5px; color: var(--ink-2); padding: 6px 0 6px 20px; position: relative; border-top: 1px solid var(--line); }
+  .toolcard li:first-child { border-top: none; }
+  .toolcard li::before { content: "›"; position: absolute; left: 2px; color: var(--ink-3); }
+  .toolcard li b { color: var(--ink); font-weight: 620; }
+
+  .tabs { display: flex; gap: 6px; margin: 6px 0 20px; }
+  .tab { font-family: var(--mono); font-size: 13px; font-weight: 600; cursor: pointer; border: 1px solid var(--line-2); background: var(--raise); color: var(--ink-2); padding: 8px 16px; border-radius: 9px; }
+  .tab[aria-selected="true"] { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .tab:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  .panel[hidden] { display: none; }
+
+  ol.steps { list-style: none; counter-reset: s; margin: 0; padding: 0; }
+  ol.steps > li { position: relative; padding: 0 0 6px 46px; margin: 0 0 22px; }
+  ol.steps > li::before { counter-increment: s; content: counter(s); position: absolute; left: 0; top: -2px; width: 30px; height: 30px; display: grid; place-items: center; border-radius: 50%; font-family: var(--mono); font-size: 14px; font-weight: 600; background: var(--accent-soft); color: var(--accent-2); border: 1px solid color-mix(in srgb, var(--accent) 30%, transparent); }
+  ol.steps > li .st-h { font-weight: 620; margin: 3px 0 8px; }
+  ol.steps > li p { font-size: 15.5px; color: var(--ink-2); margin: 0 0 10px; }
+
+  .cmdlabel { font-family: var(--mono); font-size: 11.5px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; margin: 14px 0 4px; }
+  .cmdlabel.cc { color: var(--anthropic); } .cmdlabel.cx { color: var(--openai); }
+  .type { display: flex; align-items: stretch; margin: 4px 0 6px; border: 1px solid var(--line-2); border-radius: 10px; overflow: hidden; background: var(--surface); }
+  .type .cmd { font-family: var(--mono); font-size: 13.5px; line-height: 1.5; color: var(--ink); padding: 12px 14px; overflow-x: auto; white-space: pre; flex: 1; }
+  .type .cmd .pr { color: var(--accent); user-select: none; }
+  .copy { font-family: var(--mono); font-size: 11px; font-weight: 600; letter-spacing: .04em; border: none; border-left: 1px solid var(--line-2); background: var(--raise); color: var(--ink-2); padding: 0 15px; cursor: pointer; text-transform: uppercase; }
+  .copy:hover { background: var(--accent-soft); color: var(--accent-2); }
+  .copy:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; }
+  .copy.done { color: var(--good); }
+
+  .term { background: var(--term-bg); border-radius: 10px; margin: 12px 0 6px; overflow: hidden; border: 1px solid #000; }
+  .term-bar { display: flex; align-items: center; gap: 7px; padding: 9px 12px; background: rgba(255,255,255,.05); }
+  .term-bar i { width: 11px; height: 11px; border-radius: 50%; display: block; }
+  .term-bar i:nth-child(1){ background:#ff5f57; } .term-bar i:nth-child(2){ background:#febc2e; } .term-bar i:nth-child(3){ background:#28c840; }
+  .term-bar span { font-family: var(--mono); font-size: 11px; color: var(--term-dim); margin-left: 6px; }
+  .term pre { margin: 0; padding: 14px 16px; font-family: var(--mono); font-size: 13px; line-height: 1.6; color: var(--term-ink); overflow-x: auto; }
+  .term pre .p { color: var(--term-accent); } .term pre .c { color: var(--term-dim); } .term pre .u { color: #e6dfa8; }
+  .cap { font-family: var(--mono); font-size: 11.5px; color: var(--ink-3); margin: 4px 2px 0; }
+
+  .shot { border: 1.5px dashed var(--shot-line); background: var(--shot-bg); border-radius: 10px; padding: 18px 16px; margin: 14px 0; display: flex; gap: 14px; align-items: flex-start; }
+  .shot .badge { font-family: var(--mono); font-size: 10.5px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--ink-3); border: 1px solid var(--shot-line); border-radius: 6px; padding: 3px 7px; white-space: nowrap; margin-top: 2px; }
+  .shot .st { font-size: 14.5px; } .shot .st b { color: var(--ink); font-weight: 620; } .shot .st span { color: var(--ink-3); display: block; font-size: 13px; margin-top: 3px; }
+
+  .levels { display: grid; gap: 12px; margin: 8px 0; }
+  @media (min-width: 640px) { .levels { grid-template-columns: repeat(3, 1fr); } }
+  .lv { border: 1px solid var(--line-2); border-radius: var(--radius); background: var(--surface); overflow: hidden; }
+  .lv .stripe { height: 5px; }
+  .lv.a .stripe { background: var(--accent); } .lv.b .stripe { background: var(--good); } .lv.c .stripe { background: var(--warn); }
+  .lv .body { padding: 14px 15px 16px; }
+  .lv .name { font-family: var(--mono); font-size: 12.5px; font-weight: 700; margin: 0 0 8px; }
+  .lv.a .name { color: var(--accent); } .lv.b .name { color: var(--good); } .lv.c .name { color: var(--warn); }
+  .lv p { font-size: 13.5px; color: var(--ink-2); margin: 0; }
+  .toolhdr { font-weight: 660; margin: 22px 0 4px; display: flex; align-items: center; gap: 8px; }
+  .toolhdr .dot { width: 10px; height: 10px; border-radius: 50%; }
+  .toolhdr.cc .dot { background: var(--anthropic); } .toolhdr.cx .dot { background: var(--openai); }
+
+  footer { padding: 40px 0 64px; }
+  footer p { font-size: 13.5px; color: var(--ink-3); font-family: var(--mono); margin: 0 0 8px; }
+  footer a { color: var(--accent); }
+  .two { display: grid; gap: 14px; } @media (min-width: 620px) { .two { grid-template-columns: 1fr 1fr; } }
+  .mini { border: 1px solid var(--line); border-radius: 10px; padding: 15px 16px; background: var(--raise); }
+  .mini h4 { margin: 0 0 6px; font-size: 14.5px; } .mini p { margin: 0; font-size: 14px; color: var(--ink-2); }
+  .glist { margin: 6px 0 0; padding: 0; list-style: none; }
+  .glist li { font-size: 14.5px; color: var(--ink-2); padding: 7px 0 7px 20px; position: relative; border-top: 1px solid var(--line); }
+  .glist li:first-child { border-top: none; }
+  .glist li::before { content: "›"; position: absolute; left: 2px; color: var(--ink-3); }
+  .glist li b { color: var(--ink); font-weight: 620; }
+</style>
+</head>
+<body>
+
+<nav class="top">
+  <div class="wrap">
+    <span class="brand">⌨&nbsp; <b>Setup</b>&nbsp;/ your coding agent</span>
+    <span class="links">
+      <a class="link" href="#reach">reach</a>
+      <a class="link" href="#pick">pick a tool</a>
+      <a class="link" href="#install">install</a>
+      <a class="link" href="#ways">where it runs</a>
+      <a class="link" href="#levels">permissions</a>
+      <a class="link" href="#first">first task</a>
+      <a class="link" href="#stuck">stuck?</a>
+    </span>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap">
+    <p class="eyebrow">Setup guide · AI-assisted coding</p>
+    <h1>Get a coding agent running on your laptop</h1>
+    <p class="lede">By the end of this page you will have an AI coding agent installed, signed in, and waiting for its first task. Either tool below works; pick one and follow it at your own pace.</p>
+    <div class="meta-row">
+      <span class="chip"><b>Time</b>&nbsp; ~15 minutes</span>
+      <span class="chip"><b>Tools</b>&nbsp; Claude Code or Codex</span>
+      <span class="chip"><b>Works on</b>&nbsp; Mac &amp; Windows</span>
+    </div>
+    <p style="margin:20px 0 0;font-size:14px;color:var(--ink-2);">Official pages: <a class="inline" href="https://docs.claude.com/en/docs/claude-code" target="_blank" rel="noopener">Claude Code</a> &nbsp;·&nbsp; <a class="inline" href="https://developers.openai.com/codex" target="_blank" rel="noopener">Codex</a>.</p>
+  </div>
+</header>
+
+<main>
+
+<section id="whatis">
+  <div class="wrap">
+    <p class="sec-num">00 — Orientation</p>
+    <h2>What you are installing, in one minute</h2>
+    <p class="sub">A coding agent is the same kind of model as a chatbot, with a machine built around it so it can act, not just answer.</p>
+    <p>A chat window can only hand you text. An agent opens your files, runs your code, reads what happened, and fixes it, pausing for your approval along the way. That is the whole difference, and it is why the setup below is worth fifteen minutes.</p>
+    <div class="note">
+      <span class="tag">The mental model</span>
+      <p>Think of a fast, very literal research assistant sitting at your computer. It types the commands; you make the decisions and check the result. Nothing happens on your machine without your yes.</p>
+    </div>
+  </div>
+</section>
+
+<section id="reach">
+  <div class="wrap">
+    <p class="sec-num">01 — The distinction that matters</p>
+    <h2>What can it touch?</h2>
+    <p class="sub">Every way of using AI differs mainly in what it may reach. Where the work runs is also where your data goes.</p>
+    <div class="reach">
+      <table class="reach-t">
+        <thead><tr><th>How you use it</th><th>Your files</th><th>Run your code</th><th>Where it runs</th></tr></thead>
+        <tbody>
+          <tr><td class="who">Chat window<small>ChatGPT / Claude</small></td><td class="no">— none</td><td class="no">— you run it</td><td>your browser</td></tr>
+          <tr><td class="who">Agent on your laptop<small>this guide</small></td><td class="yes">✓ reads &amp; edits</td><td class="yes">✓ runs &amp; checks</td><td>your machine</td></tr>
+          <tr><td class="who">Cloud agent<small>runs on servers</small></td><td class="mid">a copy on GitHub</td><td class="yes">✓ on servers</td><td>the vendor's servers</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="cap">This guide sets up the middle row: an agent on your own laptop.</p>
+  </div>
+</section>
+
+<section id="pick">
+  <div class="wrap">
+    <p class="sec-num">02 — Pick a tool</p>
+    <h2>Two agents, either one works</h2>
+    <p class="sub">Both run in your terminal and do the same job. This course does not require a specific one, so pick by what you can access, then use it all week.</p>
+    <div class="tools2">
+      <div class="toolcard cc">
+        <div class="top"></div>
+        <div class="in">
+          <p class="nm">Claude Code</p>
+          <p class="by">by Anthropic</p>
+          <ul>
+            <li>Sign in with an <b>Anthropic account</b>.</li>
+            <li>Needs <b>Claude Pro ($20/mo)</b> or Max, or pay-as-you-go API credits.</li>
+            <li>New API accounts get about <b>$5 free credits</b> to try it.</li>
+            <li>No student free tier.</li>
+          </ul>
+          <p style="margin:12px 0 0;font-size:13px;"><a class="inline" href="https://docs.claude.com/en/docs/claude-code" target="_blank" rel="noopener">Official page &amp; docs →</a></p>
+        </div>
+      </div>
+      <div class="toolcard cx">
+        <div class="top"></div>
+        <div class="in">
+          <p class="nm">Codex</p>
+          <p class="by">by OpenAI</p>
+          <ul>
+            <li>Sign in with a <b>ChatGPT account</b>.</li>
+            <li>Verified US/Canada students get <b>$100 in free usage credits</b>.</li>
+            <li>Or use <b>ChatGPT Plus ($20/mo)</b>, which includes it.</li>
+            <li>The cheapest path if you are a student.</li>
+          </ul>
+          <p style="margin:12px 0 0;font-size:13px;"><a class="inline" href="https://developers.openai.com/codex" target="_blank" rel="noopener">Official page &amp; docs →</a></p>
+        </div>
+      </div>
+    </div>
+    <div class="note">
+      <span class="tag">Credits vs a plan</span>
+      <p><strong>Credits</strong> are a fixed amount of usage you spend as you go; the $100 student credits and Anthropic's $5 trial are credits, and they run out once used. <strong>A plan</strong> like ChatGPT Plus or Claude Pro is a flat $20 a month with a usage allowance that refreshes. For this course the $100 Codex credits are plenty, so as a student you need no plan at all.</p>
+    </div>
+    <div class="note">
+      <span class="tag">Short version</span>
+      <p>If cost matters and you are a student, <strong>Codex</strong> is free with the student credits. If you already pay for Claude, <strong>Claude Code</strong> is right there. The rest of this course works exactly the same with either.</p>
+    </div>
+  </div>
+</section>
+
+<section id="install">
+  <div class="wrap">
+    <p class="sec-num">03 — Install</p>
+    <h2>Install it</h2>
+    <p class="sub">One line installs the tool, with nothing else needed. Choose your operating system, then run the line for the tool you picked.</p>
+
+    <div class="tabs" role="tablist" aria-label="Choose your operating system">
+      <button class="tab" role="tab" id="tab-mac" aria-selected="true" aria-controls="panel-mac">macOS</button>
+      <button class="tab" role="tab" id="tab-win" aria-selected="false" aria-controls="panel-win">Windows</button>
+    </div>
+
+    <div class="panel" id="panel-mac" role="tabpanel" aria-labelledby="tab-mac">
+      <ol class="steps">
+        <li>
+          <div class="st-h">Open the Terminal app</div>
+          <p>Press <code class="k">⌘ Command</code> + <code class="k">Space</code>, type <em>Terminal</em>, and press Enter. A small text window opens.</p>
+        </li>
+        <li>
+          <div class="st-h">Install your tool with one line</div>
+          <p>Neither installer needs any other software. Run the one for your chosen tool.</p>
+          <div class="cmdlabel cc">Claude Code</div>
+          <div class="type"><div class="cmd"><span class="pr">$ </span>curl -fsSL https://claude.ai/install.sh | bash</div><button class="copy" type="button" data-copy="curl -fsSL https://claude.ai/install.sh | bash">Copy</button></div>
+          <div class="cmdlabel cx">Codex</div>
+          <div class="type"><div class="cmd"><span class="pr">$ </span>curl -fsSL https://chatgpt.com/codex/install.sh | sh</div><button class="copy" type="button" data-copy="curl -fsSL https://chatgpt.com/codex/install.sh | sh">Copy</button></div>
+        </li>
+        <li>
+          <div class="st-h">Start it and sign in</div>
+          <p>Type <code class="k">claude</code> or <code class="k">codex</code> and press Enter. The first time, it opens your browser to sign in with your account.</p>
+          <div class="term">
+            <div class="term-bar"><i></i><i></i><i></i><span>Terminal</span></div>
+<pre><span class="p">$ </span><span class="u">claude</span>   <span class="c"># or: codex</span>
+<span class="c">Sign in to continue…</span>
+<span class="c">→ your browser opens; approve, and you land back here signed in.</span></pre>
+          </div>
+          <p class="cap">Approximate — the exact prompt differs by tool.</p>
+        </li>
+      </ol>
+    </div>
+
+    <div class="panel" id="panel-win" role="tabpanel" aria-labelledby="tab-win" hidden>
+      <ol class="steps">
+        <li>
+          <div class="st-h">Open PowerShell</div>
+          <p>Click <strong>Start</strong>, type <em>PowerShell</em>, and press Enter. Both tools run on Windows directly.</p>
+        </li>
+        <li>
+          <div class="st-h">Install your tool with one line</div>
+          <p>Run the line for your chosen tool. No WSL and no extra setup are needed for this course.</p>
+          <div class="cmdlabel cc">Claude Code</div>
+          <div class="type"><div class="cmd"><span class="pr">PS&gt; </span>irm https://claude.ai/install.ps1 | iex</div><button class="copy" type="button" data-copy="irm https://claude.ai/install.ps1 | iex">Copy</button></div>
+          <div class="cmdlabel cx">Codex</div>
+          <div class="type"><div class="cmd"><span class="pr">PS&gt; </span>irm https://chatgpt.com/codex/install.ps1 | iex</div><button class="copy" type="button" data-copy="irm https://chatgpt.com/codex/install.ps1 | iex">Copy</button></div>
+        </li>
+        <li>
+          <div class="st-h">Start it and sign in</div>
+          <p>Type <code class="k">claude</code> or <code class="k">codex</code> and press Enter, then sign in through the browser, exactly like on a Mac.</p>
+          <div class="term">
+            <div class="term-bar"><i></i><i></i><i></i><span>Windows PowerShell</span></div>
+<pre><span class="p">PS&gt; </span><span class="u">claude</span>   <span class="c"># or: codex</span>
+<span class="c">Sign in to continue…</span>
+<span class="c">→ your browser opens; approve, and you land back here signed in.</span></pre>
+          </div>
+          <p class="cap">Approximate — the exact prompt differs by tool.</p>
+        </li>
+      </ol>
+    </div>
+
+    <div class="note">
+      <span class="tag">If you have seen "npm install" online</span>
+      <p>Older guides install either tool with npm, which first needs Node.js. You do not need that path; both one-line installers above are self-contained and get you the same tool.</p>
+    </div>
+  </div>
+</section>
+
+<section id="ways">
+  <div class="wrap">
+    <p class="sec-num">04 — The versions</p>
+    <h2>Each tool comes in a few versions</h2>
+    <p class="sub">They do the same job. The difference that matters is where the code runs: on your own computer, or on the vendor's servers. Pick whichever you prefer; the rest of this course works with any of them.</p>
+    <div class="toolhdr cc"><span class="dot"></span> Claude Code</div>
+    <div class="reach">
+      <table class="reach-t">
+        <thead><tr><th>Version</th><th>Runs on</th></tr></thead>
+        <tbody>
+          <tr><td class="who">Terminal (command line)</td><td class="yes">your computer</td></tr>
+          <tr><td class="who">Web · claude.ai/code</td><td class="mid">the cloud</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="toolhdr cx"><span class="dot"></span> Codex</div>
+    <div class="reach">
+      <table class="reach-t">
+        <thead><tr><th>Version</th><th>Runs on</th></tr></thead>
+        <tbody>
+          <tr><td class="who">Terminal (command line)</td><td class="yes">your computer</td></tr>
+          <tr><td class="who">Codex Cloud · chatgpt.com/codex</td><td class="mid">the cloud</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="cap">The cloud versions run on the vendor's servers and work on a copy of your project from GitHub. The rest run on your own machine, on your local files. A free GitHub account is enough for either.</p>
+  </div>
+</section>
+
+<section id="levels">
+  <div class="wrap">
+    <p class="sec-num">05 — Staying in control</p>
+    <h2>Permission levels</h2>
+    <p class="sub">Each tool runs at one of three levels, from look-only to no-guardrails. The question behind all of them: how much would you let a brand-new assistant do unsupervised?</p>
+
+    <div class="toolhdr cc"><span class="dot"></span> Claude Code &nbsp;<span style="font-weight:400;color:var(--ink-3);font-size:13px;font-family:var(--mono)">cycle with Shift+Tab</span></div>
+    <div class="levels">
+      <div class="lv a"><div class="stripe"></div><div class="body"><p class="name">Plan Mode</p><p>Looks and plans; changes nothing. Good for exploring or thinking first.</p></div></div>
+      <div class="lv b"><div class="stripe"></div><div class="body"><p class="name">Normal · default</p><p>Reads, edits, and runs, but asks before each real action.</p></div></div>
+      <div class="lv c"><div class="stripe"></div><div class="body"><p class="name">Auto-Accept</p><p>Same as Normal without the prompts. For trusted, repeat tasks.</p></div></div>
+    </div>
+
+    <div class="toolhdr cx"><span class="dot"></span> Codex &nbsp;<span style="font-weight:400;color:var(--ink-3);font-size:13px;font-family:var(--mono)">set at launch or from the approvals menu</span></div>
+    <div class="levels">
+      <div class="lv a"><div class="stripe"></div><div class="body"><p class="name">Read Only</p><p>Reads and answers; changes nothing. Good for exploring or planning.</p></div></div>
+      <div class="lv b"><div class="stripe"></div><div class="body"><p class="name">Auto · default</p><p>Edits and runs in your folder without asking; stops at the network.</p></div></div>
+      <div class="lv c"><div class="stripe"></div><div class="body"><p class="name">Full Access</p><p>Edits, runs, and reaches the network with no prompts. Rarely, with care.</p></div></div>
+    </div>
+    <p class="cap">Start in the middle level for everyday work, and drop to look-only when you want to read the plan first.</p>
+  </div>
+</section>
+
+<section id="first">
+  <div class="wrap">
+    <p class="sec-num">06 — Try it</p>
+    <h2>Your first task</h2>
+    <p class="sub">Point it at a small folder you do not mind experimenting on, and ask for something concrete. Move into the folder, start the tool, and type your request.</p>
+    <div class="term">
+      <div class="term-bar"><i></i><i></i><i></i><span>your-project</span></div>
+<pre><span class="p">$ </span><span class="u">cd my-first-project</span>
+<span class="p">$ </span><span class="u">claude</span>   <span class="c"># or: codex</span>
+<span class="c">›</span> <span class="u">explain what the files in this folder do</span>
+<span class="c">The agent reads the folder and answers.</span></pre>
+    </div>
+
+    <div class="note" style="margin-top:18px;">
+      <span class="tag">Good first asks</span>
+      <p>"Explain what this script does." · "Add comments to this file." · "What columns are in this dataset?"</p>
+    </div>
+  </div>
+</section>
+
+<section id="stuck">
+  <div class="wrap">
+    <p class="sec-num">07 — If a step fails</p>
+    <h2>Common setup snags, and the fix</h2>
+    <p class="sub">Setup problems are normal and quick to clear. The usual ones:</p>
+    <ul class="glist">
+      <li><b>"command not found" after installing:</b> close the terminal, open a new one, and try again. It just needs a fresh window to see the new tool.</li>
+      <li><b>The install line fails partway:</b> check your internet and run it once more; most failures are a dropped connection.</li>
+      <li><b>Sign-in does not open a browser:</b> copy the link it prints and open it in your browser yourself.</li>
+      <li><b>Still stuck:</b> check the official pages linked at the top, or raise your hand and post to the course board.</li>
+    </ul>
+    <div class="note">
+      <span class="tag">Once it is running</span>
+      <p>You do not copy errors anywhere. The tool runs your commands, reads the errors itself, and fixes them. If something still looks wrong, just tell it in plain words.</p>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <p>Install commands checked August 2026. If one fails, the official pages are <a href="https://docs.claude.com/en/docs/claude-code" target="_blank" rel="noopener">docs.claude.com/claude-code</a> and <a href="https://developers.openai.com/codex" target="_blank" rel="noopener">developers.openai.com/codex</a>.</p>
+    <p>Shared setup guide · Claude Code and Codex · Mac and Windows.</p>
+  </div>
+</footer>
+
+<script>
+  (function () {
+    var tabs = Array.prototype.slice.call(document.querySelectorAll('.tab'));
+    function select(tab) {
+      tabs.forEach(function (t) {
+        var on = t === tab;
+        t.setAttribute('aria-selected', on ? 'true' : 'false');
+        var panel = document.getElementById(t.getAttribute('aria-controls'));
+        if (panel) panel.hidden = !on;
+      });
+    }
+    tabs.forEach(function (t) {
+      t.addEventListener('click', function () { select(t); });
+      t.addEventListener('keydown', function (e) {
+        var i = tabs.indexOf(t);
+        if (e.key === 'ArrowRight') { e.preventDefault(); tabs[(i + 1) % tabs.length].click(); tabs[(i + 1) % tabs.length].focus(); }
+        if (e.key === 'ArrowLeft') { e.preventDefault(); tabs[(i - 1 + tabs.length) % tabs.length].click(); tabs[(i - 1 + tabs.length) % tabs.length].focus(); }
+      });
+    });
+  })();
+  (function () {
+    document.querySelectorAll('.copy').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var text = btn.getAttribute('data-copy') || '';
+        var done = function () { var old = btn.textContent; btn.textContent = 'Copied'; btn.classList.add('done'); setTimeout(function () { btn.textContent = old; btn.classList.remove('done'); }, 1400); };
+        if (navigator.clipboard && navigator.clipboard.writeText) { navigator.clipboard.writeText(text).then(done).catch(function () { fallback(text, done); }); }
+        else { fallback(text, done); }
+      });
+    });
+    function fallback(text, done) { var ta = document.createElement('textarea'); ta.value = text; ta.style.position = 'fixed'; ta.style.opacity = '0'; document.body.appendChild(ta); ta.select(); try { document.execCommand('copy'); done(); } catch (e) {} document.body.removeChild(ta); }
+  })();
+</script>
+</body>
+</html>

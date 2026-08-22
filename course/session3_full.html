@@ -1,0 +1,625 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Session 3 — Harnessing AI Agents</title>
+<style>
+  :root{
+    --bg:#fcfcfb; --fg:#1c1c1a; --muted:#6b6b66; --line:#e6e5e1;
+    --accent:#2f6f4f; --accent-weak:#eaf3ee; --ex:#b5651d; --ex-weak:#fbf1e7;
+    --code-bg:#f4f5f3; --card:#fff;
+    --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--sans)}
+  .layout{display:grid;grid-template-columns:180px minmax(0,1fr) 360px;max-width:1320px;margin:0 auto}
+
+  /* ---- left nav ---- */
+  nav{position:sticky;top:0;align-self:start;height:100vh;overflow:auto;
+      padding:26px 14px;border-right:1px solid var(--line);font-size:14px}
+  nav .days{display:flex;flex-direction:column;gap:2px;margin-bottom:22px}
+  nav .days a{color:var(--muted);text-decoration:none;padding:3px 0;font-size:13px}
+  nav .days a.cur{color:var(--fg);font-weight:700}
+  nav .home{display:block;font-size:14px;font-weight:800;color:var(--fg);text-decoration:none;line-height:1.25;margin-bottom:18px}
+  nav .home:hover{color:var(--accent)}
+  nav .lbl{font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin:0 0 8px}
+  nav .toc a{display:block;color:var(--fg);text-decoration:none;padding:6px 0 6px 12px;
+             border-left:2px solid transparent;margin-left:-2px}
+  nav .toc a:hover{color:var(--accent)}
+  nav .toc a.active{color:var(--accent);border-left-color:var(--accent);font-weight:600}
+  nav .toc .has{color:var(--ex);font-size:11px;margin-left:6px}
+
+  /* ---- center content ---- */
+  main{padding:30px 32px 160px;min-width:0}
+  .kicker{font-size:13px;letter-spacing:.07em;text-transform:uppercase;color:var(--accent);font-weight:700;margin:0}
+  h1{margin:4px 0 6px;font-size:32px}
+  .goal{color:var(--muted);font-size:16px;margin:0 0 20px}
+  h2.sec{font-size:28px;font-weight:700;color:var(--fg);line-height:1.2;
+         margin:52px 0 12px;padding-top:22px;border-top:1px solid var(--line)}
+  h2.sec .hastag{color:var(--ex);font-weight:600;font-size:14px}
+
+  .card{background:var(--card);border:1px solid var(--line);border-radius:14px;
+        padding:20px 24px;margin:16px 0;box-shadow:0 1px 2px rgba(0,0,0,.03)}
+  .card h3{margin:0 0 12px;font-size:21px;line-height:1.25}
+  .card ul{list-style:none;padding:0;margin:0}
+  .card li{font-size:17px;line-height:1.45;padding:9px 0 9px 26px;position:relative;border-top:1px solid var(--line)}
+  .card li:first-child{border-top:0}
+  .card li::before{content:"";position:absolute;left:4px;top:17px;width:8px;height:8px;border-radius:50%;background:var(--accent)}
+  .card ul ul{margin:6px 0 0}
+  .card li li{font-size:15px;padding:5px 0 5px 24px;border-top:0;color:var(--muted)}
+  .card li li::before{width:5px;height:5px;top:14px;background:var(--muted)}
+  .card.demo{border-left:4px solid var(--accent)}
+  .card.demo .tag{display:inline-block;font-size:12px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;
+                  color:var(--accent);margin-bottom:8px}
+  .quote{background:var(--code-bg);border-left:3px solid var(--accent);border-radius:0 8px 8px 0;
+         padding:12px 16px;margin:12px 0;font-style:italic;line-height:1.5}
+  code{background:var(--code-bg);padding:1px 5px;border-radius:4px;font-family:ui-monospace,Menlo,monospace;font-size:.85em}
+  strong{color:#111}
+  table{border-collapse:collapse;width:100%;margin:10px 0;font-size:16px}
+  th,td{border:1px solid var(--line);padding:8px 12px;text-align:left}
+  th{background:var(--accent-weak);font-size:14px}
+  .src{font-size:13px;color:var(--muted)} .src a{color:var(--accent)}
+
+  /* ---- right contextual hands-on ---- */
+  aside{position:sticky;top:0;align-self:start;height:100vh;overflow:auto;
+        border-left:1px solid var(--line);padding:26px 18px 60px;background:#fbfaf8}
+  aside .railhead{font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--ex)}
+  aside .railctx{font-size:13px;color:var(--muted);margin:2px 0 16px}
+  .hands{display:none} .hands.on{display:block}
+  .hands.none-msg{color:var(--muted);font-size:14px;line-height:1.6;
+                  border:1px dashed var(--line);border-radius:10px;padding:16px;background:#fff}
+  .exi{border:1px solid #e8d3ba;background:var(--ex-weak);border-radius:10px;margin:10px 0;padding:12px 14px}
+  .exi .step{display:inline-block;font-size:10px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;
+             color:#fff;background:var(--ex);border-radius:20px;padding:2px 9px;margin-bottom:8px}
+  .exi h4{margin:0 0 6px;font-size:15px}
+  .exi ul{margin:6px 0;padding-left:18px;font-size:13.5px;line-height:1.5}
+  .exi li{margin:4px 0}
+  .exi p{font-size:13.5px;line-height:1.5;margin:6px 0}
+  .save{font-size:13px;color:var(--muted);background:#fff;border:1px solid var(--line);
+        border-radius:8px;padding:9px 12px;margin:10px 0}
+
+  .tabs{display:flex;gap:5px;margin:8px 0 0}
+  .tabs button{border:1px solid #e8d3ba;background:#fff;border-radius:7px;padding:4px 10px;
+               font-size:12px;cursor:pointer;color:var(--ex)}
+  .tabs button.on{background:var(--ex);color:#fff}
+  .panel{display:none} .panel.on{display:block}
+
+  .code{position:relative;background:#fff;border:1px solid #e8d3ba;border-radius:8px;
+        padding:9px 34px 9px 11px;font-family:ui-monospace,Menlo,monospace;font-size:12px;
+        white-space:pre-wrap;margin:8px 0;line-height:1.45}
+  .code .copy{position:absolute;top:6px;right:6px;font-size:10px;border:1px solid #e8d3ba;
+              background:#fff;border-radius:6px;padding:2px 7px;cursor:pointer;color:var(--ex)}
+  .guidelink{display:inline-block;margin-top:6px;font-size:13px;color:var(--ex);font-weight:600}
+
+  @media(max-width:1080px){
+    .layout{grid-template-columns:1fr}
+    nav{display:none}
+    aside{position:static;height:auto;border-left:0;border-top:1px solid var(--line)}
+    .hands{display:block !important;border-top:1px solid var(--line);padding-top:10px;margin-top:10px}
+    .hands.none-msg{display:none !important}
+  }
+</style>
+</head>
+<body>
+<div class="layout">
+
+  <!-- ================= LEFT NAV ================= -->
+  <nav>
+    <a class="home" href="session1_full.html">AI-Assisted Coding for Social Data Analysis</a>
+    <div class="days">
+      <div class="lbl">Sessions</div>
+      <a href="session1_full.html">1 · AI for Data Analysis I</a>
+      <a href="session2_full.html">2 · AI for Data Analysis II</a>
+      <a href="session3_full.html" class="cur">3 · Harnessing AI Agents</a>
+      <a href="session4_full.html">4 · AI for Data Collection and Literature Review</a>
+      <a href="session5_full.html">5 · AI for Building Apps</a>
+    </div>
+    <div class="lbl">Today</div>
+    <div class="toc">
+      <a href="#opening">Opening</a>
+      <a href="#inconsistent">Why the agent is inconsistent</a>
+      <a href="#agentsmd">Your AGENTS.md <span class="has">hands-on</span></a>
+      <a href="#skills">Skills <span class="has">hands-on</span></a>
+      <a href="#usage">Managing your usage <span class="has">hands-on</span></a>
+      <a href="#wrap">Wrap</a>
+    </div>
+  </nav>
+
+  <!-- ================= CENTER CONTENT ================= -->
+  <main>
+    <p class="kicker">Session 3 · Wednesday</p>
+    <h1>Harnessing AI Agents</h1>
+    <p class="goal">Make the agent follow your standards in every session. Today you build the course's core deliverable: your own AGENTS.md and one Skill. When a section has something to do, it appears in the panel on the right.</p>
+
+    <!-- OPENING -->
+    <section data-hands="none">
+    <h2 class="sec" id="opening">Opening</h2>
+
+    <div class="card">
+      <h3>Today</h3>
+      <ul>
+        <li>Goal: make the agent follow your standards in every session.</li>
+        <li>Today produces the course's core deliverable.</li>
+      </ul>
+      <table>
+        <tr><td>Why the agent is inconsistent</td></tr>
+        <tr><td>Your AGENTS.md</td></tr>
+        <tr><td>Break</td></tr>
+        <tr><td>Skills</td></tr>
+        <tr><td>Managing your usage</td></tr>
+        <tr><td>Wrap</td></tr>
+      </table>
+    </div>
+    <div class="card">
+      <h3>Where we left off</h3>
+      <ul>
+        <li>You directed a full analysis: clean, describe, model, output.</li>
+        <li>Reading the code caught at least one silent choice.</li>
+        <li>Two open problems from yesterday:
+          <ul>
+            <li>long sessions drift</li>
+            <li>every new session starts blank</li>
+          </ul>
+        </li>
+        <li>Both have the same fix, and it is today's topic.</li>
+      </ul>
+    </div>
+    </section>
+
+    <!-- WHY INCONSISTENT -->
+    <section data-hands="none">
+    <h2 class="sec" id="inconsistent">Why the agent is inconsistent</h2>
+
+    <div class="card">
+      <h3>Same prompt, different day</h3>
+      <ul>
+        <li>Run the same request on two different days and you can get:
+          <ul>
+            <li>a different table format</li>
+            <li>different standard errors</li>
+            <li>different treatment of missing data</li>
+          </ul>
+        </li>
+        <li>Two structural reasons:
+          <ul>
+            <li>Every session starts <strong>blank</strong>, so the RA forgets between meetings.</li>
+            <li>A vague instruction leaves gaps, and the agent fills them with its own defaults.</li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>What the agent decides for you when you do not</h3>
+      <ul>
+        <li>Unless you specify them, these are the agent's choices, made silently:
+          <ul>
+            <li>which standard errors to report</li>
+            <li>how to treat "don't know" and "refused"</li>
+            <li>whether to weight</li>
+            <li>how to round, sort, and label</li>
+            <li>what a table should look like</li>
+          </ul>
+        </li>
+        <li>Any one of them can change what your reader concludes.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>The fix: a specification that persists</h3>
+      <ul>
+        <li>Better prompting each morning does not fix this, because the same gaps reopen in the next session.</li>
+        <li>The fix is a written specification the agent reads at the start of <strong>every</strong> session, before you type anything.</li>
+        <li>The file is named <code>AGENTS.md</code>. Both Claude Code and Codex read it, at the root of your project.</li>
+        <li>Think of it as standard operating procedures for your AI assistant.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>What goes into an AGENTS.md</h3>
+      <ul>
+        <li>Only what applies to <strong>every</strong> task in the project:
+          <ul>
+            <li>the research question and the data</li>
+            <li>methodological standards: weights, standard errors, missing rules</li>
+            <li>file and naming conventions</li>
+            <li>output formats</li>
+            <li>things the agent must never do</li>
+          </ul>
+        </li>
+        <li>Keep it short. Write the page of rules you would give any new RA on day one, and nothing more.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Why this is worth the effort</h3>
+      <ul>
+        <li>Written down, your standards travel: the agent applies them in every session, on your machine or a collaborator's.</li>
+        <li>The agent stops re-guessing your conventions, so it handles the same task the same way each time.</li>
+        <li>In one study across 138 projects, an instructions file cut the agent's mistakes by a third to a half.</li>
+      </ul>
+      <div class="quote">An AGENTS.md that encodes your standards is the AI equivalent of a pre-registration.</div>
+    </div>
+    </section>
+
+    <!-- YOUR AGENTS.MD -->
+    <section data-hands="agentsmd">
+    <h2 class="sec" id="agentsmd">Your AGENTS.md <span class="hastag">· do it on the right</span></h2>
+
+    <div class="card">
+      <h3>The same prompt, two ways</h3>
+      <ul>
+        <li><strong>Without AGENTS.md.</strong> The agent guesses: default standard errors, its own table format, silent choices about missing data.</li>
+        <li><strong>With AGENTS.md.</strong> It applies your weighting rule and your table format without being asked.</li>
+        <li>The prompt is identical, and only the <strong>context</strong> differs.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>What to watch in the side-by-side</h3>
+      <ul>
+        <li>The standard errors: the default against the ones the file requires.</li>
+        <li>The table: the agent's habit against your journal's format.</li>
+        <li>The missing data: silently dropped against handled by your written rule.</li>
+        <li>Nothing about the model got smarter. What changed is that your standards were <strong>in the room</strong>.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>The four sections</h3>
+      <ul>
+        <li>Write four sections for your own project:
+          <ul>
+            <li><strong>Project context.</strong> The question, the data, the unit of analysis.</li>
+            <li><strong>Data conventions.</strong> Key variables, units, missing-data policy.</li>
+            <li><strong>Output standards.</strong> Table format, chart style, what every result must report.</li>
+            <li><strong>Safety rules.</strong> What the agent must never do.</li>
+          </ul>
+        </li>
+        <li>Concrete beats general in every line: name your variables, your units, your journal.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Example lines: context and data conventions</h3>
+      <ul>
+        <li>Project context:
+          <ul>
+            <li>"Panel survey of 4,000 respondents, waves 2020 to 2024; unit of analysis is person-wave."</li>
+            <li>"The outcome is political participation; the key predictor is education."</li>
+          </ul>
+        </li>
+        <li>Data conventions:
+          <ul>
+            <li>"All models use survey-weighted standard errors."</li>
+            <li>"Missing codes are -1 to -5; recode to NA before any computation."</li>
+            <li>"Never modify anything in <code>data/raw/</code>."</li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Example lines: output standards and safety rules</h3>
+      <ul>
+        <li>Output standards:
+          <ul>
+            <li>"Every table reports N and confidence intervals."</li>
+            <li>"Charts use one message per chart, with a full-sentence title."</li>
+            <li>"Summaries follow: Question, Method, Finding, Limitation."</li>
+          </ul>
+        </li>
+        <li>Safety rules:
+          <ul>
+            <li>"Never fabricate a number; if a value is unavailable, say so."</li>
+            <li>"Always state the sample restriction used."</li>
+            <li>"Flag every result you could not verify."</li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+    </section>
+
+    <!-- SKILLS -->
+    <section data-hands="skills">
+    <h2 class="sec" id="skills">Skills <span class="hastag">· do it on the right</span></h2>
+
+    <div class="card">
+      <h3>What a Skill is</h3>
+      <ul>
+        <li>A <strong>Skill</strong> is one routine you repeat often, written down once and invoked whenever you need it.</li>
+        <li>Technically it is a Markdown file in your repo with a description the agent reads.</li>
+        <li>AGENTS.md holds the rules that apply <strong>always</strong>; a Skill holds one <strong>procedure</strong> you invoke when needed.</li>
+        <li>Two ways it fires:
+          <ul>
+            <li>the agent loads it automatically when the task matches its description</li>
+            <li>or you call it by name, like a command</li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Skills that work, and skills that do not</h3>
+      <ul>
+        <li>The bar is <strong>specificity</strong>:
+          <ul>
+            <li>works: "My survey-weighted OLS table, with my SE choices, in my format."</li>
+            <li>fails: "A regression skill."</li>
+          </ul>
+        </li>
+        <li>Good candidates from this room:
+          <ul>
+            <li>the descriptive panel you produce for every new dataset</li>
+            <li>your standard robustness battery</li>
+            <li>the data-prep sequence for each new wave of your survey</li>
+          </ul>
+        </li>
+        <li>If a new RA could not follow the written routine, neither can the agent.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>The format you just used is an open standard</h3>
+      <ul>
+        <li>The Skill you just wrote is a folder holding one plain-Markdown file, <code>SKILL.md</code>. Because it is plain text, you can audit a stranger's in minutes.</li>
+        <li>The format is an <strong>open standard</strong> (<a href="https://agentskills.io">agentskills.io</a>), adopted by roughly 20 agents including Cursor, Codex, and GitHub Copilot, so a Skill written once runs in all of them.</li>
+        <li>One public directory, <a href="https://skills.sh">skills.sh</a>, counts over <strong>1.1 million</strong> skill installs.</li>
+        <li>The practical consequence: for many research routines, someone has already written the Skill, and you can read exactly what you would be adopting.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Three collections by social scientists</h3>
+      <table>
+        <tr><th>Collection</th><th>Author</th><th>What is inside</th></tr>
+        <tr><td><code>open-scholar-skill</code></td><td>Yongjun Zhang, Stony Brook</td><td>36 skills: the whole workflow</td></tr>
+        <tr><td><code>claude-academic-setup</code></td><td>Byungkyu Lee, NYU</td><td>22 skills: R, Stata, Python</td></tr>
+        <tr><td><code>vibe-research-skill</code></td><td>Yanbo Zhang, Tufts</td><td>6 skills around your taste</td></tr>
+      </table>
+      <ul>
+        <li>Three examples of what is inside:
+          <ul>
+            <li><code>scholar-citation</code> verifies every reference and checks it against retraction databases.</li>
+            <li><code>napkin</code> keeps an append-only log of the mistakes you make with the agent.</li>
+            <li><code>scholar-rag</code> searches your own Zotero library.</li>
+          </ul>
+        </li>
+        <li>Yongjun Zhang removed the five "write the whole paper" skills from his public release, to discourage fully automated paper writing.</li>
+        <li>On GitHub: <code>joshzyj/open-scholar-skill</code>, <code>letitbk/claude-academic-setup</code>, <code>Zhangyanbo/vibe-research-skill</code>.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Three ways to install one</h3>
+      <ul>
+        <li><strong>Clone.</strong> Clone the repository, then copy or symlink the skill folders you want. <code>open-scholar-skill</code> ships a <code>bash setup.sh</code> that does the copying for you.</li>
+        <li><strong>Marketplace.</strong> Add the marketplace, then install by name. Claude Code shows the token cost and component inventory before anything installs.</li>
+        <li><strong>Cross-agent.</strong> Pull from the skills.sh directory into whichever agent you use.</li>
+        <li>Whichever route you take, the result is a folder you can open. A skill in your home skills folder applies to everything you own; a skill inside a repository travels with that project.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Installing a Skill is a trust decision</h3>
+      <ul>
+        <li>A Skill is instructions your agent will follow, so installing one is closer to hiring than to downloading.</li>
+        <li>Snyk's <strong>ToxicSkills</strong> study (2026) found prompt injection in <strong>36%</strong> of the agent skills it examined, and <strong>1,467</strong> malicious payloads on a single skill registry (ClawHub).</li>
+        <li>A skill body can embed dynamic-context syntax that runs shell commands the moment the skill loads, before any human reads it.</li>
+        <li>Anthropic's own documentation says: "Only install plugins and add marketplaces from sources you trust."</li>
+        <li>The rule in this course: read the <code>SKILL.md</code> before you install, and check the <code>allowed-tools</code> grant and any embedded shell command.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Make it yours</h3>
+      <ul>
+        <li>An adopted Skill is a draft: copy the folder into your home skills folder, edit <code>SKILL.md</code>, and the change applies immediately, with no restart.</li>
+        <li>Renaming the directory renames the command; rewriting the <code>description</code> field changes when it fires on its own.</li>
+        <li>The cleanest worked example: Yanbo Zhang's <code>my-scientific-taste</code> is a deliberately replaceable placeholder holding <strong>your</strong> scientific taste, which his other skills consult by name.</li>
+        <li>His rule for where things belong matches the split you built today:</li>
+      </ul>
+      <table>
+        <tr><td>What is true for everyone</td><td>goes in a shared Skill</td></tr>
+        <tr><td>What is true for you</td><td>goes in <code>my-scientific-taste</code></td></tr>
+        <tr><td>What is true for this project</td><td>goes in <code>AGENTS.md</code></td></tr>
+      </table>
+    </div>
+    </section>
+
+    <!-- MANAGING USAGE -->
+    <section data-hands="usage">
+    <h2 class="sec" id="usage">Managing your usage <span class="hastag">· do it on the right</span></h2>
+
+    <div class="card">
+      <h3>The agent bills by the token</h3>
+      <ul>
+        <li>Everything you send and everything it writes is counted in tokens, and your plan has a limit.</li>
+        <li>A long session, a big file pasted in, or many rounds of back-and-forth all run the count up.</li>
+        <li>Running several agents at once spends it several times as fast.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>How to spend less</h3>
+      <ul>
+        <li>Use a smaller, cheaper model for simple steps, and save the strong one for the hard ones.</li>
+        <li>Give a tight brief so it gets there in fewer rounds.</li>
+        <li>Start a fresh session for a new task, so it is not re-reading an old one.</li>
+        <li>Point it at just the one file it needs.</li>
+      </ul>
+    </div>
+    </section>
+
+    <!-- WRAP -->
+    <section data-hands="none">
+    <h2 class="sec" id="wrap">Wrap</h2>
+    <div class="card">
+      <h3>Wrap</h3>
+      <ul>
+        <li>You now hold the course deliverable in embryo:
+          <ul>
+            <li>a working setup</li>
+            <li>a project AGENTS.md that survives a restart</li>
+            <li>one Skill that encodes your own routine</li>
+          </ul>
+        </li>
+        <li>Tomorrow you use the same setup for literature and writing, where the mistakes are harder to catch.</li>
+      </ul>
+    </div>
+    </section>
+
+  </main>
+
+  <!-- ================= RIGHT CONTEXTUAL HANDS-ON ================= -->
+  <aside>
+    <p class="railhead" id="railhead">Hands-on</p>
+
+    <!-- none: nothing shown -->
+    <div class="hands" data-for="none"></div>
+
+    <!-- agentsmd -->
+    <div class="hands" data-for="agentsmd">
+      <div class="exi">
+        <span class="step">Step 1</span>
+        <h4>Create your AGENTS.md</h4>
+        <p>Make a file named AGENTS.md at the root of your project. Ask the agent to start it for you:</p>
+        <div class="code">Create an AGENTS.md at the root of my project with four sections: project context, data conventions, output standards, and safety rules. Ask me what to put in each.<span class="copy">copy</span></div>
+      </div>
+      <div class="exi">
+        <span class="step">Step 2</span>
+        <h4>Fill in the four sections</h4>
+        <p>Write concrete lines for your own project. Name your variables, your units, your journal.</p>
+        <ul>
+          <li><strong>Project context:</strong> the question, the data, the unit of analysis.</li>
+          <li><strong>Data conventions:</strong> key variables, units, missing-data policy.</li>
+          <li><strong>Output standards:</strong> table format, chart style, what every result must report.</li>
+          <li><strong>Safety rules:</strong> what the agent must never do.</li>
+        </ul>
+      </div>
+      <div class="exi">
+        <span class="step">Step 3</span>
+        <h4>Test it now</h4>
+        <ul>
+          <li>Rerun one of yesterday's tasks in a fresh session.</li>
+          <li>Compare against yesterday's output: what changed without you asking?</li>
+          <li>Where the output still ignores one of your rules, the rule is too vague; sharpen the wording and rerun.</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- skills -->
+    <div class="hands" data-for="skills">
+      <div class="exi">
+        <span class="step">Step 1</span>
+        <h4>Write your own Skill</h4>
+        <p>Pick the routine you repeat most. Turn it into a Skill: what it does, when to use it, the exact steps and standards.</p>
+        <div class="code">Turn this routine into a Skill saved as SKILL.md: [describe what it does, when to use it, and the exact steps and standards]. Then test it on one of yesterday's tasks.<span class="copy">copy</span></div>
+        <ul>
+          <li>Test it on a task from yesterday, and sharpen it where the output missed your intent.</li>
+        </ul>
+      </div>
+      <div class="exi">
+        <span class="step">Step 2</span>
+        <h4>Install one from a collection</h4>
+        <p>Read the SKILL.md first, then pick one of the three routes.</p>
+        <p>Clone:</p>
+        <div class="code">git clone https://github.com/joshzyj/open-scholar-skill
+bash open-scholar-skill/setup.sh<span class="copy">copy</span></div>
+        <p>Marketplace:</p>
+        <div class="code">/plugin marketplace add letitbk/claude-academic-setup
+/plugin install claude-academic-setup@marketplace<span class="copy">copy</span></div>
+        <p>Cross-agent:</p>
+        <div class="code">npx skills add Zhangyanbo/vibe-research-skill<span class="copy">copy</span></div>
+      </div>
+      <div class="exi">
+        <span class="step">Step 3</span>
+        <h4>Read before you install</h4>
+        <ul>
+          <li>Open the <code>SKILL.md</code> and read it in full.</li>
+          <li>Check the <code>allowed-tools</code> grant and any embedded shell command.</li>
+          <li>Install only from a source you trust.</li>
+        </ul>
+      </div>
+      <div class="exi">
+        <span class="step">Step 4</span>
+        <h4>Make it yours</h4>
+        <ul>
+          <li>Copy the folder into your home skills folder and edit <code>SKILL.md</code>; the change applies immediately, with no restart.</li>
+          <li>Renaming the directory renames the command.</li>
+          <li>Rewriting the <code>description</code> field changes when it fires on its own.</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- usage -->
+    <div class="hands" data-for="usage">
+      <div class="exi">
+        <span class="step">Step 1</span>
+        <h4>Run it the wasteful way</h4>
+        <p>Do one task with a vague prompt and the whole folder in context.</p>
+      </div>
+      <div class="exi">
+        <span class="step">Step 2</span>
+        <h4>Run it the lean way</h4>
+        <p>Do the same task again with a tight brief and only the file it needs.</p>
+      </div>
+      <div class="exi">
+        <span class="step">Step 3</span>
+        <h4>Compare the cost</h4>
+        <ul>
+          <li>Compare what each run cost.</li>
+          <li>See how much a tight brief and a single file save you.</li>
+        </ul>
+      </div>
+    </div>
+  </aside>
+
+</div>
+
+<script>
+  // contextual hands-on driven by which section is in view
+  const sections=[...document.querySelectorAll('main section')];
+  const panels=[...document.querySelectorAll('.hands')];
+  const railhead=document.getElementById('railhead');
+  function show(key){
+    panels.forEach(p=>p.classList.toggle('on',p.dataset.for===key));
+    railhead.style.display = key==='none' ? 'none' : '';
+  }
+  const io=new IntersectionObserver((entries)=>{
+    let best=null,bestR=0;
+    entries.forEach(e=>{if(e.intersectionRatio>bestR){bestR=e.intersectionRatio;best=e.target;}});
+    // pick the section whose top is nearest the upper third
+    let cur=sections[0];
+    sections.forEach(s=>{const t=s.getBoundingClientRect().top; if(t<window.innerHeight*0.35) cur=s;});
+    show(cur.dataset.hands);
+  },{threshold:[0,0.1,0.5,1]});
+  sections.forEach(s=>io.observe(s));
+  addEventListener('scroll',()=>{
+    let cur=sections[0];
+    sections.forEach(s=>{const t=s.getBoundingClientRect().top; if(t<window.innerHeight*0.35) cur=s;});
+    show(cur.dataset.hands);
+  },{passive:true});
+  show('none');
+
+  // setup tool tabs (Codex / Claude Code) switch the command panels
+  let tool='codex';
+  function syncPanels(){
+    document.querySelectorAll('.hands[data-for="setup"] .panel').forEach(p=>{
+      p.classList.toggle('on', p.dataset.p===tool);
+    });
+  }
+  document.querySelectorAll('.tabs[data-g="tool"] button').forEach(b=>{
+    b.onclick=()=>{
+      document.querySelectorAll('.tabs[data-g="tool"] button').forEach(x=>x.classList.toggle('on',x===b));
+      tool=b.dataset.t;
+      syncPanels();
+    };
+  });
+  syncPanels();
+
+  // active toc
+  const links=[...document.querySelectorAll('.toc a')];
+  addEventListener('scroll',()=>{
+    let cur=null;
+    links.forEach(a=>{const el=document.querySelector(a.getAttribute('href'));
+      if(el && el.getBoundingClientRect().top<140)cur=a;});
+    links.forEach(a=>a.classList.toggle('active',a===cur));
+  },{passive:true});
+
+  // copy
+  document.addEventListener('click',e=>{
+    if(!e.target.classList.contains('copy'))return;
+    const x=e.target.parentNode.childNodes[0].textContent.trim();
+    navigator.clipboard.writeText(x).then(()=>{e.target.textContent='copied';
+      setTimeout(()=>e.target.textContent='copy',1200);});
+  });
+</script>
+</body>
+</html>

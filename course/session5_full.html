@@ -1,0 +1,462 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Session 5 — AI for Building Apps</title>
+<style>
+  :root{
+    --bg:#fcfcfb; --fg:#1c1c1a; --muted:#6b6b66; --line:#e6e5e1;
+    --accent:#2f6f4f; --accent-weak:#eaf3ee; --ex:#b5651d; --ex-weak:#fbf1e7;
+    --code-bg:#f4f5f3; --card:#fff;
+    --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--sans)}
+  .layout{display:grid;grid-template-columns:180px minmax(0,1fr) 360px;max-width:1320px;margin:0 auto}
+
+  /* ---- left nav ---- */
+  nav{position:sticky;top:0;align-self:start;height:100vh;overflow:auto;
+      padding:26px 14px;border-right:1px solid var(--line);font-size:14px}
+  nav .days{display:flex;flex-direction:column;gap:2px;margin-bottom:22px}
+  nav .days a{color:var(--muted);text-decoration:none;padding:3px 0;font-size:13px}
+  nav .days a.cur{color:var(--fg);font-weight:700}
+  nav .home{display:block;font-size:14px;font-weight:800;color:var(--fg);text-decoration:none;line-height:1.25;margin-bottom:18px}
+  nav .home:hover{color:var(--accent)}
+  nav .lbl{font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin:0 0 8px}
+  nav .toc a{display:block;color:var(--fg);text-decoration:none;padding:6px 0 6px 12px;
+             border-left:2px solid transparent;margin-left:-2px}
+  nav .toc a:hover{color:var(--accent)}
+  nav .toc a.active{color:var(--accent);border-left-color:var(--accent);font-weight:600}
+  nav .toc .has{color:var(--ex);font-size:11px;margin-left:6px}
+
+  /* ---- center content ---- */
+  main{padding:30px 32px 160px;min-width:0}
+  .kicker{font-size:13px;letter-spacing:.07em;text-transform:uppercase;color:var(--accent);font-weight:700;margin:0}
+  h1{margin:4px 0 6px;font-size:32px}
+  .goal{color:var(--muted);font-size:16px;margin:0 0 20px}
+  h2.sec{font-size:28px;font-weight:700;color:var(--fg);line-height:1.2;
+         margin:52px 0 12px;padding-top:22px;border-top:1px solid var(--line)}
+  h2.sec .hastag{color:var(--ex);font-weight:600;font-size:14px}
+
+  .card{background:var(--card);border:1px solid var(--line);border-radius:14px;
+        padding:20px 24px;margin:16px 0;box-shadow:0 1px 2px rgba(0,0,0,.03)}
+  .card h3{margin:0 0 12px;font-size:21px;line-height:1.25}
+  .card ul{list-style:none;padding:0;margin:0}
+  .card li{font-size:17px;line-height:1.45;padding:9px 0 9px 26px;position:relative;border-top:1px solid var(--line)}
+  .card li:first-child{border-top:0}
+  .card li::before{content:"";position:absolute;left:4px;top:17px;width:8px;height:8px;border-radius:50%;background:var(--accent)}
+  .card ul ul{margin:6px 0 0}
+  .card li li{font-size:15px;padding:5px 0 5px 24px;border-top:0;color:var(--muted)}
+  .card li li::before{width:5px;height:5px;top:14px;background:var(--muted)}
+  .card.demo{border-left:4px solid var(--accent)}
+  .card.demo .tag{display:inline-block;font-size:12px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;
+                  color:var(--accent);margin-bottom:8px}
+  .quote{background:var(--code-bg);border-left:3px solid var(--accent);border-radius:0 8px 8px 0;
+         padding:12px 16px;margin:12px 0;font-style:italic;line-height:1.5}
+  code{background:var(--code-bg);padding:1px 5px;border-radius:4px;font-family:ui-monospace,Menlo,monospace;font-size:.85em}
+  strong{color:#111}
+  table{border-collapse:collapse;width:100%;margin:10px 0;font-size:16px}
+  th,td{border:1px solid var(--line);padding:8px 12px;text-align:left}
+  th{background:var(--accent-weak);font-size:14px}
+  .src{font-size:13px;color:var(--muted)} .src a{color:var(--accent)}
+
+  /* ---- right contextual hands-on ---- */
+  aside{position:sticky;top:0;align-self:start;height:100vh;overflow:auto;
+        border-left:1px solid var(--line);padding:26px 18px 60px;background:#fbfaf8}
+  aside .railhead{font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--ex)}
+  aside .railctx{font-size:13px;color:var(--muted);margin:2px 0 16px}
+  .hands{display:none} .hands.on{display:block}
+  .hands.none-msg{color:var(--muted);font-size:14px;line-height:1.6;
+                  border:1px dashed var(--line);border-radius:10px;padding:16px;background:#fff}
+  .exi{border:1px solid #e8d3ba;background:var(--ex-weak);border-radius:10px;margin:10px 0;padding:12px 14px}
+  .exi .step{display:inline-block;font-size:10px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;
+             color:#fff;background:var(--ex);border-radius:20px;padding:2px 9px;margin-bottom:8px}
+  .exi h4{margin:0 0 6px;font-size:15px}
+  .exi ul{margin:6px 0;padding-left:18px;font-size:13.5px;line-height:1.5}
+  .exi li{margin:4px 0}
+  .exi p{font-size:13.5px;line-height:1.5;margin:6px 0}
+  .save{font-size:13px;color:var(--muted);background:#fff;border:1px solid var(--line);
+        border-radius:8px;padding:9px 12px;margin:10px 0}
+
+  .tabs{display:flex;gap:5px;margin:8px 0 0}
+  .tabs button{border:1px solid #e8d3ba;background:#fff;border-radius:7px;padding:4px 10px;
+               font-size:12px;cursor:pointer;color:var(--ex)}
+  .tabs button.on{background:var(--ex);color:#fff}
+  .panel{display:none} .panel.on{display:block}
+
+  .code{position:relative;background:#fff;border:1px solid #e8d3ba;border-radius:8px;
+        padding:9px 34px 9px 11px;font-family:ui-monospace,Menlo,monospace;font-size:12px;
+        white-space:pre-wrap;margin:8px 0;line-height:1.45}
+  .code .copy{position:absolute;top:6px;right:6px;font-size:10px;border:1px solid #e8d3ba;
+              background:#fff;border-radius:6px;padding:2px 7px;cursor:pointer;color:var(--ex)}
+  .guidelink{display:inline-block;margin-top:6px;font-size:13px;color:var(--ex);font-weight:600}
+
+  @media(max-width:1080px){
+    .layout{grid-template-columns:1fr}
+    nav{display:none}
+    aside{position:static;height:auto;border-left:0;border-top:1px solid var(--line)}
+    .hands{display:block !important;border-top:1px solid var(--line);padding-top:10px;margin-top:10px}
+    .hands.none-msg{display:none !important}
+  }
+</style>
+</head>
+<body>
+<div class="layout">
+
+  <!-- ================= LEFT NAV ================= -->
+  <nav>
+    <a class="home" href="session1_full.html">AI-Assisted Coding for Social Data Analysis</a>
+    <div class="days">
+      <div class="lbl">Sessions</div>
+      <a href="session1_full.html">1 · AI for Data Analysis I</a>
+      <a href="session2_full.html">2 · AI for Data Analysis II</a>
+      <a href="session3_full.html">3 · Harnessing AI Agents</a>
+      <a href="session4_full.html">4 · AI for Data Collection and Literature Review</a>
+      <a href="session5_full.html" class="cur">5 · AI for Building Apps</a>
+    </div>
+    <div class="lbl">Today</div>
+    <div class="toc">
+      <a href="#opening">Opening</a>
+      <a href="#build">Turn your analysis into a website or app <span class="has">hands-on</span></a>
+      <a href="#private">Keeping private data on your own machine <span class="has">hands-on</span></a>
+      <a href="#show">Show your project</a>
+      <a href="#next">What to learn next</a>
+    </div>
+  </nav>
+
+  <!-- ================= CENTER CONTENT ================= -->
+  <main>
+    <p class="kicker">Session 5 · Friday</p>
+    <h1>AI for Building Apps</h1>
+    <p class="goal">Today we pull these five days into one small build, and we look at what comes next. When a section has something to do, it appears in the panel on the right.</p>
+
+    <!-- OPENING -->
+    <section data-hands="none">
+    <h2 class="sec" id="opening">Opening</h2>
+
+    <div class="card">
+      <h3>Today</h3>
+      <ul>
+        <li>The goal today is to pull these five days into one small build, and to look at what comes next.</li>
+        <li>Here is the plan for the day:</li>
+      </ul>
+      <table>
+        <tr><td>Turn your analysis into a website or app</td></tr>
+        <tr><td>Build one of your own (100 minutes)</td></tr>
+        <tr><td>Break</td></tr>
+        <tr><td>Keeping private data on your own machine</td></tr>
+        <tr><td>Show your project</td></tr>
+        <tr><td>What to learn next</td></tr>
+      </table>
+    </div>
+    </section>
+
+    <!-- BUILD -->
+    <section data-hands="build">
+    <h2 class="sec" id="build">Turn your analysis into a website or app <span class="hastag">· do it on the right</span></h2>
+
+    <div class="card">
+      <h3>What building means here</h3>
+      <ul>
+        <li>Building means turning your analysis into a website or an app that other people can use:
+          <ul>
+            <li>a webpage that shows your results and lets people click through them</li>
+            <li>one command that reruns your whole analysis, from raw data to finished tables</li>
+            <li>a small app that does a repeated chore for you</li>
+          </ul>
+        </li>
+        <li>The division of labor is the same as Monday. You specify and verify, and the agent writes the code.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>How a web page works</h3>
+      <ul>
+        <li>Every webpage, from a personal site to a results page, has three layers:
+          <ul>
+            <li>what the reader sees, which is the structure, the style, and the behavior</li>
+            <li>what changes on the page, which is the inputs and filters</li>
+            <li>where the numbers come from, which is your analysis output</li>
+          </ul>
+        </li>
+        <li>You will let the agent write all of these layers.</li>
+        <li>You need to know the layers so you can check the agent's work. Open the page, click through it, and verify the numbers against your output.</li>
+      </ul>
+    </div>
+    <div class="card demo">
+      <span class="tag">Live demo</span>
+      <h3>From an analysis to a page, in minutes</h3>
+      <ul>
+        <li>Tuesday's analysis becomes a small interactive page, live.</li>
+        <li>The prompt names the output file that feeds the page and the one control the reader gets.</li>
+        <li>The page opens in a browser within minutes, and I have read none of its code.</li>
+        <li>The check at the end is the number on the page against the number in <code>output/</code>.</li>
+      </ul>
+    </div>
+    </section>
+
+    <!-- PRIVATE -->
+    <section data-hands="private">
+    <h2 class="sec" id="private">Keeping private data on your own machine <span class="hastag">· do it on the right</span></h2>
+
+    <div class="card">
+      <h3>When your data cannot leave your computer</h3>
+      <ul>
+        <li>Some data cannot be sent to a company's servers, such as human subjects, restricted records, and anything under an IRB or a data agreement.</li>
+        <li>The default tools send your files to Anthropic or OpenAI, so for that data you cannot use them.</li>
+        <li>The fix is to run the tool on an open-source model on your own machine, so nothing leaves it.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>How to keep it local</h3>
+      <ul>
+        <li><strong>Ollama</strong> is a free program that runs open-source models such as Llama or Qwen on your laptop.</li>
+        <li>You can run Codex with its open-source flag, or point Claude Code at the local model with three settings: <code>ANTHROPIC_BASE_URL</code>, <code>ANTHROPIC_AUTH_TOKEN</code>, and <code>ANTHROPIC_MODEL</code>.</li>
+        <li>You set the sandbox to your project folder and turn the network off.</li>
+        <li>Local models are slower and weaker than Claude or GPT, so you use them only when the data requires it.</li>
+      </ul>
+    </div>
+    </section>
+
+    <!-- SHOW -->
+    <section data-hands="none">
+    <h2 class="sec" id="show">Show your project</h2>
+
+    <div class="card">
+      <h3>Show your project</h3>
+      <ul>
+        <li>Take a few minutes each to walk us through your whole five-day project, including today's build.</li>
+        <li>Show the question, and show what you have: a result, a figure, a website, or a working start.</li>
+        <li>Walk the main steps and say who did each: what you decided and did, and what the agent did.</li>
+        <li>Tell us one thing the agent got wrong, and how you caught it.</li>
+        <li>Leave us one lesson for someone starting next week.</li>
+      </ul>
+    </div>
+    </section>
+
+    <!-- NEXT -->
+    <section data-hands="none">
+    <h2 class="sec" id="next">What to learn next</h2>
+
+    <div class="card">
+      <h3>Your five days, as a checklist</h3>
+      <ul>
+        <li>a working environment (Monday)</li>
+        <li>a research repository with a draft history (Monday onward)</li>
+        <li>a directed, verified analysis (Tuesday)</li>
+        <li>a project AGENTS.md that survives a restart (Wednesday)</li>
+        <li>at least one Skill (Wednesday)</li>
+        <li>a literature review or draft with verified citations (Thursday)</li>
+        <li>a website or app of your own (Friday)</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>What the full course adds</h3>
+      <ul>
+        <li>How these models actually work, and why they fail the way they do.</li>
+        <li>Designing your own agents with MCP, Hooks, and subagents. The next cards preview two pieces of this.</li>
+        <li>Building and deploying real tools on top of your research.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Who splits the work?</h3>
+      <ul>
+        <li>Today's capstone fit in one conversation, and your next real project will not.</li>
+        <li>The design question that follows is <strong>decomposition</strong>: when a task is too big for one session, who breaks it into pieces, you or the agent?</li>
+        <li>Claude Code covers the full range:
+          <ul>
+            <li><strong>You decompose fully.</strong> A shell loop calls <code>claude -p</code> once per item on a list you wrote, when you already know every piece.</li>
+            <li><strong>You plan, the agent executes.</strong> Plan mode makes it present a plan you approve before it touches a file, when you know the goal and the steps need thought.</li>
+            <li><strong>You frame, the agent splits.</strong> "Do A, B, and C in parallel with separate subagents" works when the pieces are independent and summaries are enough, as Thursday's paper fan-out showed.</li>
+            <li><strong>The agent decomposes fully.</strong> A workflow has the agent write an orchestration script that runs dozens of subagents, for a repository-wide audit or a hundred-item migration.</li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Before you parallelize</h3>
+      <ul>
+        <li>Four rules of thumb from Anthropic's own multi-agent engineering:
+          <ul>
+            <li><strong>Independence.</strong> Only subtasks that do not depend on each other's output can run in parallel. A chain of dependent steps gains nothing.</li>
+            <li><strong>Cost.</strong> A multi-agent run measures at about 15 times the tokens of a single chat, so the task has to be worth it.</li>
+            <li><strong>Focus.</strong> Three agents with sharp, separate briefs beat five with scattered ones.</li>
+            <li><strong>Fresh eyes.</strong> A reviewer agent with clean context catches what the author's context has learned to overlook, for the same reason journals use outside referees.</li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>After the five days</h3>
+      <ul>
+        <li>Keep one repository per project, and let it grow the way this one did.</li>
+        <li>Reuse your AGENTS.md and Skills on the next project from day one.</li>
+        <li>When you hit a task too big for one session, that is when subagents and workflows earn their keep.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>How good, and why a second one?</h3>
+      <ul>
+        <li><strong>How good, honestly.</strong> Small local models in the 7B class drop 15 to 40 points on agentic benchmarks and hallucinate tool calls. Frontier open-weights models such as Kimi K2.6 and Qwen 3.6 sit within a few points of the closed frontier.</li>
+        <li><strong>A second use, cross-model review.</strong> BK Lee's academic setup wires <code>/codex</code> and <code>/gemini</code> commands into Claude Code, so a second model family reviews the first's work: "each catches what the others miss."</li>
+        <li><strong>The statistical logic.</strong> Error cancellation assumes independent errors, and models from one family make correlated ones. A reviewer from a different family is closer to an independent draw.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Keep going</h3>
+      <ul>
+        <li>Keep the repository alive: one task per week through the agent, and the AGENTS.md grows with the project.</li>
+        <li>Free self-paced material if you want more:
+          <ul>
+            <li>Anthropic Academy: short courses on Claude Code, from beginner up.</li>
+            <li>DeepLearning.AI: "Claude Code: A Highly Agentic Coding Assistant."</li>
+          </ul>
+        </li>
+        <li>The habit that matters more than any tool: <strong>an unverified result is not a result.</strong></li>
+      </ul>
+    </div>
+    </section>
+
+  </main>
+
+  <!-- ================= RIGHT CONTEXTUAL HANDS-ON ================= -->
+  <aside>
+    <p class="railhead" id="railhead">Hands-on</p>
+
+    <!-- none: nothing shown -->
+    <div class="hands" data-for="none"></div>
+
+    <!-- build -->
+    <div class="hands" data-for="build">
+      <div class="exi">
+        <span class="step">Step 1</span>
+        <h4>Choose one to build</h4>
+        <p>Pick one of these and build it in your own repository. You have 100 minutes.</p>
+        <ul>
+          <li><strong>A website</strong> that shows your results and lets people click through them.</li>
+          <li><strong>One command</strong> that reruns your whole analysis, from raw data to finished output.</li>
+          <li><strong>A small app</strong> that does a chore for you, like making codebook pages.</li>
+          <li><strong>A smarter agent.</strong> Expand your AGENTS.md and add a second Skill.</li>
+        </ul>
+        <p>If you finish early, add a second option.</p>
+      </div>
+      <div class="exi">
+        <span class="step">Step 2</span>
+        <h4>Rules of the build</h4>
+        <ul>
+          <li>Everything lands in your own repository.</li>
+          <li>Keep the discipline from Tuesday: the agent proposes a plan, you review it, then it builds.</li>
+          <li>Verify first, then polish: check every number on the page against the files in <code>output/</code>.</li>
+          <li>Commit at every working stage, so you can always step back.</li>
+        </ul>
+      </div>
+      <div class="exi">
+        <span class="step">Step 3</span>
+        <h4>Suggestions for your choice</h4>
+        <ul>
+          <li><strong>Website:</strong> start from Tuesday's chart, and add one control, such as a country selector or a year slider.</li>
+          <li><strong>One command:</strong> chain Tuesday's stages so one command reruns clean, model, and output.</li>
+          <li><strong>Small app:</strong> automate the chore you noticed these five days, such as codebook pages, variable labels, or filing output.</li>
+          <li><strong>Smarter agent:</strong> write the second Skill you wished you had, and close any gaps you found in your AGENTS.md.</li>
+        </ul>
+        <p>A starter prompt for the website option:</p>
+        <div class="code">Build a webpage that shows the chart in output/. Add one control, a country selector, that filters the chart. Show me a plan first, then build it. Do not change my analysis code.<span class="copy">copy</span></div>
+      </div>
+      <div class="save">Safety net: commit before each big change, so you can step back to a working stage if something breaks.</div>
+    </div>
+
+    <!-- private -->
+    <div class="hands" data-for="private">
+      <div class="exi">
+        <span class="step">Step 1</span>
+        <h4>Install a local model</h4>
+        <p>Install Ollama, then pull an open-source model to your machine.</p>
+        <div class="code">curl -fsSL https://ollama.com/install.sh | sh<span class="copy">copy</span></div>
+        <div class="code">ollama pull qwen3<span class="copy">copy</span></div>
+      </div>
+      <div class="exi">
+        <span class="step">Step 2</span>
+        <h4>Point your agent at it</h4>
+        <p>For Claude Code, set the three settings so it talks to the local model instead of the company's servers. Ask the agent for the exact values for your model.</p>
+        <div class="code">export ANTHROPIC_BASE_URL=...
+export ANTHROPIC_AUTH_TOKEN=...
+export ANTHROPIC_MODEL=...<span class="copy">copy</span></div>
+        <ul>
+          <li>For Codex, start it with its open-source flag instead.</li>
+          <li>Set the sandbox to your project folder with the network turned off.</li>
+        </ul>
+      </div>
+      <div class="exi">
+        <span class="step">Step 3</span>
+        <h4>Check that nothing leaves</h4>
+        <ul>
+          <li>On ordinary data first, ask the local agent a question with the network off.</li>
+          <li>Turn off your wifi and give it a task. If it still works, nothing was going out.</li>
+          <li>This is the proof you can show an IRB: the data stayed on the machine.</li>
+        </ul>
+      </div>
+    </div>
+  </aside>
+
+</div>
+
+<script>
+  // contextual hands-on driven by which section is in view
+  const sections=[...document.querySelectorAll('main section')];
+  const panels=[...document.querySelectorAll('.hands')];
+  const railhead=document.getElementById('railhead');
+  function show(key){
+    panels.forEach(p=>p.classList.toggle('on',p.dataset.for===key));
+    railhead.style.display = key==='none' ? 'none' : '';
+  }
+  const io=new IntersectionObserver((entries)=>{
+    let best=null,bestR=0;
+    entries.forEach(e=>{if(e.intersectionRatio>bestR){bestR=e.intersectionRatio;best=e.target;}});
+    // pick the section whose top is nearest the upper third
+    let cur=sections[0];
+    sections.forEach(s=>{const t=s.getBoundingClientRect().top; if(t<window.innerHeight*0.35) cur=s;});
+    show(cur.dataset.hands);
+  },{threshold:[0,0.1,0.5,1]});
+  sections.forEach(s=>io.observe(s));
+  addEventListener('scroll',()=>{
+    let cur=sections[0];
+    sections.forEach(s=>{const t=s.getBoundingClientRect().top; if(t<window.innerHeight*0.35) cur=s;});
+    show(cur.dataset.hands);
+  },{passive:true});
+  show('none');
+
+  // setup tool tabs (Codex / Claude Code) switch the command panels
+  let tool='codex';
+  function syncPanels(){
+    document.querySelectorAll('.hands[data-for="setup"] .panel').forEach(p=>{
+      p.classList.toggle('on', p.dataset.p===tool);
+    });
+  }
+  document.querySelectorAll('.tabs[data-g="tool"] button').forEach(b=>{
+    b.onclick=()=>{
+      document.querySelectorAll('.tabs[data-g="tool"] button').forEach(x=>x.classList.toggle('on',x===b));
+      tool=b.dataset.t;
+      syncPanels();
+    };
+  });
+  syncPanels();
+
+  // active toc
+  const links=[...document.querySelectorAll('.toc a')];
+  addEventListener('scroll',()=>{
+    let cur=null;
+    links.forEach(a=>{const el=document.querySelector(a.getAttribute('href'));
+      if(el && el.getBoundingClientRect().top<140)cur=a;});
+    links.forEach(a=>a.classList.toggle('active',a===cur));
+  },{passive:true});
+
+  // copy
+  document.addEventListener('click',e=>{
+    if(!e.target.classList.contains('copy'))return;
+    const x=e.target.parentNode.childNodes[0].textContent.trim();
+    navigator.clipboard.writeText(x).then(()=>{e.target.textContent='copied';
+      setTimeout(()=>e.target.textContent='copy',1200);});
+  });
+</script>
+</body>
+</html>

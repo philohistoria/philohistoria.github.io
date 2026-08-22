@@ -1,0 +1,579 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Session 4 — AI for Data Collection and Literature Review</title>
+<style>
+  :root{
+    --bg:#fcfcfb; --fg:#1c1c1a; --muted:#6b6b66; --line:#e6e5e1;
+    --accent:#2f6f4f; --accent-weak:#eaf3ee; --ex:#b5651d; --ex-weak:#fbf1e7;
+    --code-bg:#f4f5f3; --card:#fff;
+    --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--sans)}
+  .layout{display:grid;grid-template-columns:180px minmax(0,1fr) 360px;max-width:1320px;margin:0 auto}
+
+  /* ---- left nav ---- */
+  nav{position:sticky;top:0;align-self:start;height:100vh;overflow:auto;
+      padding:26px 14px;border-right:1px solid var(--line);font-size:14px}
+  nav .days{display:flex;flex-direction:column;gap:2px;margin-bottom:22px}
+  nav .days a{color:var(--muted);text-decoration:none;padding:3px 0;font-size:13px}
+  nav .days a.cur{color:var(--fg);font-weight:700}
+  nav .home{display:block;font-size:14px;font-weight:800;color:var(--fg);text-decoration:none;line-height:1.25;margin-bottom:18px}
+  nav .home:hover{color:var(--accent)}
+  nav .lbl{font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin:0 0 8px}
+  nav .toc a{display:block;color:var(--fg);text-decoration:none;padding:6px 0 6px 12px;
+             border-left:2px solid transparent;margin-left:-2px}
+  nav .toc a:hover{color:var(--accent)}
+  nav .toc a.active{color:var(--accent);border-left-color:var(--accent);font-weight:600}
+  nav .toc .has{color:var(--ex);font-size:11px;margin-left:6px}
+
+  /* ---- center content ---- */
+  main{padding:30px 32px 160px;min-width:0}
+  .kicker{font-size:13px;letter-spacing:.07em;text-transform:uppercase;color:var(--accent);font-weight:700;margin:0}
+  h1{margin:4px 0 6px;font-size:32px}
+  .goal{color:var(--muted);font-size:16px;margin:0 0 20px}
+  h2.sec{font-size:28px;font-weight:700;color:var(--fg);line-height:1.2;
+         margin:52px 0 12px;padding-top:22px;border-top:1px solid var(--line)}
+  h2.sec .hastag{color:var(--ex);font-weight:600;font-size:14px}
+
+  .card{background:var(--card);border:1px solid var(--line);border-radius:14px;
+        padding:20px 24px;margin:16px 0;box-shadow:0 1px 2px rgba(0,0,0,.03)}
+  .card h3{margin:0 0 12px;font-size:21px;line-height:1.25}
+  .card ul{list-style:none;padding:0;margin:0}
+  .card li{font-size:17px;line-height:1.45;padding:9px 0 9px 26px;position:relative;border-top:1px solid var(--line)}
+  .card li:first-child{border-top:0}
+  .card li::before{content:"";position:absolute;left:4px;top:17px;width:8px;height:8px;border-radius:50%;background:var(--accent)}
+  .card ul ul{margin:6px 0 0}
+  .card li li{font-size:15px;padding:5px 0 5px 24px;border-top:0;color:var(--muted)}
+  .card li li::before{width:5px;height:5px;top:14px;background:var(--muted)}
+  .card.demo{border-left:4px solid var(--accent)}
+  .card.demo .tag{display:inline-block;font-size:12px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;
+                  color:var(--accent);margin-bottom:8px}
+  .quote{background:var(--code-bg);border-left:3px solid var(--accent);border-radius:0 8px 8px 0;
+         padding:12px 16px;margin:12px 0;font-style:italic;line-height:1.5}
+  code{background:var(--code-bg);padding:1px 5px;border-radius:4px;font-family:ui-monospace,Menlo,monospace;font-size:.85em}
+  strong{color:#111}
+  table{border-collapse:collapse;width:100%;margin:10px 0;font-size:16px}
+  th,td{border:1px solid var(--line);padding:8px 12px;text-align:left}
+  th{background:var(--accent-weak);font-size:14px}
+  .src{font-size:13px;color:var(--muted)} .src a{color:var(--accent)}
+
+  /* ---- right contextual hands-on ---- */
+  aside{position:sticky;top:0;align-self:start;height:100vh;overflow:auto;
+        border-left:1px solid var(--line);padding:26px 18px 60px;background:#fbfaf8}
+  aside .railhead{font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--ex)}
+  aside .railctx{font-size:13px;color:var(--muted);margin:2px 0 16px}
+  .hands{display:none} .hands.on{display:block}
+  .hands.none-msg{color:var(--muted);font-size:14px;line-height:1.6;
+                  border:1px dashed var(--line);border-radius:10px;padding:16px;background:#fff}
+  .exi{border:1px solid #e8d3ba;background:var(--ex-weak);border-radius:10px;margin:10px 0;padding:12px 14px}
+  .exi .step{display:inline-block;font-size:10px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;
+             color:#fff;background:var(--ex);border-radius:20px;padding:2px 9px;margin-bottom:8px}
+  .exi h4{margin:0 0 6px;font-size:15px}
+  .exi ul{margin:6px 0;padding-left:18px;font-size:13.5px;line-height:1.5}
+  .exi li{margin:4px 0}
+  .exi p{font-size:13.5px;line-height:1.5;margin:6px 0}
+  .save{font-size:13px;color:var(--muted);background:#fff;border:1px solid var(--line);
+        border-radius:8px;padding:9px 12px;margin:10px 0}
+
+  .tabs{display:flex;gap:5px;margin:8px 0 0}
+  .tabs button{border:1px solid #e8d3ba;background:#fff;border-radius:7px;padding:4px 10px;
+               font-size:12px;cursor:pointer;color:var(--ex)}
+  .tabs button.on{background:var(--ex);color:#fff}
+  .panel{display:none} .panel.on{display:block}
+
+  .code{position:relative;background:#fff;border:1px solid #e8d3ba;border-radius:8px;
+        padding:9px 34px 9px 11px;font-family:ui-monospace,Menlo,monospace;font-size:12px;
+        white-space:pre-wrap;margin:8px 0;line-height:1.45}
+  .code .copy{position:absolute;top:6px;right:6px;font-size:10px;border:1px solid #e8d3ba;
+              background:#fff;border-radius:6px;padding:2px 7px;cursor:pointer;color:var(--ex)}
+  .guidelink{display:inline-block;margin-top:6px;font-size:13px;color:var(--ex);font-weight:600}
+
+  @media(max-width:1080px){
+    .layout{grid-template-columns:1fr}
+    nav{display:none}
+    aside{position:static;height:auto;border-left:0;border-top:1px solid var(--line)}
+    .hands{display:block !important;border-top:1px solid var(--line);padding-top:10px;margin-top:10px}
+    .hands.none-msg{display:none !important}
+  }
+</style>
+</head>
+<body>
+<div class="layout">
+
+  <!-- ================= LEFT NAV ================= -->
+  <nav>
+    <a class="home" href="session1_full.html">AI-Assisted Coding for Social Data Analysis</a>
+    <div class="days">
+      <div class="lbl">Sessions</div>
+      <a href="session1_full.html">1 · AI for Data Analysis I</a>
+      <a href="session2_full.html">2 · AI for Data Analysis II</a>
+      <a href="session3_full.html">3 · Harnessing AI Agents</a>
+      <a href="session4_full.html" class="cur">4 · AI for Data Collection and Literature Review</a>
+      <a href="session5_full.html">5 · AI for Building Apps</a>
+    </div>
+    <div class="lbl">Today</div>
+    <div class="toc">
+      <a href="#opening">Opening</a>
+      <a href="#reach">What the agent can reach</a>
+      <a href="#collect">Collecting data <span class="has">hands-on</span></a>
+      <a href="#literature">Finding literature <span class="has">hands-on</span></a>
+      <a href="#discussion">Discussion</a>
+    </div>
+  </nav>
+
+  <!-- ================= CENTER CONTENT ================= -->
+  <main>
+    <p class="kicker">Session 4 · Thursday</p>
+    <h1>AI for Data Collection and Literature Review</h1>
+    <p class="goal">Today you use the agent to collect data and to find literature. A made-up fact causes the most harm in this kind of work, so you check every source and every citation. When a section has something to do, it appears in the panel on the right.</p>
+
+    <!-- OPENING -->
+    <section data-hands="none">
+    <h2 class="sec" id="opening">Opening</h2>
+
+    <div class="card">
+      <h3>Today</h3>
+      <ul>
+        <li>You take the same directed-agent workflow past data analysis, into collecting data and finding literature.</li>
+        <li>This is where a made-up fact causes the most harm, so checking the source matters even more.</li>
+        <li>The plan for the session:
+          <ul>
+            <li>what the agent can reach</li>
+            <li>collecting data</li>
+            <li>finding literature</li>
+            <li>break</li>
+            <li>discussion</li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+    </section>
+
+    <!-- WHAT THE AGENT CAN REACH -->
+    <section data-hands="none">
+    <h2 class="sec" id="reach">What the agent can reach</h2>
+
+    <div class="card">
+      <h3>What it can and cannot touch</h3>
+      <ul>
+        <li>The agent works only with what it can <strong>reach</strong>:
+          <ul>
+            <li>your files and your code: always</li>
+            <li>the open web: often</li>
+            <li>library databases, your Zotero, and journal APIs: only once you connect them</li>
+          </ul>
+        </li>
+        <li>There are two ways to reach an outside app. You connect it once with MCP, or you let the agent operate it by clicking, which is called computer use.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Connecting to other apps (MCP)</h3>
+      <ul>
+        <li>To reach an outside app, you connect it once, and then the agent can use it.</li>
+        <li><strong>MCP</strong> is the standard way to make that connection, and one setup works across services like Zotero, OpenAlex, and GitHub.</li>
+        <li>You set a connection up once, and it keeps working after that.</li>
+        <li>Today you just watch one in a demo.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Computer use: the agent clicks like a person</h3>
+      <ul>
+        <li>Some sources have no API and no connector, and the only way in is to click through a website.</li>
+        <li>A <strong>computer-use</strong> agent takes a screenshot, moves the mouse, types, and clicks, the way you would.</li>
+        <li>Codex now has this built in, so it can drive a browser and control your desktop apps.</li>
+        <li>Claude Code does not have it yet, and Anthropic's version is a separate Chrome extension.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>When computer use is worth it</h3>
+      <ul>
+        <li>The case for it is a government or survey portal with no API, where you must set filters and download a file by hand.</li>
+        <li>You describe the goal, and it clicks through the portal and pulls the file.</li>
+        <li>Use it only when an API or a script cannot do the job.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Its limits are real</h3>
+      <ul>
+        <li>It is slow, because it works one screenshot at a time.</li>
+        <li>It is unreliable on long click-throughs, and it spends your usage fast.</li>
+        <li>Text on a page can fool it into following instructions, so you never point it at anything sensitive.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>The two services we use</h3>
+      <ul>
+        <li>We use two services for literature work:
+          <ul>
+            <li><strong>OpenAlex.</strong> A free, open index of more than 250 million scholarly works you can search by topic, citation, or metadata.</li>
+            <li><strong>Zotero.</strong> Your own library, which the agent can read once you connect it.</li>
+          </ul>
+        </li>
+        <li>The flow is simple. You find papers by topic, filter them, follow their citations, export the ones you keep to Zotero, and then the agent reads your library while you write.</li>
+      </ul>
+    </div>
+    </section>
+
+    <!-- COLLECTING DATA -->
+    <section data-hands="collect">
+    <h2 class="sec" id="collect">Collecting data with the agent <span class="hastag">· do it on the right</span></h2>
+
+    <div class="card">
+      <h3>The agent can also collect data</h3>
+      <ul>
+        <li>The same reach that finds papers can also bring in data.</li>
+        <li>Three common sources, and the agent handles all three:
+          <ul>
+            <li>a web page with a table you want, such as a state agency's statistics page</li>
+            <li>an API that returns data, such as the Census or a city open-data portal</li>
+            <li>a file to download and unpack, such as a CSV inside a ZIP</li>
+          </ul>
+        </li>
+        <li>You still make the calls: which source, which variables, and how much.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Collection is the hard part, so check it</h3>
+      <ul>
+        <li>Gathering data is where these agents are weakest.</li>
+        <li>On a social-science replication benchmark, agents scored about 96 at running an analysis and about 31 at finding the data it needed.</li>
+        <li>Expect broken scrapes and wrong fields, and check every pull against the source.</li>
+      </ul>
+      <p class="src">Source: Nguyen et al., "ReplicatorBench" (2026), <a href="https://arxiv.org/abs/2602.11354">arXiv:2602.11354</a>.</p>
+    </div>
+    <div class="card">
+      <h3>Example: pulling from an API</h3>
+      <ul>
+        <li>You say what you want in plain words: "Get county population from the Census API for my state, 2010 to 2020, as a CSV."</li>
+        <li>The agent writes the request, runs it, and shows you the first rows.</li>
+        <li>If the API needs a free key, you paste yours in once and it uses it from then on.</li>
+        <li>You read the columns and confirm they are the ones you asked for.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Example: scraping a table from a page</h3>
+      <ul>
+        <li>You point it at the page: "From this URL, pull the table of unemployment by month into a CSV."</li>
+        <li>The agent reads the page, finds the table, and saves it.</li>
+        <li>Watch for the traps it should flag: a table split across pages, footnotes mixed into cells, or a site that asks you not to scrape.</li>
+        <li>When a site's terms forbid scraping, you stop and find another source.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Keep the raw pull, and log where it came from</h3>
+      <ul>
+        <li>Save the raw result once, before any cleaning, and never overwrite that copy.</li>
+        <li>Have the agent write the source, the date, and the exact query next to the file.</li>
+        <li>Months later, that note is how you answer "where did this number come from."</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Check what came back</h3>
+      <ul>
+        <li>Open the raw file and read the first few rows yourself.</li>
+        <li>Compare a handful of values against the source page or the API by hand.</li>
+        <li>Move the data into your analysis only after it matches.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>When you will do it again, make it a Skill</h3>
+      <ul>
+        <li>A pull you repeat, such as grabbing this month's new records, is worth packaging.</li>
+        <li>Turn the steps into a Skill, the same way you did on Wednesday, so next time is one command.</li>
+        <li>The Skill travels too, so a labmate can run the same pull with their own key.</li>
+      </ul>
+    </div>
+    </section>
+
+    <!-- FINDING LITERATURE -->
+    <section data-hands="literature">
+    <h2 class="sec" id="literature">Finding literature <span class="hastag">· do it on the right</span></h2>
+
+    <div class="card demo">
+      <span class="tag">Live demo</span>
+      <h3>The steps</h3>
+      <ul>
+        <li>Search the literature by topic through OpenAlex.</li>
+        <li>Filter, and pull the real metadata into Zotero.</li>
+        <li>Ask the agent to draft an annotated shortlist from the library.</li>
+        <li>Every reference in the shortlist exists, because every one came through the steps with its metadata.</li>
+      </ul>
+    </div>
+    <div class="card demo">
+      <span class="tag">Live demo</span>
+      <h3>The warning</h3>
+      <ul>
+        <li>Now the same request goes to a bare chatbot: "give me ten citations on this topic."</li>
+        <li>We fact-check one, live.</li>
+        <li>Made-up references are the most common failure of a text predictor. A citation that only <strong>sounds</strong> real is exactly what a tool trained to predict plausible text will produce.</li>
+        <li>Monday's caution now carries a real cost, because the fabricated citation reaches your referees.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Subagents, in one slide</h3>
+      <ul>
+        <li>A <strong>subagent</strong> is a delegated worker. It gets its own separate context window, does one assigned task, and returns a short report.</li>
+        <li>The main conversation receives only the report, and the full text of each paper stays in the subagent's own context.</li>
+        <li>Five papers read in parallel are five separate context windows, plus yours, which stays clean.</li>
+        <li>You invoke them in plain language. Asking for the work "in parallel, using separate subagents" is enough, and there is nothing to configure.</li>
+      </ul>
+    </div>
+    <div class="card demo">
+      <span class="tag">Live demo</span>
+      <h3>The fan-out</h3>
+      <ul>
+        <li>The setup: <code>papers/</code> holds five PDFs on one topic.</li>
+        <li>One prompt fans the reading out:</li>
+      </ul>
+      <div class="quote">Read each PDF in papers/ in parallel, using a separate subagent per paper. Each subagent writes notes/&lt;paper&gt;.md with: research question, data, identification strategy, main effect size, and stated limitations. When all notes exist, write notes/synthesis.md comparing the identification strategies and flagging disagreements between papers.</div>
+      <ul>
+        <li>The same structure lands five times: one note per paper, each with the same five fields.</li>
+      </ul>
+    </div>
+    <div class="card demo">
+      <span class="tag">Live demo</span>
+      <h3>The step that waits</h3>
+      <ul>
+        <li>The per-paper reads are <strong>independent</strong>. No note needs any other note, so all five run at once.</li>
+        <li>The synthesis needs <strong>every</strong> note, so it starts only after the last reader finishes.</li>
+        <li>That split is the design rule. You fan out the independent pieces, and you hold back the step that needs them all.</li>
+        <li>The payoff is <code>notes/synthesis.md</code>. Where two papers disagree on an effect size, the file says so, with both numbers.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>The contract each subagent needs</h3>
+      <ul>
+        <li>Tuesday's lesson returns at team scale. "Read these papers and take notes" leaves every subagent to invent its own note format.</li>
+        <li>Anthropic's report on its multi-agent research system (2025) found that without clear instructions, subagents "misinterpreted the task or performed the exact same searches as other agents."</li>
+        <li>A workable delegation names three things:
+          <ul>
+            <li><strong>Objective.</strong> What each note is for: feeding the comparison.</li>
+            <li><strong>Output format.</strong> The five named fields, in a named file.</li>
+            <li><strong>Boundary.</strong> One paper each, and no agent touches another's file.</li>
+          </ul>
+        </li>
+        <li>The demo prompt is long because it is a contract, and each clause closes one of these failures.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>What parallelizes, and what it costs</h3>
+      <table>
+        <tr><th>Fans out well</th><th>Must stay sequential</th></tr>
+        <tr><td>one paper per subagent</td><td>cleaning before modeling</td></tr>
+        <tr><td>one specification per agent</td><td>synthesis after reading</td></tr>
+      </table>
+      <ul>
+        <li>Independent pieces parallelize, and steps that share state or feed each other do not.</li>
+        <li><strong>The cost.</strong> Anthropic measures multi-agent runs at roughly 15 times the tokens of a single chat interaction. Parallelism buys speed and a clean context, and it bills accordingly.</li>
+        <li>Tomorrow's build day can reuse the pattern for robustness checks: one subagent per specification, each returning one coefficient row for a single comparison table.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Choose your task</h3>
+      <ul>
+        <li>Choose the task you actually need this month:
+          <ul>
+            <li>(a) Point the agent at a folder of PDFs, and get a structured annotated bibliography in <code>notes/</code>.</li>
+            <li>(b) Triage recent papers against your research question: relevant, maybe, no.</li>
+            <li>(c) Build a reading list on a topic, with verified metadata.</li>
+          </ul>
+        </li>
+        <li>Whichever you choose, the output lands in your repository, in <code>notes/</code>.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>The hard rule</h3>
+      <ul>
+        <li>Add one line to your AGENTS.md before you start:</li>
+      </ul>
+      <div class="quote">Every citation is checked against the actual paper before it lands in the repo.</div>
+      <ul>
+        <li>What checking means, concretely:
+          <ul>
+            <li>the DOI resolves</li>
+            <li>title, authors, year, and venue match the actual paper</li>
+            <li>the claim you cite it for is actually in the paper</li>
+          </ul>
+        </li>
+        <li>The agent can do the first two checks for you, and the third one is yours.</li>
+      </ul>
+    </div>
+    </section>
+
+    <!-- DISCUSSION -->
+    <section data-hands="none">
+    <h2 class="sec" id="discussion">Discussion</h2>
+
+    <div class="card">
+      <h3>Where are the lines?</h3>
+      <ul>
+        <li>Where is AI help with writing legitimate in your field?</li>
+        <li>Drafting and thinking: which parts must stay yours?</li>
+        <li>What do authorship and acknowledgment conventions expect?</li>
+        <li>What do your target journals require you to disclose today?</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Tomorrow</h3>
+      <ul>
+        <li>The final session is a build day: 100 minutes on one small website or app from your own project.</li>
+        <li>Think tonight about which one you want: a webpage of your results, one command that reruns everything, a small tool, or a smarter agent.</li>
+      </ul>
+    </div>
+    </section>
+
+  </main>
+
+  <!-- ================= RIGHT CONTEXTUAL HANDS-ON ================= -->
+  <aside>
+    <p class="railhead" id="railhead">Hands-on</p>
+
+    <!-- none: nothing shown -->
+    <div class="hands" data-for="none"></div>
+
+    <!-- collect -->
+    <div class="hands" data-for="collect">
+      <div class="exi">
+        <span class="step">Step 1</span>
+        <h4>Pick one source for your project</h4>
+        <p>Choose one source your project needs, and keep it small for now.</p>
+        <ul>
+          <li>a web page with a table you want</li>
+          <li>an API, such as the Census or a city open-data portal</li>
+          <li>a file to download and unpack, such as a CSV inside a ZIP</li>
+        </ul>
+      </div>
+      <div class="exi">
+        <span class="step">Step 2</span>
+        <h4>Have the agent pull a small piece</h4>
+        <p>Say what you want in plain words. Use the line that fits your source.</p>
+        <p>From an API:</p>
+        <div class="code">Get county population from the Census API for my state, 2010 to 2020, and save it as a CSV. Show me the first rows.<span class="copy">copy</span></div>
+        <p>From a web page:</p>
+        <div class="code">From this URL, pull the table of unemployment by month into a CSV, and show me the first rows.<span class="copy">copy</span></div>
+        <ul>
+          <li>If the API needs a free key, paste yours in once when it asks.</li>
+          <li>If the site's terms forbid scraping, stop and find another source.</li>
+        </ul>
+      </div>
+      <div class="save">Save the raw result once, before any cleaning, and never overwrite it. Ask the agent to write the source, the date, and the exact query next to the file.</div>
+      <div class="exi">
+        <span class="step">Step 3</span>
+        <h4>Check five rows against the source</h4>
+        <ul>
+          <li>Open the raw file and read the first few rows yourself.</li>
+          <li>Compare five values against the source page or the API by hand.</li>
+          <li>Move the data into your analysis only after it matches.</li>
+        </ul>
+      </div>
+      <div class="exi">
+        <span class="step">Step 4 · try more</span>
+        <h4>Package a pull you will repeat</h4>
+        <ul>
+          <li>If this is a pull you will run again, turn the steps into a Skill, the way you did on Wednesday.</li>
+          <li>Next time the same pull is one command, and a labmate can run it with their own key.</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- literature -->
+    <div class="hands" data-for="literature">
+      <div class="exi">
+        <span class="step">Step 1</span>
+        <h4>Add the hard rule to AGENTS.md</h4>
+        <p>Put this line in your AGENTS.md before you start, so the agent checks every reference.</p>
+        <div class="code">Every citation is checked against the actual paper before it lands in the repo.<span class="copy">copy</span></div>
+        <ul>
+          <li>The agent can confirm the DOI resolves and that title, authors, year, and venue match.</li>
+          <li>You confirm the claim you cite it for is actually in the paper.</li>
+        </ul>
+      </div>
+      <div class="exi">
+        <span class="step">Step 2</span>
+        <h4>Choose the task you need this month</h4>
+        <ul>
+          <li>(a) Point the agent at a folder of PDFs, and get a structured annotated bibliography in <code>notes/</code>.</li>
+          <li>(b) Triage recent papers against your research question: relevant, maybe, no.</li>
+          <li>(c) Build a reading list on a topic, with verified metadata.</li>
+        </ul>
+        <p>Whichever you choose, the output lands in your repository, in <code>notes/</code>.</p>
+      </div>
+      <div class="exi">
+        <span class="step">Step 3</span>
+        <h4>Fan the reading out to subagents</h4>
+        <p>Put a few PDFs in <code>papers/</code>, then hand the agent one prompt that names the objective, the output format, and the boundary.</p>
+        <div class="code">Read each PDF in papers/ in parallel, using a separate subagent per paper. Each subagent writes notes/&lt;paper&gt;.md with: research question, data, identification strategy, main effect size, and stated limitations. When all notes exist, write notes/synthesis.md comparing the identification strategies and flagging disagreements between papers.<span class="copy">copy</span></div>
+        <ul>
+          <li>The reads run at once, and the synthesis waits for the last one to finish.</li>
+          <li>Open <code>notes/synthesis.md</code> and check where two papers disagree, with both numbers.</li>
+        </ul>
+      </div>
+    </div>
+  </aside>
+
+</div>
+
+<script>
+  // contextual hands-on driven by which section is in view
+  const sections=[...document.querySelectorAll('main section')];
+  const panels=[...document.querySelectorAll('.hands')];
+  const railhead=document.getElementById('railhead');
+  function show(key){
+    panels.forEach(p=>p.classList.toggle('on',p.dataset.for===key));
+    railhead.style.display = key==='none' ? 'none' : '';
+  }
+  const io=new IntersectionObserver((entries)=>{
+    let best=null,bestR=0;
+    entries.forEach(e=>{if(e.intersectionRatio>bestR){bestR=e.intersectionRatio;best=e.target;}});
+    // pick the section whose top is nearest the upper third
+    let cur=sections[0];
+    sections.forEach(s=>{const t=s.getBoundingClientRect().top; if(t<window.innerHeight*0.35) cur=s;});
+    show(cur.dataset.hands);
+  },{threshold:[0,0.1,0.5,1]});
+  sections.forEach(s=>io.observe(s));
+  addEventListener('scroll',()=>{
+    let cur=sections[0];
+    sections.forEach(s=>{const t=s.getBoundingClientRect().top; if(t<window.innerHeight*0.35) cur=s;});
+    show(cur.dataset.hands);
+  },{passive:true});
+  show('none');
+
+  // setup tool tabs (Codex / Claude Code) switch the command panels
+  let tool='codex';
+  function syncPanels(){
+    document.querySelectorAll('.hands[data-for="setup"] .panel').forEach(p=>{
+      p.classList.toggle('on', p.dataset.p===tool);
+    });
+  }
+  document.querySelectorAll('.tabs[data-g="tool"] button').forEach(b=>{
+    b.onclick=()=>{
+      document.querySelectorAll('.tabs[data-g="tool"] button').forEach(x=>x.classList.toggle('on',x===b));
+      tool=b.dataset.t;
+      syncPanels();
+    };
+  });
+  syncPanels();
+
+  // active toc
+  const links=[...document.querySelectorAll('.toc a')];
+  addEventListener('scroll',()=>{
+    let cur=null;
+    links.forEach(a=>{const el=document.querySelector(a.getAttribute('href'));
+      if(el && el.getBoundingClientRect().top<140)cur=a;});
+    links.forEach(a=>a.classList.toggle('active',a===cur));
+  },{passive:true});
+
+  // copy
+  document.addEventListener('click',e=>{
+    if(!e.target.classList.contains('copy'))return;
+    const x=e.target.parentNode.childNodes[0].textContent.trim();
+    navigator.clipboard.writeText(x).then(()=>{e.target.textContent='copied';
+      setTimeout(()=>e.target.textContent='copy',1200);});
+  });
+</script>
+</body>
+</html>

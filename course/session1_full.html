@@ -1,0 +1,615 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Session 1 — AI for Data Analysis I</title>
+<style>
+  :root{
+    --bg:#fcfcfb; --fg:#1c1c1a; --muted:#6b6b66; --line:#e6e5e1;
+    --accent:#2f6f4f; --accent-weak:#eaf3ee; --ex:#b5651d; --ex-weak:#fbf1e7;
+    --code-bg:#f4f5f3; --card:#fff;
+    --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--sans)}
+  .layout{display:grid;grid-template-columns:180px minmax(0,1fr) 360px;max-width:1320px;margin:0 auto}
+
+  /* ---- left nav ---- */
+  nav{position:sticky;top:0;align-self:start;height:100vh;overflow:auto;
+      padding:26px 14px;border-right:1px solid var(--line);font-size:14px}
+  nav .days{display:flex;flex-direction:column;gap:2px;margin-bottom:22px}
+  nav .days a{color:var(--muted);text-decoration:none;padding:3px 0;font-size:13px}
+  nav .days a.cur{color:var(--fg);font-weight:700}
+  nav .home{display:block;font-size:14px;font-weight:800;color:var(--fg);text-decoration:none;line-height:1.25;margin-bottom:18px}
+  nav .home:hover{color:var(--accent)}
+  nav .lbl{font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin:0 0 8px}
+  nav .toc a{display:block;color:var(--fg);text-decoration:none;padding:6px 0 6px 12px;
+             border-left:2px solid transparent;margin-left:-2px}
+  nav .toc a:hover{color:var(--accent)}
+  nav .toc a.active{color:var(--accent);border-left-color:var(--accent);font-weight:600}
+  nav .toc .has{color:var(--ex);font-size:11px;margin-left:6px}
+
+  /* ---- center content ---- */
+  main{padding:30px 32px 160px;min-width:0}
+  .kicker{font-size:13px;letter-spacing:.07em;text-transform:uppercase;color:var(--accent);font-weight:700;margin:0}
+  h1{margin:4px 0 6px;font-size:32px}
+  .goal{color:var(--muted);font-size:16px;margin:0 0 20px}
+  h2.sec{font-size:28px;font-weight:700;color:var(--fg);line-height:1.2;
+         margin:52px 0 12px;padding-top:22px;border-top:1px solid var(--line)}
+  h2.sec .hastag{color:var(--ex);font-weight:600;font-size:14px}
+
+  .card{background:var(--card);border:1px solid var(--line);border-radius:14px;
+        padding:20px 24px;margin:16px 0;box-shadow:0 1px 2px rgba(0,0,0,.03)}
+  .card h3{margin:0 0 12px;font-size:21px;line-height:1.25}
+  .card ul{list-style:none;padding:0;margin:0}
+  .card li{font-size:17px;line-height:1.45;padding:9px 0 9px 26px;position:relative;border-top:1px solid var(--line)}
+  .card li:first-child{border-top:0}
+  .card li::before{content:"";position:absolute;left:4px;top:17px;width:8px;height:8px;border-radius:50%;background:var(--accent)}
+  .card ul ul{margin:6px 0 0}
+  .card li li{font-size:15px;padding:5px 0 5px 24px;border-top:0;color:var(--muted)}
+  .card li li::before{width:5px;height:5px;top:14px;background:var(--muted)}
+  .card.demo{border-left:4px solid var(--accent)}
+  .card.demo .tag{display:inline-block;font-size:12px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;
+                  color:var(--accent);margin-bottom:8px}
+  .quote{background:var(--code-bg);border-left:3px solid var(--accent);border-radius:0 8px 8px 0;
+         padding:12px 16px;margin:12px 0;font-style:italic;line-height:1.5}
+  code{background:var(--code-bg);padding:1px 5px;border-radius:4px;font-family:ui-monospace,Menlo,monospace;font-size:.85em}
+  strong{color:#111}
+  table{border-collapse:collapse;width:100%;margin:10px 0;font-size:16px}
+  th,td{border:1px solid var(--line);padding:8px 12px;text-align:left}
+  th{background:var(--accent-weak);font-size:14px}
+  .src{font-size:13px;color:var(--muted)} .src a{color:var(--accent)}
+
+  /* ---- right contextual hands-on ---- */
+  aside{position:sticky;top:0;align-self:start;height:100vh;overflow:auto;
+        border-left:1px solid var(--line);padding:26px 18px 60px;background:#fbfaf8}
+  aside .railhead{font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--ex)}
+  aside .railctx{font-size:13px;color:var(--muted);margin:2px 0 16px}
+  .hands{display:none} .hands.on{display:block}
+  .hands.none-msg{color:var(--muted);font-size:14px;line-height:1.6;
+                  border:1px dashed var(--line);border-radius:10px;padding:16px;background:#fff}
+  .exi{border:1px solid #e8d3ba;background:var(--ex-weak);border-radius:10px;margin:10px 0;padding:12px 14px}
+  .exi .step{display:inline-block;font-size:10px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;
+             color:#fff;background:var(--ex);border-radius:20px;padding:2px 9px;margin-bottom:8px}
+  .exi h4{margin:0 0 6px;font-size:15px}
+  .exi ul{margin:6px 0;padding-left:18px;font-size:13.5px;line-height:1.5}
+  .exi li{margin:4px 0}
+  .exi p{font-size:13.5px;line-height:1.5;margin:6px 0}
+  .save{font-size:13px;color:var(--muted);background:#fff;border:1px solid var(--line);
+        border-radius:8px;padding:9px 12px;margin:10px 0}
+
+  .tabs{display:flex;gap:5px;margin:8px 0 0}
+  .tabs button{border:1px solid #e8d3ba;background:#fff;border-radius:7px;padding:4px 10px;
+               font-size:12px;cursor:pointer;color:var(--ex)}
+  .tabs button.on{background:var(--ex);color:#fff}
+  .panel{display:none} .panel.on{display:block}
+
+  .code{position:relative;background:#fff;border:1px solid #e8d3ba;border-radius:8px;
+        padding:9px 34px 9px 11px;font-family:ui-monospace,Menlo,monospace;font-size:12px;
+        white-space:pre-wrap;margin:8px 0;line-height:1.45}
+  .code .copy{position:absolute;top:6px;right:6px;font-size:10px;border:1px solid #e8d3ba;
+              background:#fff;border-radius:6px;padding:2px 7px;cursor:pointer;color:var(--ex)}
+  .guidelink{display:inline-block;margin-top:6px;font-size:13px;color:var(--ex);font-weight:600}
+
+  @media(max-width:1080px){
+    .layout{grid-template-columns:1fr}
+    nav{display:none}
+    aside{position:static;height:auto;border-left:0;border-top:1px solid var(--line)}
+    .hands{display:block !important;border-top:1px solid var(--line);padding-top:10px;margin-top:10px}
+    .hands.none-msg{display:none !important}
+  }
+</style>
+</head>
+<body>
+<div class="layout">
+
+  <!-- ================= LEFT NAV ================= -->
+  <nav>
+    <a class="home" href="session1_full.html">AI-Assisted Coding for Social Data Analysis</a>
+    <div class="days">
+      <div class="lbl">Sessions</div>
+      <a href="session1_full.html" class="cur">1 · AI for Data Analysis I</a>
+      <a href="session2_full.html">2 · AI for Data Analysis II</a>
+      <a href="session3_full.html">3 · Harnessing AI Agents</a>
+      <a href="session4_full.html">4 · AI for Data Collection and Literature Review</a>
+      <a href="session5_full.html">5 · AI for Building Apps</a>
+    </div>
+    <div class="lbl">Today</div>
+    <div class="toc">
+      <a href="#opening">Opening</a>
+      <a href="#concept">What an AI agent is</a>
+      <a href="#setup">Setup <span class="has">hands-on</span></a>
+      <a href="#repo">Your research project <span class="has">hands-on</span></a>
+      <a href="#wrap">Wrap</a>
+    </div>
+  </nav>
+
+  <!-- ================= CENTER CONTENT ================= -->
+  <main>
+    <p class="kicker">Session 1 · Monday</p>
+    <h1>AI for Data Analysis I</h1>
+    <p class="goal">Leave today with your tools working and your own research project started. When a section has something to do, it appears in the panel on the right.</p>
+
+    <!-- OPENING -->
+    <section data-hands="none">
+    <h2 class="sec" id="opening">Opening</h2>
+
+    <div class="card">
+      <h3>This course</h3>
+      <ul>
+        <li>Over the next five days you use AI agents in your own research.</li>
+        <li>An <strong>agent</strong> is AI that writes and runs code on your data, inside your project.</li>
+      </ul>
+    </div>
+    <div class="card demo">
+      <span class="tag">Live demo</span>
+      <h3>An agent doing data analysis</h3>
+      <ul>
+        <li>Question: do countries differ in how much people value <strong>politics</strong>?</li>
+        <li>Data: the World Values Survey.</li>
+        <li>I hand the agent a single instruction and let it work:</li>
+      </ul>
+      <div class="quote">Using Python: from the World Values Survey, find the item on how important politics is in a respondent's life, compute the country-level average, make a bar chart of countries by that average, and save it as a PNG.</div>
+    </div>
+    <div class="card">
+      <h3>What just happened</h3>
+      <ul>
+        <li>The agent wrote the code and ran it.</li>
+        <li>It hit errors, read them, and fixed them.</li>
+        <li>It checked its own output.</li>
+        <li>It returned a chart for you to inspect.</li>
+        <li>Your only inputs were the instruction at the start and your reading of the chart at the end.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>You can push it further</h3>
+      <ul>
+        <li>The first instruction was only the beginning. You can continue:
+          <ul>
+            <li>"Validate the variable against the codebook."</li>
+            <li>"Handle the survey weights."</li>
+            <li>"Write a README so this re-runs with one command."</li>
+          </ul>
+        </li>
+        <li>For bigger jobs, you can split the work:
+          <ul>
+            <li>one agent validates the data</li>
+            <li>one writes the code</li>
+            <li>one drafts the report</li>
+          </ul>
+        </li>
+        <li>By Friday, you will have done all of these on your own project.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>From tool user to director</h3>
+      <ul>
+        <li>You already analyze data in R, Stata, or Python.</li>
+        <li>The new skill is <strong>directing</strong> an AI agent to write and run that code.</li>
+        <li>The agent produced a country-level average in ninety seconds, and whether that average answers the question is still your call.</li>
+        <li>You remain the only one in the room who can say whether a number is credible.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Who this course is for</h3>
+      <ul>
+        <li>You have written and run your own scripts: load data, run a regression.</li>
+        <li>You brought a dataset or an ongoing project. Every exercise runs on it.</li>
+        <li>You do <strong>not</strong> need a software engineering background.</li>
+        <li>If you already use Claude Code or Cursor daily, this course will be too slow for you.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>One tool, on purpose</h3>
+      <ul>
+        <li>This course runs on one coding agent. <strong>Claude Code</strong> (by Anthropic) and <strong>Codex</strong> (by OpenAI) both work; pick one and use it all week.</li>
+        <li>The pre-course email walked you through installing either one.</li>
+        <li>Every hands-on uses that tool's exact commands, and two instructors support a room far better with one setup per person.</li>
+        <li>What you build transfers anyway: the Skill format you learn on Wednesday is an open standard that many agents read.</li>
+        <li>The agent runs on a computer, so you need a Mac or Windows laptop; once it is running you can also reach it from a phone or tablet.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>The five days</h3>
+      <ul>
+        <li>Monday: run your first analysis by directing an agent.</li>
+        <li>Tuesday: direct a full analysis, deciding at each stage what to hand over.</li>
+        <li>Wednesday: make your analysis re-run with a single command.</li>
+        <li>Thursday: use the agent to search literature and draft writing.</li>
+        <li>Friday: build a small tool around your own project.</li>
+        <li>Each day adds to one project of your own, and on Friday you leave with it.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Where this is going: your Friday project</h3>
+      <ul>
+        <li>By Friday you will present a project of your own.</li>
+        <li>It does not need to be finished; some will have results, some will have a start.</li>
+        <li>What matters is the account you give: your question, what you built, and how far you got.</li>
+        <li>For each main step, say who did it: which parts you decided, and which parts the agent did.</li>
+        <li>Share the experience: what worked, what the agent got wrong, and how you caught it.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Today</h3>
+      <ul>
+        <li>First, the concept: what an AI agent is.</li>
+        <li>Then setup: get your tools running.</li>
+        <li>After the break, build your own research project.</li>
+        <li>We close with a checkpoint on your own data.</li>
+      </ul>
+    </div>
+    </section>
+
+    <!-- CONCEPT -->
+    <section data-hands="none">
+    <h2 class="sec" id="concept">What an AI agent is</h2>
+
+    <div class="card">
+      <h3>Isn't this just ChatGPT?</h3>
+      <ul>
+        <li>Underneath it is the same kind of model. The difference is the machine built around it.</li>
+        <li>Ask ChatGPT for the WVS analysis, and it hands you a block of code to run yourself.</li>
+        <li>Give the agent the same request, and it writes the code, runs it, hits an error, and fixes it, until the chart exists.</li>
+        <li>ChatGPT answers once and stops. The agent keeps working until the task is done.</li>
+        <li>That difference comes from three engineering breakthroughs, solved between 2023 and 2025.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>It works in a folder, not a chat</h3>
+      <ul>
+        <li>The biggest change from ChatGPT is where your work lives: in a folder on your computer.</li>
+        <li>You pick one folder for your project, and the agent works inside it.</li>
+        <li>Your data, your scripts, and your notes are all in there together.</li>
+        <li>The agent only touches things in that folder, so it stays out of the rest of your computer.</li>
+        <li>Its notes stay in the folder, so next time it picks up where you left off, instead of starting over like a chat.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Condition 1: tool use</h3>
+      <ul>
+        <li>A language model on its own only produces text.</li>
+        <li><strong>Tool use</strong> gives it real actions: read a file, write a file, run a command, search the web.</li>
+        <li>Every time it edits your script or runs <code>python analysis.py</code>, that is tool use at work.</li>
+        <li>The model asks to run an action, the action runs on your computer, and the result goes back to the model.</li>
+        <li>This is why the agent asks permission before it acts: it is running on your machine.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Condition 2: the agent loop</h3>
+      <ul>
+        <li>A chatbot answers once. An agent works in a <strong>loop</strong> until the goal is met.</li>
+        <li>On the WVS chart the loop ran like this:
+          <ul>
+            <li>it read the survey file and the codebook,</li>
+            <li>it wrote code to compute the country averages,</li>
+            <li>it ran the code and hit an error on missing values,</li>
+            <li>it read the error and rewrote that step,</li>
+            <li>it ran again and produced the chart.</li>
+          </ul>
+        </li>
+        <li>The loop repeats until the task is done, or until you stop it.</li>
+        <li>It pauses for your approval, and that pause is where your judgment enters.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Condition 3: running the code</h3>
+      <ul>
+        <li>Much of research work is code: cleaning data, running a model, drawing a chart.</li>
+        <li>For that work, code you have written is only a guess until it runs.</li>
+        <li>The agent runs its own code, reads what breaks, fixes it, and runs again, so you end up with a result that works.</li>
+        <li>Some tasks are not code, like reading a codebook or drafting a paragraph, and there the agent just does the writing.</li>
+        <li>Running its own code is what lets the agent finish the job.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>The three conditions together</h3>
+      <table>
+        <tr><th>A model alone</th><th>An agent</th></tr>
+        <tr><td>generates a code snippet</td><td>writes, runs, tests, and fixes code</td></tr>
+        <tr><td>describes what a script should do</td><td>implements it and verifies it</td></tr>
+        <tr><td>suggests an approach</td><td>executes it and iterates to a result</td></tr>
+      </table>
+      <ul><li>Take away any one of the three, and the system falls back to a chatbot.</li></ul>
+    </div>
+    <div class="card">
+      <h3>A short history</h3>
+      <ul>
+        <li>ChatGPT: end of 2022.</li>
+        <li>Tool use became reliable in mid-2023.</li>
+        <li>The agent loop matured through 2023–2024.</li>
+        <li>Code execution became dependable during 2024–2025.</li>
+        <li>The first agentic coding tools, in 2025, combined all three in the terminal.</li>
+        <li>If an AI coding tool underwhelmed you two years ago, it likely had one or two of the three, and this is why.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>The agent is your RA</h3>
+      <ul>
+        <li>You have been the research assistant: a professor hands you a task, and you go do it.</li>
+        <li>Now you are on the other side, and the agent is your RA.</li>
+        <li>It is fast, and it takes instructions literally, so a vague brief comes back as a vague result.</li>
+        <li>Your job is the part the professor kept: decide what to ask for, and judge what comes back.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>One warning for the week</h3>
+      <ul>
+        <li>These models are built to sound fluent, and fluent language can still be wrong.</li>
+        <li>The case to fear is the answer that is confident and wrong at once.</li>
+        <li>So you check every result the agent gives you, every time.</li>
+        <li>The rule for these five days: <strong>an unverified result is not a result.</strong></li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>What it is good and bad at</h3>
+      <ul><li>A 2026 benchmark ran AI agents through a full social-science replication and scored each step:</li></ul>
+      <table>
+        <tr><th>Step</th><th>Score</th></tr>
+        <tr><td>Run the analysis</td><td>96</td></tr>
+        <tr><td>Read and interpret the result</td><td>93</td></tr>
+        <tr><td>Find the data it needs</td><td>31</td></tr>
+        <tr><td>Judge whether it replicates</td><td>79%</td></tr>
+      </table>
+      <ul><li>You lean on it for the code and the reading; you own the data and the final call.</li></ul>
+      <p class="src">Source: Nguyen et al., "ReplicatorBench: Benchmarking LLM Agents for Replicability in Social and Behavioral Sciences" (2026), <a href="https://arxiv.org/abs/2602.11354">arXiv:2602.11354</a>.</p>
+    </div>
+    </section>
+
+    <!-- SETUP -->
+    <section data-hands="setup">
+    <h2 class="sec" id="setup">Setup <span class="hastag">· do it on the right</span></h2>
+
+    <div class="card">
+      <h3>What the terminal is</h3>
+      <ul>
+        <li>The terminal is a text interface to your computer: you type a command, it prints the result.</li>
+        <li>On a Mac it is the app called <strong>Terminal</strong>; on Windows it is <strong>PowerShell</strong>.</li>
+        <li>Agents live here because this is where programs are run.</li>
+        <li>You need very little of it: <code>cd folder</code> moves into a folder, <code>ls</code> lists what is there.</li>
+        <li>Everything else you can ask the agent to type for you.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>When something breaks</h3>
+      <ul>
+        <li>Something will break today. That is part of the course, on purpose.</li>
+        <li>When the agent runs a command that fails, it reads the error and fixes it on its own; you watch and steer.</li>
+        <li>When you are stuck yourself, tell the agent in plain words what happened.</li>
+        <li>Error messages are information, and the agent is very good at reading them.</li>
+      </ul>
+    </div>
+    </section>
+
+    <!-- RESEARCH PROJECT -->
+    <section data-hands="repo">
+    <h2 class="sec" id="repo">Your research project <span class="hastag">· do it on the right</span></h2>
+
+    <div class="card">
+      <h3>What a whole project looks like</h3>
+      <ul>
+        <li>Most research projects go through the same steps, and you can hand each one to the agent:
+          <ul>
+            <li>find and collect the data</li>
+            <li>clean it and get it ready</li>
+            <li>build the measures you need</li>
+            <li>run the analysis</li>
+            <li>make the figures and write up the result</li>
+          </ul>
+        </li>
+        <li>This week you do all of these on your own project.</li>
+        <li>Today you start at the beginning: get your data in and take a first look.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>The agent can set up the whole project</h3>
+      <ul>
+        <li>You can ask the agent to make the folders, write the first scripts, and run them.</li>
+        <li>Setting up a project is one of the first things it does well.</li>
+        <li>Many people do not know this, and set everything up themselves by hand.</li>
+        <li>You say what you want, and you check what it made.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>One project, one folder</h3>
+      <ul>
+        <li>Everything in this course lives in one folder for your own project.</li>
+        <li>Ask the agent for a clear layout, so you and it always know where things are:</li>
+      </ul>
+      <table>
+        <tr><td><code>README.md</code></td><td>what this project is</td></tr>
+        <tr><td><code>data/</code></td><td>your data</td></tr>
+        <tr><td><code>scripts/</code></td><td>analysis code</td></tr>
+        <tr><td><code>output/</code></td><td>tables and figures</td></tr>
+        <tr><td><code>notes/</code></td><td>literature and writing (Thursday)</td></tr>
+      </table>
+      <ul><li>You keep adding to this one project all week.</li></ul>
+    </div>
+    </section>
+
+    <!-- WRAP -->
+    <section data-hands="none">
+    <h2 class="sec" id="wrap">Wrap</h2>
+    <div class="card">
+      <h3>Where you are</h3>
+      <ul>
+        <li>Your tools are running, and your own project has its first script.</li>
+        <li>Tomorrow you run a full analysis in stages, deciding at each stage what to hand the agent.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>How you work for the rest of the week</h3>
+      <ul>
+        <li>You do not write code yourself. You direct the agent, and it writes and runs the code.</li>
+        <li>You can hand it every part of the work: finding and collecting data, cleaning it, building your measures, running the analysis, and drawing the figures.</li>
+        <li>Your job is to decide what to ask for and to check what comes back.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Pick your project now</h3>
+      <ul>
+        <li>Choose one project tonight and carry it through all five days.</li>
+        <li>It can be a dataset you want to analyze, a question you have been putting off, or a messy file you never had time to clean.</li>
+        <li>By Friday, aim for something that also looks good: a clear figure, a short readable report, or a small website that shows your result.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Before you go, and tonight</h3>
+      <ul>
+        <li>Show a neighbor your script running on your own data.</li>
+        <li>If your environment is still broken, you pair up tomorrow and get a fix slot with Bing before Session 2.</li>
+        <li>Tonight, write one sentence: the first analysis you want to run on your data.</li>
+      </ul>
+    </div>
+    </section>
+
+  </main>
+
+  <!-- ================= RIGHT CONTEXTUAL HANDS-ON ================= -->
+  <aside>
+    <p class="railhead" id="railhead">Hands-on</p>
+
+    <!-- none: nothing shown -->
+    <div class="hands" data-for="none"></div>
+
+    <!-- setup -->
+    <div class="hands" data-for="setup">
+      <div class="exi">
+        <span class="step">Step 1</span>
+        <h4>Pick where it runs</h4>
+        <p>Both agents come in two forms. They do the same job; the difference is where your data goes.</p>
+        <ul>
+          <li><strong>On your computer:</strong> you run it in the terminal, and your files stay on your machine. Best for your own or private data.</li>
+          <li><strong>In your browser:</strong> Claude at claude.ai/code, or Codex at chatgpt.com/codex. Nothing to install, but it runs on the company's servers, on a copy of your project from GitHub.</li>
+        </ul>
+        <p>For this course, running it on your computer is the safer choice, so the steps below set that up.</p>
+      </div>
+      <div class="exi">
+        <span class="step">Step 2</span>
+        <h4>Install it on your computer</h4>
+        <p>Pick the agent you chose, then run its line in the terminal.</p>
+        <div class="tabs" data-g="tool">
+          <button class="on" data-t="codex">Codex</button>
+          <button data-t="cc">Claude Code</button>
+        </div>
+        <div class="panel on" data-p="codex">
+          <p>Mac:</p><div class="code">curl -fsSL https://chatgpt.com/codex/install.sh | sh<span class="copy">copy</span></div>
+          <p>Windows (PowerShell):</p><div class="code">irm https://chatgpt.com/codex/install.ps1 | iex<span class="copy">copy</span></div>
+        </div>
+        <div class="panel" data-p="cc">
+          <p>Mac:</p><div class="code">curl -fsSL https://claude.ai/install.sh | bash<span class="copy">copy</span></div>
+          <p>Windows (PowerShell):</p><div class="code">irm https://claude.ai/install.ps1 | iex<span class="copy">copy</span></div>
+        </div>
+      </div>
+      <div class="exi">
+        <span class="step">Step 3</span>
+        <h4>Start it and sign in</h4>
+        <p>Type the tool's name and press Enter; it opens your browser to sign in.</p>
+        <div class="panel on" data-p="codex"><div class="code">codex<span class="copy">copy</span></div></div>
+        <div class="panel" data-p="cc"><div class="code">claude<span class="copy">copy</span></div></div>
+        <ul>
+          <li>You are set when it prints a prompt and waits for you to type.</li>
+          <li>Raise your hand the moment a step fails; do not sit stuck for more than a few minutes.</li>
+        </ul>
+      </div>
+      <a class="guidelink" href="setup_guide.html">Full setup guide: the browser version, permission levels, first task, and fixes →</a>
+    </div>
+
+    <!-- repo -->
+    <div class="hands" data-for="repo">
+      <div class="exi">
+        <span class="step">Step 1</span>
+        <h4>First, redo the demo yourself</h4>
+        <p>Start with the same task from this morning, so you see the agent work end to end on a known example. Hand it one instruction and watch:</p>
+        <div class="code">Using Python and the World Values Survey, find the item on how important politics is in life, compute the country-level average, make a bar chart, and save it as a PNG.<span class="copy">copy</span></div>
+        <ul>
+          <li>Let it write the code, run it, hit errors, and fix them.</li>
+          <li>Read the chart at the end and ask: does this look right?</li>
+        </ul>
+      </div>
+      <div class="exi">
+        <span class="step">Step 2</span>
+        <h4>Now switch to your own project</h4>
+        <p>Ask the agent to set up your project and a first look at your data. You write no code; it does:</p>
+        <div class="code">Set up a project folder for my research with data/, scripts/, and output/ folders and a README with my question. Then write and run a script that loads my dataset and reports the row and column count, the missing values per column, and the distribution of my key variables.<span class="copy">copy</span></div>
+        <ul>
+          <li>Copy your dataset into <code>data/</code> first. Sensitive or human-subjects data stays on your machine; do not upload it anywhere.</li>
+          <li>Read the script, ask it to explain any line you do not recognize, and check the numbers against what you know.</li>
+        </ul>
+      </div>
+      <div class="save">Safety net: before a big change, ask the agent to save a checkpoint you can go back to if something breaks. You will learn the proper version-history tool on Wednesday.</div>
+      <div class="exi">
+        <span class="step">Step 3 · try more</span>
+        <h4>Try it on your other work</h4>
+        <ul>
+          <li>Do not stop at this dataset. Give the agent other things you have: a paper you are drafting, a lecture, a messy spreadsheet.</li>
+          <li>Ask each one for something real, and see where it helps and where it gets things wrong.</li>
+          <li>Today, get a sense of what it can and cannot do for you.</li>
+        </ul>
+      </div>
+    </div>
+  </aside>
+
+</div>
+
+<script>
+  // contextual hands-on driven by which section is in view
+  const sections=[...document.querySelectorAll('main section')];
+  const panels=[...document.querySelectorAll('.hands')];
+  const railhead=document.getElementById('railhead');
+  function show(key){
+    panels.forEach(p=>p.classList.toggle('on',p.dataset.for===key));
+    railhead.style.display = key==='none' ? 'none' : '';
+  }
+  const io=new IntersectionObserver((entries)=>{
+    let best=null,bestR=0;
+    entries.forEach(e=>{if(e.intersectionRatio>bestR){bestR=e.intersectionRatio;best=e.target;}});
+    // pick the section whose top is nearest the upper third
+    let cur=sections[0];
+    sections.forEach(s=>{const t=s.getBoundingClientRect().top; if(t<window.innerHeight*0.35) cur=s;});
+    show(cur.dataset.hands);
+  },{threshold:[0,0.1,0.5,1]});
+  sections.forEach(s=>io.observe(s));
+  addEventListener('scroll',()=>{
+    let cur=sections[0];
+    sections.forEach(s=>{const t=s.getBoundingClientRect().top; if(t<window.innerHeight*0.35) cur=s;});
+    show(cur.dataset.hands);
+  },{passive:true});
+  show('none');
+
+  // setup tool tabs (Codex / Claude Code) switch the command panels
+  let tool='codex';
+  function syncPanels(){
+    document.querySelectorAll('.hands[data-for="setup"] .panel').forEach(p=>{
+      p.classList.toggle('on', p.dataset.p===tool);
+    });
+  }
+  document.querySelectorAll('.tabs[data-g="tool"] button').forEach(b=>{
+    b.onclick=()=>{
+      document.querySelectorAll('.tabs[data-g="tool"] button').forEach(x=>x.classList.toggle('on',x===b));
+      tool=b.dataset.t;
+      syncPanels();
+    };
+  });
+  syncPanels();
+
+  // active toc
+  const links=[...document.querySelectorAll('.toc a')];
+  addEventListener('scroll',()=>{
+    let cur=null;
+    links.forEach(a=>{const el=document.querySelector(a.getAttribute('href'));
+      if(el && el.getBoundingClientRect().top<140)cur=a;});
+    links.forEach(a=>a.classList.toggle('active',a===cur));
+  },{passive:true});
+
+  // copy
+  document.addEventListener('click',e=>{
+    if(!e.target.classList.contains('copy'))return;
+    const x=e.target.parentNode.childNodes[0].textContent.trim();
+    navigator.clipboard.writeText(x).then(()=>{e.target.textContent='copied';
+      setTimeout(()=>e.target.textContent='copy',1200);});
+  });
+</script>
+</body>
+</html>
