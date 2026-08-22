@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Computational Social Science | Han Zhang</title>
-    <link>https://hanzhang.xyz/tags/computational-social-science/</link>
-      <atom:link href="https://hanzhang.xyz/tags/computational-social-science/index.xml" rel="self" type="application/rss+xml" />
-    <description>Computational Social Science</description>
+    <title>AI | Han Zhang</title>
+    <link>https://hanzhang.xyz/tags/ai/</link>
+      <atom:link href="https://hanzhang.xyz/tags/ai/index.xml" rel="self" type="application/rss+xml" />
+    <description>AI</description>
     <generator>Hugo Blox Builder (https://hugoblox.com)</generator><language>en-us</language><lastBuildDate>Fri, 21 Aug 2026 00:00:00 +0000</lastBuildDate>
     <image>
       <url>https://hanzhang.xyz/media/icon_hu_f9a4133fef468c2c.png</url>
-      <title>Computational Social Science</title>
-      <link>https://hanzhang.xyz/tags/computational-social-science/</link>
+      <title>AI</title>
+      <link>https://hanzhang.xyz/tags/ai/</link>
     </image>
     
     <item>
@@ -20,16 +20,6 @@
       <description>&lt;p&gt;A five-day short course, co-taught with Bing Tian, on using AI coding agents to do real research on your own data: running analyses, coding your data, checking every result, collecting data, reading literature, and building a small website or app.&lt;/p&gt;
 &lt;p&gt;
 &lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>SOSC 4300 &amp; 5500 : Computational Social Science</title>
-      <link>https://hanzhang.xyz/teaching/sosc4300/</link>
-      <pubDate>Wed, 01 May 2024 00:00:00 +0000</pubDate>
-      <guid>https://hanzhang.xyz/teaching/sosc4300/</guid>
-      <description>&lt;p&gt;I have taught &lt;em&gt;SOSC 4300 / 5500: Computational Social Science&lt;/em&gt; at HKUST from 2020 - 2024. You can view the 
-.&lt;/p&gt;
 </description>
     </item>
     
