@@ -1,0 +1,678 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Codex Setup Guide</title>
+<style>
+  /* ---------- Design tokens ---------- */
+  :root {
+    --paper:   #f4f4f0;
+    --surface: #ffffff;
+    --raise:   #fbfbf8;
+    --ink:     #1a1d21;
+    --ink-2:   #4a4f56;
+    --ink-3:   #767b82;
+    --line:    #e2e1da;
+    --line-2:  #d3d2c9;
+    --accent:  #115e6e;
+    --accent-2:#0c4a58;
+    --accent-soft: #e0edef;
+    --warn:    #8a5a00;
+    --warn-bg: #f8edd6;
+    --warn-line:#e6cf97;
+    --danger:  #9c3a2b;
+    --danger-bg:#f6e3de;
+    --danger-line:#e3b6ab;
+    --good:    #2c6740;
+    --good-bg: #e2efe5;
+    --good-line:#b5d5bd;
+    --term-bg: #0f1518;
+    --term-ink:#d5dee0;
+    --term-dim:#8b989c;
+    --term-accent:#5cc0d1;
+    --shot-bg: #f0efe8;
+    --shot-line:#bdbcb2;
+
+    --mono: ui-monospace, "SF Mono", "Cascadia Code", "JetBrains Mono", Menlo, Consolas, monospace;
+    --sans: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+
+    --measure: 44rem;
+    --radius: 12px;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --paper:   #12161a;
+      --surface: #191d22;
+      --raise:   #1e232a;
+      --ink:     #ececE6;
+      --ink-2:   #b3b9c0;
+      --ink-3:   #838a92;
+      --line:    #2a2f36;
+      --line-2:  #363c44;
+      --accent:  #56b8ca;
+      --accent-2:#7fcdda;
+      --accent-soft: #14313a;
+      --warn:    #e0b25f;
+      --warn-bg: #2c2413;
+      --warn-line:#524217;
+      --danger:  #e39485;
+      --danger-bg:#2f1c18;
+      --danger-line:#5a3129;
+      --good:    #8fd0a0;
+      --good-bg: #17281c;
+      --good-line:#2f4a37;
+      --term-bg: #0c1013;
+      --shot-bg: #181c21;
+      --shot-line:#3a4048;
+    }
+  }
+  :root[data-theme="light"] {
+    --paper:#f4f4f0; --surface:#ffffff; --raise:#fbfbf8; --ink:#1a1d21; --ink-2:#4a4f56;
+    --ink-3:#767b82; --line:#e2e1da; --line-2:#d3d2c9; --accent:#115e6e; --accent-2:#0c4a58;
+    --accent-soft:#e0edef; --warn:#8a5a00; --warn-bg:#f8edd6; --warn-line:#e6cf97;
+    --danger:#9c3a2b; --danger-bg:#f6e3de; --danger-line:#e3b6ab; --good:#2c6740;
+    --good-bg:#e2efe5; --good-line:#b5d5bd; --term-bg:#0f1518; --shot-bg:#f0efe8; --shot-line:#bdbcb2;
+  }
+  :root[data-theme="dark"] {
+    --paper:#12161a; --surface:#191d22; --raise:#1e232a; --ink:#ecece6; --ink-2:#b3b9c0;
+    --ink-3:#838a92; --line:#2a2f36; --line-2:#363c44; --accent:#56b8ca; --accent-2:#7fcdda;
+    --accent-soft:#14313a; --warn:#e0b25f; --warn-bg:#2c2413; --warn-line:#524217;
+    --danger:#e39485; --danger-bg:#2f1c18; --danger-line:#5a3129; --good:#8fd0a0;
+    --good-bg:#17281c; --good-line:#2f4a37; --term-bg:#0c1013; --shot-bg:#181c21; --shot-line:#3a4048;
+  }
+
+  /* ---------- Base ---------- */
+  * { box-sizing: border-box; }
+  img { max-width: 100%; height: auto; display: block; }
+  html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--sans);
+    font-size: 17px;
+    line-height: 1.62;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+  ::selection { background: var(--accent-soft); }
+
+  .wrap { max-width: var(--measure); margin: 0 auto; padding: 0 22px; }
+
+  /* ---------- Top nav ---------- */
+  nav.top {
+    position: sticky; top: 0; z-index: 50;
+    background: color-mix(in srgb, var(--paper) 88%, transparent);
+    backdrop-filter: saturate(1.2) blur(8px);
+    border-bottom: 1px solid var(--line);
+  }
+  nav.top .wrap { display: flex; align-items: center; gap: 6px; min-height: 52px; flex-wrap: wrap; }
+  nav.top .brand {
+    font-family: var(--mono); font-size: 13px; font-weight: 600; letter-spacing: .02em;
+    color: var(--ink); margin-right: auto; display: flex; align-items: center; gap: 8px;
+  }
+  nav.top .brand b { color: var(--accent); }
+  nav.top a.link {
+    font-family: var(--mono); font-size: 12px; color: var(--ink-2);
+    text-decoration: none; padding: 5px 8px; border-radius: 7px; white-space: nowrap;
+  }
+  nav.top a.link:hover { color: var(--ink); background: var(--accent-soft); }
+  nav.top a.link:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  @media (max-width: 720px) { nav.top .links { display: none; } }
+
+  /* ---------- Header ---------- */
+  header.hero { padding: 58px 0 30px; border-bottom: 1px solid var(--line); }
+  .eyebrow {
+    font-family: var(--mono); font-size: 12.5px; letter-spacing: .14em; text-transform: uppercase;
+    color: var(--accent); font-weight: 600; margin: 0 0 16px;
+  }
+  h1 {
+    font-size: clamp(2rem, 6vw, 2.85rem); line-height: 1.05; letter-spacing: -.02em;
+    margin: 0 0 16px; font-weight: 720; text-wrap: balance;
+  }
+  .lede { font-size: 1.16rem; color: var(--ink-2); margin: 0 0 26px; max-width: 38rem; }
+  .meta-row { display: flex; flex-wrap: wrap; gap: 8px; }
+  .chip {
+    font-family: var(--mono); font-size: 12px; color: var(--ink-2);
+    border: 1px solid var(--line-2); border-radius: 999px; padding: 4px 12px; background: var(--raise);
+  }
+  .chip b { color: var(--ink); font-weight: 600; }
+
+  /* ---------- Sections ---------- */
+  section { padding: 44px 0; border-bottom: 1px solid var(--line); }
+  .sec-num {
+    font-family: var(--mono); font-size: 12.5px; letter-spacing: .1em; color: var(--ink-3);
+    font-weight: 600; margin: 0 0 6px;
+  }
+  h2 { font-size: 1.62rem; line-height: 1.15; letter-spacing: -.015em; margin: 0 0 8px; font-weight: 680; text-wrap: balance; }
+  h3 { font-size: 1.1rem; margin: 30px 0 10px; font-weight: 660; letter-spacing: -.01em; }
+  p { margin: 0 0 14px; }
+  p.sub { color: var(--ink-2); margin-bottom: 22px; max-width: 40rem; }
+  a.inline { color: var(--accent); text-underline-offset: 2px; text-decoration-color: color-mix(in srgb, var(--accent) 40%, transparent); }
+  strong { font-weight: 640; }
+  code.k {
+    font-family: var(--mono); font-size: .9em; background: var(--accent-soft);
+    color: var(--accent-2); padding: 1.5px 6px; border-radius: 5px; white-space: nowrap;
+  }
+
+  /* ---------- Reach comparison ---------- */
+  .reach { overflow-x: auto; margin: 8px 0 4px; border: 1px solid var(--line); border-radius: var(--radius); }
+  table.reach-t { border-collapse: collapse; width: 100%; min-width: 420px; font-size: 15px; }
+  table.reach-t th, table.reach-t td { padding: 13px 15px; text-align: left; border-bottom: 1px solid var(--line); }
+  table.reach-t thead th {
+    font-family: var(--mono); font-size: 12px; letter-spacing: .04em; text-transform: uppercase;
+    color: var(--ink-3); font-weight: 600; background: var(--raise);
+  }
+  table.reach-t tbody tr:last-child td { border-bottom: none; }
+  table.reach-t td.who { font-weight: 600; }
+  table.reach-t td.who small { display: block; font-weight: 400; color: var(--ink-3); font-family: var(--mono); font-size: 11.5px; margin-top: 2px; }
+  .yes { color: var(--good); font-weight: 600; }
+  .no  { color: var(--ink-3); }
+  .mid { color: var(--warn); font-weight: 600; }
+
+  /* ---------- Callouts ---------- */
+  .note {
+    border: 1px solid var(--line-2); border-left: 3px solid var(--accent);
+    background: var(--raise); border-radius: 10px; padding: 14px 16px; margin: 20px 0; font-size: 15.5px;
+  }
+  .note .tag {
+    font-family: var(--mono); font-size: 11px; letter-spacing: .08em; text-transform: uppercase;
+    font-weight: 700; display: block; margin-bottom: 4px; color: var(--accent);
+  }
+  .note.warn { border-left-color: var(--warn); background: var(--warn-bg); border-color: var(--warn-line); }
+  .note.warn .tag { color: var(--warn); }
+  .note.danger { border-left-color: var(--danger); background: var(--danger-bg); border-color: var(--danger-line); }
+  .note.danger .tag { color: var(--danger); }
+  .note p:last-child { margin-bottom: 0; }
+
+  /* ---------- Tabs (Mac / Windows) ---------- */
+  .tabs { display: flex; gap: 6px; margin: 6px 0 20px; }
+  .tab {
+    font-family: var(--mono); font-size: 13px; font-weight: 600; cursor: pointer;
+    border: 1px solid var(--line-2); background: var(--raise); color: var(--ink-2);
+    padding: 8px 16px; border-radius: 9px;
+  }
+  .tab[aria-selected="true"] { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .tab:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  .panel[hidden] { display: none; }
+
+  /* ---------- Steps ---------- */
+  ol.steps { list-style: none; counter-reset: s; margin: 0; padding: 0; }
+  ol.steps > li {
+    position: relative; padding: 0 0 6px 46px; margin: 0 0 22px;
+  }
+  ol.steps > li::before {
+    counter-increment: s; content: counter(s);
+    position: absolute; left: 0; top: -2px; width: 30px; height: 30px;
+    display: grid; place-items: center; border-radius: 50%;
+    font-family: var(--mono); font-size: 14px; font-weight: 600;
+    background: var(--accent-soft); color: var(--accent-2);
+    border: 1px solid color-mix(in srgb, var(--accent) 30%, transparent);
+  }
+  ol.steps > li .st-h { font-weight: 620; margin: 3px 0 8px; }
+  ol.steps > li p { font-size: 15.5px; color: var(--ink-2); margin: 0 0 10px; }
+
+  /* ---------- Type-this command ---------- */
+  .type {
+    display: flex; align-items: stretch; gap: 0; margin: 10px 0 12px;
+    border: 1px solid var(--line-2); border-radius: 10px; overflow: hidden; background: var(--surface);
+  }
+  .type .cmd {
+    font-family: var(--mono); font-size: 13.5px; line-height: 1.5; color: var(--ink);
+    padding: 12px 14px; overflow-x: auto; white-space: pre; flex: 1;
+  }
+  .type .cmd .pr { color: var(--accent); user-select: none; }
+  .copy {
+    font-family: var(--mono); font-size: 11px; font-weight: 600; letter-spacing: .04em;
+    border: none; border-left: 1px solid var(--line-2); background: var(--raise); color: var(--ink-2);
+    padding: 0 15px; cursor: pointer; text-transform: uppercase;
+  }
+  .copy:hover { background: var(--accent-soft); color: var(--accent-2); }
+  .copy:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; }
+  .copy.done { color: var(--good); }
+
+  /* ---------- Terminal (illustrative output) ---------- */
+  .term { background: var(--term-bg); border-radius: 10px; margin: 12px 0 6px; overflow: hidden; border: 1px solid #000; }
+  .term-bar { display: flex; align-items: center; gap: 7px; padding: 9px 12px; background: rgba(255,255,255,.05); }
+  .term-bar i { width: 11px; height: 11px; border-radius: 50%; display: block; }
+  .term-bar i:nth-child(1){ background:#ff5f57; } .term-bar i:nth-child(2){ background:#febc2e; } .term-bar i:nth-child(3){ background:#28c840; }
+  .term-bar span { font-family: var(--mono); font-size: 11px; color: var(--term-dim); margin-left: 6px; }
+  .term pre {
+    margin: 0; padding: 14px 16px; font-family: var(--mono); font-size: 13px; line-height: 1.6;
+    color: var(--term-ink); overflow-x: auto;
+  }
+  .term pre .p { color: var(--term-accent); } /* prompt */
+  .term pre .c { color: var(--term-dim); }     /* comment / output */
+  .term pre .u { color: #e6dfa8; }             /* user typed */
+
+  .cap { font-family: var(--mono); font-size: 11.5px; color: var(--ink-3); margin: 4px 2px 0; }
+
+  /* ---------- Screenshot slot ---------- */
+  .shot {
+    border: 1.5px dashed var(--shot-line); background: var(--shot-bg); border-radius: 10px;
+    padding: 18px 16px; margin: 14px 0; display: flex; gap: 14px; align-items: flex-start;
+  }
+  .shot .badge {
+    font-family: var(--mono); font-size: 10.5px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase;
+    color: var(--ink-3); border: 1px solid var(--shot-line); border-radius: 6px; padding: 3px 7px; white-space: nowrap; margin-top: 2px;
+  }
+  .shot .st { font-size: 14.5px; }
+  .shot .st b { color: var(--ink); font-weight: 620; }
+  .shot .st span { color: var(--ink-3); display: block; font-size: 13px; margin-top: 3px; }
+
+  /* ---------- Permission level cards ---------- */
+  .levels { display: grid; gap: 14px; margin: 8px 0; }
+  @media (min-width: 640px) { .levels { grid-template-columns: repeat(3, 1fr); } }
+  .lv { border: 1px solid var(--line-2); border-radius: var(--radius); background: var(--surface); overflow: hidden; }
+  .lv .stripe { height: 5px; }
+  .lv.read .stripe { background: var(--accent); }
+  .lv.auto .stripe { background: var(--good); }
+  .lv.full .stripe { background: var(--warn); }
+  .lv .body { padding: 15px 16px 18px; }
+  .lv .name { font-family: var(--mono); font-size: 13px; font-weight: 700; letter-spacing: .02em; margin: 0 0 3px; }
+  .lv.read .name { color: var(--accent); } .lv.auto .name { color: var(--good); } .lv.full .name { color: var(--warn); }
+  .lv .tagl { font-size: 12px; color: var(--ink-3); font-family: var(--mono); margin: 0 0 12px; }
+  .lv p { font-size: 14px; color: var(--ink-2); margin: 0 0 10px; }
+  .lv .best { font-size: 13px; color: var(--ink); border-top: 1px solid var(--line); padding-top: 10px; margin: 0; }
+  .lv .best b { font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: .06em; color: var(--ink-3); display: block; margin-bottom: 2px; font-weight: 600; }
+
+  /* ---------- Footer ---------- */
+  footer { padding: 40px 0 64px; }
+  footer p { font-size: 13.5px; color: var(--ink-3); font-family: var(--mono); margin: 0 0 8px; }
+  footer a { color: var(--accent); }
+
+  .two { display: grid; gap: 14px; }
+  @media (min-width: 620px) { .two { grid-template-columns: 1fr 1fr; } }
+  .mini { border: 1px solid var(--line); border-radius: 10px; padding: 15px 16px; background: var(--raise); }
+  .mini h4 { margin: 0 0 6px; font-size: 14.5px; }
+  .mini p { margin: 0; font-size: 14px; color: var(--ink-2); }
+</style>
+</head>
+<body>
+
+<nav class="top">
+  <div class="wrap">
+    <span class="brand">🖥&nbsp; <b>Codex</b>&nbsp;/ setup guide</span>
+    <span class="links">
+      <a class="link" href="#account">access</a>
+      <a class="link" href="#install">install</a>
+      <a class="link" href="#graphical">point &amp; click</a>
+      <a class="link" href="#levels">permissions</a>
+      <a class="link" href="#first">first task</a>
+      <a class="link" href="#stuck">stuck?</a>
+    </span>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap">
+    <p class="eyebrow">Applied AI for Public Policy · Week 2</p>
+    <h1>Get Codex running on your laptop</h1>
+    <p class="lede">By the end of this page you will have an AI coding agent installed, signed in, and waiting for its first task. Follow it at your own pace; every command is one you can copy.</p>
+    <div class="meta-row">
+      <span class="chip"><b>Time</b>&nbsp; ~15 minutes</span>
+      <span class="chip"><b>Cost</b>&nbsp; free for students</span>
+      <span class="chip"><b>Works on</b>&nbsp; Mac &amp; Windows</span>
+    </div>
+  </div>
+</header>
+
+<main>
+
+<!-- 0. What this is -->
+<section id="whatis">
+  <div class="wrap">
+    <p class="sec-num">00 — Orientation</p>
+    <h2>What you are installing, in one minute</h2>
+    <p class="sub">Codex is a coding <em>agent</em>. Underneath it is the same kind of model as a chatbot, but with a machine built around it so it can act, not just answer.</p>
+    <p>A chat window can only hand you text. An agent can open your files, run your code, read what happened, and fix it, pausing for your approval along the way. That is the whole difference, and it is why the setup below is worth fifteen minutes.</p>
+    <div class="note">
+      <span class="tag">The mental model</span>
+      <p>Think of a fast, very literal research assistant sitting at your computer. It types the commands; you make the decisions and check the result. Nothing happens on your machine without your yes.</p>
+    </div>
+  </div>
+</section>
+
+<!-- reach -->
+<section id="reach">
+  <div class="wrap">
+    <p class="sec-num">01 — The one distinction that matters</p>
+    <h2>What can it touch?</h2>
+    <p class="sub">Every way of using AI differs mainly in what it is allowed to reach. Where the work runs is also where your data goes, so this is a privacy question as much as a convenience one.</p>
+    <div class="reach">
+      <table class="reach-t">
+        <thead>
+          <tr><th>How you use it</th><th>Your files</th><th>Run your code</th><th>Where it runs</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="who">Chat window<small>chatgpt.com</small></td>
+            <td class="no">— none</td><td class="no">— you run it</td><td>your browser</td>
+          </tr>
+          <tr>
+            <td class="who">Codex, on your laptop<small>terminal or editor</small></td>
+            <td class="yes">✓ reads &amp; edits</td><td class="yes">✓ runs &amp; checks</td><td>your machine</td>
+          </tr>
+          <tr>
+            <td class="who">Codex Cloud<small>chatgpt.com/codex</small></td>
+            <td class="mid">a copy on GitHub</td><td class="yes">✓ on servers</td><td>OpenAI's servers</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="cap">This guide sets up the middle row — Codex on your own laptop — and shows the other two as alternatives.</p>
+  </div>
+</section>
+
+<!-- 2. Access -->
+<section id="account">
+  <div class="wrap">
+    <p class="sec-num">02 — Access</p>
+    <h2>Getting Codex for free</h2>
+    <p class="sub">You need a (free) OpenAI account and a way to pay for usage. As a student, you have one without spending anything.</p>
+
+    <h3>Option A — the student credits (recommended)</h3>
+    <p>Verified university students in the US and Canada can claim <strong>$100 in free Codex credits</strong>, and they work even on a free ChatGPT account. That is enough to run everything this course asks of you.</p>
+    <div class="note">
+      <span class="tag">Do this first</span>
+      <p>Sign in at <a class="inline" href="https://chatgpt.com" target="_blank" rel="noopener">chatgpt.com</a> with your school email, then claim the student credits from OpenAI's Codex-for-students page. Verification can take a little time, so start it before class.</p>
+    </div>
+
+    <h3>Option B — a plan you already pay for</h3>
+    <p>If you already pay for <strong>ChatGPT Plus</strong> ($20/month, which includes Codex), just sign in with that. A paid plan gives you higher ongoing limits than the one-time credit bucket, so you will not have to think about running out.</p>
+    <p class="cap">You do not need both. Pick the free credits or your existing plan and move on.</p>
+  </div>
+</section>
+
+<!-- 3. Install terminal -->
+<section id="install">
+  <div class="wrap">
+    <p class="sec-num">03 — Install</p>
+    <h2>The main way: Codex in the terminal</h2>
+    <p class="sub">The terminal is a plain text window where you type one line, press Enter, and the computer does it. It is already on your machine. You only need it to start Codex; after that you talk in plain English.</p>
+
+    <div class="tabs" role="tablist" aria-label="Choose your operating system">
+      <button class="tab" role="tab" id="tab-mac" aria-selected="true" aria-controls="panel-mac">macOS</button>
+      <button class="tab" role="tab" id="tab-win" aria-selected="false" aria-controls="panel-win">Windows</button>
+    </div>
+
+    <!-- MAC -->
+    <div class="panel" id="panel-mac" role="tabpanel" aria-labelledby="tab-mac">
+      <ol class="steps">
+        <li>
+          <div class="st-h">Open the Terminal app</div>
+          <p>Press <code class="k">⌘ Command</code> + <code class="k">Space</code>, type <em>Terminal</em>, and press Enter. A small text window opens. That is it.</p>
+          <div class="shot">
+            <span class="badge">Screenshot</span>
+            <div class="st"><b>Capture:</b> Spotlight search showing "Terminal", or the empty Terminal window once open.<span>Take this on a real Mac during setup.</span></div>
+          </div>
+        </li>
+        <li>
+          <div class="st-h">Install Codex with one line</div>
+          <p>Copy the line below, paste it into Terminal, and press Enter. It downloads Codex as a single small program. Nothing else is required.</p>
+          <div class="type">
+            <div class="cmd"><span class="pr">$ </span>curl -fsSL https://chatgpt.com/codex/install.sh | sh</div>
+            <button class="copy" type="button" data-copy="curl -fsSL https://chatgpt.com/codex/install.sh | sh">Copy</button>
+          </div>
+          <div class="term">
+            <div class="term-bar"><i></i><i></i><i></i><span>Terminal — zsh</span></div>
+<pre><span class="p">$ </span><span class="u">curl -fsSL https://chatgpt.com/codex/install.sh | sh</span>
+<span class="c">Downloading codex… installed to /usr/local/bin/codex</span>
+<span class="c"># when it finishes, you get your prompt back</span></pre>
+          </div>
+          <p class="cap">Approximate output — the exact wording may differ.</p>
+        </li>
+        <li>
+          <div class="st-h">Start Codex and sign in</div>
+          <p>Type <code class="k">codex</code> and press Enter. The first time, choose <strong>Sign in with ChatGPT</strong>; your browser opens, you approve, and you are back.</p>
+          <div class="type">
+            <div class="cmd"><span class="pr">$ </span>codex</div>
+            <button class="copy" type="button" data-copy="codex">Copy</button>
+          </div>
+          <div class="shot">
+            <span class="badge">Screenshot</span>
+            <div class="st"><b>Capture:</b> the "Sign in with ChatGPT" prompt on first launch, and the browser "authorize" screen.<span>Two images; take on a real machine.</span></div>
+          </div>
+        </li>
+      </ol>
+    </div>
+
+    <!-- WINDOWS -->
+    <div class="panel" id="panel-win" role="tabpanel" aria-labelledby="tab-win" hidden>
+      <ol class="steps">
+        <li>
+          <div class="st-h">Open PowerShell</div>
+          <p>Click <strong>Start</strong>, type <em>PowerShell</em>, and press Enter. Codex now runs on Windows directly, so this is all you need.</p>
+          <div class="shot">
+            <span class="badge">Screenshot</span>
+            <div class="st"><b>Capture:</b> the Start menu showing "PowerShell", or the open blue PowerShell window.<span>Take this on a real Windows PC.</span></div>
+          </div>
+        </li>
+        <li>
+          <div class="st-h">Install Codex with one line</div>
+          <p>Copy the line below into PowerShell and press Enter. It installs Codex directly, with no WSL and no extra setup for this course.</p>
+          <div class="type">
+            <div class="cmd"><span class="pr">PS&gt; </span>irm https://chatgpt.com/codex/install.ps1 | iex</div>
+            <button class="copy" type="button" data-copy="irm https://chatgpt.com/codex/install.ps1 | iex">Copy</button>
+          </div>
+          <div class="term">
+            <div class="term-bar"><i></i><i></i><i></i><span>Windows PowerShell</span></div>
+<pre><span class="p">PS&gt; </span><span class="u">irm https://chatgpt.com/codex/install.ps1 | iex</span>
+<span class="c">Installing codex… done. Restart your terminal if 'codex' is not found.</span></pre>
+          </div>
+          <p class="cap">Approximate output — the exact wording may differ.</p>
+        </li>
+        <li>
+          <div class="st-h">Start Codex and sign in</div>
+          <p>Type <code class="k">codex</code> and press Enter. Choose <strong>Sign in with ChatGPT</strong>; your browser opens, you approve, and you are back — exactly like on a Mac.</p>
+          <div class="type">
+            <div class="cmd"><span class="pr">PS&gt; </span>codex</div>
+            <button class="copy" type="button" data-copy="codex">Copy</button>
+          </div>
+          <div class="shot">
+            <span class="badge">Screenshot</span>
+            <div class="st"><b>Capture:</b> the "Sign in with ChatGPT" prompt on first launch in PowerShell.<span>Take on a real Windows machine.</span></div>
+          </div>
+        </li>
+      </ol>
+      <div class="note warn">
+        <span class="tag">Only if you are told to</span>
+        <p>You do <strong>not</strong> need WSL, Node.js, or any other tool for this course. Ignore online guides that start with those; the one line above is enough.</p>
+      </div>
+    </div>
+
+    <div class="note">
+      <span class="tag">If you have seen "npm install" online</span>
+      <p>Many guides say to run <code class="k">npm install -g @openai/codex</code>. That works too, but it first needs another program called Node.js. You do not need that path — the one-line installer above gets you the exact same Codex.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 4. Graphical -->
+<section id="graphical">
+  <div class="wrap">
+    <p class="sec-num">04 — Alternatives</p>
+    <h2>If you would rather point and click</h2>
+    <p class="sub">The terminal is the main tool for this course, but the same Codex comes in two graphical forms. They follow a different logic — you click instead of type — so try them if the terminal is not for you.</p>
+
+    <h3>In your editor (VS Code)</h3>
+    <p>This keeps your files in a sidebar and Codex in a panel beside them; changes are highlighted in the code and you approve them with a click.</p>
+    <ol class="steps">
+      <li>
+        <div class="st-h">Install VS Code</div>
+        <p>Download it from <a class="inline" href="https://code.visualstudio.com" target="_blank" rel="noopener">code.visualstudio.com</a>. It is the same on Mac and Windows.</p>
+      </li>
+      <li>
+        <div class="st-h">Add the Codex extension</div>
+        <p>Open the Extensions panel on the left, search for <em>Codex</em>, and install the one published by OpenAI (id <code class="k">openai.chatgpt</code>). A Codex icon appears in the sidebar.</p>
+        <div class="shot">
+          <span class="badge">Screenshot</span>
+          <div class="st"><b>Capture:</b> the Extensions search showing the OpenAI Codex extension, and the Codex icon in the sidebar.</div>
+        </div>
+      </li>
+      <li>
+        <div class="st-h">Sign in</div>
+        <p>Click <strong>Continue with ChatGPT</strong>, using the same account as before. You are ready.</p>
+      </li>
+    </ol>
+
+    <h3>In the browser (Codex Cloud)</h3>
+    <p>Nothing to install. You hand Codex a task and it works on OpenAI's servers, then gives you back a pull request. Best when your project already lives on GitHub, or when you want to delegate and check back later.</p>
+    <ol class="steps">
+      <li>
+        <div class="st-h">Open Codex Cloud</div>
+        <p>Go to <a class="inline" href="https://chatgpt.com/codex" target="_blank" rel="noopener">chatgpt.com/codex</a> and sign in with your ChatGPT account.</p>
+      </li>
+      <li>
+        <div class="st-h">Connect GitHub and send a task</div>
+        <p>Connect your GitHub account, pick the project Codex may see, describe the task in plain English, and send it. Review the result and open a pull request when you are happy.</p>
+        <div class="shot">
+          <span class="badge">Screenshot</span>
+          <div class="st"><b>Capture:</b> the "connect GitHub" step and a finished task showing its diff.</div>
+        </div>
+      </li>
+    </ol>
+    <div class="note warn">
+      <span class="tag">Policy note</span>
+      <p>Codex Cloud runs your code on OpenAI's servers, not your laptop. For sensitive or restricted data, keep the work local (the terminal or editor version) instead.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 5. Permission levels -->
+<section id="levels">
+  <div class="wrap">
+    <p class="sec-num">05 — Staying in control</p>
+    <h2>The three permission levels</h2>
+    <p class="sub">Codex runs at one of three levels. You set it when you start, or change it mid-session from the approvals menu. The question behind all three: how much would you let a brand-new assistant do unsupervised?</p>
+    <div class="levels">
+      <div class="lv read">
+        <div class="stripe"></div>
+        <div class="body">
+          <p class="name">Read Only</p>
+          <p class="tagl">looks, never changes</p>
+          <p>Reads your files and answers questions, but edits nothing and runs nothing.</p>
+          <p class="best"><b>Best for</b> exploring unfamiliar code, or thinking through a plan first.</p>
+        </div>
+      </div>
+      <div class="lv auto">
+        <div class="stripe"></div>
+        <div class="body">
+          <p class="name">Auto <span style="font-weight:400;color:var(--ink-3);font-size:11px;">· default</span></p>
+          <p class="tagl">acts inside your folder</p>
+          <p>Edits and runs inside your project without asking each time, but stops before touching the network or anything outside it.</p>
+          <p class="best"><b>Best for</b> everyday work on your own project. Start here.</p>
+        </div>
+      </div>
+      <div class="lv full">
+        <div class="stripe"></div>
+        <div class="body">
+          <p class="name">Full Access</p>
+          <p class="tagl">no guardrails</p>
+          <p>Edits, runs, and reaches the network with no approval prompts. Powerful and easy to regret.</p>
+          <p class="best"><b>Best for</b> rare, trusted tasks — and only when you know why you need it.</p>
+        </div>
+      </div>
+    </div>
+    <p class="cap">Everyday default is Auto. When in doubt, drop to Read Only and read the plan first.</p>
+  </div>
+</section>
+
+<!-- 6. First task -->
+<section id="first">
+  <div class="wrap">
+    <p class="sec-num">06 — Try it</p>
+    <h2>Your first task</h2>
+    <p class="sub">Do not save it for a real project. Point it at a small folder you do not mind experimenting on, and ask for something concrete.</p>
+    <div class="term">
+      <div class="term-bar"><i></i><i></i><i></i><span>codex — your-project</span></div>
+<pre><span class="p">$ </span><span class="u">cd my-first-project</span>
+<span class="p">$ </span><span class="u">codex</span>
+<span class="c">›</span> <span class="u">explain what the files in this folder do</span>
+<span class="c">Codex reads the folder, then answers — and waits for your
+approval before it changes or runs anything.</span></pre>
+    </div>
+    <div class="two" style="margin-top:18px;">
+      <div class="mini"><h4>Good first asks</h4><p>"Explain what this script does." · "Add comments to this file." · "What columns are in this data?"</p></div>
+      <div class="mini"><h4>The habit to build</h4><p>Read the change it proposes and approve it only once you understand it. An unverified result is not a result.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- 7. Stuck -->
+<section id="stuck">
+  <div class="wrap">
+    <p class="sec-num">07 — When something breaks</p>
+    <h2>Something will break. That is fine.</h2>
+    <p class="sub">Errors during setup are normal and are never a sign you are behind. The reflex to build:</p>
+    <ol class="steps">
+      <li><div class="st-h">Read the last line</div><p>The final line of an error usually says what went wrong. Start there.</p></li>
+      <li><div class="st-h">Paste it to Codex</div><p>Copy the <em>full</em> error message, paste it in, and read the explanation before you try the fix.</p></li>
+      <li><div class="st-h">Ask for help early</div><p>Stuck past 15 minutes? Post to the course board or raise your hand in the build block. Do not debug alone for ten minutes.</p></li>
+    </ol>
+    <div class="note">
+      <span class="tag">No-install fallback</span>
+      <p>If the install truly will not cooperate today, use the browser-based <a class="inline" href="https://chatgpt.com/codex" target="_blank" rel="noopener">Codex Cloud</a> so you are not blocked. We will sort the local install in office hours.</p>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <p>Commands checked August 2026. If a command fails, the official install page at <a href="https://developers.openai.com/codex" target="_blank" rel="noopener">developers.openai.com/codex</a> has the current version.</p>
+    <p>Applied AI for Public Policy · Week 2 setup guide · replace the dashed slots with real screenshots before sharing.</p>
+  </div>
+</footer>
+
+<script>
+  // Tabs: Mac / Windows
+  (function () {
+    var tabs = Array.prototype.slice.call(document.querySelectorAll('.tab'));
+    function select(tab) {
+      tabs.forEach(function (t) {
+        var on = t === tab;
+        t.setAttribute('aria-selected', on ? 'true' : 'false');
+        var panel = document.getElementById(t.getAttribute('aria-controls'));
+        if (panel) panel.hidden = !on;
+      });
+    }
+    tabs.forEach(function (t) {
+      t.addEventListener('click', function () { select(t); });
+      t.addEventListener('keydown', function (e) {
+        var i = tabs.indexOf(t);
+        if (e.key === 'ArrowRight') { e.preventDefault(); tabs[(i + 1) % tabs.length].focus(); tabs[(i + 1) % tabs.length].click(); }
+        if (e.key === 'ArrowLeft')  { e.preventDefault(); tabs[(i - 1 + tabs.length) % tabs.length].focus(); tabs[(i - 1 + tabs.length) % tabs.length].click(); }
+      });
+    });
+  })();
+
+  // Copy buttons
+  (function () {
+    document.querySelectorAll('.copy').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var text = btn.getAttribute('data-copy') || '';
+        var done = function () {
+          var old = btn.textContent;
+          btn.textContent = 'Copied'; btn.classList.add('done');
+          setTimeout(function () { btn.textContent = old; btn.classList.remove('done'); }, 1400);
+        };
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(text).then(done).catch(function () { fallback(text, done); });
+        } else { fallback(text, done); }
+      });
+    });
+    function fallback(text, done) {
+      var ta = document.createElement('textarea');
+      ta.value = text; ta.style.position = 'fixed'; ta.style.opacity = '0';
+      document.body.appendChild(ta); ta.select();
+      try { document.execCommand('copy'); done(); } catch (e) {}
+      document.body.removeChild(ta);
+    }
+  })();
+</script>
+</body>
+</html>

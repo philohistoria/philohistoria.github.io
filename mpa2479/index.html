@@ -1,0 +1,511 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MPA 2479 Applied AI for Public Policy: week-by-week plan (Fall 2026)</title>
+<style>
+  :root{
+    --bg:#fdfdfc; --fg:#1c1b19; --muted:#6b6862; --rule:#dcd9d2;
+    --band:#f2f0ea; --accent:#8a5a2b; --note:#f7f5ef;
+    /* hue families: AI = blue, hands-on = orange, policy = purple,
+       assignments/deadlines = crimson, course stages = teal */
+    --blue:#0f5c88;     --blue-tint:#f1f7fb; --blue-edge:#8fbcda;
+    --orange:#96490c;   --orange-tint:#fdf6ef; --orange-edge:#e2b688;
+    --purple:#57368b;   --purple-tint:#f8f5fd; --purple-edge:#c1abe1;
+    --crimson:#a01d2b;  --crimson-tint:#fdf4f4; --crimson-edge:#e3a9ae;
+    --teal:#0d585d;     --teal-tint:#d8ecee;
+    --slate:#6c6a64;
+    --cite:#25397f;
+    --green:#2e6641;
+  }
+  @media (prefers-color-scheme: dark){
+    :root{ --bg:#161513; --fg:#e8e5df; --muted:#a09c94; --rule:#35332e;
+           --band:#211f1c; --accent:#c9975c; --note:#1d1c19;
+           --blue:#74bbe2;     --blue-tint:#121c24; --blue-edge:#3b6b8b;
+           --orange:#e3a76c;   --orange-tint:#241b13; --orange-edge:#8f6636;
+           --purple:#bba6ea;   --purple-tint:#1d1a27; --purple-edge:#655493;
+           --crimson:#f0949c;  --crimson-tint:#241618; --crimson-edge:#71393f;
+           --teal:#7ed2d6;     --teal-tint:#0f3538;
+           --slate:#9b988f;
+           --cite:#9fb0f0;
+           --green:#8fc09a; }
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--fg);
+       font:16px/1.55 "Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif;
+       padding:2.5rem 1.5rem 5rem;}
+  .wrap{max-width:1180px;margin:0 auto}
+  h1{font-size:1.6rem;margin:0 0 .3rem;font-weight:600;letter-spacing:-.01em}
+  .sub{color:var(--muted);font-size:.92rem;margin:0 0 .2rem}
+  .spine{background:var(--note);border:1px solid var(--rule);border-left:4px solid var(--teal);
+         border-radius:10px;padding:.9rem 1.1rem;margin:.9rem 0 1rem}
+  .spine h2{margin:0 0 .45rem;font-size:1.02rem;font-weight:600}
+  .spine .steps{font-family:-apple-system,BlinkMacSystemFont,sans-serif;font-size:.82rem;
+                line-height:1.9;margin:0 0 .5rem}
+  .spine .steps b{color:var(--teal);background:var(--teal-tint);
+                  border-radius:4px;padding:.08rem .3rem}
+  .spine p{margin:.3rem 0;font-size:.88rem;line-height:1.5}
+  .arcs-title{font-size:1.02rem;font-weight:600;margin:1.2rem 0 .3rem}
+  .tchip{display:inline-block;font-family:-apple-system,BlinkMacSystemFont,sans-serif;
+         font-size:.62rem;font-weight:700;letter-spacing:.05em;text-transform:uppercase;
+         border-radius:3px;padding:.1rem .35rem;margin-right:.25rem}
+  .t-code{background:#dfeadf;color:#2e5a2e}
+  .t-write{background:#e3e0ef;color:#4a3f7a}
+  .t-pres{background:#f4e3d0;color:#7a4a1e}
+  @media (prefers-color-scheme: dark){
+    .t-code{background:#243524;color:#9cc79c}
+    .t-write{background:#2a2740;color:#b3a8e0}
+    .t-pres{background:#3a2c1c;color:#dcae7a}
+  }
+  table.assign{margin:.6rem 0}
+  table.assign th,table.assign td{border:1px solid var(--rule);padding:.45rem .6rem;font-size:.82rem;
+      text-align:left;vertical-align:top}
+  table.assign th{font-family:-apple-system,BlinkMacSystemFont,sans-serif;font-size:.68rem;
+      letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+  table.assign td.w{white-space:nowrap;font-weight:600}
+  td.asg{font-size:.8rem;background:var(--crimson-tint);
+         border-left:3px solid var(--crimson-edge)}
+  td.asg .due{display:block;color:var(--crimson);font-weight:600;font-size:.74rem;
+              font-family:-apple-system,BlinkMacSystemFont,sans-serif;
+              margin-top:.35rem;padding-top:.35rem;border-top:1px dashed var(--crimson-edge)}
+  td.asg b{display:block;margin-bottom:.25rem;color:var(--crimson)}
+  td.asg ul{margin:.2rem 0 .35rem;padding-left:.95rem;font-size:.76rem}
+  td.asg li{margin:.12rem 0;line-height:1.4}
+  .legend{font-size:.82rem;color:var(--muted);margin:.6rem 0 .3rem}
+  .cal{color:var(--muted);font-size:.88rem;margin:.9rem 0 2rem;
+       border-left:3px solid var(--teal);padding:.5rem 0 .5rem .85rem}
+  .cal b{color:var(--fg);font-weight:600}
+  .scroll{overflow-x:auto}
+  table{border-collapse:collapse;width:100%;min-width:1060px}
+  th{text-align:left;font-size:.72rem;letter-spacing:.09em;text-transform:uppercase;
+     color:var(--muted);font-weight:600;padding:.5rem .8rem;border-bottom:1.5px solid var(--rule);
+     font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+  td{padding:.85rem .8rem;vertical-align:top;font-size:.9rem}
+  tr.wk>td{border-top:1px solid var(--rule)}
+  tr.wk:first-of-type>td{border-top:none}
+  /* one hue per content column, carried by the heading and the cell edge */
+  tr.wk>td:nth-child(2){background:var(--blue-tint);border-left:3px solid var(--blue-edge)}
+  tr.wk>td:nth-child(3){background:var(--orange-tint);border-left:3px solid var(--orange-edge)}
+  tr.wk>td:nth-child(4){background:var(--purple-tint);border-left:3px solid var(--purple-edge)}
+  tr.wk>td:nth-child(2) .topic{color:var(--blue)}
+  tr.wk>td:nth-child(3) .topic{color:var(--orange)}
+  tr.wk>td:nth-child(4) .topic{color:var(--purple)}
+  .wknum{white-space:nowrap;width:9.8rem}
+  .wknum .n{font-weight:600;font-size:.95rem;display:block}
+  .wknum .d{color:var(--muted);font-size:.8rem;display:block;
+            font-family:-apple-system,BlinkMacSystemFont,sans-serif}
+  .wknum .stage{display:inline-block;margin-top:.4rem;font-size:.63rem;letter-spacing:.08em;
+                text-transform:uppercase;font-weight:700;border-radius:4px;padding:.2rem .38rem;
+                background:var(--teal-tint);color:var(--teal);
+                white-space:normal;line-height:1.4;max-width:8.7rem;
+                font-family:-apple-system,BlinkMacSystemFont,sans-serif}
+  .wknum .stage .of{display:block;font-weight:600;opacity:.75;letter-spacing:.06em}
+  .wknum .stage.shop{background:var(--band);color:var(--muted)}
+  .wknum .stage.proj{background:var(--teal);color:var(--bg)}
+  .topic{font-weight:600;display:block;margin-bottom:.3rem}
+  ul{margin:.15rem 0 0;padding-left:1.05rem}
+  li{margin:.18rem 0}
+  .cite{color:var(--cite)}
+  .rlab{display:inline-block;font-family:-apple-system,BlinkMacSystemFont,sans-serif;
+        font-size:.62rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;
+        margin-right:.4rem}
+  .rlab.req{color:var(--crimson)}
+  .rlab.opt{color:var(--muted)}
+  .rlab.disc{color:var(--green)}
+  tr.goal>td{padding:0 .8rem 1rem;font-size:.85rem}
+  .goalbox{background:var(--note);border-left:3px solid var(--slate);
+           padding:.55rem .8rem;color:var(--fg)}
+  .goalbox b{color:var(--slate);font-family:-apple-system,BlinkMacSystemFont,sans-serif;
+             font-size:.7rem;letter-spacing:.08em;text-transform:uppercase;margin-right:.4rem}
+  .none{color:var(--muted);font-style:italic}
+  .src{color:var(--muted);font-size:.82rem}
+  .cand{font-size:.68rem;letter-spacing:.08em;text-transform:uppercase;color:var(--crimson);
+        font-weight:700;font-family:-apple-system,BlinkMacSystemFont,sans-serif}
+  tr.break>td{background:var(--band);color:var(--muted);font-size:.85rem;
+              padding:.55rem .8rem;font-style:italic;border-top:1px solid var(--rule)}
+  .deliv{display:inline-block;margin-top:.45rem;font-size:.7rem;font-weight:700;
+         letter-spacing:.05em;color:var(--crimson);
+         font-family:-apple-system,BlinkMacSystemFont,sans-serif}
+  footer{margin-top:2.5rem;padding-top:1.2rem;border-top:1px solid var(--rule);
+         color:var(--muted);font-size:.85rem}
+  footer h2{font-size:.9rem;color:var(--fg);margin:1.2rem 0 .4rem;font-weight:600}
+  footer ol{padding-left:1.2rem;margin:.3rem 0}
+  footer li{margin:.3rem 0}
+  table.arcs{min-width:1300px;border-collapse:collapse;margin:.6rem 0}
+  table.arcs td,table.arcs th{border:1px solid var(--rule);padding:.4rem .45rem;font-size:.76rem;
+      text-align:center;vertical-align:middle;line-height:1.3}
+  table.arcs th{font-family:-apple-system,BlinkMacSystemFont,sans-serif;font-size:.68rem;
+      letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+  table.arcs td.lab{text-align:left;white-space:nowrap;font-weight:600;color:var(--fg);
+      font-family:-apple-system,BlinkMacSystemFont,sans-serif;font-size:.72rem}
+  table.arcs .arc{font-family:-apple-system,BlinkMacSystemFont,sans-serif;font-size:.65rem;
+      letter-spacing:.07em;text-transform:uppercase;font-weight:700;
+      border-bottom:none;border-top:2px solid var(--rule);color:var(--muted)}
+  /* the AI row and its band read blue; the policy row and its band read purple */
+  table.arcs tr.arow-ai td{background:var(--blue-tint)}
+  table.arcs tr.arow-ai td.lab{color:var(--blue)}
+  table.arcs tr.arcband-ai .arc{color:var(--blue);border-top:2px solid var(--blue-edge)}
+  table.arcs tr.arow-policy td{background:var(--purple-tint)}
+  table.arcs tr.arow-policy td.lab{color:var(--purple)}
+  table.arcs tr.arcband-policy .arc{color:var(--purple);border-top:2px solid var(--purple-edge)}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<h1>MPA 2479, Applied AI for Public Policy: what happens in each of the twelve weeks</h1>
+<p class="sub">A course in the Master of Public Affairs program, Watson Institute, Brown University. Fall 2026.</p>
+<p class="sub">Thursdays, 9:00 to 11:30 am. Instructor: Han Zhang.</p>
+
+<div class="spine">
+<h2>Teaching goals</h2>
+<p><b>1. Learn to use agentic AI, and find out what it cannot do.</b> Students install the agent in Week 1 and run it themselves from then on. Every output gets checked against a source or against their own hand-coding, so they find the limits by running into them.</p>
+<p><b>2. Then use the agent to do policy analysis.</b> The policy analysis follows the standard framework, Bardach &amp; Patashnik's <span class="cite">A Practical Guide for Policy Analysis</span>. The course walks its eight steps once, in order, on a policy question each student chooses in Week 3.</p>
+<p><b>3. Treat the policy of AI as its own domain.</b> Regulating AI is a separate policy question from using an agent to do policy work. Students analyze it with the same eight steps: the government's own AI systems in Week 8, and the choice among governance approaches in Week 10. They use the agent to collect the evidence for that analysis as well.</p>
+</div>
+
+<h2 class="arcs-title">The two arcs: what students learn about the AI agent, and where each week sits on the eightfold path</h2>
+<div class="scroll">
+<table class="arcs">
+<tr><th></th><th>W1</th><th>W2</th><th>W3</th><th>W4</th><th>W5</th><th>W6</th><th>W7</th><th>W8</th><th>W9</th><th>W10</th><th>W11</th><th>W12</th></tr>
+<tr class="arcband-ai"><td class="lab"></td>
+  <td class="arc" colspan="3">learn to use the AI agent</td>
+  <td class="arc" colspan="4">use the AI agent, one evidence step at a time</td>
+  <td class="arc" colspan="1">apply it, no new AI skills</td>
+  <td class="arc" colspan="4">your final project</td></tr>
+<tr class="arow-ai"><td class="lab">AI agent<br>what students<br>learn to do</td>
+  <td>what an AI agent is</td><td>how to direct the AI agent</td><td>write a spec; compare the agent with and without it</td>
+  <td>collect data, including with sub&shy;agents</td><td>code text with the agent; build a gold standard</td><td>analyze the data; publish a page</td><td>check the agent's facts and its fairness</td>
+  <td>audit a federal AI system</td><td>design your final project</td>
+  <td>no new AI skills this week</td><td>build your project; rerun a classmate's</td><td>present your project; what you can claim</td></tr>
+<tr class="arow-policy"><td class="lab">Policy analysis<br>Bardach &amp; Patashnik<br>eightfold path</td>
+  <td>the eightfold path, start to finish</td><td>does the AI agent actually help</td><td>step 1: define the problem</td>
+  <td>step 2a: collect the evidence</td><td>step 2b: construct the measure</td><td>step 2c: analyze the evidence and publish it</td><td>verify what the agent produced (this course's addition)</td>
+  <td>steps 3+4: construct alternatives and select criteria</td><td>step 5: project the outcomes</td>
+  <td>steps 6+7: confront the trade-offs and decide</td><td>no policy reading this week</td><td>step 8: tell your story</td></tr>
+<tr class="arcband-policy"><td class="lab"></td>
+  <td class="arc" colspan="2">policy analysis, and the evidence on AI</td>
+  <td class="arc" colspan="5">AI for policy</td>
+  <td class="arc" colspan="1">policy of AI</td>
+  <td class="arc" colspan="1">your project</td>
+  <td class="arc" colspan="1">policy of AI</td>
+  <td class="arc" colspan="2">your project</td></tr>
+</table>
+</div>
+
+
+
+
+<p class="legend"><span class="tchip t-code">data/code</span> computational, produced and validated with the agent · <span class="tchip t-write">writing</span> graded prose · <span class="tchip t-pres">presentation</span> delivered live. Each assignment practices that week's material and is due before the next class. Each check-in is worth 5 points, scored one point per checklist item, five items each. Weights sum to 100 with Participation (10%).</p>
+<div class="scroll">
+<table>
+<thead>
+<tr><th class="wknum">Week</th><th style="width:22%">AI content (lecture &amp; demo)</th><th style="width:24%">Hands-on (students do)</th><th style="width:25%">Policy component</th><th style="width:19%">Assignment, due date, weight</th></tr>
+</thead>
+<tbody>
+
+<!-- ============ WEEK 1 ============ -->
+<tr class="wk">
+  <td class="wknum"><span class="n">Week 1</span><span class="d">Sept 10</span><span class="stage shop">Shopping · overview</span></td>
+  <td><span class="topic">What an AI agent is</span>
+    <ul><li>Isn't this just ChatGPT? It works in your folder rather than in a chat window</li>
+        <li>It can use tools, run the code it writes, and read the errors back</li>
+        <li>What it is good and bad at</li>
+        <li>Demo: a city's 311 CSV → cleaned, analyzed, charted, live</li></ul></td>
+  <td><span class="topic">Install, then redo the demo yourself</span>
+    <ul><li>Install Claude Code with step-by-step support; TA circulating</li>
+        <li>Redo the demo on the same 311 dataset, with the same prompt, on your machine</li>
+        <li>If time: try it on a different provided dataset (permits, inspections)</li></ul></td>
+  <td><span class="topic">The eight steps of policy analysis, start to finish</span>
+    <ul><li><span class="rlab req">Required</span>Bardach &amp; Patashnik, <span class="cite">A Practical Guide for Policy Analysis</span>, the eightfold-path overview chapter <span class="src">[chapter and edition to confirm; the same textbook as MPA 2445, Policy Analysis and Problem Solving, the MPA core course, also taught in the fall]</span></li>
+        <li><span class="rlab opt">Optional</span>OECD, <span class="cite">Digital Government Outlook 2026</span>, AI chapter; Stanford HAI, <span class="cite">AI Index 2026</span>, policy chapter; Margetts &amp; Dorobantu (Nature 2019)</li>
+        <li><span class="rlab disc">Discussion</span>one question: which of the eight steps do you think AI can help with, and which not? Vote and defend; the answers are recorded and revisited in Week 12.</li></ul></td>
+
+  <td class="asg"><span class="none">Nothing due. Installation happens in class.</span></td>
+</tr>
+<tr class="goal"><td></td><td colspan="4"><div class="goalbox"><b>Teaching&nbsp;goal</b>Everyone leaves having watched the agent write and run code, and with the tool installed. Students see it hit an error and fix it on its own.</div></td></tr>
+
+<!-- ============ WEEK 2 ============ -->
+<tr class="wk">
+  <td class="wknum"><span class="n">Week 2</span><span class="d">Sept 17</span><span class="stage shop">Shopping</span></td>
+  <td><span class="topic">Directing the agent</span>
+    <ul><li>Git in 15 minutes, agent-first: a commit is a snapshot; the agent runs the commands, you read what it did</li>
+        <li>Three ways to run the agent: normal (approve each step), auto-accept, plan mode (the agent writes a plan, you approve or edit it before anything runs)</li>
+        <li>Demo: same task with a vague prompt, then with a directed one</li>
+        <li>What a session costs, and how to spend less</li></ul></td>
+  <td><span class="topic">Repo + first script + plan mode</span>
+    <ul><li>Create a repo; have the agent write a summary-statistics script on a provided dataset; commit it</li>
+        <li>A second, bigger task (merge two files, chart the result) in plan mode: read the agent's plan, change one thing, then let it run</li>
+        <li>Checkpoint: show a neighbor your script runs; explain it in your own words</li>
+        <li>Late adders: setup guide + office hours, on your own; class does not repeat Week 1</li></ul></td>
+  <td><span class="topic">Does AI actually make an analyst faster or better?</span>
+    <ul><li><span class="rlab req">Required</span>Dell'Acqua et al., <span class="cite">Navigating the Jagged Technological Frontier</span> (Harvard Business School Working Paper 24-013, 2023): a randomized experiment with 758 BCG consultants. AI raised speed and quality on tasks inside its competence, and made people more wrong on a task designed to sit just outside it.</li>
+        <li><span class="rlab req">Required</span>UK Department for Business and Trade, <span class="cite">Evaluation of the M365 Copilot Pilot</span> (2025), executive summary. A government ministry's own evaluation: real but small time savings, hallucinations observed throughout, and no evidence that saved time became higher productivity.</li>
+        <li><span class="rlab opt">Optional</span>Brynjolfsson, Mitchell &amp; Rock (AEA P&amp;P 2018), the pre-agent task rubric; GAO, <span class="cite">Generative AI Use and Management at Federal Agencies</span> (GAO-25-107653); <span class="cite">Generative AI in Public Administration: A Quasi-Experimental Analysis of Bureaucratic Productivity</span> (Government Information Quarterly 2026)</li></ul></td>
+
+  <td class="asg">Nothing graded, but your setup must be working by the end of this week: the tool installed, a repository created, one committed script. If it is broken, come to office hours before Week 3.</td>
+</tr>
+<tr class="goal"><td></td><td colspan="4"><div class="goalbox"><b>Teaching&nbsp;goal</b>Everyone can stage a multi-step task through plan mode instead of sending a vague prompt. The vague-vs-directed demo is where prompting skill becomes visible.</div></td></tr>
+
+<!-- ============ WEEK 3 ============ -->
+<tr class="wk">
+  <td class="wknum"><span class="n">Week 3</span><span class="d">Sept 24</span><span class="stage"><span class="of">Eightfold path</span>Step 1: define</span></td>
+  <td><span class="topic">Why the agent is inconsistent, and the fix</span>
+    <ul><li>Every session starts blank; vague instructions produce variable output</li>
+        <li><code>AGENTS.md</code>: project context, data conventions, output standards, safety rules</li></ul></td>
+  <td><span class="topic">Working dataset + spec + the with/without-spec comparison</span>
+    <ul><li>Choose the dataset and policy question for the semester. This is the draft of your final project; the Week 9 proposal formalizes the same thread. Switching later is allowed, but the cost grows every week.</li>
+        <li>The 3-item dataset checklist, verified in conference:
+          <ul><li>programmatically collectable, meaning an API or a scrapable source (Week 4 needs this)</li>
+              <li>a policy question you can chart and explain to a named audience (Week 6)</li>
+              <li>a topic you are willing to carry all semester</li></ul>
+          Text data is NOT required; numeric-only projects are fully eligible.</li>
+        <li>One paragraph: the question, labelled predictive / causal / descriptive</li>
+        <li>Write the spec; run the same task with and without it, and compare the two outputs side by side</li></ul></td>
+  <td><span class="topic">Step 1: define the problem, and why two analysts define it differently</span>
+    <ul><li><span class="rlab req">Required</span>Bardach &amp; Patashnik, the Step 1 chapter, on defining the problem</li>
+        <li><span class="rlab req">Required</span>Kahneman et al., <span class="cite">Noise</span> (HBR 2016)</li>
+        <li><span class="rlab opt">Optional</span>Deborah Stone, <span class="cite">Policy Paradox</span>, excerpt on problem definition; Gebru et al., <span class="cite">Datasheets for Datasets</span></li></ul></td>
+
+  <td class="asg"><b>Check-in 1</b>
+    <ul><li>a one-paragraph question, labelled predictive, causal, or descriptive</li>
+        <li>a named dataset that passes the three-item dataset test</li>
+        <li>an AGENTS.md with all four sections</li>
+        <li>the same task run with and without the spec, both outputs committed</li>
+        <li>everything in the repository with a clear commit message</li></ul>
+<span class="tchip t-code">data/code</span><span class="tchip t-write">writing</span><br>
+<span class="due">Due before class,&nbsp;Thu&nbsp;Oct&nbsp;1<br>Worth 5% of the grade, one point per checklist item</span></td>
+</tr>
+<tr class="goal"><td></td><td colspan="4"><div class="goalbox"><b>Teaching&nbsp;goal</b>Without the spec, the same task comes back with different choices each run; with the spec, the output follows the rules the student wrote. The side-by-side comparison is the evidence.</div></td></tr>
+
+<!-- ============ WEEK 4 ============ -->
+<tr class="wk">
+  <td class="wknum"><span class="n">Week 4</span><span class="d">Oct 1</span><span class="stage"><span class="of">Eightfold path</span>Step 2a: evidence</span></td>
+  <td><span class="topic">Collecting data with the agent</span>
+    <ul><li>How an API call works; where public data lives (Census, BLS, Socrata)</li>
+        <li>Scraping a table when there is no API; what a 403 tells you</li>
+        <li>Keep the raw pull; log where it came from and when</li>
+        <li>Subagents: when the pull is really 50 identical pulls (50 states, 10 years, 20 agencies), the agent sends one copy of itself per piece, waits, and assembles. Each copy needs written instructions: what to fetch, what format to return, what to do if the source fails</li></ul></td>
+  <td><span class="topic">Build your data pipeline</span>
+    <ul><li>API pipeline from a starter template, pointed at your working dataset's domain</li>
+        <li>One scraped table with its provenance log</li>
+        <li>Extend the pipeline to several units (a few states or years) with subagents, one per unit</li>
+        <li>README: what source, what parameters, how to rerun</li>
+        <li>Last 20 min: swap repos, rerun a neighbor's pipeline from their README alone</li></ul></td>
+  <td><span class="topic">Step 2: assemble the evidence, and write down where it came from</span>
+    <ul><li><span class="rlab req">Required</span>Lazer, Kennedy, King &amp; Vespignani, <span class="cite">The Parable of Google Flu</span> (Science 2014), 3 pp.: 45 undocumented search terms, nobody could rerun it, wrong for 100 straight weeks</li>
+        <li><span class="rlab opt">Optional</span>Lum &amp; Isaac, <span class="cite">To Predict and Serve?</span> (2016), a different data problem: the records measure policing rather than crime, which a provenance log does not fix</li></ul></td>
+
+  <td class="asg"><b>Check-in 2</b>
+    <ul><li>running the script from a fresh copy of the repository produces the same output file, with no manual steps</li>
+        <li>the downloaded file is saved unchanged in <code>data/</code>, next to a short note of the URL and the date it was pulled</li>
+        <li>changing one parameter (a different state or year) and rerunning produces new, correct output</li>
+        <li>a README that tells someone else what to run and in what order</li>
+        <li>committed to the repository</li></ul>
+<span class="tchip t-code">data/code</span><br>
+<span class="due">Due before class,&nbsp;Thu&nbsp;Oct&nbsp;8<br>Worth 5% of the grade, one point per checklist item</span></td>
+</tr>
+<tr class="goal"><td></td><td colspan="4"><div class="goalbox"><b>Teaching&nbsp;goal</b>Half the neighbor-reruns fail on the first try, for the same reason Google Flu could not be rerun: the documentation is missing. A README that tells someone else what to run, and in what order, prevents this.</div></td></tr>
+
+<!-- ============ WEEK 5 ============ -->
+<tr class="wk">
+  <td class="wknum"><span class="n">Week 5</span><span class="d">Oct 8</span><span class="stage"><span class="of">Eightfold path</span>Step 2b: evidence</span></td>
+  <td><span class="topic">Coding text at scale: making your measures</span>
+    <ul><li>Using the agent to turn text (311 complaints, public comments, permits) into variables</li>
+        <li>The prompt is the instrument: freeze it, then run it</li>
+        <li>The tier question: can you check every result yourself? If not, you need a gold standard</li>
+        <li>Confusion matrix; a simple baseline for comparison</li></ul></td>
+  <td><span class="topic">Build and validate your measure</span>
+    <ul><li>Hand-code 100 documents from the course-provided text dataset (311 complaint narratives); use your own data instead if your project has text</li>
+        <li>Have the agent code 1,000 with the frozen prompt</li>
+        <li>Compare: confusion matrix against your 100, and against a two-feature baseline</li>
+        <li>Optional close: wrap your frozen prompt as a Skill</li></ul></td>
+  <td><span class="topic">Step 2: build a measure, and check that it measures what you meant</span>
+    <ul><li><span class="rlab req">Required</span>Obermeyer et al. (Science 2019): the algorithm predicted health costs when the goal was health needs, so it understated how sick Black patients were</li>
+        <li><span class="rlab req">Required</span>Dressel &amp; Farid (Sci Adv 2018): two features match COMPAS</li>
+        <li><span class="rlab opt">Optional</span>Davidson et al. (ICWSM 2017)</li></ul></td>
+
+  <td class="asg"><b>Skill check: measurement</b>
+    <ul><li>your 100 hand-coded documents</li>
+        <li>the agent's 1,000 codes, from the same frozen prompt</li>
+        <li>the confusion matrix comparing the two</li>
+        <li>the confusion matrix for the two-feature baseline, for comparison</li></ul>
+<span class="tchip t-code">data/code</span><br>
+<span class="due">Due before class,&nbsp;Thu&nbsp;Oct&nbsp;15<br>Worth 10% of the grade</span></td>
+</tr>
+<tr class="goal"><td></td><td colspan="4"><div class="goalbox"><b>Teaching&nbsp;goal</b>The agent's coding looks correct until the confusion matrix. Expect real disagreement with the hand-coded 100, and the two-feature baseline comes close for some students. After this week nobody should treat unvalidated agent output as data.</div></td></tr>
+
+<!-- ============ WEEK 6 ============ -->
+<tr class="wk">
+  <td class="wknum"><span class="n">Week 6</span><span class="d">Oct 15</span><span class="stage"><span class="of">Eightfold path</span>Steps 2c + 8</span></td>
+  <td><span class="topic">Analyze, visualize, publish</span>
+    <ul><li>From coded data to charts a non-technical reader can use</li>
+        <li>From a script to a page, and from a page to a public URL (GitHub Pages)</li>
+        <li>When the data cannot leave your machine, and how to work that way</li></ul></td>
+  <td><span class="topic">Analysis + a public page + the brief</span>
+    <ul><li>Analyze the data you collected in W4, folding in your W5 measure if it came from your own text: three charts with plain-language captions</li>
+        <li>An interactive display: filter by geography, time, or group</li>
+        <li>Deploy it: a public link anyone can open, committed in your README</li>
+        <li>Draft the 2-page data brief to a named decision-maker. Every number in it must come from a script's output; none typed in by hand.</li></ul></td>
+  <td><span class="topic">Step 2 and step 8: publish the evidence so others can check it</span>
+    <ul><li><span class="rlab req">Required</span>Yu &amp; Robinson, <span class="cite">The New Ambiguity of "Open Government"</span> (2012): evidence the public can audit; transparency affects whether the evidence is credible, not only how it is presented</li>
+        <li><span class="rlab opt">Optional</span>O'Neil, <span class="cite">Weapons of Math Destruction</span>, ch. 1</li></ul></td>
+
+  <td class="asg"><b>Data brief</b>
+    <ul><li>2 pages to a named decision-maker</li>
+        <li>each number in it comes from a script's output, not typed by hand</li>
+        <li>the public page linked</li></ul>
+<span class="tchip t-write">writing</span><br>
+<span class="due">Due before class,&nbsp;Thu&nbsp;Oct&nbsp;22<br>Worth 10% of the grade</span></td>
+</tr>
+<tr class="goal"><td></td><td colspan="4"><div class="goalbox"><b>Teaching&nbsp;goal</b>By end of class every student's analysis is at a URL a stranger can open. The readings argue for transparency, and students apply it to their own work. Exploratory charts are Step 2 and the public page is Step 8; the agent makes publishing cheap, so enforce the rule that every number in the brief comes from a script, not from someone eyeballing a chart and typing a figure in. This is the fullest week of the implement arc; if it overruns, the brief deadline (before W7) absorbs it.</div></td></tr>
+
+<!-- ============ WEEK 7 ============ -->
+<tr class="wk">
+  <td class="wknum"><span class="n">Week 7</span><span class="d">Oct 22</span><span class="stage"><span class="of">Added to the path</span>Verify</span></td>
+  <td><span class="topic">Checking the AI's work: facts and fairness</span>
+    <ul><li>Why a fluent model invents citations and figures; demo: five claims about RI poverty, checked against Census live</li>
+        <li>Fairness metrics: parity, equalized odds, calibration, and why you cannot have all three</li></ul></td>
+  <td><span class="topic">Audit your own outputs</span>
+    <ul><li>Fact-check: pull 10 numbers from your W4–6 outputs, trace each to a source; table: claim | AI number | actual | verdict</li>
+        <li>Subgroup error audit: recompute the W5 confusion matrix group by group, using demographic groups if your data has them, otherwise geography, source, or time period; the skill is the same</li>
+        <li>Short structured debate: which fairness definition should govern your measure?</li></ul></td>
+  <td><span class="topic">Check the evidence: invented numbers, and errors that fall unevenly across groups</span>
+    <ul><li><span class="rlab req">Required</span>NIST <span class="cite">AI RMF 1.0</span>, exec summary</li>
+        <li><span class="rlab req">Required</span>ProPublica, <span class="cite">Machine Bias</span>, read against Corbett-Davies et al. (WaPo)</li>
+        <li><span class="rlab opt">Optional</span>Buolamwini &amp; Gebru, <span class="cite">Gender Shades</span>; Cronkite News on fabricated citations in court</li></ul></td>
+
+  <td class="asg"><b>Audit</b>
+    <ul><li>10 facts checked against a source</li>
+        <li>a subgroup error audit</li>
+        <li>1 page of interpretation</li></ul>
+<span class="tchip t-code">data/code</span><span class="tchip t-write">writing</span><br>
+<span class="due">Due before class,&nbsp;Thu&nbsp;Oct&nbsp;29<br>Worth 10% of the grade</span></td>
+</tr>
+<tr class="goal"><td></td><td colspan="4"><div class="goalbox"><b>Teaching&nbsp;goal</b>Most students find at least one wrong number in their own earlier outputs. This is the densest session of the course: fact-check, fairness, and debate; cap the debate at 20 minutes.</div></td></tr>
+
+<!-- ============ WEEK 8 ============ -->
+<tr class="wk">
+  <td class="wknum"><span class="n">Week 8</span><span class="d">Oct 29</span><span class="stage"><span class="of">Eightfold path</span>Steps 3+4</span></td>
+  <td><span class="topic">Audit a government AI system: everything so far, applied</span>
+    <ul><li>What the government itself runs: the mandated public inventory of federal AI use cases</li>
+        <li>M-25-21's checklist for high-impact systems repeats, item by item, what you already know: validated against what gold standard (W5)? numbers documented and rerunnable (W4, W7)? fairness-tested by group (W7)?</li>
+        <li>No new coding; W4's collection skills, pointed at a governance target</li></ul></td>
+  <td><span class="topic">Score a real federal system</span>
+    <ul><li>Pull the 2025 federal AI use-case inventory (3,611 rows)</li>
+        <li>Collect the agency-hosted inventories the same way you collected your own data in Week 4, one subagent per agency</li>
+        <li>Pick one high-impact system; score it against M-25-21's own <code>hi_*</code> minimum practices</li>
+        <li>Jigsaw report-out</li>
+        <li>Before leaving: form arena groups and claim an arena. This is the policy-of-AI thread, about AI as a policy domain; it is separate from your own project's domain. Groups present in W10, two weeks of preparation.</li></ul></td>
+  <td><span class="topic">Steps 3 and 4: alternatives and criteria, as the federal government already writes them</span>
+    <ul><li><span class="rlab req">Required</span>OMB <span class="cite">M-25-21</span> (operative; M-24-10 rescinded, used for comparison only): the <code>hi_*</code> minimum practices are a criteria list already in use, Step 4 in practice</li>
+        <li><span class="rlab req">Required</span>Engstrom, Ho, Sharkey &amp; Cuéllar, <span class="cite">Government by Algorithm</span> (2020), pp. 6–20: what agencies actually deployed, which is the set of alternatives available in practice</li>
+        <li><span class="rlab opt">Optional</span><span class="cite">Blueprint for an AI Bill of Rights</span> (2022)</li></ul></td>
+
+  <td class="asg"><b>Policy of AI ①</b>
+    <ul><li>one high-impact federal system, chosen from the inventory</li>
+        <li>a scorecard against the M-25-21 minimum practices</li></ul>
+<span class="tchip t-code">data/code</span><br>
+<span class="due">Due before class,&nbsp;Thu&nbsp;Nov&nbsp;5<br>Worth 5% of the grade</span></td>
+</tr>
+<tr class="goal"><td></td><td colspan="4"><div class="goalbox"><b>Teaching&nbsp;goal</b>The integrative week: four weeks of practice on their own project become the criteria for judging someone else's system. Engstrom's team took 8 months to find 157 cases by hand; the class collects 3,611 in one session. Arena groups form here and present in W10, with two weeks of preparation.</div></td></tr>
+
+<!-- ============ WEEK 9 ============ -->
+<tr class="wk">
+  <td class="wknum"><span class="n">Week 9</span><span class="d">Nov 5</span><span class="stage"><span class="of">Eightfold path</span>Step 5: project</span></td>
+  <td><span class="topic">Designing your final project</span>
+    <ul><li>What makes a policy project worth deploying: question, audience, upkeep</li>
+        <li>Scoping: what fits in two build weeks</li></ul></td>
+  <td><span class="topic">Proposal + deployed skeleton</span>
+    <ul><li>Project proposal: question, data, audience, what the project does</li>
+        <li>Deploy an empty but working version, published the same way as the Week 6 page</li>
+        <li>Instructor conferences rotate through the room while everyone builds</li></ul></td>
+  <td><span class="topic">Step 5: project the outcomes before the policy is adopted</span>
+    <ul><li><span class="rlab req">Required</span>Mullainathan &amp; Spiess (JEP 2017): what prediction can give policy, ŷ vs. β̂</li>
+        <li><span class="rlab req">Required</span>Hofman, Sharma &amp; Watts, <span class="cite">Prediction and Explanation in Social Systems</span> (Science 2017): the ceiling on predictability of social outcomes</li>
+        <li><span class="rlab req">Required</span>Hewitt, Ashokkumar, Ghezae &amp; Willer (Nature 2026): LLMs predict survey-experiment treatment effects at r = 0.85</li>
+        <li><span class="rlab disc">Discussion</span>use AI to predict your proposed project's outcomes, then argue about the consequences of relying on prediction: what would your agency be allowed to conclude from a simulated pilot?</li></ul></td>
+
+  <td class="asg"><b>Check-in 3</b>: the proposal
+    <ul><li>the question and a named audience</li>
+        <li>the data, already in hand from the semester so far</li>
+        <li>what the project will do</li>
+        <li>three alternatives, including doing nothing</li>
+        <li>predicted outcomes and the basis for the prediction</li></ul>
+<span class="tchip t-write">writing</span><br>
+<span class="due">Due before class,&nbsp;Thu&nbsp;Nov&nbsp;12<br>Worth 5% of the grade, one point per checklist item</span></td>
+</tr>
+<tr class="goal"><td></td><td colspan="4"><div class="goalbox"><b>Teaching&nbsp;goal</b>Every project has a live URL before building starts. The prediction readings set the question each proposal has to answer: what will happen when this deploys, and on what basis do you claim that.</div></td></tr>
+
+<!-- ============ WEEK 10 ============ -->
+<tr class="wk">
+  <td class="wknum"><span class="n">Week 10</span><span class="d">Nov 12</span><span class="stage"><span class="of">Eightfold path</span>Steps 6+7</span></td>
+  <td><span class="topic">The six arenas of AI policy</span>
+    <ul><li>Opening lecture (~30 min): what people argue about when they argue about AI policy, and a quick tour of the three regimes (US preemption fight, EU AI Act + 2026 delay, China's layered rules)</li>
+        <li>Shared pre-read for everyone, not just the regimes group: Bradford, <span class="cite">Digital Empires</span>, Introduction (~15pp) [in Zotero], which gives the whole class the market-driven / state-driven / rights-driven vocabulary before groups split</li>
+        <li>Two arenas are not on the menu because the class already worked in them: present-harm accountability (W7) and government's own AI (W8)</li></ul></td>
+  <td><span class="topic">Teach your arena (groups formed in W8)</span>
+    <ul><li>Each group, 8–10 min: what the fight is about, who is fighting, one concrete 2025–26 case, one core reading they chose, from the menu below or found with the agent</li>
+        <li>Every presentation ends on the same question: what does this arena's fight mean for a government analyst office?</li>
+        <li>Memo: draft a one-page internal AI-use policy for a government analyst office: weigh the trade-offs among the approaches your arena surfaced, decide, and cite your own experience this term for each rule</li></ul></td>
+  <td><span class="topic">Steps 6 and 7: weigh the approaches to regulating AI, and decide (one arena per group)</span>
+    <ul><li><span class="rlab req">Required</span>Every student reads the shared Bradford introduction; every group reads and presents one core reading from its own arena.</li>
+        <li><b>Frontier-model risk</b>: International AI Safety Report; <span class="cite">Backfiring Effect of Weak AI Safety Regulation</span> (PNAS 2026, in Zotero; citekey pending a metadata fix)</li>
+        <li><b>Jurisdiction &amp; regimes</b>: Nelson (Science 2026) [in Zotero]; the shared Bradford intro [in Zotero]; on China specifically, Sheehan, <span class="cite">China's AI Regulations and How They Get Made</span> (2023) [in Zotero] for how the rules get made, Migliorini, <span class="cite">China's Interim Measures on Generative AI</span> (2024) [in Zotero] for what they say (already compares to the EU AI Act); the Dec 2025 preemption EO</li>
+        <li><b>Geopolitics &amp; chips</b>: export-control brief (not yet picked); <span class="cite">Chip War</span> excerpt (background only; it is chip-industry history rather than AI policy)</li>
+        <li><b>Power &amp; concentration</b>: Kak &amp; West, the sole candidate right now; Farrell's <span class="cite">AI as Governance</span> was read in full and dropped, because it is a political-theory research agenda rather than a case-based fight, so this arena needs a second reading before W10</li>
+        <li><b>Information ecosystem</b>: Kostka &amp; Bogs, <span class="cite">The Expanding Digital Reach of the Chinese State</span> (2026) [in Zotero]: function creep as the mechanism (Health Codes repurposed against protesters, facial recognition onto Uyghurs and schoolchildren); China's 2025 labeling rules; EU AI Act Art. 50; state deepfake-election laws</li>
+        <li><b>Labor &amp; economy</b> (incl. the regulation-vs-innovation fight): Brynjolfsson, Mitchell &amp; Rock (optional in W2); Bradford, <span class="cite">False Choice</span> (2024); Draghi excerpt; Jia, Jin &amp; Wagman (2021)</li></ul></td>
+
+  <td class="asg"><b>Policy of AI ②</b>
+    <ul><li>an arena presentation, delivered in class</li>
+        <li>a 1-page memo that weighs the alternatives and decides</li></ul>
+<span class="tchip t-pres">presentation</span><span class="tchip t-write">writing</span><br>
+<span class="due">Presented in class,&nbsp;Nov&nbsp;12<br>Memo due before class,&nbsp;Thu&nbsp;Nov&nbsp;19<br>Worth 10% of the grade</span></td>
+</tr>
+<tr class="goal"><td></td><td colspan="4"><div class="goalbox"><b>Teaching&nbsp;goal</b>Students teach the six arenas, with two weeks of preparation, so the class covers the range of AI policy debates. In the memo each student weighs the approaches, picks rules, and backs each rule with their own experience this term.</div></td></tr>
+
+<!-- ============ WEEK 11 ============ -->
+<tr class="wk">
+  <td class="wknum"><span class="n">Week 11</span><span class="d">Nov 19</span><span class="stage proj">Project week</span></td>
+  <td><span class="topic">Reviewing someone else's repo</span>
+    <ul><li>What a review looks for when nobody typed the code</li></ul></td>
+  <td><span class="topic">Build, then swap</span>
+    <ul><li>Build time with instructor support</li>
+        <li>Swap repos; rerun a classmate's project using the README alone; write a one-page review</li></ul></td>
+  <td><span class="none">No reading, build week.</span></td>
+
+  <td class="asg"><b>Peer rerun review</b>, counts toward Participation (10%)<br>
+<span class="tchip t-pres">presentation</span></td>
+</tr>
+<tr class="goal"><td></td><td colspan="4"><div class="goalbox"><b>Teaching&nbsp;goal</b>In Week 4 students reran a practice pipeline from a classmate's README. Here they do the same thing to each other's real final projects: can a classmate get your project running using only what you wrote down? Thanksgiving is next week, so this is the last class before presentations. A problem found here still has two weeks on the calendar to fix, but no more class time to get help with it.</div></td></tr>
+
+<tr class="break"><td colspan="5">Thu, Nov 26: Thanksgiving recess (Nov 25–29). No class.</td></tr>
+
+<!-- ============ WEEK 12 ============ -->
+<tr class="wk">
+  <td class="wknum"><span class="n">Week 12</span><span class="d">Dec 3</span><span class="stage"><span class="of">Eightfold path</span>Step 8: tell it</span></td>
+  <td><span class="topic">What you can claim, and what to learn next</span>
+    <ul><li>Revisit the validation tiers from Week 5: what could you defend in a methods section?</li>
+        <li>What the next step up costs, and when not to take it</li></ul></td>
+  <td><span class="topic">Final presentations</span>
+    <ul><li>Present the deployed project</li>
+        <li>Required in every talk: one thing the agent got wrong, and how you caught it</li></ul></td>
+  <td><span class="none">No reading, presentations.</span></td>
+
+  <td class="asg"><b>Final project</b>
+    <ul><li>the deployed project</li>
+        <li>documentation that lets a classmate rerun it</li>
+        <li>a presentation naming one agent error you caught</li></ul>
+<span class="tchip t-code">data/code</span><span class="tchip t-write">writing</span><span class="tchip t-pres">presentation</span><br>
+<span class="due">Presented in class,&nbsp;Dec&nbsp;3<br>Project and documentation due,&nbsp;Thu&nbsp;Dec&nbsp;10<br>Worth 30% of the grade</span></td>
+</tr>
+<tr class="goal"><td></td><td colspan="4"><div class="goalbox"><b>Teaching&nbsp;goal</b>Every presentation includes the "one thing the agent got wrong" slide: nobody presents a project without presenting an audit of it.</div></td></tr>
+
+</tbody>
+</table>
+</div>
+</div>
+</body>
+</html>

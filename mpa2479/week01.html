@@ -1,0 +1,550 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Week 1: What an AI Agent Is</title>
+<style>
+  :root{
+    --bg:#fcfcfb; --fg:#1c1c1a; --muted:#6b6b66; --line:#e6e5e1;
+    --accent:#2f5d8a; --accent-weak:#eaf0f5; --ex:#b5651d; --ex-weak:#fbf1e7;
+    --code-bg:#f4f5f3; --card:#fff;
+    --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--sans)}
+  .layout{display:grid;grid-template-columns:180px minmax(0,1fr) 360px;max-width:1320px;margin:0 auto}
+
+  nav{position:sticky;top:0;align-self:start;height:100vh;overflow:auto;
+      padding:26px 14px;border-right:1px solid var(--line);font-size:14px}
+  nav .days{display:flex;flex-direction:column;gap:2px;margin-bottom:22px}
+  nav .days a{color:var(--muted);text-decoration:none;padding:3px 0;font-size:13px}
+  nav .days a.cur{color:var(--fg);font-weight:700}
+  nav .days span.off{color:#c8c7c2;padding:3px 0;font-size:13px}
+  nav .home{display:block;font-size:14px;font-weight:800;color:var(--fg);text-decoration:none;line-height:1.25;margin-bottom:18px}
+  nav .home:hover{color:var(--accent)}
+  nav .lbl{font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin:0 0 8px}
+  nav .toc a{display:block;color:var(--fg);text-decoration:none;padding:6px 0 6px 12px;
+             border-left:2px solid transparent;margin-left:-2px}
+  nav .toc a:hover{color:var(--accent)}
+  nav .toc a.active{color:var(--accent);border-left-color:var(--accent);font-weight:600}
+  nav .toc .has{color:var(--ex);font-size:11px;margin-left:6px}
+
+  main{padding:30px 32px 160px;min-width:0}
+  .kicker{font-size:13px;letter-spacing:.07em;text-transform:uppercase;color:var(--accent);font-weight:700;margin:0}
+  h1{margin:4px 0 6px;font-size:32px}
+  .goal{color:var(--muted);font-size:16px;margin:0 0 20px}
+  h2.sec{font-size:28px;font-weight:700;color:var(--fg);line-height:1.2;
+         margin:52px 0 12px;padding-top:22px;border-top:1px solid var(--line)}
+  h2.sec .hastag{color:var(--ex);font-weight:600;font-size:14px}
+
+  .card{background:var(--card);border:1px solid var(--line);border-radius:14px;
+        padding:20px 24px;margin:16px 0;box-shadow:0 1px 2px rgba(0,0,0,.03)}
+  .card h3{margin:0 0 12px;font-size:21px;line-height:1.25}
+  .card ul{list-style:none;padding:0;margin:0}
+  .card li{font-size:17px;line-height:1.45;padding:9px 0 9px 26px;position:relative;border-top:1px solid var(--line)}
+  .card li:first-child{border-top:0}
+  .card li::before{content:"";position:absolute;left:4px;top:17px;width:8px;height:8px;border-radius:50%;background:var(--accent)}
+  .card ul ul{margin:6px 0 0}
+  .card li li{font-size:15px;padding:5px 0 5px 24px;border-top:0;color:var(--muted)}
+  .card li li::before{width:5px;height:5px;top:14px;background:var(--muted)}
+  .card.demo{border-left:4px solid var(--accent)}
+  .card.demo .tag{display:inline-block;font-size:12px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;
+                  color:var(--accent);margin-bottom:8px}
+  .card.read{border-left:4px solid #7a5ea6}
+  .card.read .tag{display:inline-block;font-size:12px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;
+                  color:#7a5ea6;margin-bottom:8px}
+  .quote{background:var(--code-bg);border-left:3px solid var(--accent);border-radius:0 8px 8px 0;
+         padding:12px 16px;margin:12px 0;font-style:italic;line-height:1.5}
+  code{background:var(--code-bg);padding:1px 5px;border-radius:4px;font-family:ui-monospace,Menlo,monospace;font-size:.85em}
+  strong{color:#111}
+  table{border-collapse:collapse;width:100%;margin:10px 0;font-size:16px}
+  th,td{border:1px solid var(--line);padding:8px 12px;text-align:left}
+  th{background:var(--accent-weak);font-size:14px}
+  .src{font-size:13px;color:var(--muted)} .src a{color:var(--accent)}
+
+  aside{position:sticky;top:0;align-self:start;height:100vh;overflow:auto;
+        border-left:1px solid var(--line);padding:26px 18px 60px;background:#fbfaf8}
+  aside .railhead{font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--ex)}
+  .hands{display:none} .hands.on{display:block}
+  .exi{border:1px solid #e8d3ba;background:var(--ex-weak);border-radius:10px;margin:10px 0;padding:12px 14px}
+  .exi .step{display:inline-block;font-size:10px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;
+             color:#fff;background:var(--ex);border-radius:20px;padding:2px 9px;margin-bottom:8px}
+  .exi h4{margin:0 0 6px;font-size:15px}
+  .exi ul{margin:6px 0;padding-left:18px;font-size:13.5px;line-height:1.5}
+  .exi li{margin:4px 0}
+  .exi p{font-size:13.5px;line-height:1.5;margin:6px 0}
+  .save{font-size:13px;color:var(--muted);background:#fff;border:1px solid var(--line);
+        border-radius:8px;padding:9px 12px;margin:10px 0}
+  .code{position:relative;background:#fff;border:1px solid #e8d3ba;border-radius:8px;
+        padding:9px 34px 9px 11px;font-family:ui-monospace,Menlo,monospace;font-size:12px;
+        white-space:pre-wrap;margin:8px 0;line-height:1.45}
+  .code .copy{position:absolute;top:6px;right:6px;font-size:10px;border:1px solid #e8d3ba;
+              background:#fff;border-radius:6px;padding:2px 7px;cursor:pointer;color:var(--ex)}
+  .guidelink{display:inline-block;margin-top:6px;font-size:13px;color:var(--ex);font-weight:600}
+
+    .mobilenote{display:none}
+  .mhead{display:none}
+  /* ---- tablet: two columns, top menu ---- */
+  @media(max-width:1080px){
+    .layout{grid-template-columns:minmax(0,1fr) 340px}
+    nav{display:none}
+    .mhead{display:flex;align-items:center;justify-content:space-between;gap:12px;
+           position:sticky;top:0;z-index:20;background:var(--bg);
+           border-bottom:1px solid var(--line);padding:10px 16px}
+    .mtitle{font-size:14px;font-weight:800;color:var(--fg);text-decoration:none}
+    .mnav summary{list-style:none;cursor:pointer;font-size:13px;font-weight:700;color:var(--accent);
+                  border:1px solid var(--line);border-radius:8px;padding:5px 12px;background:#fff}
+    .mnav summary::-webkit-details-marker{display:none}
+    .mnav{position:relative}
+    .mnav-box{position:absolute;right:0;top:36px;min-width:240px;background:#fff;
+              border:1px solid var(--line);border-radius:12px;box-shadow:0 8px 24px rgba(0,0,0,.10);
+              padding:10px 14px;z-index:30}
+    .mnav-box a{display:block;color:var(--fg);text-decoration:none;font-size:14px;padding:6px 0}
+    .mnav-box a:hover{color:var(--accent)}
+    .mlbl{font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin:8px 0 2px}
+    main{padding:20px 20px 120px}
+    h1{font-size:27px}
+    h2.sec{font-size:24px}
+    table{display:block;overflow-x:auto}
+  }
+  /* ---- phone: single column ---- */
+  @media(max-width:740px){
+    .layout{grid-template-columns:1fr}
+    main{padding:16px 14px 60px}
+    .mobilenote{display:block;background:var(--accent-weak);border:1px solid var(--line);
+                border-radius:10px;padding:10px 14px;margin:0 0 18px;font-size:13.5px;
+                line-height:1.5;color:var(--fg)}
+    h1{font-size:25px}
+    .card{padding:16px 16px}
+    .card li{font-size:16px}
+    aside{position:static;height:auto;border-left:0;border-top:1px solid var(--line)}
+    .hands{display:block !important;border-top:1px solid var(--line);padding-top:10px;margin-top:10px}
+    .hands[data-for="none"]{display:none !important}
+  }
+</style>
+</head>
+<body>
+<div class="mhead">
+  <a class="mtitle" href="week01.html">Applied AI for Public Policy</a>
+  <details class="mnav">
+    <summary>Menu</summary>
+    <div class="mnav-box">
+      <p class="mlbl">Weeks</p>
+      <a href="week01.html">1 · What an AI agent is</a>
+      <a href="week02.html">2 · Directing the agent</a>
+      <p class="mlbl">On this page</p>
+      <a href="#opening">Opening</a>
+      <a href="#reading">Reading discussion</a>
+      <a href="#concept">What an AI agent is</a>
+      <a href="#setup">Setup</a>
+      <a href="#redo">Redo the demo</a>
+      <a href="#wrap">Wrap</a>
+    </div>
+  </details>
+</div>
+<div class="layout">
+
+  <!-- ================= LEFT NAV ================= -->
+  <nav>
+    <a class="home" href="index.html">MPA 2479<br>Applied AI for Public Policy</a>
+    <div class="days">
+      <div class="lbl">Weeks</div>
+      <a href="week01.html" class="cur">1 · What an AI agent is</a>
+      <a href="week02.html">2 · Directing the agent</a>
+      <span class="off">3 · Define the problem</span>
+      <span class="off">4 · Collecting data</span>
+      <span class="off">5 · Coding text at scale</span>
+      <span class="off">6 · Analyze, visualize, publish</span>
+      <span class="off">7 · Facts and fairness</span>
+      <span class="off">8 · Audit a federal system</span>
+      <span class="off">9 · Project outcomes + proposal</span>
+      <span class="off">10 · The arenas of AI policy</span>
+      <span class="off">11 · Build and review</span>
+      <span class="off">12 · Presentations</span>
+    </div>
+    <div class="lbl">Today</div>
+    <div class="toc">
+      <a href="#opening">Opening</a>
+      <a href="#reading">Reading discussion</a>
+      <a href="#concept">What an AI agent is</a>
+      <a href="#setup">Setup <span class="has">hands-on</span></a>
+      <a href="#redo">Redo the demo <span class="has">hands-on</span></a>
+      <a href="#wrap">Wrap</a>
+    </div>
+  </nav>
+
+  <!-- ================= CENTER CONTENT ================= -->
+  <main>
+    <div class="mobilenote">You are on a small screen. This page is designed for a laptop, with three columns and hands-on steps appearing beside the content. On a phone it collapses to one column and the hands-on steps move to the end of the page. Reading here is fine; for the exercises you need your laptop anyway.</div>
+    <p class="kicker">Week 1 · Thursday, September 10, 2026, 9:00 to 11:30 am · Shopping period</p>
+    <h1>What an AI Agent Is</h1>
+    <p class="byline" style="margin:2px 0 16px;color:var(--muted);font-size:15px">Han Zhang · page drafted with Claude (Anthropic)</p>
+    <p class="goal">Leave today having watched an AI agent do a policy analysis end to end, and with the tool installed on your own laptop. When a section has something to do, it appears in the panel on the right.</p>
+
+    <!-- OPENING -->
+    <section data-hands="none">
+    <h2 class="sec" id="opening">Opening</h2>
+
+    <div class="card">
+      <h3>This course</h3>
+      <ul>
+        <li>Every week has two parts: you <strong>build</strong> something with an AI agent, and you <strong>read and argue</strong> about how AI is changing public policy.</li>
+        <li>An <strong>agent</strong> is AI that writes and runs code on real data, inside a project on your computer.</li>
+        <li>You are not expected to write code from memory. You direct the agent; it writes and runs the code; you judge what comes back.</li>
+      </ul>
+    </div>
+    <div class="card demo">
+      <span class="tag">Live demo</span>
+      <h3>An agent doing a policy analysis</h3>
+      <ul>
+        <li>Question: what do residents of a city complain about, and where?</li>
+        <li>Data: the city's 311 service-request file, downloaded from its open data portal.</li>
+        <li>I hand the agent a single instruction and let it work:</li>
+      </ul>
+      <div class="quote">Using Python: load the 311 service-request file, clean the category and neighborhood fields, count requests by category and by neighborhood, and make one chart of the top complaint categories and one map or chart of requests by neighborhood. Save both as PNGs.</div>
+    </div>
+    <div class="card">
+      <h3>What just happened</h3>
+      <ul>
+        <li>The agent wrote the code and ran it.</li>
+        <li>It hit errors, read them, and fixed them.</li>
+        <li>It checked its own output.</li>
+        <li>It returned two charts for us to inspect.</li>
+        <li>My only inputs were the instruction at the start and my reading of the charts at the end.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>From analyst to director</h3>
+      <ul>
+        <li>The agent produced the neighborhood counts in about two minutes.</li>
+        <li>Whether those counts mean anything for policy is still a human call: 311 records measure who complains, not what is broken.</li>
+        <li>That division of labor runs through the whole course: the agent does the implementation, and you own the question and the judgment.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Who this course is for</h3>
+      <ul>
+        <li>You have taken at least one course that used a programming language, ideally Python.</li>
+        <li>You can look at a script and roughly follow what it does, even if you could not write it from scratch.</li>
+        <li>You do <strong>not</strong> need a computer science background.</li>
+        <li>You need a laptop in every class. This is a hands-on course.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>One tool, on purpose</h3>
+      <ul>
+        <li>This course runs on one coding agent: <strong>Claude Code</strong>.</li>
+        <li>Every hands-on uses its exact commands, and one setup per person is the only way to support a full room.</li>
+        <li>What you learn transfers: the habits of directing, specifying, and checking work the same in any agent.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>The semester at a glance</h3>
+      <ul>
+        <li>Weeks 1–2: meet the agent and learn to direct it.</li>
+        <li>Weeks 3–7: walk the evidence steps at production depth: define your problem (Step 1), assemble the evidence (Steps 2a–2c: collect, construct, analyze and publish), then verify what the agent produced (Step 2½), a step this course adds to the path.</li>
+        <li>Weeks 8–10: apply the path to AI itself: score a real federal AI system against criteria (Steps 3–4), predict the outcomes of your own proposed tool (Step 5), and weigh and decide how AI should be governed (Steps 6–7).</li>
+        <li>Weeks 11–12: build, and tell your story (Step 8).</li>
+        <li>The first seven weeks are AI for policy: the agent works as your analyst. Weeks 8–10 are policy of AI: AI systems are the thing being governed.</li>
+        <li>By December you will have: a public web page with your analysis, an automated data pipeline, a policy brief, a fairness analysis, and an audit of a real government AI system.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Shopping period</h3>
+      <ul>
+        <li>Weeks 1 and 2 have no deliverables. The add deadline is Tuesday, September 22.</li>
+        <li>Use these two weeks to decide whether this course is for you.</li>
+        <li>The first deliverable is in Week 3, and the workload from there is real: readings before class, a build in class, and a deliverable after most weeks.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Today</h3>
+      <ul>
+        <li>First, we discuss the reading: the big picture of AI and government.</li>
+        <li>Then the concept: what an AI agent actually is.</li>
+        <li>Then setup: get the tool running on your laptop, with support in the room.</li>
+        <li>We close with you redoing today's demo yourself.</li>
+      </ul>
+    </div>
+    </section>
+
+    <!-- READING DISCUSSION -->
+    <section data-hands="none">
+    <h2 class="sec" id="reading">Reading discussion</h2>
+
+    <div class="card read">
+      <span class="tag">Read before class</span>
+      <h3>The eightfold path</h3>
+      <ul>
+        <li>Bardach &amp; Patashnik, <strong>"A Practical Guide for Policy Analysis"</strong>. Read the chapter that lays out the eightfold path: define the problem, assemble evidence, construct alternatives, select criteria, project outcomes, confront trade-offs, decide, tell your story.</li>
+        <li>It is the same textbook as the MPA core Policy Analysis course, so the framework will be familiar to you, or soon will be.</li>
+        <li>The eight steps are the spine of this course: the semester walks the path once, end to end, with an AI agent doing the implementation work.</li>
+        <li>Optional background on AI and government:
+          <ul>
+            <li>OECD, <em>Digital Government Outlook 2026</em>, AI chapter.</li>
+            <li>Stanford AI Index 2026, policy chapter.</li>
+            <li>Margetts &amp; Dorobantu, "Rethink Government with AI" (Nature, 2019).</li>
+          </ul>
+        </li>
+      </ul>
+      <p class="src">[Chapter and edition to confirm.]</p>
+    </div>
+    <div class="card">
+      <h3>Discussion (~25 min)</h3>
+      <ul>
+        <li>The vote: which of the eight steps do you think AI can help, and which not? Defend your pick. We record the answers and come back to them in Week 12.</li>
+        <li>Think about the job you want after this degree. Which of the eight steps does that job actually spend its weeks on?</li>
+        <li>What would you need to see before trusting an AI-produced number in a memo that goes out under your name? Keep your answer; Weeks 5 through 8 are about exactly this.</li>
+      </ul>
+    </div>
+    </section>
+
+    <!-- CONCEPT -->
+    <section data-hands="none">
+    <h2 class="sec" id="concept">What an AI agent is</h2>
+
+    <div class="card">
+      <h3>Isn't this just ChatGPT?</h3>
+      <ul>
+        <li>Underneath it is the same kind of model. The difference is the machine built around it.</li>
+        <li>Ask ChatGPT for the 311 analysis, and it hands you a block of code to run yourself.</li>
+        <li>Give the agent the same request, and it writes the code, runs it, hits an error, and fixes it, until the charts exist.</li>
+        <li>ChatGPT answers once and stops. The agent keeps working until the task is done.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>It works in a folder, not a chat</h3>
+      <ul>
+        <li>You pick one folder for your project, and the agent works inside it.</li>
+        <li>Your data, your scripts, and your outputs are all in there together.</li>
+        <li>The agent only touches things in that folder, so it stays out of the rest of your computer.</li>
+        <li>Its notes stay in the folder, so next session it picks up where you left off instead of starting over.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Condition 1: tool use</h3>
+      <ul>
+        <li>A language model on its own only produces text.</li>
+        <li><strong>Tool use</strong> gives it real actions: read a file, write a file, run a command, search the web.</li>
+        <li>Every time it edits a script or runs <code>python analysis.py</code>, that is tool use at work.</li>
+        <li>This is why the agent asks permission before it acts: it is running on your machine.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Condition 2: the agent loop</h3>
+      <ul>
+        <li>A chatbot answers once. An agent works in a <strong>loop</strong> until the goal is met.</li>
+        <li>On the 311 charts the loop ran like this:
+          <ul>
+            <li>it read the file and found the column names,</li>
+            <li>it wrote code to clean and count the categories,</li>
+            <li>it ran the code and hit an error on inconsistent neighborhood names,</li>
+            <li>it read the error and rewrote that step,</li>
+            <li>it ran again and produced the charts.</li>
+          </ul>
+        </li>
+        <li>The loop pauses for your approval, and that pause is where your judgment enters.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Condition 3: running the code</h3>
+      <ul>
+        <li>Code that has not run is only a guess.</li>
+        <li>The agent runs its own code, reads what breaks, fixes it, and runs again, so you end up with a result that works.</li>
+        <li>Running its own code is what lets the agent finish the job.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>The three conditions together</h3>
+      <table>
+        <tr><th>A model alone</th><th>An agent</th></tr>
+        <tr><td>generates a code snippet</td><td>writes, runs, tests, and fixes code</td></tr>
+        <tr><td>describes what a script should do</td><td>implements it and verifies it</td></tr>
+        <tr><td>suggests an approach</td><td>executes it and iterates to a result</td></tr>
+      </table>
+      <ul><li>Take away any one of the three, and the system falls back to a chatbot.</li></ul>
+    </div>
+    <div class="card">
+      <h3>One warning for the semester</h3>
+      <ul>
+        <li>These models are built to sound fluent, and fluent language can still be wrong.</li>
+        <li>The case to fear is the answer that is confident and wrong at once. A fabricated statistic in a policy memo looks exactly like a real one.</li>
+        <li>So you check every result the agent gives you, every time.</li>
+        <li>The rule for the semester: <strong>an unverified number never goes into a memo.</strong></li>
+      </ul>
+    </div>
+    </section>
+
+    <!-- SETUP -->
+    <section data-hands="setup">
+    <h2 class="sec" id="setup">Setup <span class="hastag">· do it on the right</span></h2>
+
+    <div class="card">
+      <h3>What the terminal is</h3>
+      <ul>
+        <li>The terminal is a text interface to your computer: you type a command, it prints the result.</li>
+        <li>On a Mac it is the app called <strong>Terminal</strong>; on Windows it is <strong>PowerShell</strong>.</li>
+        <li>Agents live here because this is where programs are run.</li>
+        <li>You need very little of it: <code>cd folder</code> moves into a folder, <code>ls</code> lists what is there.</li>
+        <li>Everything else you can ask the agent to type for you.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>When something breaks</h3>
+      <ul>
+        <li>Something will break today. That is part of the course, on purpose.</li>
+        <li>When the agent runs a command that fails, it reads the error and fixes it on its own; you watch and steer.</li>
+        <li>When you are stuck yourself, tell the agent in plain words what happened.</li>
+        <li>Raise your hand the moment a step fails. Setup problems are not your fault and not a sign you are behind.</li>
+      </ul>
+    </div>
+    </section>
+
+    <!-- REDO THE DEMO -->
+    <section data-hands="redo">
+    <h2 class="sec" id="redo">Redo the demo yourself <span class="hastag">· do it on the right</span></h2>
+
+    <div class="card">
+      <h3>Same task, your machine</h3>
+      <ul>
+        <li>You watched the agent do the 311 analysis this morning. Now you run the same task yourself.</li>
+        <li>The dataset and the exact instruction are on the right; the point is to see the loop happen on your own screen.</li>
+        <li>Watch what it does with the instruction: each place where it makes a choice you did not specify is a decision that should have been yours.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>If you finish early</h3>
+      <ul>
+        <li>Try the same kind of task on a second dataset from the portal: building permits, restaurant inspections, or crime incidents.</li>
+        <li>Change the question, not just the file, and see whether the agent's choices still make sense.</li>
+      </ul>
+    </div>
+    </section>
+
+    <!-- WRAP -->
+    <section data-hands="none">
+    <h2 class="sec" id="wrap">Wrap</h2>
+    <div class="card">
+      <h3>Where you are</h3>
+      <ul>
+        <li>You have seen what an agent is, and the tool runs on your laptop.</li>
+        <li>Next week: how to direct it, with three ways to run the agent, your first repository, and what a session costs.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Deciding whether to stay</h3>
+      <ul>
+        <li>Every week of this course works the way today did: you build something with the agent.</li>
+        <li>If the terminal felt alien, that is normal and not disqualifying; it stops feeling alien around Week 3.</li>
+        <li>If you wanted a course about AI policy with no building, this is not that course: there are readings every week, and there is also something to build every week.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Before you go</h3>
+      <ul>
+        <li>Show a neighbor the demo running on your machine.</li>
+        <li>If your setup is still broken, come to office hours before next Thursday. Do not start Week 2 with a broken environment.</li>
+        <li>Start thinking now about the policy domain and dataset you care about. In Week 3 you choose the question you will carry all semester.</li>
+        <li>For next week, read Dell'Acqua et al., "Navigating the Jagged Technological Frontier" (Harvard Business School Working Paper 24-013, 2023), and the executive summary of the UK Department for Business and Trade's "Evaluation of the M365 Copilot Pilot" (2025).</li>
+      </ul>
+    </div>
+    </section>
+
+  </main>
+
+  <!-- ================= RIGHT CONTEXTUAL HANDS-ON ================= -->
+  <aside>
+    <p class="railhead" id="railhead">Hands-on</p>
+
+    <div class="hands" data-for="none"></div>
+
+    <!-- setup -->
+    <div class="hands" data-for="setup">
+      <div class="exi">
+        <span class="step">Step 1</span>
+        <h4>Install Claude Code</h4>
+        <p>Open the terminal (Mac: Terminal; Windows: PowerShell) and run the line for your system.</p>
+        <p>Mac:</p><div class="code">curl -fsSL https://claude.ai/install.sh | bash<span class="copy">copy</span></div>
+        <p>Windows (PowerShell):</p><div class="code">irm https://claude.ai/install.ps1 | iex<span class="copy">copy</span></div>
+      </div>
+      <div class="exi">
+        <span class="step">Step 2</span>
+        <h4>Start it and sign in</h4>
+        <p>Type the tool's name and press Enter; it opens your browser to sign in.</p>
+        <div class="code">claude<span class="copy">copy</span></div>
+        <ul>
+          <li>You are set when it prints a prompt and waits for you to type.</li>
+          <li>Raise your hand the moment a step fails; do not sit stuck for more than a few minutes.</li>
+        </ul>
+      </div>
+      <a class="guidelink" href="setup_guide.html">Full setup guide: accounts, permission levels, and fixes →</a>
+    </div>
+
+    <!-- redo -->
+    <div class="hands" data-for="redo">
+      <div class="exi">
+        <span class="step">Step 1</span>
+        <h4>Get the data</h4>
+        <p>Download the 311 file from Canvas (Week 1 → data) and put it in a new folder for this course.</p>
+        <div class="code">mkdir ai-policy
+cd ai-policy
+claude<span class="copy">copy</span></div>
+      </div>
+      <div class="exi">
+        <span class="step">Step 2</span>
+        <h4>Hand it the instruction</h4>
+        <p>Paste the same instruction from the demo and watch the loop run:</p>
+        <div class="code">Using Python: load the 311 service-request file in this folder, clean the category and neighborhood fields, count requests by category and by neighborhood, and make one chart of the top complaint categories and one chart of requests by neighborhood. Save both as PNGs.<span class="copy">copy</span></div>
+        <ul>
+          <li>Let it write the code, run it, hit errors, and fix them.</li>
+          <li>Open the two PNGs at the end and ask: does this look right?</li>
+        </ul>
+      </div>
+      <div class="exi">
+        <span class="step">Step 3 · if time</span>
+        <h4>Try a second dataset</h4>
+        <p>Pick another file from the portal links on Canvas (permits, inspections, or crime incidents) and write your own instruction for it.</p>
+        <ul>
+          <li>Ask for something you actually want to know, not a copy of the 311 question.</li>
+          <li>Notice where the agent makes a choice you did not specify.</li>
+        </ul>
+      </div>
+      <div class="save">No account or setup still broken? Pair with a neighbor for this part, one machine and two people, and get your own fixed at office hours this week.</div>
+    </div>
+  </aside>
+
+</div>
+
+<script>
+  const sections=[...document.querySelectorAll('main section')];
+  const panels=[...document.querySelectorAll('.hands')];
+  const railhead=document.getElementById('railhead');
+  function show(key){
+    panels.forEach(p=>p.classList.toggle('on',p.dataset.for===key));
+    railhead.style.display = key==='none' ? 'none' : '';
+  }
+  addEventListener('scroll',()=>{
+    let cur=sections[0];
+    sections.forEach(s=>{const t=s.getBoundingClientRect().top; if(t<window.innerHeight*0.35) cur=s;});
+    show(cur.dataset.hands);
+  },{passive:true});
+  show('none');
+
+  const links=[...document.querySelectorAll('.toc a')];
+  addEventListener('scroll',()=>{
+    let cur=null;
+    links.forEach(a=>{const el=document.querySelector(a.getAttribute('href'));
+      if(el && el.getBoundingClientRect().top<140)cur=a;});
+    links.forEach(a=>a.classList.toggle('active',a===cur));
+  },{passive:true});
+
+  document.addEventListener('click',e=>{
+    if(!e.target.classList.contains('copy'))return;
+    const x=e.target.parentNode.childNodes[0].textContent.trim();
+    navigator.clipboard.writeText(x).then(()=>{e.target.textContent='copied';
+      setTimeout(()=>e.target.textContent='copy',1200);});
+  });
+</script>
+</body>
+</html>

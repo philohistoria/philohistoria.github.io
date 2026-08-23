@@ -1,0 +1,441 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Week 2: Directing the Agent</title>
+<style>
+  :root{
+    --bg:#fcfcfb; --fg:#1c1c1a; --muted:#6b6b66; --line:#e6e5e1;
+    --accent:#2f5d8a; --accent-weak:#eaf0f5; --ex:#b5651d; --ex-weak:#fbf1e7;
+    --code-bg:#f4f5f3; --card:#fff;
+    --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--sans)}
+  .layout{display:grid;grid-template-columns:180px minmax(0,1fr) 360px;max-width:1320px;margin:0 auto}
+  nav{position:sticky;top:0;align-self:start;height:100vh;overflow:auto;
+      padding:26px 14px;border-right:1px solid var(--line);font-size:14px}
+  nav .days{display:flex;flex-direction:column;gap:2px;margin-bottom:22px}
+  nav .days a{color:var(--muted);text-decoration:none;padding:3px 0;font-size:13px}
+  nav .days a.cur{color:var(--fg);font-weight:700}
+  nav .days span.off{color:#c8c7c2;padding:3px 0;font-size:13px}
+  nav .home{display:block;font-size:14px;font-weight:800;color:var(--fg);text-decoration:none;line-height:1.25;margin-bottom:18px}
+  nav .home:hover{color:var(--accent)}
+  nav .lbl{font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin:0 0 8px}
+  nav .toc a{display:block;color:var(--fg);text-decoration:none;padding:6px 0 6px 12px;
+             border-left:2px solid transparent;margin-left:-2px}
+  nav .toc a:hover{color:var(--accent)}
+  nav .toc a.active{color:var(--accent);border-left-color:var(--accent);font-weight:600}
+  nav .toc .has{color:var(--ex);font-size:11px;margin-left:6px}
+  main{padding:30px 32px 160px;min-width:0}
+  .kicker{font-size:13px;letter-spacing:.07em;text-transform:uppercase;color:var(--accent);font-weight:700;margin:0}
+  h1{margin:4px 0 6px;font-size:32px}
+  .goal{color:var(--muted);font-size:16px;margin:0 0 20px}
+  h2.sec{font-size:28px;font-weight:700;color:var(--fg);line-height:1.2;
+         margin:52px 0 12px;padding-top:22px;border-top:1px solid var(--line)}
+  h2.sec .hastag{color:var(--ex);font-weight:600;font-size:14px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:14px;
+        padding:20px 24px;margin:16px 0;box-shadow:0 1px 2px rgba(0,0,0,.03)}
+  .card h3{margin:0 0 12px;font-size:21px;line-height:1.25}
+  .card ul{list-style:none;padding:0;margin:0}
+  .card li{font-size:17px;line-height:1.45;padding:9px 0 9px 26px;position:relative;border-top:1px solid var(--line)}
+  .card li:first-child{border-top:0}
+  .card li::before{content:"";position:absolute;left:4px;top:17px;width:8px;height:8px;border-radius:50%;background:var(--accent)}
+  .card ul ul{margin:6px 0 0}
+  .card li li{font-size:15px;padding:5px 0 5px 24px;border-top:0;color:var(--muted)}
+  .card li li::before{width:5px;height:5px;top:14px;background:var(--muted)}
+  .card.demo{border-left:4px solid var(--accent)}
+  .card.demo .tag{display:inline-block;font-size:12px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;
+                  color:var(--accent);margin-bottom:8px}
+  .card.read{border-left:4px solid #7a5ea6}
+  .card.read .tag{display:inline-block;font-size:12px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;
+                  color:#7a5ea6;margin-bottom:8px}
+  .quote{background:var(--code-bg);border-left:3px solid var(--accent);border-radius:0 8px 8px 0;
+         padding:12px 16px;margin:12px 0;font-style:italic;line-height:1.5}
+  code{background:var(--code-bg);padding:1px 5px;border-radius:4px;font-family:ui-monospace,Menlo,monospace;font-size:.85em}
+  strong{color:#111}
+  table{border-collapse:collapse;width:100%;margin:10px 0;font-size:16px}
+  th,td{border:1px solid var(--line);padding:8px 12px;text-align:left}
+  th{background:var(--accent-weak);font-size:14px}
+  .src{font-size:13px;color:var(--muted)} .src a{color:var(--accent)}
+  aside{position:sticky;top:0;align-self:start;height:100vh;overflow:auto;
+        border-left:1px solid var(--line);padding:26px 18px 60px;background:#fbfaf8}
+  aside .railhead{font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--ex)}
+  .hands{display:none} .hands.on{display:block}
+  .exi{border:1px solid #e8d3ba;background:var(--ex-weak);border-radius:10px;margin:10px 0;padding:12px 14px}
+  .exi .step{display:inline-block;font-size:10px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;
+             color:#fff;background:var(--ex);border-radius:20px;padding:2px 9px;margin-bottom:8px}
+  .exi h4{margin:0 0 6px;font-size:15px}
+  .exi ul{margin:6px 0;padding-left:18px;font-size:13.5px;line-height:1.5}
+  .exi li{margin:4px 0}
+  .exi p{font-size:13.5px;line-height:1.5;margin:6px 0}
+  .save{font-size:13px;color:var(--muted);background:#fff;border:1px solid var(--line);
+        border-radius:8px;padding:9px 12px;margin:10px 0}
+  .code{position:relative;background:#fff;border:1px solid #e8d3ba;border-radius:8px;
+        padding:9px 34px 9px 11px;font-family:ui-monospace,Menlo,monospace;font-size:12px;
+        white-space:pre-wrap;margin:8px 0;line-height:1.45}
+  .code .copy{position:absolute;top:6px;right:6px;font-size:10px;border:1px solid #e8d3ba;
+              background:#fff;border-radius:6px;padding:2px 7px;cursor:pointer;color:var(--ex)}
+  .guidelink{display:inline-block;margin-top:6px;font-size:13px;color:var(--ex);font-weight:600}
+    .mobilenote{display:none}
+  .mhead{display:none}
+  /* ---- tablet: two columns, top menu ---- */
+  @media(max-width:1080px){
+    .layout{grid-template-columns:minmax(0,1fr) 340px}
+    nav{display:none}
+    .mhead{display:flex;align-items:center;justify-content:space-between;gap:12px;
+           position:sticky;top:0;z-index:20;background:var(--bg);
+           border-bottom:1px solid var(--line);padding:10px 16px}
+    .mtitle{font-size:14px;font-weight:800;color:var(--fg);text-decoration:none}
+    .mnav summary{list-style:none;cursor:pointer;font-size:13px;font-weight:700;color:var(--accent);
+                  border:1px solid var(--line);border-radius:8px;padding:5px 12px;background:#fff}
+    .mnav summary::-webkit-details-marker{display:none}
+    .mnav{position:relative}
+    .mnav-box{position:absolute;right:0;top:36px;min-width:240px;background:#fff;
+              border:1px solid var(--line);border-radius:12px;box-shadow:0 8px 24px rgba(0,0,0,.10);
+              padding:10px 14px;z-index:30}
+    .mnav-box a{display:block;color:var(--fg);text-decoration:none;font-size:14px;padding:6px 0}
+    .mnav-box a:hover{color:var(--accent)}
+    .mlbl{font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin:8px 0 2px}
+    main{padding:20px 20px 120px}
+    h1{font-size:27px}
+    h2.sec{font-size:24px}
+    table{display:block;overflow-x:auto}
+  }
+  /* ---- phone: single column ---- */
+  @media(max-width:740px){
+    .layout{grid-template-columns:1fr}
+    main{padding:16px 14px 60px}
+    .mobilenote{display:block;background:var(--accent-weak);border:1px solid var(--line);
+                border-radius:10px;padding:10px 14px;margin:0 0 18px;font-size:13.5px;
+                line-height:1.5;color:var(--fg)}
+    h1{font-size:25px}
+    .card{padding:16px 16px}
+    .card li{font-size:16px}
+    aside{position:static;height:auto;border-left:0;border-top:1px solid var(--line)}
+    .hands{display:block !important;border-top:1px solid var(--line);padding-top:10px;margin-top:10px}
+    .hands[data-for="none"]{display:none !important}
+  }
+</style>
+</head>
+<body>
+<div class="mhead">
+  <a class="mtitle" href="week01.html">Applied AI for Public Policy</a>
+  <details class="mnav">
+    <summary>Menu</summary>
+    <div class="mnav-box">
+      <p class="mlbl">Weeks</p>
+      <a href="week01.html">1 · What an AI agent is</a>
+      <a href="week02.html">2 · Directing the agent</a>
+      <p class="mlbl">On this page</p>
+      <a href="#opening">Opening</a>
+      <a href="#reading">Reading discussion</a>
+      <a href="#repo">Your repository</a>
+      <a href="#direct">Directing the agent</a>
+      <a href="#cost">What a session costs</a>
+      <a href="#wrap">Wrap</a>
+    </div>
+  </details>
+</div>
+<div class="layout">
+
+  <!-- ================= LEFT NAV ================= -->
+  <nav>
+    <a class="home" href="index.html">MPA 2479<br>Applied AI for Public Policy</a>
+    <div class="days">
+      <div class="lbl">Weeks</div>
+      <a href="week01.html">1 · What an AI agent is</a>
+      <a href="week02.html" class="cur">2 · Directing the agent</a>
+      <span class="off">3 · Define the problem</span>
+      <span class="off">4 · Collecting data</span>
+      <span class="off">5 · Coding text at scale</span>
+      <span class="off">6 · Analyze, visualize, publish</span>
+      <span class="off">7 · Facts and fairness</span>
+      <span class="off">8 · Audit a federal system</span>
+      <span class="off">9 · Project outcomes + proposal</span>
+      <span class="off">10 · The arenas of AI policy</span>
+      <span class="off">11 · Build and review</span>
+      <span class="off">12 · Presentations</span>
+    </div>
+    <div class="lbl">Today</div>
+    <div class="toc">
+      <a href="#opening">Opening</a>
+      <a href="#reading">Reading discussion</a>
+      <a href="#repo">Your repository <span class="has">hands-on</span></a>
+      <a href="#direct">Directing the agent <span class="has">hands-on</span></a>
+      <a href="#cost">What a session costs</a>
+      <a href="#wrap">Wrap</a>
+    </div>
+  </nav>
+
+  <!-- ================= CENTER CONTENT ================= -->
+  <main>
+    <div class="mobilenote">You are on a small screen. This page is designed for a laptop, with three columns and hands-on steps appearing beside the content. On a phone it collapses to one column and the hands-on steps move to the end of the page. Reading here is fine; for the exercises you need your laptop anyway.</div>
+    <p class="kicker">Week 2 · Thursday, September 17, 2026, 9:00 to 11:30 am · Shopping period</p>
+    <h1>Directing the Agent</h1>
+    <p class="byline" style="margin:2px 0 16px;color:var(--muted);font-size:15px">Han Zhang · page drafted with Claude (Anthropic)</p>
+    <p class="goal">Leave today with a repository, your first committed script, and one task run through plan mode. When a section has something to do, it appears in the panel on the right.</p>
+
+    <!-- OPENING -->
+    <section data-hands="none">
+    <h2 class="sec" id="opening">Opening</h2>
+    <div class="card">
+      <h3>Where we left off</h3>
+      <ul>
+        <li>You know what an agent is: tools, a loop, and code execution.</li>
+        <li>The tool runs on your laptop, and you redid the 311 demo yourself.</li>
+        <li>If you added this course this week: work through the Week 1 setup guide on your own, and come to office hours; class does not repeat it.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Today</h3>
+      <ul>
+        <li>First, the reading: two evaluations of whether these tools actually help.</li>
+        <li>Then your repository: one project, one folder, with a history.</li>
+        <li>Then three ways to run the agent, and plan mode.</li>
+        <li>We close with what a session costs.</li>
+      </ul>
+    </div>
+    </section>
+
+    <!-- READING -->
+    <section data-hands="none">
+    <h2 class="sec" id="reading">Reading discussion</h2>
+    <div class="card read">
+      <span class="tag">Read before class</span>
+      <h3>Does the tool actually help? Two evaluations</h3>
+      <ul>
+        <li>Dell'Acqua et al., <strong>"Navigating the Jagged Technological Frontier"</strong> (Harvard Business School Working Paper 24-013, 2023). A randomized experiment with 758 BCG consultants: AI raised speed and quality on tasks inside its competence, and made people more wrong on a task designed to sit just outside it.</li>
+        <li>UK Department for Business and Trade, <strong>"Evaluation of the M365 Copilot Pilot"</strong> (2025), executive summary. A government ministry's own evaluation: real but small time savings, hallucinations observed throughout, and no evidence that saved time became higher productivity.</li>
+        <li>Optional:
+          <ul>
+            <li>Brynjolfsson, Mitchell &amp; Rock, "What Can Machines Learn, and What Does It Mean for Occupations and the Economy?" (AEA Papers &amp; Proceedings, 2018), the pre-agent task rubric.</li>
+            <li>GAO, "Generative AI Use and Management at Federal Agencies" (GAO-25-107653).</li>
+            <li>"Generative AI in Public Administration: A Quasi-Experimental Analysis of Bureaucratic Productivity" (Government Information Quarterly, 2026).</li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Discussion (~20 min)</h3>
+      <ul>
+        <li>Dell'Acqua's consultants did worse with AI on a task chosen to sit just outside its competence. Which task in the job you want has that shape?</li>
+        <li>The DBT evaluation found time savings but no productivity gain, and Pennsylvania-style pilots report large self-reported savings. An agency asks you whether to buy licences for 5,000 staff: which evidence do you use?</li>
+        <li>Both studies tested chat assistants, not agents like the one you are using. What in these findings still applies, and what needs re-testing?</li>
+      </ul>
+    </div>
+    </section>
+
+    <!-- REPO -->
+    <section data-hands="repo">
+    <h2 class="sec" id="repo">Your repository <span class="hastag">· do it on the right</span></h2>
+    <div class="card">
+      <h3>Git in fifteen minutes, agent-first</h3>
+      <ul>
+        <li><strong>Git</strong> keeps a history of your project: a <strong>commit</strong> is a labeled snapshot you can always go back to.</li>
+        <li>A folder with this history is a <strong>repository</strong>.</li>
+        <li>You will not type git commands from memory. The agent runs them; your job is to read what it did.</li>
+        <li>Why bother during shopping period: every deliverable in this course is "committed to your repository," starting Week 3.</li>
+        <li>Why it matters for policy work: a memo's numbers should be traceable to the exact version of the code that made them. The history is the paper trail.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>One project, one folder</h3>
+      <ul>
+        <li>Everything in this course lives in one folder, and the agent works inside it.</li>
+        <li>Ask the agent for a clear layout, so you and it always know where things are:</li>
+      </ul>
+      <table>
+        <tr><td><code>README.md</code></td><td>what this project is</td></tr>
+        <tr><td><code>data/</code></td><td>your data</td></tr>
+        <tr><td><code>scripts/</code></td><td>analysis code</td></tr>
+        <tr><td><code>output/</code></td><td>tables, charts, and later your public page</td></tr>
+      </table>
+    </div>
+    </section>
+
+    <!-- DIRECTING -->
+    <section data-hands="direct">
+    <h2 class="sec" id="direct">Directing the agent <span class="hastag">· do it on the right</span></h2>
+    <div class="card">
+      <h3>Three ways to run the agent</h3>
+      <ul><li>The agent runs at one of three levels of freedom:</li></ul>
+      <table>
+        <tr><th>Mode</th><th>What it can do</th><th>Best for</th></tr>
+        <tr><td><strong>Plan mode</strong></td><td>looks and proposes; changes nothing</td><td>thinking first</td></tr>
+        <tr><td><strong>Normal</strong></td><td>edits and runs, asking as it goes</td><td>day-to-day work</td></tr>
+        <tr><td><strong>Auto-accept</strong></td><td>edits and runs without asking</td><td>trusted, repeat work</td></tr>
+      </table>
+      <ul><li>Ask yourself how much you would let a brand-new intern do <strong>unsupervised</strong>; that is how to pick the mode.</li></ul>
+    </div>
+    <div class="card">
+      <h3>Plan mode is the one to learn</h3>
+      <ul>
+        <li>In plan mode the agent reads your project and writes a <strong>plan</strong>: the steps it intends to take, before it takes any.</li>
+        <li>You read the plan, change what you disagree with, and only then let it run.</li>
+        <li>A wrong plan costs one rewrite. A wrong execution costs an afternoon.</li>
+        <li>The habit for any multi-step task in this course: plan first, then run.</li>
+      </ul>
+    </div>
+    <div class="card demo">
+      <span class="tag">Live demo</span>
+      <h3>Take 1: the vague prompt</h3>
+      <div class="quote">Analyze the 311 data and tell me what this city's biggest problems are.</div>
+      <ul>
+        <li>What comes back looks like an answer:
+          <ul>
+            <li>It runs, and it produces something plausible.</li>
+            <li>Which categories did it merge? What time window? Did it adjust for neighborhood population? You cannot tell without reading the code.</li>
+          </ul>
+        </li>
+        <li>It looks plausible, and you cannot check any of it. That is the kind of output that should not go into a policy memo.</li>
+      </ul>
+    </div>
+    <div class="card demo">
+      <span class="tag">Live demo</span>
+      <h3>Take 2: the same task, directed</h3>
+      <ul>
+        <li>Explore: "Look at the 311 file. What category and date fields are there, and how messy are they?"</li>
+        <li>Plan: "Propose an analysis of complaint patterns by neighborhood. State the time window, how you will handle duplicate reports, and whether counts are adjusted for population."</li>
+        <li>Review the plan, and change one thing you disagree with.</li>
+        <li>Execute step by step, committing after each step.</li>
+        <li>The output looks similar; the difference is that you made every choice.</li>
+      </ul>
+    </div>
+    </section>
+
+    <!-- COST -->
+    <section data-hands="none">
+    <h2 class="sec" id="cost">What a session costs</h2>
+    <div class="card">
+      <h3>The agent bills by the token</h3>
+      <ul>
+        <li>Everything you send and everything it writes is counted in tokens, and your plan has a limit.</li>
+        <li>A long session, a big file pasted in, or many rounds of back-and-forth all run the count up.</li>
+        <li>This matters here because you are on student budgets: the course is designed to fit a Pro plan, and the habits below are how it fits.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>How to spend less</h3>
+      <ul>
+        <li>Give a tight brief so it gets there in fewer rounds; plan mode is also a cost tool.</li>
+        <li>Start a fresh session for a new task, so it is not re-reading an old one.</li>
+        <li>Point it at just the one file it needs.</li>
+        <li>If you hit your limit before class ends, say so. Do not silently stop working.</li>
+      </ul>
+    </div>
+    </section>
+
+    <!-- WRAP -->
+    <section data-hands="none">
+    <h2 class="sec" id="wrap">Wrap</h2>
+    <div class="card">
+      <h3>Where you are</h3>
+      <ul>
+        <li>You have a repository with a README, one committed script, and one task run through plan mode.</li>
+        <li>Shopping period ends this week. The add deadline is Tuesday, September 22.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Before Week 3: this one takes real time</h3>
+      <ul>
+        <li>Next week you choose the dataset and policy question you will work with for the rest of the semester. The dataset you bring is the draft of your semester project: switching later is allowed, but the cost grows every week.</li>
+        <li>Browse for it now: city open data portals (311, permits, inspections, stops), Census, BLS, EPA, USAspending, or anything public in your policy area.</li>
+        <li>Come with a candidate. Unsure where to look for your topic? Email me.</li>
+        <li>Read for next week: Bardach &amp; Patashnik, the Step 1 chapter, on how to define a policy problem; and Kahneman et al., "Noise" (HBR 2016).</li>
+      </ul>
+    </div>
+    </section>
+
+  </main>
+
+  <!-- ================= RIGHT CONTEXTUAL HANDS-ON ================= -->
+  <aside>
+    <p class="railhead" id="railhead">Hands-on</p>
+    <div class="hands" data-for="none"></div>
+
+    <!-- repo -->
+    <div class="hands" data-for="repo">
+      <div class="exi">
+        <span class="step">Step 1</span>
+        <h4>Make the folder a repository</h4>
+        <p>In your course folder from last week, ask the agent to do the setup, so you write no commands:</p>
+        <div class="code">Turn this folder into a git repository. Create a README that says what this project is, data/, scripts/, and output/ folders, and make sure files in data/ are never committed. Then make the first commit.<span class="copy">copy</span></div>
+        <ul>
+          <li>Read what it did: ask it to show the history and explain what the commit contains.</li>
+        </ul>
+      </div>
+      <div class="exi">
+        <span class="step">Step 2</span>
+        <h4>First script, committed</h4>
+        <p>Point it at the practice dataset from Canvas (Week 2 → data):</p>
+        <div class="code">Write and run a script in scripts/ that loads the dataset in data/ and reports the row and column count, missing values per column, and the distribution of the main variables. Save the summary to output/. Then commit with a clear message.<span class="copy">copy</span></div>
+        <ul>
+          <li>Checkpoint: show a neighbor your script runs, and explain in your own words what it does.</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- direct -->
+    <div class="hands" data-for="direct">
+      <div class="exi">
+        <span class="step">Step 1</span>
+        <h4>Switch to plan mode</h4>
+        <p>In Claude Code, press <strong>Shift+Tab</strong> until the footer shows plan mode. The agent can now look and propose, but change nothing.</p>
+      </div>
+      <div class="exi">
+        <span class="step">Step 2</span>
+        <h4>A bigger task, planned first</h4>
+        <p>This task has real choices in it. Hand it over in plan mode:</p>
+        <div class="code">The folder has two files: the service requests and a neighborhood population table. Propose a plan to merge them and chart requests per 1,000 residents by neighborhood. State how you will match neighborhood names and what you will do with requests that match no neighborhood.<span class="copy">copy</span></div>
+        <ul>
+          <li>Read the plan. Find the choice you would have made differently, and say so.</li>
+          <li>Only when the plan says what you mean: approve it and let it run.</li>
+          <li>Ask it to commit when the chart is done.</li>
+        </ul>
+      </div>
+      <div class="exi">
+        <span class="step">Step 3 · if time</span>
+        <h4>Compare the two</h4>
+        <ul>
+          <li>Start a fresh session and give the vague version, "analyze this and tell me what's interesting", with auto-accept on.</li>
+          <li>Compare what came back with what you approved in plan mode. Which one could you defend in a memo?</li>
+        </ul>
+      </div>
+      <div class="save">Late adders: the Week 1 rail has the install steps; do them now and jump in at Step 1; the plan-mode exercise works even if your Week 1 practice is missing.</div>
+    </div>
+  </aside>
+
+</div>
+
+<script>
+  const sections=[...document.querySelectorAll('main section')];
+  const panels=[...document.querySelectorAll('.hands')];
+  const railhead=document.getElementById('railhead');
+  function show(key){
+    panels.forEach(p=>p.classList.toggle('on',p.dataset.for===key));
+    railhead.style.display = key==='none' ? 'none' : '';
+  }
+  addEventListener('scroll',()=>{
+    let cur=sections[0];
+    sections.forEach(s=>{const t=s.getBoundingClientRect().top; if(t<window.innerHeight*0.35) cur=s;});
+    show(cur.dataset.hands);
+  },{passive:true});
+  show('none');
+  const links=[...document.querySelectorAll('.toc a')];
+  addEventListener('scroll',()=>{
+    let cur=null;
+    links.forEach(a=>{const el=document.querySelector(a.getAttribute('href'));
+      if(el && el.getBoundingClientRect().top<140)cur=a;});
+    links.forEach(a=>a.classList.toggle('active',a===cur));
+  },{passive:true});
+  document.addEventListener('click',e=>{
+    if(!e.target.classList.contains('copy'))return;
+    const x=e.target.parentNode.childNodes[0].textContent.trim();
+    navigator.clipboard.writeText(x).then(()=>{e.target.textContent='copied';
+      setTimeout(()=>e.target.textContent='copy',1200);});
+  });
+</script>
+</body>
+</html>
