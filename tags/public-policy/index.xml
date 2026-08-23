@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>AI | Han Zhang</title>
-    <link>https://hanzhang.xyz/tags/ai/</link>
-      <atom:link href="https://hanzhang.xyz/tags/ai/index.xml" rel="self" type="application/rss+xml" />
-    <description>AI</description>
+    <title>Public Policy | Han Zhang</title>
+    <link>https://hanzhang.xyz/tags/public-policy/</link>
+      <atom:link href="https://hanzhang.xyz/tags/public-policy/index.xml" rel="self" type="application/rss+xml" />
+    <description>Public Policy</description>
     <generator>Hugo Blox Builder (https://hugoblox.com)</generator><language>en-us</language><lastBuildDate>Sat, 22 Aug 2026 00:00:00 +0000</lastBuildDate>
     <image>
       <url>https://hanzhang.xyz/media/icon_hu_f9a4133fef468c2c.png</url>
-      <title>AI</title>
-      <link>https://hanzhang.xyz/tags/ai/</link>
+      <title>Public Policy</title>
+      <link>https://hanzhang.xyz/tags/public-policy/</link>
     </image>
     
     <item>
@@ -20,19 +20,6 @@
       <description>&lt;script&gt;window.location.replace(&#34;/mpa2479/&#34;);&lt;/script&gt;
 &lt;meta http-equiv=&#34;refresh&#34; content=&#34;0; url=https://hanzhang.xyz/mpa2479/&#34;&gt;
 &lt;p&gt;A course in the Master of Public Affairs program at the Watson Institute, Brown University. Fall 2026, Thursdays 9:00 to 11:30 am. Students do a piece of policy analysis from start to finish with an AI coding agent alongside them, following the eight steps in Bardach and Patashnik&amp;rsquo;s &lt;em&gt;A Practical Guide for Policy Analysis&lt;/em&gt;, and then treat the regulation of AI as a policy question of its own.&lt;/p&gt;
-&lt;p&gt;
-&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>AI-Assisted Coding for Social Data Analysis</title>
-      <link>https://hanzhang.xyz/teaching/ai-coding-short-course/</link>
-      <pubDate>Fri, 21 Aug 2026 00:00:00 +0000</pubDate>
-      <guid>https://hanzhang.xyz/teaching/ai-coding-short-course/</guid>
-      <description>&lt;script&gt;window.location.replace(&#34;/course/&#34;);&lt;/script&gt;
-&lt;meta http-equiv=&#34;refresh&#34; content=&#34;0; url=https://hanzhang.xyz/course/&#34;&gt;
-&lt;p&gt;A five-day short course, co-taught with Bing Tian, on using AI coding agents to do real research on your own data: running analyses, coding your data, checking every result, collecting data, reading literature, and building a small website or app.&lt;/p&gt;
 &lt;p&gt;
 &lt;/p&gt;
 </description>

@@ -5,12 +5,25 @@
     <link>https://hanzhang.xyz/teaching/</link>
       <atom:link href="https://hanzhang.xyz/teaching/index.xml" rel="self" type="application/rss+xml" />
     <description>Teaching</description>
-    <generator>Hugo Blox Builder (https://hugoblox.com)</generator><language>en-us</language><lastBuildDate>Fri, 21 Aug 2026 00:00:00 +0000</lastBuildDate>
+    <generator>Hugo Blox Builder (https://hugoblox.com)</generator><language>en-us</language><lastBuildDate>Sat, 22 Aug 2026 00:00:00 +0000</lastBuildDate>
     <image>
       <url>https://hanzhang.xyz/media/icon_hu_f9a4133fef468c2c.png</url>
       <title>Teaching</title>
       <link>https://hanzhang.xyz/teaching/</link>
     </image>
+    
+    <item>
+      <title>MPA 2479: Applied AI for Public Policy</title>
+      <link>https://hanzhang.xyz/teaching/mpa2479/</link>
+      <pubDate>Sat, 22 Aug 2026 00:00:00 +0000</pubDate>
+      <guid>https://hanzhang.xyz/teaching/mpa2479/</guid>
+      <description>&lt;script&gt;window.location.replace(&#34;/mpa2479/&#34;);&lt;/script&gt;
+&lt;meta http-equiv=&#34;refresh&#34; content=&#34;0; url=https://hanzhang.xyz/mpa2479/&#34;&gt;
+&lt;p&gt;A course in the Master of Public Affairs program at the Watson Institute, Brown University. Fall 2026, Thursdays 9:00 to 11:30 am. Students do a piece of policy analysis from start to finish with an AI coding agent alongside them, following the eight steps in Bardach and Patashnik&amp;rsquo;s &lt;em&gt;A Practical Guide for Policy Analysis&lt;/em&gt;, and then treat the regulation of AI as a policy question of its own.&lt;/p&gt;
+&lt;p&gt;
+&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>AI-Assisted Coding for Social Data Analysis</title>
