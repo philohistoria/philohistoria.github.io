@@ -383,13 +383,13 @@
       </ul>
     </div>
     <div class="card">
-      <h3>Four ways to install one</h3>
+      <h3>Four ways to install a Skill</h3>
       <ul>
         <li><strong>Clone (either tool).</strong> Clone the repository, then copy or symlink the skill folders you want. <code>open-scholar-skill</code> ships a <code>bash setup.sh</code> that does the copying for you.</li>
         <li><strong>Official catalog (either tool).</strong> Each vendor ships one. Claude Code registers Anthropic&rsquo;s marketplace the first time you start it, so you install by name with <code>/plugin install</code>. In Codex you type <code>$skill-installer</code> inside the session and name a skill from the <code>openai/skills</code> catalog.</li>
         <li><strong>Third-party marketplace (Claude Code).</strong> Add someone&rsquo;s repository as a marketplace, then install by name. Claude Code shows the token cost and the full list of what will install before anything lands on disk.</li>
-        <li><strong>Cross-agent (either tool).</strong> The <code>skills</code> CLI installs from any public git repository into whichever agents you have. The skills.sh directory is a search index over public repositories, and anyone can appear in it &mdash; it is not a curated store.</li>
-        <li>Whichever route you take, the result is a folder you can open. A skill in your home skills folder applies to everything you own; a skill inside a repository travels with that project.</li>
+        <li><strong>Cross-agent (either tool).</strong> The <code>skills</code> CLI installs from any public git repository into whichever agents you have. The skills.sh directory is a search index over public repositories. Anyone can appear in it, and nobody curates it.</li>
+        <li>Whichever route you take, the result is a folder you can open. A skill in your home skills folder applies to every project on your machine; a skill inside a repository travels with that project.</li>
       </ul>
     </div>
     <div class="card">
@@ -417,7 +417,7 @@
       <ul>
         <li>The Claude Code desktop app installs plugins from a window: the <strong>+</strong> next to the prompt box &rarr; <strong>Plugins</strong> &rarr; <strong>Add plugin</strong> opens a browser of your marketplaces, and <strong>Manage plugins</strong> turns them on and off.</li>
         <li>Codex has no install window. The IDE extension lists your skills, and the installer runs as a command typed inside the session.</li>
-        <li>Neither tool has a window that installs a plain skill folder; that is still a matter of putting the folder in the right place, which is what the commands on this page do for you.</li>
+        <li>Neither tool has a window that installs a plain skill folder. You put the folder in the right place yourself, which is what the commands on this page do for you.</li>
         <li>The desktop apps read the same folders the terminal reads, so a skill installed either way shows up in both.</li>
       </ul>
     </div>
@@ -437,7 +437,7 @@
       <ul>
         <li>Everything that defines your agent&rsquo;s behavior in a project is a file in the project folder: the context file, <code>.claude/agents/</code>, and the skill folders. Whoever gets the folder gets your setup.</li>
         <li>Your home folder <code>~/.claude/</code> is different: it holds your personal skills, your settings, and the agent&rsquo;s memory of you. It applies to every project on your machine, and it is not part of any shared folder.</li>
-        <li>So the rule has two halves: the project folder is the shared unit, and the home folder is yours.</li>
+        <li>So you share the project folder, and you keep the home folder.</li>
         <li>Never share: <code>settings.local.json</code>, API keys, and anything under <code>~/.claude/</code>.</li>
         <li>The simplest sharing is one-way: copy someone&rsquo;s project folder and keep what you want. You get a snapshot, and their later changes reach you only when you copy again.</li>
       </ul>
@@ -449,17 +449,17 @@
         <li>One working rule makes it safe: do not edit the same file at the same time. Split the files between you, or say who is editing what.</li>
         <li>If you break the rule, Dropbox keeps both versions and renames one <code>AGENTS (conflicted copy 2026-04-15).md</code>. Nothing is lost, but you merge the two by hand.</li>
         <li>Dropbox keeps versions per file for a limited time (30 days on Basic, 180 on Business), with no record of why a change was made.</li>
-        <li>One warning: do not put a git repository inside a synced folder. Two machines writing its internal files at the same moment can corrupt it. Data in Dropbox, code in git, is the standard split.</li>
+        <li>One warning: do not put a git repository inside a synced folder. Two machines writing its internal files at the same moment can corrupt it. The standard practice is to keep data in Dropbox and code in git.</li>
       </ul>
     </div>
     <div class="card">
       <h3>Collaborating through git: both of you commit</h3>
       <ul>
-        <li>On Monday you learned one git move: commit a save point. Collaboration adds one more: <strong>pull</strong>, which fetches your partner&rsquo;s commits.</li>
+        <li>On Monday you learned one git command: commit a save point. Collaboration adds one more command: <strong>pull</strong>, which fetches your partner&rsquo;s commits.</li>
         <li>Nobody has to approve anyone. One of you creates the repository and adds the other as a collaborator; from then on both push changes directly. Review steps exist on GitHub, and they are optional and off by default.</li>
         <li>The creator alone controls the settings: who is invited, public or private, deletion. Over the code itself, you are equals.</li>
         <li>The routine that prevents almost all trouble: <strong>pull before you start, then edit, then commit and push.</strong></li>
-        <li>When you both changed the same file anyway, the later push is rejected. That is protection, not failure: pull first, and git merges the file on its own when you touched different lines. Only when you edited the same lines does it stop, put both versions side by side in the file, and wait for you to choose.</li>
+        <li>When you both changed the same file anyway, the later push is rejected. The rejection protects your partner&rsquo;s work: pull first, and git merges the file on its own when you touched different lines. Only when you edited the same lines does it stop, put both versions side by side in the file, and wait for you to choose.</li>
         <li>Nothing is ever silently overwritten. This record of who changed what, and the automatic merging, are what git adds over the shared folder.</li>
       </ul>
     </div>
