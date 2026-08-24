@@ -333,12 +333,42 @@
       </ul>
     </div>
     <div class="card">
-      <h3>Or let one agent run the others</h3>
+      <h3>Or let one agent run the others: subagents</h3>
       <ul>
         <li>You do not have to open and manage the agents yourself.</li>
         <li>You can tell one agent to do it: "clean the data, draw the figure, and look up the codebook, using a separate helper for each."</li>
-        <li>It opens the helpers, hands them the jobs, and brings back the results.</li>
-        <li>You will hear these helpers called subagents; the only difference is who manages them, you or the main agent.</li>
+        <li>These helpers are called <strong>subagents</strong>. Each gets its own separate working context, does one assigned task, and returns a short report to the main agent.</li>
+        <li>The main conversation receives only the reports, so its own context stays clean.</li>
+        <li>You invoke them in plain language: asking for the work "in parallel, using separate subagents" is enough, and there is nothing to configure.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Which arrangement for which job</h3>
+      <ul>
+        <li>The two arrangements sit at the same level; the difference is who coordinates, you or the main agent.</li>
+        <li>Open several sessions yourself when the tasks are independent and you want to watch and steer each one.</li>
+        <li>Use subagents when the results must be combined afterward: the main agent is the natural place where the reports meet, and it can dictate one format for all of them.</li>
+        <li>When the combining step needs judgment, keep it: run separate sessions and merge the results yourself.</li>
+        <li>On Thursday you use subagents on a real case: five papers read in parallel, then one synthesis.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Sessions can message each other</h3>
+      <ul>
+        <li>Several open sessions are not isolated from one another: in both tools, one session can send a message to another.</li>
+        <li>Claude Code: <code>/msg list</code> shows your reachable sessions, and <code>/msg</code> sends to one; this works out of the box, including to sessions on other machines.</li>
+        <li>Codex: a session can queue a message to another local or remote session.</li>
+        <li>The use is coordination between your open sessions: the session that finishes cleaning tells the modeling session the data is ready.</li>
+        <li>Shared files and git still work as the slower channel, and they leave the record a collaborator can read later.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>An expensive model to plan, cheap models to execute</h3>
+      <ul>
+        <li>Each vendor sells several model sizes. The large one is better at judgment and costs more per token; the small one is cheaper and faster.</li>
+        <li>A common arrangement uses both: the main agent runs on the large model and does the planning and the checking, and the subagents run on the small model and do the mechanical pieces.</li>
+        <li>Planning is one short conversation and execution is many long ones, so the expensive tokens go where the judgment is.</li>
+        <li>In practice: pick the model for a session with the tool&rsquo;s model command, and tell the main agent to use a smaller model for its helpers.</li>
       </ul>
     </div>
     <div class="card demo">
