@@ -187,7 +187,7 @@
     </div>
     <div class="card demo">
       <span class="tag">Live demo</span>
-      <h3>From an analysis to a page, in minutes</h3>
+      <h3>From an analysis to a page</h3>
       <ul>
         <li>Tuesday's analysis becomes a small interactive page, live.</li>
         <li>The prompt names the output file that feeds the page and the one control the reader gets.</li>
@@ -256,7 +256,7 @@
       <h3>What the full course adds</h3>
       <ul>
         <li>How these models actually work, and why they fail the way they do.</li>
-        <li>Designing your own agents with MCP, Hooks, and subagents. The next cards preview the subagent piece.</li>
+        <li>Designing your own agents with MCP, Hooks, and subagents. The cards below cover subagents.</li>
         <li>Building and deploying real tools on top of your research.</li>
       </ul>
     </div>
@@ -269,7 +269,7 @@
           <ul>
             <li><strong>You decompose fully.</strong> A shell loop calls <code>claude -p</code> (Codex: <code>codex exec</code>) once per item on a list you wrote, when you already know every piece.</li>
             <li><strong>You plan, the agent executes.</strong> Plan mode makes it present a plan you approve before it touches a file, when you know the goal and the steps need thought.</li>
-            <li><strong>You frame, the agent splits.</strong> "Do A, B, and C in parallel with separate subagents" works when the pieces are independent and summaries are enough, as Thursday's paper fan-out showed.</li>
+            <li><strong>You frame, the agent splits.</strong> "Do A, B, and C in parallel with separate subagents" works when the pieces are independent and summaries are enough, as Thursday's parallel paper reading showed.</li>
             <li><strong>The agent decomposes fully.</strong> A workflow has the agent write an orchestration script that runs dozens of subagents, for a repository-wide audit or a hundred-item migration.</li>
           </ul>
         </li>
@@ -283,7 +283,7 @@
             <li><strong>Independence.</strong> Only subtasks that do not depend on each other's output can run in parallel. A chain of dependent steps gains nothing.</li>
             <li><strong>Cost.</strong> A multi-agent run measures at about 15 times the tokens of a single chat, so the task has to be worth it.</li>
             <li><strong>Focus.</strong> Three agents with sharp, separate briefs beat five with scattered ones.</li>
-            <li><strong>Fresh eyes.</strong> A reviewer agent with clean context catches what the author's context has learned to overlook, for the same reason journals use outside referees.</li>
+            <li><strong>Independent review.</strong> A reviewer agent with clean context catches what the author's context has learned to overlook, for the same reason journals use outside referees.</li>
           </ul>
         </li>
       </ul>
@@ -293,21 +293,21 @@
       <ul>
         <li>Keep one repository per project, and let it grow the way this one did.</li>
         <li>Reuse your AGENTS.md and Skills on the next project from day one.</li>
-        <li>When you hit a task too big for one session, that is when subagents and workflows earn their keep.</li>
+        <li>When you hit a task too big for one session, that is when subagents and workflows are useful.</li>
       </ul>
     </div>
     <div class="card">
-      <h3>Local and open models: how good, and why a second one?</h3>
+      <h3>Local and open models: how good are they, and why use a second model?</h3>
       <ul>
-        <li><strong>How good, honestly.</strong> Small local models in the 7B class drop 15 to 40 points on agentic benchmarks and hallucinate tool calls. Frontier open-weights models such as Kimi K2.6 and Qwen 3.6 sit within a few points of the closed frontier.</li>
+        <li><strong>How good they are.</strong> Small local models in the 7B class drop 15 to 40 points on agentic benchmarks and hallucinate tool calls. Frontier open-weights models such as Kimi K2.6 and Qwen 3.6 sit within a few points of the closed frontier.</li>
         <li><strong>A second use, cross-model review.</strong> BK Lee's academic setup wires <code>/codex</code> and <code>/gemini</code> commands into Claude Code, so a second model family reviews the first's work: "each catches what the others miss."</li>
         <li><strong>The statistical logic.</strong> Error cancellation assumes independent errors, and models from one family make correlated ones. A reviewer from a different family is closer to an independent draw.</li>
       </ul>
     </div>
     <div class="card">
-      <h3>Keep going</h3>
+      <h3>How to keep practicing</h3>
       <ul>
-        <li>Keep the repository alive: one task per week through the agent, and the AGENTS.md grows with the project.</li>
+        <li>Keep using the repository: one task per week through the agent, and the AGENTS.md grows with the project.</li>
         <li>Free self-paced material if you want more:
           <ul>
             <li>Anthropic Academy: short courses on Claude Code, from beginner up.</li>
@@ -364,7 +364,7 @@
         <p>A starter prompt for the website option:</p>
         <div class="code">Build a webpage that shows the chart in output/. Add one control, a country selector, that filters the chart. Show me a plan first, then build it. Do not change my analysis code.<span class="copy">copy</span></div>
       </div>
-      <div class="save">Safety net: commit before each big change, so you can step back to a working stage if something breaks.</div>
+      <div class="save">Commit before each big change, so you can step back to a working stage if something breaks.</div>
     </div>
 
     <!-- private -->

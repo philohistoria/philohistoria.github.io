@@ -163,7 +163,7 @@
             <li>every new session starts blank</li>
           </ul>
         </li>
-        <li>Both have the same fix, and it is today's topic.</li>
+        <li>Both are fixed by the same file, AGENTS.md, which is today's topic.</li>
       </ul>
     </div>
     </section>
@@ -173,7 +173,7 @@
     <h2 class="sec" id="inconsistent">Why the agent is inconsistent</h2>
 
     <div class="card">
-      <h3>Same prompt, different day</h3>
+      <h3>The same prompt gives different results</h3>
       <ul>
         <li>Run the same request on two different days and you can get:
           <ul>
@@ -213,7 +213,7 @@
         <li>The standard name is <code>AGENTS.md</code>, at the root of your project. Codex and most other agents read it directly.</li>
         <li>Claude Code reads its own file instead, named <code>CLAUDE.md</code>; it does not read <code>AGENTS.md</code>. The two files do the same job, only the name differs.</li>
         <li>So: Codex users write <code>AGENTS.md</code>, Claude Code users write <code>CLAUDE.md</code>. Everything below applies to both; where we say AGENTS.md, use your tool&rsquo;s name.</li>
-        <li>Think of it as standard operating procedures for your AI assistant.</li>
+        <li>It is the standard operating procedure for your AI assistant.</li>
       </ul>
     </div>
     <div class="card">
@@ -234,7 +234,7 @@
     <div class="card">
       <h3>Why this is worth the effort</h3>
       <ul>
-        <li>Written down, your standards travel: the agent applies them in every session, on your machine or a collaborator's.</li>
+        <li>Once your standards are written down, the agent applies them in every session, on your machine or a collaborator's.</li>
         <li>The agent stops re-guessing your conventions, so it handles the same task the same way each time.</li>
         <li>In one study across 138 projects, an instructions file cut the agent's mistakes by a third to a half.</li>
       </ul>
@@ -260,7 +260,7 @@
         <li>The standard errors: the default against the ones the file requires.</li>
         <li>The table: the agent's habit against your journal's format.</li>
         <li>The missing data: silently dropped against handled by your written rule.</li>
-        <li>Nothing about the model got smarter. What changed is that your standards were <strong>in the room</strong>.</li>
+        <li>The model is no smarter. What changed is that your standards were <strong>in the file the agent reads</strong>.</li>
       </ul>
     </div>
     <div class="card">
@@ -274,7 +274,7 @@
             <li><strong>Safety rules.</strong> What the agent must never do.</li>
           </ul>
         </li>
-        <li>Concrete beats general in every line: name your variables, your units, your journal.</li>
+        <li>Write concrete lines: name your variables, your units, your journal.</li>
       </ul>
     </div>
     <div class="card">
@@ -337,13 +337,13 @@
     <div class="card">
       <h3>Skills that work, and skills that do not</h3>
       <ul>
-        <li>The bar is <strong>specificity</strong>:
+        <li>A Skill works when it is <strong>specific</strong>:
           <ul>
             <li>works: "My survey-weighted OLS table, with my SE choices, in my format."</li>
             <li>fails: "A regression skill."</li>
           </ul>
         </li>
-        <li>Good candidates from this room:
+        <li>Good candidates from this class:
           <ul>
             <li>the descriptive panel you produce for every new dataset</li>
             <li>your standard robustness battery</li>
@@ -394,7 +394,7 @@
     <div class="card">
       <h3>Installing a Skill is a trust decision</h3>
       <ul>
-        <li>A Skill is instructions your agent will follow, so installing one is closer to hiring than to downloading.</li>
+        <li>A Skill is instructions your agent will follow, so installing one means trusting whoever wrote it.</li>
         <li>Snyk's <strong>ToxicSkills</strong> study (2026) found prompt injection in <strong>36%</strong> of the agent skills it examined, and <strong>1,467</strong> malicious payloads on a single skill registry (ClawHub).</li>
         <li>A skill body can embed dynamic-context syntax that runs shell commands the moment the skill loads, before any human reads it.</li>
         <li>Anthropic's own documentation says: "Only install plugins and add marketplaces from sources you trust."</li>
@@ -402,9 +402,9 @@
       </ul>
     </div>
     <div class="card">
-      <h3>Make it yours</h3>
+      <h3>Editing a Skill you adopted</h3>
       <ul>
-        <li>An adopted Skill is a draft: copy the folder into your home skills folder, edit <code>SKILL.md</code>, and the change applies immediately, with no restart.</li>
+        <li>You can edit any Skill you adopt: copy the folder into your home skills folder, edit <code>SKILL.md</code>, and the change applies immediately, with no restart.</li>
         <li>Renaming the directory renames the command; rewriting the <code>description</code> field changes when it fires on its own.</li>
         <li>The cleanest worked example: Yanbo Zhang's <code>my-scientific-taste</code> is a deliberately replaceable placeholder holding <strong>your</strong> scientific taste, which his other skills consult by name.</li>
         <li>His rule for where things belong matches the split you built today:</li>
@@ -446,7 +446,7 @@
     <div class="card">
       <h3>Wrap</h3>
       <ul>
-        <li>You now hold the course deliverable in embryo:
+        <li>You now have the first version of the course deliverable:
           <ul>
             <li>a working setup</li>
             <li>a project AGENTS.md that survives a restart</li>
@@ -532,7 +532,7 @@ bash open-scholar-skill/setup.sh<span class="copy">copy</span></div>
       </div>
       <div class="exi">
         <span class="step">Step 4</span>
-        <h4>Make it yours</h4>
+        <h4>Edit the Skill you installed</h4>
         <ul>
           <li>Copy the folder into your home skills folder and edit <code>SKILL.md</code>; the change applies immediately, with no restart.</li>
           <li>Renaming the directory renames the command.</li>
@@ -545,12 +545,12 @@ bash open-scholar-skill/setup.sh<span class="copy">copy</span></div>
     <div class="hands" data-for="usage">
       <div class="exi">
         <span class="step">Step 1</span>
-        <h4>Run it the wasteful way</h4>
+        <h4>Run it with a vague prompt</h4>
         <p>Do one task with a vague prompt and the whole folder in context.</p>
       </div>
       <div class="exi">
         <span class="step">Step 2</span>
-        <h4>Run it the lean way</h4>
+        <h4>Run it with a tight brief</h4>
         <p>Do the same task again with a tight brief and only the file it needs.</p>
       </div>
       <div class="exi">

@@ -149,7 +149,7 @@
       </ul>
     </div>
     <div class="card">
-      <h3>Where we left off</h3>
+      <h3>What you have from Monday</h3>
       <ul>
         <li>You have a repository with a README, protected data, one script, and one commit.</li>
         <li>You know what an agent is: tools, a loop, and code execution.</li>
@@ -175,7 +175,7 @@
             <li><strong>Reproducible publication.</strong> Can someone else replicate it?</li>
           </ul>
         </li>
-        <li>Today you drive stages 1 through 4 on your own data. Stage 5 is a build option on Friday.</li>
+        <li>Today you work through stages 1 through 4 on your own data. Stage 5 is a build option on Friday.</li>
       </ul>
     </div>
     <div class="card">
@@ -196,7 +196,7 @@
         <tr><th>Level</th><th>What it can do</th><th>Best for</th></tr>
         <tr><td><strong>Read-only</strong></td><td>looks and plans; changes nothing</td><td>thinking first</td></tr>
         <tr><td><strong>Standard</strong></td><td>edits and runs in your project</td><td>day-to-day work</td></tr>
-        <tr><td><strong>Full auto</strong></td><td>edits, runs, and reaches out; no asking</td><td>trusted, repeat work</td></tr>
+        <tr><td><strong>Full auto</strong></td><td>edits, runs, and uses the internet without asking</td><td>trusted, repeat work</td></tr>
       </table>
       <ul>
         <li>Claude Code and Codex both have these three; the names and the key to switch differ, so check your tool.</li>
@@ -217,13 +217,13 @@
     </div>
     <div class="card demo">
       <span class="tag">Live demo</span>
-      <h3>Take 1: the vague prompt</h3>
+      <h3>First try: the vague prompt</h3>
       <div class="quote">Analyze how the importance of politics varies across countries and make me publication-ready output.</div>
       <ul>
         <li>What comes back looks like an answer:
           <ul>
             <li>It runs, and it produces something plausible.</li>
-            <li>Which variable did it pick? How did it treat missing values? Did it weight? You cannot tell without excavating the code.</li>
+            <li>Which variable did it pick? How did it treat missing values? Did it weight? You cannot tell without reading the code.</li>
           </ul>
         </li>
         <li>It looks plausible, and you cannot check any of it.</li>
@@ -231,7 +231,7 @@
     </div>
     <div class="card demo">
       <span class="tag">Live demo</span>
-      <h3>Take 2: the same task, directed</h3>
+      <h3>Second try: the same task, directed</h3>
       <ul>
         <li>Explore: "Look at the data and the codebook. What politics items are there, and what are their missing codes?"</li>
         <li>Plan: "Propose an analysis plan for country-level differences. Include variable choice, missing handling, and weights."</li>
@@ -263,7 +263,7 @@
       </ul>
     </div>
     <div class="card">
-      <h3>The catch: check it against human coding</h3>
+      <h3>Check the agent's codes against your own</h3>
       <ul>
         <li>Hand-code a random sample yourself, then compare the agent's codes to yours.</li>
         <li>Report the agreement, the same way you would for two human coders.</li>
@@ -298,7 +298,7 @@
         <li>Recompute one number a second way, in software you already trust, and see if it matches.</li>
         <li>Compare it against something you already know: a published figure, a total that must add up, or a number you expected.</li>
         <li>Read the code and the choices it made: which cases it dropped, how it treated missing values, whether it weighted.</li>
-        <li>Look at the data at its edges: the row count, the missing counts, the smallest and largest values.</li>
+        <li>Look at the plain features of the data: the row count, the missing counts, the smallest and largest values.</li>
         <li>Change one input, and check the output moves the way it should.</li>
         <li>Have a fresh session or a second agent redo the step, and compare the two.</li>
       </ul>
@@ -311,7 +311,7 @@
             <li><strong>Right variable?</strong> WVS has several politics items: interest, importance, action. Check the codebook.</li>
             <li><strong>Missing values?</strong> WVS codes "don't know / refused" as -1 to -5; averaging those in corrupts every country mean.</li>
             <li><strong>Weights?</strong> WVS has survey weights; unweighted means can mislead.</li>
-            <li><strong>Scale direction?</strong> 1 = very important, 4 = not at all; the chart may be upside-down in meaning.</li>
+            <li><strong>Scale direction?</strong> 1 = very important, 4 = not at all; the chart may run in the opposite direction from what you expect.</li>
           </ul>
         </li>
         <li>Every one of these is invisible in the picture and visible in the code.</li>
@@ -326,7 +326,7 @@
     <div class="card">
       <h3>You can run more than one agent</h3>
       <ul>
-        <li>You are not limited to a single agent; you can open several at once.</li>
+        <li>You can open several agents at once.</li>
         <li>Give each one a separate job, and they work at the same time.</li>
         <li>One cleans the data, one draws a figure, one looks up the codebook, all at once.</li>
         <li>The jobs have to be independent, so none of them waits on another.</li>
@@ -373,7 +373,7 @@
     <div class="card">
       <h3>Why long sessions drift</h3>
       <ul>
-        <li>As a session grows, the agent's working memory fills with files, outputs, and errors.</li>
+        <li>As a session grows, the text the agent is holding from the session fills up with files, outputs, and errors.</li>
         <li>Your instructions from the first hour get crowded out, and the agent slowly reverts to its own defaults.</li>
         <li>Tomorrow morning it remembers nothing at all.</li>
         <li>Tomorrow's session builds the fix: instructions that <strong>persist</strong> outside the conversation.</li>
@@ -424,7 +424,7 @@
         <h4>Clean</h4>
         <p>Ask the agent to explore first:</p>
         <div class="code">What are the missing codes in my key variables? What types are they stored as?<span class="copy">copy</span></div>
-        <p>Common traps it should surface for you:</p>
+        <p>Common problems it should find for you:</p>
         <ul>
           <li>missing values coded as numbers (for example -1 to -5, or 999)</li>
           <li>numbers stored as text</li>
@@ -457,7 +457,7 @@
         <ul>
           <li>When a command fails, let the agent read the error and fix it; if you are stuck yourself, describe what happened.</li>
           <li>If the plan has a step you do not understand, ask the agent to explain that step; do not approve what you cannot explain.</li>
-          <li>Flag one of us; unfixable environments pair up.</li>
+          <li>Ask one of us for help. If your setup cannot be fixed, you work with a partner.</li>
         </ul>
       </div>
     </div>

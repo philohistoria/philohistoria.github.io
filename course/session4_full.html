@@ -198,7 +198,7 @@
       </ul>
     </div>
     <div class="card">
-      <h3>Its limits are real</h3>
+      <h3>The limits of computer use</h3>
       <ul>
         <li>It is slow, because it works one screenshot at a time.</li>
         <li>It is unreliable on long click-throughs, and it spends your usage fast.</li>
@@ -214,7 +214,7 @@
             <li><strong>Zotero.</strong> Your own library, which the agent can read once you connect it.</li>
           </ul>
         </li>
-        <li>The flow is simple. You find papers by topic, filter them, follow their citations, export the ones you keep to Zotero, and then the agent reads your library while you write.</li>
+        <li>The steps are simple. You find papers by topic, filter them, follow their citations, export the ones you keep to Zotero, and then the agent reads your library while you write.</li>
       </ul>
     </div>
     </section>
@@ -234,7 +234,7 @@
             <li>a file to download and unpack, such as a CSV inside a ZIP</li>
           </ul>
         </li>
-        <li>You still make the calls: which source, which variables, and how much.</li>
+        <li>You still decide which source, which variables, and how much.</li>
       </ul>
     </div>
     <div class="card">
@@ -260,7 +260,7 @@
       <ul>
         <li>You point it at the page: "From this URL, pull the table of unemployment by month into a CSV."</li>
         <li>The agent reads the page, finds the table, and saves it.</li>
-        <li>Watch for the traps it should flag: a table split across pages, footnotes mixed into cells, or a site that asks you not to scrape.</li>
+        <li>Watch for the problems it should flag: a table split across pages, footnotes mixed into cells, or a site that asks you not to scrape.</li>
         <li>When a site's terms forbid scraping, you stop and find another source.</li>
       </ul>
     </div>
@@ -285,7 +285,7 @@
       <ul>
         <li>A pull you repeat, such as grabbing this month's new records, is worth packaging.</li>
         <li>Turn the steps into a Skill, the same way you did on Wednesday, so next time is one command.</li>
-        <li>The Skill travels too, so a labmate can run the same pull with their own key.</li>
+        <li>You can share the Skill, so a labmate can run the same pull with their own key.</li>
       </ul>
     </div>
     </section>
@@ -296,7 +296,7 @@
 
     <div class="card demo">
       <span class="tag">Live demo</span>
-      <h3>The steps</h3>
+      <h3>Searching through OpenAlex and Zotero</h3>
       <ul>
         <li>Search the literature by topic through OpenAlex.</li>
         <li>Filter, and pull the real metadata into Zotero.</li>
@@ -306,7 +306,7 @@
     </div>
     <div class="card demo">
       <span class="tag">Live demo</span>
-      <h3>The warning</h3>
+      <h3>The same request to a bare chatbot</h3>
       <ul>
         <li>Now the same request goes to a bare chatbot: "give me ten citations on this topic."</li>
         <li>We fact-check one, live.</li>
@@ -315,7 +315,7 @@
       </ul>
     </div>
     <div class="card">
-      <h3>Subagents, in one slide</h3>
+      <h3>What a subagent is</h3>
       <ul>
         <li>A <strong>subagent</strong> &mdash; the helpers you ran side by side on Tuesday &mdash; is a delegated worker. It gets its own separate context window, does one assigned task, and returns a short report.</li>
         <li>The main conversation receives only the report, and the full text of each paper stays in the subagent's own context.</li>
@@ -325,30 +325,30 @@
     </div>
     <div class="card demo">
       <span class="tag">Live demo</span>
-      <h3>The fan-out</h3>
+      <h3>Reading five papers at once</h3>
       <ul>
         <li>The setup: <code>papers/</code> holds five PDFs on one topic.</li>
-        <li>One prompt fans the reading out:</li>
+        <li>One prompt sends each paper to its own subagent:</li>
       </ul>
       <div class="quote">Read each PDF in papers/ in parallel, using a separate subagent per paper. Each subagent writes notes/&lt;paper&gt;.md with: research question, data, identification strategy, main effect size, and stated limitations. When all notes exist, write notes/synthesis.md comparing the identification strategies and flagging disagreements between papers.</div>
       <ul>
-        <li>The same structure lands five times: one note per paper, each with the same five fields.</li>
+        <li>You get the same structure five times: one note per paper, each with the same five fields.</li>
       </ul>
     </div>
     <div class="card demo">
       <span class="tag">Live demo</span>
-      <h3>The step that waits</h3>
+      <h3>Why the synthesis step waits</h3>
       <ul>
         <li>The per-paper reads are <strong>independent</strong>. No note needs any other note, so all five run at once.</li>
         <li>The synthesis needs <strong>every</strong> note, so it starts only after the last reader finishes.</li>
-        <li>That split is the design rule. You fan out the independent pieces, and you hold back the step that needs them all.</li>
-        <li>The payoff is <code>notes/synthesis.md</code>. Where two papers disagree on an effect size, the file says so, with both numbers.</li>
+        <li>That split is the design rule. You run the independent pieces at once, and you hold back the step that needs them all.</li>
+        <li>The result is <code>notes/synthesis.md</code>. Where two papers disagree on an effect size, the file says so, with both numbers.</li>
       </ul>
     </div>
     <div class="card">
-      <h3>The contract each subagent needs</h3>
+      <h3>What each subagent needs to be told</h3>
       <ul>
-        <li>Tuesday's lesson returns at team scale. "Read these papers and take notes" leaves every subagent to invent its own note format.</li>
+        <li>Tuesday's lesson applies again when you delegate to several subagents. "Read these papers and take notes" leaves every subagent to invent its own note format.</li>
         <li>Anthropic's report on its multi-agent research system (2025) found that without clear instructions, subagents "misinterpreted the task or performed the exact same searches as other agents."</li>
         <li>A workable delegation names three things:
           <ul>
@@ -357,19 +357,19 @@
             <li><strong>Boundary.</strong> One paper each, and no agent touches another's file.</li>
           </ul>
         </li>
-        <li>The demo prompt is long because it is a contract, and each clause closes one of these failures.</li>
+        <li>The demo prompt is long because it states all three, and each clause closes one of these failures.</li>
       </ul>
     </div>
     <div class="card">
       <h3>What parallelizes, and what it costs</h3>
       <table>
-        <tr><th>Fans out well</th><th>Must stay sequential</th></tr>
+        <tr><th>Runs in parallel</th><th>Must stay sequential</th></tr>
         <tr><td>one paper per subagent</td><td>cleaning before modeling</td></tr>
         <tr><td>one specification per agent</td><td>synthesis after reading</td></tr>
       </table>
       <ul>
         <li>Independent pieces parallelize, and steps that share state or feed each other do not.</li>
-        <li><strong>The cost.</strong> Anthropic measures multi-agent runs at roughly 15 times the tokens of a single chat interaction. Parallelism buys speed and a clean context, and it bills accordingly.</li>
+        <li><strong>The cost.</strong> Anthropic measures multi-agent runs at roughly 15 times the tokens of a single chat interaction. Parallelism gives you speed and a clean context, and it costs more.</li>
         <li>The same pattern works for robustness checks on any later project: one subagent per specification, each returning one coefficient row for a single comparison table.</li>
       </ul>
     </div>
@@ -505,7 +505,7 @@
       </div>
       <div class="exi">
         <span class="step">Step 3</span>
-        <h4>Fan the reading out to subagents</h4>
+        <h4>Send each paper to its own subagent</h4>
         <p>Put a few PDFs in <code>papers/</code>, then hand the agent one prompt that names the objective, the output format, and the boundary.</p>
         <div class="code">Read each PDF in papers/ in parallel, using a separate subagent per paper. Each subagent writes notes/&lt;paper&gt;.md with: research question, data, identification strategy, main effect size, and stated limitations. When all notes exist, write notes/synthesis.md comparing the identification strategies and flagging disagreements between papers.<span class="copy">copy</span></div>
         <ul>
