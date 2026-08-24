@@ -383,12 +383,42 @@
       </ul>
     </div>
     <div class="card">
-      <h3>Three ways to install one</h3>
+      <h3>Four ways to install one</h3>
       <ul>
-        <li><strong>Clone.</strong> Clone the repository, then copy or symlink the skill folders you want. <code>open-scholar-skill</code> ships a <code>bash setup.sh</code> that does the copying for you.</li>
-        <li><strong>Marketplace (Claude Code only).</strong> Add the marketplace, then install by name. Claude Code shows the token cost and component inventory before anything installs; Codex users take the clone or cross-agent route.</li>
-        <li><strong>Cross-agent.</strong> Pull from the skills.sh directory into whichever agent you use.</li>
+        <li><strong>Clone (either tool).</strong> Clone the repository, then copy or symlink the skill folders you want. <code>open-scholar-skill</code> ships a <code>bash setup.sh</code> that does the copying for you.</li>
+        <li><strong>Official catalog (either tool).</strong> Each vendor ships one. Claude Code registers Anthropic&rsquo;s marketplace the first time you start it, so you install by name with <code>/plugin install</code>. In Codex you type <code>$skill-installer</code> inside the session and name a skill from the <code>openai/skills</code> catalog.</li>
+        <li><strong>Third-party marketplace (Claude Code).</strong> Add someone&rsquo;s repository as a marketplace, then install by name. Claude Code shows the token cost and the full list of what will install before anything lands on disk.</li>
+        <li><strong>Cross-agent (either tool).</strong> The <code>skills</code> CLI installs from any public git repository into whichever agents you have. The skills.sh directory is a search index over public repositories, and anyone can appear in it &mdash; it is not a curated store.</li>
         <li>Whichever route you take, the result is a folder you can open. A skill in your home skills folder applies to everything you own; a skill inside a repository travels with that project.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Where an installed skill sits on disk</h3>
+      <ul>
+        <li>Installing a skill means putting a folder with a <code>SKILL.md</code> in a place your agent reads, and nothing else.</li>
+        <li>Both tools read a home location and a project location. Home applies to every project you open; the project location travels with the repository when you share it.</li>
+        <li>Claude Code reads <code>~/.claude/skills/</code> and <code>.claude/skills/</code>; Codex reads <code>~/.agents/skills/</code>, <code>~/.codex/skills/</code>, and <code>.agents/skills/</code>.</li>
+        <li>The two tools do not read each other&rsquo;s folders. Codex ships an <code>/import</code> command that copies Claude Code skills and settings across.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Updating a skill you installed</h3>
+      <ul>
+        <li>An installed skill is a snapshot. The author keeps editing theirs; yours does not change until you update it.</li>
+        <li><strong>Cloned:</strong> <code>git pull</code> in the clone, then re-run <code>setup.sh</code> or copy again. A copied folder does not receive the pull; a symlinked one does.</li>
+        <li><strong>Claude Code marketplace:</strong> Anthropic&rsquo;s own marketplaces update in the background and then ask you to run <code>/reload-plugins</code>. Third-party marketplaces do not update on their own: run <code>/plugin marketplace update</code>, or switch auto-update on in the <code>/plugin</code> menu.</li>
+        <li><strong>Cross-agent:</strong> <code>npx skills update</code> re-fetches every skill from its source; name one to update just that one.</li>
+        <li><strong>Codex catalog:</strong> there is no update command; run <code>$skill-installer</code> on the skill again.</li>
+        <li>An update rewrites instructions your agent will follow, so read the changes the way you read the skill before installing it. An update also overwrites edits you made in that folder; keep your own edits under a different skill name.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Installing without the terminal</h3>
+      <ul>
+        <li>The Claude Code desktop app installs plugins from a window: the <strong>+</strong> next to the prompt box &rarr; <strong>Plugins</strong> &rarr; <strong>Add plugin</strong> opens a browser of your marketplaces, and <strong>Manage plugins</strong> turns them on and off.</li>
+        <li>Codex has no install window. The IDE extension lists your skills, and the installer runs as a command typed inside the session.</li>
+        <li>Neither tool has a window that installs a plain skill folder; that is still a matter of putting the folder in the right place, which is what the commands on this page do for you.</li>
+        <li>The desktop apps read the same folders the terminal reads, so a skill installed either way shows up in both.</li>
       </ul>
     </div>
     <div class="card">
@@ -550,19 +580,6 @@
       </div>
       <div class="exi">
         <span class="step">Step 2</span>
-        <h4>Install one from a collection</h4>
-        <p>Read the SKILL.md first, then pick one of the three routes.</p>
-        <p>Clone:</p>
-        <div class="code">git clone https://github.com/joshzyj/open-scholar-skill
-bash open-scholar-skill/setup.sh<span class="copy">copy</span></div>
-        <p>Marketplace (Claude Code only):</p>
-        <div class="code">/plugin marketplace add letitbk/claude-academic-setup
-/plugin install claude-academic-setup@marketplace<span class="copy">copy</span></div>
-        <p>Cross-agent:</p>
-        <div class="code">npx skills add Zhangyanbo/vibe-research-skill<span class="copy">copy</span></div>
-      </div>
-      <div class="exi">
-        <span class="step">Step 3</span>
         <h4>Read before you install</h4>
         <ul>
           <li>Open the <code>SKILL.md</code> and read it in full.</li>
@@ -571,7 +588,45 @@ bash open-scholar-skill/setup.sh<span class="copy">copy</span></div>
         </ul>
       </div>
       <div class="exi">
+        <span class="step">Step 3</span>
+        <h4>Install one from a collection</h4>
+        <p>Pick one route.</p>
+        <p>Clone, either tool:</p>
+        <div class="code">git clone https://github.com/joshzyj/open-scholar-skill
+bash open-scholar-skill/setup.sh<span class="copy">copy</span></div>
+        <p>Official catalog, Claude Code:</p>
+        <div class="code">/plugin install document-skills@anthropic-agent-skills<span class="copy">copy</span></div>
+        <p>Official catalog, Codex (typed inside the session):</p>
+        <div class="code">$skill-installer gh-address-comments<span class="copy">copy</span></div>
+        <p>Third-party marketplace, Claude Code:</p>
+        <div class="code">/plugin marketplace add letitbk/claude-academic-setup
+/plugin install claude-academic-setup@claude-academic-setup<span class="copy">copy</span></div>
+        <p>Cross-agent, either tool:</p>
+        <div class="code">npx skills add Zhangyanbo/vibe-research-skill<span class="copy">copy</span></div>
+      </div>
+      <div class="exi">
         <span class="step">Step 4</span>
+        <h4>Find it on disk</h4>
+        <ul>
+          <li>Open the folder the install wrote to, and read the <code>SKILL.md</code> that is now there.</li>
+          <li>Claude Code: <code>~/.claude/skills/</code>, or <code>.claude/skills/</code> inside the project.</li>
+          <li>Codex: <code>~/.agents/skills/</code> or <code>~/.codex/skills/</code>, or <code>.agents/skills/</code> inside the project.</li>
+          <li>Confirm the agent sees it: <code>/skills</code> in Codex, <code>/plugin</code> in Claude Code.</li>
+        </ul>
+      </div>
+      <div class="exi">
+        <span class="step">Step 5</span>
+        <h4>Update it a week later</h4>
+        <ul>
+          <li>Cloned: <code>git pull</code> in the clone, then re-run <code>setup.sh</code>.</li>
+          <li>Claude Code marketplace: <code>/plugin marketplace update letitbk/claude-academic-setup</code>, then <code>/reload-plugins</code>.</li>
+          <li>Cross-agent: <code>npx skills update</code>.</li>
+          <li>Codex catalog: run <code>$skill-installer</code> on the skill again.</li>
+          <li>Read what changed before you use it, and move edits of your own out of the folder first.</li>
+        </ul>
+      </div>
+      <div class="exi">
+        <span class="step">Step 6</span>
         <h4>Edit the Skill you installed</h4>
         <ul>
           <li>Copy the folder into your home skills folder and edit <code>SKILL.md</code>; the change applies immediately, with no restart.</li>
