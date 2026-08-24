@@ -129,7 +129,7 @@
   <main>
     <p class="kicker">Session 1 · Monday, August 24, 2026</p>
     <h1>AI for Data Analysis I</h1>
-    <p class="byline" style="margin:2px 0 16px;color:var(--muted);font-size:15px">Han Zhang and Bing Tian</p>
+    <p class="byline" style="margin:2px 0 16px;color:var(--muted);font-size:15px">Han Zhang and Bing Tian, with the help of Claude</p>
     <p class="goal">Leave today with your tools working and your own research project started. When a section has something to do, it appears in the panel on the right.</p>
 
     <!-- OPENING -->
@@ -216,8 +216,8 @@
       <ul>
         <li>Monday: run your first analysis by directing an agent.</li>
         <li>Tuesday: direct a full analysis, deciding at each stage what to hand over.</li>
-        <li>Wednesday: make your analysis re-run with a single command.</li>
-        <li>Thursday: use the agent to search literature and draft writing.</li>
+        <li>Wednesday: teach the agent your standards, so every new session follows them.</li>
+        <li>Thursday: use the agent to collect data and search the literature.</li>
         <li>Friday: build a small tool around your own project.</li>
         <li>Each day adds to one project of your own, and on Friday you leave with it.</li>
       </ul>
@@ -264,17 +264,23 @@
         <li>You pick one folder for your project, and the agent works inside it.</li>
         <li>Your data, your scripts, and your notes are all in there together.</li>
         <li>The agent only touches things in that folder, so it stays out of the rest of your computer.</li>
-        <li>Its notes stay in the folder, so next time it picks up where you left off, instead of starting over like a chat.</li>
+        <li>Its memory stays in the folder, so next time it picks up where you left off, instead of starting over like a chat.</li>
       </ul>
     </div>
     <div class="card">
       <h3>Condition 1: tool use</h3>
       <ul>
         <li>A language model on its own only produces text.</li>
-        <li><strong>Tool use</strong> gives it real actions: read a file, write a file, run a command, search the web.</li>
-        <li>Every time it edits your script or runs <code>python analysis.py</code>, that is tool use at work.</li>
-        <li>The model asks to run an action, the action runs on your computer, and the result goes back to the model.</li>
-        <li>This is why the agent asks permission before it acts: it is running on your machine.</li>
+        <li><strong>Tool use</strong> gives it real actions. The basic set:
+          <ul>
+            <li>read a file &mdash; your data, your script, a codebook, a PDF;</li>
+            <li>write or edit a file &mdash; create a script, fix a line, draft a note;</li>
+            <li>run a command &mdash; execute a script, install a package, list a folder;</li>
+            <li>search the web and read pages &mdash; look up documentation, find a source.</li>
+          </ul>
+        </li>
+        <li>More tools can be plugged in later &mdash; a browser, your reference manager &mdash; and you will meet some this week.</li>
+        <li>Each action runs on your computer, and the result goes back into the model, which decides what to do next.</li>
       </ul>
     </div>
     <div class="card">
@@ -291,17 +297,18 @@
           </ul>
         </li>
         <li>The loop repeats until the task is done, or until you stop it.</li>
-        <li>It pauses for your approval, and that pause is where your judgment enters.</li>
+        <li>How often it stops to ask you first is a setting, not a law: by default it asks before acting, and looser modes let routine actions through. Tomorrow you choose between these modes deliberately.</li>
+        <li>Wherever you set that dial, judging the result stays your job.</li>
       </ul>
     </div>
     <div class="card">
       <h3>Condition 3: running the code</h3>
       <ul>
-        <li>Much of research work is code: cleaning data, running a model, drawing a chart.</li>
-        <li>For that work, code you have written is only a guess until it runs.</li>
-        <li>The agent runs its own code, reads what breaks, fixes it, and runs again, so you end up with a result that works.</li>
-        <li>Some tasks are not code, like reading a codebook or drafting a paragraph, and there the agent just does the writing.</li>
-        <li>Running its own code is what lets the agent finish the job.</li>
+        <li>Code is how a computer is made to do a task &mdash; any task, not just statistics.</li>
+        <li>The statistical script is the kind you know, and it is one kind among many: code can also download data, collect and sort papers, clean a pile of text files, or build a website. Most of what this week covers runs on code the agent writes.</li>
+        <li>Written code is only a guess until it runs. The agent runs its own code, reads what breaks, fixes it, and runs again, so you end up with a result that works.</li>
+        <li>Some tasks need no code at all, like reading a codebook or drafting a paragraph, and there the agent just reads and writes.</li>
+        <li>Running what it writes is what lets the agent finish a job instead of handing you homework.</li>
       </ul>
     </div>
     <div class="card">
@@ -369,6 +376,7 @@
         <li>On a Mac it is the app called <strong>Terminal</strong>; on Windows it is <strong>PowerShell</strong>.</li>
         <li>Agents live here because this is where programs are run.</li>
         <li>You need very little of it: <code>cd folder</code> moves into a folder, <code>ls</code> lists what is there.</li>
+        <li>The one command that matters: <code>cd</code> into your project folder before you start the agent. The folder you start it in is the project it lives in &mdash; your files, its permissions, and its memory all stay there.</li>
         <li>Everything else you can ask the agent to type for you.</li>
       </ul>
     </div>
@@ -427,6 +435,26 @@
       </table>
       <ul><li>You keep adding to this one project all week.</li></ul>
     </div>
+    <div class="card">
+      <h3>Save points with git</h3>
+      <ul>
+        <li>Git is the standard tool for keeping a history of a folder: each save is a labeled point, called a commit, that you can go back to.</li>
+        <li>Before any big change, ask the agent to commit; if the change goes wrong, ask it to go back to the last commit.</li>
+        <li>You do not need to memorize any git commands. The agent runs them; you only say commit, show the history, or go back.</li>
+        <li>What matters today is knowing these three things exist: save a point, list past points, return to one.</li>
+        <li>Ask the agent to keep your raw data out of the history, so the data never leaves <code>data/</code>.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Why researchers keep a history</h3>
+      <ul>
+        <li>You can always go back to a version that worked.</li>
+        <li>The history documents how the analysis evolved, which is what your methods section has to describe.</li>
+        <li>A collaborator can see exactly what changed between two versions.</li>
+        <li>Three words cover what you need today: a <strong>repository</strong> is a folder whose history is tracked, a <strong>commit</strong> is one labeled save point, and a <code>.gitignore</code> is the list of files the history must never include.</li>
+        <li>You type none of this. Ask the agent to set it up, and ask it to explain any part you want to understand.</li>
+      </ul>
+    </div>
     </section>
 
     <!-- WRAP -->
@@ -456,9 +484,17 @@
       </ul>
     </div>
     <div class="card">
+      <h3>Share your start</h3>
+      <ul>
+        <li>Pairs, three minutes each: run your script on your own data while your neighbor watches; say your question in one plain sentence; name one thing the agent got wrong and how you caught it.</li>
+        <li>Then the room: two or three volunteers show theirs. An interesting failure is worth more here than a finished chart.</li>
+        <li>Be ready for three questions: What is your question, in plain words? What did the agent get wrong, and how did you catch it? Where do you want this to be by Friday?</li>
+        <li>This is a rehearsal: Friday&rsquo;s presentation asks the same things, plus who did each part &mdash; you or the agent.</li>
+      </ul>
+    </div>
+    <div class="card">
       <h3>Before you go, and tonight</h3>
       <ul>
-        <li>Show a neighbor your script running on your own data.</li>
         <li>If your environment is still broken, you pair up tomorrow and get a fix slot with Bing before Session 2.</li>
         <li>Tonight, write one sentence: the first analysis you want to run on your data.</li>
       </ul>
@@ -478,17 +514,28 @@
     <div class="hands" data-for="setup">
       <div class="exi">
         <span class="step">Step 1</span>
-        <h4>Pick where it runs</h4>
-        <p>Both agents come in two forms. They do the same job; the difference is where your data goes.</p>
+        <h4>GUI or terminal</h4>
+        <p>Your agent comes in two forms on your computer. Both run on your machine and work on your own files; the difference is how you talk to it.</p>
         <ul>
-          <li><strong>On your computer:</strong> you run it in the terminal, and your files stay on your machine. Best for your own or private data.</li>
-          <li><strong>In your browser:</strong> Claude at claude.ai/code, or Codex at chatgpt.com/codex. Nothing to install, but it runs on the company's servers, on a copy of your project from GitHub.</li>
+          <li><strong>Desktop app (GUI):</strong> a normal window with a chat pane.
+            <ul>
+              <li>Strength: it installs like any other app, and everything is a click &mdash; nothing to memorize.</li>
+              <li>Weakness: it can only do what the window offers. It cannot run automatically or as part of something bigger.</li>
+            </ul>
+          </li>
+          <li><strong>Terminal:</strong> the same agent, driven by typed commands.
+            <ul>
+              <li>Strength: it can do more complex work. The bigger jobs later in the week &mdash; the agent called from a script, run on a schedule, or run on a server &mdash; only work here.</li>
+              <li>Weakness: the first hour looks unfamiliar.</li>
+            </ul>
+          </li>
+          <li>The two share the same brain and the same settings files, and both can spin up subagents; only the window around the agent differs.</li>
         </ul>
-        <p>For this course, running it on your computer is the safer choice, so the steps below set that up.</p>
+        <p>This course uses the terminal version, so every command this week works as written. The steps below install it; if you prefer the GUI, install it from the official site and translate as you go.</p>
       </div>
       <div class="exi">
         <span class="step">Step 2</span>
-        <h4>Install it on your computer</h4>
+        <h4>Install the terminal version</h4>
         <p>Pick the agent you chose, then run its line in the terminal.</p>
         <div class="tabs" data-g="tool">
           <button class="on" data-t="codex">Codex</button>
@@ -513,33 +560,55 @@
           <li>You are set when it prints a prompt and waits for you to type.</li>
           <li>Raise your hand the moment a step fails; do not sit stuck for more than a few minutes.</li>
         </ul>
+        <p>You are ready for the rest of the day when three things work: the terminal opens, your agent is signed in, and you can point the agent at your dataset on this machine.</p>
       </div>
-      <a class="guidelink" href="setup_guide.html">Full setup guide: the browser version, permission levels, first task, and fixes →</a>
+      <div class="exi">
+        <span class="step">Step 4</span>
+        <h4>The test: redo the morning demo on your own</h4>
+        <p>Your setup counts as done when the agent completes this morning's task for you, end to end. Hand it one instruction and watch:</p>
+        <div class="code">Using Python and the World Values Survey, find the item on how important politics is in life, compute the country-level average, make a bar chart, and save it as a PNG.<span class="copy">copy</span></div>
+        <ul>
+          <li>Let it write the code, run it, hit errors, and fix them.</li>
+          <li>If a chart appears and it looks right to you, you are set up.</li>
+        </ul>
+      </div>
+      <div class="exi">
+        <span class="step">If you finish early</span>
+        <h4>While the room catches up</h4>
+        <ul>
+          <li>Ask the agent to explain your dataset's file format and how to read it.</li>
+          <li>Ask the agent to report the current state of your project folder and explain what each line of that report means.</li>
+          <li>Help a neighbor get running; you will learn from their error too.</li>
+        </ul>
+      </div>
     </div>
 
     <!-- repo -->
     <div class="hands" data-for="repo">
       <div class="exi">
         <span class="step">Step 1</span>
-        <h4>First, redo the demo yourself</h4>
-        <p>Start with the same task from this morning, so you see the agent work end to end on a known example. Hand it one instruction and watch:</p>
-        <div class="code">Using Python and the World Values Survey, find the item on how important politics is in life, compute the country-level average, make a bar chart, and save it as a PNG.<span class="copy">copy</span></div>
-        <ul>
-          <li>Let it write the code, run it, hit errors, and fix them.</li>
-          <li>Read the chart at the end and ask: does this look right?</li>
-        </ul>
-      </div>
-      <div class="exi">
-        <span class="step">Step 2</span>
         <h4>Now switch to your own project</h4>
         <p>Ask the agent to set up your project and a first look at your data. You write no code; it does:</p>
         <div class="code">Set up a project folder for my research with data/, scripts/, and output/ folders and a README with my question. Then write and run a script that loads my dataset and reports the row and column count, the missing values per column, and the distribution of my key variables.<span class="copy">copy</span></div>
         <ul>
           <li>Copy your dataset into <code>data/</code> first. Sensitive or human-subjects data stays on your machine; do not upload it anywhere.</li>
           <li>Read the script, ask it to explain any line you do not recognize, and check the numbers against what you know.</li>
+          <li>Ask the agent to keep your raw data out of the tracked history, and to do it before your first save point rather than after.</li>
+        </ul>
+        <div class="code">Set up the history for this project so the files in data/ are never tracked, and tell me which files you excluded.<span class="copy">copy</span></div>
+      </div>
+      <div class="save">Safety net: before a big change, tell the agent &ldquo;commit a checkpoint with git.&rdquo; If something breaks, tell it &ldquo;go back to the last commit.&rdquo;</div>
+      <div class="exi">
+        <span class="step">Step 2</span>
+        <h4>Make your first save point</h4>
+        <p>Tell the agent to commit, and write the message yourself. A useful message says what changed and why, in one line.</p>
+        <div class="code">Commit this with the message: add loading script; 2,431 rows, politics importance item found<span class="copy">copy</span></div>
+        <ul>
+          <li>That message is useful because a colleague can read it and know what happened.</li>
+          <li>A message like "update" tells no one anything, including you next month.</li>
+          <li>Then ask the agent to show the history and read it back to you; your project now has one.</li>
         </ul>
       </div>
-      <div class="save">Safety net: before a big change, ask the agent to save a checkpoint you can go back to if something breaks. You will learn the proper version-history tool on Wednesday.</div>
       <div class="exi">
         <span class="step">Step 3 · try more</span>
         <h4>Try it on your other work</h4>

@@ -130,7 +130,7 @@
   <main>
     <p class="kicker">Session 3 · Wednesday, August 26, 2026</p>
     <h1>Harnessing AI Agents</h1>
-    <p class="byline" style="margin:2px 0 16px;color:var(--muted);font-size:15px">Han Zhang and Bing Tian</p>
+    <p class="byline" style="margin:2px 0 16px;color:var(--muted);font-size:15px">Han Zhang and Bing Tian, with the help of Claude</p>
     <p class="goal">Make the agent follow your standards in every session. Today you build the course's core deliverable: your own AGENTS.md and one Skill. When a section has something to do, it appears in the panel on the right.</p>
 
     <!-- OPENING -->
@@ -210,7 +210,9 @@
       <ul>
         <li>Better prompting each morning does not fix this, because the same gaps reopen in the next session.</li>
         <li>The fix is a written specification the agent reads at the start of <strong>every</strong> session, before you type anything.</li>
-        <li>The file is named <code>AGENTS.md</code>. Both Claude Code and Codex read it, at the root of your project.</li>
+        <li>The standard name is <code>AGENTS.md</code>, at the root of your project. Codex and most other agents read it directly.</li>
+        <li>Claude Code reads its own file instead, named <code>CLAUDE.md</code>; it does not read <code>AGENTS.md</code>. The two files do the same job, only the name differs.</li>
+        <li>So: Codex users write <code>AGENTS.md</code>, Claude Code users write <code>CLAUDE.md</code>. Everything below applies to both; where we say AGENTS.md, use your tool&rsquo;s name.</li>
         <li>Think of it as standard operating procedures for your AI assistant.</li>
       </ul>
     </div>
@@ -384,7 +386,7 @@
       <h3>Three ways to install one</h3>
       <ul>
         <li><strong>Clone.</strong> Clone the repository, then copy or symlink the skill folders you want. <code>open-scholar-skill</code> ships a <code>bash setup.sh</code> that does the copying for you.</li>
-        <li><strong>Marketplace.</strong> Add the marketplace, then install by name. Claude Code shows the token cost and component inventory before anything installs.</li>
+        <li><strong>Marketplace (Claude Code only).</strong> Add the marketplace, then install by name. Claude Code shows the token cost and component inventory before anything installs; Codex users take the clone or cross-agent route.</li>
         <li><strong>Cross-agent.</strong> Pull from the skills.sh directory into whichever agent you use.</li>
         <li>Whichever route you take, the result is a folder you can open. A skill in your home skills folder applies to everything you own; a skill inside a repository travels with that project.</li>
       </ul>
@@ -422,7 +424,7 @@
     <div class="card">
       <h3>The agent bills by the token</h3>
       <ul>
-        <li>Everything you send and everything it writes is counted in tokens, and your plan has a limit.</li>
+        <li>Everything you send and everything it writes is counted in tokens, against the plan limit you first met on Tuesday.</li>
         <li>A long session, a big file pasted in, or many rounds of back-and-forth all run the count up.</li>
         <li>Running several agents at once spends it several times as fast.</li>
       </ul>
@@ -470,8 +472,8 @@
       <div class="exi">
         <span class="step">Step 1</span>
         <h4>Create your AGENTS.md</h4>
-        <p>Make a file named AGENTS.md at the root of your project. Ask the agent to start it for you:</p>
-        <div class="code">Create an AGENTS.md at the root of my project with four sections: project context, data conventions, output standards, and safety rules. Ask me what to put in each.<span class="copy">copy</span></div>
+        <p>Make the file at the root of your project &mdash; <code>AGENTS.md</code> for Codex, <code>CLAUDE.md</code> for Claude Code. Ask the agent to start it for you:</p>
+        <div class="code">Create your context file (AGENTS.md or CLAUDE.md, whichever you read) at the root of my project with four sections: project context, data conventions, output standards, and safety rules. Ask me what to put in each.<span class="copy">copy</span></div>
       </div>
       <div class="exi">
         <span class="step">Step 2</span>
@@ -513,7 +515,7 @@
         <p>Clone:</p>
         <div class="code">git clone https://github.com/joshzyj/open-scholar-skill
 bash open-scholar-skill/setup.sh<span class="copy">copy</span></div>
-        <p>Marketplace:</p>
+        <p>Marketplace (Claude Code only):</p>
         <div class="code">/plugin marketplace add letitbk/claude-academic-setup
 /plugin install claude-academic-setup@marketplace<span class="copy">copy</span></div>
         <p>Cross-agent:</p>

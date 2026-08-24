@@ -129,7 +129,7 @@
   <main>
     <p class="kicker">Session 5 · Friday, August 28, 2026</p>
     <h1>AI for Building Apps</h1>
-    <p class="byline" style="margin:2px 0 16px;color:var(--muted);font-size:15px">Han Zhang and Bing Tian</p>
+    <p class="byline" style="margin:2px 0 16px;color:var(--muted);font-size:15px">Han Zhang and Bing Tian, with the help of Claude</p>
     <p class="goal">Today we pull these five days into one small build, and we look at what comes next. When a section has something to do, it appears in the panel on the right.</p>
 
     <!-- OPENING -->
@@ -160,6 +160,7 @@
     <div class="card">
       <h3>What building means here</h3>
       <ul>
+        <li>An analysis that only you can run is one nobody else can use.</li>
         <li>Building means turning your analysis into a website or an app that other people can use:
           <ul>
             <li>a webpage that shows your results and lets people click through them</li>
@@ -212,7 +213,7 @@
       <h3>How to keep it local</h3>
       <ul>
         <li><strong>Ollama</strong> is a free program that runs open-source models such as Llama or Qwen on your laptop.</li>
-        <li>You can run Codex with its open-source flag, or point Claude Code at the local model with three settings: <code>ANTHROPIC_BASE_URL</code>, <code>ANTHROPIC_AUTH_TOKEN</code>, and <code>ANTHROPIC_MODEL</code>.</li>
+        <li>You can run Codex against a local model with <code>codex --oss</code>, or point Claude Code at it with three settings: <code>ANTHROPIC_BASE_URL</code>, <code>ANTHROPIC_AUTH_TOKEN</code>, and <code>ANTHROPIC_MODEL</code>.</li>
         <li>You set the sandbox to your project folder and turn the network off.</li>
         <li>Local models are slower and weaker than Claude or GPT, so you use them only when the data requires it.</li>
       </ul>
@@ -247,7 +248,7 @@
         <li>a directed, verified analysis (Tuesday)</li>
         <li>a project AGENTS.md that survives a restart (Wednesday)</li>
         <li>at least one Skill (Wednesday)</li>
-        <li>a literature review or draft with verified citations (Thursday)</li>
+        <li>a literature search with verified citations (Thursday)</li>
         <li>a website or app of your own (Friday)</li>
       </ul>
     </div>
@@ -255,7 +256,7 @@
       <h3>What the full course adds</h3>
       <ul>
         <li>How these models actually work, and why they fail the way they do.</li>
-        <li>Designing your own agents with MCP, Hooks, and subagents. The next cards preview two pieces of this.</li>
+        <li>Designing your own agents with MCP, Hooks, and subagents. The next cards preview the subagent piece.</li>
         <li>Building and deploying real tools on top of your research.</li>
       </ul>
     </div>
@@ -264,9 +265,9 @@
       <ul>
         <li>Today's capstone fit in one conversation, and your next real project will not.</li>
         <li>The design question that follows is <strong>decomposition</strong>: when a task is too big for one session, who breaks it into pieces, you or the agent?</li>
-        <li>Claude Code covers the full range:
+        <li>Both agents cover the full range:
           <ul>
-            <li><strong>You decompose fully.</strong> A shell loop calls <code>claude -p</code> once per item on a list you wrote, when you already know every piece.</li>
+            <li><strong>You decompose fully.</strong> A shell loop calls <code>claude -p</code> (Codex: <code>codex exec</code>) once per item on a list you wrote, when you already know every piece.</li>
             <li><strong>You plan, the agent executes.</strong> Plan mode makes it present a plan you approve before it touches a file, when you know the goal and the steps need thought.</li>
             <li><strong>You frame, the agent splits.</strong> "Do A, B, and C in parallel with separate subagents" works when the pieces are independent and summaries are enough, as Thursday's paper fan-out showed.</li>
             <li><strong>The agent decomposes fully.</strong> A workflow has the agent write an orchestration script that runs dozens of subagents, for a repository-wide audit or a hundred-item migration.</li>
@@ -296,7 +297,7 @@
       </ul>
     </div>
     <div class="card">
-      <h3>How good, and why a second one?</h3>
+      <h3>Local and open models: how good, and why a second one?</h3>
       <ul>
         <li><strong>How good, honestly.</strong> Small local models in the 7B class drop 15 to 40 points on agentic benchmarks and hallucinate tool calls. Frontier open-weights models such as Kimi K2.6 and Qwen 3.6 sit within a few points of the closed frontier.</li>
         <li><strong>A second use, cross-model review.</strong> BK Lee's academic setup wires <code>/codex</code> and <code>/gemini</code> commands into Claude Code, so a second model family reviews the first's work: "each catches what the others miss."</li>
@@ -383,7 +384,7 @@
 export ANTHROPIC_AUTH_TOKEN=...
 export ANTHROPIC_MODEL=...<span class="copy">copy</span></div>
         <ul>
-          <li>For Codex, start it with its open-source flag instead.</li>
+          <li>For Codex: <code>codex --oss</code> starts it against the local model instead.</li>
           <li>Set the sandbox to your project folder with the network turned off.</li>
         </ul>
       </div>

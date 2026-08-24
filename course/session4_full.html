@@ -129,7 +129,7 @@
   <main>
     <p class="kicker">Session 4 · Thursday, August 27, 2026</p>
     <h1>AI for Data Collection and Literature Review</h1>
-    <p class="byline" style="margin:2px 0 16px;color:var(--muted);font-size:15px">Han Zhang and Bing Tian</p>
+    <p class="byline" style="margin:2px 0 16px;color:var(--muted);font-size:15px">Han Zhang and Bing Tian, with the help of Claude</p>
     <p class="goal">Today you use the agent to collect data and to find literature. A made-up fact causes the most harm in this kind of work, so you check every source and every citation. When a section has something to do, it appears in the panel on the right.</p>
 
     <!-- OPENING -->
@@ -317,7 +317,7 @@
     <div class="card">
       <h3>Subagents, in one slide</h3>
       <ul>
-        <li>A <strong>subagent</strong> is a delegated worker. It gets its own separate context window, does one assigned task, and returns a short report.</li>
+        <li>A <strong>subagent</strong> &mdash; the helpers you ran side by side on Tuesday &mdash; is a delegated worker. It gets its own separate context window, does one assigned task, and returns a short report.</li>
         <li>The main conversation receives only the report, and the full text of each paper stays in the subagent's own context.</li>
         <li>Five papers read in parallel are five separate context windows, plus yours, which stays clean.</li>
         <li>You invoke them in plain language. Asking for the work "in parallel, using separate subagents" is enough, and there is nothing to configure.</li>
@@ -370,7 +370,7 @@
       <ul>
         <li>Independent pieces parallelize, and steps that share state or feed each other do not.</li>
         <li><strong>The cost.</strong> Anthropic measures multi-agent runs at roughly 15 times the tokens of a single chat interaction. Parallelism buys speed and a clean context, and it bills accordingly.</li>
-        <li>Tomorrow's build day can reuse the pattern for robustness checks: one subagent per specification, each returning one coefficient row for a single comparison table.</li>
+        <li>The same pattern works for robustness checks on any later project: one subagent per specification, each returning one coefficient row for a single comparison table.</li>
       </ul>
     </div>
     <div class="card">
