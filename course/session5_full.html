@@ -120,6 +120,7 @@
       <a href="#opening">Opening</a>
       <a href="#build">Turn your analysis into a website or app <span class="has">hands-on</span></a>
       <a href="#private">Keeping private data on your own machine <span class="has">hands-on</span></a>
+      <a href="#engines">Other models in the same agent <span class="has">hands-on</span></a>
       <a href="#show">Show your project</a>
       <a href="#next">What to learn next</a>
     </div>
@@ -219,6 +220,49 @@
         <li>Local models are slower and weaker than Claude or GPT, so you use them only when the data requires it.</li>
       </ul>
     </div>
+    <div class="card">
+      <h3>Two failures that look like a broken agent</h3>
+      <ul>
+        <li><strong>Silent truncation.</strong> The agent sends about 23,000 tokens of its own instructions and tool definitions with every request. A local server whose context window is smaller cuts them off without an error message, and the model, stripped of its instructions, returns nothing. The fix is to start the server with a 32k context: <code>OLLAMA_CONTEXT_LENGTH=32768 ollama serve</code>.</li>
+        <li><strong>Memory spent on context, not weights.</strong> The same 2.5&nbsp;GB model occupies 4.8&nbsp;GB of memory at a 16k context, 7.8&nbsp;GB at 32k, and 42&nbsp;GB at Ollama&rsquo;s default. On a 16&nbsp;GB laptop, leaving the default on means the machine swaps or the model dies.</li>
+        <li><strong>Size floor.</strong> A 3B model answers questions but cannot follow the agent&rsquo;s tool instructions at all; a 4B model barely completes a one-file task in minutes; a serious setup starts around 20B, which needs 16&nbsp;GB of memory or more.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>For daily private work, use a shell built for local models</h3>
+      <ul>
+        <li>Claude Code&rsquo;s instructions are written for a frontier cloud model, and a local model performs below its own level inside them.</li>
+        <li>Tools built for local models carry smaller instructions and work better with the same download: <strong>Aider</strong> (<code>aider --model ollama/qwen3-coder</code>, saves every change as a commit) and <strong>OpenCode</strong> are the two established choices.</li>
+        <li>So the practical split: Claude Code on Ollama proves that the tool and the model are separate parts, and a local-first tool on the same Ollama is what you use for the sensitive project itself.</li>
+      </ul>
+    </div>
+    </section>
+
+    <!-- OTHER ENGINES -->
+    <section data-hands="engines">
+    <h2 class="sec" id="engines">Other models in the same agent <span class="hastag">&middot; do it on the right</span></h2>
+
+    <div class="card">
+      <h3>A cheaper model behind the same agent</h3>
+      <ul>
+        <li>Several companies sell frontier open-weight models through interfaces that speak Anthropic&rsquo;s protocol: DeepSeek, Kimi (Moonshot), and GLM (Z.ai) all publish an address that Claude Code can talk to directly.</li>
+        <li>Switching is one environment variable and an API key from that company, at a fraction of Anthropic&rsquo;s price. Some sell monthly coding plans aimed at exactly this use.</li>
+        <li>Be clear about what this buys: <strong>price, not privacy</strong>. Your data still leaves your machine, now to a different company&rsquo;s servers. For data under an IRB or a data agreement, this route is no better than the default, and the servers&rsquo; location can make compliance harder.</li>
+        <li>Support: the model company supports the route and Anthropic tolerates it; when it breaks, neither support team is yours. Quality varies by provider and month; the strongest open models test close to the closed frontier.</li>
+        <li>GPT is the one engine this does not cover: OpenAI publishes no Anthropic-speaking address, so reaching GPT means a fragile translation proxy in the middle, and the simpler choice there is Codex itself.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>A second opinion from a different model family</h3>
+      <ul>
+        <li>The agent can run any command-line program, and another agent&rsquo;s CLI is a command-line program. One saved command sends a question to Codex and returns its answer for comparison.</li>
+        <li>The statistical logic: models from one family share training data and blind spots, so their errors are correlated. Claude checking Claude is close to reading the same answer twice. A reviewer from a different family is closer to an independent draw.</li>
+        <li>Where the two families agree, your confidence rises. Where they disagree, you have found the place to check yourself.</li>
+        <li>The second model knows nothing of your conversation: everything it needs must be inside the question you send.</li>
+        <li>One rule: read the second opinion and decide yourself. Letting the agent apply it unread turns two models into a rumor mill.</li>
+        <li>The same trick reaches Gemini (<code>gemini -p</code>) or a local model (<code>ollama run</code>), which gives a free, fully offline second opinion.</li>
+      </ul>
+    </div>
     </section>
 
     <!-- SHOW -->
@@ -298,11 +342,10 @@
       </ul>
     </div>
     <div class="card">
-      <h3>Local and open models: how good are they, and why use a second model?</h3>
+      <h3>Local and open models: how good are they?</h3>
       <ul>
-        <li><strong>How good they are.</strong> Small local models in the 7B class drop 15 to 40 points on agentic benchmarks and hallucinate tool calls. Frontier open-weights models such as Kimi K2.6 and Qwen 3.6 sit within a few points of the closed frontier.</li>
-        <li><strong>A second use, cross-model review.</strong> BK Lee's academic setup wires <code>/codex</code> and <code>/gemini</code> commands into Claude Code, so a second model family reviews the first's work: "each catches what the others miss."</li>
-        <li><strong>The statistical logic.</strong> Error cancellation assumes independent errors, and models from one family make correlated ones. A reviewer from a different family is closer to an independent draw.</li>
+        <li>Small local models in the 7B class drop 15 to 40 points on agentic benchmarks and hallucinate tool calls. Frontier open-weights models such as Kimi K2.6 and Qwen 3.6 sit within a few points of the closed frontier.</li>
+        <li>The cross-model review this enables is the second-opinion command you built earlier today.</li>
       </ul>
     </div>
     <div class="card">
@@ -373,9 +416,10 @@
       <div class="exi">
         <span class="step">Step 1</span>
         <h4>Install a local model</h4>
-        <p>Install Ollama, then pull an open-source model to your machine.</p>
+        <p>Install Ollama, pick a model by your memory, and start the server with a 32k context.</p>
         <div class="code">curl -fsSL https://ollama.com/install.sh | sh<span class="copy">copy</span></div>
-        <div class="code">ollama pull qwen3<span class="copy">copy</span></div>
+        <p>16&nbsp;GB laptop: <code>ollama pull qwen3:4b</code>. 32&nbsp;GB or more: <code>ollama pull qwen3-coder:30b</code>.</p>
+        <div class="code">OLLAMA_CONTEXT_LENGTH=32768 ollama serve<span class="copy">copy</span></div>
       </div>
       <div class="exi">
         <span class="step">Step 2</span>
@@ -387,6 +431,7 @@ export ANTHROPIC_BASE_URL=http://localhost:11434
 claude --model qwen3.5<span class="copy">copy</span></div>
         <ul>
           <li>For Codex: <code>codex --oss</code> starts it against the local model instead.</li>
+          <li>Switch models inside the session with <code>/model</code> and the model&rsquo;s name; the variables choose the server, the name chooses the model.</li>
           <li>Set the sandbox to your project folder with the network turned off.</li>
         </ul>
       </div>
@@ -397,6 +442,59 @@ claude --model qwen3.5<span class="copy">copy</span></div>
           <li>On ordinary data first, ask the local agent a question with the network off.</li>
           <li>Turn off your wifi and give it a task. If it still works, nothing was going out.</li>
           <li>This is the proof you can show an IRB: the data stayed on the machine.</li>
+          <li>Watch it work: <code>ollama ps</code> in a second terminal shows the model loaded and answering.</li>
+        </ul>
+      </div>
+      <div class="exi">
+        <span class="step">Step 4</span>
+        <h4>For the real project, switch to a local-first shell</h4>
+        <div class="code">python -m pip install aider-install &amp;&amp; aider-install
+aider --model ollama/qwen3-coder:30b<span class="copy">copy</span></div>
+        <p>Same local model, a shell written for it, and every change saved as a commit.</p>
+      </div>
+    </div>
+
+    <!-- engines -->
+    <div class="hands" data-for="engines">
+      <div class="exi">
+        <span class="step">Step 1</span>
+        <h4>Swap the engine for a cheaper hosted model</h4>
+        <p>Get an API key from the provider, then point the same agent at its address. DeepSeek as the example:</p>
+        <div class="code">export ANTHROPIC_BASE_URL=https://api.deepseek.com/anthropic
+export ANTHROPIC_AUTH_TOKEN=YOUR_DEEPSEEK_KEY
+export ANTHROPIC_MODEL=deepseek-reasoner
+claude<span class="copy">copy</span></div>
+        <ul>
+          <li>Kimi: <code>https://api.moonshot.ai/anthropic</code>. GLM: <code>https://api.z.ai/api/anthropic</code>. Each provider&rsquo;s documentation lists its current model names.</li>
+          <li>Open a fresh terminal to go back to Claude; the variables live only in the shell that set them.</li>
+        </ul>
+      </div>
+      <div class="exi">
+        <span class="step">Step 2</span>
+        <h4>Save a second-opinion command</h4>
+        <p>Create <code>.claude/commands/consult-codex.md</code> in your project:</p>
+        <div class="code">---
+description: Second opinion from Codex
+allowed-tools: Bash(codex exec:*), Read
+---
+Ask Codex for an independent opinion on: $ARGUMENTS
+If a file is referenced, Read it and inline the relevant part.
+Run exactly:
+codex exec --skip-git-repo-check --sandbox read-only "&lt;question + context&gt;" &lt; /dev/null
+Report Codex's answer as Codex's, then say where you agree and disagree.
+Never edit files from this command.<span class="copy">copy</span></div>
+        <ul>
+          <li>The <code>&lt; /dev/null</code> matters: without it Codex waits for input forever.</li>
+          <li>Costs bill to your ChatGPT account, not your Claude plan.</li>
+        </ul>
+      </div>
+      <div class="exi">
+        <span class="step">Step 3</span>
+        <h4>Use it on a real doubt</h4>
+        <div class="code">/consult-codex is mean imputation biasing my variance estimates downward?<span class="copy">copy</span></div>
+        <ul>
+          <li>Read both answers. Agreement raises your confidence; disagreement marks what you check by hand.</li>
+          <li>Do not ask it to apply the advice; that decision stays with you.</li>
         </ul>
       </div>
     </div>
