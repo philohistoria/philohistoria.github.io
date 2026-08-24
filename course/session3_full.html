@@ -403,13 +403,42 @@
       </ul>
     </div>
     <div class="card">
-      <h3>Sharing Skills and agent setups with other people</h3>
+      <h3>What is shared and what stays yours</h3>
       <ul>
-        <li>Everything that defines your agent&rsquo;s behavior is a file in the project: the context file, <code>.claude/agents/</code>, and the skill folders. Whoever gets the folder gets your setup.</li>
-        <li><strong>One-way borrowing.</strong> Clone someone&rsquo;s repository and copy what you want. You get a snapshot; their later updates reach you only when you pull again.</li>
-        <li><strong>Two-way collaboration.</strong> Share one git repository and both commit and pull. Updates flow in both directions, and the history shows who changed what.</li>
-        <li><strong>A shared Dropbox folder</strong> also works for two or three people who trust each other: the files sync on their own. Its limits: when two people edit the same file at once you get conflicted copies, and there is no record of who changed what &mdash; the two things git adds.</li>
-        <li>What you do not share: <code>settings.local.json</code>, API keys, and your personal <code>~/.claude/</code> folder. The project folder is the shared unit; your home folder is yours.</li>
+        <li>Everything that defines your agent&rsquo;s behavior in a project is a file in the project folder: the context file, <code>.claude/agents/</code>, and the skill folders. Whoever gets the folder gets your setup.</li>
+        <li>Your home folder <code>~/.claude/</code> is different: it holds your personal skills, your settings, and the agent&rsquo;s memory of you. It applies to every project on your machine, and it is not part of any shared folder.</li>
+        <li>So the rule has two halves: the project folder is the shared unit, and the home folder is yours.</li>
+        <li>Never share: <code>settings.local.json</code>, API keys, and anything under <code>~/.claude/</code>.</li>
+        <li>The simplest sharing is one-way: copy someone&rsquo;s project folder and keep what you want. You get a snapshot, and their later changes reach you only when you copy again.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Collaborating through a shared Dropbox folder</h3>
+      <ul>
+        <li>For two or three people who trust each other, a shared Dropbox or Drive folder is the easiest route: the files sync on their own, and nobody learns a new tool.</li>
+        <li>One working rule makes it safe: do not edit the same file at the same time. Split the files between you, or say who is editing what.</li>
+        <li>If you break the rule, Dropbox keeps both versions and renames one <code>AGENTS (conflicted copy 2026-04-15).md</code>. Nothing is lost, but you merge the two by hand.</li>
+        <li>Dropbox keeps versions per file for a limited time (30 days on Basic, 180 on Business), with no record of why a change was made.</li>
+        <li>One warning: do not put a git repository inside a synced folder. Two machines writing its internal files at the same moment can corrupt it. Data in Dropbox, code in git, is the standard split.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Collaborating through git: both of you commit</h3>
+      <ul>
+        <li>On Monday you learned one git move: commit a save point. Collaboration adds one more: <strong>pull</strong>, which fetches your partner&rsquo;s commits.</li>
+        <li>Nobody has to approve anyone. One of you creates the repository and adds the other as a collaborator; from then on both push changes directly. Review steps exist on GitHub, and they are optional and off by default.</li>
+        <li>The creator alone controls the settings: who is invited, public or private, deletion. Over the code itself, you are equals.</li>
+        <li>The routine that prevents almost all trouble: <strong>pull before you start, then edit, then commit and push.</strong></li>
+        <li>When you both changed the same file anyway, the later push is rejected. That is protection, not failure: pull first, and git merges the file on its own when you touched different lines. Only when you edited the same lines does it stop, put both versions side by side in the file, and wait for you to choose.</li>
+        <li>Nothing is ever silently overwritten. This record of who changed what, and the automatic merging, are what git adds over the shared folder.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>The agent runs git for both of you</h3>
+      <ul>
+        <li>Neither of you memorizes git commands. Start a session with &ldquo;pull the latest,&rdquo; end it with &ldquo;commit and push, the change was about X.&rdquo;</li>
+        <li>When a push is rejected or a merge stops, say &ldquo;resolve it and show me what you kept.&rdquo;</li>
+        <li>Add one line to your context file: confirm with me before pushing. Without it the agent will stage, commit, and push in one step, and the change leaves your machine before you have read it.</li>
       </ul>
     </div>
     <div class="card">
