@@ -259,8 +259,8 @@
 <!-- ============ WEEK 3 ============ -->
 <tr class="wk">
   <td class="wknum"><span class="n">Week 3</span><span class="d">Sept 24</span><span class="stage"><span class="of">Eightfold path</span>Step 1: define</span></td>
-  <td><span class="topic">Why the agent is inconsistent, and the fix</span>
-    <ul><li>Every session starts blank; vague instructions produce variable output</li>
+  <td><span class="topic">Making the agent yours: the spec</span>
+    <ul><li>Every session starts blank. When you leave a choice unstated, the agent fills it with the defaults of an average analyst, and those are not your choices. The spec is where you write your own choices down</li>
         <li><code>AGENTS.md</code>: project context, data conventions, output standards, safety rules</li>
         <li>Skills: a written procedure the agent follows when you ask for it. Install one from the official catalog. Read a Skill written by a stranger line by line before you use it. An installed Skill is a fixed copy, and you update it yourself</li></ul></td>
   <td><span class="topic">Working dataset + spec + the with/without-spec comparison</span>
@@ -288,7 +288,7 @@
 <span class="tchip t-code">data/code</span><span class="tchip t-write">writing</span><br>
 <span class="due">Due before class,&nbsp;Thu&nbsp;Oct&nbsp;1<br>Worth 5% of the grade, one point per checklist item</span></td>
 </tr>
-<tr class="goal"><td></td><td colspan="4"><div class="goalbox"><b>Teaching&nbsp;goal</b>Without the spec, the same task comes back with different choices each run; with the spec, the output follows the rules the student wrote. The side-by-side comparison is the evidence.</div></td></tr>
+<tr class="goal"><td></td><td colspan="4"><div class="goalbox"><b>Teaching&nbsp;goal</b>Without the spec, the output carries the agent's defaults. With the spec, it carries the choices the student wrote down. The spec does not make the agent deterministic: a rule can be ignored, and two runs still differ. What reruns exactly is the committed script, not the conversation. The side-by-side comparison is the evidence.</div></td></tr>
 
 <!-- ============ WEEK 4 ============ -->
 <tr class="wk">
@@ -327,13 +327,19 @@
 <tr class="wk">
   <td class="wknum"><span class="n">Week 5</span><span class="d">Oct 8</span><span class="stage"><span class="of">Eightfold path</span>Step 2b: evidence</span></td>
   <td><span class="topic">Coding text at scale: making your measures</span>
-    <ul><li>Using the agent to turn text (311 complaints, public comments, permits) into variables</li>
+    <ul><li>Using the agent to turn text (consumer complaints, public comments, permits) into variables</li>
         <li>The prompt is the instrument: freeze it, then run it</li>
+        <li>Pilot first: code a small overlap sample twice, with two independent coders, and compare both against your own hand codes. Revise the codebook until agreement stops improving. Each revision is a new version of the prompt</li>
+        <li>Then freeze the codebook. The agent writes a script that sends each document to a model API with the frozen codebook and writes the codes to a CSV. A cheap model is enough. The agent does not read the documents itself, and subagents are not the coders</li>
+        <li>At API prices, coding everything a second time with a model from a different family costs little. Two runs of the same family repeat the same errors, the way one coder coding twice does. The disagreements go to you</li>
         <li>The tier question: can you check every result yourself? If not, you need a gold standard</li>
         <li>Confusion matrix; a simple baseline for comparison</li></ul></td>
   <td><span class="topic">Build and validate your measure</span>
-    <ul><li>Hand-code 100 documents from the course-provided text dataset (311 complaint narratives); use your own data instead if your project has text</li>
-        <li>Have the agent code 1,000 with the frozen prompt</li>
+    <ul><li>The course text dataset is the CFPB Consumer Complaint Database: 3.8 million public consumer complaint narratives, no registration, an API at consumerfinance.gov and a bulk CSV. Use your own data instead if your project has text</li>
+        <li>The coding task is the primary grievance type, in four categories: UNAUTHORIZED, money moved or an account opened without consent; INACCURATE_RECORD, the company reports something wrong and the remedy is a correction rather than money; UNFAIR_CHARGE, the account is yours and the charge or the rate is disputed; SERVICE_FAILURE, the company would not act or could not be reached. These four cut across CFPB's own product and issue labels, so those labels serve as a third rater</li>
+        <li>Hand-code 100 narratives yourself</li>
+        <li>Pilot the codebook on a small overlap sample: two independent coding runs plus your own hand codes, then revise the codebook and run it again, until agreement stops improving</li>
+        <li>Freeze the codebook. Have the agent write a script that codes 1,000 narratives through the API on a cheap model and writes the codes to a CSV</li>
         <li>Compare: confusion matrix against your 100, and against a two-feature baseline</li>
         <li>Optional close: wrap your frozen prompt as a Skill</li></ul></td>
   <td><span class="topic">Step 2: build a measure, and check that it measures what you meant</span>
@@ -343,7 +349,7 @@
 
   <td class="asg"><b>Skill check: measurement</b>
     <ul><li>your 100 hand-coded documents</li>
-        <li>the agent's 1,000 codes, from the same frozen prompt</li>
+        <li>the agent's script, and the 1,000 codes it produced from the frozen codebook</li>
         <li>the confusion matrix comparing the two</li>
         <li>the confusion matrix for the two-feature baseline, for comparison</li></ul>
 <span class="tchip t-code">data/code</span><br>
