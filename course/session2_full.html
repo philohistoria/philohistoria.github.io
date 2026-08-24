@@ -194,12 +194,12 @@
       <ul><li>The agent runs at one of three levels of freedom:</li></ul>
       <table>
         <tr><th>Level</th><th>What it can do</th><th>Best for</th></tr>
-        <tr><td><strong>Read-only</strong></td><td>looks and plans; changes nothing</td><td>thinking first</td></tr>
+        <tr><td><strong>Plan first</strong></td><td>reads and proposes; changes nothing until you approve</td><td>thinking first</td></tr>
         <tr><td><strong>Standard</strong></td><td>edits and runs in your project</td><td>day-to-day work</td></tr>
         <tr><td><strong>Full auto</strong></td><td>edits, runs, and uses the internet without asking</td><td>trusted, repeat work</td></tr>
       </table>
       <ul>
-        <li>Claude Code and Codex both have these three; the names and the key to switch differ, so check your tool.</li>
+        <li>The real names: in Claude Code, Shift+Tab cycles between plan mode, the default ask-first mode, and auto-accepting edits. In Codex, the sandbox setting is read-only, workspace-write, or full access.</li>
         <li>Ask yourself how much you would let a brand-new RA do <strong>unsupervised</strong>.</li>
       </ul>
     </div>
@@ -207,37 +207,35 @@
       <h3>Explore, Plan, Execute, Commit</h3>
       <ul><li>The workflow for any task with real stakes:</li></ul>
       <table>
-        <tr><th>Phase</th><th>What happens</th><th>Research parallel</th></tr>
+        <tr><th>Phase</th><th>What happens</th><th>The research step it matches</th></tr>
         <tr><td>Explore</td><td>reads data and files, touches none</td><td>literature review, EDA</td></tr>
         <tr><td>Plan</td><td>proposes; you review and approve</td><td>pre-registration</td></tr>
         <tr><td>Execute</td><td>runs the approved plan, step by step</td><td>running the analysis</td></tr>
-        <tr><td>Commit</td><td>the save point from Monday, now with a clear message</td><td>methods write-up</td></tr>
+        <tr><td>Commit</td><td>saves a commit with a message that says what changed</td><td>methods write-up</td></tr>
       </table>
       <ul><li>Explore and Plan are cheap; a wrong plan costs one rewrite, and a wrong execution costs an afternoon.</li></ul>
     </div>
     <div class="card demo">
       <span class="tag">Live demo</span>
       <h3>First try: the vague prompt</h3>
-      <div class="quote">Analyze how the importance of politics varies across countries and make me publication-ready output.</div>
+      <p>The task is harder than Monday&rsquo;s: build a multi-item index. Constructing a measure has real degrees of freedom, and that is where direction matters.</p>
+      <div class="quote">Using the WVS, measure how postmaterialist each country is and rank the countries.</div>
       <ul>
-        <li>What comes back looks like an answer:
-          <ul>
-            <li>It runs, and it produces something plausible.</li>
-            <li>Which variable did it pick? How did it treat missing values? Did it weight? You cannot tell without reading the code.</li>
-          </ul>
-        </li>
-        <li>It looks plausible, and you cannot check any of it.</li>
+        <li>A ranked chart comes back in two minutes, and it looks final.</li>
+        <li>On the way there the agent silently made five choices: which survey items form the index, how to treat the negative missing codes, whether to use the survey weights, which wave to use, and how to average within countries.</li>
+        <li>Each choice is defensible. None of them was yours. Two analysts giving this same prompt can get different rankings and never know why.</li>
       </ul>
     </div>
     <div class="card demo">
       <span class="tag">Live demo</span>
       <h3>Second try: the same task, directed</h3>
       <ul>
-        <li>Explore: "Look at the data and the codebook. What politics items are there, and what are their missing codes?"</li>
-        <li>Plan: "Propose an analysis plan for country-level differences. Include variable choice, missing handling, and weights."</li>
-        <li>Review the plan, and change one thing you disagree with.</li>
+        <li>Explore: "Read the codebook. List every item in the materialist/postmaterialist battery, its wording, and its missing codes. Change nothing."</li>
+        <li>Plan: "Propose a plan for the standard four-item index and a country ranking. State your choice on missing codes, weights, and wave, and flag every place a published analysis might reasonably differ."</li>
+        <li>Review the plan and change at least one choice &mdash; for example, keep only respondents who answered all four items.</li>
         <li>Execute stage by stage, committing after each stage.</li>
-        <li>The output is similar, and the difference is that every choice passed through your hands.</li>
+        <li>Compare the two rankings. Some countries move. The movement is exactly those five choices, which are now written down in the plan and the commits.</li>
+        <li>The vague run was not wrong anywhere you could point to. It was uncheckable, and that is the difference.</li>
       </ul>
     </div>
     </section>
@@ -255,11 +253,28 @@
       </ul>
     </div>
     <div class="card">
-      <h3>How to set it up</h3>
+      <h3>A worked example: 311 complaints</h3>
       <ul>
-        <li>Write the codebook first: the categories, each with a clear rule and an example.</li>
-        <li>Give the agent the codebook and a handful of cases, and read what it returns.</li>
-        <li>Fix the codebook where it was unclear, until the agent codes the way you mean.</li>
+        <li>The running example: a city&rsquo;s 311 complaint narratives, free-text descriptions residents typed in. The question: what are people actually complaining about?</li>
+        <li>The codebook is categories, each with a rule and an example:
+          <ul>
+            <li><strong>Noise</strong> &mdash; the complaint is mainly about sound. "Upstairs neighbor plays drums past midnight."</li>
+            <li><strong>Housing condition</strong> &mdash; about the building itself: heat, water, mold. "No heat in the apartment for three days."</li>
+            <li><strong>Street and trash</strong> &mdash; about shared space outside. "Mattress on the corner for a week."</li>
+            <li><strong>Other</strong> &mdash; anything else, plus a rule for mixed cases: code the main grievance, the one the resident wants fixed.</li>
+          </ul>
+        </li>
+        <li>Give the agent the codebook and twenty cases, and read what it returns. Where it codes differently than you would, the rule was unclear; fix the rule, not the answer.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Who does the coding, mechanically</h3>
+      <ul>
+        <li>There are two setups, and the size of the data decides.</li>
+        <li><strong>Dozens of cases:</strong> the agent reads them directly in the conversation and codes them, like an RA reading a stack of pages. This is how you develop the codebook and build your hand-coded comparison sample.</li>
+        <li><strong>Thousands of cases:</strong> the agent writes a script that sends each narrative, with the codebook as the prompt, to a model API, one call per case, and writes the labels to a CSV. The script can rerun, resume after a crash, and call a cheaper model than the one you are talking to.</li>
+        <li>Do not have the agent read thousands of cases in the conversation itself: the session fills up, and the coding drifts as it fills.</li>
+        <li>Once the codebook is frozen, the prompt in that script is your measurement instrument. Freezing it is what makes the measure reportable.</li>
       </ul>
     </div>
     <div class="card">
@@ -445,7 +460,7 @@
         </ul>
         <p>Two requirements:</p>
         <ul>
-          <li>Use your tool's read-only planning mode at least once, and change at least one thing in the plan before you run it.</li>
+          <li>Use plan mode (Claude Code) or a read-only sandbox (Codex) at least once, and change at least one thing in the plan before you run it.</li>
           <li>Every commit message must be readable by a colleague.</li>
         </ul>
       </div>
