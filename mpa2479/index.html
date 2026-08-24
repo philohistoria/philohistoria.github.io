@@ -175,7 +175,7 @@
   <td class="arc" colspan="1">apply it, no new AI skills</td>
   <td class="arc" colspan="4">your final project</td></tr>
 <tr class="arow-ai"><td class="lab">AI agent<br>what students<br>learn to do</td>
-  <td>what an AI agent is</td><td>how to direct the AI agent</td><td>write a spec; compare the agent with and without it</td>
+  <td>what an AI agent is</td><td>how to direct the AI agent, alone and in a pair</td><td>write a spec; compare the agent with and without it</td>
   <td>collect data, including with sub&shy;agents</td><td>code text with the agent; build a gold standard</td><td>analyze the data; publish a page</td><td>check the agent's facts and its fairness</td>
   <td>audit a federal AI system</td><td>design your final project</td>
   <td>no new AI skills this week</td><td>build your project; rerun a classmate's</td><td>present your project; what you can claim</td></tr>
@@ -211,10 +211,12 @@
   <td><span class="topic">What an AI agent is</span>
     <ul><li>Isn't this just ChatGPT? It works in your folder rather than in a chat window</li>
         <li>It can use tools, run the code it writes, and read the errors back</li>
+        <li>Code is how a computer is made to do any task &mdash; collect data, sort documents, build a page; the statistics you know is one kind among many</li>
         <li>What it is good and bad at</li>
         <li>Demo: a city's 311 CSV → cleaned, analyzed, charted, live</li></ul></td>
   <td><span class="topic">Install, then redo the demo yourself</span>
     <ul><li>Install Claude Code with step-by-step support; TA circulating</li>
+        <li>The agent also comes as a desktop app; the course uses the terminal version, where every command this semester works as written</li>
         <li>Redo the demo on the same 311 dataset, with the same prompt, on your machine</li>
         <li>If time: try it on a different provided dataset (permits, inspections)</li></ul></td>
   <td><span class="topic">The eight steps of policy analysis, start to finish</span>
@@ -230,13 +232,19 @@
 <tr class="wk">
   <td class="wknum"><span class="n">Week 2</span><span class="d">Sept 17</span><span class="stage shop">Shopping</span></td>
   <td><span class="topic">Directing the agent</span>
-    <ul><li>Git in 15 minutes, agent-first: a commit is a snapshot; the agent runs the commands, you read what it did</li>
+    <ul><li>Git, agent-first: a commit is a snapshot; the agent runs the commands, you read what it did</li>
+        <li>Why analysts keep a history: return to a version that worked, see how the analysis evolved, and show a teammate what changed</li>
+        <li>Before the first commit: keep the raw data out of the tracked history. A pushed repository is published, and 311 or police records must never be in it</li>
+        <li>A clear message on each commit; after the first one, ask the agent to show the history</li>
+        <li>Working in a pair: pull before you start, then edit, then commit and push. A rejected push protects your partner's work, and the agent runs every command</li>
+        <li>What travels with the repository (the spec, <code>.claude/</code>) and what stays personal (<code>~/.claude/</code>, API keys)</li>
+        <li>Can your data leave your machine? If not, local models exist (Ollama), with a wifi-off test as the proof. Decide this before choosing your dataset in Week 3</li>
         <li>Three ways to run the agent: normal (approve each step), auto-accept, plan mode (the agent writes a plan, you approve or edit it before anything runs)</li>
-        <li>Demo: same task with a vague prompt, then with a directed one</li>
-        <li>What a session costs, and how to spend less</li></ul></td>
+        <li>Demo: same task with a vague prompt, then with a directed one</li></ul></td>
   <td><span class="topic">Repo + first script + plan mode</span>
     <ul><li>Create a repo; have the agent write a summary-statistics script on a provided dataset; commit it</li>
         <li>A second, bigger task (merge two files, chart the result) in plan mode: read the agent's plan, change one thing, then let it run</li>
+        <li>In pairs: both work in one shared repository, each commits a change, collide on the same file once on purpose, and let the agent resolve it</li>
         <li>Checkpoint: show a neighbor your script runs; explain it in your own words</li>
         <li>Late adders: setup guide + office hours, on your own; class does not repeat Week 1</li></ul></td>
   <td><span class="topic">Does AI actually make an analyst faster or better?</span>
@@ -246,23 +254,26 @@
 
   <td class="asg">Nothing graded, but your setup must be working by the end of this week: the tool installed, a repository created, one committed script. If it is broken, come to office hours before Week 3.</td>
 </tr>
-<tr class="goal"><td></td><td colspan="4"><div class="goalbox"><b>Teaching&nbsp;goal</b>Everyone can stage a multi-step task through plan mode instead of sending a vague prompt. The vague-vs-directed demo is where prompting skill becomes visible.</div></td></tr>
+<tr class="goal"><td></td><td colspan="4"><div class="goalbox"><b>Teaching&nbsp;goal</b>Everyone can stage a multi-step task through plan mode instead of sending a vague prompt. The vague-vs-directed demo is where prompting skill becomes visible. Each pair leaves with one shared repository that both members have committed to.</div></td></tr>
 
 <!-- ============ WEEK 3 ============ -->
 <tr class="wk">
   <td class="wknum"><span class="n">Week 3</span><span class="d">Sept 24</span><span class="stage"><span class="of">Eightfold path</span>Step 1: define</span></td>
   <td><span class="topic">Why the agent is inconsistent, and the fix</span>
     <ul><li>Every session starts blank; vague instructions produce variable output</li>
-        <li><code>AGENTS.md</code>: project context, data conventions, output standards, safety rules</li></ul></td>
+        <li><code>AGENTS.md</code>: project context, data conventions, output standards, safety rules</li>
+        <li>Skills: a written procedure the agent follows on request. Install one from the official catalog; a skill from a stranger you read line by line first; an installed skill is a snapshot you update yourself</li></ul></td>
   <td><span class="topic">Working dataset + spec + the with/without-spec comparison</span>
     <ul><li>Choose the dataset and policy question for the semester. This is the draft of your final project; the Week 9 proposal formalizes the same thread. Switching later is allowed, but the cost grows every week.</li>
-        <li>The 3-item dataset checklist, verified in conference:
+        <li>The 4-item dataset checklist, verified in conference:
           <ul><li>programmatically collectable, meaning an API or a scrapable source (Week 4 needs this)</li>
               <li>a policy question you can chart and explain to a named audience (Week 6)</li>
-              <li>a topic you are willing to carry all semester</li></ul>
+              <li>a topic you are willing to carry all semester</li>
+              <li>cleared to leave your machine; data that cannot go to a company's servers means the local-model route from Week 2, decided now</li></ul>
           Text data is NOT required; numeric-only projects are fully eligible.</li>
         <li>One paragraph: the question, labelled predictive / causal / descriptive</li>
-        <li>Write the spec; run the same task with and without it, and compare the two outputs side by side</li></ul></td>
+        <li>Write the spec; run the same task with and without it, and compare the two outputs side by side</li>
+        <li>Install one Skill from the official catalog; read its <code>SKILL.md</code> and say what it is allowed to touch</li></ul></td>
   <td><span class="topic">Step 1: define the problem, and why two analysts define it differently</span>
     <ul><li><span class="rlab req">Required</span>Bardach &amp; Patashnik, the Step 1 chapter, on defining the problem</li>
         <li><span class="rlab req">Required</span>Kahneman et al., <span class="cite">Noise</span> (HBR 2016)</li>
@@ -270,7 +281,7 @@
 
   <td class="asg"><b>Check-in 1</b>
     <ul><li>a one-paragraph question, labelled predictive, causal, or descriptive</li>
-        <li>a named dataset that passes the three-item dataset test</li>
+        <li>a named dataset that passes the four-item dataset test</li>
         <li>an AGENTS.md with all four sections</li>
         <li>the same task run with and without the spec, both outputs committed</li>
         <li>everything in the repository with a clear commit message</li></ul>
@@ -286,12 +297,16 @@
     <ul><li>How an API call works; where public data lives (Census, BLS, Socrata)</li>
         <li>Scraping a table when there is no API; what a 403 tells you</li>
         <li>Keep the raw pull; log where it came from and when</li>
-        <li>Subagents: when the pull is really 50 identical pulls (50 states, 10 years, 20 agencies), the agent sends one copy of itself per piece, waits, and assembles. Each copy needs written instructions: what to fetch, what format to return, what to do if the source fails</li></ul></td>
+        <li>Subagents: when the pull is really 50 identical pulls (50 states, 10 years, 20 agencies), the agent sends one copy of itself per piece, waits, and assembles. Each copy needs written instructions: what to fetch, what format to return, what to do if the source fails</li>
+        <li>Who coordinates: several sessions you manage side by side, or one agent managing subagents. Results that must be combined afterward point to subagents; open sessions can also message each other directly</li>
+        <li>Use a large model to plan and small models to execute the 50 pulls; what a session costs, and how to spend less</li>
+        <li>A second opinion from a different model family: one saved command sends a question to Codex. Models from one family make correlated errors, so agreement across families means more, and disagreement marks what you check by hand</li></ul></td>
   <td><span class="topic">Build your data pipeline</span>
     <ul><li>API pipeline from a starter template, pointed at your working dataset's domain</li>
         <li>One scraped table with its provenance log</li>
         <li>Extend the pipeline to several units (a few states or years) with subagents, one per unit</li>
         <li>README: what source, what parameters, how to rerun</li>
+        <li>Save the second-opinion command; run it once on a pulled table: does this distribution look plausible?</li>
         <li>Last 20 min: swap repos, rerun a neighbor's pipeline from their README alone</li></ul></td>
   <td><span class="topic">Step 2: assemble the evidence, and write down where it came from</span>
     <ul><li><span class="rlab req">Required</span>Lazer, Kennedy, King &amp; Vespignani, <span class="cite">The Parable of Google Flu</span> (Science 2014), 3 pp.: 45 undocumented search terms, nobody could rerun it, wrong for 100 straight weeks</li>
@@ -369,6 +384,7 @@
         <li>Fairness metrics: parity, equalized odds, calibration, and why you cannot have all three</li></ul></td>
   <td><span class="topic">Audit your own outputs</span>
     <ul><li>Fact-check: pull 10 numbers from your W4–6 outputs, trace each to a source; table: claim | AI number | actual | verdict</li>
+        <li>On the claims with no reachable source, reuse the Week 4 second-opinion command; where the two model families disagree, that claim goes to the top of the check list</li>
         <li>Subgroup error audit: recompute the W5 confusion matrix group by group, using demographic groups if your data has them, otherwise geography, source, or time period; the skill is the same</li>
         <li>Short structured debate: which fairness definition should govern your measure?</li></ul></td>
   <td><span class="topic">Check the evidence: invented numbers, and errors that fall unevenly across groups</span>
