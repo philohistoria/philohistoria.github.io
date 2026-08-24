@@ -395,10 +395,21 @@
       <h3>Installing a Skill is a trust decision</h3>
       <ul>
         <li>A Skill is instructions your agent will follow, so installing one means trusting whoever wrote it.</li>
+        <li>Sources fall into three tiers: official collections from the tool vendors; people you know, such as a coauthor or labmate sharing a private repository; and strangers on the internet. The first two you can install after a quick read; the third you read line by line first.</li>
         <li>Snyk's <strong>ToxicSkills</strong> study (2026) found prompt injection in <strong>36%</strong> of the agent skills it examined, and <strong>1,467</strong> malicious payloads on a single skill registry (ClawHub).</li>
         <li>A skill body can embed dynamic-context syntax that runs shell commands the moment the skill loads, before any human reads it.</li>
         <li>Anthropic's own documentation says: "Only install plugins and add marketplaces from sources you trust."</li>
         <li>The rule in this course: read the <code>SKILL.md</code> before you install, and check the <code>allowed-tools</code> grant and any embedded shell command.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Sharing Skills and agent setups with other people</h3>
+      <ul>
+        <li>Everything that defines your agent&rsquo;s behavior is a file in the project: the context file, <code>.claude/agents/</code>, and the skill folders. Whoever gets the folder gets your setup.</li>
+        <li><strong>One-way borrowing.</strong> Clone someone&rsquo;s repository and copy what you want. You get a snapshot; their later updates reach you only when you pull again.</li>
+        <li><strong>Two-way collaboration.</strong> Share one git repository and both commit and pull. Updates flow in both directions, and the history shows who changed what.</li>
+        <li><strong>A shared Dropbox folder</strong> also works for two or three people who trust each other: the files sync on their own. Its limits: when two people edit the same file at once you get conflicted copies, and there is no record of who changed what &mdash; the two things git adds.</li>
+        <li>What you do not share: <code>settings.local.json</code>, API keys, and your personal <code>~/.claude/</code> folder. The project folder is the shared unit; your home folder is yours.</li>
       </ul>
     </div>
     <div class="card">
