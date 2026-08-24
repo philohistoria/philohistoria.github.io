@@ -213,7 +213,8 @@
       <h3>How to keep it local</h3>
       <ul>
         <li><strong>Ollama</strong> is a free program that runs open-source models such as Llama or Qwen on your laptop.</li>
-        <li>You can run Codex against a local model with <code>codex --oss</code>, or point Claude Code at it with three settings: <code>ANTHROPIC_BASE_URL</code>, <code>ANTHROPIC_AUTH_TOKEN</code>, and <code>ANTHROPIC_MODEL</code>.</li>
+        <li>You can run Codex against a local model with <code>codex --oss</code>, or point Claude Code at the local server with two settings and a model name. Ollama, the local model server, speaks both tools&rsquo; protocols.</li>
+        <li>One honest note: for Claude Code this route is supported by Ollama, not by Anthropic; for Codex the <code>--oss</code> flag is official.</li>
         <li>You set the sandbox to your project folder and turn the network off.</li>
         <li>Local models are slower and weaker than Claude or GPT, so you use them only when the data requires it.</li>
       </ul>
@@ -380,9 +381,10 @@
         <span class="step">Step 2</span>
         <h4>Point your agent at it</h4>
         <p>For Claude Code, set the three settings so it talks to the local model instead of the company's servers. Ask the agent for the exact values for your model.</p>
-        <div class="code">export ANTHROPIC_BASE_URL=...
-export ANTHROPIC_AUTH_TOKEN=...
-export ANTHROPIC_MODEL=...<span class="copy">copy</span></div>
+        <div class="code">export ANTHROPIC_AUTH_TOKEN=ollama
+export ANTHROPIC_API_KEY=""
+export ANTHROPIC_BASE_URL=http://localhost:11434
+claude --model qwen3.5<span class="copy">copy</span></div>
         <ul>
           <li>For Codex: <code>codex --oss</code> starts it against the local model instead.</li>
           <li>Set the sandbox to your project folder with the network turned off.</li>
