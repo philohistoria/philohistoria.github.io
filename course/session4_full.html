@@ -130,7 +130,7 @@
     <p class="kicker">Session 4 · Thursday, August 27, 2026</p>
     <h1>AI for Data Collection and Literature Review</h1>
     <p class="byline" style="margin:2px 0 16px;color:var(--muted);font-size:15px">Han Zhang and Bing Tian, with the help of Claude</p>
-    <p class="goal">Today you use the agent to collect data and to find literature. A made-up fact causes the most harm in this kind of work, so you check every source and every citation. When a section has something to do, it appears in the panel on the right.</p>
+    <p class="goal">You use the agent today to collect data and find literature and made-up facts cause the most harm in this work. You check every source and every citation and if a section is relevant, it appears in the panel on the right.</p>
 
     <!-- OPENING -->
     <section data-hands="none">
@@ -139,8 +139,8 @@
     <div class="card">
       <h3>Today</h3>
       <ul>
-        <li>You take the same directed-agent workflow past data analysis, into collecting data and finding literature.</li>
-        <li>This is where a made-up fact causes the most harm, so checking the source matters even more.</li>
+        <li>You use the same directed-agent workflow, and it goes past data analysis and moves into collecting data and finding literature.</li>
+        <li>Made-up facts cause the most harm here, and checking the source matters even more.</li>
         <li>The plan for the session:
           <ul>
             <li>what the agent can reach</li>
@@ -164,43 +164,43 @@
           <ul>
             <li>your files and your code: always</li>
             <li>the open web: often</li>
-            <li>library databases, your Zotero, and journal APIs: only once you connect them</li>
+            <li>Connect your library databases, your Zotero, and journal APIs, and this only works once you connect them.</li>
           </ul>
         </li>
-        <li>There are two ways to reach an outside app. You connect it once with MCP, or you let the agent operate it by clicking, which is called computer use.</li>
+        <li>You can reach an outside app in two ways. You can connect it once with MCP or let the agent operate it by clicking. This is called computer use.</li>
       </ul>
     </div>
     <div class="card">
       <h3>Connecting to other apps (MCP)</h3>
       <ul>
-        <li>To reach an outside app, you connect it once, and then the agent can use it. <strong>MCP</strong> is the standard for that connection.</li>
-        <li>The everyday examples: Gmail, Google Calendar, Google Drive. These are not programming tools. Once connected, the agent can act on them directly: "find the reviewer&rsquo;s email about the deadline and put the date in my calendar."</li>
-        <li>The research example is Zotero, and you watch it live in the literature part of this session.</li>
+        <li>You connect an outside app once, and then the agent can use it, and <strong>MCP</strong> is the standard for that connection.</li>
+        <li>Everyday examples include Gmail, Google Calendar, and Google Drive, which are not programming tools, and once connected, the agent can act on them directly. For example: "find the reviewer&rsquo;s email about the deadline and put the date in my calendar."</li>
+        <li>The research example is Zotero, and you will watch it live in the literature part of this session.</li>
       </ul>
     </div>
     <div class="card">
       <h3>Computer use</h3>
       <ul>
-        <li>Some sources have no API and no connector, and the only way in is to click through a website. Example: a statistical yearbook site where each table sits behind three menus and a download button.</li>
-        <li>A <strong>computer-use</strong> agent takes a screenshot, moves the mouse, types, and clicks, the way you would.</li>
-        <li>Codex now has this built in, so it can drive a browser and control your desktop apps.</li>
+        <li>Some sources lack an API and a connector, and you can only access them by clicking through a website. For example, a statistical yearbook site might hide each table behind three menus and a download button.</li>
+        <li>A <strong>computer-use</strong> agent acts like you. It takes a screenshot, moves the mouse, types, and clicks.</li>
+        <li>Codex has this built in now, and it can drive a browser and control your desktop apps.</li>
         <li>Claude Code does not have it yet, and Anthropic's version is a separate Chrome extension.</li>
       </ul>
     </div>
     <div class="card">
       <h3>When computer use is worth it</h3>
       <ul>
-        <li>The case for it is a government or survey portal with no API, where you must set filters and download a file by hand.</li>
-        <li>You describe the goal, and it clicks through the portal and pulls the file.</li>
-        <li>Use it only when an API or a script cannot do the job.</li>
+        <li>It is a government or survey portal which has no API. You must set filters and download a file by hand.</li>
+        <li>You describe the goal. It clicks through the portal and pulls the file.</li>
+        <li>Use it only if an API or a script fails to do the job.</li>
       </ul>
     </div>
     <div class="card">
       <h3>The limits of computer use</h3>
       <ul>
-        <li>It is slow, because it works one screenshot at a time.</li>
-        <li>It is unreliable on long click-throughs, and it spends your usage fast.</li>
-        <li>Text on a page can fool it into following instructions, so you never point it at anything sensitive.</li>
+        <li>It is slow and works one screenshot at a time.</li>
+        <li>It is unreliable for long click-throughs and spends your usage fast.</li>
+        <li>Text on a page can trick it, and it might follow instructions from the text. Never point it at sensitive information.</li>
       </ul>
     </div>
     <div class="card">
@@ -209,10 +209,10 @@
         <li>We use two services for literature work:
           <ul>
             <li><strong>OpenAlex.</strong> A free, open index of more than 250 million scholarly works you can search by topic, citation, or metadata.</li>
-            <li><strong>Zotero.</strong> Your own library, which the agent can read once you connect it.</li>
+            <li><strong>Zotero.</strong> Your own library, which the agent can read after you connect it.</li>
           </ul>
         </li>
-        <li>The steps are simple. You find papers by topic, filter them, follow their citations, export the ones you keep to Zotero, and then the agent reads your library while you write.</li>
+        <li>The steps are simple. Find papers by topic, filter them, follow their citations, and export the kept papers to Zotero. The agent reads your library while you write.</li>
       </ul>
     </div>
     </section>
@@ -224,74 +224,74 @@
     <div class="card">
       <h3>Data Collection Capabilities</h3>
       <ul>
-        <li>The agent can use that same reach to bring in data.</li>
+        <li>The agent can use that same reach to get data.</li>
         <li>Three common sources, and the agent handles all three:
           <ul>
             <li>a web page with a table you want, such as a state agency's statistics page</li>
-            <li>an API that returns data, such as the Census or a city open-data portal</li>
-            <li>a file to download and unpack, such as a CSV inside a ZIP</li>
+            <li>An API returns data, which includes the Census or a city open-data portal.</li>
+            <li>Download and unpack a file, for example, a CSV inside a ZIP.</li>
           </ul>
         </li>
-        <li>You still decide which source, which variables, and how much.</li>
+        <li>You still choose the source, choose the variables, and decide the amount.</li>
       </ul>
     </div>
     <div class="card">
       <h3>Verify your collection</h3>
       <ul>
-        <li>Gathering data is where these agents are weakest.</li>
-        <li>On a social-science replication benchmark, agents scored about 96 at running an analysis and about 31 at finding the data it needed.</li>
-        <li>Expect broken scrapes and wrong fields, and check every pull against the source.</li>
+        <li>These agents are weakest at gathering data.</li>
+        <li>Agents used a social-science replication benchmark and scored about 96 running an analysis and about 31 finding the data it needed.</li>
+        <li>Scrapes will break and fields will be wrong, so check every pull against the source.</li>
       </ul>
-      <p class="src">Source: Nguyen et al., "ReplicatorBench" (2026), <a href="https://arxiv.org/abs/2602.11354">arXiv:2602.11354</a>.</p>
+      <p class="src">Nguyen et al., "ReplicatorBench" (2026), <a href="https://arxiv.org/abs/2602.11354">arXiv:2602.11354</a>.</p>
     </div>
     <div class="card">
       <h3>Example: pulling from an API</h3>
       <ul>
-        <li>You say what you want in plain words: "Get county population from the Census API for my state, 2010 to 2020, as a CSV."</li>
-        <li>The agent writes the request, runs it, and shows you the first rows.</li>
-        <li>If the API needs a free key, you paste yours in once and it uses it from then on.</li>
-        <li>You read the columns and confirm they are the ones you asked for.</li>
+        <li>Say what you want in simple words: "Get county population from the Census API for my state, 2010 to 2020, as a CSV."</li>
+        <li>The agent writes the request, runs the request, and shows you the first rows.</li>
+        <li>If the API requires a free key, paste your key in once and it will use it from then on.</li>
+        <li>Read the columns and confirm they are the ones you asked for.</li>
       </ul>
     </div>
     <div class="card">
       <h3>Scraping a table from a webpage</h3>
       <ul>
-        <li>You point it at the page: "From this URL, pull the table of unemployment by month into a CSV."</li>
+        <li>Point it at the page and "Get the monthly unemployment table from this URL and put it in a CSV."</li>
         <li>The agent reads the page, finds the table, and saves it.</li>
-        <li>Watch for the problems it should flag: a table split across pages, footnotes mixed into cells, or a site that asks you not to scrape.</li>
-        <li>When a site's terms forbid scraping, you stop and find another source.</li>
+        <li>Watch for the problems it should flag: a table split across pages, footnotes mixed into cells, and a site that asks you not to scrape.</li>
+        <li>If a site's terms forbid scraping, stop and find another source.</li>
       </ul>
     </div>
     <div class="card">
       <h3>Track raw pull sources</h3>
       <ul>
-        <li>Save the raw result once, before any cleaning, and never overwrite that copy.</li>
-        <li>Have the agent write the source, the date, and the exact query next to the file.</li>
-        <li>Months later, that note is how you answer "where did this number come from."</li>
+        <li>Please paste the text you'd like me to rewrite.</li>
+        <li>The agent must write the source next to the file and must also write the date and the exact query next to the file.</li>
+        <li>Months later, you use that note to answer "where did this number come from."</li>
       </ul>
     </div>
     <div class="card">
       <h3>Check your results</h3>
       <ul>
         <li>Open the raw file and read the first few rows yourself.</li>
-        <li>Compare a handful of values against the source page or the API by hand.</li>
-        <li>Move the data into your analysis only after it matches.</li>
+        <li>Manually compare some values against the source page or the API.</li>
+        <li>Match the data first and Then move it into your analysis.</li>
       </ul>
     </div>
     <div class="card">
       <h3>Turn Repetition into a Skill</h3>
       <ul>
-        <li>A pull you repeat, such as grabbing this month's new records, is worth packaging.</li>
-        <li>Turn the steps into a Skill, the same way you did on Wednesday, so next time is one command.</li>
-        <li>You can share the Skill, so a labmate can run the same pull with their own key.</li>
+        <li>You repeat a pull, and for example, you grab this month's new records, and this is worth packaging.</li>
+        <li>I don’t have the source text yet — please paste the text you want me to rewrite and I will follow your instructions exactly.</li>
+        <li>You can share the Skill, and a labmate can then run the same pull using their own key.</li>
       </ul>
     </div>
     <div class="card">
       <h3>Scaling a pull: script or subagents?</h3>
       <ul>
-        <li>One question decides: are the steps the same for every piece?</li>
-        <li>The same &mdash; 50 calls to one API with a different state code &mdash; is a loop in a script. No agent needed.</li>
-        <li>Different for every piece &mdash; 10 state websites, each laid out its own way &mdash; is subagent work: each copy has to figure out its own page.</li>
+        <li>One question matters: are the steps the same for every piece?</li>
+        <li>It is the same and it is 50 calls to one API. Each call has a different state code and this is a loop in a script and no agent is needed.</li>
+        <li>Every piece is different, and there are 10 state websites, and each one has its own layout. This is subagent work, and each copy must figure out its own page.</li>
       </ul>
     </div>
     </section>
@@ -304,64 +304,64 @@
       <span class="tag">Live demo</span>
       <h3>Searching OpenAlex and Zotero</h3>
       <ul>
-        <li>Search the literature by topic through OpenAlex.</li>
-        <li>Filter, and pull the real metadata into Zotero.</li>
-        <li>Ask the agent to draft an annotated shortlist from the library.</li>
-        <li>Every reference in the shortlist exists, because every one came through the steps with its metadata.</li>
+        <li>Use OpenAlex to search the literature by topic.</li>
+        <li>Filter the data and pull the real metadata into Zotero.</li>
+        <li>Tell the agent to write a short list from the library and include notes for each item.</li>
+        <li>Every reference is in the shortlist, and this is because every one went through the steps with its metadata.</li>
       </ul>
     </div>
     <div class="card demo">
       <span class="tag">Live demo</span>
       <h3>The same request to a basic chatbot</h3>
       <ul>
-        <li>Now the same request goes to a bare chatbot: "give me ten citations on this topic."</li>
+        <li>The same request now goes to a simple chatbot: "give me ten citations on this topic."</li>
         <li>We fact-check one, live.</li>
-        <li>Made-up references are the most common failure of a text predictor. A citation that only <strong>sounds</strong> real is exactly what a tool trained to predict plausible text will produce.</li>
-        <li>Monday's caution now carries a real cost, because the fabricated citation reaches your referees.</li>
+        <li>Text predictors often make up references, and this is their most common mistake. A tool trained to predict plausible text will produce citations that are only <strong>sounds</strong> real.</li>
+        <li>Monday's warning has a real cost now, and the fake citation goes to your referees.</li>
       </ul>
     </div>
     <div class="card">
       <h3>Using subagents for reading</h3>
       <ul>
-        <li>Subagents are Tuesday's arrangement: one main agent delegates to helpers, each with its own separate context, each returning a short report.</li>
-        <li>That separation is what makes subagents fit reading. The full text of each paper stays in its own subagent's context. Five papers in parallel use five contexts, and your own conversation receives only the five reports.</li>
+        <li>Subagents follow Tuesday's arrangement and one main agent delegates tasks to helpers. Each helper has its own separate context and returns a short report.</li>
+        <li>This separation makes subagents good at reading and each paper's full text stays in its own subagent's context. Five papers run in parallel using five contexts and your conversation receives only the five reports.</li>
       </ul>
     </div>
     <div class="card demo">
       <span class="tag">Live demo</span>
       <h3>Reading five papers at once</h3>
       <ul>
-        <li>The setup: <code>papers/</code> holds five PDFs on one topic.</li>
-        <li>One prompt sends each paper to its own subagent:</li>
+        <li>The setup: <code>papers/</code> has five PDFs about one topic.</li>
+        <li>One prompt sends each paper to a separate subagent:</li>
       </ul>
       <div class="quote">Read each PDF in papers/ in parallel, using a separate subagent per paper. Each subagent writes notes/&lt;paper&gt;.md with: research question, data, identification strategy, main effect size, and stated limitations. When all notes exist, write notes/synthesis.md comparing the identification strategies and flagging disagreements between papers.</div>
       <ul>
-        <li>You get the same structure five times: one note per paper, each with the same five fields.</li>
+        <li>The structure is the same five times and you get one note per paper and each note has the same five fields.</li>
       </ul>
     </div>
     <div class="card demo">
       <span class="tag">Live demo</span>
       <h3>Why the synthesis step waits</h3>
       <ul>
-        <li>The per-paper reads are <strong>independent</strong>. No note needs any other note, so all five run at once.</li>
-        <li>The synthesis needs <strong>every</strong> note, so it starts only after the last reader finishes.</li>
-        <li>That split is the design rule. You run the independent pieces at once, and you hold back the step that needs them all.</li>
-        <li>The result is <code>notes/synthesis.md</code>. Where two papers disagree on an effect size, the file says so, with both numbers.</li>
+        <li>Each paper has <strong>independent</strong> reads, no note needs another note, and all five run at once.</li>
+        <li>The synthesis needs <strong>every</strong> note and it starts only after the last reader finishes.</li>
+        <li>The design rule is to split the work, run the independent pieces at once, and hold back the step that needs them all.</li>
+        <li>The result is <code>notes/synthesis.md</code>, and if two papers have different effect sizes, the file notes this and includes both numbers.</li>
       </ul>
     </div>
     <div class="card">
       <h3>Subagent Instructions</h3>
       <ul>
-        <li>Tuesday's lesson applies again when you delegate to several subagents. "Read these papers and take notes" leaves every subagent to invent its own note format.</li>
-        <li>Anthropic's report on its multi-agent research system (2025) found that without clear instructions, subagents "misinterpreted the task or performed the exact same searches as other agents."</li>
+        <li>Tuesday's lesson applies again when you delegate to many subagents, and "Read these papers and take notes" is an example which leaves every subagent to invent its own note format.</li>
+        <li>Anthropic released a report in 2025 about its multi-agent research system which found that subagents need clear instructions and, without them, subagents misinterpreted the task, and they also performed the exact same searches as other agents.</li>
         <li>A workable delegation names three things:
           <ul>
             <li><strong>Objective.</strong> What each note is for: feeding the comparison.</li>
-            <li><strong>Output format.</strong> The five named fields, in a named file.</li>
-            <li><strong>Boundary.</strong> One paper each, and no agent touches another's file.</li>
+            <li><strong>Output format.</strong> There are five named fields and they are in a named file.</li>
+            <li><strong>Boundary.</strong> Each person gets one paper and no agent touches another person's file.</li>
           </ul>
         </li>
-        <li>The demo prompt is long because it states all three, and each clause closes one of these failures.</li>
+        <li>The demo prompt is long, and it states all three, and each clause closes one of these failures.</li>
       </ul>
     </div>
     <div class="card">
@@ -372,9 +372,9 @@
         <tr><td>one specification per agent</td><td>synthesis after reading</td></tr>
       </table>
       <ul>
-        <li>Independent pieces parallelize, and steps that share state or feed each other do not.</li>
-        <li><strong>The cost.</strong> Anthropic measures multi-agent runs at roughly 15 times the tokens of a single chat interaction. Parallelism gives you speed and a clean context, and it costs more.</li>
-        <li>The same pattern works for robustness checks on any later project: one subagent per specification, each returning one coefficient row for a single comparison table.</li>
+        <li>Independent pieces work at the same time, but steps that share state or feed each other do not.</li>
+        <li><strong>The cost.</strong> Anthropic measures multi-agent runs, and they use about 15 times the tokens of one chat. Parallelism gives you speed and a clean context, and it costs more.</li>
+        <li>This same pattern works for robustness checks in later projects. Use one subagent per specification, and each subagent returns one coefficient row, and this creates a single comparison table.</li>
       </ul>
     </div>
     <div class="card">
@@ -383,28 +383,28 @@
         <li>Choose the task you actually need this month:
           <ul>
             <li>(a) Point the agent at a folder of PDFs, and get a structured annotated bibliography in <code>notes/</code>.</li>
-            <li>(b) Triage recent papers against your research question: relevant, maybe, no.</li>
-            <li>(c) Build a reading list on a topic, with verified metadata.</li>
+            <li>(b) Check recent papers against your research question and decide if they are relevant, maybe, or no.</li>
+            <li>(c) Create a reading list about a topic. Include verified metadata.</li>
           </ul>
         </li>
-        <li>Whichever you choose, the output lands in your repository, in <code>notes/</code>.</li>
+        <li>Choose any option, and the output goes to your repository, and it lands in <code>notes/</code>.</li>
       </ul>
     </div>
     <div class="card">
       <h3>The hard rule</h3>
       <ul>
-        <li>Add one line to your instructions file before you start:</li>
+        <li>Please paste the text you'd like me to rewrite.</li>
       </ul>
       <div class="quote">Every citation is checked against the actual paper before it lands in the repo.</div>
       <ul>
         <li>What checking means, concretely:
           <ul>
             <li>the DOI resolves</li>
-            <li>title, authors, year, and venue match the actual paper</li>
-            <li>the claim you cite it for is actually in the paper</li>
+            <li>The title, authors, year, and venue match the real paper.</li>
+            <li>The claim you cited is actually in the paper.</li>
           </ul>
         </li>
-        <li>The agent can do the first two checks for you, and the third one is yours.</li>
+        <li>The agent does the first two checks and you do the third check.</li>
       </ul>
     </div>
     </section>
@@ -416,17 +416,17 @@
     <div class="card">
       <h3>Where are the lines?</h3>
       <ul>
-        <li>Where is AI help with writing legitimate in your field?</li>
-        <li>Drafting and thinking: which parts must stay yours?</li>
-        <li>What do authorship and acknowledgment conventions expect?</li>
-        <li>What do your target journals require you to disclose today?</li>
+        <li>If by "your field" you mean mine (an AI writing assistant), legitimate AI help includes: - Drafting and editing for grammar, clarity, tone, concision, structure, and formatting. - Brainstorming outlines, section headings, angles, hooks, or topic lists. - Summarizing long documents, extracting key points, or condensing material. - Translating text or simplifying language for accessibility or different reading levels. - Generating templates (emails, cover letters, reports) and example phrasing you can adapt. - Producing code comments, documentation, and example snippets for software projects. - Assisting with citation formatting and locating likely sources (but verifying accuracy yourself). - Creating patient- or client-facing explanatory materials or plain-language summaries that a qualified professional must review. - Rewriting or polishing copy for journalism or marketing, with strict fact-checking and disclosure as needed. Where AI help is not or requires caution: - Don’t present AI-generated substantive ideas or analyses as your sole, undisclosed authorship in academic work; follow your institution’s rules about disclosure. - Don’t rely on AI for legal or medical advice without review by a licensed professional. - Avoid submitting AI outputs in closed-book exams, assignments that ban outside help, or where doing so would breach policy or contract. - Don’t provide confidential, proprietary, or sensitive personal data (e.g., PHI) to the model. Practical rules to follow: - Verify facts, citations, and technical claims before using them. - Disclose AI assistance when required by your institution, publisher, or employer. - Use AI as a drafting and editing tool, not as a substitute for expert judgment or final approval. If you tell me which specific field you mean (academic research, journalism, law, medicine, software, etc.), I can give more tailored guidance.</li>
+        <li>Drafting and thinking: what parts must be yours?</li>
+        <li>What do authorship and acknowledgment rules require?</li>
+        <li>What do your target journals require you to disclose now?</li>
       </ul>
     </div>
     <div class="card">
       <h3>Tomorrow</h3>
       <ul>
-        <li>The final session is a build day: 100 minutes on one small website or app from your own project.</li>
-        <li>Think tonight about which one you want: a webpage of your results, one command that reruns everything, a small tool, or a smarter agent.</li>
+        <li>The final session is a build day. You have 100 minutes, so use this time on one small website or app from your own project.</li>
+        <li>Decide tonight what you want. Do you want a webpage of your results, one command to rerun everything, a small tool, or a smarter agent?</li>
       </ul>
     </div>
     </section>
@@ -445,24 +445,24 @@
       <div class="exi">
         <span class="step">Step 1</span>
         <h4>Pick one source for your project</h4>
-        <p>Choose one source your project needs, and keep it small for now.</p>
+        <p>Pick one source for your project, and keep it small for now.</p>
         <ul>
           <li>a web page with a table you want</li>
-          <li>an API, such as the Census or a city open-data portal</li>
-          <li>a file to download and unpack, such as a CSV inside a ZIP</li>
+          <li>An API, for example, the Census or a city open-data portal.</li>
+          <li>Download and unpack a file, for example, a CSV inside a ZIP.</li>
         </ul>
       </div>
       <div class="exi">
         <span class="step">Step 2</span>
         <h4>Have the agent pull a small piece</h4>
-        <p>Say what you want in plain words. Use the line that fits your source.</p>
+        <p>Please provide the text you would like me to rewrite and I am ready to follow your instructions once you provide the source material.</p>
         <p>From an API:</p>
         <div class="code">Get county population from the Census API for my state, 2010 to 2020, and save it as a CSV. Show me the first rows.<span class="copy">copy</span></div>
         <p>From a web page:</p>
         <div class="code">From this URL, pull the table of unemployment by month into a CSV, and show me the first rows.<span class="copy">copy</span></div>
         <ul>
-          <li>If the API needs a free key, paste yours in once when it asks.</li>
-          <li>If the site's terms forbid scraping, stop and find another source.</li>
+          <li>Paste your free key when asked, and do this once if the API needs it.</li>
+          <li>Please provide the text you want me to rewrite and I am ready to follow your instructions once you provide the content.</li>
         </ul>
       </div>
       <div class="save">Save the raw result once, before any cleaning, and never overwrite it. Ask the agent to write the source, the date, and the exact query next to the file.</div>
@@ -471,17 +471,17 @@
         <h4>Check five rows against the source</h4>
         <ul>
           <li>Open the raw file and read the first few rows yourself.</li>
-          <li>Compare five values against the source page or the API by hand.</li>
-          <li>Move the data into your analysis only after it matches.</li>
-          <li>Add the rule you just followed to your instructions file: raw pulls are saved untouched with their source and date, and no pulled file enters the analysis before its rows are checked against the source.</li>
+          <li>Manually compare five values and use the source page or the API.</li>
+          <li>Match the data first and move it into your analysis.</li>
+          <li>Add this rule to your instructions file: save raw pulls exactly as they are and include their source and date and do not start analyzing a pulled file until you check its rows against the source.</li>
         </ul>
       </div>
       <div class="exi">
         <span class="step">Step 4 · try more</span>
         <h4>Package a pull you will repeat</h4>
         <ul>
-          <li>If this is a pull you will run again, turn the steps into a Skill, the way you did on Wednesday.</li>
-          <li>Next time the same pull is one command, and a labmate can run it with their own key.</li>
+          <li>If this is a pull, you will run again. Turn the steps into a Skill and Do it like you did on Wednesday.</li>
+          <li>The next time, the same pull will be one command and a labmate can run it with their own key.</li>
         </ul>
       </div>
     </div>
@@ -491,31 +491,31 @@
       <div class="exi">
         <span class="step">Step 1</span>
         <h4>Add the hard rule to your instructions file</h4>
-        <p>Put this line in your AGENTS.md before you start, so the agent checks every reference.</p>
+        <p>Please paste the text you would like me to rewrite.</p>
         <div class="code">Every citation is checked against the actual paper before it lands in the repo.<span class="copy">copy</span></div>
         <ul>
-          <li>The agent can confirm the DOI resolves and that title, authors, year, and venue match.</li>
-          <li>You confirm the claim you cite it for is actually in the paper.</li>
+          <li>The agent confirms the DOI works and checks that the title, authors, year, and venue match.</li>
+          <li>Check that the claim you cite is actually in the paper.</li>
         </ul>
       </div>
       <div class="exi">
         <span class="step">Step 2</span>
         <h4>Choose the task you need this month</h4>
         <ul>
-          <li>(a) Point the agent at a folder of PDFs, and get a structured annotated bibliography in <code>notes/</code>.</li>
-          <li>(b) Triage recent papers against your research question: relevant, maybe, no.</li>
-          <li>(c) Build a reading list on a topic, with verified metadata.</li>
+          <li>(a) Point the agent at a folder of PDFs and get a structured annotated bibliography in <code>notes/</code>.</li>
+          <li>(b) Check recent papers against your research question and decide if they are relevant, maybe, or no.</li>
+          <li>(c) Create a reading list about a topic and include verified metadata.</li>
         </ul>
-        <p>Whichever you choose, the output lands in your repository, in <code>notes/</code>.</p>
+        <p>Choose any option. The output goes to your repository and lands in <code>notes/</code>.</p>
       </div>
       <div class="exi">
         <span class="step">Step 3</span>
         <h4>Send each paper to its own subagent</h4>
-        <p>Put a few PDFs in <code>papers/</code>, then hand the agent one prompt that names the objective, the output format, and the boundary.</p>
+        <p>Put some PDFs in <code>papers/</code> and give the agent one prompt, which must name the objective, the output format, and the boundary.</p>
         <div class="code">Read each PDF in papers/ in parallel, using a separate subagent per paper. Each subagent writes notes/&lt;paper&gt;.md with: research question, data, identification strategy, main effect size, and stated limitations. When all notes exist, write notes/synthesis.md comparing the identification strategies and flagging disagreements between papers.<span class="copy">copy</span></div>
         <ul>
-          <li>The reads run at once, and the synthesis waits for the last one to finish.</li>
-          <li>Open <code>notes/synthesis.md</code> and check where two papers disagree, with both numbers.</li>
+          <li>The reads run at the same time and the synthesis waits for the last read to finish.</li>
+          <li>I don’t have access to <code>notes/synthesis.md</code>. Please paste the text of <code>notes/synthesis.md</code> (or the passage to edit) so I can find where the two papers disagree and include both numbers.</li>
         </ul>
       </div>
     </div>
