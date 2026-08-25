@@ -160,7 +160,7 @@
         <li>It found errors, read them, and fixed them.</li>
         <li>It checked its own output.</li>
         <li>It returned a chart for you to inspect.</li>
-        <li>Please paste the text you would like me to rewrite, and I will apply the specified rules.</li>
+        <li>Your only inputs were the instruction at the start and your reading of the chart at the end.</li>
       </ul>
     </div>
     <div class="card">
@@ -228,7 +228,7 @@
         <li>You will present your own project by Friday.</li>
         <li>It does not need to be finished. Some will have results or a start.</li>
         <li>Your account is what matters. Tell your question, say what you built, and state how far you got.</li>
-        <li>Please provide the text you would like me to rewrite and you did not include any text in your prompt. Once you provide it, I will follow your instructions exactly.</li>
+        <li>For each main step, say who did it: which parts you decided, and which parts the agent did.</li>
         <li>Tell us your experience and say what worked and what the agent did wrong and explain how you caught the error.</li>
       </ul>
     </div>
@@ -298,7 +298,7 @@
         </li>
         <li>The loop repeats, continues until the task is done, and also stops if you stop it.</li>
         <li>You control how often it asks you first, and by default, it asks before acting. Looser modes let routine actions through, and you will use the strictest setting, plan mode, tomorrow.</li>
-        <li>Please provide the text you would like me to rewrite, and once you provide it, I will follow your instructions exactly.</li>
+        <li>Whichever mode you choose, judging the result stays your job.</li>
       </ul>
     </div>
     <div class="card">
@@ -377,7 +377,7 @@
         <li>Agents run in the terminal, and this is where programs run.</li>
         <li>You need very little. <code>cd folder</code> moves into a folder and <code>ls</code> lists what is there.</li>
         <li>Run this one command: <code>cd</code> into your project folder, and do this before you start the agent. The folder where you start it is the project it works in, and your files, its permissions, and its memory all stay there.</li>
-        <li>Please paste the text you would like me to rewrite.</li>
+        <li>Everything else you can ask the agent to type for you.</li>
       </ul>
     </div>
     <div class="card">
@@ -387,6 +387,17 @@
         <li>The agent runs a command, and the command fails. It reads the error and fixes the error by itself, and you watch and steer.</li>
         <li>If you are stuck, tell the agent in plain words what happened.</li>
         <li>Error messages provide information and the agent reads them very well.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>A few commands you will use every day</h3>
+      <ul>
+        <li><code>Esc</code> stops the agent mid-answer, so you can redirect it before it finishes.</li>
+        <li><code>Esc Esc</code> jumps back to an earlier point in the conversation, and the agent forgets everything after that point.</li>
+        <li><code>/compact</code> asks the agent to summarize the conversation so far and continue from the summary. Use it when a long session slows down.</li>
+        <li><code>/clear</code> empties the conversation and starts fresh in the same folder.</li>
+        <li><code>/exit</code> closes the agent, and <code>claude --resume</code> reopens a past conversation and continues it.</li>
+        <li>On Wednesday we explain what these commands do to the agent's memory.</li>
       </ul>
     </div>
     </section>

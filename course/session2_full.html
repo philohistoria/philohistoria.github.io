@@ -232,7 +232,7 @@
         <li>Check it against what you already know and use a published figure, a total that must add up, or a number you expected.</li>
         <li>Read the code and its choices, see which cases it dropped, how it treated missing values, and if it used weights.</li>
         <li>Look at the basic data features and check the number of rows and the missing counts and find the smallest and the largest values.</li>
-        <li>Please provide the text you would like me to rewrite and I am ready to process it according to your instructions.</li>
+        <li>Change one input, and check the output moves the way it should.</li>
         <li>Start a new session or have a second agent do the step again, and compare the two.</li>
       </ul>
     </div>
@@ -381,7 +381,7 @@
         <li>This is the main exercise of the unit.</li>
         <li>Two subagents use your codebook, and they each code the same ten cases and work independently.</li>
         <li>The codebook was unclear when they disagreed. Discuss the disagreements, fix the rules, run again, and watch agreement rise.</li>
-        <li>You didn't include the source text. Please paste the exact text you want me to rewrite following your rules, and I'll apply the allowed merges and connective changes only.</li>
+        <li>What you keep at the end is the revised codebook.</li>
         <li>Be careful. The two subagents use the same model, and their agreement is like one coder coding twice. Your own hand codes are the reference.</li>
         
       </ul>
@@ -453,15 +453,15 @@
       <div class="exi">
         <span class="step">Step 1</span>
         <h4>Say your problem in one sentence</h4>
-        <p>Please paste the source text you want me to rewrite.</p>
+        <p>Start from the sentence you wrote last night. Write it at the top of a new file, in plain words a colleague outside your field would understand.</p>
       </div>
       <div class="exi">
         <span class="step">Step 2</span>
         <h4>Write your own plan</h4>
         <p>Under the sentence, break the work into steps, as concretely as you can, and use the stages as a guide: prepare, explore, model, report.</p>
         <ul>
-          <li>Please provide the text you would like me to rewrite, and you did not include any text in your prompt.</li>
-          <li>Please provide the text you would like me to rewrite.</li>
+          <li>Name the actual variables, the actual files, the actual model.</li>
+          <li>Where you are unsure, write the question instead of skipping it.</li>
         </ul>
       </div>
       <div class="exi">
@@ -476,7 +476,7 @@
         <ul>
           <li>Review its changes one by one, accept what convinces you and change back what does not.</li>
           <li>Hi neighbor, I accepted one change: I started biking to work, which saved me time and improved my fitness. I rejected one change: I tried switching to a standing desk but it increased my back pain, so I went back to my regular desk.</li>
-          <li>Please paste the text you'd like me to rewrite, and I will apply the merging rules you specified.</li>
+          <li>The refined plan is yours only after this pass.</li>
         </ul>
       </div>
       <div class="exi">
@@ -512,7 +512,7 @@
         <ul>
           <li>I am an AI language model that analyzes your prompts, draws on patterns learned from large amounts of text, and generates context-aware, humanlike responses to answer questions, summarize, draft and edit text, and help with reasoning and problem solving. I don't have personal experiences or real-time access to the world, and my outputs reflect only the data I was trained on. What plan would you like me to create?</li>
           <li>Review your plan and check your choices, which include: specification, standard errors, weights, and sample.</li>
-          <li>Please paste the text you'd like me to rewrite and I'll apply the rules you specified.</li>
+          <li>Execute, read the output, and ask the agent to explain anything unexpected.</li>
           <li>Commit with a message, and name the model and the headline result.</li>
         </ul>
       </div>
@@ -544,8 +544,8 @@
         <span class="step">Then</span>
         <h4>One formatted output</h4>
         <ul>
-          <li>Please paste the text you'd like me to rewrite. Once you provide it, I will apply the merging rules you specified exactly.</li>
-          <li>Please provide the text you would like me to rewrite.</li>
+          <li>Produce one polished output from your model or descriptives: a table or a chart, styled the way your field expects.</li>
+          <li>The agent handles the formatting; you check the numbers.</li>
           <li>Commit it to <code>output/</code>.</li>
         </ul>
       </div>
@@ -569,9 +569,9 @@
         <h4>Code a slice of your own text</h4>
         <ul>
           <li>Text cases (pick twenty) 1. The city council approved the new zoning ordinance yesterday. 2. I think the new policy will harm small businesses. 3. The patient reported a headache and nausea after taking the medication. 4. This restaurant serves the best pizza in town. 5. The package is scheduled for delivery on Friday. 6. I couldn't finish the report because the data was incomplete. 7. Temperatures will drop below freezing overnight. 8. That movie was a complete waste of time. 9. The research study found a correlation between A and B. 10. I'm excited about the upcoming product launch. 11. The train arrives at 3:45 PM at platform 2. 12. The customer service rep was unhelpful and rude. 13. The software update fixes three security vulnerabilities. 14. In my opinion, remote work increases productivity. 15. The company reported a 10% increase in quarterly revenue. 16. This painting evokes a sense of melancholy. 17. The lab results show elevated levels of cholesterol. 18. I won't recommend this app to my friends. 19. Enrollment for the course opens on Monday. 20. The speaker's argument lacked supporting evidence. Two-category codebook Categories - Objective (Factual): Statements that report observable events, measurable results, scheduled facts, or documented findings presented as facts. These are verifiable claims or straightforward reports of occurrences. - Subjective (Opinion/Interpretation): Statements that express personal beliefs, evaluations, tastes, emotions, or interpretive judgments that cannot be verified solely by objective evidence. Inclusion criteria - Objective: Includes scheduled events, reported observations, documented results, and direct reports of actions or findings (e.g., approvals, deliveries, lab results, arrival times, study results, reported symptoms). - Subjective: Includes personal opinions, evaluations, recommendations, emotional responses, and interpretive claims (e.g., "best," "waste of time," "unhelpful," "in my opinion"). Exclusion criteria - Objective: Exclude statements that primarily express preference, judgment, or emotion even if they reference facts. - Subjective: Exclude neutral factual reporting that does not include evaluation or opinion. Examples mapped to categories - Objective: 1, 3, 5, 6, 7, 9, 11, 13, 15, 17, 19 - Subjective: 2, 4, 8, 10, 12, 14, 16, 18, 20 Annotation tips - Treat first-person reports of events or symptoms as Objective when they plainly report what happened (e.g., "The patient reported a headache..." -> Objective). - Treat value judgments, recommendations, emotions, and preference language as Subjective (e.g., "best," "waste of time," "I won't recommend," "excited"). - If a sentence contains both factual reporting and an explicit opinion, label according to the dominant communicative intent. If equal weight and both must be captured, prefer Subjective. - For ambiguous evaluative claims that cite evidence (e.g., "lacked supporting evidence"), label Subjective when the sentence is an assessment rather than a neutral report of verifiable facts. Edge cases and conflict resolution - Sentences that report another party's opinion (reported speech) should be labeled according to the content: if the reported content is factual, label Objective; if it is evaluative, label Subjective. - If annotators disagree, provide a short justification for your label citing the inclusion/exclusion criteria; resolve by majority or lead annotator review.</li>
-          <li>No text of your own, use <a href="data/cfpb_complaints_10.csv" download>ten real consumer complaints</a> and the four-category codebook from the card on the left.</li>
+          <li>No text of your own? Use <a href="data/cfpb_complaints_10.csv" download>ten real consumer complaints</a> and the four-category codebook from the card on the left.</li>
           <li>Let the agent code them or hand-code those same twenty yourself.</li>
-          <li>Please provide the text you would like me to rewrite, and once you provide it, I will follow your instructions exactly.</li>
+          <li>Compare, and note where you and the agent disagree.</li>
         </ul>
       </div>
       <div class="exi">
@@ -581,7 +581,7 @@
         <div class="code">Have two subagents code these ten cases with my codebook, independently and without seeing each other's work. Then show me a table of the two codings side by side and list every disagreement.<span class="copy">copy</span></div>
         <ul>
           <li>Look at every disagreement and decide which rule in the codebook was unclear, fix that rule, and run it again.</li>
-          <li>The user did not provide a text to rewrite, so please provide the text you want me to simplify.</li>
+          <li>Note what happened to agreement after the fix.</li>
         </ul>
       </div>
     

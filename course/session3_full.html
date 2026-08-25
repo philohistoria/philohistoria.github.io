@@ -174,6 +174,16 @@
     <h2 class="sec" id="inconsistent">Why the agent is inconsistent</h2>
 
     <div class="card">
+      <h3>Everything the model says is a prediction</h3>
+      <ul>
+        <li>Every answer from an LLM is a prediction of the next word. Prediction is probabilistic: the same input can give different outputs.</li>
+        <li>Code is the opposite. The same input always gives the same output.</li>
+        <li>Everything in today's session, instructions files, memory, and skills, pushes the agent toward consistent behavior. But these are all instructions to a probabilistic model, so they are soft constraints, not guarantees. They differ only in degree.</li>
+        <li>If a step must always run the same way, write it as code and let the agent call the code. The agent decides when to run it; the code decides what happens.</li>
+      </ul>
+    </div>
+
+    <div class="card">
       <h3>The same prompt gives different results</h3>
       <ul>
         <li>Run the same request on two different days and you can get:
@@ -222,7 +232,7 @@
         <tr><td>Global</td><td><code>~/.claude/CLAUDE.md</code></td><td><code>~/.codex/AGENTS.md</code></td></tr>
       </table>
       <ul>
-        <li>Please paste the original text you want me to rewrite.</li>
+        <li>Where this page says "your instructions file," use your tool&rsquo;s name.</li>
       </ul>
     </div>
     <div class="card">
@@ -231,7 +241,7 @@
         <li>Claude Code also keeps <strong>memory</strong>, which are notes about you and the project. They stay across sessions.</li>
         <li>The agent writes a note when it learns something and when you say "remember this."</li>
         <li><code>/memory</code> shows the notes. You can edit or delete them.</li>
-        <li>Please paste the text you want me to rewrite, and I will apply the rules you specified.</li>
+        <li>Rules you want enforced go in instructions. Memory holds the rest.</li>
         <li>Codex does not have memory in the terminal, and its instruction files are everything.</li>
       </ul>
     </div>
@@ -262,6 +272,33 @@
         <li>One study looked at 138 projects, an instructions file was used, and it cut the agent's mistakes by a third to a half.</li>
       </ul>
       <div class="quote">An instructions file that encodes your standards is the AI equivalent of a pre-registration.</div>
+    </div>
+    <div class="card">
+      <h3>What the agent can see: the context</h3>
+      <ul>
+        <li>The context is everything the model reads before writing its next reply. Nothing else exists for it.</li>
+        <li>In the context: your instructions files, the conversation so far, the files it has read, and the output of every command it ran.</li>
+        <li>Not in the context: files it has not read, your other terminal windows, and past sessions.</li>
+        <li>The context has a size limit. When it fills up, the agent summarizes the conversation and continues from the summary, and details can drop out at that point.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Commands that manage the context</h3>
+      <ul>
+        <li>You met these commands on Monday, and now you can see what they do.</li>
+        <li><code>/compact</code> replaces the conversation with a summary. This frees space but loses detail.</li>
+        <li><code>/clear</code> empties the context. Your instructions files and memory survive, because they live on disk; the conversation does not.</li>
+        <li><code>claude --resume</code> loads a past conversation back into the context. This is the only way a new session sees an old one.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Subagents: a fresh context on purpose</h3>
+      <ul>
+        <li>The agent can send out a helper, called a subagent, to do one task.</li>
+        <li>The subagent starts with a fresh context that holds only the task description. It does not see your conversation.</li>
+        <li>It reports back only its conclusion, so a search through fifty files does not fill your context with fifty files.</li>
+        <li>This is the same idea as <code>/compact</code>: keep the main context small by keeping details out of it.</li>
+      </ul>
     </div>
     </section>
 
@@ -538,7 +575,7 @@
       <ul>
         <li>Use a small, cheap model for easy steps and save the strong model for hard steps.</li>
         <li>Write a short brief, which will reduce the number of rounds.</li>
-        <li>Please provide the text you would like me to rewrite. I am ready to start the task once you provide the content.</li>
+        <li>Start a fresh session for a new task, so it is not re-reading an old one.</li>
         <li>Point it at just the one file it needs.</li>
       </ul>
     </div>
@@ -603,7 +640,7 @@
           <li>Start a new session, ask: "Which instruction files did you load, and what do they say?" and both files must appear.</li>
           <li>Run a task from yesterday again and use the same session.</li>
           <li>Compare this to yesterday's output and what changed without your request?</li>
-          <li>Please paste the exact text you want rewritten, and I will apply the specified rules.</li>
+          <li>Where the output still ignores one of your rules, the rule is too vague; sharpen the wording and rerun.</li>
         </ul>
       </div>
     </div>
@@ -687,7 +724,7 @@ bash open-scholar-skill/setup.sh<span class="copy">copy</span></div>
       <div class="exi">
         <span class="step">Step 2</span>
         <h4>Run it with a tight brief</h4>
-        <p>Please paste the text you want me to rewrite, and I will follow your instructions exactly.</p>
+        <p>Do the same task again with a tight brief and only the file it needs.</p>
       </div>
       <div class="exi">
         <span class="step">Step 3</span>
