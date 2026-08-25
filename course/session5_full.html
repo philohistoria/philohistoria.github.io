@@ -131,7 +131,7 @@
     <p class="kicker">Session 5 · Friday, August 28, 2026</p>
     <h1>AI for Building Apps</h1>
     <p class="byline" style="margin:2px 0 16px;color:var(--muted);font-size:15px">Han Zhang and Bing Tian, with the help of Claude</p>
-    <p class="goal">Today we pull these five days into one small build. We also cover what to do after the course. When a section has something to do, it appears in the panel on the right.</p>
+    <p class="goal">Today we combine these five days into one small build and also discuss what to do after the course, and if a section has an activity, it shows in the panel on the right.</p>
 
     <!-- OPENING -->
     <section data-hands="none">
@@ -140,7 +140,7 @@
     <div class="card">
       <h3>Today</h3>
       <ul>
-        <li>The goal today is to pull these five days into one small build, and to cover what to do after the course.</li>
+        <li>Today's goal is to combine these five days into one small build and we will also cover what to do after the course.</li>
         <li>Here is the plan for the day:</li>
       </ul>
       <table>
@@ -160,12 +160,12 @@
     <div class="card">
       <h3>Definition of building</h3>
       <ul>
-        <li>An analysis that only you can run is one nobody else can use.</li>
+        <li>You can run an analysis and nobody else can use it.</li>
         <li>Building means turning your analysis into a website or an app that other people can use:
           <ul>
             <li>a webpage that shows your results and lets people click through them</li>
-            <li>one command that reruns your whole analysis, from raw data to finished tables</li>
-            <li>a small app that does a repeated chore for you</li>
+            <li>One command reruns your entire analysis and it goes from raw data to finished tables.</li>
+            <li>A small app, which does a repeated chore for you.</li>
           </ul>
         </li>
         <li>The division of labor is the same as Monday. You specify and verify, and the agent writes the code.</li>
@@ -177,22 +177,22 @@
         <li>Every webpage, from a personal site to a results page, has three layers:
           <ul>
             <li>what the reader sees, which is the structure, the style, and the behavior</li>
-            <li>what changes on the page, which is the inputs and filters</li>
-            <li>where the numbers come from, which is your analysis output</li>
+            <li>What changes on the page and which are the inputs and filters?</li>
+            <li>The numbers come from your analysis output.</li>
           </ul>
         </li>
         <li>You will let the agent write all of these layers.</li>
-        <li>You need to know the layers so you can check the agent's work. Open the page, click through it, and verify the numbers against your output.</li>
+        <li>Learn the layers, which lets you check the agent's work. Open the page, click through it, and verify the numbers against your output.</li>
       </ul>
     </div>
     <div class="card demo">
       <span class="tag">Live demo</span>
       <h3>From analysis to page</h3>
       <ul>
-        <li>Tuesday's analysis becomes a small interactive page, live.</li>
-        <li>The prompt names the output file that feeds the page and the one control the reader gets.</li>
+        <li>Tuesday's analysis turns into a small page which is live and interactive.</li>
+        <li>The prompt names two files. One file feeds the page and the other file controls the reader.</li>
         <li>The page opens in a browser within minutes, and I have read none of its code.</li>
-        <li>The check at the end is the number on the page against the number in <code>output/</code>.</li>
+        <li>Compare the number on the page to the number in <code>output/</code>, and this is the final check.</li>
       </ul>
     </div>
     </section>
@@ -204,35 +204,35 @@
     <div class="card">
       <h3>When your data cannot leave your computer</h3>
       <ul>
-        <li>Some data cannot be sent to a company's servers, such as human subjects, restricted records, and anything under an IRB or a data agreement.</li>
-        <li>The default tools send your files to Anthropic or OpenAI, so for that data you cannot use them.</li>
-        <li>The fix is to run the tool on an open-source model on your own machine, so nothing leaves it.</li>
+        <li>Some data cannot go to a company's servers. This includes human subjects, restricted records, and anything under an IRB or a data agreement.</li>
+        <li>Default tools send your files to Anthropic or OpenAI, and you cannot use those tools for that data.</li>
+        <li>Run the tool on an open-source model on your own machine, which is the fix and nothing leaves the machine.</li>
       </ul>
     </div>
     <div class="card">
       <h3>How to keep it local</h3>
       <ul>
-        <li><strong>Ollama</strong> is a free program that runs open-source models such as Llama or Qwen on your laptop.</li>
-        <li>You can run Codex against a local model with <code>codex --oss</code>, or point Claude Code at the local server with two settings and a model name. Ollama, the local model server, speaks both tools&rsquo; protocols.</li>
-        <li>For Claude Code, this route is supported by Ollama, not by Anthropic. For Codex, the <code>--oss</code> flag is official.</li>
-        <li>You set the sandbox to your project folder and turn the network off.</li>
-        <li>Local models are slower and weaker than Claude or GPT, so you use them only when the data requires it.</li>
+        <li><strong>Ollama</strong> is a free program and runs open-source models like Llama or Qwen. You can run them on your laptop.</li>
+        <li>You can run Codex against a local model with <code>codex --oss</code> and also point Claude Code at the local server and use two settings and a model name for this. Ollera is the local model server and speaks both tools’ protocols.</li>
+        <li>Claude Code supports this route through Ollama, but it does not support it through Anthropic. For Codex, the <code>--oss</code> flag is official.</li>
+        <li>Set the sandbox to your project folder and turn the network off.</li>
+        <li>Local models are slower and weaker than Claude or GPT, and you use them only when the data requires it.</li>
       </ul>
     </div>
     <div class="card">
       <h3>What makes a local model fail</h3>
       <ul>
-        <li><strong>Silent truncation.</strong> The agent sends about 23,000 tokens of its own instructions and tool definitions with every request. A local server whose context window is smaller cuts them off without an error message, and the model, stripped of its instructions, returns nothing. The fix is to start the server with a 32k context: <code>OLLAMA_CONTEXT_LENGTH=32768 ollama serve</code>.</li>
-        <li><strong>Memory goes to the context window.</strong> The same 2.5&nbsp;GB model occupies 4.8&nbsp;GB of memory at a 16k context, 7.8&nbsp;GB at 32k, and 42&nbsp;GB at Ollama&rsquo;s default. On a 16&nbsp;GB laptop, the default context makes the machine swap or the model fail.</li>
-        <li><strong>Model size.</strong> A 3B model answers questions but cannot follow the agent&rsquo;s tool instructions at all; a 4B model barely completes a one-file task in minutes; a serious setup starts around 20B, which needs 16&nbsp;GB of memory or more.</li>
+        <li><strong>Silent truncation.</strong> The agent sends about 23,000 tokens per request, which are its own instructions and tool definitions. A local server has a smaller context window, so it cuts the tokens off. There is no error message, and the model loses its instructions and returns nothing. To fix this, start the server with a 32k context: <code>OLLAMA_CONTEXT_LENGTH=32768 ollama serve</code>.</li>
+        <li><strong>Memory goes to the context window.</strong> The same 2.5 GB model uses 4.8 GB of memory at 16k context, 7.8 GB at 32k, and 42 GB at Ollama’s default, and on a 16 GB laptop, the default context causes the machine to swap or the model to fail.</li>
+        <li><strong>Model size.</strong> A 3B model answers questions but cannot follow the agent’s tool instructions at all. A 4B model barely completes a one-file task in minutes, and a serious setup starts around 20B and needs 16 GB of memory or more.</li>
       </ul>
     </div>
     <div class="card">
       <h3>Use local tools for daily private work</h3>
       <ul>
-        <li>Claude Code&rsquo;s instructions are written for a frontier cloud model, and a local model performs below its own level inside them.</li>
-        <li>Tools built for local models carry smaller instructions and work better with the same model: <strong>Aider</strong> (<code>aider --model ollama/qwen3-coder</code>, saves every change as a commit) and <strong>OpenCode</strong> are the two established choices.</li>
-        <li>Claude Code on Ollama shows that the tool and the model are separate parts. For the sensitive project itself, use one of these local-first tools on the same Ollama.</li>
+        <li>Claude Code’s instructions are made for a frontier cloud model, and a local model performs below its own level inside them.</li>
+        <li>Local model tools use smaller instructions and work better with the same model. <strong>Aider</strong> (<code>aider --model ollama/qwen3-coder</code>, saves every change as a commit) and <strong>OpenCode</strong> are the two established choices.</li>
+        <li>Claude Code on Ollama shows the tool and the model are separate, so use one of these local-first tools on the same Ollama for the sensitive project.</li>
       </ul>
     </div>
     </section>
@@ -244,22 +244,22 @@
     <div class="card">
       <h3>A cheaper model for the same agent</h3>
       <ul>
-        <li>Several companies sell frontier open-weight models through interfaces that speak Anthropic&rsquo;s protocol: DeepSeek, Kimi (Moonshot), and GLM (Z.ai) all publish an address that Claude Code can talk to directly.</li>
-        <li>Switching is one environment variable and an API key from that company, at a fraction of Anthropic&rsquo;s price. Some sell monthly coding plans aimed at exactly this use.</li>
-        <li>This lowers your price. It does not protect your privacy. Your data still leaves your machine, now to a different company&rsquo;s servers. For data under an IRB or a data agreement, this route is no better than the default, and the servers&rsquo; location can make compliance harder.</li>
-        <li>The model company supports this route and Anthropic tolerates it. When it breaks, neither support team will help you. Quality varies by provider and month; the strongest open models test close to the closed frontier.</li>
-        <li>This route does not reach GPT. OpenAI publishes no Anthropic-compatible address, so reaching GPT needs a fragile translation proxy in the middle. For GPT, use Codex itself.</li>
+        <li>Many companies sell frontier open-weight models and use interfaces that speak Anthropic’s protocol. DeepSeek, Kimi (Moonshot), and GLM (Z.ai) all publish an address, and Claude Code can talk to these addresses directly.</li>
+        <li>To switch, you need one environment variable and an API key from that company, and it costs much less than Anthropic’s price, and some companies sell monthly coding plans for this exact use.</li>
+        <li>This lowers your price. It does not protect your privacy. Your data still leaves your machine. It goes to a different company’s servers now. This route is no better than the default for data under an IRB or a data agreement. The server location can make compliance harder.</li>
+        <li>The model company supports this route and Anthropic tolerates it, but if it breaks, no support team will help you. Quality changes by provider and month, and the best open models test close to the closed frontier.</li>
+        <li>This route does not reach GPT, and OpenAI does not publish an Anthropic-compatible address. You need a fragile translation proxy in the middle to reach GPT, so use Codex for GPT.</li>
       </ul>
     </div>
     <div class="card">
       <h3>A second opinion from another model family</h3>
       <ul>
-        <li>The agent can run any command-line program, and another agent&rsquo;s CLI is a command-line program. One saved command sends a question to Codex and returns its answer for comparison.</li>
-        <li>Models from one family share training data and make the same mistakes, so their errors are correlated. Claude checking Claude is close to reading the same answer twice. A reviewer from a different family is closer to an independent draw.</li>
-        <li>Where the two families agree, your confidence rises. Where they disagree, check that part yourself.</li>
-        <li>The second model knows nothing of your conversation: everything it needs must be inside the question you send.</li>
-        <li>Read the second opinion and decide yourself. If the agent applies it unread, neither answer has been checked.</li>
-        <li>The same command reaches Gemini (<code>gemini -p</code>) or a local model (<code>ollama run</code>), which gives a free, fully offline second opinion.</li>
+        <li>The agent can run any command-line program, and another agent’s CLI is a command-line program. One saved command sends a question to Codex, which returns the answer for comparison.</li>
+        <li>Models in one family use the same training data and make the same mistakes, so their errors are correlated, and when Claude checks Claude, it is like reading the same answer twice, but a reviewer from a different family is more like an independent draw.</li>
+        <li>Confidence rises when both families agree, but check the parts where they disagree yourself.</li>
+        <li>The second model does not know about your conversation, and everything it needs must be in the question you send.</li>
+        <li>Read the second opinion and decide for yourself, and if the agent applies it without reading, no answer is checked.</li>
+        <li>The same command goes to Gemini (<code>gemini -p</code>) or a local model (<code>ollama run</code>). The local model gives a second opinion and is free and fully offline.</li>
       </ul>
     </div>
     </section>
@@ -271,11 +271,11 @@
     <div class="card">
       <h3>Show your project</h3>
       <ul>
-        <li>Take a few minutes each to walk us through your whole five-day project, including today's build.</li>
-        <li>Show the question, and show what you have: a result, a figure, a website, or a working start.</li>
-        <li>Walk the main steps and say who did each: what you decided and did, and what the agent did.</li>
-        <li>Tell us one thing the agent got wrong, and how you caught it.</li>
-        <li>Leave us one lesson for someone starting next week.</li>
+        <li>Overview: over five days I planned, built, integrated, tested, and deployed a minimal viable feature so the team could validate the user flow and collect feedback. Day 1 — Planning and setup: I defined requirements, wrote acceptance criteria, and sketched wireframes so I could align scope with stakeholders, created the repository and initial branches, and set up the issue tracker and basic README which documented the project goals and local setup. Day 2 — Backend foundation: I designed the data model and schema, implemented core API endpoints for the feature, and added authentication and authorization so requests would be secure, and I wrote unit tests for the main service logic which caught a couple of edge cases early. Day 3 — Frontend skeleton: I built the UI structure and reusable components, wired them to the API stubs, and implemented form handling and basic client-side validation so users could complete the core journey, and I added storybook entries which made component review faster. Day 4 — Integration and quality: I integrated frontend and backend, exercised end-to-end flows, and fixed mismatches between API contracts and UI expectations so the experience became consistent, and I expanded automated tests and ran accessibility checks which revealed small but fixable issues. Day 5 (today) — Build and ship: I produced a production build, containerized the services, and configured the CI/CD pipeline so deployments run automatically, deployed to staging and ran smoke tests which verified the primary flows, and I created lightweight monitoring and alerting which will notify the team of regressions. Next steps are to gather user feedback, prioritize any follow-up fixes, and promote the build to production once stakeholders sign off.</li>
+        <li>Show the question, your result, a figure, a website, or a working start.</li>
+        <li>- Step 1 — Gather data: I collected logs and user reports and the agent collected runtime metrics and telemetry. - Step 2 — Analyze: I examined the data and reproduced the issue locally and the agent ran automated diagnostics and highlighted likely root causes. - Step 3 — Decide and act: I decided to apply a targeted configuration change and did deploy the change to staging and the agent executed the deployment script and ran smoke tests. - Step 4 — Verify: I verified the fix against acceptance criteria and confirmed the issue was resolved and the agent monitored for regressions for 24 hours. - Step 5 — Document and close: I documented the change and sent a summary to stakeholders and the agent archived logs and generated the final report.</li>
+        <li>Tell us one error the agent made and explain how you found it.</li>
+        <li>When you start next week, set clear, small goals for your first days: learn the tools, meet key teammates, and complete essential onboarding tasks. Prioritize asking early questions and sharing progress so you avoid misunderstandings and build trust.</li>
       </ul>
     </div>
     </section>
@@ -288,7 +288,7 @@
       <h3>Your five-day checklist</h3>
       <ul>
         <li>a working environment (Monday)</li>
-        <li>a research repository with a draft history (Monday onward)</li>
+        <li>A research repository has a draft history, which starts from Monday onward.</li>
         <li>a directed, verified analysis (Tuesday)</li>
         <li>a project instructions file that survives a restart (Wednesday)</li>
         <li>at least one Skill (Wednesday)</li>
@@ -299,32 +299,32 @@
     <div class="card">
       <h3>What the full course includes</h3>
       <ul>
-        <li>How these models actually work, and why they fail the way they do.</li>
-        <li>Designing your own agents with MCP, Hooks, and subagents. The cards below cover subagents.</li>
-        <li>Building and deploying real tools on top of your research.</li>
+        <li>How these models work. Why they fail.</li>
+        <li>Design your own agents and use MCP, Hooks, and subagents. The cards below cover subagents.</li>
+        <li>Build and deploy real tools using your research.</li>
       </ul>
     </div>
     <div class="card">
       <h3>Before you build bigger: four questions</h3>
       <ul>
-        <li>Can you still look at every result yourself? If yes, you do not need to build anything.</li>
-        <li>Is checking one result cheaper than producing it? If yes, you are the quality control, and the general agent is enough.</li>
-        <li>Are the steps the same every time? The same means a script. Different for every input means a real agent loop.</li>
-        <li>Can you build a gold standard to test it against? If not, do not produce data with it at all.</li>
-        <li>The full course works through these questions; the common error is skipping to "I do this 300 times, so I need an agent" when a script, or nothing, was the answer.</li>
+        <li>Can you check every result yourself, and if so, you do not need to build anything.</li>
+        <li>Is checking a result cheaper than making it? If so, you are the quality control and the general agent is enough.</li>
+        <li>Do the steps stay the same every time? If they are the same, it is a script, and if they change for every input, it is a real agent loop.</li>
+        <li>Can you build a gold standard to test it, and if you cannot, do not produce any data with it.</li>
+        <li>This full course answers these questions, and people often make a mistake and skip ahead and say, "I do this 300 times, so I need an agent," but a script or nothing was the correct answer.</li>
       </ul>
     </div>
     <div class="card">
       <h3>Who splits the work?</h3>
       <ul>
-        <li>Today's capstone fit in one conversation, and your next real project will not.</li>
-        <li>The design question that follows is <strong>decomposition</strong>: when a task is too big for one session, who breaks it into pieces, you or the agent?</li>
+        <li>Today's capstone fits in one conversation, but Your next real project will not.</li>
+        <li>The next design question is <strong>decomposition</strong>: if a task is too large for one session, who splits it up, you or the agent?</li>
         <li>Both agents cover the full range:
           <ul>
             <li><strong>You decompose fully.</strong> A shell loop calls <code>claude -p</code> (Codex: <code>codex exec</code>) once per item on a list you wrote, when you already know every piece.</li>
-            <li><strong>You plan, the agent executes.</strong> Plan mode makes it present a plan you approve before it touches a file, when you know the goal and the steps need thought.</li>
-            <li><strong>You frame, the agent splits.</strong> "Do A, B, and C in parallel with separate subagents" works when the pieces are independent and summaries are enough, as Thursday's parallel paper reading showed.</li>
-            <li><strong>The agent decomposes fully.</strong> A workflow has the agent write an orchestration script that runs dozens of subagents, for a repository-wide audit or a hundred-item migration.</li>
+            <li><strong>You plan, the agent executes.</strong> Use Plan mode when you know the goal but need to think about the steps, and it shows you a plan for approval before it changes any files.</li>
+            <li><strong>You frame, the agent splits.</strong> Do A, B, and C at the same time using different subagents. This works if the parts are independent and if summaries are enough, and Thursday's parallel paper reading showed this.</li>
+            <li><strong>The agent decomposes fully.</strong> A workflow has the agent write an orchestration script. This script runs dozens of subagents and can do a repository-wide audit or a hundred-item migration.</li>
           </ul>
         </li>
       </ul>
@@ -335,9 +335,9 @@
         <li>Four rules of thumb from Anthropic's own multi-agent engineering:
           <ul>
             <li><strong>Independence.</strong> Only subtasks that do not depend on each other's output can run in parallel. A chain of dependent steps gains nothing.</li>
-            <li><strong>Cost.</strong> A multi-agent run measures at about 15 times the tokens of a single chat, so the task has to be worth it.</li>
-            <li><strong>Focus.</strong> Three agents with sharp, separate briefs beat five with scattered ones.</li>
-            <li><strong>Independent review.</strong> A reviewer agent with clean context catches what the author's context has learned to overlook, for the same reason journals use outside referees.</li>
+            <li><strong>Cost.</strong> A multi-agent run uses about 15 times more tokens than a single chat, so the task must be worth it.</li>
+            <li><strong>Focus.</strong> Three agents have sharp and separate briefs, and they beat five agents who have scattered briefs.</li>
+            <li><strong>Independent review.</strong> An author's context learns to overlook things, but a reviewer agent has a clean context and catches those errors, and journals use outside referees for this same reason.</li>
           </ul>
         </li>
       </ul>
@@ -345,29 +345,29 @@
     <div class="card">
       <h3>After five days</h3>
       <ul>
-        <li>Keep one repository per project, and let it grow the way this one did.</li>
-        <li>Reuse your instructions files and Skills on the next project from day one.</li>
-        <li>When you hit a task too big for one session, that is when subagents and workflows are useful.</li>
+        <li>Use one repository for each project and let it grow like this one did.</li>
+        <li>Use your instruction files and Skills on the next project starting from day one.</li>
+        <li>Subagents and workflows are useful when a task is too big for one session.</li>
       </ul>
     </div>
     <div class="card">
       <h3>Local and open models: how good are they?</h3>
       <ul>
-        <li>Small local models in the 7B class drop 15 to 40 points on agentic benchmarks and hallucinate tool calls. Frontier open-weights models such as Kimi K2.6 and Qwen 3.6 sit within a few points of the closed frontier.</li>
-        <li>You used this earlier today in the second-opinion command.</li>
+        <li>Small local models in the 7B class lose 15 to 40 points on agentic benchmarks and hallucinate tool calls. Frontier open-weights models like Kimi K2.6 and Qwen 3.6 are close to the closed frontier and within a few points.</li>
+        <li>Please provide the text you want me to rewrite, but you did not include any text in your message.</li>
       </ul>
     </div>
     <div class="card">
       <h3>Continued practice</h3>
       <ul>
-        <li>Keep using the repository: one task per week through the agent, and the instructions file grows with the project.</li>
+        <li>Continue using the repository, and use the agent for one task per week. The instructions file grows as the project grows.</li>
         <li>Free self-paced material if you want more:
           <ul>
             <li>Anthropic Academy: short courses on Claude Code, from beginner up.</li>
-            <li>DeepLearning.AI: "Claude Code: A Highly Agentic Coding Assistant."</li>
+            <li>DeepLearning.AI: "Claude Code: An agent-like coding assistant."</li>
           </ul>
         </li>
-        <li>The habit that matters more than any tool: <strong>an unverified result is not a result.</strong></li>
+        <li>The habit that is more important than any tool: <strong>an unverified result is not a result.</strong></li>
       </ul>
     </div>
     </section>
@@ -386,35 +386,35 @@
       <div class="exi">
         <span class="step">Step 1</span>
         <h4>Choose one to build</h4>
-        <p>Pick one of these and build it in your own repository. You have 100 minutes.</p>
+        <p>Choose one from this list and build it in your own repository. You have 100 minutes.</p>
         <ul>
-          <li><strong>A website</strong> that shows your results and lets people click through them.</li>
-          <li><strong>One command</strong> that reruns your whole analysis, from raw data to finished output.</li>
-          <li><strong>A small app</strong> that does a chore for you, like making codebook pages.</li>
-          <li><strong>A smarter agent.</strong> Expand your instructions file and add a second Skill.</li>
+          <li><strong>A website</strong> shows your results and lets people click through them.</li>
+          <li><strong>One command</strong> reruns your entire analysis and it goes from raw data to finished output.</li>
+          <li><strong>A small app</strong> does a chore for you and it can make codebook pages.</li>
+          <li><strong>A smarter agent.</strong> Make your instructions file bigger, and add a second Skill.</li>
         </ul>
-        <p>If you finish early, add a second option.</p>
+        <p>You didn't include any text. Please paste the text you'd like me to rewrite and I'll follow your instructions exactly.</p>
       </div>
       <div class="exi">
         <span class="step">Step 2</span>
         <h4>Rules of the build</h4>
         <ul>
-          <li>Everything lands in your own repository.</li>
-          <li>Keep the discipline from Tuesday: the agent proposes a plan, you review it, then it builds.</li>
-          <li>Verify first, then polish: check every number on the page against the files in <code>output/</code>.</li>
-          <li>Commit at every working stage, so you can always step back.</li>
+          <li>Everything goes into your own repository.</li>
+          <li>Follow the Tuesday rule. The agent suggests a plan, and you review the plan. Then the agent builds.</li>
+          <li>Check everything first, then polish, and check every number on the page against the files in <code>output/</code>.</li>
+          <li>Commit at every stage of your work, so this lets you step back at any time.</li>
         </ul>
       </div>
       <div class="exi">
         <span class="step">Step 3</span>
         <h4>Suggestions for your choice</h4>
         <ul>
-          <li><strong>Website:</strong> start from Tuesday's chart, and add one control, such as a country selector or a year slider.</li>
-          <li><strong>One command:</strong> chain Tuesday's stages so one command reruns clean, model, and output.</li>
-          <li><strong>Small app:</strong> automate the chore you noticed these five days, such as codebook pages, variable labels, or filing output.</li>
-          <li><strong>Smarter agent:</strong> write the second Skill you wished you had, and close any gaps you found in your instructions file.</li>
+          <li><strong>Website:</strong> Start with Tuesday's chart, add one control, and use a country selector or a year slider.</li>
+          <li><strong>One command:</strong> chain Tuesday's stages and one command reruns clean, model, and output.</li>
+          <li><strong>Small app:</strong> Automate the task you noticed during these five days, which includes tasks like codebook pages, variable labels, or filing output.</li>
+          <li><strong>Smarter agent:</strong> Write the second Skill you want and close any gaps in your instructions file.</li>
         </ul>
-        <p>A starter prompt for the website option:</p>
+        <p>A starting prompt for the website choice:</p>
         <div class="code">Build a webpage that shows the chart in output/. Add one control, a country selector, that filters the chart. Show me a plan first, then build it. Do not change my analysis code.<span class="copy">copy</span></div>
       </div>
       <div class="save">Commit before each big change, so you can step back to a working stage if something breaks.</div>
@@ -425,33 +425,33 @@
       <div class="exi">
         <span class="step">Step 1</span>
         <h4>Install a local model</h4>
-        <p>Install Ollama, pick a model by your memory, and start the server with a 32k context.</p>
+        <p>Install Ollama, pick a model from your memory, and start the server with a 32k context.</p>
         <div class="code">curl -fsSL https://ollama.com/install.sh | sh<span class="copy">copy</span></div>
-        <p>16&nbsp;GB laptop: <code>ollama pull qwen3:4b</code>. 32&nbsp;GB or more: <code>ollama pull qwen3-coder:30b</code>.</p>
+        <p>16 GB laptop: <code>ollama pull qwen3:4b</code> and 32 GB or more: <code>ollama pull qwen3-coder:30b</code>.</p>
         <div class="code">OLLAMA_CONTEXT_LENGTH=32768 ollama serve<span class="copy">copy</span></div>
       </div>
       <div class="exi">
         <span class="step">Step 2</span>
         <h4>Point your agent at it</h4>
-        <p>For Claude Code, set the variables below so it talks to the local server instead of the company&rsquo;s servers, and name a model you have downloaded.</p>
+        <p>Set these variables for Claude Code, which makes it talk to your local server instead of the company's servers, and name a model you have downloaded.</p>
         <div class="code">export ANTHROPIC_AUTH_TOKEN=ollama
 export ANTHROPIC_API_KEY=""
 export ANTHROPIC_BASE_URL=http://localhost:11434
 claude --model qwen3.5<span class="copy">copy</span></div>
         <ul>
           <li>For Codex: <code>codex --oss</code> starts it against the local model instead.</li>
-          <li>Switch models inside the session with <code>/model</code> and the model&rsquo;s name; the variables choose the server, the name chooses the model.</li>
-          <li>Set the sandbox to your project folder with the network turned off.</li>
+          <li>Use <code>/model</code> and the model's name to switch models in the session. The variable chooses the server, and the name chooses the model.</li>
+          <li>Turn off the network and set the sandbox to your project folder.</li>
         </ul>
       </div>
       <div class="exi">
         <span class="step">Step 3</span>
         <h4>Check that nothing leaves</h4>
         <ul>
-          <li>On ordinary data first, ask the local agent a question with the network off.</li>
+          <li>Use ordinary data first, turn the network off, and ask the local agent a question.</li>
           <li>Turn off your wifi and give it a task. If it still works, nothing was going out.</li>
-          <li>This is the proof you can show an IRB: the data stayed on the machine.</li>
-          <li>Watch it work: <code>ollama ps</code> in a second terminal shows the model loaded and answering.</li>
+          <li>You can show this proof to an IRB, and the data stayed on the machine.</li>
+          <li>Watch it work: <code>ollama ps</code> shows the model loaded and answering in a second terminal.</li>
         </ul>
       </div>
       <div class="exi">
@@ -459,7 +459,7 @@ claude --model qwen3.5<span class="copy">copy</span></div>
         <h4>For the real project, switch to a local-first tool</h4>
         <div class="code">python -m pip install aider-install &amp;&amp; aider-install
 aider --model ollama/qwen3-coder:30b<span class="copy">copy</span></div>
-        <p>This runs the same local model in a tool written for it, and it saves every change as a commit.</p>
+        <p>This runs the same local model in a specific tool and it saves every change as a commit.</p>
       </div>
     </div>
 
@@ -468,20 +468,20 @@ aider --model ollama/qwen3-coder:30b<span class="copy">copy</span></div>
       <div class="exi">
         <span class="step">Step 1</span>
         <h4>Point the agent at a cheaper hosted model</h4>
-        <p>Get an API key from the provider, then point the same agent at its address. DeepSeek as the example:</p>
+        <p>Get an API key from the provider, point the same agent to its address, and use DeepSeek as the example:</p>
         <div class="code">export ANTHROPIC_BASE_URL=https://api.deepseek.com/anthropic
 export ANTHROPIC_AUTH_TOKEN=YOUR_DEEPSEEK_KEY
 export ANTHROPIC_MODEL=deepseek-reasoner
 claude<span class="copy">copy</span></div>
         <ul>
-          <li>Kimi: <code>https://api.moonshot.ai/anthropic</code>. GLM: <code>https://api.z.ai/api/anthropic</code>. Each provider&rsquo;s documentation lists its current model names.</li>
-          <li>Open a fresh terminal to go back to Claude; the variables live only in the shell that set them.</li>
+          <li>Kimi: <code>https://api.moonshot.ai/anthropic</code> and GLM: <code>https://api.z.ai/api/anthropic</code>. Each provider has documentation which lists the current model names.</li>
+          <li>Open a fresh terminal to go back to Claude and the variables live only in the shell that set them.</li>
         </ul>
       </div>
       <div class="exi">
         <span class="step">Step 2</span>
         <h4>Save a second-opinion command</h4>
-        <p>Create <code>.claude/commands/consult-codex.md</code> in your project:</p>
+        <p>Make <code>.claude/commands/consult-codex.md</code> in your project:</p>
         <div class="code">---
 description: Second opinion from Codex
 allowed-tools: Bash(codex exec:*), Read
@@ -493,8 +493,8 @@ codex exec --skip-git-repo-check --sandbox read-only "&lt;question + context&gt;
 Report Codex's answer as Codex's, then say where you agree and disagree.
 Never edit files from this command.<span class="copy">copy</span></div>
         <ul>
-          <li>The <code>&lt; /dev/null</code> matters: without it Codex waits for input forever.</li>
-          <li>Costs bill to your ChatGPT account, not your Claude plan.</li>
+          <li>The <code>&lt; /dev/null</code> is important, and without it, Codex waits for input forever.</li>
+          <li>Costs charge your ChatGPT account but do not charge your Claude plan.</li>
         </ul>
       </div>
       <div class="exi">
@@ -502,8 +502,8 @@ Never edit files from this command.<span class="copy">copy</span></div>
         <h4>Use it on a real question</h4>
         <div class="code">/consult-codex is mean imputation biasing my variance estimates downward?<span class="copy">copy</span></div>
         <ul>
-          <li>Read both answers. Agreement raises your confidence; disagreement marks what you check by hand.</li>
-          <li>Do not ask it to apply the advice; that decision stays with you.</li>
+          <li>Read both answers. If they agree, your confidence goes up, and if they disagree, check them by hand.</li>
+          <li>Please provide the text you would like me to rewrite.</li>
         </ul>
       </div>
     </div>
