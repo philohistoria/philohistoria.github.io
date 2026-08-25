@@ -146,7 +146,7 @@
       </ul>
     </div>
     <div class="card">
-      <h3>What you have from Monday</h3>
+      <h3>Monday's Materials</h3>
       <ul>
         <li>You have a repository with a README, protected data, one script, and one commit.</li>
         <li>You know what an agent is: tools, a loop, and code execution.</li>
@@ -160,7 +160,7 @@
     <h2 class="sec" id="steps">Breaking work into clear steps <span class="hastag">· do it on the right</span></h2>
 
     <div class="card">
-      <h3>Five stages of any analysis</h3>
+      <h3>Five stages of analysis</h3>
       <ul>
         <li>Every empirical project moves through the same five stages:
           <ul>
@@ -175,7 +175,7 @@
       </ul>
     </div>
     <div class="card">
-      <h3>What the agent contributes at each stage</h3>
+      <h3>Agent contributions by stage</h3>
       <table>
         <tr><th>Stage</th><th>What you delegate</th><th>What you keep</th></tr>
         <tr><td>Prepare</td><td>recoding, merging, type fixes</td><td>what counts as missing</td></tr>
@@ -186,7 +186,7 @@
       <ul><li>The agent does the typing, and you make the choices.</li></ul>
     </div>
     <div class="card">
-      <h3>The choices you did not state</h3>
+      <h3>Unstated choices</h3>
       <ul>
         <li>Any real task has choices you did not state: which variable, how to treat missing codes, whether to weight, which sample.</li>
         <li>Where you leave a gap, the agent fills it with the average analyst&rsquo;s defaults, and the average analyst is not you.</li>
@@ -218,7 +218,7 @@
     <h2 class="sec" id="verify">Verifying your results <span class="hastag">· do it on the right</span></h2>
 
     <div class="card">
-      <h3>Why you always check</h3>
+      <h3>Why you check frequently</h3>
       <ul>
         <li>The agent is fluent, and fluent output can still be wrong.</li>
         <li>It will not tell you when it guessed; a wrong number looks exactly like a right one.</li>
@@ -254,10 +254,10 @@
 
     <!-- WORKING FASTER -->
     <section data-hands="faster">
-    <h2 class="sec" id="faster">Several agents at once: for speed, and for checking <span class="hastag">· do it on the right</span></h2>
+    <h2 class="sec" id="faster">Multiple agents: for speed and verification <span class="hastag">· do it on the right</span></h2>
 
     <div class="card">
-      <h3>You can run more than one agent</h3>
+      <h3>Run multiple agents</h3>
       <ul>
         <li>Open several agents at once, give each one a separate job, and they work at the same time.</li>
         <li>On the same cleaned dataset: one writes the descriptive table, one draws the chart, one drafts the README.</li>
@@ -273,7 +273,7 @@
       </ul>
     </div>
     <div class="card">
-      <h3>Subagents: one agent runs the others</h3>
+      <h3>Subagents: One agent manages others</h3>
       <ul>
         <li>Instead of opening the agents yourself, you can tell one agent to do it: "write the table, the chart, and the README from the cleaned data, using a separate helper for each."</li>
         <li>These helpers are called <strong>subagents</strong>. Each gets its own context, does one assigned task, and returns a short report to the main agent.</li>
@@ -292,7 +292,7 @@
       </ul>
     </div>
     <div class="card">
-      <h3>Sessions can message each other</h3>
+      <h3>Session messaging</h3>
       <ul>
         <li>In both tools, one open session can send a message to another.</li>
         <li>Claude Code: <code>/msg list</code> shows your reachable sessions, and <code>/msg</code> sends to one. This works without any setup, including to sessions on other machines.</li>
@@ -302,7 +302,7 @@
       </ul>
     </div>
     <div class="card">
-      <h3>Two reasons to run more than one</h3>
+      <h3>Two reasons to run multiple</h3>
       <ul>
         <li>One reason is speed: split a task into five independent pieces, run five agents, and a five-minute wait becomes about one minute.</li>
         <li>If one piece needs another&rsquo;s output, it waits, and the speedup is gone.</li>
@@ -311,7 +311,7 @@
       </ul>
     </div>
     <div class="card">
-      <h3>Plan on the advanced model, execute on the cheap one</h3>
+      <h3>Plan with advanced model, execute with cheap one</h3>
       <ul>
         <li>The advanced model plans better and costs more. The cheap model is fast and costs almost nothing.</li>
         <li>Planning needs the better model. Execution is mechanical. Spend the expensive tokens on planning.</li>
@@ -324,7 +324,7 @@
       </ul>
     </div>
     <div class="card">
-      <h3>What running them costs</h3>
+      <h3>Running costs</h3>
       <ul>
         <li>The tool charges by usage, measured in units called tokens, and each plan has a limit.</li>
         <li>Several agents at once, or one agent working for a long time, spend that usage faster.</li>
@@ -333,7 +333,7 @@
     </div>
     <div class="card demo">
       <span class="tag">Exercise</span>
-      <h3>The same model in R and in Python</h3>
+      <h3>The same model in R and Python</h3>
       <ul>
         <li>One instruction: "Implement my model spec twice, one subagent in R and one in Python, working independently. Then put the two coefficient tables side by side and report every difference."</li>
         <li>If the tables match, the result does not depend on the software.</li>
@@ -387,7 +387,7 @@
       </ul>
     </div>
 <div class="card">
-      <h3>Check the agent's codes against your own</h3>
+      <h3>Compare agent codes with yours</h3>
       <ul>
         <li>Hand-code a random sample yourself, then compare the agent's codes to yours.</li>
         <li>Report the agreement, the same way you would for two human coders.</li>
@@ -411,7 +411,7 @@
 
     <!-- DISCUSSION AND WRAP -->
     <section data-hands="none">
-    <h2 class="sec" id="discuss">Discussion and wrap</h2>
+    <h2 class="sec" id="discuss">Discussion and Wrap-up</h2>
     <div class="card">
       <h3>Discussion</h3>
       <ul>

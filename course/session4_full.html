@@ -155,7 +155,7 @@
 
     <!-- WHAT THE AGENT CAN REACH -->
     <section data-hands="none">
-    <h2 class="sec" id="reach">What the agent can reach</h2>
+    <h2 class="sec" id="reach">Agent capabilities</h2>
 
     <div class="card">
       <h3>What it can and cannot touch</h3>
@@ -222,7 +222,7 @@
     <h2 class="sec" id="collect">Collecting data with the agent <span class="hastag">· do it on the right</span></h2>
 
     <div class="card">
-      <h3>The agent can also collect data</h3>
+      <h3>Data Collection Capabilities</h3>
       <ul>
         <li>The agent can use that same reach to bring in data.</li>
         <li>Three common sources, and the agent handles all three:
@@ -236,7 +236,7 @@
       </ul>
     </div>
     <div class="card">
-      <h3>Collection is the hard part, so check it</h3>
+      <h3>Verify your collection</h3>
       <ul>
         <li>Gathering data is where these agents are weakest.</li>
         <li>On a social-science replication benchmark, agents scored about 96 at running an analysis and about 31 at finding the data it needed.</li>
@@ -254,7 +254,7 @@
       </ul>
     </div>
     <div class="card">
-      <h3>Example: scraping a table from a page</h3>
+      <h3>Scraping a table from a webpage</h3>
       <ul>
         <li>You point it at the page: "From this URL, pull the table of unemployment by month into a CSV."</li>
         <li>The agent reads the page, finds the table, and saves it.</li>
@@ -263,7 +263,7 @@
       </ul>
     </div>
     <div class="card">
-      <h3>Keep the raw pull, and log where it came from</h3>
+      <h3>Track raw pull sources</h3>
       <ul>
         <li>Save the raw result once, before any cleaning, and never overwrite that copy.</li>
         <li>Have the agent write the source, the date, and the exact query next to the file.</li>
@@ -271,7 +271,7 @@
       </ul>
     </div>
     <div class="card">
-      <h3>Check what came back</h3>
+      <h3>Check your results</h3>
       <ul>
         <li>Open the raw file and read the first few rows yourself.</li>
         <li>Compare a handful of values against the source page or the API by hand.</li>
@@ -279,7 +279,7 @@
       </ul>
     </div>
     <div class="card">
-      <h3>When you will do it again, make it a Skill</h3>
+      <h3>Turn Repetition into a Skill</h3>
       <ul>
         <li>A pull you repeat, such as grabbing this month's new records, is worth packaging.</li>
         <li>Turn the steps into a Skill, the same way you did on Wednesday, so next time is one command.</li>
@@ -302,7 +302,7 @@
 
     <div class="card demo">
       <span class="tag">Live demo</span>
-      <h3>Searching through OpenAlex and Zotero</h3>
+      <h3>Searching OpenAlex and Zotero</h3>
       <ul>
         <li>Search the literature by topic through OpenAlex.</li>
         <li>Filter, and pull the real metadata into Zotero.</li>
@@ -312,7 +312,7 @@
     </div>
     <div class="card demo">
       <span class="tag">Live demo</span>
-      <h3>The same request to a bare chatbot</h3>
+      <h3>The same request to a basic chatbot</h3>
       <ul>
         <li>Now the same request goes to a bare chatbot: "give me ten citations on this topic."</li>
         <li>We fact-check one, live.</li>
@@ -321,7 +321,7 @@
       </ul>
     </div>
     <div class="card">
-      <h3>Subagents, applied to reading</h3>
+      <h3>Using subagents for reading</h3>
       <ul>
         <li>Subagents are Tuesday's arrangement: one main agent delegates to helpers, each with its own separate context, each returning a short report.</li>
         <li>That separation is what makes subagents fit reading. The full text of each paper stays in its own subagent's context. Five papers in parallel use five contexts, and your own conversation receives only the five reports.</li>
@@ -350,7 +350,7 @@
       </ul>
     </div>
     <div class="card">
-      <h3>What each subagent needs to be told</h3>
+      <h3>Subagent Instructions</h3>
       <ul>
         <li>Tuesday's lesson applies again when you delegate to several subagents. "Read these papers and take notes" leaves every subagent to invent its own note format.</li>
         <li>Anthropic's report on its multi-agent research system (2025) found that without clear instructions, subagents "misinterpreted the task or performed the exact same searches as other agents."</li>
@@ -365,7 +365,7 @@
       </ul>
     </div>
     <div class="card">
-      <h3>What parallelizes, and what it costs</h3>
+      <h3>Parallelization: what and how much it costs</h3>
       <table>
         <tr><th>Runs in parallel</th><th>Must stay sequential</th></tr>
         <tr><td>one paper per subagent</td><td>cleaning before modeling</td></tr>

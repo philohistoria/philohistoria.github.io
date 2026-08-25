@@ -192,7 +192,7 @@
       </ul>
     </div>
     <div class="card">
-      <h3>What the agent decides on its own</h3>
+      <h3>Agent Autonomy</h3>
       <ul>
         <li>Unless you specify them, these are the agent's choices, made silently:
           <ul>
@@ -207,7 +207,7 @@
       </ul>
     </div>
     <div class="card">
-      <h3>Instructions: global and project</h3>
+      <h3>Global and Project Instructions</h3>
       <ul>
         <li>The agent does not know you, so it fills gaps with default settings, and these settings belong to the average analyst, which is not you.</li>
         <li>Better prompting each morning does not fix this, and the same gaps reopen in the next session.</li>
@@ -236,7 +236,7 @@
       </ul>
     </div>
     <div class="card">
-      <h3>Instructions or memory: which one for what</h3>
+      <h3>Instructions vs. Memory: When to use each</h3>
       <ul>
         <li>A rule you want enforced goes in instructions: "cluster standard errors by county."</li>
         <li>Memory keeps track of everything that happened and you prefer R. The income variable is messy and you explain why you chose logit instead of probit.</li>
@@ -267,7 +267,7 @@
 
     <!-- YOUR AGENTS.MD -->
     <section data-hands="agentsmd">
-    <h2 class="sec" id="agentsmd">Your instructions files <span class="hastag">· do it on the right</span></h2>
+    <h2 class="sec" id="agentsmd">Your instruction files <span class="hastag">· do it on the right</span></h2>
 
     <div class="card">
       <h3>The same prompt, two ways</h3>
@@ -278,7 +278,7 @@
       </ul>
     </div>
     <div class="card">
-      <h3>What to watch in the side-by-side</h3>
+      <h3>Side-by-side comparison guide</h3>
       <ul>
         <li>The standard errors and these are the defaults compared to what the file requires.</li>
         <li>The table shows how the agent's habit compares to your journal's format.</li>
@@ -359,7 +359,7 @@
       </ul>
     </div>
     <div class="card">
-      <h3>Skills that work, and skills that do not</h3>
+      <h3>Effective and ineffective skills</h3>
       <ul>
         <li>A Skill works when it is <strong>specific</strong>:
           <ul>
@@ -418,7 +418,7 @@
       </ul>
     </div>
     <div class="card">
-      <h3>Where an installed skill sits on disk</h3>
+      <h3>Skill installation location</h3>
       <ul>
         <li>To install a skill, put a folder in a place your agent reads, and this folder must contain a <code>SKILL.md</code>, and do not add anything else.</li>
         <li>Both tools read a home location and a project location, and the home location applies to every project you open, and the project location stays with the repository when you share it.</li>
@@ -427,7 +427,7 @@
       </ul>
     </div>
     <div class="card">
-      <h3>Updating a skill you installed</h3>
+      <h3>Updating an installed skill</h3>
       <ul>
         <li>An installed skill is a snapshot, and the author can keep editing their skill, but yours does not change until you update it.</li>
         <li><strong>Cloned:</strong> <code>git pull</code> in the clone and re-run <code>setup.sh</code> or copy again. A copied folder does not get the pull but a symlinked folder does.</li>
@@ -458,7 +458,7 @@
       </ul>
     </div>
     <div class="card">
-      <h3>Editing a Skill you adopted</h3>
+      <h3>Edit a Learned Skill</h3>
       <ul>
         <li>You can edit any Skill you adopt and copy the folder into your home skills folder. Edit <code>SKILL.md</code>, and the change applies immediately, so you do not need to restart.</li>
         <li>Renaming the directory renames the command and rewriting the <code>description</code> field changes when it fires on its own.</li>
@@ -472,7 +472,7 @@
       </table>
     </div>
     <div class="card">
-      <h3>What is shared and what stays yours</h3>
+      <h3>What is shared and what is private</h3>
       <ul>
         <li>Your agent's behavior is defined by files in the project folder, and these include the context file, <code>.claude/agents/</code>, and the skill folders, and anyone who gets the folder gets your setup.</li>
         <li>Your home folder <code>~/.claude/</code> is different and holds your personal skills, your settings, and the agent’s memory of you. It applies to every project on your machine and is not part of any shared folder.</li>
@@ -482,7 +482,7 @@
       </ul>
     </div>
     <div class="card">
-      <h3>Collaborating through a shared Dropbox folder</h3>
+      <h3>Collaborating via a shared Dropbox folder</h3>
       <ul>
         <li>If two or three people trust each other, use a shared Dropbox or Drive folder. It is the easiest way, files sync automatically, and nobody has to learn a new tool.</li>
         <li>Follow one rule to stay safe: do not edit the same file at the same time and split the files between people, or, say who is editing what.</li>
@@ -492,7 +492,7 @@
       </ul>
     </div>
     <div class="card">
-      <h3>Collaborating through git: both of you commit</h3>
+      <h3>Git Collaboration: Committing Together</h3>
       <ul>
         <li>On Monday you learned one git command, which is to commit a save point. Collaboration adds one more command, <strong>pull</strong>, which fetches your partner’s commits.</li>
         <li>No one needs to approve anyone. One person creates the repository and they add the other person as a collaborator, and both people can push changes directly after that. GitHub has review steps, which are optional and are off by default.</li>
@@ -503,7 +503,7 @@
       </ul>
     </div>
     <div class="card">
-      <h3>The agent runs git for both of you</h3>
+      <h3>The agent runs git for you</h3>
       <ul>
         <li>Neither of you memorizes git commands, so start a session by saying, “pull the latest,” and end a session by saying, “commit and push, the change was about X.”</li>
         <li>If a push is rejected or a merge stops, say &ldquo;resolve it and show me what you kept.&rdquo;</li>
@@ -517,7 +517,7 @@
     <h2 class="sec" id="usage">Managing your usage <span class="hastag">· do it on the right</span></h2>
 
     <div class="card">
-      <h3>The agent bills by the token</h3>
+      <h3>Token-based billing</h3>
       <ul>
         <li>Everything you send counts as tokens, and Everything it writes counts as tokens, and These count against the plan limit you first met on Tuesday.</li>
         <li>Every new message sends the entire conversation again, and a reply at the end of a long session costs much more than an early reply, and the cost of a session grows faster than its length.</li>
@@ -525,7 +525,7 @@
       </ul>
     </div>
     <div class="card">
-      <h3>Both load every session, so keep them short</h3>
+      <h3>Keep them short; they load every session</h3>
       <ul>
         <li>Every session starts by reading your instructions files and, in Claude Code, the memory index, and all of it costs context before you type a word.</li>
         <li>More is not better. The agent follows a short list of rules well but does not follow a long list as well. A large file costs more and also leads to worse compliance.</li>
