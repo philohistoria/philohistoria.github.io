@@ -271,7 +271,7 @@
               <li>A topic you can work on all semester.</li>
               <li>Your machine is cleared to leave, and if you cannot send data to a company's servers, run the model on your own machine. Follow the steps from Week 2 and decide that now.</li></ul>
           Text data is NOT required; numeric-only projects are fully eligible.</li>
-        <li>Please paste the text you want me to rewrite and I will apply the instructions.</li>
+        <li>One paragraph: the question, labelled predictive / causal / descriptive</li>
         <li>Write the specification. Run the task twice, once with the spec and once without it, and compare both outputs side by side.</li>
         <li>Install one Skill from the official catalog, read its <code>SKILL.md</code>, and say what the Skill can touch.</li></ul></td>
   <td><span class="topic">Step 1: define the problem, and why two analysts define it differently</span>
@@ -341,7 +341,7 @@
         <li>Test the codebook on a small sample with some overlap, do two independent coding runs, and add your own hand codes. Revise the codebook, run it again, and stop when agreement no longer improves.</li>
         <li>Freeze the codebook and tell the agent to write a script which will use the API and code 1,000 narratives. Use a cheap model and write the codes to a CSV.</li>
         <li>Compare these things: The confusion matrix, your 100, and a two-feature baseline.</li>
-        <li>Please paste the text you'd like me to rewrite, and I will follow the instructions exactly.</li></ul></td>
+        <li>Optional close: wrap your frozen prompt as a Skill</li></ul></td>
   <td><span class="topic">Step 2: build a measure, and check that it measures what you meant</span>
     <ul><li><span class="rlab req">Required</span>Obermeyer et al. (Science 2019) studied an algorithm, and the goal was to predict health needs, but the algorithm predicted health costs instead, and because of this, it understated how sick Black patients were.</li>
         <li><span class="rlab req">Required</span>Dressel & Farid (Sci Adv 2018) found that two features match COMPAS.</li>
@@ -389,7 +389,7 @@
     <ul><li>Why a fluent model makes up citations and figures. Demo: five claims about RI poverty which are checked against live Census data.</li>
         <li>Fairness metrics include parity, equalized odds, and calibration, but you cannot have all three at once.</li></ul></td>
   <td><span class="topic">Audit your own outputs</span>
-    <ul><li>I don’t have access to any prior “W4–6” outputs in this conversation. Please either paste the W4–6 outputs you want me to check or clarify what “W4–6 outputs” refers to (e.g., filenames, dates, or a system I produced earlier). Also confirm: - Do you want me to extract exactly 10 numeric claims (if fewer exist, should I stop or pick fewer)? - Should sources be primary (official reports, peer‑reviewed papers) with links, or are reputable secondary sources acceptable? - Preferred format for the table (plain text columns, Markdown table, or CSV)? Once you provide the outputs or clarify, I will extract 10 numbers, trace each to a source, and produce the table with columns: claim | AI number | actual | verdict.</li>
+    <ul><li>Fact-check: pull 10 numbers from your W4–6 outputs, trace each to a source; table: claim | AI number | actual | verdict</li>
         <li>For the claims with no reachable source, reuse the second-opinion command from Week 4 and check first the claims where the two model families disagree</li>
         <li>Subgroup error audit: Recompute the W5 confusion matrix for each group, and use demographic groups if available, or, if not, geography, source, or time period, and the skill is the same.</li>
         <li>A short debate: which fairness definition should rule your measure?</li></ul></td>
