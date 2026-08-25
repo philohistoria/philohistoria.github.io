@@ -119,9 +119,8 @@
     <div class="toc">
       <a href="#opening">Opening</a>
       <a href="#steps">Breaking work into clear steps <span class="has">hands-on</span></a>
-      <a href="#coding">Coding data with the agent <span class="has">hands-on</span></a>
       <a href="#verify">Verifying your results <span class="has">hands-on</span></a>
-      <a href="#faster">Working faster: several agents at once <span class="has">hands-on</span></a>
+      <a href="#faster">Several agents at once: for speed, and for checking <span class="has">hands-on</span></a>
       <a href="#discuss">Discussion and wrap</a>
     </div>
   </nav>
@@ -141,10 +140,8 @@
       <h3>Today</h3>
       <ul>
         <li>Breaking work into clear steps.</li>
-        <li>Coding data with the agent.</li>
-        <li>Break.</li>
         <li>Verifying your results.</li>
-        <li>Working faster: several agents at once.</li>
+        <li>Several agents at once, ending with coding text into data.</li>
         <li>Discussion.</li>
       </ul>
     </div>
@@ -154,7 +151,6 @@
         <li>You have a repository with a README, protected data, one script, and one commit.</li>
         <li>You know what an agent is: tools, a loop, and code execution.</li>
         <li>You wrote one sentence last night: the analysis you want to run.</li>
-        <li>Today you break one analysis into clear stages, code text into data with the agent, verify every result, and then run several agents at once.</li>
       </ul>
     </div>
     </section>
@@ -187,113 +183,35 @@
         <tr><td>Model</td><td>writing and running the estimation</td><td>the specification</td></tr>
         <tr><td>Report</td><td>formatting tables and figures</td><td>what the result means</td></tr>
       </table>
-      <ul><li>The pattern in one line: the agent does the typing, and you make the choices.</li></ul>
+      <ul><li>The agent does the typing, and you make the choices.</li></ul>
     </div>
     <div class="card">
-      <h3>Three ways to run the agent</h3>
-      <ul><li>The agent runs at one of three levels of freedom:</li></ul>
-      <table>
-        <tr><th>Level</th><th>What it can do</th><th>Best for</th></tr>
-        <tr><td><strong>Plan first</strong></td><td>reads and proposes; changes nothing until you approve</td><td>thinking first</td></tr>
-        <tr><td><strong>Standard</strong></td><td>edits and runs in your project</td><td>day-to-day work</td></tr>
-        <tr><td><strong>Full auto</strong></td><td>edits, runs, and uses the internet without asking</td><td>trusted, repeat work</td></tr>
-      </table>
+      <h3>The choices you did not state</h3>
       <ul>
-        <li>The real names: in Claude Code, Shift+Tab cycles between plan mode, the default ask-first mode, and auto-accepting edits. In Codex, the sandbox setting is read-only, workspace-write, or full access.</li>
-        <li>Ask yourself how much you would let a brand-new RA do <strong>unsupervised</strong>.</li>
+        <li>Any real task has choices you did not state: which variable, how to treat missing codes, whether to weight, which sample.</li>
+        <li>Where you leave a gap, the agent fills it with the average analyst&rsquo;s defaults, and the average analyst is not you.</li>
+        <li>Each of those choices is defensible, and none of them was yours. That is why you write the plan first.</li>
       </ul>
     </div>
     <div class="card">
-      <h3>Explore, Plan, Execute, Commit</h3>
-      <ul><li>The workflow for any task with real stakes:</li></ul>
-      <table>
-        <tr><th>Phase</th><th>What happens</th><th>The research step it matches</th></tr>
-        <tr><td>Explore</td><td>reads data and files, touches none</td><td>literature review, EDA</td></tr>
-        <tr><td>Plan</td><td>proposes; you review and approve</td><td>pre-registration</td></tr>
-        <tr><td>Execute</td><td>runs the approved plan, step by step</td><td>running the analysis</td></tr>
-        <tr><td>Commit</td><td>saves a commit with a message that says what changed</td><td>methods write-up</td></tr>
-      </table>
-      <ul><li>Explore and Plan are cheap; a wrong plan costs one rewrite, and a wrong execution costs an afternoon.</li></ul>
-    </div>
-    <div class="card demo">
-      <span class="tag">Live demo</span>
-      <h3>First try: the vague prompt</h3>
-      <p>The task is harder than Monday&rsquo;s: build a multi-item index. Constructing a measure has real degrees of freedom, and that is where direction matters.</p>
-      <div class="quote">Using the WVS, measure how postmaterialist each country is and rank the countries.</div>
+      <h3>Who writes the plan</h3>
       <ul>
-        <li>A ranked chart comes back in two minutes, and it looks final.</li>
-        <li>On the way there the agent silently made five choices: which survey items form the index, how to treat the negative missing codes, whether to use the survey weights, which wave to use, and how to average within countries.</li>
-        <li>Each choice is defensible. None of them was yours. Two analysts giving this same prompt can get different rankings and never know why.</li>
-      </ul>
-    </div>
-    <div class="card demo">
-      <span class="tag">Live demo</span>
-      <h3>Second try: the same task, directed</h3>
-      <ul>
-        <li>Explore: "Read the codebook. List every item in the materialist/postmaterialist battery, its wording, and its missing codes. Change nothing."</li>
-        <li>Plan: "Propose a plan for the standard four-item index and a country ranking. State your choice on missing codes, weights, and wave, and flag every place a published analysis might reasonably differ."</li>
-        <li>Review the plan and change at least one choice &mdash; for example, keep only respondents who answered all four items.</li>
-        <li>Execute stage by stage, committing after each stage.</li>
-        <li>Compare the two rankings. Some countries move. The movement is exactly those five choices, which are now written down in the plan and the commits.</li>
-        <li>The vague run was not wrong anywhere you could point to. It was uncheckable, and that is the difference.</li>
+        <li>Three ways, all legitimate:
+          <ul>
+            <li><strong>You plan.</strong> You break the work into stages yourself and hand the agent one stage at a time.</li>
+            <li><strong>The agent plans.</strong> In plan mode it reads your project, proposes a plan, and runs nothing until you approve.</li>
+            <li><strong>You draft, the agent refines.</strong> You write the plan, hand it over, and the agent tells you what is missing, what order is wrong, and what it would cut.</li>
+          </ul>
+        </li>
+        <li>Today&rsquo;s exercise uses the third way, on your own project.</li>
+        <li>Both tools enter plan mode with Shift+Tab. Claude Code cycles plan mode, ask-first, and auto-accept; Codex cycles Plan, Pair, and Execute, and <code>/plan</code> jumps straight there.</li>
+        <li>Whoever drafts it, the plan is yours after you edit it. Do not approve a step you cannot explain.</li>
       </ul>
     </div>
     </section>
 
     <!-- CODING DATA WITH THE AGENT -->
-    <section data-hands="coding">
-    <h2 class="sec" id="coding">Coding data with the agent <span class="hastag">· do it on the right</span></h2>
-
-    <div class="card">
-      <h3>Turning text into variables</h3>
-      <ul>
-        <li>A lot of social-science data starts as text: open-ended answers, interview transcripts, documents, news.</li>
-        <li>The agent can read each case and assign a code, the way a research assistant would.</li>
-        <li>That turns text into a variable you can count and model.</li>
-      </ul>
-    </div>
-    <div class="card">
-      <h3>A worked example: 311 complaints</h3>
-      <ul>
-        <li>The running example: a city&rsquo;s 311 complaint narratives, free-text descriptions residents typed in. The question: what are people actually complaining about?</li>
-        <li>The codebook is categories, each with a rule and an example:
-          <ul>
-            <li><strong>Noise</strong> &mdash; the complaint is mainly about sound. "Upstairs neighbor plays drums past midnight."</li>
-            <li><strong>Housing condition</strong> &mdash; about the building itself: heat, water, mold. "No heat in the apartment for three days."</li>
-            <li><strong>Street and trash</strong> &mdash; about shared space outside. "Mattress on the corner for a week."</li>
-            <li><strong>Other</strong> &mdash; anything else, plus a rule for mixed cases: code the main grievance, the one the resident wants fixed.</li>
-          </ul>
-        </li>
-        <li>Give the agent the codebook and twenty cases, and read what it returns. Where it codes differently than you would, the rule was unclear; fix the rule, not the answer.</li>
-      </ul>
-    </div>
-    <div class="card">
-      <h3>Who does the coding, mechanically</h3>
-      <ul>
-        <li>There are two setups, and the size of the data decides.</li>
-        <li><strong>Dozens of cases:</strong> the agent reads them directly in the conversation and codes them, like an RA reading a stack of pages. This is how you develop the codebook and build your hand-coded comparison sample.</li>
-        <li><strong>Thousands of cases:</strong> the agent writes a script that sends each narrative, with the codebook as the prompt, to a model API, one call per case, and writes the labels to a CSV. The script can rerun, resume after a crash, and call a cheaper model than the one you are talking to.</li>
-        <li>Do not have the agent read thousands of cases in the conversation itself: the session fills up, and the coding drifts as it fills.</li>
-        <li>Once the codebook is frozen, the prompt in that script is your measurement instrument. Freezing it is what makes the measure reportable.</li>
-      </ul>
-    </div>
-    <div class="card">
-      <h3>Check the agent's codes against your own</h3>
-      <ul>
-        <li>Hand-code a random sample yourself, then compare the agent's codes to yours.</li>
-        <li>Report the agreement, the same way you would for two human coders.</li>
-        <li>Low agreement means the codebook is vague or the task is too hard; fix that before you trust the rest.</li>
-      </ul>
-    </div>
-    <div class="card">
-      <h3>Then code the full dataset</h3>
-      <ul>
-        <li>Once agreement is high enough, let the agent code the full dataset.</li>
-        <li>Keep the sample and the agreement number; they are your evidence the measure is sound.</li>
-        <li>Spot-check a few more as it goes.</li>
-      </ul>
-    </div>
-    </section>
+    
 
     <!-- VERIFYING YOUR RESULTS -->
     <section data-hands="verify">
@@ -336,31 +254,37 @@
 
     <!-- WORKING FASTER -->
     <section data-hands="faster">
-    <h2 class="sec" id="faster">Working faster: several agents at once <span class="hastag">· do it on the right</span></h2>
+    <h2 class="sec" id="faster">Several agents at once: for speed, and for checking <span class="hastag">· do it on the right</span></h2>
 
     <div class="card">
       <h3>You can run more than one agent</h3>
       <ul>
-        <li>You can open several agents at once.</li>
-        <li>Give each one a separate job, and they work at the same time.</li>
-        <li>One cleans the data, one draws a figure, one looks up the codebook, all at once.</li>
-        <li>The jobs have to be independent, so none of them waits on another.</li>
+        <li>Open several agents at once, give each one a separate job, and they work at the same time.</li>
+        <li>On the same cleaned dataset: one writes the descriptive table, one draws the chart, one drafts the README.</li>
+        <li>The jobs have to be independent, so none of them waits on another. Cleaning and charting are not independent: the chart needs the cleaned data.</li>
+      </ul>
+    </div>
+    <div class="card demo">
+      <span class="tag">Live demo</span>
+      <h3>Three agents at once</h3>
+      <ul>
+        <li>I open three agents and give each an independent task on the same cleaned dataset.</li>
+        <li>All three run at the same time and finish sooner than one agent doing them one after another.</li>
       </ul>
     </div>
     <div class="card">
       <h3>Subagents: one agent runs the others</h3>
       <ul>
-        <li>You do not have to open and manage the agents yourself.</li>
-        <li>You can tell one agent to do it: "clean the data, draw the figure, and look up the codebook, using a separate helper for each."</li>
-        <li>These helpers are called <strong>subagents</strong>. Each gets its own separate working context, does one assigned task, and returns a short report to the main agent.</li>
+        <li>Instead of opening the agents yourself, you can tell one agent to do it: "write the table, the chart, and the README from the cleaned data, using a separate helper for each."</li>
+        <li>These helpers are called <strong>subagents</strong>. Each gets its own context, does one assigned task, and returns a short report to the main agent.</li>
         <li>The main conversation receives only the reports, so it does not fill up with the helpers&rsquo; working text.</li>
-        <li>You invoke them in plain language: asking for the work "in parallel, using separate subagents" is enough, and there is nothing to configure.</li>
+        <li>You ask for them in plain language: "in parallel, using separate subagents" is enough. There is nothing to configure.</li>
       </ul>
     </div>
     <div class="card">
       <h3>Which arrangement for which job</h3>
       <ul>
-        <li>The two arrangements are alternatives. The difference is who coordinates the work, you or the main agent.</li>
+        <li>The difference between the two is who coordinates the work, you or the main agent.</li>
         <li>Open several sessions yourself when the tasks are independent and you want to watch and steer each one.</li>
         <li>Use subagents when the results must be combined afterward. The main agent receives every report, so it can require one format for all of them.</li>
         <li>When the combining step needs judgment, do it yourself: run separate sessions and merge the results.</li>
@@ -378,20 +302,25 @@
       </ul>
     </div>
     <div class="card">
-      <h3>Use a large model to plan and small models to execute</h3>
+      <h3>Two reasons to run more than one</h3>
       <ul>
-        <li>Each vendor sells several model sizes. The large one is better at judgment and costs more per token. The small one is cheaper and faster.</li>
-        <li>A common arrangement uses both. The main agent runs on the large model and does the planning and the checking. The subagents run on the small model and do the mechanical work.</li>
-        <li>Planning is one short conversation and execution is many long ones, so you spend the expensive tokens on the judgment.</li>
-        <li>In practice: pick the model for a session with the tool&rsquo;s model command, and tell the main agent to use a smaller model for its helpers.</li>
+        <li>One reason is speed: split a task into five independent pieces, run five agents, and a five-minute wait becomes about one minute.</li>
+        <li>If one piece needs another&rsquo;s output, it waits, and the speedup is gone.</li>
+        <li>The other reason is checking: two subagents doing the same job cannot see each other, so comparing their results tells you something one run cannot.</li>
+        <li>Research already works this way: two coders code the same sample, and a replication is run by someone else.</li>
       </ul>
     </div>
-    <div class="card demo">
-      <span class="tag">Live demo</span>
-      <h3>Three agents at once</h3>
+    <div class="card">
+      <h3>Plan on the advanced model, execute on the cheap one</h3>
       <ul>
-        <li>I open three agents and give each a different task on the same project.</li>
-        <li>You watch all three run together and finish sooner than one agent would in a row.</li>
+        <li>The advanced model plans better and costs more. The cheap model is fast and costs almost nothing.</li>
+        <li>Planning needs the better model. Execution is mechanical. Spend the expensive tokens on planning.</li>
+        <li>One prompt does it:</li>
+      </ul>
+      <div class="quote">Make the plan and review the results yourself. Run the pieces with subagents on a cheaper model.</div>
+      <ul>
+        <li>You set your own session&rsquo;s model with <code>/model</code> in both tools.</li>
+        <li>Tomorrow you write this down once, in a file the agent reads every time.</li>
       </ul>
     </div>
     <div class="card">
@@ -399,10 +328,86 @@
       <ul>
         <li>The tool charges by usage, measured in units called tokens, and each plan has a limit.</li>
         <li>Several agents at once, or one agent working for a long time, spend that usage faster.</li>
-        <li>Check your usage now and then, because going faster spends it faster.</li>
+        <li>Check your usage now and then.</li>
       </ul>
     </div>
+    <div class="card demo">
+      <span class="tag">Exercise</span>
+      <h3>The same model in R and in Python</h3>
+      <ul>
+        <li>One instruction: "Implement my model spec twice, one subagent in R and one in Python, working independently. Then put the two coefficient tables side by side and report every difference."</li>
+        <li>If the tables match, the result does not depend on the software.</li>
+        <li>If they differ, a default differed: how one language handles missing values, standard errors, or factor levels. Which one you meant is your call.</li>
+        <li>No third agent is needed: the main agent compares the two tables, and judging a difference is yours.</li>
+      </ul>
+    </div>
+    
+    
+    
+    
+    
+    
+
+    <div class="card">
+      <h3>Turning text into variables</h3>
+      <ul>
+        <li>A lot of social-science data starts as text: open-ended answers, interview transcripts, documents, news.</li>
+        <li>The agent can read each case and assign a code, the way a research assistant would.</li>
+        <li>That turns text into a variable you can count and model.</li>
+        <li>What you build in this unit is the codebook: the coding rules you give the agent. You sharpen it by having two coders work independently and reading where they disagree.</li>
+        <li>Coding thousands of cases is a script's job, and it gets one card at the end.</li>
+      </ul>
+    </div>
+    <div class="card demo">
+      <span class="tag">Exercise</span>
+      <h3>A worked example: consumer complaints</h3>
+      <ul>
+        <li>The running example: the CFPB Consumer Complaint Database &mdash; 3.8 million free-text complaints about banks and lenders, public and downloadable without registration (consumerfinance.gov). The question: what kind of wrong does the writer say was done to them?</li>
+        <li>The codebook is categories, each with a rule and a real example:
+          <ul>
+            <li><strong>Unauthorized</strong> &mdash; money moved or an account opened without consent. "My credit score is fine and for some reason the rate they charged me is 22%" is not this; "an account was opened in my name when I was too young to have one" is.</li>
+            <li><strong>Inaccurate record</strong> &mdash; the company reports something wrong, and the remedy asked for is correction, not money. "The debt was already removed, and they keep adding it back to my credit report."</li>
+            <li><strong>Unfair charge</strong> &mdash; the account is mine, but the fee, rate, or terms are disputed. "I was approved, and the interest rate they charged me is 22%."</li>
+            <li><strong>Service failure</strong> &mdash; the company would not act or could not be reached. "The website has been down for months and no email is ever answered."</li>
+          </ul>
+        </li>
+        <li>These categories cut across the database&rsquo;s own labels, so the official labels can serve as a third coder to compare against.</li>
+        <li>Give the agent the codebook and twenty cases, and read what it returns. Where it codes differently than you would, the rule was unclear; fix the rule, not the answer.</li>
+      </ul>
+    </div>
+<div class="card">
+      <h3>The pilot: two coders, one codebook</h3>
+      <ul>
+        <li>This is the main exercise of the unit.</li>
+        <li>Two subagents each code the same ten cases with your codebook, independently.</li>
+        <li>Where they disagree, the codebook was unclear. Discuss the disagreements, fix the rules, run again, and watch agreement rise.</li>
+        <li>What you keep at the end is the revised codebook.</li>
+        <li>One caution: the two subagents run on the same model, so their agreement is like one coder coding twice. Your own hand codes remain the reference.</li>
+        
+      </ul>
+    </div>
+<div class="card">
+      <h3>Check the agent's codes against your own</h3>
+      <ul>
+        <li>Hand-code a random sample yourself, then compare the agent's codes to yours.</li>
+        <li>Report the agreement, the same way you would for two human coders.</li>
+        <li>Low agreement means the codebook is vague or the task is too hard; fix that before you trust the rest.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Coding at scale</h3>
+      <ul>
+        <li>For dozens of cases, the agent codes them in the conversation. That is where you develop the codebook, and that is the work of today.</li>
+        <li>For thousands, do not code in the agent at all. Reading thousands of cases in a conversation uses up money and context, drifts as the session fills, and cannot be rerun.</li>
+        <li>Instead, the agent <strong>writes a script</strong>: each case goes to a model API with the frozen codebook as the prompt, on a cheap model, and the labels are saved to a CSV. The script can be rerun, resumed, and it costs only cents.</li>
+        <li>The frozen prompt in that script is your measurement instrument.</li>
+      </ul>
+    </div>
+    
+    
     </section>
+
+    
 
     <!-- DISCUSSION AND WRAP -->
     <section data-hands="none">
@@ -410,15 +415,23 @@
     <div class="card">
       <h3>Discussion</h3>
       <ul>
-        <li>Where did the agent surprise you, for better and for worse?</li>
-        <li>What did you catch when you read the code?</li>
-        <li>Would you have caught it without being told to look?</li>
+        <li>What did you learn today that you did not expect?</li>
+        <li>What did the agent get wrong today, and how did you catch it?</li>
+        <li>Which of today&rsquo;s three tools &mdash; plan mode, a second coder, several agents at once &mdash; will you use on your own project this week?</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Homework</h3>
+      <ul>
+        <li>Finish any stage of your plan you did not get through today, and commit each stage.</li>
+        <li>Write down the three instructions you found yourself repeating to the agent today. Tomorrow they become the first draft of your spec file.</li>
+        <li>Note one procedure you would want to run again on a future project. On Wednesday you turn it into a Skill.</li>
       </ul>
     </div>
     <div class="card">
       <h3>Why long sessions drift</h3>
       <ul>
-        <li>As a session grows, the text the agent is holding from the session fills up with files, outputs, and errors.</li>
+        <li>As a session grows, the text the agent is holding fills up with files, outputs, and errors.</li>
         <li>Your instructions from the first hour get crowded out, and the agent slowly reverts to its own defaults.</li>
         <li>Tomorrow morning it remembers nothing at all.</li>
         <li>Tomorrow's session builds the fix: instructions that <strong>persist</strong> outside the conversation.</li>
@@ -438,38 +451,45 @@
     <!-- steps -->
     <div class="hands" data-for="steps">
       <div class="exi">
-        <span class="step">Exercise</span>
-        <h4>Which mode would you pick?</h4>
-        <p>For each task, decide which of the three modes fits:</p>
-        <ul>
-          <li>First look at a collaborator's undocumented dataset.</li>
-          <li>Rerunning your validated cleaning script on this month's new wave.</li>
-          <li>Changing how your script treats missing income.</li>
-          <li>"Plan the analysis for my one-sentence question from last night."</li>
-        </ul>
-        <p>There is a defensible answer for each; the point is that you choose the mode on purpose.</p>
+        <span class="step">Step 1</span>
+        <h4>Say your problem in one sentence</h4>
+        <p>Start from the sentence you wrote last night. Write it at the top of a new file, in plain words a colleague outside your field would understand.</p>
       </div>
       <div class="exi">
-        <span class="step">The task</span>
-        <h4>Direct one analysis on your data</h4>
-        <p>Start from the sentence you wrote last night, on your own data. Work through three stages, and commit after each:</p>
+        <span class="step">Step 2</span>
+        <h4>Write your own plan</h4>
+        <p>Under the sentence, break the work into steps, as concretely as you can. Use the stages as a guide: prepare, explore, model, report.</p>
         <ul>
-          <li><strong>Clean.</strong> Missing codes, variable types, sample filters.</li>
-          <li><strong>Describe.</strong> The descriptives that matter for your question.</li>
-          <li><strong>Model.</strong> One model suited to your question.</li>
+          <li>Name the actual variables, the actual files, the actual model.</li>
+          <li>Where you are unsure, write the question instead of skipping it.</li>
         </ul>
-        <p>Two requirements:</p>
+      </div>
+      <div class="exi">
+        <span class="step">Step 3</span>
+        <h4>Have the agent refine it</h4>
+        <p>Enter plan mode (Shift+Tab in both tools; <code>/plan</code> in Codex), then:</p>
+        <div class="code">This is my problem and this is my plan. Refine it: what is missing, what order is wrong, what would you cut, and which of my choices would another analyst make differently?<span class="copy">copy</span></div>
+      </div>
+      <div class="exi">
+        <span class="step">Step 4</span>
+        <h4>Judge the refined plan</h4>
         <ul>
-          <li>Use plan mode (Claude Code) or a read-only sandbox (Codex) at least once, and change at least one thing in the plan before you run it.</li>
-          <li>Every commit message must be readable by a colleague.</li>
+          <li>Go through its changes one by one: accept what convinces you, change back what does not.</li>
+          <li>Share with a neighbor: one change you accepted, one you rejected, and why.</li>
+          <li>The refined plan is yours only after this pass.</li>
         </ul>
+      </div>
+      <div class="exi">
+        <span class="step">Then</span>
+        <h4>Execute the plan, stage by stage</h4>
+        <p>Work through the plan on your own data, committing after each stage. Every commit message must be readable by a colleague.</p>
       </div>
       <div class="exi">
         <span class="step">Stage 1</span>
         <h4>Clean</h4>
         <p>Ask the agent to explore first:</p>
         <div class="code">What are the missing codes in my key variables? What types are they stored as?<span class="copy">copy</span></div>
-        <p>Common problems it should find for you:</p>
+        <p>Common problems it should find:</p>
         <ul>
           <li>missing values coded as numbers (for example -1 to -5, or 999)</li>
           <li>numbers stored as text</li>
@@ -481,7 +501,7 @@
         <span class="step">Stage 2</span>
         <h4>Describe</h4>
         <ul>
-          <li>Ask for the summaries that answer your question, and not for a generic dump of every variable.</li>
+          <li>Ask for the summaries that answer your question, not a dump of every variable.</li>
           <li>For each table or figure, ask yourself: would I show this to a co-author as evidence?</li>
           <li>Commit when the descriptives match what you know about your data.</li>
         </ul>
@@ -508,19 +528,7 @@
     </div>
 
     <!-- coding -->
-    <div class="hands" data-for="coding">
-      <div class="exi">
-        <span class="step">Try it</span>
-        <h4>Code a slice of your own text</h4>
-        <ul>
-          <li>Take twenty text cases from your project and write a two-category codebook.</li>
-          <li>Have the agent code them, and hand-code the same twenty yourself.</li>
-          <li>Compare, and note where you and the agent disagree.</li>
-        </ul>
-      </div>
-    </div>
-
-    <!-- verify -->
+    
     <div class="hands" data-for="verify">
       <div class="exi">
         <span class="step">Try it</span>
@@ -554,6 +562,29 @@
           <li>You finished two things in the time of one.</li>
         </ul>
       </div>
+      
+    
+      <div class="exi">
+        <span class="step">Try it 1</span>
+        <h4>Code a slice of your own text</h4>
+        <ul>
+          <li>Take twenty text cases from your project and write a two-category codebook.</li>
+          <li>No text of your own? Use <a href="data/cfpb_complaints_10.csv" download>ten real consumer complaints</a> and the four-category codebook from the card on the left.</li>
+          <li>Have the agent code them, and hand-code the same twenty yourself.</li>
+          <li>Compare, and note where you and the agent disagree.</li>
+        </ul>
+      </div>
+      <div class="exi">
+        <span class="step">Try it 2</span>
+        <h4>Double-code your own cases</h4>
+        <p>Take the twenty cases and the codebook from Try it 1:</p>
+        <div class="code">Have two subagents code these ten cases with my codebook, independently and without seeing each other's work. Then show me a table of the two codings side by side and list every disagreement.<span class="copy">copy</span></div>
+        <ul>
+          <li>For each disagreement, decide: which rule in the codebook was unclear? Fix the rule, and run it again.</li>
+          <li>Note what happened to agreement after the fix.</li>
+        </ul>
+      </div>
+    
     </div>
   </aside>
 

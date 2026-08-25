@@ -119,10 +119,10 @@
     <div class="toc">
       <a href="#opening">Opening</a>
       <a href="#inconsistent">Why the agent is inconsistent</a>
-      <a href="#agentsmd">Your AGENTS.md <span class="has">hands-on</span></a>
+      <a href="#agentsmd">Your instructions files <span class="has">hands-on</span></a>
       <a href="#skills">Skills <span class="has">hands-on</span></a>
       <a href="#usage">Managing your usage <span class="has">hands-on</span></a>
-      <a href="#wrap">Wrap</a>
+      <a href="#wrap">Wrap-up</a>
     </div>
   </nav>
 
@@ -131,7 +131,7 @@
     <p class="kicker">Session 3 · Wednesday, August 26, 2026</p>
     <h1>Harnessing AI Agents</h1>
     <p class="byline" style="margin:2px 0 16px;color:var(--muted);font-size:15px">Han Zhang and Bing Tian, with the help of Claude</p>
-    <p class="goal">Make the agent follow your standards in every session. Today you build the course's core deliverable: your own AGENTS.md and one Skill. When a section has something to do, it appears in the panel on the right.</p>
+    <p class="goal">The agent must follow your standards in every session. Today you build the core deliverable of the course, which includes your instruction files and one Skill, and if a section requires action, it appears in the right panel.</p>
 
     <!-- OPENING -->
     <section data-hands="none">
@@ -140,13 +140,12 @@
     <div class="card">
       <h3>Today</h3>
       <ul>
-        <li>Goal: make the agent follow your standards in every session.</li>
-        <li>Today produces the course's core deliverable.</li>
+        <li>Make the agent follow your standards in every session.</li>
+        <li>Today we produce the main result of the course.</li>
       </ul>
       <table>
         <tr><td>Why the agent is inconsistent</td></tr>
-        <tr><td>Your AGENTS.md</td></tr>
-        <tr><td>Break</td></tr>
+        <tr><td>Your instructions files</td></tr>
         <tr><td>Skills</td></tr>
         <tr><td>Managing your usage</td></tr>
         <tr><td>Wrap</td></tr>
@@ -155,15 +154,17 @@
     <div class="card">
       <h3>Where we left off</h3>
       <ul>
-        <li>You directed a full analysis: clean, describe, model, output.</li>
-        <li>Reading the code caught at least one silent choice.</li>
+        <li>You gave directions for a full analysis and said to clean, describe, model, and output.</li>
+        <li>Reading the code showed at least one silent choice.</li>
         <li>Two open problems from yesterday:
           <ul>
             <li>long sessions drift</li>
             <li>every new session starts blank</li>
           </ul>
         </li>
-        <li>Both are fixed by the same file, AGENTS.md, which is today's topic.</li>
+        <li>Your instruction files fix both, and they are today's topic.</li>
+        <li>Last night, you wrote three instructions and repeated them to the agent. These three lines are the first draft and you will write this file this morning.</li>
+        <li>You noted one procedure you want to run again, and that procedure is the Skill you will write this afternoon.</li>
       </ul>
     </div>
     </section>
@@ -185,7 +186,7 @@
         <li>Two structural reasons:
           <ul>
             <li>Every session starts <strong>blank</strong>, so the RA forgets between meetings.</li>
-            <li>A vague instruction leaves gaps, and the agent fills them with its own defaults.</li>
+            <li>Vague instructions leave gaps, and the agent fills these gaps with its own defaults.</li>
           </ul>
         </li>
       </ul>
@@ -202,65 +203,87 @@
             <li>what a table should look like</li>
           </ul>
         </li>
-        <li>Any one of them can change what your reader concludes.</li>
+        <li>Each one can change your reader's conclusion.</li>
       </ul>
     </div>
     <div class="card">
-      <h3>The fix: a specification that persists</h3>
+      <h3>Instructions: global and project</h3>
       <ul>
-        <li>Better prompting each morning does not fix this, because the same gaps reopen in the next session.</li>
-        <li>The fix is a written specification the agent reads at the start of <strong>every</strong> session, before you type anything.</li>
-        <li>The standard name is <code>AGENTS.md</code>, at the root of your project. Codex and most other agents read it directly.</li>
-        <li>Claude Code reads its own file instead, named <code>CLAUDE.md</code>; it does not read <code>AGENTS.md</code>. The two files do the same job, only the name differs.</li>
-        <li>So: Codex users write <code>AGENTS.md</code>, Claude Code users write <code>CLAUDE.md</code>. Everything below applies to both; where we say AGENTS.md, use your tool&rsquo;s name.</li>
-        <li>It is the standard operating procedure for your AI assistant.</li>
+        <li>The agent does not know you, so it fills gaps with default settings, and these settings belong to the average analyst, which is not you.</li>
+        <li>Better prompting each morning does not fix this, and the same gaps reopen in the next session.</li>
+        <li>The fix is written <strong>instructions</strong>, and read it at the start of every session. There are two levels:</li>
+        <li><strong>Project instructions</strong> live at the project root. They hold the project rules and travel with the repository when you share it.</li>
+        <li><strong>Global instructions</strong> live in your home folder and hold rules about you, which include your language, your software, and your reporting habits, and apply to every project on your machine. They are personal and never shared.</li>
+        <li>The names change depending on the tool, but the structure stays the same:</li>
+      </ul>
+      <table>
+        <tr><th></th><th>Claude Code</th><th>Codex</th></tr>
+        <tr><td>Project</td><td><code>CLAUDE.md</code> at the repo root</td><td><code>AGENTS.md</code> at the repo root</td></tr>
+        <tr><td>Global</td><td><code>~/.claude/CLAUDE.md</code></td><td><code>~/.codex/AGENTS.md</code></td></tr>
+      </table>
+      <ul>
+        <li>Please paste the original text you want me to rewrite.</li>
       </ul>
     </div>
     <div class="card">
-      <h3>What goes into an AGENTS.md</h3>
+      <h3>Memory (Claude Code)</h3>
       <ul>
-        <li>Only what applies to <strong>every</strong> task in the project:
-          <ul>
-            <li>the research question and the data</li>
-            <li>methodological standards: weights, standard errors, missing rules</li>
-            <li>file and naming conventions</li>
-            <li>output formats</li>
-            <li>things the agent must never do</li>
-          </ul>
-        </li>
-        <li>Keep it short. Write the page of rules you would give any new RA on day one, and nothing more.</li>
+        <li>Claude Code also keeps <strong>memory</strong>, which are notes about you and the project. They stay across sessions.</li>
+        <li>The agent writes a note when it learns something and when you say "remember this."</li>
+        <li><code>/memory</code> shows the notes. You can edit or delete them.</li>
+        <li>Please paste the text you want me to rewrite, and I will apply the rules you specified.</li>
+        <li>Codex does not have memory in the terminal, and its instruction files are everything.</li>
       </ul>
     </div>
     <div class="card">
-      <h3>Why this is worth the effort</h3>
+      <h3>Instructions or memory: which one for what</h3>
       <ul>
-        <li>Once your standards are written down, the agent applies them in every session, on your machine or a collaborator's.</li>
-        <li>The agent stops re-guessing your conventions, so it handles the same task the same way each time.</li>
-        <li>In one study across 138 projects, an instructions file cut the agent's mistakes by a third to a half.</li>
+        <li>A rule you want enforced goes in instructions: "cluster standard errors by county."</li>
+        <li>Memory keeps track of everything that happened and you prefer R. The income variable is messy and you explain why you chose logit instead of probit.</li>
+        <li>If you keep correcting the same thing, put the correction in the instructions. Memory might notice it and Instructions guarantee it.</li>
+        <li>Memory is personal and it stays on your machine. A collaborator clones your project. They get your project instructions but do not get your memory. Put anything the team needs in the instructions file.</li>
       </ul>
-      <div class="quote">An AGENTS.md that encodes your standards is the AI equivalent of a pre-registration.</div>
+    </div>
+    
+    <div class="card">
+      <h3>Scope and limits</h3>
+      <ul>
+        <li>It changes how things work and the output follows your choices and it does not follow the agent's guesses, which means the output matches your work. There are fewer differences between the morning and the afternoon and this happens because there is less guessing.</li>
+        <li>It does not change what it does not change: the model still has randomness and a rule can still be ignored. This happens especially late in a long session and two runs are still not identical.</li>
+        <li>The file does not replace checking and does not make a result reproducible and reproducibility is in the committed script. The file shapes how code is written and the committed code is what reruns exactly.</li>
+      </ul>
+    </div>
+    
+    <div class="card">
+      <h3>Evidence</h3>
+      <ul>
+        <li>Write down your standards and the agent applies them in every session and this happens on your machine or a collaborator's.</li>
+        <li>The agent stops guessing your conventions, and you spend less time in each session correcting the same things.</li>
+        <li>One study looked at 138 projects, an instructions file was used, and it cut the agent's mistakes by a third to a half.</li>
+      </ul>
+      <div class="quote">An instructions file that encodes your standards is the AI equivalent of a pre-registration.</div>
     </div>
     </section>
 
     <!-- YOUR AGENTS.MD -->
     <section data-hands="agentsmd">
-    <h2 class="sec" id="agentsmd">Your AGENTS.md <span class="hastag">· do it on the right</span></h2>
+    <h2 class="sec" id="agentsmd">Your instructions files <span class="hastag">· do it on the right</span></h2>
 
     <div class="card">
       <h3>The same prompt, two ways</h3>
       <ul>
-        <li><strong>Without AGENTS.md.</strong> The agent guesses: default standard errors, its own table format, silent choices about missing data.</li>
-        <li><strong>With AGENTS.md.</strong> It applies your weighting rule and your table format without being asked.</li>
-        <li>The prompt is identical, and only the <strong>context</strong> differs.</li>
+        <li><strong>Without instructions.</strong> The agent makes guesses. It uses default standard errors, its own table format, and makes silent choices about missing data.</li>
+        <li><strong>With instructions.</strong> It uses your weighting rule and your table format, and you do not have to ask.</li>
+        <li>The prompt is the same, but only the <strong>context</strong> is different.</li>
       </ul>
     </div>
     <div class="card">
       <h3>What to watch in the side-by-side</h3>
       <ul>
-        <li>The standard errors: the default against the ones the file requires.</li>
-        <li>The table: the agent's habit against your journal's format.</li>
-        <li>The missing data: silently dropped against handled by your written rule.</li>
-        <li>The model is no smarter. What changed is that your standards were <strong>in the file the agent reads</strong>.</li>
+        <li>The standard errors and these are the defaults compared to what the file requires.</li>
+        <li>The table shows how the agent's habit compares to your journal's format.</li>
+        <li>The missing data and silently dropped against handled by your written rule.</li>
+        <li>The model is not smarter. Your standards were <strong>in the file the agent reads</strong> and that is what changed.</li>
       </ul>
     </div>
     <div class="card">
@@ -269,12 +292,13 @@
         <li>Write four sections for your own project:
           <ul>
             <li><strong>Project context.</strong> The question, the data, the unit of analysis.</li>
-            <li><strong>Data conventions.</strong> Key variables, units, missing-data policy.</li>
-            <li><strong>Output standards.</strong> Table format, chart style, what every result must report.</li>
-            <li><strong>Safety rules.</strong> What the agent must never do.</li>
+            <li><strong>Data conventions.</strong> Main variables, units, and rules for missing data.</li>
+            <li><strong>Output standards.</strong> Use a table format and chart style and Report every result.</li>
+            <li><strong>Safety rules.</strong> Things the agent must never do.</li>
           </ul>
         </li>
-        <li>Write concrete lines: name your variables, your units, your journal.</li>
+        <li>Write specific lines, name your variables, name your units, and name your journal.</li>
+        <li>RA Day One Rules - Be on time for duty shifts and meetings. - Know emergency procedures, evacuation routes, and key contacts. - Maintain confidentiality and report serious incidents to your supervisor immediately. - Respond to resident emails within 24 hours and log all incidents. - Conduct nightly rounds and check doors, lights, and noise. - Enforce policies consistently and document violations. - Handle conflicts calmly and refer residents to resources when needed. - Report maintenance issues and keep common areas clean. - Attend all required trainings and team meetings. - Take care of yourself and seek support if you feel overwhelmed.</li>
       </ul>
     </div>
     <div class="card">
@@ -283,13 +307,13 @@
         <li>Project context:
           <ul>
             <li>"Panel survey of 4,000 respondents, waves 2020 to 2024; unit of analysis is person-wave."</li>
-            <li>"The outcome is political participation; the key predictor is education."</li>
+            <li>People participate in politics and education predicts this.</li>
           </ul>
         </li>
         <li>Data conventions:
           <ul>
             <li>"All models use survey-weighted standard errors."</li>
-            <li>"Missing codes are -1 to -5; recode to NA before any computation."</li>
+            <li>Missing codes are -1 to -5, and recode them to NA, and do this before any computation.</li>
             <li>"Never modify anything in <code>data/raw/</code>."</li>
           </ul>
         </li>
@@ -301,15 +325,15 @@
         <li>Output standards:
           <ul>
             <li>"Every table reports N and confidence intervals."</li>
-            <li>"Charts use one message per chart, with a full-sentence title."</li>
-            <li>"Summaries follow: Question, Method, Finding, Limitation."</li>
+            <li>Each chart has one message and use a full-sentence title for each chart.</li>
+            <li>Summaries follow: Question, Method, Finding, Limitation.</li>
           </ul>
         </li>
         <li>Safety rules:
           <ul>
             <li>"Never fabricate a number; if a value is unavailable, say so."</li>
-            <li>"Always state the sample restriction used."</li>
-            <li>"Flag every result you could not verify."</li>
+            <li>Always state the sample restriction you used.</li>
+            <li>Mark any result you cannot verify.</li>
           </ul>
         </li>
       </ul>
@@ -323,9 +347,9 @@
     <div class="card">
       <h3>What a Skill is</h3>
       <ul>
-        <li>A <strong>Skill</strong> is one routine you repeat often, written down once and invoked whenever you need it.</li>
-        <li>Technically it is a Markdown file in your repo with a description the agent reads.</li>
-        <li>AGENTS.md holds the rules that apply <strong>always</strong>; a Skill holds one <strong>procedure</strong> you invoke when needed.</li>
+        <li>A <strong>Skill</strong> is a routine. You repeat it often, write it down once, and invoke it whenever you need it.</li>
+        <li>It is a Markdown file in your repo, has a description, and the agent reads it.</li>
+        <li>Your instructions file has the rules for <strong>always</strong> and a Skill has one <strong>procedure</strong> and you use it when needed.</li>
         <li>Two ways it fires:
           <ul>
             <li>the agent loads it automatically when the task matches its description</li>
@@ -347,19 +371,19 @@
           <ul>
             <li>the descriptive panel you produce for every new dataset</li>
             <li>your standard robustness battery</li>
-            <li>the data-prep sequence for each new wave of your survey</li>
+            <li>The data preparation steps for every new wave of your survey.</li>
           </ul>
         </li>
-        <li>If a new RA could not follow the written routine, neither can the agent.</li>
+        <li>If a new RA cannot follow the written routine, the agent cannot either.</li>
       </ul>
     </div>
     <div class="card">
-      <h3>The format you just used is an open standard</h3>
+      <h3>An open format</h3>
       <ul>
-        <li>The Skill you just wrote is a folder holding one plain-Markdown file, <code>SKILL.md</code>. Because it is plain text, you can audit a stranger's in minutes.</li>
-        <li>The format is an <strong>open standard</strong> (<a href="https://agentskills.io">agentskills.io</a>), adopted by roughly 20 agents including Cursor, Codex, and GitHub Copilot, so a Skill written once runs in all of them.</li>
-        <li>One public directory, <a href="https://skills.sh">skills.sh</a>, counts over <strong>1.1 million</strong> skill installs.</li>
-        <li>The practical consequence: for many research routines, someone has already written the Skill, and you can read exactly what you would be adopting.</li>
+        <li>The Skill you just wrote is a folder and holds one plain-Markdown file, <code>SKILL.md</code>, which is plain text, and you can audit a stranger's in minutes.</li>
+        <li>The format is an <strong>open standard</strong> (<a href="https://agentskills.io">agentskills.io</a>). About 20 agents use it, and these include Cursor, Codex, and GitHub Copilot, and a Skill written once runs in all of them.</li>
+        <li>One public directory, <a href="https://skills.sh">skills.sh</a>, has more than <strong>1.1 million</strong> skill installs.</li>
+        <li>The result is practical. For many research tasks, someone already wrote the Skill, and you can read exactly what you will adopt.</li>
       </ul>
     </div>
     <div class="card">
@@ -374,116 +398,116 @@
         <li>Three examples of what is inside:
           <ul>
             <li><code>scholar-citation</code> verifies every reference and checks it against retraction databases.</li>
-            <li><code>napkin</code> keeps an append-only log of the mistakes you make with the agent.</li>
-            <li><code>scholar-rag</code> searches your own Zotero library.</li>
+            <li><code>napkin</code> keeps a log of your mistakes with the agent, and this log is append-only.</li>
+            <li><code>scholar-rag</code> searches your Zotero library.</li>
           </ul>
         </li>
-        <li>Yongjun Zhang removed the five "write the whole paper" skills from his public release, to discourage fully automated paper writing.</li>
+        <li>Yongjun Zhang removed five "write the whole paper" skills from his public release, and he did this to discourage fully automated paper writing.</li>
         <li>On GitHub: <code>joshzyj/open-scholar-skill</code>, <code>letitbk/claude-academic-setup</code>, <code>Zhangyanbo/vibe-research-skill</code>.</li>
       </ul>
     </div>
     <div class="card">
       <h3>Four ways to install a Skill</h3>
       <ul>
-        <li><strong>Clone (either tool).</strong> Clone the repository, then copy or symlink the skill folders you want. <code>open-scholar-skill</code> ships a <code>bash setup.sh</code> that does the copying for you.</li>
-        <li><strong>Official catalog (either tool).</strong> Each vendor ships one. Claude Code registers Anthropic&rsquo;s marketplace the first time you start it, so you install by name with <code>/plugin install</code>. In Codex you type <code>$skill-installer</code> inside the session and name a skill from the <code>openai/skills</code> catalog.</li>
-        <li><strong>Third-party marketplace (Claude Code).</strong> Add someone&rsquo;s repository as a marketplace, then install by name. Claude Code shows the token cost and the full list of what will install before anything lands on disk.</li>
-        <li><strong>Cross-agent (either tool).</strong> The <code>skills</code> CLI installs from any public git repository into whichever agents you have. The skills.sh directory is a search index over public repositories. Anyone can appear in it, and nobody curates it.</li>
-        <li>Whichever route you take, the result is a folder you can open. A skill in your home skills folder applies to every project on your machine; a skill inside a repository travels with that project.</li>
+        <li><strong>Clone (either tool).</strong> Clone the repository and copy or symlink the skill folders you want. <code>open-scholar-skill</code> ships a <code>bash setup.sh</code> which does the copying for you.</li>
+        <li><strong>Official catalog (either tool).</strong> Each vendor ships one and Claude Code registers Anthropic’s marketplace when you first start it. You install by name with <code>/plugin install</code>, in Codex type <code>$skill-installer</code> inside the session, and name a skill from the <code>openai/skills</code> catalog.</li>
+        <li><strong>Third-party marketplace (Claude Code).</strong> Add a person's repository as a marketplace and then install it by name. Claude Code shows the token cost and the full list of files to install before they land on disk.</li>
+        <li><strong>Cross-agent (either tool).</strong> The <code>skills</code> CLI installs from any public git repository and installs into your agents. The skills.sh directory is a search index for public repositories, and anyone can appear in the index and nobody curates it.</li>
+        <li>No matter which route you take, you get a folder you can open.</li>
       </ul>
     </div>
     <div class="card">
       <h3>Where an installed skill sits on disk</h3>
       <ul>
-        <li>Installing a skill means putting a folder with a <code>SKILL.md</code> in a place your agent reads, and nothing else.</li>
-        <li>Both tools read a home location and a project location. Home applies to every project you open; the project location travels with the repository when you share it.</li>
-        <li>Claude Code reads <code>~/.claude/skills/</code> and <code>.claude/skills/</code>; Codex reads <code>~/.agents/skills/</code>, <code>~/.codex/skills/</code>, and <code>.agents/skills/</code>.</li>
-        <li>The two tools do not read each other&rsquo;s folders. Codex ships an <code>/import</code> command that copies Claude Code skills and settings across.</li>
+        <li>To install a skill, put a folder in a place your agent reads, and this folder must contain a <code>SKILL.md</code>, and do not add anything else.</li>
+        <li>Both tools read a home location and a project location, and the home location applies to every project you open, and the project location stays with the repository when you share it.</li>
+        <li>Claude Code reads <code>~/.claude/skills/</code> and <code>.claude/skills/</code>, and Codex reads <code>~/.agents/skills/</code>, <code>~/.codex/skills/</code>, and <code>.agents/skills/</code>.</li>
+        <li>The two tools cannot read each other's folders, and Codex includes an <code>/import</code> command which copies Claude Code skills and settings.</li>
       </ul>
     </div>
     <div class="card">
       <h3>Updating a skill you installed</h3>
       <ul>
-        <li>An installed skill is a snapshot. The author keeps editing theirs; yours does not change until you update it.</li>
-        <li><strong>Cloned:</strong> <code>git pull</code> in the clone, then re-run <code>setup.sh</code> or copy again. A copied folder does not receive the pull; a symlinked one does.</li>
-        <li><strong>Claude Code marketplace:</strong> Anthropic&rsquo;s own marketplaces update in the background and then ask you to run <code>/reload-plugins</code>. Third-party marketplaces do not update on their own: run <code>/plugin marketplace update</code>, or switch auto-update on in the <code>/plugin</code> menu.</li>
-        <li><strong>Cross-agent:</strong> <code>npx skills update</code> re-fetches every skill from its source; name one to update just that one.</li>
-        <li><strong>Codex catalog:</strong> there is no update command; run <code>$skill-installer</code> on the skill again.</li>
-        <li>An update rewrites instructions your agent will follow, so read the changes the way you read the skill before installing it. An update also overwrites edits you made in that folder; keep your own edits under a different skill name.</li>
+        <li>An installed skill is a snapshot, and the author can keep editing their skill, but yours does not change until you update it.</li>
+        <li><strong>Cloned:</strong> <code>git pull</code> in the clone and re-run <code>setup.sh</code> or copy again. A copied folder does not get the pull but a symlinked folder does.</li>
+        <li><strong>Claude Code marketplace:</strong> Anthropic’s marketplaces update in the background and they then ask you to run <code>/reload-plugins</code>. Third-party marketplaces do not update by themselves so run <code>/plugin marketplace update</code> or turn on auto-update in the <code>/plugin</code> menu.</li>
+        <li><strong>Cross-agent:</strong> <code>npx skills update</code> fetches every skill again from its source, and name one skill to update only that one.</li>
+        <li><strong>Codex catalog:</strong> There is no update command, so run <code>$skill-installer</code> on the skill again.</li>
+        <li>An update changes the instructions for your agent. Read the new changes like you read the original skill before installing. An update will overwrite any edits you made in that folder, so keep your own edits under a different skill name.</li>
       </ul>
     </div>
     <div class="card">
       <h3>Installing without the terminal</h3>
       <ul>
-        <li>The Claude Code desktop app installs plugins from a window: the <strong>+</strong> next to the prompt box &rarr; <strong>Plugins</strong> &rarr; <strong>Add plugin</strong> opens a browser of your marketplaces, and <strong>Manage plugins</strong> turns them on and off.</li>
-        <li>Codex has no install window. The IDE extension lists your skills, and the installer runs as a command typed inside the session.</li>
-        <li>Neither tool has a window that installs a plain skill folder. You put the folder in the right place yourself, which is what the commands on this page do for you.</li>
-        <li>The desktop apps read the same folders the terminal reads, so a skill installed either way shows up in both.</li>
+        <li>The Claude Code desktop app installs plugins from a window. Click the <strong>+</strong> next to the prompt box → <strong>Plugins</strong> → <strong>Add plugin</strong>, which opens a browser of your marketplaces, and use <strong>Manage plugins</strong> to turn them on and off.</li>
+        <li>Codex does not have an install window. The IDE extension shows your skills and you run the installer by typing a command inside the session.</li>
+        <li>Neither tool has a window to install a plain skill folder, so you must put the folder in the right place yourself, and the commands on this page do that for you.</li>
+        <li>The desktop apps and the terminal read the same folders and a skill shows up in both places if you install it one way or the other.</li>
       </ul>
     </div>
     <div class="card">
-      <h3>Installing a Skill is a trust decision</h3>
+      <h3>Trust</h3>
       <ul>
-        <li>A Skill is instructions your agent will follow, so installing one means trusting whoever wrote it.</li>
-        <li>Sources fall into three tiers: official collections from the tool vendors; people you know, such as a coauthor or labmate sharing a private repository; and strangers on the internet. The first two you can install after a quick read; the third you read line by line first.</li>
-        <li>Snyk's <strong>ToxicSkills</strong> study (2026) found prompt injection in <strong>36%</strong> of the agent skills it examined, and <strong>1,467</strong> malicious payloads on a single skill registry (ClawHub).</li>
-        <li>A skill body can embed dynamic-context syntax that runs shell commands the moment the skill loads, before any human reads it.</li>
-        <li>Anthropic's own documentation says: "Only install plugins and add marketplaces from sources you trust."</li>
-        <li>The rule in this course: read the <code>SKILL.md</code> before you install, and check the <code>allowed-tools</code> grant and any embedded shell command.</li>
-      </ul>
-    </div>
-    <div class="card">
-      <h3>What is shared and what stays yours</h3>
-      <ul>
-        <li>Everything that defines your agent&rsquo;s behavior in a project is a file in the project folder: the context file, <code>.claude/agents/</code>, and the skill folders. Whoever gets the folder gets your setup.</li>
-        <li>Your home folder <code>~/.claude/</code> is different: it holds your personal skills, your settings, and the agent&rsquo;s memory of you. It applies to every project on your machine, and it is not part of any shared folder.</li>
-        <li>So you share the project folder, and you keep the home folder.</li>
-        <li>Never share: <code>settings.local.json</code>, API keys, and anything under <code>~/.claude/</code>.</li>
-        <li>The simplest sharing is one-way: copy someone&rsquo;s project folder and keep what you want. You get a snapshot, and their later changes reach you only when you copy again.</li>
-      </ul>
-    </div>
-    <div class="card">
-      <h3>Collaborating through a shared Dropbox folder</h3>
-      <ul>
-        <li>For two or three people who trust each other, a shared Dropbox or Drive folder is the easiest route: the files sync on their own, and nobody learns a new tool.</li>
-        <li>One working rule makes it safe: do not edit the same file at the same time. Split the files between you, or say who is editing what.</li>
-        <li>If you break the rule, Dropbox keeps both versions and renames one <code>AGENTS (conflicted copy 2026-04-15).md</code>. Nothing is lost, but you merge the two by hand.</li>
-        <li>Dropbox keeps versions per file for a limited time (30 days on Basic, 180 on Business), with no record of why a change was made.</li>
-        <li>One warning: do not put a git repository inside a synced folder. Two machines writing its internal files at the same moment can corrupt it. The standard practice is to keep data in Dropbox and code in git.</li>
-      </ul>
-    </div>
-    <div class="card">
-      <h3>Collaborating through git: both of you commit</h3>
-      <ul>
-        <li>On Monday you learned one git command: commit a save point. Collaboration adds one more command: <strong>pull</strong>, which fetches your partner&rsquo;s commits.</li>
-        <li>Nobody has to approve anyone. One of you creates the repository and adds the other as a collaborator; from then on both push changes directly. Review steps exist on GitHub, and they are optional and off by default.</li>
-        <li>The creator alone controls the settings: who is invited, public or private, deletion. Over the code itself, you are equals.</li>
-        <li>The routine that prevents almost all trouble: <strong>pull before you start, then edit, then commit and push.</strong></li>
-        <li>When you both changed the same file anyway, the later push is rejected. The rejection protects your partner&rsquo;s work: pull first, and git merges the file on its own when you touched different lines. Only when you edited the same lines does it stop, put both versions side by side in the file, and wait for you to choose.</li>
-        <li>Nothing is ever silently overwritten. This record of who changed what, and the automatic merging, are what git adds over the shared folder.</li>
-      </ul>
-    </div>
-    <div class="card">
-      <h3>The agent runs git for both of you</h3>
-      <ul>
-        <li>Neither of you memorizes git commands. Start a session with &ldquo;pull the latest,&rdquo; end it with &ldquo;commit and push, the change was about X.&rdquo;</li>
-        <li>When a push is rejected or a merge stops, say &ldquo;resolve it and show me what you kept.&rdquo;</li>
-        <li>Add one line to your context file: confirm with me before pushing. Without it the agent will stage, commit, and push in one step, and the change leaves your machine before you have read it.</li>
+        <li>A Skill contains instructions for your agent, and installing a skill means you trust the author.</li>
+        <li>Sources have three tiers and the first tier is official collections from tool vendors, the second tier is people you know, like a coauthor or labmate sharing a private repository, and the third tier is strangers on the internet. You can install the first two after a quick read, but you must read the third one line by line first.</li>
+        <li>Snyk published a <strong>ToxicSkills</strong> study in 2026, which found prompt injection in <strong>36%</strong> of the agent skills studied and also found <strong>1,467</strong> malicious payloads on one skill registry called ClawHub.</li>
+        <li>A skill body can include dynamic-context syntax, and this syntax runs shell commands as soon as the skill loads, which happens before a human reads it.</li>
+        <li>Anthropic's documentation says: "Only install plugins and add marketplaces from sources you trust."</li>
+        <li>This course has a rule. Read the <code>SKILL.md</code> before you install and check the <code>allowed-tools</code> grant and any embedded shell command.</li>
       </ul>
     </div>
     <div class="card">
       <h3>Editing a Skill you adopted</h3>
       <ul>
-        <li>You can edit any Skill you adopt: copy the folder into your home skills folder, edit <code>SKILL.md</code>, and the change applies immediately, with no restart.</li>
-        <li>Renaming the directory renames the command; rewriting the <code>description</code> field changes when it fires on its own.</li>
-        <li>The cleanest worked example: Yanbo Zhang's <code>my-scientific-taste</code> is a deliberately replaceable placeholder holding <strong>your</strong> scientific taste, which his other skills consult by name.</li>
-        <li>His rule for where things belong matches the split you built today:</li>
+        <li>You can edit any Skill you adopt and copy the folder into your home skills folder. Edit <code>SKILL.md</code>, and the change applies immediately, so you do not need to restart.</li>
+        <li>Renaming the directory renames the command and rewriting the <code>description</code> field changes when it fires on its own.</li>
+        <li>This is the cleanest worked example. Yanbo Zhang's <code>my-scientific-taste</code> is a placeholder and is meant to be replaced and holds <strong>your</strong> scientific taste and his other skills consult it by name.</li>
+        <li>His rule for where things go matches the split you made today:</li>
       </ul>
       <table>
         <tr><td>What is true for everyone</td><td>goes in a shared Skill</td></tr>
         <tr><td>What is true for you</td><td>goes in <code>my-scientific-taste</code></td></tr>
         <tr><td>What is true for this project</td><td>goes in <code>AGENTS.md</code></td></tr>
       </table>
+    </div>
+    <div class="card">
+      <h3>What is shared and what stays yours</h3>
+      <ul>
+        <li>Your agent's behavior is defined by files in the project folder, and these include the context file, <code>.claude/agents/</code>, and the skill folders, and anyone who gets the folder gets your setup.</li>
+        <li>Your home folder <code>~/.claude/</code> is different and holds your personal skills, your settings, and the agent’s memory of you. It applies to every project on your machine and is not part of any shared folder.</li>
+        <li>You share the project folder and keep the home folder.</li>
+        <li>Do not share <code>settings.local.json</code>, API keys, or anything under <code>~/.claude/</code>.</li>
+        <li>One-way sharing is the simplest method. Copy a person's project folder and keep what you want, and you get a snapshot, and their later changes reach you only when you copy again.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Collaborating through a shared Dropbox folder</h3>
+      <ul>
+        <li>If two or three people trust each other, use a shared Dropbox or Drive folder. It is the easiest way, files sync automatically, and nobody has to learn a new tool.</li>
+        <li>Follow one rule to stay safe: do not edit the same file at the same time and split the files between people, or, say who is editing what.</li>
+        <li>If you break the rule, Dropbox keeps both versions and it renames one <code>AGENTS (conflicted copy 2026-04-15).md</code>. Nothing is lost and you must merge the two by hand.</li>
+        <li>Dropbox saves file versions for a set time. It keeps them for 30 days on Basic and for 180 days on Business. Dropbox does not record why a change happened.</li>
+        <li>Warning: Do not put a git repository inside a synced folder, and two machines might write internal files at the same time, which can corrupt the repository. Standard practice is to keep data in Dropbox and code in git.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Collaborating through git: both of you commit</h3>
+      <ul>
+        <li>On Monday you learned one git command, which is to commit a save point. Collaboration adds one more command, <strong>pull</strong>, which fetches your partner’s commits.</li>
+        <li>No one needs to approve anyone. One person creates the repository and they add the other person as a collaborator, and both people can push changes directly after that. GitHub has review steps, which are optional and are off by default.</li>
+        <li>Only the creator controls the settings; they decide who is invited, choose public or private, and control deletion. You are equals over the code.</li>
+        <li>The routine that stops almost all trouble: <strong>pull before you start, then edit, then commit and push.</strong></li>
+        <li>You both changed the same file, so the later push is rejected, which protects your partner&rsquo;s work, so pull first. Git merges the file automatically if you touched different lines, but it only stops if you edited the same lines, and then it puts both versions side by side in the file and waits for you to choose.</li>
+        <li>Nothing is overwritten silently, and Git tracks who changed what and merges changes automatically and adds these features to the shared folder.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>The agent runs git for both of you</h3>
+      <ul>
+        <li>Neither of you memorizes git commands, so start a session by saying, “pull the latest,” and end a session by saying, “commit and push, the change was about X.”</li>
+        <li>If a push is rejected or a merge stops, say &ldquo;resolve it and show me what you kept.&rdquo;</li>
+        <li>Add one line to your context file and confirm with me before pushing. Without this line, the agent will stage, commit, and push in one step and the change will leave your machine before you read it.</li>
+      </ul>
     </div>
     </section>
 
@@ -494,17 +518,26 @@
     <div class="card">
       <h3>The agent bills by the token</h3>
       <ul>
-        <li>Everything you send and everything it writes is counted in tokens, against the plan limit you first met on Tuesday.</li>
-        <li>A long session, a big file pasted in, or many rounds of back-and-forth all run the count up.</li>
-        <li>Running several agents at once spends it several times as fast.</li>
+        <li>Everything you send counts as tokens, and Everything it writes counts as tokens, and These count against the plan limit you first met on Tuesday.</li>
+        <li>Every new message sends the entire conversation again, and a reply at the end of a long session costs much more than an early reply, and the cost of a session grows faster than its length.</li>
+        <li>You paste a large file, have many rounds of back-and-forth, or several agents run it at once, which increases the count.</li>
       </ul>
     </div>
     <div class="card">
+      <h3>Both load every session, so keep them short</h3>
+      <ul>
+        <li>Every session starts by reading your instructions files and, in Claude Code, the memory index, and all of it costs context before you type a word.</li>
+        <li>More is not better. The agent follows a short list of rules well but does not follow a long list as well. A large file costs more and also leads to worse compliance.</li>
+        <li>Prune on a schedule and delete rules that do not apply anymore and memories that were wrong. <code>/memory</code> opens the memory files for this purpose.</li>
+      </ul>
+    </div>
+
+    <div class="card">
       <h3>How to spend less</h3>
       <ul>
-        <li>Use a smaller, cheaper model for simple steps, and save the strong one for the hard ones.</li>
-        <li>Give a tight brief so it gets there in fewer rounds.</li>
-        <li>Start a fresh session for a new task, so it is not re-reading an old one.</li>
+        <li>Use a small, cheap model for easy steps and save the strong model for hard steps.</li>
+        <li>Write a short brief, which will reduce the number of rounds.</li>
+        <li>Please provide the text you would like me to rewrite. I am ready to start the task once you provide the content.</li>
         <li>Point it at just the one file it needs.</li>
       </ul>
     </div>
@@ -512,18 +545,18 @@
 
     <!-- WRAP -->
     <section data-hands="none">
-    <h2 class="sec" id="wrap">Wrap</h2>
+    <h2 class="sec" id="wrap">Wrap-up</h2>
     <div class="card">
-      <h3>Wrap</h3>
+      <h3>Wrap-up</h3>
       <ul>
         <li>You now have the first version of the course deliverable:
           <ul>
             <li>a working setup</li>
-            <li>a project AGENTS.md that survives a restart</li>
+            <li>A project instructions file and it survives a restart.</li>
             <li>one Skill that encodes your own routine</li>
           </ul>
         </li>
-        <li>Tomorrow you use the same setup for literature and writing, where the mistakes are harder to catch.</li>
+        <li>Tomorrow you will use the same setup for literature and writing, and mistakes are harder to catch there.</li>
       </ul>
     </div>
     </section>
@@ -541,28 +574,35 @@
     <div class="hands" data-for="agentsmd">
       <div class="exi">
         <span class="step">Step 1</span>
-        <h4>Create your AGENTS.md</h4>
-        <p>Make the file at the root of your project &mdash; <code>AGENTS.md</code> for Codex, <code>CLAUDE.md</code> for Claude Code. Ask the agent to start it for you:</p>
-        <div class="code">Create your context file (AGENTS.md or CLAUDE.md, whichever you read) at the root of my project with four sections: project context, data conventions, output standards, and safety rules. Ask me what to put in each.<span class="copy">copy</span></div>
+        <h4>Set up your global instructions</h4>
+        <p>There are two or three rules about you, which are not about any project, and include the language you want for answers, the software you use, and a reporting habit.</p>
+        <div class="code">Create my global instructions file (~/.claude/CLAUDE.md or ~/.codex/AGENTS.md, whichever you read) with these rules about how I work: [your rules].<span class="copy">copy</span></div>
       </div>
       <div class="exi">
         <span class="step">Step 2</span>
-        <h4>Fill in the four sections</h4>
-        <p>Write concrete lines for your own project. Name your variables, your units, your journal.</p>
-        <ul>
-          <li><strong>Project context:</strong> the question, the data, the unit of analysis.</li>
-          <li><strong>Data conventions:</strong> key variables, units, missing-data policy.</li>
-          <li><strong>Output standards:</strong> table format, chart style, what every result must report.</li>
-          <li><strong>Safety rules:</strong> what the agent must never do.</li>
-        </ul>
+        <h4>Set up your project instructions from last night's three rules</h4>
+        <p>Use the three instructions from last night and put the file in your project root. Use <code>CLAUDE.md</code> for Claude Code and <code>AGENTS.md</code> for Codex.</p>
+        <div class="code">Create my project instructions file at the root of my project with four sections: project context, data conventions, output standards, and safety rules. Here are three rules I kept repeating to you yesterday: [paste your three]. Put each one in the section it belongs to, then ask me what else to put in each.<span class="copy">copy</span></div>
       </div>
       <div class="exi">
         <span class="step">Step 3</span>
+        <h4>Fill in the four sections</h4>
+        <p>Write concrete lines for your own project, name your variables and your units, and keep a journal.</p>
+        <ul>
+          <li><strong>Project context:</strong> the question, the data, and the unit of analysis.</li>
+          <li><strong>Data conventions:</strong> includes key variables, units, and the policy for missing data.</li>
+          <li><strong>Output standards:</strong> Use a table format and a chart style, and report every result.</li>
+          <li><strong>Safety rules:</strong> things the agent must not do.</li>
+        </ul>
+      </div>
+      <div class="exi">
+        <span class="step">Step 4</span>
         <h4>Test it now</h4>
         <ul>
-          <li>Rerun one of yesterday's tasks in a fresh session.</li>
-          <li>Compare against yesterday's output: what changed without you asking?</li>
-          <li>Where the output still ignores one of your rules, the rule is too vague; sharpen the wording and rerun.</li>
+          <li>Start a new session, ask: "Which instruction files did you load, and what do they say?" and both files must appear.</li>
+          <li>Run a task from yesterday again and use the same session.</li>
+          <li>Compare this to yesterday's output and what changed without your request?</li>
+          <li>Please paste the exact text you want rewritten, and I will apply the specified rules.</li>
         </ul>
       </div>
     </div>
@@ -571,11 +611,11 @@
     <div class="hands" data-for="skills">
       <div class="exi">
         <span class="step">Step 1</span>
-        <h4>Write your own Skill</h4>
-        <p>Pick the routine you repeat most. Turn it into a Skill: what it does, when to use it, the exact steps and standards.</p>
-        <div class="code">Turn this routine into a Skill saved as SKILL.md: [describe what it does, when to use it, and the exact steps and standards]. Then test it on one of yesterday's tasks.<span class="copy">copy</span></div>
+        <h4>Write your own Skill from the procedure you noted</h4>
+        <p>Use the procedure you noted last night and the one you want to run again on a future project. Write it out, state what it does, state when to use it, and list the exact steps and standards.</p>
+        <div class="code">Turn this routine into a Skill saved as SKILL.md: [the procedure you noted last night — what it does, when to use it, and the exact steps and standards]. Then test it on one of yesterday's tasks.<span class="copy">copy</span></div>
         <ul>
-          <li>Test it on a task from yesterday, and sharpen it where the output missed your intent.</li>
+          <li>Test it on a task from yesterday and sharpen it if the output misses your intent.</li>
         </ul>
       </div>
       <div class="exi">
@@ -608,30 +648,30 @@ bash open-scholar-skill/setup.sh<span class="copy">copy</span></div>
         <span class="step">Step 4</span>
         <h4>Find it on disk</h4>
         <ul>
-          <li>Open the folder the install wrote to, and read the <code>SKILL.md</code> that is now there.</li>
-          <li>Claude Code: <code>~/.claude/skills/</code>, or <code>.claude/skills/</code> inside the project.</li>
-          <li>Codex: <code>~/.agents/skills/</code> or <code>~/.codex/skills/</code>, or <code>.agents/skills/</code> inside the project.</li>
-          <li>Confirm the agent sees it: <code>/skills</code> in Codex, <code>/plugin</code> in Claude Code.</li>
+          <li>Open the installation folder and read the <code>SKILL.md</code> inside it.</li>
+          <li>Claude Code: <code>~/.claude/skills/</code> or <code>.claude/skills/</code> inside the project.</li>
+          <li>Codex: <code>~/.agents/skills/</code>, <code>~/.codex/skills/</code>, or <code>.agents/skills/</code> is inside the project.</li>
+          <li>Make sure the agent sees these: <code>/skills</code> in Codex and <code>/plugin</code> in Claude Code.</li>
         </ul>
       </div>
       <div class="exi">
         <span class="step">Step 5</span>
         <h4>Update it a week later</h4>
         <ul>
-          <li>Cloned: <code>git pull</code> in the clone, then re-run <code>setup.sh</code>.</li>
+          <li>Clone <code>git pull</code> in the clone and then run <code>setup.sh</code> again.</li>
           <li>Claude Code marketplace: <code>/plugin marketplace update letitbk/claude-academic-setup</code>, then <code>/reload-plugins</code>.</li>
           <li>Cross-agent: <code>npx skills update</code>.</li>
           <li>Codex catalog: run <code>$skill-installer</code> on the skill again.</li>
-          <li>Read what changed before you use it, and move edits of your own out of the folder first.</li>
+          <li>Read what changed before using it and move your own edits out of the folder first.</li>
         </ul>
       </div>
       <div class="exi">
         <span class="step">Step 6</span>
         <h4>Edit the Skill you installed</h4>
         <ul>
-          <li>Copy the folder into your home skills folder and edit <code>SKILL.md</code>; the change applies immediately, with no restart.</li>
+          <li>Copy the folder into your home skills folder. Edit <code>SKILL.md</code>. The change applies immediately, and you do not need to restart.</li>
           <li>Renaming the directory renames the command.</li>
-          <li>Rewriting the <code>description</code> field changes when it fires on its own.</li>
+          <li>Rewriting the <code>description</code> field changes it when it fires by itself.</li>
         </ul>
       </div>
     </div>
@@ -641,19 +681,19 @@ bash open-scholar-skill/setup.sh<span class="copy">copy</span></div>
       <div class="exi">
         <span class="step">Step 1</span>
         <h4>Run it with a vague prompt</h4>
-        <p>Do one task with a vague prompt and the whole folder in context.</p>
+        <p>Perform one task with a vague prompt, and the entire folder is in context.</p>
       </div>
       <div class="exi">
         <span class="step">Step 2</span>
         <h4>Run it with a tight brief</h4>
-        <p>Do the same task again with a tight brief and only the file it needs.</p>
+        <p>Please paste the text you want me to rewrite, and I will follow your instructions exactly.</p>
       </div>
       <div class="exi">
         <span class="step">Step 3</span>
         <h4>Compare the cost</h4>
         <ul>
           <li>Compare what each run cost.</li>
-          <li>See how much a tight brief and a single file save you.</li>
+          <li>See how much a tight brief and one file save you.</li>
         </ul>
       </div>
     </div>

@@ -122,7 +122,7 @@
       <a href="#private">Keeping private data on your own machine <span class="has">hands-on</span></a>
       <a href="#engines">Other models in the same agent <span class="has">hands-on</span></a>
       <a href="#show">Show your project</a>
-      <a href="#next">What to learn next</a>
+      <a href="#next">Takeaways</a>
     </div>
   </nav>
 
@@ -131,7 +131,7 @@
     <p class="kicker">Session 5 · Friday, August 28, 2026</p>
     <h1>AI for Building Apps</h1>
     <p class="byline" style="margin:2px 0 16px;color:var(--muted);font-size:15px">Han Zhang and Bing Tian, with the help of Claude</p>
-    <p class="goal">Today we pull these five days into one small build, and we look at what comes next. When a section has something to do, it appears in the panel on the right.</p>
+    <p class="goal">Today we pull these five days into one small build. We also cover what to do after the course. When a section has something to do, it appears in the panel on the right.</p>
 
     <!-- OPENING -->
     <section data-hands="none">
@@ -140,16 +140,15 @@
     <div class="card">
       <h3>Today</h3>
       <ul>
-        <li>The goal today is to pull these five days into one small build, and to look at what comes next.</li>
+        <li>The goal today is to pull these five days into one small build, and to cover what to do after the course.</li>
         <li>Here is the plan for the day:</li>
       </ul>
       <table>
         <tr><td>Turn your analysis into a website or app</td></tr>
         <tr><td>Build one of your own (100 minutes)</td></tr>
-        <tr><td>Break</td></tr>
         <tr><td>Keeping private data on your own machine</td></tr>
         <tr><td>Show your project</td></tr>
-        <tr><td>What to learn next</td></tr>
+        <tr><td>Takeaways</td></tr>
       </table>
     </div>
     </section>
@@ -215,7 +214,7 @@
       <ul>
         <li><strong>Ollama</strong> is a free program that runs open-source models such as Llama or Qwen on your laptop.</li>
         <li>You can run Codex against a local model with <code>codex --oss</code>, or point Claude Code at the local server with two settings and a model name. Ollama, the local model server, speaks both tools&rsquo; protocols.</li>
-        <li>One honest note: for Claude Code this route is supported by Ollama, not by Anthropic; for Codex the <code>--oss</code> flag is official.</li>
+        <li>For Claude Code, this route is supported by Ollama, not by Anthropic. For Codex, the <code>--oss</code> flag is official.</li>
         <li>You set the sandbox to your project folder and turn the network off.</li>
         <li>Local models are slower and weaker than Claude or GPT, so you use them only when the data requires it.</li>
       </ul>
@@ -283,7 +282,7 @@
 
     <!-- NEXT -->
     <section data-hands="none">
-    <h2 class="sec" id="next">What to learn next</h2>
+    <h2 class="sec" id="next">Takeaways</h2>
 
     <div class="card">
       <h3>Your five days, as a checklist</h3>
@@ -291,7 +290,7 @@
         <li>a working environment (Monday)</li>
         <li>a research repository with a draft history (Monday onward)</li>
         <li>a directed, verified analysis (Tuesday)</li>
-        <li>a project AGENTS.md that survives a restart (Wednesday)</li>
+        <li>a project instructions file that survives a restart (Wednesday)</li>
         <li>at least one Skill (Wednesday)</li>
         <li>a literature search with verified citations (Thursday)</li>
         <li>a website or app of your own (Friday)</li>
@@ -303,6 +302,16 @@
         <li>How these models actually work, and why they fail the way they do.</li>
         <li>Designing your own agents with MCP, Hooks, and subagents. The cards below cover subagents.</li>
         <li>Building and deploying real tools on top of your research.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Before you build anything bigger: four questions</h3>
+      <ul>
+        <li>Can you still look at every result yourself? If yes, you do not need to build anything.</li>
+        <li>Is checking one result cheaper than producing it? If yes, you are the quality control, and the general agent is enough.</li>
+        <li>Are the steps the same every time? The same means a script. Different for every input means a real agent loop.</li>
+        <li>Can you build a gold standard to test it against? If not, do not produce data with it at all.</li>
+        <li>The full course works through these questions; the common error is skipping to "I do this 300 times, so I need an agent" when a script, or nothing, was the answer.</li>
       </ul>
     </div>
     <div class="card">
@@ -337,7 +346,7 @@
       <h3>After the five days</h3>
       <ul>
         <li>Keep one repository per project, and let it grow the way this one did.</li>
-        <li>Reuse your AGENTS.md and Skills on the next project from day one.</li>
+        <li>Reuse your instructions files and Skills on the next project from day one.</li>
         <li>When you hit a task too big for one session, that is when subagents and workflows are useful.</li>
       </ul>
     </div>
@@ -349,9 +358,9 @@
       </ul>
     </div>
     <div class="card">
-      <h3>How to keep practicing</h3>
+      <h3>Continued practice</h3>
       <ul>
-        <li>Keep using the repository: one task per week through the agent, and the AGENTS.md grows with the project.</li>
+        <li>Keep using the repository: one task per week through the agent, and the instructions file grows with the project.</li>
         <li>Free self-paced material if you want more:
           <ul>
             <li>Anthropic Academy: short courses on Claude Code, from beginner up.</li>
@@ -382,7 +391,7 @@
           <li><strong>A website</strong> that shows your results and lets people click through them.</li>
           <li><strong>One command</strong> that reruns your whole analysis, from raw data to finished output.</li>
           <li><strong>A small app</strong> that does a chore for you, like making codebook pages.</li>
-          <li><strong>A smarter agent.</strong> Expand your AGENTS.md and add a second Skill.</li>
+          <li><strong>A smarter agent.</strong> Expand your instructions file and add a second Skill.</li>
         </ul>
         <p>If you finish early, add a second option.</p>
       </div>
@@ -403,7 +412,7 @@
           <li><strong>Website:</strong> start from Tuesday's chart, and add one control, such as a country selector or a year slider.</li>
           <li><strong>One command:</strong> chain Tuesday's stages so one command reruns clean, model, and output.</li>
           <li><strong>Small app:</strong> automate the chore you noticed these five days, such as codebook pages, variable labels, or filing output.</li>
-          <li><strong>Smarter agent:</strong> write the second Skill you wished you had, and close any gaps you found in your AGENTS.md.</li>
+          <li><strong>Smarter agent:</strong> write the second Skill you wished you had, and close any gaps you found in your instructions file.</li>
         </ul>
         <p>A starter prompt for the website option:</p>
         <div class="code">Build a webpage that shows the chart in output/. Add one control, a country selector, that filters the chart. Show me a plan first, then build it. Do not change my analysis code.<span class="copy">copy</span></div>

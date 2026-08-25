@@ -146,7 +146,6 @@
             <li>what the agent can reach</li>
             <li>collecting data</li>
             <li>finding literature</li>
-            <li>break</li>
             <li>discussion</li>
           </ul>
         </li>
@@ -174,16 +173,15 @@
     <div class="card">
       <h3>Connecting to other apps (MCP)</h3>
       <ul>
-        <li>To reach an outside app, you connect it once, and then the agent can use it.</li>
-        <li><strong>MCP</strong> is the standard way to make that connection, and one setup works across services like Zotero, OpenAlex, and GitHub.</li>
-        <li>You set a connection up once, and it keeps working after that.</li>
-        <li>Today you just watch one in a demo.</li>
+        <li>To reach an outside app, you connect it once, and then the agent can use it. <strong>MCP</strong> is the standard for that connection.</li>
+        <li>The everyday examples: Gmail, Google Calendar, Google Drive. These are not programming tools. Once connected, the agent can act on them directly: "find the reviewer&rsquo;s email about the deadline and put the date in my calendar."</li>
+        <li>The research example is Zotero, and you watch it live in the literature part of this session.</li>
       </ul>
     </div>
     <div class="card">
-      <h3>Computer use: the agent clicks like a person</h3>
+      <h3>Computer use</h3>
       <ul>
-        <li>Some sources have no API and no connector, and the only way in is to click through a website.</li>
+        <li>Some sources have no API and no connector, and the only way in is to click through a website. Example: a statistical yearbook site where each table sits behind three menus and a download button.</li>
         <li>A <strong>computer-use</strong> agent takes a screenshot, moves the mouse, types, and clicks, the way you would.</li>
         <li>Codex now has this built in, so it can drive a browser and control your desktop apps.</li>
         <li>Claude Code does not have it yet, and Anthropic's version is a separate Chrome extension.</li>
@@ -226,7 +224,7 @@
     <div class="card">
       <h3>The agent can also collect data</h3>
       <ul>
-        <li>The same reach that finds papers can also bring in data.</li>
+        <li>The agent can use that same reach to bring in data.</li>
         <li>Three common sources, and the agent handles all three:
           <ul>
             <li>a web page with a table you want, such as a state agency's statistics page</li>
@@ -286,6 +284,14 @@
         <li>A pull you repeat, such as grabbing this month's new records, is worth packaging.</li>
         <li>Turn the steps into a Skill, the same way you did on Wednesday, so next time is one command.</li>
         <li>You can share the Skill, so a labmate can run the same pull with their own key.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Scaling a pull: script or subagents?</h3>
+      <ul>
+        <li>One question decides: are the steps the same for every piece?</li>
+        <li>The same &mdash; 50 calls to one API with a different state code &mdash; is a loop in a script. No agent needed.</li>
+        <li>Different for every piece &mdash; 10 state websites, each laid out its own way &mdash; is subagent work: each copy has to figure out its own page.</li>
       </ul>
     </div>
     </section>
@@ -387,7 +393,7 @@
     <div class="card">
       <h3>The hard rule</h3>
       <ul>
-        <li>Add one line to your AGENTS.md before you start:</li>
+        <li>Add one line to your instructions file before you start:</li>
       </ul>
       <div class="quote">Every citation is checked against the actual paper before it lands in the repo.</div>
       <ul>
@@ -467,6 +473,7 @@
           <li>Open the raw file and read the first few rows yourself.</li>
           <li>Compare five values against the source page or the API by hand.</li>
           <li>Move the data into your analysis only after it matches.</li>
+          <li>Add the rule you just followed to your instructions file: raw pulls are saved untouched with their source and date, and no pulled file enters the analysis before its rows are checked against the source.</li>
         </ul>
       </div>
       <div class="exi">
@@ -483,7 +490,7 @@
     <div class="hands" data-for="literature">
       <div class="exi">
         <span class="step">Step 1</span>
-        <h4>Add the hard rule to AGENTS.md</h4>
+        <h4>Add the hard rule to your instructions file</h4>
         <p>Put this line in your AGENTS.md before you start, so the agent checks every reference.</p>
         <div class="code">Every citation is checked against the actual paper before it lands in the repo.<span class="copy">copy</span></div>
         <ul>
