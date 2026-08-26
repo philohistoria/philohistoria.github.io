@@ -176,10 +176,10 @@
     <div class="card">
       <h3>Everything the model says is a prediction</h3>
       <ul>
-        <li>Every answer from an LLM is a prediction of the next word. Prediction is probabilistic: the same input can give different outputs.</li>
-        <li>Code is the opposite. The same input always gives the same output.</li>
-        <li>Everything in today's session, instructions files, memory, and skills, pushes the agent toward consistent behavior. But these are all instructions to a probabilistic model, so they are soft constraints, not guarantees. They differ only in degree.</li>
-        <li>If a step must always run the same way, write it as code and let the agent call the code. The agent decides when to run it; the code decides what happens.</li>
+        <li>LLMs predict the next word for every answer, and this prediction is probabilistic, so the same input can produce different outputs.</li>
+        <li>Code is different, and the same input always produces the same output.</li>
+        <li>Today's session includes instruction files, memory, and skills, which push the agent toward consistent behavior, but these are just instructions for a probabilistic model, and they are soft constraints, not guarantees and only differ in degree.</li>
+        <li>If a step must always work the same way, write it as code and let the agent call the code. The agent decides when to run it and the code decides what happens.</li>
       </ul>
     </div>
 
@@ -246,7 +246,19 @@
         <li><code>/memory</code> shows the notes. You can edit or delete them.</li>
         <li>The notes live in <code>~/.claude/projects/</code>, in one folder per project, not in the project itself. A <code>MEMORY.md</code> file there is the index, and the agent reads it at the start of every session.</li>
         <li>Rules you want enforced go in instructions. Memory holds the rest.</li>
-        <li>Codex does not have memory in the terminal, and its instruction files are everything.</li>
+        <li>Codex keeps memory the same way, in <code>~/.codex/memories/</code>, with the same index-plus-notes structure.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>You control the memory</h3>
+      <ul>
+        <li>Control stays in one place in the terminal and it is <code>/memory</code> in Claude Code and <code>/memories</code> in Codex. Notes are plain text files on your machine and you can read, edit, or delete them with any editor.</li>
+        <li>The coding app is less convenient: it does not show the memory commands. But the files are still on your machine, so everything else works.</li>
+        <li>The chat apps are a useful contrast. There, memory lives on the server: it is on by default, it reads your whole chat history, and you cannot make the private mode your default. You can edit single memories in the settings, but you never hold the files.</li>
+        <li>The coding tools are easier to control, at least in the terminal, because the memory is files on your machine. The line that matters is not app versus terminal; it is whose machine holds the files.</li>
+        <li>In both, you can use simple words to control it and ask: "show me your memories," "delete the one about X," or "turn off automatic memory." The agent manages its own files.</li>
+        <li>At the start of a session only the index loads, and full notes load only when a task needs them.</li>
+        <li>Memory stays on one machine: notes on your desktop computer do not follow you to your laptop.</li>
       </ul>
     </div>
     <div class="card">
@@ -278,39 +290,39 @@
       <div class="quote">An instructions file that encodes your standards is the AI equivalent of a pre-registration.</div>
     </div>
     <div class="card">
-      <h3>What the agent can see: the context</h3>
+      <h3>What the agent sees: the context</h3>
       <ul>
-        <li>The context is everything the model reads before writing its next reply. Nothing else exists for it.</li>
-        <li>In the context: your instructions files, the conversation so far, the files it has read, and the output of every command it ran.</li>
-        <li>Not in the context: files it has not read, your other terminal windows, and past sessions.</li>
-        <li>The context has a size limit. When it fills up, the agent summarizes the conversation and continues from the summary, and details can drop out at that point.</li>
+        <li>The context is everything the model reads before its next reply, and nothing else exists for it.</li>
+        <li>The context includes: your instruction files, the current conversation, the files it read and the output from every command it ran.</li>
+        <li>It does not see these things: files it has not read, your other terminal windows, or past sessions.</li>
+        <li>The context has a size limit and fills up eventually. The agent then summarizes the conversation and continues from that summary, and details can be lost at that point.</li>
       </ul>
     </div>
     <div class="card">
-      <h3>Commands that manage the context</h3>
+      <h3>Context management commands</h3>
       <ul>
-        <li>You met these commands on Monday, and now you can see what they do.</li>
-        <li><code>/compact</code> replaces the conversation with a summary. This frees space but loses detail.</li>
-        <li><code>/clear</code> empties the context. Your instructions files and memory survive, because they live on disk; the conversation does not.</li>
-        <li><code>claude --resume</code> loads a past conversation back into the context. This is the only way a new session sees an old one.</li>
+        <li>You met these commands on Monday and now you can see what they do.</li>
+        <li><code>/compact</code> replaces the conversation with a summary, which saves space but loses detail.</li>
+        <li><code>/clear</code> empties the conversation. Your instruction files and memory stay, because they live on disk.</li>
+        <li><code>claude --resume</code> loads a past conversation into the context, and this is how a new session sees an old one.</li>
       </ul>
     </div>
     <div class="card">
       <h3>The conversation is also a file</h3>
       <ul>
-        <li>Every session is saved as a file on disk, one line per message. Nothing about it is temporary.</li>
-        <li>In Claude Code these files live under <code>~/.claude/projects/</code>, and in Codex under <code>~/.codex/sessions/</code>.</li>
-        <li><code>claude --resume</code> loads one of these files back into the context, and the agent continues as if the session never ended. <code>codex resume</code> does the same.</li>
-        <li>So all four layers are just files: instructions, memory, skills, and the conversation itself. The only real difference is when each one is read into the context.</li>
+        <li>Each session saves as a file on disk, and it has one line per message. Nothing is temporary.</li>
+        <li>In Claude Code, these files are under <code>~/.claude/projects/</code>, and in Codex, they are under <code>~/.codex/sessions/</code>.</li>
+        <li><code>claude --resume</code> loads one of these files back into the context and the agent continues as if the session never ended. <code>codex resume</code> does the same.</li>
+        <li>All four layers are files and include instructions, memory, skills, and the conversation, and the only difference is when each layer enters the context.</li>
       </ul>
     </div>
     <div class="card">
-      <h3>Subagents: a fresh context on purpose</h3>
+      <h3>Subagents: a new perspective on purpose</h3>
       <ul>
-        <li>The agent can send out a helper, called a subagent, to do one task.</li>
-        <li>The subagent starts with a fresh context that holds only the task description. It does not see your conversation.</li>
-        <li>It reports back only its conclusion, so a search through fifty files does not fill your context with fifty files.</li>
-        <li>This is the same idea as <code>/compact</code>: keep the main context small by keeping details out of it.</li>
+        <li>The agent can send a subagent, which does one task.</li>
+        <li>The subagent begins with a new context, which contains only the task description and cannot see your conversation.</li>
+        <li>It reports only its conclusion, and a search through fifty files does not fill your context with fifty files.</li>
+        <li>This has the same idea as <code>/compact</code>. Keep the main context small and leave details out of it.</li>
       </ul>
     </div>
     </section>
@@ -328,12 +340,12 @@
       </ul>
     </div>
     <div class="card">
-      <h3>Side-by-side comparison guide</h3>
+      <h3>What to watch in the side-by-side</h3>
       <ul>
-        <li>The standard errors and these are the defaults compared to what the file requires.</li>
-        <li>The table shows how the agent's habit compares to your journal's format.</li>
-        <li>The missing data and silently dropped against handled by your written rule.</li>
-        <li>The model is not smarter. Your standards were <strong>in the file the agent reads</strong> and that is what changed.</li>
+        <li>The standard errors: the default against the ones the file requires.</li>
+        <li>The table: the agent's habit against your journal's format.</li>
+        <li>The missing data: silently dropped against handled by your written rule.</li>
+        <li>The model is no smarter. What changed is that your standards were <strong>in the file the agent reads</strong>.</li>
       </ul>
     </div>
     <div class="card">
@@ -343,47 +355,48 @@
           <ul>
             <li><strong>Project context.</strong> The question, the data, the unit of analysis.</li>
             <li><strong>Data conventions.</strong> Main variables, units, and rules for missing data.</li>
-            <li><strong>Output standards.</strong> Use a table format and chart style and Report every result.</li>
+            <li><strong>Output standards.</strong> Table format, chart style, what every result must report.</li>
             <li><strong>Safety rules.</strong> Things the agent must never do.</li>
           </ul>
         </li>
         <li>Write specific lines, name your variables, name your units, and name your journal.</li>
-        <li>RA Day One Rules - Be on time for duty shifts and meetings. - Know emergency procedures, evacuation routes, and key contacts. - Maintain confidentiality and report serious incidents to your supervisor immediately. - Respond to resident emails within 24 hours and log all incidents. - Conduct nightly rounds and check doors, lights, and noise. - Enforce policies consistently and document violations. - Handle conflicts calmly and refer residents to resources when needed. - Report maintenance issues and keep common areas clean. - Attend all required trainings and team meetings. - Take care of yourself and seek support if you feel overwhelmed.</li>
+        <li>Keep it to one page: the rules you would give any new RA on day one, and nothing more.</li>
       </ul>
     </div>
     <div class="card">
-      <h3>Example lines: context and data conventions</h3>
+      <h3>Instructions file examples: context and data conventions</h3>
       <ul>
+        <li>Each line below is a real line from an instructions file (CLAUDE.md or AGENTS.md). Paste and adapt.</li>
         <li>Project context:
           <ul>
             <li>"Panel survey of 4,000 respondents, waves 2020 to 2024; unit of analysis is person-wave."</li>
-            <li>People participate in politics and education predicts this.</li>
+            <li>"The outcome is political participation; the key predictor is education."</li>
           </ul>
         </li>
         <li>Data conventions:
           <ul>
             <li>"All models use survey-weighted standard errors."</li>
-            <li>Missing codes are -1 to -5, and recode them to NA, and do this before any computation.</li>
+            <li>"Missing codes are -1 to -5; recode to NA before any computation."</li>
             <li>"Never modify anything in <code>data/raw/</code>."</li>
           </ul>
         </li>
       </ul>
     </div>
     <div class="card">
-      <h3>Example lines: output standards and safety rules</h3>
+      <h3>Instructions file examples: output standards and safety rules</h3>
       <ul>
         <li>Output standards:
           <ul>
             <li>"Every table reports N and confidence intervals."</li>
-            <li>Each chart has one message and use a full-sentence title for each chart.</li>
-            <li>Summaries follow: Question, Method, Finding, Limitation.</li>
+            <li>"Charts use one message per chart, with a full-sentence title."</li>
+            <li>"Summaries follow: Question, Method, Finding, Limitation."</li>
           </ul>
         </li>
         <li>Safety rules:
           <ul>
             <li>"Never fabricate a number; if a value is unavailable, say so."</li>
-            <li>Always state the sample restriction you used.</li>
-            <li>Mark any result you cannot verify.</li>
+            <li>"Always state the sample restriction used."</li>
+            <li>"Flag every result you could not verify."</li>
           </ul>
         </li>
       </ul>
@@ -563,39 +576,42 @@
     </section>
 
     <!-- MANAGING USAGE -->
-    <section data-hands="usage">
-    <h2 class="sec" id="usage">Managing your usage <span class="hastag">· do it on the right</span></h2>
+    <section data-hands="none">
+    <h2 class="sec" id="usage">Managing your usage</h2>
 
     <div class="card">
       <h3>Token-based billing</h3>
       <ul>
-        <li>Everything you send and everything the agent writes is counted in tokens, against the plan limit you first met on Tuesday.</li>
-        <li>Every new message sends the entire conversation again, and a reply at the end of a long session costs much more than an early reply, and the cost of a session grows faster than its length.</li>
+        <li>Every message you send or the agent writes counts as tokens.</li>
+        <li>There are two ways to pay. You can get a subscription (Claude Pro or Max, ChatGPT Plus or Pro), which gives you a quota, which refills on a schedule, and if you hit the limit, you must wait. You can also use an API key, which bills per token and has no ceiling, and you pay for exactly what you use, and a runaway session costs real money.</li>
+        <li>Each new message sends the whole conversation again, so a reply at the end of a long session costs much more than an early reply, and the cost of a session grows faster than its length.</li>
         <li>You paste a large file, have many rounds of back-and-forth, or several agents run it at once, which increases the count.</li>
       </ul>
     </div>
     <div class="card">
-      <h3>Where a rule lives decides what it costs</h3>
+      <h3>Rule location determines cost</h3>
       <ul>
-        <li>Instructions and the memory index load at the start of every session, whether today's task needs them or not. A skill loads only when its task comes up. An old session loads only when you resume it.</li>
-        <li>So the rule is about placement, not length: rules you want enforced every time go in instructions, and everything occasional goes in a layer that loads on demand.</li>
-        <li>A wrong or outdated memory is worse than no memory: it loads every session and pushes the agent the wrong way. Prune with <code>/memory</code>.</li>
+        <li>Instructions and the memory index load at the start of every session, which happens even if today's task does not need them. A skill loads only when its task appears, and an old session loads only when you resume it.</li>
+        <li>The rule is about placement, not length. Put rules you want enforced every time in instructions and everything occasional in a layer that loads on demand.</li>
+        <li>Wrong or outdated memories are bad and they are worse than having no memory. These memories load in every session and push the agent in the wrong direction, so use <code>/memory</code> to prune them.</li>
       </ul>
     </div>
     <div class="card">
-      <h3>Why not one long session until the context is full</h3>
+      <h3>Why not one long session?</h3>
       <ul>
-        <li>Every message resends the entire conversation, so the same question costs more at hour three than at minute five.</li>
-        <li>A model reasons worse over a stuffed context: it starts missing things in the middle.</li>
-        <li>Near the limit the agent compacts the conversation into a summary, and it decides silently what to drop.</li>
-        <li>One task, one session. <code>/compact</code> is the repair tool, not the plan.</li>
+        <li>The model does not remember past messages, and every time you send a message, the tool sends the entire conversation from the beginning.</li>
+        <li>Your tenth question costs more, and you pay for the nine previous rounds plus this one. The total cost does not grow in a straight line, but it grows roughly with the square of the length.</li>
+        <li>Long context hurts quality, and the model misses things in the middle.</li>
+        <li>The conversation reaches its limit. The agent makes a summary, and it decides what to drop silently.</li>
+        <li>One task per session. <code>/compact</code> is a repair tool, not a plan.</li>
       </ul>
     </div>
     <div class="card">
-      <h3>Subagents spend tokens without spending your context</h3>
+      <h3>Subagents use tokens without using your context</h3>
       <ul>
-        <li>A subagent burns tokens like any other call, so it does not make the work cheaper.</li>
-        <li>What it saves is your main context: fifty files get read in the helper's context, and only the conclusion comes back.</li>
+        <li>A subagent's work is billed like everything else, so it does not make the task cheaper.</li>
+        <li>What it saves is your main conversation. The subagent reads the fifty files inside its own context, that reading is thrown away when it finishes, and only its conclusion enters yours.</li>
+        <li>Your main conversation stays short, so every later message costs less and the model stays sharp.</li>
         <li>Use one when the work is bulky but the answer is small.</li>
       </ul>
     </div>
@@ -743,27 +759,6 @@ bash open-scholar-skill/setup.sh<span class="copy">copy</span></div>
       </div>
     </div>
 
-    <!-- usage -->
-    <div class="hands" data-for="usage">
-      <div class="exi">
-        <span class="step">Step 1</span>
-        <h4>Run it with a vague prompt</h4>
-        <p>Perform one task with a vague prompt, and the entire folder is in context.</p>
-      </div>
-      <div class="exi">
-        <span class="step">Step 2</span>
-        <h4>Run it with a tight brief</h4>
-        <p>Do the same task again with a tight brief and only the file it needs.</p>
-      </div>
-      <div class="exi">
-        <span class="step">Step 3</span>
-        <h4>Compare the cost</h4>
-        <ul>
-          <li>Compare what each run cost.</li>
-          <li>See how much a tight brief and one file save you.</li>
-        </ul>
-      </div>
-    </div>
   </aside>
 
 </div>
