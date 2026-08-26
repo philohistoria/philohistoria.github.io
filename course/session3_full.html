@@ -230,9 +230,12 @@
         <tr><th></th><th>Claude Code</th><th>Codex</th></tr>
         <tr><td>Project</td><td><code>CLAUDE.md</code> at the repo root</td><td><code>AGENTS.md</code> at the repo root</td></tr>
         <tr><td>Global</td><td><code>~/.claude/CLAUDE.md</code></td><td><code>~/.codex/AGENTS.md</code></td></tr>
+        <tr><td>Memory</td><td><code>~/.claude/projects/&lt;project&gt;/memory/</code></td><td>none</td></tr>
       </table>
       <ul>
         <li>Where this page says "your instructions file," use your tool&rsquo;s name.</li>
+        <li>The two instructions files are files you write, and no tool creates them for you. If you do not see a <code>CLAUDE.md</code>, you have not written one yet.</li>
+        <li>The memory row is different: the agent writes those notes itself. The next card explains it.</li>
       </ul>
     </div>
     <div class="card">
@@ -241,6 +244,7 @@
         <li>Claude Code also keeps <strong>memory</strong>, which are notes about you and the project. They stay across sessions.</li>
         <li>The agent writes a note when it learns something and when you say "remember this."</li>
         <li><code>/memory</code> shows the notes. You can edit or delete them.</li>
+        <li>The notes live in <code>~/.claude/projects/</code>, in one folder per project, not in the project itself. A <code>MEMORY.md</code> file there is the index, and the agent reads it at the start of every session.</li>
         <li>Rules you want enforced go in instructions. Memory holds the rest.</li>
         <li>Codex does not have memory in the terminal, and its instruction files are everything.</li>
       </ul>
@@ -289,6 +293,15 @@
         <li><code>/compact</code> replaces the conversation with a summary. This frees space but loses detail.</li>
         <li><code>/clear</code> empties the context. Your instructions files and memory survive, because they live on disk; the conversation does not.</li>
         <li><code>claude --resume</code> loads a past conversation back into the context. This is the only way a new session sees an old one.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>The conversation is also a file</h3>
+      <ul>
+        <li>Every session is saved as a file on disk, one line per message. Nothing about it is temporary.</li>
+        <li>In Claude Code these files live under <code>~/.claude/projects/</code>, and in Codex under <code>~/.codex/sessions/</code>.</li>
+        <li><code>claude --resume</code> loads one of these files back into the context, and the agent continues as if the session never ended. <code>codex resume</code> does the same.</li>
+        <li>So all four layers are just files: instructions, memory, skills, and the conversation itself. The only real difference is when each one is read into the context.</li>
       </ul>
     </div>
     <div class="card">
@@ -556,17 +569,34 @@
     <div class="card">
       <h3>Token-based billing</h3>
       <ul>
-        <li>Everything you send counts as tokens, and Everything it writes counts as tokens, and These count against the plan limit you first met on Tuesday.</li>
+        <li>Everything you send and everything the agent writes is counted in tokens, against the plan limit you first met on Tuesday.</li>
         <li>Every new message sends the entire conversation again, and a reply at the end of a long session costs much more than an early reply, and the cost of a session grows faster than its length.</li>
         <li>You paste a large file, have many rounds of back-and-forth, or several agents run it at once, which increases the count.</li>
       </ul>
     </div>
     <div class="card">
-      <h3>Keep them short; they load every session</h3>
+      <h3>Where a rule lives decides what it costs</h3>
       <ul>
-        <li>Every session starts by reading your instructions files and, in Claude Code, the memory index, and all of it costs context before you type a word.</li>
-        <li>More is not better. The agent follows a short list of rules well but does not follow a long list as well. A large file costs more and also leads to worse compliance.</li>
-        <li>Prune on a schedule and delete rules that do not apply anymore and memories that were wrong. <code>/memory</code> opens the memory files for this purpose.</li>
+        <li>Instructions and the memory index load at the start of every session, whether today's task needs them or not. A skill loads only when its task comes up. An old session loads only when you resume it.</li>
+        <li>So the rule is about placement, not length: rules you want enforced every time go in instructions, and everything occasional goes in a layer that loads on demand.</li>
+        <li>A wrong or outdated memory is worse than no memory: it loads every session and pushes the agent the wrong way. Prune with <code>/memory</code>.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Why not one long session until the context is full</h3>
+      <ul>
+        <li>Every message resends the entire conversation, so the same question costs more at hour three than at minute five.</li>
+        <li>A model reasons worse over a stuffed context: it starts missing things in the middle.</li>
+        <li>Near the limit the agent compacts the conversation into a summary, and it decides silently what to drop.</li>
+        <li>One task, one session. <code>/compact</code> is the repair tool, not the plan.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Subagents spend tokens without spending your context</h3>
+      <ul>
+        <li>A subagent burns tokens like any other call, so it does not make the work cheaper.</li>
+        <li>What it saves is your main context: fifty files get read in the helper's context, and only the conclusion comes back.</li>
+        <li>Use one when the work is bulky but the answer is small.</li>
       </ul>
     </div>
 
@@ -575,7 +605,6 @@
       <ul>
         <li>Use a small, cheap model for easy steps and save the strong model for hard steps.</li>
         <li>Write a short brief, which will reduce the number of rounds.</li>
-        <li>Start a fresh session for a new task, so it is not re-reading an old one.</li>
         <li>Point it at just the one file it needs.</li>
       </ul>
     </div>
