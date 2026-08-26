@@ -600,10 +600,10 @@
       <h3>Why not one long session?</h3>
       <ul>
         <li>The model does not remember past messages, and every time you send a message, the tool sends the entire conversation from the beginning.</li>
-        <li>Your tenth question costs more, and you pay for the nine previous rounds plus this one. The total cost does not grow in a straight line, but it grows roughly with the square of the length.</li>
+        <li>Your tenth question is billed for the nine previous rounds plus itself, so the total cost of a session grows quadratically with its length, not linearly.</li>
         <li>Long context hurts quality, and the model misses things in the middle.</li>
         <li>The conversation reaches its limit. The agent makes a summary, and it decides what to drop silently.</li>
-        <li>One task per session. <code>/compact</code> is a repair tool, not a plan.</li>
+        <li>Start a new session for each task, and use <code>/compact</code> to rescue a session that has already grown too long.</li>
       </ul>
     </div>
     <div class="card">
