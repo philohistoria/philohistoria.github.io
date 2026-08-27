@@ -199,6 +199,19 @@
       </ul>
     </div>
     <div class="card">
+      <h3>Three APIs, one shape: input in, output back</h3>
+      <table>
+        <tr><th>API</th><th>you send</th><th>you get back</th></tr>
+        <tr><td>arXiv</td><td>a search query</td><td>the matching papers, as records</td></tr>
+        <tr><td>Zotero</td><td>a search term</td><td>matching items from your own library</td></tr>
+        <tr><td>OpenAI, or any model</td><td>a prompt</td><td>the model's answer</td></tr>
+      </table>
+      <ul>
+        <li>Every API has the same shape: a request goes in, structured output comes back.</li>
+        <li>The only differences are what you send and what you get back.</li>
+      </ul>
+    </div>
+    <div class="card">
       <h3>Constructing an API call: endpoint and parameters</h3>
       <ul>
         <li>Our teaching example is arXiv, the open paper archive. Its API needs no account.</li>
