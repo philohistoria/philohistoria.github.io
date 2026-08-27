@@ -193,7 +193,7 @@
     <div class="card">
       <h3>An API accepts requests from programs</h3>
       <ul>
-        <li>A serious data site offers an API: an address where a program, rather than a person, asks for data.</li>
+        <li>Many data sites offer an API: an address where a program, rather than a person, asks for data.</li>
         <li>Each site defines its own. The Census has one, arXiv has one, and they all differ.</li>
         <li>Using an API means writing code to send the request, and writing that code is exactly what the agent does well.</li>
       </ul>
@@ -269,7 +269,7 @@
       <h3>Track raw pull sources</h3>
       <ul>
         <li>Save the raw result once, before any cleaning, and never overwrite that copy.</li>
-        <li>The agent must write the source next to the file and must also write the date and the exact query next to the file.</li>
+        <li>Have the agent write the source, the date, and the exact query next to the file.</li>
         <li>Months later, you use that note to answer "where did this number come from."</li>
       </ul>
     </div>
@@ -278,13 +278,13 @@
       <ul>
         <li>Open the raw file and read the first few rows yourself.</li>
         <li>Manually compare some values against the source page or the API.</li>
-        <li>Match the data first and Then move it into your analysis.</li>
+        <li>Move the data into your analysis only after it matches.</li>
       </ul>
     </div>
     <div class="card">
-      <h3>Turn Repetition into a Skill</h3>
+      <h3>Turn a repeated pull into a Skill</h3>
       <ul>
-        <li>You repeat a pull, and for example, you grab this month's new records, and this is worth packaging.</li>
+        <li>A pull you will run again, such as grabbing this month's new records, is worth packaging.</li>
         <li>Turn the steps into a Skill, the same way you did on Wednesday, so next time is one command.</li>
         <li>You can share the Skill, and a labmate can then run the same pull using their own key.</li>
       </ul>
@@ -293,8 +293,8 @@
       <h3>Scaling a pull: script or subagents?</h3>
       <ul>
         <li>One question matters: are the steps the same for every piece?</li>
-        <li>It is the same and it is 50 calls to one API. Each call has a different state code and this is a loop in a script and no agent is needed.</li>
-        <li>Every piece is different, and there are 10 state websites, and each one has its own layout. This is subagent work, and each copy must figure out its own page.</li>
+        <li>If the steps are the same — 50 calls to one API, each with a different state code — that is a loop in a script, and no agent is needed.</li>
+        <li>If every piece is different — 10 state websites, each with its own layout — that is subagent work, and each copy figures out its own page.</li>
       </ul>
     </div>
     </section>
@@ -392,7 +392,7 @@
         <li>Ask a bare chatbot for ten citations, and some will be invented. A text predictor produces references that only <strong>sound</strong> real.</li>
         <li>This cannot be fixed from inside the model: it has no way to check its own memory, and "please double-check" just makes it predict again.</li>
         <li>Verification needs an outside authority — a source of record the reference can be checked against.</li>
-        <li>That is what the morning's plumbing is for: every reference must arrive through an API, with its real metadata, from a source of record.</li>
+        <li>That is what the morning's APIs are for: every reference must arrive through an API, with its real metadata, from a source of record.</li>
       </ul>
     </div>
     <div class="card">
@@ -408,7 +408,7 @@
             <li>4. one written rule for the agent: only works that are in my Zotero can be cited</li>
           </ul>
         </li>
-        <li>Steps 1 to 3 are API calls like the morning's. Step 4 makes the agent obey the pipeline. The next cards take them one at a time.</li>
+        <li>Steps 1 to 3 are API calls like the morning's. Step 4 makes the agent follow them. The next cards take them one at a time.</li>
       </ul>
     </div>
     <div class="card">
@@ -450,7 +450,7 @@
       <ul>
         <li>Steps 1 to 3 only work if the agent never goes around them.</li>
         <li>So the rule goes into the agent's instruction file, in writing: "Only cite works that are in my Zotero library. If a work is not there, stop and tell me."</li>
-        <li>With that line, a citation cannot enter a draft from the model's memory. The only road in is the pipeline.</li>
+        <li>With that line, a citation cannot enter a draft from the model's memory. The only way in is the three steps above.</li>
       </ul>
     </div>
     <div class="card">
@@ -470,8 +470,8 @@
       <h3>Subagents speed up steps 1 and 2</h3>
       <ul>
         <li>Tuesday's subagents come back here, because the steps repeat.</li>
-        <li>Step 1 fans out: a draft cites thirty works, and one subagent per work checks the library at the same time.</li>
-        <li>Step 2 fans out too: several searches run at once — different keywords, or different databases.</li>
+        <li>Step 1 can run in parallel: a draft cites thirty works, and one subagent per work checks the library at the same time.</li>
+        <li>Step 2 can run in parallel too: several searches run at once, with different keywords or different databases.</li>
         <li>Step 3 stays sequential: one writer adds the keepers to the library, so nothing is added twice.</li>
       </ul>
     </div>
@@ -487,7 +487,7 @@
           </ul>
         </li>
         <li>It solves a real failure: fabricated citations.</li>
-        <li>My own version still has rough edges I am fixing. It is a working example. Take the design and build your own.</li>
+        <li>My own version is not finished; I am still fixing parts of it. It is a working example. Take the design and build your own.</li>
       </ul>
     </div>
     </section>
