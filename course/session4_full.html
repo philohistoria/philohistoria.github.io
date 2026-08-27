@@ -133,7 +133,7 @@
     <p class="kicker">Session 4 · Thursday, August 27, 2026</p>
     <h1>Connecting AI to Other Websites and Apps</h1>
     <p class="byline" style="margin:2px 0 16px;color:var(--muted);font-size:15px">Han Zhang and Bing Tian, with the help of Claude</p>
-    <p class="goal">So far the agent has only used your machine. Today it connects to outside websites and apps. You learn the two ways in, API and MCP, and put them to work on three examples: collecting data, coding data, and finding literature. When a section has an exercise, it appears in the panel on the right.</p>
+    <p class="goal">The agent only used your machine before. Today it connects to outside websites and apps. You will learn two ways to connect: API and MCP. You will use them on three examples: collecting data, coding data, and finding literature. Exercises appear in the panel on the right.</p>
 
     <!-- OPENING -->
     <section data-hands="none">
@@ -142,13 +142,13 @@
     <div class="card">
       <h3>Today</h3>
       <ul>
-        <li>So far the agent has worked with what is on your machine. Today it connects to outside websites and apps.</li>
-        <li>There are two ways in, API and MCP, and the session teaches both.</li>
-        <li>Collecting data, coding data at scale, and finding literature are the examples that put them to work.</li>
+        <li>The agent used your local files until now. Today, it connects to outside websites and apps.</li>
+        <li>There are two ways to enter: API and MCP. This session teaches both.</li>
+        <li>They use these tools for several tasks. They collect data. They code data at scale. They find literature.</li>
         <li>The plan for the session:
           <ul>
             <li>two ways to connect</li>
-            <li>APIs: collecting data, coding data at scale</li>
+            <li>APIs collect data. They code data at a large scale.</li>
             <li>MCP</li>
             <li>finding literature</li>
             <li>discussion</li>
@@ -165,23 +165,23 @@
     <div class="card">
       <h3>So far the agent has only used your machine</h3>
       <ul>
-        <li>Everything this week stayed in one place: your files, your code, and public web pages.</li>
-        <li>Most of what a real project needs lives elsewhere: the Census, your Zotero library, a journal database, a government portal.</li>
-        <li>Those are other websites and apps, and the agent cannot use them until you give it a way in.</li>
-        <li>Today's question: how does the agent work with a website or an app that is not on your machine?</li>
+        <li>Everything stayed in one place this week. This includes your files, your code, and public web pages.</li>
+        <li>Real projects need many things. Most of these things live elsewhere. They are in the Census. They are in your Zotero library. They are in a journal database. They are in a government portal.</li>
+        <li>Those are other websites and apps. The agent cannot use them. It needs you to give it a way in.</li>
+        <li>Today's question: How does the agent work with a website or an app that is not on your machine?</li>
       </ul>
     </div>
     <div class="card">
       <h3>Two ways the agent works with other websites and apps</h3>
       <ul>
-        <li>Every outside website or app poses the same problem: the agent needs a way to talk to it.</li>
+        <li>Every outside website or app has the same problem. The agent needs a way to talk to it.</li>
         <li>There are two answers:
           <ul>
             <li>the site has an <strong>API</strong>: it accepts requests from programs, and the agent writes the request</li>
-            <li>you connect the app once through <strong>MCP</strong>, and from then on the agent uses it directly</li>
+            <li>Connect the app once through <strong>MCP</strong>. After that, the agent uses it directly.</li>
           </ul>
         </li>
-        <li>The morning is about APIs. MCP comes after the break.</li>
+        <li>The morning covers APIs. MCP follows the break.</li>
       </ul>
     </div>
     </section>
@@ -193,9 +193,9 @@
     <div class="card">
       <h3>An API accepts requests from programs</h3>
       <ul>
-        <li>Many data sites offer an API: an address where a program, rather than a person, asks for data.</li>
-        <li>Each site defines its own. The Census has one, arXiv has one, and they all differ.</li>
-        <li>Using an API means writing code to send the request, and writing that code is exactly what the agent does well.</li>
+        <li>Many data sites have an API. An API is an address. A program uses it to ask for data instead of a person.</li>
+        <li>Every site defines its own. The Census has one. arXiv has one. They all differ.</li>
+        <li>Using an API requires writing code to send a request. The agent is very good at writing that code.</li>
       </ul>
     </div>
     <div class="card">
@@ -207,29 +207,29 @@
         <tr><td>OpenAI, or any model</td><td>a prompt</td><td>the model's answer</td></tr>
       </table>
       <ul>
-        <li>Every API has the same shape: a request goes in, structured output comes back.</li>
-        <li>The only differences are what you send and what you get back.</li>
+        <li>All APIs have the same shape. A request goes in. Structured output comes back.</li>
+        <li>Only the things you send and receive are different.</li>
       </ul>
     </div>
     <div class="card">
       <h3>Constructing an API call: endpoint and parameters</h3>
       <ul>
-        <li>Our teaching example is arXiv, the open paper archive. Its API needs no account.</li>
+        <li>We use arXiv as our teaching example. It is an open paper archive. You do not need an account for its API.</li>
         <li>Paste this into a browser:</li>
       </ul>
       <div class="quote">http://export.arxiv.org/api/query?search_query=all:electron&amp;start=0&amp;max_results=5</div>
       <ul>
-        <li>The <strong>endpoint</strong> is the part before the question mark: where you are calling.</li>
-        <li>The <strong>parameters</strong> are the part after it: what you are asking for. Here: search for "electron", return the first 5 records.</li>
-        <li>What comes back is not a webpage. It is structured text, one record per paper, with title, authors, and date as named fields.</li>
+        <li>The <strong>endpoint</strong> is the part before the question mark. It shows where you are calling.</li>
+        <li>The <strong>parameters</strong> is the part after it. This is what you want. Search for "electron". Return the first 5 records.</li>
+        <li>It does not return a webpage. It returns structured text. Each paper is one record. The records have named fields for title, authors, and date.</li>
       </ul>
     </div>
     <div class="card">
       <h3>The agent uses the API for you</h3>
       <ul>
-        <li>In a programming course you would now read the API documentation and write the request loop yourself.</li>
-        <li>Here you say: "Get the 100 most recent arXiv papers mentioning 'election', with title, authors, and date, as a CSV." The agent reads the documentation, writes the code that calls the API, and runs it.</li>
-        <li>Your job moves up one level: check the CSV against the site, and make sure the agent respects the site's rate limits.</li>
+        <li>In a programming course, you would read the API documentation. You would then write the request loop yourself.</li>
+        <li>You say: "Get the 100 most recent arXiv papers mentioning 'election', with title, authors, and date, as a CSV." The agent reads the documentation. It writes the code to call the API. Then it runs the code.</li>
+        <li>Your job has a new task. Check the CSV against the site. Make sure the agent follows the site's rate limits.</li>
       </ul>
     </div>
     </section>
@@ -241,73 +241,73 @@
     <div class="card">
       <h3>Where research data comes from</h3>
       <ul>
-        <li>The arXiv pull you just saw is data collection: an API that returns records, and a loop that turns them into a table.</li>
-        <li>The same pattern covers most sources: the Census, a city open-data portal, a journal database.</li>
+        <li>The arXiv pull was data collection. An API returned records. A loop turned them into a table.</li>
+        <li>The same pattern applies to most sources. These include the Census, a city open-data portal, and a journal database.</li>
         <li>Two fallbacks when there is no API:
           <ul>
             <li>a web page with a table on it: the agent reads the page itself and extracts the table</li>
-            <li>a file to download and unpack, for example a CSV inside a ZIP</li>
+            <li>Download a file and unpack it. For example, a CSV inside a ZIP.</li>
           </ul>
         </li>
-        <li>You still choose the source, choose the variables, and decide the amount.</li>
+        <li>You still choose the source. You choose the variables. You decide the amount.</li>
       </ul>
     </div>
     <div class="card">
       <h3>Verify your collection</h3>
       <ul>
         <li>These agents are weakest at gathering data.</li>
-        <li>On a social-science replication benchmark, agents scored about 96 at running an analysis and about 31 at finding the data it needed.</li>
-        <li>Scrapes will break and fields will be wrong, so check every pull against the source.</li>
+        <li>Agents used a social-science replication benchmark. They scored about 96 at running an analysis. They scored about 31 at finding the data it needed.</li>
+        <li>Scrapes will break. Fields will be wrong. Check every pull against the source.</li>
       </ul>
       <p class="src">Nguyen et al., "ReplicatorBench" (2026), <a href="https://arxiv.org/abs/2602.11354">arXiv:2602.11354</a>.</p>
     </div>
     <div class="card">
       <h3>Some APIs need a key</h3>
       <ul>
-        <li>Open APIs like arXiv answer anyone. Most others hand out a <strong>key</strong>: a password for programs, usually free to request.</li>
-        <li>The site uses the key to know who is asking, to limit how fast you pull, and sometimes to bill.</li>
-        <li>You paste your key in once, and the agent uses it from then on. The key lives in a file, never inside the code you share.</li>
+        <li>Open APIs like arXiv answer everyone. Most other APIs give you a <strong>key</strong>. This is a password for programs. It is usually free to request.</li>
+        <li>The site uses the key to identify you. It limits your request speed. Sometimes it uses the key for billing.</li>
+        <li>Paste your key one time. The agent uses it after that. The key stays in a file. It is never inside the shared code.</li>
       </ul>
     </div>
     <div class="card">
       <h3>No API: the agent reads the page itself</h3>
       <ul>
-        <li>Point it at the page: "Get the monthly unemployment table from this URL and put it in a CSV."</li>
-        <li>The agent reads the page, finds the table, and saves it.</li>
-        <li>Watch for the problems it should flag: a table split across pages, footnotes mixed into cells, and a site that asks you not to scrape.</li>
-        <li>If a site's terms forbid scraping, stop and find another source.</li>
+        <li>Go to this URL. Get the monthly unemployment table. Put it in a CSV.</li>
+        <li>The agent reads the page. It finds the table. It saves it.</li>
+        <li>Watch for these problems: A table splits across pages. Footnotes mix into cells. A site asks you not to scrape.</li>
+        <li>If a site's terms forbid scraping, stop. Find another source.</li>
       </ul>
     </div>
     <div class="card">
       <h3>Track raw pull sources</h3>
       <ul>
         <li>Save the raw result once, before any cleaning, and never overwrite that copy.</li>
-        <li>Have the agent write the source, the date, and the exact query next to the file.</li>
-        <li>Months later, you use that note to answer "where did this number come from."</li>
+        <li>Tell the agent to write the source, the date, and the exact query next to the file.</li>
+        <li>Months later, you use that note. You use it to answer "where did this number come from."</li>
       </ul>
     </div>
     <div class="card">
       <h3>Check your results</h3>
       <ul>
-        <li>Open the raw file and read the first few rows yourself.</li>
-        <li>Manually compare some values against the source page or the API.</li>
-        <li>Move the data into your analysis only after it matches.</li>
+        <li>Open the raw file. Read the first few rows yourself.</li>
+        <li>Compare some values manually. Check them against the source page or the API.</li>
+        <li>Match the data first. Then move it into your analysis.</li>
       </ul>
     </div>
     <div class="card">
       <h3>Turn a repeated pull into a Skill</h3>
       <ul>
-        <li>A pull you will run again, such as grabbing this month's new records, is worth packaging.</li>
+        <li>You will run a pull again. This includes grabbing this month's new records. It is worth packaging.</li>
         <li>Turn the steps into a Skill, the same way you did on Wednesday, so next time is one command.</li>
-        <li>You can share the Skill, and a labmate can then run the same pull using their own key.</li>
+        <li>You can share the Skill. A labmate can then run the same pull. They use their own key.</li>
       </ul>
     </div>
     <div class="card">
       <h3>Scaling a pull: script or subagents?</h3>
       <ul>
-        <li>One question matters: are the steps the same for every piece?</li>
-        <li>If the steps are the same — 50 calls to one API, each with a different state code — that is a loop in a script, and no agent is needed.</li>
-        <li>If every piece is different — 10 state websites, each with its own layout — that is subagent work, and each copy figures out its own page.</li>
+        <li>One question is important: are the steps the same for every piece?</li>
+        <li>The steps are the same. You make 50 calls to one API. Each call has a different state code. This is a loop in a script. No agent is needed.</li>
+        <li>Every piece is different. There are 10 state websites. Each has its own layout. This is subagent work. Each copy figures out its own page.</li>
       </ul>
     </div>
     </section>
@@ -319,47 +319,47 @@
     <div class="card">
       <h3>The API you have been using all week</h3>
       <ul>
-        <li>The model itself is a website with an API: you send it text and instructions, and it sends back an answer.</li>
-        <li>The chat window and Claude Code are wrappers around that API. Every message this week went through it.</li>
-        <li>arXiv's API returns data. The model's API returns a judgment. Both are the same mechanism: a request goes out, a structured answer comes back.</li>
+        <li>The model is a website with an API. You send it text and instructions. It sends back an answer.</li>
+        <li>The chat window and Claude Code wrap that API. All messages this week used it.</li>
+        <li>The arXiv API returns data. The model's API returns a judgment. They use the same mechanism. A request goes out. A structured answer comes back.</li>
       </ul>
     </div>
     <div class="card">
       <h3>Coding data through the model's API</h3>
       <ul>
-        <li>On Monday you coded twenty cases by pasting them into the chat. That works for twenty, not for twenty thousand.</li>
-        <li>At scale, the same task becomes a script: for each case, the script sends the codebook and one text to the model's API, and stores the label that comes back.</li>
-        <li>Coding data this way is now a standard workflow in social science, with a growing methods literature on when to trust it.</li>
+        <li>On Monday, you coded twenty cases. You pasted them into the chat. This works for twenty cases. It does not work for twenty thousand.</li>
+        <li>When done at scale, the task becomes a script. For each case, the script sends the codebook and one text to the model's API. It then stores the returned label.</li>
+        <li>Social scientists now use this coding data workflow as a standard. More literature discusses when to trust it.</li>
       </ul>
     </div>
     <div class="card">
       <h3>What the script sends, one case at a time</h3>
       <ul>
-        <li>Each request contains your codebook and one text case.</li>
-        <li>Sent: "Codebook: 1 = mentions cost, 0 = does not. Text: 'The premiums went up again this year.' Answer with the code only."</li>
+        <li>Each request has your codebook. It also has one text case.</li>
+        <li>Codebook: 1 means it mentions cost. 0 means it does not. Text: 'The premiums went up again this year.' Answer with only the code.</li>
         <li>Returned: "1".</li>
-        <li>The loop repeats this once per case and writes each answer next to its case in a CSV.</li>
+        <li>The loop runs once per case. It writes each answer next to its case in a CSV.</li>
       </ul>
     </div>
     <div class="card">
       <h3>Many model APIs, one request format</h3>
       <ul>
-        <li>Every major lab sells its model the same way, and the request format is nearly identical across OpenAI, Anthropic, and Google.</li>
-        <li>OpenRouter puts the whole market behind one address: one account, one key, four hundred models. You pick the model by its name inside the request.</li>
-        <li>That makes a robustness check cheap: rerun the same coding with a second model, and report the agreement, the same way you would for two human coders.</li>
-        <li>When the text cannot leave your machine at all, such as interviews under an IRB protocol, the same request shape also works against a model running on your own laptop.</li>
-        <li>OpenRouter can even pick the model for you (model = openrouter/auto), routed by what other users run for similar tasks. Fun to try, but for coded data you pin one model and report it. The model is part of your method.</li>
+        <li>Major labs sell their models in the same way. The request format is almost identical for OpenAI, Anthropic, and Google.</li>
+        <li>OpenRouter connects the entire market to one address. It uses one account and one key for four hundred models. You choose a model by its name inside the request.</li>
+        <li>This makes a robustness check cheap. Rerun the same coding with a second model. Report the agreement. Do it the same way you would for two human coders.</li>
+        <li>Sometimes you cannot move text from your machine. This happens with interviews under an IRB protocol. In these cases, the same request shape works on a model running on your own laptop.</li>
+        <li>OpenRouter can pick a model for you. Use `model = openrouter/auto` to do this. It routes based on what other users run for similar tasks. It is fun to try. However, pin one model for coded data and report it. The model is part of your method.</li>
       </ul>
     </div>
     <div class="card demo">
       <span class="tag">Live demo</span>
       <h3>The same case, three models</h3>
       <ul>
-        <li>One request, one codebook, one text case. The only thing that changes is the model's name.</li>
-        <li>Send it to a strong model, a mid one, and a cheap one, and read the three codes side by side.</li>
-        <li>In our test run, a small model miscoded this case while larger models coded it correctly.</li>
-        <li>The model is a choice you report, like a coder, not a fixed part of the machine.</li>
-        <li>The check does not change: hand-code a sample, compare, and report the agreement before you run the rest.</li>
+        <li>There is one request. There is one codebook. There is one text case. Only the model's name changes.</li>
+        <li>Send it to a strong model, a mid model, and a cheap model. Read the three codes side by side.</li>
+        <li>We ran a test. A small model miscoded this case. Larger models coded it correctly.</li>
+        <li>You report the model as a choice. It is like a coder. It is not a fixed part of the machine.</li>
+        <li>The check remains the same. Hand-code a sample. Compare it. Report the agreement. Do this before you run the rest.</li>
       </ul>
     </div>
     </section>
@@ -371,26 +371,26 @@
     <div class="card">
       <h3>What MCP is: a pre-packaged API</h3>
       <ul>
-        <li>Gmail has an API. So do Google Calendar, Slack, and Zotero. So why a second way in?</li>
-        <li><strong>MCP</strong> is not another source. It is an API packaged for agents: someone wraps a site's API into ready-made tools and handles the login, and you connect it once with a click.</li>
-        <li>After that the agent uses the app directly — "what is on my calendar Thursday?" — with no code written and no key pasted.</li>
+        <li>Gmail has an API. Google Calendar, Slack, and Zotero also have APIs. Why is there a second way to enter?</li>
+        <li><strong>MCP</strong> is not another source. It is an API for agents. Someone wraps a site's API into ready-made tools. They handle the login. You connect it once with a click.</li>
+        <li>Then the agent uses the app directly. It asks, "what is on my calendar Thursday?" No code is written. No key is pasted.</li>
       </ul>
     </div>
     <div class="card">
       <h3>Why MCP exists</h3>
       <ul>
-        <li>The AI most people use — the chat app on their phone or desktop — cannot run code at all. Someone must hand it tools, and MCP is the standard way to hand them.</li>
-        <li>It also carries the login: for a Gmail or Google Drive connector you sign in once in the browser. You could not get that access by writing code without a developer account.</li>
-        <li>One standard works across AI apps: Claude and ChatGPT both speak it, and the same connector serves both.</li>
+        <li>Most people use an AI chat app on a phone or desktop. This AI cannot run code. Someone must give it tools. MCP is the standard way to give it those tools.</li>
+        <li>It also carries the login. For a Gmail or Google Drive connector, you sign in once in the browser. You could not get that access by writing code without a developer account.</li>
+        <li>One standard works for all AI apps. Claude and ChatGPT both use it. The same connector serves both.</li>
       </ul>
     </div>
     <div class="card demo">
       <span class="tag">Live demo</span>
       <h3>API or MCP: when to use which</h3>
       <ul>
-        <li>In Claude Code, which writes code fluently, the API route often does the same job with less overhead. Our Zotero setup runs on its API, no MCP involved.</li>
-        <li>In the chat apps — claude.ai, Claude Desktop, your phone — MCP is the only way in, and it is how you connect Gmail, Drive, Slack, or Notion there.</li>
-        <li>Demo: this machine has Google Calendar connected. Watch one request — "what is on my calendar Thursday?" — answered with no code on screen.</li>
+        <li>Claude Code writes code fluently. The API route often does the same job. It has less overhead. Our Zotero setup runs on its API. No MCP is involved.</li>
+        <li>MCP is the only way in for chat apps. These include claude.ai, Claude Desktop, and your phone. You use it to connect Gmail, Drive, Slack, or Notion there.</li>
+        <li>This machine connects to Google Calendar. Watch one request. The user asks, "what is on my calendar Thursday?" The machine answers. No code appears on the screen.</li>
       </ul>
     </div>
     </section>
@@ -402,68 +402,68 @@
     <div class="card">
       <h3>Literature is where fabrication hurts most</h3>
       <ul>
-        <li>Ask a bare chatbot for ten citations, and some will be invented. A text predictor produces references that only <strong>sound</strong> real.</li>
-        <li>This cannot be fixed from inside the model: it has no way to check its own memory, and "please double-check" just makes it predict again.</li>
-        <li>Verification needs an outside authority — a source of record the reference can be checked against.</li>
-        <li>That is what the morning's APIs are for: every reference must arrive through an API, with its real metadata, from a source of record.</li>
+        <li>If you ask a basic chatbot for ten citations, it might invent some. A text predictor writes references that <strong>sound</strong> real without being real.</li>
+        <li>The model cannot fix this from the inside. It cannot check its own memory. Saying "please double-check" only makes it predict again.</li>
+        <li>Verification needs an outside authority. This is a source of record. You can check the reference against it.</li>
+        <li>That is what the morning's APIs are for. Every reference must come through an API. It must include its real metadata. It must come from a source of record.</li>
       </ul>
     </div>
     <div class="card">
       <h3>My own workflow: four steps</h3>
       <ul>
         <li>You are writing, and a claim needs a citation. The citation must be real.</li>
-        <li><strong>Zotero</strong> is where your references live: it holds your library and builds your bibliography.</li>
+        <li><strong>Zotero</strong> is where your references live. It holds your library. It builds your bibliography.</li>
         <li>This is how I solve it myself, in four steps:
           <ul>
             <li>1. search my Zotero library — is the paper already there?</li>
-            <li>2. if not, search OpenAlex — find it, with its real metadata</li>
-            <li>3. add it to Zotero — write it into my library</li>
-            <li>4. one written rule for the agent: only works that are in my Zotero can be cited</li>
+            <li>2. If not, search OpenAlex. Find it. Use its real metadata.</li>
+            <li>3. Add it to Zotero. Write it into my library.</li>
+            <li>4. One rule for the agent: Only cite works found in my Zotero.</li>
           </ul>
         </li>
-        <li>Steps 1 to 3 are API calls like the morning's. Step 4 makes the agent follow them. The next cards take them one at a time.</li>
+        <li>Steps 1 to 3 are API calls. They are like the ones from this morning. Step 4 makes the agent follow the steps. The next cards take them one by one.</li>
       </ul>
     </div>
     <div class="card">
       <h3>Step 1: is it already in my library?</h3>
       <ul>
-        <li>Every citation starts with this question, before any search of the web.</li>
-        <li>The agent asks it through the Zotero API: search your library by title words, by author, or by DOI.</li>
-        <li>A miss is not proof of absence. The paper may be filed under different words, so search a second way before concluding it is not there.</li>
+        <li>Every citation starts with this question. This happens before any web search.</li>
+        <li>The agent asks it using the Zotero API. You can search your library by title words. You can search by author. You can search by DOI.</li>
+        <li>Not finding something does not prove it is gone. The paper might be under different words. Search a second way before you decide it is not there.</li>
       </ul>
     </div>
     <div class="card">
       <h3>Step 2: find it in OpenAlex</h3>
       <ul>
-        <li><strong>OpenAlex</strong> is a free, open index of more than 250 million scholarly works, all fields. The same kind of API as arXiv's, plus citation links between papers.</li>
-        <li>Search by topic or by title. Follow the citations of what you find to the papers nearby.</li>
-        <li>What comes back is a database record: title, authors, year, venue, DOI.</li>
-        <li>That record, not the model's memory, is what goes into your draft.</li>
+        <li><strong>OpenAlex</strong> is a free and open index. It has more than 250 million scholarly works. It covers all fields. It uses the same kind of API as arXiv. It also has citation links between papers.</li>
+        <li>Search by topic or by title. Follow citations to find nearby papers.</li>
+        <li>The result is a database record. It includes the title, authors, year, venue, and DOI.</li>
+        <li>That record goes into your draft. It is not the model's memory.</li>
       </ul>
     </div>
     <div class="card">
       <h3>Why step 2 is slow</h3>
       <ul>
-        <li>Every database limits how fast a program can ask. They protect their servers, and they do not want their whole collection copied.</li>
-        <li>arXiv asks for one request every three seconds. Semantic Scholar often refuses without a key. OpenAlex is generous if you send your email along.</li>
-        <li>Hit the limit and the site answers "too many requests". The right response is to slow down, wait, and retry.</li>
-        <li>In practice this, not the code, is what makes the search step slow. Plan for minutes, not seconds.</li>
+        <li>Every database has a speed limit for requests. This protects their servers. They do not want people to copy their entire collection.</li>
+        <li>arXiv asks for one request every three seconds. Semantic Scholar often refuses without a key. OpenAlex is generous if you include your email.</li>
+        <li>If you hit the limit, the site says "too many requests". Slow down. Wait. Then retry.</li>
+        <li>This process makes the search step slow, not the code. It takes minutes instead of seconds.</li>
       </ul>
     </div>
     <div class="card">
       <h3>Step 3: write it into Zotero</h3>
       <ul>
-        <li>Adding the paper to your library is a write request to the Zotero API, with your key. The same mechanics as every API call this morning.</li>
-        <li>The record lands with its metadata attached, exactly as OpenAlex returned it.</li>
-        <li>Your bibliography is then generated from the library, so no line in it was ever typed from memory.</li>
+        <li>Adding the paper to your library is a write request. It uses your key for the Zotero API. It works like every other API call this morning.</li>
+        <li>The record lands with its metadata. It is exactly as OpenAlex returned it.</li>
+        <li>The system generates your bibliography from the library. No line was typed from memory.</li>
       </ul>
     </div>
     <div class="card">
       <h3>Step 4: one rule the agent cannot skip</h3>
       <ul>
-        <li>Steps 1 to 3 only work if the agent never goes around them.</li>
-        <li>So the rule goes into the agent's instruction file, in writing: "Only cite works that are in my Zotero library. If a work is not there, stop and tell me."</li>
-        <li>With that line, a citation cannot enter a draft from the model's memory. The only way in is the three steps above.</li>
+        <li>Steps 1 to 3 only work if the agent does not go around them.</li>
+        <li>The rule goes into the agent's instruction file in writing: "Only cite works in my Zotero library. If a work is not there, stop and tell me."</li>
+        <li>That line prevents a citation from entering a draft from the model's memory. You must use the three steps above to include one.</li>
       </ul>
     </div>
     <div class="card">
@@ -472,35 +472,35 @@
         <li>The three steps keep fake references out. The same idea also checks references that are already on the page:
           <ul>
             <li><strong>citation check</strong>: look up every reference in the draft against Crossref or OpenAlex. The DOI, title, authors, and venue must match.</li>
-            <li><strong>retraction check</strong>: run the references against the Retraction Watch database, now part of Crossref.</li>
-            <li><strong>reading your own library</strong>: the agent answers from the PDFs in your Zotero, not from its memory of the literature.</li>
+            <li><strong>retraction check</strong>: Check the references in the Retraction Watch database. This is now part of Crossref.</li>
+            <li><strong>reading your own library</strong>: The agent answers using the PDFs in your Zotero. It does not use its own memory of the literature.</li>
           </ul>
         </li>
-        <li>The rule under all three: where a database of record exists, check against it. Never trust the model's memory.</li>
+        <li>There are three rules. All three follow this rule: if there is a database of record, check it. Do not trust the model's memory.</li>
       </ul>
     </div>
     <div class="card">
       <h3>Subagents speed up steps 1 and 2</h3>
       <ul>
-        <li>Tuesday's subagents come back here, because the steps repeat.</li>
-        <li>Step 1 can run in parallel: a draft cites thirty works, and one subagent per work checks the library at the same time.</li>
-        <li>Step 2 can run in parallel too: several searches run at once, with different keywords or different databases.</li>
-        <li>Step 3 stays sequential: one writer adds the keepers to the library, so nothing is added twice.</li>
+        <li>The subagents from Tuesday return here. This happens because the steps repeat.</li>
+        <li>Step 1 can run in parallel. A draft cites thirty works. One subagent checks the library for each work at the same time.</li>
+        <li>Step 2 can also run in parallel. Several searches run at once. They use different keywords or different databases.</li>
+        <li>Step 3 remains sequential. One writer adds the keepers to the library. This ensures nothing is added twice.</li>
       </ul>
     </div>
     <div class="card">
       <h3>What this section showed</h3>
       <ul>
-        <li>Monday's WVS demo was one chart from one dataset. This workflow is much more complex: four steps, three APIs, and one written rule.</li>
+        <li>Monday's WVS demo used one chart from one dataset. This workflow is more complex. It has four steps, three APIs, and one written rule.</li>
         <li>The shape is the standard one for a complex task:
           <ul>
             <li>plan first: plan mode turns the vague goal into concrete steps</li>
-            <li>run the steps separately, and check each one</li>
-            <li>inside a step, run the independent pieces in parallel with subagents</li>
+            <li>Run the steps one by one. Check each step.</li>
+            <li>Inside a step, run the independent pieces in parallel using subagents.</li>
           </ul>
         </li>
-        <li>It solves a real failure: fabricated citations.</li>
-        <li>My own version is not finished; I am still fixing parts of it. It is a working example. Take the design and build your own.</li>
+        <li>It solves a real problem. That problem is fake citations.</li>
+        <li>My version is not done. I am still fixing parts. It is a working example. Use this design to build your own.</li>
       </ul>
     </div>
     </section>
@@ -512,17 +512,17 @@
     <div class="card">
       <h3>Where are the lines?</h3>
       <ul>
-        <li>What counts as legitimate AI help in your field, and what crosses the line?</li>
-        <li>Drafting and thinking: what parts must be yours?</li>
-        <li>What do authorship and acknowledgment rules require?</li>
+        <li>What is acceptable AI help in your field? What goes too far?</li>
+        <li>What parts must belong to you? Drafting and thinking: which parts?</li>
+        <li>What do the rules for authorship and acknowledgment require?</li>
         <li>What do your target journals require you to disclose now?</li>
       </ul>
     </div>
     <div class="card">
       <h3>Tomorrow</h3>
       <ul>
-        <li>The final session is a build day. You have 100 minutes, so use this time on one small website or app from your own project.</li>
-        <li>Decide tonight what you want. Do you want a webpage of your results, one command to rerun everything, a small tool, or a smarter agent?</li>
+        <li>The final session is a build day. You have 100 minutes. Use this time on one small website or app from your own project.</li>
+        <li>Decide tonight what you want. Do you want a webpage of your results? Do you want one command to rerun everything? Do you want a small tool? Or do you want a smarter agent?</li>
       </ul>
     </div>
     </section>
@@ -541,11 +541,11 @@
       <div class="exi">
         <span class="step">Step 1</span>
         <h4>Call an API from your browser</h4>
-        <p>Paste this URL into a browser tab and look at what comes back.</p>
+        <p>Copy this URL. Paste it into a browser tab. Look at the result.</p>
         <div class="code">http://export.arxiv.org/api/query?search_query=all:electron&amp;start=0&amp;max_results=5<span class="copy">copy</span></div>
         <ul>
           <li>Find the five paper records in the response.</li>
-          <li>Find three fields you could extract as variables.</li>
+          <li>Find three fields. You can extract them as variables.</li>
         </ul>
       </div>
       <div class="exi">
@@ -556,14 +556,14 @@
           <li><code>start=0</code> &rarr; <code>start=2</code></li>
           <li><code>electron</code> &rarr; <code>quantum</code></li>
         </ul>
-        <p>What changed in the response: how many records, and which ones?</p>
+        <p>What changed in the response? How many records changed? Which ones changed?</p>
       </div>
       <div class="exi">
         <span class="step">Step 3</span>
         <h4>Let the agent write the loop</h4>
         <div class="code">Get the 100 most recent arXiv papers mentioning 'election', with title, authors, and date, as a CSV. Respect arXiv's rate limit. Show me the first rows.<span class="copy">copy</span></div>
         <ul>
-          <li>Read the code it wrote: find the endpoint and the parameters you just used by hand.</li>
+          <li>Read the code it wrote. Find the endpoint. Find the parameters you just used. Do this by hand.</li>
           <li>Check the first rows against the arXiv website.</li>
         </ul>
       </div>
@@ -574,23 +574,23 @@
       <div class="exi">
         <span class="step">Step 1</span>
         <h4>One case, by hand</h4>
-        <p>Run Monday's coding task as a single API-style request, in plain chat:</p>
+        <p>Run Monday's coding task. Use a single API-style request. Use plain chat.</p>
         <div class="code">Codebook: 1 = mentions cost, 0 = does not. Text: "The premiums went up again this year." Answer with the code only.<span class="copy">copy</span></div>
       </div>
       <div class="exi">
         <span class="step">Step 2</span>
         <h4>Scale it to your own cases</h4>
-        <p>Use twenty text cases from your project and your Monday codebook.</p>
+        <p>Use twenty text cases. Take them from your project. Also take them from your Monday codebook.</p>
         <div class="code">Write a script that codes each case in cases.csv with my codebook through the model's API, one request per case, and writes the labels to a new column. Run it on the first 20 rows and show me the labels next to the text.<span class="copy">copy</span></div>
         <ul>
-          <li>The script asks for an API key once. The key lives in a file, not in the code.</li>
+          <li>The script asks for an API key one time. The key is stored in a file. It is not in the code.</li>
         </ul>
       </div>
       <div class="exi">
         <span class="step">Step 3</span>
         <h4>Check it like a second coder</h4>
         <ul>
-          <li>Hand-code the same twenty cases yourself.</li>
+          <li>Hand-code those same twenty cases yourself.</li>
           <li>Compare, and note where you and the model disagree.</li>
           <li>Optional, with an OpenRouter key: rerun the same twenty with a second model and compare the two models too.</li>
         </ul>
@@ -602,11 +602,11 @@
       <div class="exi">
         <span class="step">Step 1</span>
         <h4>Pick one source for your project</h4>
-        <p>Pick one source for your project, and keep it small for now.</p>
+        <p>Choose one source for your project. Keep it small for now.</p>
         <ul>
           <li>a web page with a table you want</li>
-          <li>An API, for example, the Census or a city open-data portal.</li>
-          <li>Download and unpack a file, for example, a CSV inside a ZIP.</li>
+          <li>An API is an example. This could be the Census. It could also be a city open-data portal.</li>
+          <li>Download a file. For example, a CSV inside a ZIP. Unpack the file.</li>
         </ul>
       </div>
       <div class="exi">
@@ -618,7 +618,7 @@
         <p>From a web page:</p>
         <div class="code">From this URL, pull the table of unemployment by month into a CSV, and show me the first rows.<span class="copy">copy</span></div>
         <ul>
-          <li>Paste your free key when asked, and do this once if the API needs it.</li>
+          <li>Paste your free key when asked. Do this once if the API needs it.</li>
           <li>If the site's terms forbid scraping, stop and find another source.</li>
         </ul>
       </div>
@@ -627,18 +627,18 @@
         <span class="step">Step 3</span>
         <h4>Check five rows against the source</h4>
         <ul>
-          <li>Open the raw file and read the first few rows yourself.</li>
-          <li>Manually compare five values and use the source page or the API.</li>
-          <li>Match the data first and move it into your analysis.</li>
-          <li>Add this rule to your instructions file: save raw pulls exactly as they are and include their source and date and do not start analyzing a pulled file until you check its rows against the source.</li>
+          <li>Open the raw file. Read the first few rows yourself.</li>
+          <li>Compare five values by hand. Use the source page or the API.</li>
+          <li>Match the data first. Move it into your analysis.</li>
+          <li>Add this rule to your instructions file: save raw pulls exactly as they are. Include their source and date. Do not start analyzing a pulled file until you check its rows against the source.</li>
         </ul>
       </div>
       <div class="exi">
         <span class="step">Step 4 · try more</span>
         <h4>Package a pull you will repeat</h4>
         <ul>
-          <li>If this is a pull, you will run again. Turn the steps into a Skill and Do it like you did on Wednesday.</li>
-          <li>The next time, the same pull will be one command and a labmate can run it with their own key.</li>
+          <li>If this is a pull, you will run again. Turn the steps into a Skill. Do it like you did on Wednesday.</li>
+          <li>Next time, the same pull will be one command. A labmate can run it with their own key.</li>
         </ul>
       </div>
     </div>
