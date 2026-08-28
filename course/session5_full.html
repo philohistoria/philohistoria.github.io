@@ -208,7 +208,7 @@
       <h3>How to keep it local</h3>
       <ul>
         <li><strong>Ollama</strong> is a free program and runs open-source models like Llama or Qwen. You can run them on your laptop.</li>
-        <li>One command now does the whole hookup: <code>ollama launch claude</code> starts Claude Code against your local server. For Codex, the flag is <code>codex --oss</code>. Ollama is the local model server and speaks both tools’ protocols.</li>
+        <li>One command now does the whole hookup: type <code>ollama</code> with nothing after it, and a menu walks you through picking a tool and a model. <code>ollama launch claude</code> jumps straight to Claude Code on your local server. For Codex, the flag is <code>codex --oss</code>. Ollama is the local model server and speaks both tools’ protocols.</li>
         <li>The Ollama desktop app has a Claude toggle that does the same for the Claude app: switch it on, and Claude runs on the model you pick, local or on Ollama’s cloud.</li>
         <li>Ollama supports this route, and Anthropic does not. For Codex, the <code>--oss</code> flag is official.</li>
         <li>Set the sandbox to your project folder and turn the network off.</li>
@@ -426,13 +426,15 @@
       <div class="exi">
         <span class="step">Step 2</span>
         <h4>Point your agent at it</h4>
-        <p>One command starts Claude Code against your local server:</p>
+        <p>Type <code>ollama</code> with nothing after it and follow the menu, or jump straight there:</p>
         <div class="code">ollama launch claude<span class="copy">copy</span></div>
         <p>It sets three variables and starts the tool. You can also set them yourself, which shows what the command does and lets you script it:</p>
         <div class="code">export ANTHROPIC_AUTH_TOKEN=ollama
 export ANTHROPIC_API_KEY=""
 export ANTHROPIC_BASE_URL=http://localhost:11434
+export CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC=1
 claude --model qwen3-coder:30b<span class="copy">copy</span></div>
+        <p>The last line matters for sensitive data: see Step 3.</p>
         <ul>
           <li>For Codex: <code>codex --oss</code> starts it against the local model instead.</li>
           <li>Use <code>/model</code> and the model's name to switch models in the session. The variable chooses the server, and the name chooses the model.</li>
@@ -443,6 +445,8 @@ claude --model qwen3-coder:30b<span class="copy">copy</span></div>
         <span class="step">Step 3</span>
         <h4>Check that nothing leaves</h4>
         <ul>
+          <li>Local inference is not the whole story. Your prompts, data, and code go only to your machine, but by default the tool itself still sends usage metrics and error reports to Anthropic. Those messages never contain your prompts or files. <code>CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC=1</code> turns them off.</li>
+          <li>In the Ollama menu, pick a model that runs locally, not one marked cloud. A cloud model runs on Ollama's servers, and your data leaves the machine.</li>
           <li>Use ordinary data first, turn the network off, and ask the local agent a question.</li>
           <li>Turn off your wifi and give it a task. If it still works, nothing was going out.</li>
           <li>You can show this proof to an IRB, and the data stayed on the machine.</li>
