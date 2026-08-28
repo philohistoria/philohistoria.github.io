@@ -146,6 +146,7 @@
       <table>
         <tr><td>Turn your analysis into a website</td></tr>
         <tr><td>Build one of your own (100 minutes)</td></tr>
+        <tr><td>Other models in this agent</td></tr>
         <tr><td>Keeping private data on your own machine</td></tr>
         <tr><td>Show your project</td></tr>
         <tr><td>Takeaways</td></tr>
@@ -192,71 +193,131 @@
     </div>
     </section>
 
-    <!-- PRIVATE -->
-    <section data-hands="private">
-    <h2 class="sec" id="private">Keeping private data on your own machine <span class="hastag">· do it on the right</span></h2>
-
-    <div class="card">
-      <h3>When your data cannot leave your computer</h3>
-      <ul>
-        <li>Some data cannot go to a company's servers. This includes human subjects, restricted records, and anything under an IRB or a data agreement.</li>
-        <li>Default tools send your files to Anthropic or OpenAI, and you cannot use those tools for that data.</li>
-        <li>Run the tool on an open-source model on your own machine, which is the fix and nothing leaves the machine.</li>
-      </ul>
-    </div>
-    <div class="card">
-      <h3>How to keep it local</h3>
-      <ul>
-        <li><strong>Ollama</strong> is a free program and runs open-source models like Gemma or Qwen. You can run them on your laptop.</li>
-        <li>One warning before anything else: the default downloads are too big for most laptops. A bare <code>ollama run gemma4</code> pulls a 9.6&nbsp;GB model that a 16&nbsp;GB laptop struggles to run. This course defaults to a small 4B model, and you always name the tag yourself.</li>
-        <li>One command now does the whole hookup: type <code>ollama</code> with nothing after it, and a menu walks you through picking a tool and a model. <code>ollama launch claude</code> jumps straight to Claude Code on your local server. For Codex, the flag is <code>codex --oss</code>. Ollama is the local model server and speaks both tools’ protocols.</li>
-        <li>The Ollama desktop app has a Claude toggle that does the same for the Claude app: switch it on, and Claude runs on the model you pick, local or on Ollama’s cloud.</li>
-        <li>Ollama supports this route, and Anthropic does not. For Codex, the <code>--oss</code> flag is official.</li>
-        <li>Set the sandbox to your project folder and turn the network off.</li>
-        <li>Local models are slower and weaker than Claude or GPT, and you use them only when the data requires it.</li>
-      </ul>
-    </div>
-    <div class="card">
-      <h3>What makes a local model fail</h3>
-      <ul>
-        <li><strong>Silent truncation.</strong> The agent sends about 23,000 tokens per request, which are its own instructions and tool definitions. A local server has a smaller context window, so it cuts the tokens off. There is no error message, and the model loses its instructions and returns nothing. To fix this, start the server with a 32k context: <code>OLLAMA_CONTEXT_LENGTH=32768 ollama serve</code>.</li>
-        <li><strong>Memory goes to the context window.</strong> The same 2.5 GB model uses 4.8 GB of memory at 16k context, 7.8 GB at 32k, and 42 GB at Ollama’s default, and on a 16 GB laptop, the default context causes the machine to swap or the model to fail.</li>
-        <li><strong>Model size.</strong> A 3B model answers questions but cannot follow the agent’s tool instructions at all. A 4B model barely completes a one-file task in minutes, and a serious setup starts around 20B and needs 16 GB of memory or more.</li>
-      </ul>
-    </div>
-    <div class="card">
-      <h3>Use local tools for daily private work</h3>
-      <ul>
-        <li>Claude Code’s instructions are made for a frontier cloud model, and a local model performs below its own level inside them.</li>
-        <li>Local model tools use smaller instructions and work better with the same model. <strong>Aider</strong> (<code>aider --model ollama/qwen3-coder</code>, saves every change as a commit) and <strong>OpenCode</strong> are the two established choices.</li>
-        <li>Claude Code on Ollama shows the tool and the model are separate, so use one of these local-first tools on the same Ollama for the sensitive project.</li>
-      </ul>
-    </div>
-    </section>
-
     <!-- OTHER ENGINES -->
     <section data-hands="engines">
     <h2 class="sec" id="engines">Other models in this agent <span class="hastag">&middot; do it on the right</span></h2>
 
     <div class="card">
-      <h3>A cheaper model for the same agent</h3>
+      <h3>Three parts, and every one can be swapped</h3>
       <ul>
-        <li>Many companies sell frontier open-weight models and use interfaces that speak Anthropic’s protocol. DeepSeek, Kimi (Moonshot), and GLM (Z.ai) all publish an address, and Claude Code can talk to these addresses directly.</li>
-        <li>To switch, you need one environment variable and an API key from that company, and it costs much less than Anthropic’s price, and some companies sell monthly coding plans for this exact use.</li>
-        <li>This lowers your price. It does not protect your privacy. Your data still leaves your machine. It goes to a different company’s servers now. This route is no better than the default for data under an IRB or a data agreement. The server location can make compliance harder.</li>
-        <li>The model company supports this route and Anthropic tolerates it, but if it breaks, no support team will help you. Quality changes by provider and month, and the best open models test close to the closed frontier.</li>
-        <li>This route does not reach GPT, and OpenAI does not publish an Anthropic-compatible address. You need a fragile translation proxy in the middle to reach GPT, so use Codex for GPT.</li>
+        <li>Your setup all week had three parts:
+          <ul>
+            <li>the <strong>agent</strong> — the tool in your terminal (Claude Code)</li>
+            <li>the <strong>model</strong> — the brain it calls (Claude)</li>
+            <li>the <strong>server</strong> — where the model runs (Anthropic&rsquo;s)</li>
+          </ul>
+        </li>
+        <li>Each part can be swapped:
+          <ul>
+            <li>the model: many open models exist — Qwen, Gemma, DeepSeek, Kimi</li>
+            <li>the server: another company, an aggregator (OpenRouter), or your own laptop</li>
+            <li>the agent: open-source coding agents — OpenCode, Aider</li>
+          </ul>
+        </li>
+        <li>Three reasons to swap:
+          <ul>
+            <li>cheaper — another company&rsquo;s server (this section)</li>
+            <li>a second opinion — another model family (this section)</li>
+            <li>private data — your own laptop (next section)</li>
+          </ul>
+        </li>
       </ul>
     </div>
     <div class="card">
-      <h3>A second opinion from another model family</h3>
+      <h3>Swap the server: same agent, cheaper model</h3>
       <ul>
-        <li>The agent can run any command-line program, and another agent’s CLI is a command-line program. One saved command sends a question to Codex, which returns the answer for comparison.</li>
-        <li>Models in one family use the same training data and make the same mistakes, so their errors are correlated, and when Claude checks Claude, it is like reading the same answer twice, but a reviewer from a different family is more like an independent draw.</li>
-        <li>Confidence rises when both families agree, but check the parts where they disagree yourself.</li>
-        <li>The second model does not know about your conversation, and everything it needs must be in the question you send.</li>
-        <li>Read the second opinion and decide for yourself, and if the agent applies it without reading, no answer is checked.</li>
-        <li>The same command goes to Gemini (<code>gemini -p</code>) or a local model (<code>ollama run</code>). The local model gives a second opinion and is free and fully offline.</li>
+        <li>DeepSeek, Kimi, and GLM publish addresses that speak Anthropic&rsquo;s protocol, and Claude Code talks to them directly:
+          <ul>
+            <li>one environment variable plus that company&rsquo;s API key</li>
+            <li>a fraction of Anthropic&rsquo;s price; some sell monthly coding plans</li>
+          </ul>
+        </li>
+        <li><strong>OpenRouter</strong> is an aggregator: one key, hundreds of models from many companies behind one address.</li>
+        <li>Cheaper is not private. Your data still leaves your machine, now to a different company. Not for IRB data.</li>
+        <li>No support team if it breaks. And this route does not reach GPT — use Codex for GPT.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Swap the family: a second opinion</h3>
+      <ul>
+        <li>Save one command that sends a question to Codex, to Gemini (<code>gemini -p</code>), or to a local model.</li>
+        <li>Why another family: models from one family make the same mistakes. Claude checking Claude reads the same answer twice.</li>
+        <li>Two rules:
+          <ul>
+            <li>the second model knows nothing of your session — put everything in the question</li>
+            <li>read its answer yourself; where the families disagree, you decide</li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+    </section>
+
+    <!-- PRIVATE -->
+    <section data-hands="private">
+    <h2 class="sec" id="private">Keeping private data on your own machine <span class="hastag">&middot; do it on the right</span></h2>
+
+    <div class="card">
+      <h3>When your data cannot leave</h3>
+      <ul>
+        <li>Some data cannot go to any company&rsquo;s server: human subjects, restricted records, anything under an IRB or a data agreement.</li>
+        <li>Every route so far sends your files to someone&rsquo;s server.</li>
+        <li>The fix: run an open model on your own laptop. Nothing leaves.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Ollama: one program, many open models</h3>
+      <ul>
+        <li>There are too many open models to manage by hand. <strong>Ollama</strong> aggregates them:
+          <ul>
+            <li>pull any model by name, one interface for all</li>
+            <li>serves them to any agent — it speaks both Claude Code&rsquo;s and Codex&rsquo;s protocols</li>
+            <li>local by default; its <em>cloud</em> models run on Ollama&rsquo;s servers — avoid those for private data</li>
+          </ul>
+        </li>
+        <li>Hooking it up:
+          <ul>
+            <li>type <code>ollama</code> with nothing after it — a menu walks you through</li>
+            <li><code>ollama launch claude</code> — straight to Claude Code on your local model</li>
+            <li><code>codex --oss</code> for Codex; a Claude toggle in the Ollama app for the Claude desktop app</li>
+          </ul>
+        </li>
+        <li>Do not accept the default model. It is 7–10&nbsp;GB and most laptops cannot run it. Course default: <code>qwen3:4b</code> (2.5&nbsp;GB).</li>
+        <li>Local models are slower and weaker than Claude or GPT. Use them only when the data requires it.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Why a local model fails</h3>
+      <ul>
+        <li><strong>Context too small.</strong>
+          <ul>
+            <li>laptop default: 4k tokens; the agent&rsquo;s own instructions: ~20k</li>
+            <li>result: the instructions get cut off — no error, empty answers</li>
+            <li>fix: start the server at 32k (our setting); Ollama&rsquo;s docs say 64k+ if your memory allows</li>
+          </ul>
+        </li>
+        <li><strong>Context eats memory.</strong> The same 2.5&nbsp;GB model needs:
+          <ul>
+            <li>4.8&nbsp;GB at 16k context</li>
+            <li>7.8&nbsp;GB at 32k</li>
+            <li>so do not raise the context beyond what your RAM fits</li>
+          </ul>
+        </li>
+        <li><strong>Model too small.</strong>
+          <ul>
+            <li>under 4B: cannot follow an agent&rsquo;s tool instructions at all</li>
+            <li>4B: completes our exercise, slowly</li>
+            <li>comfortable: 20B and up, on a 32&nbsp;GB machine</li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>OpenCode and Aider: agents built for local models</h3>
+      <ul>
+        <li>These are agents, like Claude Code — but open-source and designed for small local models.</li>
+        <li>Why they work better locally: their instructions are a fraction of Claude Code&rsquo;s, so the same small model has more room left to think.</li>
+        <li>They run on the same Ollama underneath: <code>aider --model ollama/qwen3:4b</code>, or point OpenCode at the same server.</li>
+        <li>For a long-running sensitive project, prefer one of these over Claude Code on Ollama.</li>
       </ul>
     </div>
     </section>
