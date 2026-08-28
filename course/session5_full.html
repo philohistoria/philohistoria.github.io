@@ -207,7 +207,8 @@
     <div class="card">
       <h3>How to keep it local</h3>
       <ul>
-        <li><strong>Ollama</strong> is a free program and runs open-source models like Llama or Qwen. You can run them on your laptop.</li>
+        <li><strong>Ollama</strong> is a free program and runs open-source models like Gemma or Qwen. You can run them on your laptop.</li>
+        <li>One warning before anything else: the default downloads are too big for most laptops. A bare <code>ollama run gemma4</code> pulls a 9.6&nbsp;GB model that a 16&nbsp;GB laptop struggles to run. This course defaults to a small 4B model, and you always name the tag yourself.</li>
         <li>One command now does the whole hookup: type <code>ollama</code> with nothing after it, and a menu walks you through picking a tool and a model. <code>ollama launch claude</code> jumps straight to Claude Code on your local server. For Codex, the flag is <code>codex --oss</code>. Ollama is the local model server and speaks both tools’ protocols.</li>
         <li>The Ollama desktop app has a Claude toggle that does the same for the Claude app: switch it on, and Claude runs on the model you pick, local or on Ollama’s cloud.</li>
         <li>Ollama supports this route, and Anthropic does not. For Codex, the <code>--oss</code> flag is official.</li>
@@ -418,22 +419,28 @@
       <div class="exi">
         <span class="step">Step 1</span>
         <h4>Install a local model</h4>
-        <p>Install Ollama, pick a model from your memory, and start the server with a 32k context.</p>
-        <div class="code">curl -fsSL https://ollama.com/install.sh | sh<span class="copy">copy</span></div>
-        <p>16 GB laptop: <code>ollama pull qwen3:4b</code> and 32 GB or more: <code>ollama pull qwen3-coder:30b</code>.</p>
-        <div class="code">OLLAMA_CONTEXT_LENGTH=32768 ollama serve<span class="copy">copy</span></div>
+        <p>Install Ollama, pull the small course model by name, and start the server with a 32k context.</p>
+        <div class="code">curl -fsSL https://ollama.com/install.sh | sh
+ollama pull qwen3:4b
+OLLAMA_CONTEXT_LENGTH=32768 ollama serve<span class="copy">copy</span></div>
+        <ul>
+          <li>Do not run a bare <code>ollama run gemma4</code> or accept the menu's default model: those pull 7–10&nbsp;GB models, and most laptops in this room cannot run them.</li>
+          <li><code>qwen3:4b</code> is a 2.5&nbsp;GB download and runs on a 16&nbsp;GB laptop, and on an 8&nbsp;GB laptop it runs only with a short context.</li>
+          <li>Only a machine with 32&nbsp;GB or more should try <code>qwen3-coder:30b</code> or <code>gemma4:26b</code>.</li>
+        </ul>
       </div>
       <div class="exi">
         <span class="step">Step 2</span>
         <h4>Point your agent at it</h4>
         <p>Type <code>ollama</code> with nothing after it and follow the menu, or jump straight there:</p>
         <div class="code">ollama launch claude<span class="copy">copy</span></div>
+        <p>In the menu, pick the small model you pulled in Step 1, not the default it offers.</p>
         <p>It sets three variables and starts the tool. You can also set them yourself, which shows what the command does and lets you script it:</p>
         <div class="code">export ANTHROPIC_AUTH_TOKEN=ollama
 export ANTHROPIC_API_KEY=""
 export ANTHROPIC_BASE_URL=http://localhost:11434
 export CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC=1
-claude --model qwen3-coder:30b<span class="copy">copy</span></div>
+claude --model qwen3:4b<span class="copy">copy</span></div>
         <p>The last line matters for sensitive data: see Step 3.</p>
         <ul>
           <li>For Codex: <code>codex --oss</code> starts it against the local model instead.</li>
