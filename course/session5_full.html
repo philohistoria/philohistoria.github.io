@@ -144,7 +144,7 @@
         <li>Here is the plan for the day:</li>
       </ul>
       <table>
-        <tr><td>Turn your analysis into a website or app</td></tr>
+        <tr><td>Turn your analysis into a website</td></tr>
         <tr><td>Build one of your own (100 minutes)</td></tr>
         <tr><td>Keeping private data on your own machine</td></tr>
         <tr><td>Show your project</td></tr>
@@ -155,19 +155,14 @@
 
     <!-- BUILD -->
     <section data-hands="build">
-    <h2 class="sec" id="build">Turn your analysis into a website or app <span class="hastag">· do it on the right</span></h2>
+    <h2 class="sec" id="build">Turn your analysis into a website <span class="hastag">· do it on the right</span></h2>
 
     <div class="card">
       <h3>Definition of building</h3>
       <ul>
         <li>You can run an analysis and nobody else can use it.</li>
-        <li>Building means turning your analysis into a website or an app that other people can use:
-          <ul>
-            <li>a webpage that shows your results and lets people click through them</li>
-            <li>One command reruns your entire analysis and it goes from raw data to finished tables.</li>
-            <li>A small app, which does a repeated chore for you.</li>
-          </ul>
-        </li>
+        <li>Today, building means one specific thing: turning your analysis into a webpage that other people can open and read.</li>
+        <li>The page shows your question, one figure or table from <code>output/</code>, and one sentence saying what you found.</li>
         <li>The division of labor is the same as Monday. You specify and verify, and the agent writes the code.</li>
       </ul>
     </div>
@@ -187,12 +182,12 @@
     </div>
     <div class="card demo">
       <span class="tag">Live demo</span>
-      <h3>From analysis to page</h3>
+      <h3>The demo case is this website</h3>
       <ul>
-        <li>Tuesday's analysis turns into a small page which is live and interactive.</li>
-        <li>The prompt names two files. One file feeds the page and the other file controls the reader.</li>
-        <li>The page opens in a browser within minutes, and I have read none of its code.</li>
-        <li>Compare the number on the page to the number in <code>output/</code>, and this is the final check.</li>
+        <li>The site you are reading right now was built this way. I described the layout and the content, and the agent wrote every line of the HTML.</li>
+        <li>Each session page is one plain HTML file in the course repository. There is no server and no framework. A folder of files becomes a website.</li>
+        <li>We open the file for this page next to the page itself, and change one thing: ask the agent to edit one card, reload, and see the change.</li>
+        <li>Your build this morning is a smaller version of the same thing: one HTML file that shows your own results.</li>
       </ul>
     </div>
     </section>
@@ -385,15 +380,13 @@
     <div class="hands" data-for="build">
       <div class="exi">
         <span class="step">Step 1</span>
-        <h4>Choose one to build</h4>
-        <p>Choose one from this list and build it in your own repository. You have 100 minutes.</p>
+        <h4>Build a results page</h4>
+        <p>Everyone builds the same thing: one HTML page in your own repository that presents this week's analysis. You have 100 minutes.</p>
         <ul>
-          <li><strong>A website</strong> shows your results and lets people click through them.</li>
-          <li><strong>One command</strong> reruns your entire analysis and it goes from raw data to finished output.</li>
-          <li><strong>A small app</strong> does a chore for you and it can make codebook pages.</li>
-          <li><strong>A smarter agent.</strong> Make your instructions file bigger, and add a second Skill.</li>
+          <li>The page states your question in one sentence.</li>
+          <li>The page shows one figure or one table from <code>output/</code>.</li>
+          <li>The page ends with one sentence saying what you found.</li>
         </ul>
-        <p>If you finish early, add a second option.</p>
       </div>
       <div class="exi">
         <span class="step">Step 2</span>
@@ -407,14 +400,13 @@
       </div>
       <div class="exi">
         <span class="step">Step 3</span>
-        <h4>Suggestions for your choice</h4>
+        <h4>If you finish early</h4>
         <ul>
-          <li><strong>Website:</strong> Start with Tuesday's chart, add one control, and use a country selector or a year slider.</li>
-          <li><strong>One command:</strong> chain Tuesday's stages and one command reruns clean, model, and output.</li>
-          <li><strong>Small app:</strong> Automate the task you noticed during these five days, which includes tasks like codebook pages, variable labels, or filing output.</li>
-          <li><strong>Smarter agent:</strong> Write the second Skill you want and close any gaps in your instructions file.</li>
+          <li>Add one control: a country selector or a year slider that filters the chart.</li>
+          <li>Then add a second page for a second result, with a link between the two pages.</li>
+          <li>Do not start an app and do not touch your instructions file. Today is about the page.</li>
         </ul>
-        <p>A starting prompt for the website choice:</p>
+        <p>A starting prompt:</p>
         <div class="code">Build a webpage that shows the chart in output/. Add one control, a country selector, that filters the chart. Show me a plan first, then build it. Do not change my analysis code.<span class="copy">copy</span></div>
       </div>
       <div class="save">Commit before each big change, so you can step back to a working stage if something breaks.</div>
