@@ -141,7 +141,8 @@
       <ul>
         <li>Breaking work into clear steps.</li>
         <li>Verifying your results.</li>
-        <li>Many agents work at once, and they end by turning code into data.</li>
+        <li>Several agents at once.</li>
+        <li>Turning text into data.</li>
         <li>Discussion.</li>
       </ul>
     </div>
@@ -189,8 +190,8 @@
       <h3>Unstated choices</h3>
       <ul>
         <li>Real tasks have unstated choices. You must choose a variable, decide how to treat missing codes, decide whether to weight, and choose a sample.</li>
-        <li>If you leave a gap, the agent fills it, and it uses the average analyst's defaults. The average analyst is not you.</li>
-        <li>Every choice can be defended, and none of them were yours, which is why you write the plan first.</li>
+        <li>If you leave a gap, the agent fills it with a default you did not choose.</li>
+        <li>Write the plan first, so the choices are yours.</li>
       </ul>
     </div>
     <div class="card">
@@ -204,7 +205,12 @@
           </ul>
         </li>
         <li>Today's exercise uses the third way, so use it on your own project.</li>
-        <li>Press Shift+Tab to enter plan mode in both tools. Claude Code cycles through plan mode, ask-first, and auto-accept, and Codex cycles Plan, Pair, and Execute. <code>/plan</code> jumps straight to Execute.</li>
+        <li>Press Shift+Tab to switch modes in both tools:
+          <ul>
+            <li>Claude Code cycles plan mode, ask-first, and auto-accept</li>
+            <li>Codex cycles Plan, Pair, and Execute</li>
+          </ul>
+        </li>
         <li>You own the plan after you edit it, and this applies regardless of who drafts it. Do not approve any step that you cannot explain.</li>
       </ul>
     </div>
@@ -222,7 +228,7 @@
       <ul>
         <li>The agent speaks well, but fluent output can still be wrong.</li>
         <li>It will not tell you when it guessed, and a wrong number looks exactly like a right one.</li>
-        <li>Check every result yourself, and nothing counts until you do.</li>
+        <li>Check every result yourself.</li>
       </ul>
     </div>
     <div class="card">
@@ -260,7 +266,7 @@
       <h3>Run multiple agents</h3>
       <ul>
         <li>Open many agents at once, give each agent a different job, and they work at the same time.</li>
-        <li>Use the same cleaned dataset. One person writes the descriptive table, draws the chart, and drafts the README.</li>
+        <li>All three read the same cleaned dataset: one writes the descriptive table, one draws the chart, one drafts the README.</li>
         <li>Jobs must be independent, and no job can wait on another. Cleaning and charting are not independent, and the chart needs the cleaned data.</li>
       </ul>
     </div>
@@ -295,10 +301,11 @@
       <h3>Session messaging</h3>
       <ul>
         <li>In both tools, one open session can send a message to another.</li>
-        <li>Claude Code: <code>/msg list</code> shows your reachable sessions and <code>/msg</code> sends to one session. It works without any setup and also for sessions on other machines.</li>
+        <li>Claude Code can list your reachable sessions and send a message to one of them, with no setup, including sessions on other machines. Its <code>/help</code> lists the command.</li>
         <li>Codex: A session can queue a message to another local or remote session.</li>
         <li>Use it to coordinate your open sessions, and the session that finishes cleaning tells the modeling session that the data is ready.</li>
-        <li>Shared files and git are slow ways to pass work between sessions, and they also leave a record, and a collaborator can read it later.</li>
+        <li>Messages are for coordination in the moment.</li>
+        <li>The durable record still lives in git, where a collaborator can read it later.</li>
       </ul>
     </div>
     <div class="card">
@@ -307,7 +314,7 @@
         <li>Speed is one reason. Split a task into five independent pieces and run five agents, so a five-minute wait becomes about one minute.</li>
         <li>If one piece needs output from another, it waits and the speedup is gone.</li>
         <li>Another reason is checking. Two subagents do the same job, and they cannot see each other, so comparing their results tells you something one run cannot.</li>
-        <li>Research already works this way. Two coders code the same sample and Someone else runs a replication.</li>
+        <li>Research already works this way. Two coders code the same sample, and someone else runs a replication.</li>
       </ul>
     </div>
     <div class="card">
@@ -335,7 +342,11 @@
       <span class="tag">Exercise</span>
       <h3>The same model in R and Python</h3>
       <ul>
-        <li>Follow these instructions: Implement my model spec twice and make one subagent in R and one subagent in Python and they must work independently and put the two coefficient tables side by side and report every difference.</li>
+        <li>The prompt:
+          <ul>
+            <li>&ldquo;Implement my model spec twice: one subagent in R, one subagent in Python, working independently. Put the two coefficient tables side by side and report every difference.&rdquo;</li>
+          </ul>
+        </li>
         <li>If the tables match, the result is the same regardless of the software.</li>
         <li>They might differ, and a default differs if one language handles missing values, standard errors, or factor levels differently. You must decide which one you meant.</li>
         <li>You do not need a third agent, and the main agent compares the two tables, and you judge if there is a difference.</li>
@@ -355,19 +366,25 @@
         <li>The agent reads each case, assigns a code, and works like a research assistant.</li>
         <li>That turns text into a variable, and you can count and model it.</li>
         <li>In this unit, you build a codebook which contains the coding rules for the agent. To improve it, have two coders work alone and read the parts where they disagree.</li>
-        <li>A script codes thousands of cases and gets one card at the end.</li>
+        <li>Scaling this up to thousands of cases is the last card of this unit.</li>
       </ul>
     </div>
     <div class="card demo">
       <span class="tag">Exercise</span>
       <h3>A worked example: consumer complaints</h3>
       <ul>
-        <li>The running example is the CFPB Consumer Complaint Database and it has 3.8 million free-text complaints about banks and lenders. The data is public and you can download it without registration at consumerfinance.gov. The question is: what kind of wrong does the writer say was done to them?</li>
+        <li>The running example: the CFPB Consumer Complaint Database.
+          <ul>
+            <li>3.8 million free-text complaints about banks and lenders</li>
+            <li>public, downloadable without registration at consumerfinance.gov</li>
+            <li>our question: what kind of wrong does the writer say was done to them?</li>
+          </ul>
+        </li>
         <li>The codebook is categories, each with a rule and a real example:
           <ul>
             <li><strong>Unauthorized</strong> &mdash; money moved or an account opened without consent. "My credit score is fine and for some reason the rate they charged me is 22%" is not this; "an account was opened in my name when I was too young to have one" is.</li>
             <li><strong>Inaccurate record</strong> — The company reports an error, and they want a correction instead of money. "The debt was already removed, and they keep adding it back to my credit report."</li>
-            <li><strong>Unfair charge</strong> — The account belongs to me, and I dispute the fee, rate, or terms. "I was approved, and They charged me a 22% interest rate."</li>
+            <li><strong>Unfair charge</strong> — The account belongs to me, and I dispute the fee, rate, or terms. "I was approved, and they charged me a 22% interest rate."</li>
             <li><strong>Service failure</strong> — The company did not act and no one could reach them. The website has been down for months and no emails are ever answered.</li>
           </ul>
         </li>
@@ -397,9 +414,17 @@
     <div class="card">
       <h3>Coding at scale</h3>
       <ul>
-        <li>The agent codes dozens of cases in the conversation, and you will develop the codebook there, and that is the work for today.</li>
-        <li>Do not code thousands of cases into the agent, and reading thousands of cases in a conversation costs money, and it uses up context, and the session drifts as it fills, and you cannot rerun it.</li>
-        <li>The agent <strong>writes a script</strong> does this instead: Each case goes to a model API, the prompt is the frozen codebook, and it uses a cheap model. The labels are saved to a CSV, and you can rerun or resume the script and it costs only cents.</li>
+        <li>Today you develop the codebook in the conversation, on dozens of cases.</li>
+        <li>Do not feed thousands of cases into the conversation:
+          <ul>
+            <li>it costs money</li>
+            <li>it uses up the context window</li>
+            <li>the session drifts as it fills</li>
+            <li>you cannot rerun a conversation</li>
+          </ul>
+        </li>
+        <li>The agent <strong>writes a script</strong> instead. The script sends each case to a cheap model over the internet, prompts it with the frozen codebook, and saves the labels to a CSV.</li>
+        <li>The script can be rerun or resumed, and a run costs cents.</li>
         <li>That script has a frozen prompt and is your measurement instrument.</li>
       </ul>
     </div>
@@ -431,7 +456,7 @@
     <div class="card">
       <h3>Why long sessions drift</h3>
       <ul>
-        <li>Sessions grow over time, and the agent holds more text, which includes files, outputs, and errors.</li>
+        <li>The session accumulates files, outputs, and errors as it grows.</li>
         <li>The first hour's instructions get crowded out, and the agent slowly reverts to its own defaults.</li>
         <li>It will remember nothing tomorrow morning.</li>
         <li>Tomorrow's session builds the fix and includes instructions that <strong>persist</strong> outside the conversation.</li>
@@ -518,7 +543,7 @@
       </div>
       <div class="exi">
         <span class="step">If stuck</span>
-        <h4>When you get stuck</h4>
+        <h4>Getting help</h4>
         <ul>
           <li>If a command fails, let the agent read the error and fix it. If you are stuck, describe what happened.</li>
           <li>If you do not understand a step in the plan, ask the agent to explain it and do not approve steps you cannot explain.</li>

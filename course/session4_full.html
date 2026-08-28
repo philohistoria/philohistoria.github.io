@@ -144,11 +144,11 @@
       <ul>
         <li>The agent used your local files until now. Today, it connects to outside websites and apps.</li>
         <li>There are two ways to enter: API and MCP. This session teaches both.</li>
-        <li>They use these tools for several tasks. They collect data. They code data at scale. They find literature.</li>
+        <li>We use both connections on three tasks: collecting data, coding data at scale, and finding literature.</li>
         <li>The plan for the session:
           <ul>
             <li>two ways to connect</li>
-            <li>APIs collect data. They code data at a large scale.</li>
+            <li>APIs: collecting data, coding data at scale</li>
             <li>MCP</li>
             <li>finding literature</li>
             <li>discussion</li>
@@ -166,7 +166,14 @@
       <h3>So far the agent has only used your machine</h3>
       <ul>
         <li>Everything stayed in one place this week. This includes your files, your code, and public web pages.</li>
-        <li>Real projects need many things. Most of these things live elsewhere. They are in the Census. They are in your Zotero library. They are in a journal database. They are in a government portal.</li>
+        <li>Real projects need things that live elsewhere:
+          <ul>
+            <li>the Census</li>
+            <li>your Zotero library</li>
+            <li>a journal database</li>
+            <li>a government portal</li>
+          </ul>
+        </li>
         <li>Those are other websites and apps. The agent cannot use them. It needs you to give it a way in.</li>
         <li>Today's question: How does the agent work with a website or an app that is not on your machine?</li>
       </ul>
@@ -220,7 +227,7 @@
       <div class="quote">http://export.arxiv.org/api/query?search_query=all:electron&amp;start=0&amp;max_results=5</div>
       <ul>
         <li>The <strong>endpoint</strong> is the part before the question mark. It shows where you are calling.</li>
-        <li>The <strong>parameters</strong> is the part after it. This is what you want. Search for "electron". Return the first 5 records.</li>
+        <li>The <strong>parameters</strong> are the part after it: what you want. Here, search for &ldquo;electron&rdquo; and return the first 5 records.</li>
         <li>It does not return a webpage. It returns structured text. Each paper is one record. The records have named fields for title, authors, and date.</li>
       </ul>
     </div>
@@ -256,7 +263,7 @@
       <h3>Verify your collection</h3>
       <ul>
         <li>These agents are weakest at gathering data.</li>
-        <li>Agents used a social-science replication benchmark. They scored about 96 at running an analysis. They scored about 31 at finding the data it needed.</li>
+        <li>On a social-science replication benchmark, agents scored about 96 at running an analysis but about 31 at finding the data the analysis needed.</li>
         <li>Scrapes will break. Fields will be wrong. Check every pull against the source.</li>
       </ul>
       <p class="src">Nguyen et al., "ReplicatorBench" (2026), <a href="https://arxiv.org/abs/2602.11354">arXiv:2602.11354</a>.</p>
@@ -272,8 +279,8 @@
     <div class="card">
       <h3>No API: the agent reads the page itself</h3>
       <ul>
-        <li>Go to this URL. Get the monthly unemployment table. Put it in a CSV.</li>
-        <li>The agent reads the page. It finds the table. It saves it.</li>
+        <li>You say to the agent: &ldquo;Go to this URL, get the monthly unemployment table, and put it in a CSV.&rdquo;</li>
+        <li>The agent reads the page, finds the table, and saves it.</li>
         <li>Watch for these problems: A table splits across pages. Footnotes mix into cells. A site asks you not to scrape.</li>
         <li>If a site's terms forbid scraping, stop. Find another source.</li>
       </ul>
@@ -297,7 +304,7 @@
     <div class="card">
       <h3>Turn a repeated pull into a Skill</h3>
       <ul>
-        <li>You will run a pull again. This includes grabbing this month's new records. It is worth packaging.</li>
+        <li>Some pulls repeat — this month&rsquo;s new records, again next month. Those are worth packaging.</li>
         <li>Turn the steps into a Skill, the same way you did on Wednesday, so next time is one command.</li>
         <li>You can share the Skill. A labmate can then run the same pull. They use their own key.</li>
       </ul>
@@ -305,9 +312,12 @@
     <div class="card">
       <h3>Scaling a pull: script or subagents?</h3>
       <ul>
-        <li>One question is important: are the steps the same for every piece?</li>
-        <li>The steps are the same. You make 50 calls to one API. Each call has a different state code. This is a loop in a script. No agent is needed.</li>
-        <li>Every piece is different. There are 10 state websites. Each has its own layout. This is subagent work. Each copy figures out its own page.</li>
+        <li>One question decides it: are the steps the same for every piece?
+          <ul>
+            <li>steps identical — 50 calls to one API, each with a different state code: a loop in a script, no agent needed</li>
+            <li>every piece different — 10 state websites, each with its own layout: subagent work, where each copy figures out its own page</li>
+          </ul>
+        </li>
       </ul>
     </div>
     </section>
@@ -329,7 +339,7 @@
       <ul>
         <li>On Monday, you coded twenty cases. You pasted them into the chat. This works for twenty cases. It does not work for twenty thousand.</li>
         <li>When done at scale, the task becomes a script. For each case, the script sends the codebook and one text to the model's API. It then stores the returned label.</li>
-        <li>Social scientists now use this coding data workflow as a standard. More literature discusses when to trust it.</li>
+        <li>This workflow is now common in social science text analysis.</li>
       </ul>
     </div>
     <div class="card">
@@ -348,7 +358,8 @@
         <li>OpenRouter connects the entire market to one address. It uses one account and one key for four hundred models. You choose a model by its name inside the request.</li>
         <li>This makes a robustness check cheap. Rerun the same coding with a second model. Report the agreement. Do it the same way you would for two human coders.</li>
         <li>Sometimes you cannot move text from your machine. This happens with interviews under an IRB protocol. In these cases, the same request shape works on a model running on your own laptop.</li>
-        <li>OpenRouter can pick a model for you. Use `model = openrouter/auto` to do this. It routes based on what other users run for similar tasks. It is fun to try. However, pin one model for coded data and report it. The model is part of your method.</li>
+        <li>OpenRouter can pick a model for you: <code>model = openrouter/auto</code> routes each request based on what other users run for similar tasks.</li>
+        <li>For coded data, pin one model by name and report it. The model is part of your method.</li>
       </ul>
     </div>
     <div class="card demo">
@@ -358,7 +369,7 @@
         <li>There is one request. There is one codebook. There is one text case. Only the model's name changes.</li>
         <li>Send it to a strong model, a mid model, and a cheap model. Read the three codes side by side.</li>
         <li>We ran a test. A small model miscoded this case. Larger models coded it correctly.</li>
-        <li>You report the model as a choice. It is like a coder. It is not a fixed part of the machine.</li>
+        <li>Report which model you used, the way you would report a human coder.</li>
         <li>The check remains the same. Hand-code a sample. Compare it. Report the agreement. Do this before you run the rest.</li>
       </ul>
     </div>
@@ -499,7 +510,7 @@
             <li>Inside a step, run the independent pieces in parallel using subagents.</li>
           </ul>
         </li>
-        <li>It solves a real problem. That problem is fake citations.</li>
+        <li>It solves a real problem: fake citations.</li>
         <li>My version is not done. I am still fixing parts. It is a working example. Use this design to build your own.</li>
       </ul>
     </div>
@@ -521,8 +532,8 @@
     <div class="card">
       <h3>Tomorrow</h3>
       <ul>
-        <li>The final session is a build day. You have 100 minutes. Use this time on one small website or app from your own project.</li>
-        <li>Decide tonight what you want. Do you want a webpage of your results? Do you want one command to rerun everything? Do you want a small tool? Or do you want a smarter agent?</li>
+        <li>The final session is a build day: 100 minutes on one small website that presents your own project.</li>
+        <li>Think tonight about what goes on your page: your question in one sentence, one figure or table, and one sentence on what you found.</li>
       </ul>
     </div>
     </section>
@@ -605,7 +616,7 @@
         <p>Choose one source for your project. Keep it small for now.</p>
         <ul>
           <li>a web page with a table you want</li>
-          <li>An API is an example. This could be the Census. It could also be a city open-data portal.</li>
+          <li>an API — the Census, or a city open-data portal</li>
           <li>Download a file. For example, a CSV inside a ZIP. Unpack the file.</li>
         </ul>
       </div>
@@ -637,7 +648,7 @@
         <span class="step">Step 4 · try more</span>
         <h4>Package a pull you will repeat</h4>
         <ul>
-          <li>If this is a pull, you will run again. Turn the steps into a Skill. Do it like you did on Wednesday.</li>
+          <li>If this is a pull you will run again, turn the steps into a Skill, the way you did on Wednesday.</li>
           <li>Next time, the same pull will be one command. A labmate can run it with their own key.</li>
         </ul>
       </div>

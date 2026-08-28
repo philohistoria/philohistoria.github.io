@@ -130,7 +130,7 @@
     <p class="kicker">Session 1 · Monday, August 24, 2026</p>
     <h1>AI for Data Analysis I</h1>
     <p class="byline" style="margin:2px 0 16px;color:var(--muted);font-size:15px">Han Zhang and Bing Tian, with the help of Claude</p>
-    <p class="goal">Leave today and your tools will work. You will start your own research project and a section appears in the right panel when it has something to do.</p>
+    <p class="goal">Leave today with working tools and your own research project started. When a part of the session has hands-on work, it appears in the right panel.</p>
 
     <!-- OPENING -->
     <section data-hands="none">
@@ -170,7 +170,7 @@
           <ul>
             <li>"Validate the variable against the codebook."</li>
             <li>"Handle the survey weights."</li>
-            <li>Write a README so this will let you re-run it with one command.</li>
+            <li>"Write a README that lets me re-run this with one command."</li>
           </ul>
         </li>
         <li>For bigger jobs, you can split the work:
@@ -197,8 +197,8 @@
       <ul>
         <li>You wrote your own scripts and ran them. You loaded data and ran a regression.</li>
         <li>You provided a dataset or a current project, and every exercise uses it.</li>
-        <li>You do <strong>not</strong> not need a software engineering background.</li>
-        <li>This course will be too slow if you use Claude Code or Cursor every day.</li>
+        <li>You do <strong>not</strong> need a software engineering background.</li>
+        <li>If you already use Claude Code or Cursor every day, this course will be too slow for you.</li>
       </ul>
     </div>
     <div class="card">
@@ -206,7 +206,7 @@
       <ul>
         <li>This course uses one coding agent. <strong>Claude Code</strong> (by Anthropic) works and <strong>Codex</strong> (by OpenAI) also works. Pick one and use it all week.</li>
         <li>The pre-course email explained how to install either one.</li>
-        <li>Every student uses the tool's exact commands, and two instructors support a class much better with one setup per person.</li>
+        <li>Every student uses the tool's exact commands, and two instructors support a class much better when everyone runs the same setup.</li>
         <li>What you build moves regardless. The Skill format you learn on Wednesday is an open standard, and many agents read it.</li>
         <li>The agent runs on a computer, and you need a Mac or Windows laptop. Once it is running, you can use it from a phone or tablet.</li>
       </ul>
@@ -254,13 +254,13 @@
         <li>Ask ChatGPT for the WVS analysis, and it gives you a block of code which you must run yourself.</li>
         <li>Give the agent the same request. It writes the code, runs the code, hits an error, and fixes the error. It repeats this until the chart exists.</li>
         <li>ChatGPT answers once and then stops, but the agent continues to work until the task is finished.</li>
-        <li>Three engineering breakthroughs caused that difference and were solved between 2023 and 2025.</li>
+        <li>That difference comes from three engineering problems, solved between 2023 and 2025. They are the three conditions below.</li>
       </ul>
     </div>
     <div class="card">
       <h3>The agent works in one folder</h3>
       <ul>
-        <li>ChatGPT's biggest change is where your work lives, and it stays in a folder on your computer.</li>
+        <li>The biggest change from ChatGPT is where your work lives: in a folder on your computer.</li>
         <li>Pick one folder for your project and the agent works inside that folder.</li>
         <li>Your data, scripts, and notes are all inside together.</li>
         <li>The agent only touches items in that folder and does not touch the rest of your computer.</li>
@@ -297,12 +297,13 @@
           </ul>
         </li>
         <li>The loop repeats, continues until the task is done, and also stops if you stop it.</li>
-        <li>You control how often it asks you first, and by default, it asks before acting. Looser modes let routine actions through, and you will use the strictest setting, plan mode, tomorrow.</li>
+        <li>You control how often it asks you first. By default it asks before acting, and looser modes let routine actions through.</li>
+        <li>You will use the strictest setting tomorrow.</li>
         <li>Whichever mode you choose, judging the result stays your job.</li>
       </ul>
     </div>
     <div class="card">
-      <h3>Running the Code</h3>
+      <h3>Condition 3: code execution</h3>
       <ul>
         <li>Code tells a computer what to do. It can do any task and does not just do statistics.</li>
         <li>This is a statistical script, and it is one type of code. Code can also download data, collect and sort papers, clean text files, and build a website. This week covers mostly code that the agent writes.</li>
@@ -329,7 +330,7 @@
         <li>The agent loop grew more advanced during 2023–2024.</li>
         <li>Code execution was dependable during 2024–2025.</li>
         <li>In 2025, the first agentic coding tools came out and combined all three in the terminal.</li>
-        <li>Two years ago, AI coding tools might have disappointed you. They likely lacked one or two of these three things, which is why.</li>
+        <li>Two years ago, AI coding tools might have disappointed you. They lacked one or two of the three conditions.</li>
       </ul>
     </div>
     <div class="card">
@@ -352,7 +353,7 @@
     </div>
     <div class="card">
       <h3>Strengths and weaknesses</h3>
-      <ul><li>A 2026 benchmark tested AI agents and they did a full social-science replication and it scored each step:</li></ul>
+      <ul><li>A 2026 benchmark had AI agents run full social-science replications, and scored each step:</li></ul>
       <table>
         <tr><th>Step</th><th>Score</th></tr>
         <tr><td>Run the analysis</td><td>96</td></tr>
@@ -360,7 +361,7 @@
         <tr><td>Find the data it needs</td><td>31</td></tr>
         <tr><td>Judge whether it replicates</td><td>79%</td></tr>
       </table>
-      <ul><li>You use it to write code and read, own the data, and make the final call.</li></ul>
+      <ul><li>Use it to write code and read results. Finding the data and the final judgment stay yours.</li></ul>
       <p class="src">Nguyen et al., "ReplicatorBench: Benchmarking LLM Agents for Replicability in Social and Behavioral Sciences" (2026), <a href="https://arxiv.org/abs/2602.11354">arXiv:2602.11354</a>.</p>
     </div>
     </section>
@@ -376,7 +377,8 @@
         <li>On a Mac, use the app <strong>Terminal</strong>, and on Windows, use <strong>PowerShell</strong>.</li>
         <li>Agents run in the terminal, and this is where programs run.</li>
         <li>You need very little. <code>cd folder</code> moves into a folder and <code>ls</code> lists what is there.</li>
-        <li>Run this one command: <code>cd</code> into your project folder, and do this before you start the agent. The folder where you start it is the project it works in, and your files, its permissions, and its memory all stay there.</li>
+        <li>One command matters today: <code>cd</code> into your project folder before you start the agent.</li>
+        <li>The folder where you start the agent is the project it works in. Your files, its permissions, and its memory all stay there.</li>
         <li>Everything else you can ask the agent to type for you.</li>
       </ul>
     </div>
@@ -462,7 +464,13 @@
         <li>You can always return to a working version.</li>
         <li>The history shows how the analysis changed, and your methods section must describe this.</li>
         <li>A collaborator can see all changes between two versions.</li>
-        <li>You need three words today. A <strong>repository</strong> is a folder with a tracked history, <strong>commit</strong> is a labeled save point, and <code>.gitignore</code> is a list of files, and the history must never include those files.</li>
+        <li>You need three words today:
+          <ul>
+            <li>a <strong>repository</strong> is a folder with a tracked history</li>
+            <li>a <strong>commit</strong> is one labeled save point</li>
+            <li><code>.gitignore</code> lists the files the history must never include</li>
+          </ul>
+        </li>
         <li>You do not type any of this. Ask the agent to set it up and explain any part you want to understand.</li>
       </ul>
     </div>
@@ -497,9 +505,21 @@
     <div class="card">
       <h3>Exercise</h3>
       <ul>
-        <li>Work in pairs and each person has three minutes. Run your script on your own data and your neighbor must watch. Say your question in one plain sentence, name one mistake the agent made, and explain how you found it.</li>
+        <li>Work in pairs, three minutes each. Run your script on your own data while your neighbor watches, and cover three things:
+          <ul>
+            <li>your question, in one plain sentence</li>
+            <li>one mistake the agent made</li>
+            <li>how you found it</li>
+          </ul>
+        </li>
         <li>The whole class follows and two or three volunteers show their work. An interesting failure is worth more than a finished chart here.</li>
-        <li>Prepare for three questions: 1. What is your question in simple words, 2. What error did the agent make and how did you find it, and 3. Where should this be by Friday?</li>
+        <li>Prepare for three questions:
+          <ul>
+            <li>What is your question, in simple words?</li>
+            <li>What error did the agent make, and how did you find it?</li>
+            <li>Where should this be by Friday?</li>
+          </ul>
+        </li>
         <li>This is a rehearsal and Friday’s presentation asks the same questions. It also asks who did each part and if it was you or the agent.</li>
       </ul>
     </div>
@@ -542,7 +562,7 @@
           </li>
           <li>Both run on the same model, use the same settings files, and can start subagents. Only the window around the agent differs.</li>
         </ul>
-        <p>This course uses the terminal version, and every command this week works as written. The steps below install it, or if you prefer the GUI, install it from the official site, and translate as you go.</p>
+        <p>This course uses the terminal version, so every command this week works as written. The steps below install it. If you prefer the GUI, install it from the official site and translate as you go.</p>
       </div>
       <div class="exi">
         <span class="step">Step 2</span>
@@ -604,7 +624,7 @@
         <ul>
           <li>First, copy your dataset into <code>data/</code> and keep sensitive or human-subjects data on your machine and do not upload that data anywhere.</li>
           <li>Read the script and ask it to explain lines you do not recognize and check the numbers against your own knowledge.</li>
-          <li>Tell the agent to keep your raw data out of the tracked history and tell them to do this before your first save point instead of after.</li>
+          <li>Tell the agent to keep your raw data out of the tracked history — before your first save point, not after.</li>
         </ul>
         <div class="code">Set up the history for this project so the files in data/ are never tracked, and tell me which files you excluded.<span class="copy">copy</span></div>
       </div>
@@ -612,7 +632,7 @@
       <div class="exi">
         <span class="step">Step 2</span>
         <h4>Make your first save point</h4>
-        <p>Tell the agent to commit: add explicit commit after successful validation to prevent stale state and improve reliability.</p>
+        <p>Now that the numbers check out, tell the agent to commit:</p>
         <div class="code">Commit this with the message: add loading script; 2,431 rows, politics importance item found<span class="copy">copy</span></div>
         <ul>
           <li>That message is useful, a colleague can read it, and they will know what happened.</li>

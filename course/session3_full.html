@@ -178,7 +178,8 @@
       <ul>
         <li>LLMs predict the next word for every answer, and this prediction is probabilistic, so the same input can produce different outputs.</li>
         <li>Code is different, and the same input always produces the same output.</li>
-        <li>Today's session includes instruction files, memory, and skills, which push the agent toward consistent behavior, but these are just instructions for a probabilistic model, and they are soft constraints, not guarantees and only differ in degree.</li>
+        <li>Today&rsquo;s tools — instruction files, memory, skills — push the agent toward consistent behavior.</li>
+        <li>They are still instructions for a probabilistic model: soft constraints, not guarantees.</li>
         <li>If a step must always work the same way, write it as code and let the agent call the code. The agent decides when to run it and the code decides what happens.</li>
       </ul>
     </div>
@@ -221,7 +222,7 @@
       <ul>
         <li>The agent does not know you, so it fills gaps with default settings, and these settings belong to the average analyst, which is not you.</li>
         <li>Better prompting each morning does not fix this, and the same gaps reopen in the next session.</li>
-        <li>The fix is written <strong>instructions</strong>, and read it at the start of every session. There are two levels:</li>
+        <li>The fix is written <strong>instructions</strong>, which the agent reads at the start of every session. There are two levels:</li>
         <li><strong>Project instructions</strong> live at the project root. They hold the project rules and travel with the repository when you share it.</li>
         <li><strong>Global instructions</strong> live in your home folder and hold rules about you, which include your language, your software, and your reporting habits, and apply to every project on your machine. They are personal and never shared.</li>
         <li>The names change depending on the tool, but the structure stays the same:</li>
@@ -252,7 +253,7 @@
     <div class="card">
       <h3>You control the memory</h3>
       <ul>
-        <li>Control stays in one place in the terminal and it is <code>/memory</code> in Claude Code and <code>/memories</code> in Codex. Notes are plain text files on your machine and you can read, edit, or delete them with any editor.</li>
+        <li>Control lives in one command: <code>/memory</code> in Claude Code, <code>/memories</code> in Codex. The notes are plain text files on your machine, and any editor can read, edit, or delete them.</li>
         <li>The coding app is less convenient: it does not show the memory commands. But the files are still on your machine, so everything else works.</li>
         <li>The chat apps are a useful contrast. There, memory lives on the server: it is on by default, it reads your whole chat history, and you cannot make the private mode your default. You can edit single memories in the settings, but you never hold the files.</li>
         <li>The coding tools are easier to control, at least in the terminal, because the memory is files on your machine. The line that matters is not app versus terminal; it is whose machine holds the files.</li>
@@ -265,7 +266,13 @@
       <h3>Instructions vs. Memory: When to use each</h3>
       <ul>
         <li>A rule you want enforced goes in instructions: "cluster standard errors by county."</li>
-        <li>Memory keeps track of everything that happened and you prefer R. The income variable is messy and you explain why you chose logit instead of probit.</li>
+        <li>Memory keeps the rest, for example:
+          <ul>
+            <li>you prefer R</li>
+            <li>the income variable is messy</li>
+            <li>why you chose logit over probit</li>
+          </ul>
+        </li>
         <li>If you keep correcting the same thing, put the correction in the instructions. Memory might notice it and Instructions guarantee it.</li>
         <li>Memory is personal and it stays on your machine. A collaborator clones your project. They get your project instructions but do not get your memory. Put anything the team needs in the instructions file.</li>
       </ul>
@@ -274,9 +281,9 @@
     <div class="card">
       <h3>Scope and limits</h3>
       <ul>
-        <li>It changes how things work and the output follows your choices and it does not follow the agent's guesses, which means the output matches your work. There are fewer differences between the morning and the afternoon and this happens because there is less guessing.</li>
-        <li>It does not change what it does not change: the model still has randomness and a rule can still be ignored. This happens especially late in a long session and two runs are still not identical.</li>
-        <li>The file does not replace checking and does not make a result reproducible and reproducibility is in the committed script. The file shapes how code is written and the committed code is what reruns exactly.</li>
+        <li>What the instructions file changes: the output follows your choices instead of the agent&rsquo;s guesses. Less guessing means fewer differences between the morning run and the afternoon run.</li>
+        <li>What it does not change: the model is still probabilistic. A rule can still be ignored, especially late in a long session, and two runs are still not identical.</li>
+        <li>The file does not replace checking, and it does not make a result reproducible. Reproducibility lives in the committed script — the file only shapes how that script gets written.</li>
       </ul>
     </div>
     
@@ -285,7 +292,6 @@
       <ul>
         <li>Write down your standards and the agent applies them in every session and this happens on your machine or a collaborator's.</li>
         <li>The agent stops guessing your conventions, and you spend less time in each session correcting the same things.</li>
-        <li>One study looked at 138 projects, an instructions file was used, and it cut the agent's mistakes by a third to a half.</li>
       </ul>
       <div class="quote">An instructions file that encodes your standards is the AI equivalent of a pre-registration.</div>
     </div>
@@ -317,7 +323,7 @@
       </ul>
     </div>
     <div class="card">
-      <h3>Subagents: a new perspective on purpose</h3>
+      <h3>Subagents: a fresh context, on purpose</h3>
       <ul>
         <li>The agent can send a subagent, which does one task.</li>
         <li>The subagent begins with a new context, which contains only the task description and cannot see your conversation.</li>
@@ -446,7 +452,7 @@
         <li>The Skill you just wrote is a folder and holds one plain-Markdown file, <code>SKILL.md</code>, which is plain text, and you can audit a stranger's in minutes.</li>
         <li>The format is an <strong>open standard</strong> (<a href="https://agentskills.io">agentskills.io</a>). About 20 agents use it, and these include Cursor, Codex, and GitHub Copilot, and a Skill written once runs in all of them.</li>
         <li>One public directory, <a href="https://skills.sh">skills.sh</a>, has more than <strong>1.1 million</strong> skill installs.</li>
-        <li>Anthropic has no official page for browsing skills. Two third-party directories, <a href="https://buildwithclaude.com/">buildwithclaude.com</a> and <a href="https://www.claudemarketplace.net/">claudemarketplace.net</a>, collect skills and plugins. Browse them for ideas and useful ones.</li>
+        <li>Anthropic has no official page for browsing skills. Two third-party directories, <a href="https://buildwithclaude.com/">buildwithclaude.com</a> and <a href="https://www.claudemarketplace.net/">claudemarketplace.net</a>, collect skills and plugins. Browse them for skills worth adopting.</li>
         <li>The result is practical. For many research tasks, someone already wrote the Skill, and you can read exactly what you will adopt.</li>
       </ul>
     </div>
@@ -483,8 +489,13 @@
     <div class="card">
       <h3>Skill installation location</h3>
       <ul>
-        <li>To install a skill, put a folder in a place your agent reads, and this folder must contain a <code>SKILL.md</code>, and do not add anything else.</li>
-        <li>Both tools read a home location and a project location, and the home location applies to every project you open, and the project location stays with the repository when you share it.</li>
+        <li>Installing a skill means one thing: a folder containing a <code>SKILL.md</code>, placed where your agent reads.</li>
+        <li>Both tools read two locations:
+          <ul>
+            <li>a home location, which applies to every project you open</li>
+            <li>a project location, which travels with the repository when you share it</li>
+          </ul>
+        </li>
         <li>Claude Code reads <code>~/.claude/skills/</code> and <code>.claude/skills/</code>, and Codex reads <code>~/.agents/skills/</code>, <code>~/.codex/skills/</code>, and <code>.agents/skills/</code>.</li>
         <li>The two tools cannot read each other's folders, and Codex includes an <code>/import</code> command which copies Claude Code skills and settings.</li>
       </ul>
@@ -513,9 +524,16 @@
       <h3>Trust</h3>
       <ul>
         <li>A Skill contains instructions for your agent, and installing a skill means you trust the author.</li>
-        <li>Sources have three tiers and the first tier is official collections from tool vendors, the second tier is people you know, like a coauthor or labmate sharing a private repository, and the third tier is strangers on the internet. You can install the first two after a quick read, but you must read the third one line by line first.</li>
+        <li>Sources come in three tiers:
+          <ul>
+            <li>official collections from tool vendors</li>
+            <li>people you know — a coauthor or labmate sharing a repository</li>
+            <li>strangers on the internet</li>
+          </ul>
+        </li>
+        <li>The first two you can install after a quick read. The third you read line by line first.</li>
         <li>Snyk published a <strong>ToxicSkills</strong> study in 2026, which found prompt injection in <strong>36%</strong> of the agent skills studied and also found <strong>1,467</strong> malicious payloads on one skill registry called ClawHub.</li>
-        <li>A skill body can include dynamic-context syntax, and this syntax runs shell commands as soon as the skill loads, which happens before a human reads it.</li>
+        <li>A skill file can embed a shell command that runs the moment the skill loads — before any human reads it.</li>
         <li>Anthropic's documentation says: "Only install plugins and add marketplaces from sources you trust."</li>
         <li>This course has a rule. Read the <code>SKILL.md</code> before you install and check the <code>allowed-tools</code> grant and any embedded shell command.</li>
       </ul>
@@ -537,7 +555,7 @@
     <div class="card">
       <h3>What is shared and what is private</h3>
       <ul>
-        <li>Your agent's behavior is defined by files in the project folder, and these include the context file, <code>.claude/agents/</code>, and the skill folders, and anyone who gets the folder gets your setup.</li>
+        <li>Your agent&rsquo;s behavior is defined by files in the project folder — the instructions file, <code>.claude/agents/</code>, and the skill folders. Anyone who gets the folder gets your setup.</li>
         <li>Your home folder <code>~/.claude/</code> is different and holds your personal skills, your settings, and the agent’s memory of you. It applies to every project on your machine and is not part of any shared folder.</li>
         <li>You share the project folder and keep the home folder.</li>
         <li>Do not share <code>settings.local.json</code>, API keys, or anything under <code>~/.claude/</code>.</li>
@@ -570,7 +588,7 @@
       <ul>
         <li>Neither of you memorizes git commands, so start a session by saying, “pull the latest,” and end a session by saying, “commit and push, the change was about X.”</li>
         <li>If a push is rejected or a merge stops, say &ldquo;resolve it and show me what you kept.&rdquo;</li>
-        <li>Add one line to your context file and confirm with me before pushing. Without this line, the agent will stage, commit, and push in one step and the change will leave your machine before you read it.</li>
+        <li>Add this line to your instructions file: &ldquo;Confirm with me before pushing.&rdquo; Without it, the agent will stage, commit, and push in one step, and the change will leave your machine before you read it.</li>
       </ul>
     </div>
     </section>
@@ -583,9 +601,20 @@
       <h3>Token-based billing</h3>
       <ul>
         <li>Every message you send or the agent writes counts as tokens.</li>
-        <li>There are two ways to pay. You can get a subscription (Claude Pro or Max, ChatGPT Plus or Pro), which gives you a quota, which refills on a schedule, and if you hit the limit, you must wait. You can also use an API key, which bills per token and has no ceiling, and you pay for exactly what you use, and a runaway session costs real money.</li>
+        <li>Two ways to pay:
+          <ul>
+            <li><strong>Subscription</strong> (Claude Pro or Max, ChatGPT Plus or Pro): a quota that refills on a schedule. Hit the limit and you wait.</li>
+            <li><strong>API key</strong>: billed per token, no ceiling. You pay for exactly what you use, and a runaway session costs real money.</li>
+          </ul>
+        </li>
         <li>Each new message sends the whole conversation again, so a reply at the end of a long session costs much more than an early reply, and the cost of a session grows faster than its length.</li>
-        <li>You paste a large file, have many rounds of back-and-forth, or several agents run it at once, which increases the count.</li>
+        <li>What increases the count:
+          <ul>
+            <li>pasting a large file</li>
+            <li>many rounds of back-and-forth</li>
+            <li>several agents running at once</li>
+          </ul>
+        </li>
       </ul>
     </div>
     <div class="card">
@@ -635,11 +664,11 @@
         <li>You now have the first version of the course deliverable:
           <ul>
             <li>a working setup</li>
-            <li>A project instructions file and it survives a restart.</li>
+            <li>a project instructions file</li>
             <li>one Skill that encodes your own routine</li>
           </ul>
         </li>
-        <li>Tomorrow you will use the same setup for literature and writing, and mistakes are harder to catch there.</li>
+        <li>Tomorrow the same setup connects to outside websites and apps — collecting data, coding at scale, and finding literature through APIs and MCP.</li>
       </ul>
     </div>
     </section>
@@ -658,7 +687,7 @@
       <div class="exi">
         <span class="step">Step 1</span>
         <h4>Set up your global instructions</h4>
-        <p>There are two or three rules about you, which are not about any project, and include the language you want for answers, the software you use, and a reporting habit.</p>
+        <p>Write two or three rules about you, not about any project: the language you want for answers, the software you use, a reporting habit.</p>
         <div class="code">Create my global instructions file (~/.claude/CLAUDE.md or ~/.codex/AGENTS.md, whichever you read) with these rules about how I work: [your rules].<span class="copy">copy</span></div>
       </div>
       <div class="exi">
@@ -670,7 +699,7 @@
       <div class="exi">
         <span class="step">Step 3</span>
         <h4>Fill in the four sections</h4>
-        <p>Write concrete lines for your own project, name your variables and your units, and keep a journal.</p>
+        <p>Write concrete lines for your own project: name your variables, your units, and your target journal.</p>
         <ul>
           <li><strong>Project context:</strong> the question, the data, and the unit of analysis.</li>
           <li><strong>Data conventions:</strong> includes key variables, units, and the policy for missing data.</li>
