@@ -208,8 +208,9 @@
       <h3>How to keep it local</h3>
       <ul>
         <li><strong>Ollama</strong> is a free program and runs open-source models like Llama or Qwen. You can run them on your laptop.</li>
-        <li>You can run Codex against a local model with <code>codex --oss</code> and also point Claude Code at the local server and use two settings and a model name for this. Ollera is the local model server and speaks both tools’ protocols.</li>
-        <li>Claude Code supports this route through Ollama, but it does not support it through Anthropic. For Codex, the <code>--oss</code> flag is official.</li>
+        <li>One command now does the whole hookup: <code>ollama launch claude</code> starts Claude Code against your local server. For Codex, the flag is <code>codex --oss</code>. Ollama is the local model server and speaks both tools’ protocols.</li>
+        <li>The Ollama desktop app has a Claude toggle that does the same for the Claude app: switch it on, and Claude runs on the model you pick, local or on Ollama’s cloud.</li>
+        <li>Ollama supports this route, and Anthropic does not. For Codex, the <code>--oss</code> flag is official.</li>
         <li>Set the sandbox to your project folder and turn the network off.</li>
         <li>Local models are slower and weaker than Claude or GPT, and you use them only when the data requires it.</li>
       </ul>
@@ -425,11 +426,13 @@
       <div class="exi">
         <span class="step">Step 2</span>
         <h4>Point your agent at it</h4>
-        <p>Set these variables for Claude Code, which makes it talk to your local server instead of the company's servers, and name a model you have downloaded.</p>
+        <p>One command starts Claude Code against your local server:</p>
+        <div class="code">ollama launch claude<span class="copy">copy</span></div>
+        <p>It sets three variables and starts the tool. You can also set them yourself, which shows what the command does and lets you script it:</p>
         <div class="code">export ANTHROPIC_AUTH_TOKEN=ollama
 export ANTHROPIC_API_KEY=""
 export ANTHROPIC_BASE_URL=http://localhost:11434
-claude --model qwen3.5<span class="copy">copy</span></div>
+claude --model qwen3-coder:30b<span class="copy">copy</span></div>
         <ul>
           <li>For Codex: <code>codex --oss</code> starts it against the local model instead.</li>
           <li>Use <code>/model</code> and the model's name to switch models in the session. The variable chooses the server, and the name chooses the model.</li>
