@@ -118,11 +118,11 @@
     <div class="lbl">Today</div>
     <div class="toc">
       <a href="#opening">Opening</a>
-      <a href="#build">Turn your analysis into a website or app <span class="has">hands-on</span></a>
-      <a href="#private">Keeping private data on your own machine <span class="has">hands-on</span></a>
-      <a href="#engines">Other models in the same agent <span class="has">hands-on</span></a>
+      <a href="#build">Turn your analysis into a website <span class="has">hands-on</span></a>
+      <a href="#engines">Other models in this agent <span class="has">hands-on</span></a>
+      <a href="#private">A pure local model, for private data <span class="has">hands-on</span></a>
       <a href="#show">Show your project</a>
-      <a href="#next">Takeaways</a>
+      <a href="#next">Wrap-up</a>
     </div>
   </nav>
 
@@ -145,11 +145,11 @@
       </ul>
       <table>
         <tr><td>Turn your analysis into a website</td></tr>
-        <tr><td>Build one of your own (100 minutes)</td></tr>
+        <tr><td>Build your results page (100 minutes)</td></tr>
         <tr><td>Other models in this agent</td></tr>
-        <tr><td>Keeping private data on your own machine</td></tr>
+        <tr><td>A pure local model, for private data</td></tr>
         <tr><td>Show your project</td></tr>
-        <tr><td>Takeaways</td></tr>
+        <tr><td>Wrap-up</td></tr>
       </table>
     </div>
     </section>
@@ -198,126 +198,133 @@
     <h2 class="sec" id="engines">Other models in this agent <span class="hastag">&middot; do it on the right</span></h2>
 
     <div class="card">
-      <h3>Three parts, and every one can be swapped</h3>
+      <h3>Claude Code and the model under it are two things</h3>
       <ul>
-        <li>Your setup all week had three parts:
+        <li>Claude Code is the tool you type into. The model that answers is separate. Both can be swapped.</li>
+        <li>The tool: Claude Code is not the only one.
           <ul>
-            <li>the <strong>agent</strong> — the tool in your terminal (Claude Code)</li>
-            <li>the <strong>model</strong> — the brain it calls (Claude)</li>
-            <li>the <strong>server</strong> — where the model runs (Anthropic&rsquo;s)</li>
+            <li>each model company ships its own — Claude Code (Anthropic), Codex (OpenAI), Gemini CLI (Google)</li>
+            <li>open-source tools belong to no company and take any model — for example OpenCode</li>
           </ul>
         </li>
-        <li>Each part can be swapped:
+        <li>The model: it can sit in three places:
           <ul>
-            <li>the model: many open models exist — Qwen, Gemma, DeepSeek, Kimi</li>
-            <li>the server: another company, an aggregator (OpenRouter), or your own laptop</li>
-            <li>the agent: open-source coding agents — OpenCode, Aider</li>
+            <li><strong>Anthropic&rsquo;s computers</strong> — the default. The model is Claude.</li>
+            <li><strong>Another company&rsquo;s API</strong> — still over the internet, but much cheaper.</li>
+            <li><strong>A pure local model</strong> — served by Ollama on a machine you control. Your data never goes to any company.</li>
           </ul>
         </li>
-        <li>Three reasons to swap:
+        <li>Why would you want a model other than Claude?
           <ul>
-            <li>cheaper — another company&rsquo;s server (this section)</li>
-            <li>a second opinion — another model family (this section)</li>
-            <li>private data — your own laptop (next section)</li>
+            <li>cheaper — open models sell for a fraction of the price</li>
+            <li>verification — a second model checks Claude&rsquo;s work, because models from the same company make the same mistakes</li>
+            <li>private data — some data cannot be sent to any company, so the model must run where the data is</li>
           </ul>
         </li>
+        <li>The next card covers the cheap route. The verification command is built on the right. The next section covers the pure local model.</li>
       </ul>
     </div>
     <div class="card">
-      <h3>Swap the server: same agent, cheaper model</h3>
+      <h3>Another company&rsquo;s API</h3>
       <ul>
-        <li>DeepSeek, Kimi, and GLM publish addresses that speak Anthropic&rsquo;s protocol, and Claude Code talks to them directly:
+        <li><strong>OpenRouter</strong> is the easy version: one account, one key, hundreds of models (DeepSeek, Kimi, Qwen, and Claude itself) behind one address.</li>
+        <li>Claude Code points at it with three lines:
           <ul>
-            <li>one environment variable plus that company&rsquo;s API key</li>
-            <li>a fraction of Anthropic&rsquo;s price; some sell monthly coding plans</li>
+            <li><code>ANTHROPIC_BASE_URL=https://openrouter.ai/api</code></li>
+            <li>your OpenRouter key as <code>ANTHROPIC_AUTH_TOKEN</code></li>
+            <li><code>ANTHROPIC_MODEL</code> set to any name from openrouter.ai/models</li>
           </ul>
         </li>
-        <li><strong>OpenRouter</strong> is an aggregator: one key, hundreds of models from many companies behind one address.</li>
-        <li>Cheaper is not private. Your data still leaves your machine, now to a different company. Not for IRB data.</li>
-        <li>No support team if it breaks. And this route does not reach GPT — use Codex for GPT.</li>
-      </ul>
-    </div>
-    <div class="card">
-      <h3>Swap the family: a second opinion</h3>
-      <ul>
-        <li>Save one command that sends a question to Codex, to Gemini (<code>gemini -p</code>), or to a local model.</li>
-        <li>Why another family: models from one family make the same mistakes. Claude checking Claude reads the same answer twice.</li>
-        <li>Two rules:
-          <ul>
-            <li>the second model knows nothing of your session — put everything in the question</li>
-            <li>read its answer yourself; where the families disagree, you decide</li>
-          </ul>
-        </li>
+        <li>You can also skip the middleman: DeepSeek, Kimi, and GLM each sell their own Anthropic-protocol API — same three lines, that company&rsquo;s address and key. (OpenAI is the exception: GPT is not reachable this way; use Codex for GPT.)</li>
+        <li>Cheaper is not private: your data still leaves your machine, now to a different company&rsquo;s servers.</li>
       </ul>
     </div>
     </section>
 
     <!-- PRIVATE -->
     <section data-hands="private">
-    <h2 class="sec" id="private">Keeping private data on your own machine <span class="hastag">&middot; do it on the right</span></h2>
+    <h2 class="sec" id="private">A pure local model, for private data <span class="hastag">&middot; do it on the right</span></h2>
 
     <div class="card">
       <h3>When your data cannot leave</h3>
       <ul>
         <li>Some data cannot go to any company&rsquo;s server: human subjects, restricted records, anything under an IRB or a data agreement.</li>
         <li>Every route so far sends your files to someone&rsquo;s server.</li>
-        <li>The fix: run an open model on your own laptop. Nothing leaves.</li>
+        <li>Two fixes, in order of effort:
+          <ul>
+            <li>keep Claude, and hide the data from the agent (next card)</li>
+            <li>run an open model on a machine you control, so your data never leaves that machine (the rest of this section)</li>
+          </ul>
+        </li>
+        <li>That machine is usually your laptop. When the laptop cannot cope, Brown&rsquo;s Oscar cluster works too — last card of this section.</li>
       </ul>
     </div>
     <div class="card">
-      <h3>Ollama: one program, many open models</h3>
+      <h3>Half-way: keep Claude, hide the data</h3>
       <ul>
-        <li>There are too many open models to manage by hand. <strong>Ollama</strong> aggregates them:
-          <ul>
-            <li>pull any model by name, one interface for all</li>
-            <li>serves them to any agent — it speaks both Claude Code&rsquo;s and Codex&rsquo;s protocols</li>
-            <li>local by default; its <em>cloud</em> models run on Ollama&rsquo;s servers — avoid those for private data</li>
-          </ul>
-        </li>
-        <li>Hooking it up:
-          <ul>
-            <li>type <code>ollama</code> with nothing after it — a menu walks you through</li>
-            <li><code>ollama launch claude</code> — straight to Claude Code on your local model</li>
-            <li><code>codex --oss</code> for Codex; a Claude toggle in the Ollama app for the Claude desktop app</li>
-          </ul>
-        </li>
-        <li>Do not accept the default model. It is 7–10&nbsp;GB and most laptops cannot run it. Course default: <code>qwen3:4b</code> (2.5&nbsp;GB).</li>
-        <li>Local models are slower and weaker than Claude or GPT. Use them only when the data requires it.</li>
+        <li>Your data file and your codebook are two different files. The data holds the rows. The codebook is the document that lists each variable&rsquo;s name and meaning — every survey ships one, or you write a page yourself.</li>
+        <li>The agent only needs the codebook. It writes the script from the codebook, and the script reads the real data when it runs — the agent never does.</li>
+        <li>The simplest way to hide the data: keep it outside the project folder, and let the script point to it by path. The agent works inside the project, and a file it cannot see is a file it cannot quote.</li>
+        <li>If you want a lock on top: a deny rule in <code>.claude/settings.json</code> — <code>"permissions": {"deny": ["Read(/path/to/data/**)"]}</code>. Then even an accidental &ldquo;yes&rdquo; to a read request cannot open the file.</li>
+        <li>The leak to watch: error messages and printed output can quote data values into the conversation. Keep prints to counts and coefficients.</li>
       </ul>
     </div>
     <div class="card">
-      <h3>Why a local model fails</h3>
+      <h3>What Ollama is</h3>
       <ul>
-        <li><strong>Context too small.</strong>
+        <li><strong>Ollama</strong> is a free program that downloads and serves open models: pull a model by name, one interface for all of them.</li>
+        <li>Its trick: it imitates a company&rsquo;s API. It answers the exact same calls, at an address on your own machine, with no internet involved. The tool you type into cannot tell the difference.</li>
+        <li>Do not accept its default model — 7–10&nbsp;GB, most laptops cannot run it. Course default: <code>qwen3:4b</code> (2.5&nbsp;GB).</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Ollama + Claude Code</h3>
+      <ul>
+        <li>Type <code>ollama</code> and pick Claude Code and your model from the menu, or do the same in the Ollama app. Official guide: <a href="https://docs.ollama.com/integrations/claude-code">docs.ollama.com/integrations/claude-code</a>. For Codex: <code>codex --oss</code>.</li>
+        <li>One issue remains: Claude Code is still Anthropic&rsquo;s program. By default it sends usage metrics and error reports to Anthropic — never your prompts, data, or files. Run it with <code>CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC=1</code> to turn that off.</li>
+        <li>Check it yourself: pick a model that runs locally (not one marked <em>cloud</em>), turn off your wifi, and give it a task. If it still works, nothing was going out — proof you can show an IRB.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Ollama + OpenCode</h3>
+      <ul>
+        <li>For the absolute version, swap the tool too: <strong>OpenCode</strong> is open-source, needs no account, and belongs to no company. With Ollama under it, no part of the stack can send anything anywhere.</li>
+        <li>This is the pairing for a real project on sensitive data — and serious models want a bigger machine: a 32&nbsp;GB laptop, or Oscar (two cards down).</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Most laptops struggle with this</h3>
+      <ul>
+        <li>A model that can drive an agent is a heavy program, and most laptops are at the edge:
           <ul>
-            <li>laptop default: 4k tokens; the agent&rsquo;s own instructions: ~20k</li>
-            <li>result: the instructions get cut off — no error, empty answers</li>
-            <li>fix: start the server at 32k (our setting); Ollama&rsquo;s docs say 64k+ if your memory allows</li>
+            <li>under 4B parameters: cannot follow the agent&rsquo;s tool instructions at all</li>
+            <li>4B (our course default): completes the exercise, slowly</li>
+            <li>comfortable starts around 20B — and that needs a 32&nbsp;GB machine</li>
           </ul>
         </li>
-        <li><strong>Context eats memory.</strong> The same 2.5&nbsp;GB model needs:
+        <li>The context window is a second memory cost on top of the model. The same 2.5&nbsp;GB model needs:
           <ul>
-            <li>4.8&nbsp;GB at 16k context</li>
+            <li>4.8&nbsp;GB of memory at 16k context</li>
             <li>7.8&nbsp;GB at 32k</li>
-            <li>so do not raise the context beyond what your RAM fits</li>
           </ul>
         </li>
-        <li><strong>Model too small.</strong>
-          <ul>
-            <li>under 4B: cannot follow an agent&rsquo;s tool instructions at all</li>
-            <li>4B: completes our exercise, slowly</li>
-            <li>comfortable: 20B and up, on a 32&nbsp;GB machine</li>
-          </ul>
-        </li>
+        <li>And the default context is too small for an agent: laptops default to 4k tokens, while the agent&rsquo;s own instructions are ~20k. The instructions get cut off with no error message. Set the context to 32k in the Ollama app settings.</li>
       </ul>
     </div>
     <div class="card">
-      <h3>OpenCode and Aider: agents built for local models</h3>
+      <h3>When your laptop is not enough: Brown&rsquo;s Oscar</h3>
       <ul>
-        <li>These are agents, like Claude Code — but open-source and designed for small local models.</li>
-        <li>Why they work better locally: their instructions are a fraction of Claude Code&rsquo;s, so the same small model has more room left to think.</li>
-        <li>They run on the same Ollama underneath: <code>aider --model ollama/qwen3:4b</code>, or point OpenCode at the same server.</li>
-        <li>For a long-running sensitive project, prefer one of these over Claude Code on Ollama.</li>
+        <li>Oscar is Brown&rsquo;s computing cluster. A GPU node there runs models far beyond any laptop, and your data stays inside Brown&rsquo;s systems.</li>
+        <li>CCV maintains Ollama on Oscar, with a shared library of already-downloaded models: <a href="https://docs.ccv.brown.edu/oscar/large-language-models">docs.ccv.brown.edu/oscar/large-language-models</a>.</li>
+        <li>The recipe from that page:
+          <ul>
+            <li><code>interact -n 4 -m 32g -q gpu -g 1</code> — get a GPU node</li>
+            <li><code>module load ollama</code>, then <code>ollama serve</code></li>
+            <li>second terminal: <code>ssh</code> to the node and <code>ollama run</code> a model</li>
+          </ul>
+        </li>
+        <li>Working on Oscar means working over <code>ssh</code>, in a terminal — there is no other interface. This is where Monday&rsquo;s terminal skills pay off: on a cluster, the terminal is all there is.</li>
+        <li>The agent CCV documents there is <strong>OpenCode</strong> — open-source, no account needed, and it takes the Ollama on the node as its model. The whole stack runs inside Brown&rsquo;s systems.</li>
       </ul>
     </div>
     </section>
@@ -329,103 +336,34 @@
     <div class="card">
       <h3>Show your project</h3>
       <ul>
-        <li>Take a few minutes each to walk us through your whole five-day project, including today's build.</li>
-        <li>Show the question, your result, a figure, a website, or a working start.</li>
-        <li>Walk the main steps and say who did each: what you decided and did, and what the agent did.</li>
-        <li>Tell us one error the agent made and explain how you found it.</li>
-        <li>Leave us one lesson for someone starting next week.</li>
+        <li>Tell us in a few minutes what you made this week. A finished project is not required.</li>
+        <li>If you have a complete project, walk us through it: the question, the analysis, the figure or the website.</li>
+        <li>If not, show any piece: a data analysis, a visualization, a workflow or Skill you customized, anything you built around the agent.</li>
+        <li>If the agent got something wrong and you caught it, tell that story — it is the most useful thing to share.</li>
       </ul>
     </div>
     </section>
 
     <!-- NEXT -->
     <section data-hands="none">
-    <h2 class="sec" id="next">Takeaways</h2>
+    <h2 class="sec" id="next">Wrap-up</h2>
 
     <div class="card">
-      <h3>Your five-day checklist</h3>
+      <h3>What we covered</h3>
       <ul>
-        <li>a working environment (Monday)</li>
-        <li>A research repository has a draft history, which starts from Monday onward.</li>
-        <li>a directed, verified analysis (Tuesday)</li>
-        <li>a project instructions file that survives a restart (Wednesday)</li>
-        <li>at least one Skill (Wednesday)</li>
-        <li>a literature search with verified citations (Thursday)</li>
-        <li>a website or app of your own (Friday)</li>
+        <li><strong>Monday:</strong> getting started — the terminal, a project repository, your first analysis with the agent.</li>
+        <li><strong>Tuesday:</strong> working in stages — plans you approve before the agent runs, checking results, git for version control, subagents for parallel work.</li>
+        <li><strong>Wednesday:</strong> project instruction files and Skills.</li>
+        <li><strong>Thursday:</strong> connecting the agent to outside websites and apps — APIs and MCP.</li>
+        <li><strong>Friday:</strong> turning your analysis into a website, and changing what runs underneath — other models, other coding agents, fully local.</li>
       </ul>
     </div>
     <div class="card">
-      <h3>What the full course includes</h3>
+      <h3>Keep exploring</h3>
       <ul>
-        <li>How these models work. Why they fail.</li>
-        <li>Design your own agents and use MCP, Hooks, and subagents. The cards below cover subagents.</li>
-        <li>Build and deploy real tools using your research.</li>
-      </ul>
-    </div>
-    <div class="card">
-      <h3>Before you build bigger: four questions</h3>
-      <ul>
-        <li>Can you check every result yourself, and if so, you do not need to build anything.</li>
-        <li>Is checking a result cheaper than making it? If so, you are the quality control and the general agent is enough.</li>
-        <li>Do the steps stay the same every time? If they are the same, it is a script, and if they change for every input, it is a real agent loop.</li>
-        <li>Can you build a gold standard to test it, and if you cannot, do not produce any data with it.</li>
-        <li>This full course answers these questions, and people often make a mistake and skip ahead and say, "I do this 300 times, so I need an agent," but a script or nothing was the correct answer.</li>
-      </ul>
-    </div>
-    <div class="card">
-      <h3>Who splits the work?</h3>
-      <ul>
-        <li>Today's capstone fits in one conversation, but Your next real project will not.</li>
-        <li>The next design question is <strong>decomposition</strong>: if a task is too large for one session, who splits it up, you or the agent?</li>
-        <li>Both agents cover the full range:
-          <ul>
-            <li><strong>You decompose fully.</strong> A shell loop calls <code>claude -p</code> (Codex: <code>codex exec</code>) once per item on a list you wrote, when you already know every piece.</li>
-            <li><strong>You plan, the agent executes.</strong> Use Plan mode when you know the goal but need to think about the steps, and it shows you a plan for approval before it changes any files.</li>
-            <li><strong>You frame, the agent splits.</strong> Do A, B, and C at the same time using different subagents. This works if the parts are independent and if summaries are enough, and Thursday's parallel paper reading showed this.</li>
-            <li><strong>The agent decomposes fully.</strong> A workflow has the agent write an orchestration script. This script runs dozens of subagents and can do a repository-wide audit or a hundred-item migration.</li>
-          </ul>
-        </li>
-      </ul>
-    </div>
-    <div class="card">
-      <h3>Before you parallelize</h3>
-      <ul>
-        <li>Four rules of thumb from Anthropic's own multi-agent engineering:
-          <ul>
-            <li><strong>Independence.</strong> Only subtasks that do not depend on each other's output can run in parallel. A chain of dependent steps gains nothing.</li>
-            <li><strong>Cost.</strong> A multi-agent run uses about 15 times more tokens than a single chat, so the task must be worth it.</li>
-            <li><strong>Focus.</strong> Three agents have sharp and separate briefs, and they beat five agents who have scattered briefs.</li>
-            <li><strong>Independent review.</strong> An author's context learns to overlook things, but a reviewer agent has a clean context and catches those errors, and journals use outside referees for this same reason.</li>
-          </ul>
-        </li>
-      </ul>
-    </div>
-    <div class="card">
-      <h3>After five days</h3>
-      <ul>
-        <li>Use one repository for each project and let it grow like this one did.</li>
-        <li>Use your instruction files and Skills on the next project starting from day one.</li>
-        <li>Subagents and workflows are useful when a task is too big for one session.</li>
-      </ul>
-    </div>
-    <div class="card">
-      <h3>Local and open models: how good are they?</h3>
-      <ul>
-        <li>Small local models in the 7B class lose 15 to 40 points on agentic benchmarks and hallucinate tool calls. Frontier open-weights models like Kimi K2.6 and Qwen 3.6 are close to the closed frontier and within a few points.</li>
-        <li>You used this earlier today in the second-opinion command.</li>
-      </ul>
-    </div>
-    <div class="card">
-      <h3>Continued practice</h3>
-      <ul>
-        <li>Continue using the repository, and use the agent for one task per week. The instructions file grows as the project grows.</li>
-        <li>Free self-paced material if you want more:
-          <ul>
-            <li>Anthropic Academy: short courses on Claude Code, from beginner up.</li>
-            <li>DeepLearning.AI: "Claude Code: An agent-like coding assistant."</li>
-          </ul>
-        </li>
-        <li>The habit that is more important than any tool: <strong>an unverified result is not a result.</strong></li>
+        <li>Everything in this course changes fast. What you learned this week is this month&rsquo;s version, and next month there will be more.</li>
+        <li>So use the agent often, and explore on your own. Do not fence yourself in with what we happened to cover.</li>
+        <li>Try things. If it breaks, that is a lesson, and the repository lets you step back.</li>
       </ul>
     </div>
     </section>
@@ -479,99 +417,59 @@
     <div class="hands" data-for="private">
       <div class="exi">
         <span class="step">Step 1</span>
-        <h4>Install a local model</h4>
-        <p>Install Ollama, pull the small course model by name, and start the server with a 32k context.</p>
-        <div class="code">curl -fsSL https://ollama.com/install.sh | sh
-ollama pull qwen3:4b
-OLLAMA_CONTEXT_LENGTH=32768 ollama serve<span class="copy">copy</span></div>
-        <ul>
-          <li>Do not run a bare <code>ollama run gemma4</code> or accept the menu's default model: those pull 7–10&nbsp;GB models, and most laptops in this room cannot run them.</li>
-          <li><code>qwen3:4b</code> is a 2.5&nbsp;GB download and runs on a 16&nbsp;GB laptop, and on an 8&nbsp;GB laptop it runs only with a short context.</li>
-          <li>Only a machine with 32&nbsp;GB or more should try <code>qwen3-coder:30b</code> or <code>gemma4:26b</code>.</li>
-        </ul>
+        <h4>Install Ollama</h4>
+        <p>Download the app from <a href="https://ollama.com/download">ollama.com/download</a> and install it like any program. Then pull the small course model:</p>
+        <div class="code">ollama pull qwen3:4b<span class="copy">copy</span></div>
+        <p>Do not pull the models the menu suggests first — they are 7–10&nbsp;GB.</p>
       </div>
       <div class="exi">
         <span class="step">Step 2</span>
-        <h4>Point your agent at it</h4>
-        <p>Type <code>ollama</code> with nothing after it and follow the menu, or jump straight there:</p>
-        <div class="code">ollama launch claude<span class="copy">copy</span></div>
-        <p>In the menu, pick the small model you pulled in Step 1, not the default it offers.</p>
-        <p>It sets three variables and starts the tool. You can also set them yourself, which shows what the command does and lets you script it:</p>
-        <div class="code">export ANTHROPIC_AUTH_TOKEN=ollama
-export ANTHROPIC_API_KEY=""
-export ANTHROPIC_BASE_URL=http://localhost:11434
-export CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC=1
-claude --model qwen3:4b<span class="copy">copy</span></div>
-        <p>The last line matters for sensitive data: see Step 3.</p>
+        <h4>Start Claude Code on the local model</h4>
+        <p>Type this, and pick Claude Code and <code>qwen3:4b</code> from the menu — or make the same choices in the Ollama app:</p>
+        <div class="code">ollama<span class="copy">copy</span></div>
         <ul>
-          <li>For Codex: <code>codex --oss</code> starts it against the local model instead.</li>
-          <li>Use <code>/model</code> and the model's name to switch models in the session. The variable chooses the server, and the name chooses the model.</li>
-          <li>Turn off the network and set the sandbox to your project folder.</li>
+          <li>Official guide: <a href="https://docs.ollama.com/integrations/claude-code">docs.ollama.com/integrations/claude-code</a>.</li>
+          <li><em>If</em> the model returns empty or cut-off answers: in the Ollama app settings, raise the context length to 32k. The laptop default is too small for an agent, and it fails without an error message.</li>
         </ul>
       </div>
-      <div class="exi">
-        <span class="step">Step 3</span>
-        <h4>Check that nothing leaves</h4>
-        <ul>
-          <li>Local inference is not the whole story. Your prompts, data, and code go only to your machine, but by default the tool itself still sends usage metrics and error reports to Anthropic. Those messages never contain your prompts or files. <code>CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC=1</code> turns them off.</li>
-          <li>In the Ollama menu, pick a model that runs locally, not one marked cloud. A cloud model runs on Ollama's servers, and your data leaves the machine.</li>
-          <li>Use ordinary data first, turn the network off, and ask the local agent a question.</li>
-          <li>Turn off your wifi and give it a task. If it still works, nothing was going out.</li>
-          <li>You can show this proof to an IRB, and the data stayed on the machine.</li>
-          <li>Watch it work: <code>ollama ps</code> shows the model loaded and answering in a second terminal.</li>
-        </ul>
-      </div>
-      <div class="exi">
-        <span class="step">Step 4</span>
-        <h4>For the real project, switch to a local-first tool</h4>
-        <div class="code">python -m pip install aider-install &amp;&amp; aider-install
-aider --model ollama/qwen3-coder:30b<span class="copy">copy</span></div>
-        <p>This runs the same local model in a specific tool and it saves every change as a commit.</p>
-      </div>
+      <div class="save">The privacy checks (turn off the leftover traffic, the wifi-off test) are on the Ollama + Claude Code card on the left.</div>
     </div>
 
     <!-- engines -->
     <div class="hands" data-for="engines">
       <div class="exi">
         <span class="step">Step 1</span>
-        <h4>Point the agent at a cheaper hosted model</h4>
-        <p>Get an API key from the provider, point the same agent to its address, and use DeepSeek as the example:</p>
+        <h4>Point Claude Code at OpenRouter</h4>
+        <p>Make an account at openrouter.ai and create a key. Then five lines, one at a time:</p>
+        <div class="code">export ANTHROPIC_BASE_URL=https://openrouter.ai/api<span class="copy">copy</span></div>
+        <p>Send my requests to OpenRouter instead of Anthropic.</p>
+        <div class="code">export ANTHROPIC_AUTH_TOKEN=YOUR_OPENROUTER_KEY<span class="copy">copy</span></div>
+        <p>My OpenRouter key.</p>
+        <div class="code">export ANTHROPIC_API_KEY=""<span class="copy">copy</span></div>
+        <p>Blank the Anthropic key so it does not interfere.</p>
+        <div class="code">export ANTHROPIC_MODEL=deepseek/deepseek-chat<span class="copy">copy</span></div>
+        <p>Which model answers. Any name from <a href="https://openrouter.ai/models">openrouter.ai/models</a> works, and <code>/model</code> switches later inside the session.</p>
+        <div class="code">claude<span class="copy">copy</span></div>
+        <p>Start the tool as usual.</p>
+        <p>Nothing is permanent: the settings die with this terminal window, and a new terminal is normal Claude again.</p>
+      </div>
+      <div class="exi">
+        <span class="step">Alternative</span>
+        <h4>One company directly, no middleman</h4>
+        <p>Same five lines, with that company&rsquo;s address, key, and model name. DeepSeek as the example:</p>
         <div class="code">export ANTHROPIC_BASE_URL=https://api.deepseek.com/anthropic
 export ANTHROPIC_AUTH_TOKEN=YOUR_DEEPSEEK_KEY
-export ANTHROPIC_MODEL=deepseek-reasoner
+export ANTHROPIC_API_KEY=""
+export ANTHROPIC_MODEL=deepseek-chat
 claude<span class="copy">copy</span></div>
-        <ul>
-          <li>Kimi: <code>https://api.moonshot.ai/anthropic</code> and GLM: <code>https://api.z.ai/api/anthropic</code>. Each provider has documentation which lists the current model names.</li>
-          <li>Open a fresh terminal to go back to Claude and the variables live only in the shell that set them.</li>
-        </ul>
+        <p>Kimi: <code>api.moonshot.ai/anthropic</code> · GLM: <code>api.z.ai/api/anthropic</code></p>
       </div>
       <div class="exi">
         <span class="step">Step 2</span>
-        <h4>Save a second-opinion command</h4>
-        <p>Make <code>.claude/commands/consult-codex.md</code> in your project:</p>
-        <div class="code">---
-description: Second opinion from Codex
-allowed-tools: Bash(codex exec:*), Read
----
-Ask Codex for an independent opinion on: $ARGUMENTS
-If a file is referenced, Read it and inline the relevant part.
-Run exactly:
-codex exec --skip-git-repo-check --sandbox read-only "&lt;question + context&gt;" &lt; /dev/null
-Report Codex's answer as Codex's, then say where you agree and disagree.
-Never edit files from this command.<span class="copy">copy</span></div>
-        <ul>
-          <li>The <code>&lt; /dev/null</code> is important, and without it, Codex waits for input forever.</li>
-          <li>Costs charge your ChatGPT account but do not charge your Claude plan.</li>
-        </ul>
-      </div>
-      <div class="exi">
-        <span class="step">Step 3</span>
-        <h4>Use it on a real question</h4>
+        <h4>Get a second opinion from Codex</h4>
+        <p>Claude Code already has the command. Ask it a real question from your project:</p>
         <div class="code">/consult-codex is mean imputation biasing my variance estimates downward?<span class="copy">copy</span></div>
-        <ul>
-          <li>Read both answers. If they agree, your confidence goes up, and if they disagree, check them by hand.</li>
-          <li>Do not ask it to apply the advice; that decision stays with you.</li>
-        </ul>
+        <p>Needs Codex installed and signed in. The answer charges your ChatGPT account, not your Claude plan.</p>
       </div>
     </div>
   </aside>
