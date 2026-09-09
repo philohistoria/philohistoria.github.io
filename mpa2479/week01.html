@@ -45,6 +45,9 @@
   .card li{font-size:17px;line-height:1.45;padding:9px 0 9px 26px;position:relative;border-top:1px solid var(--line)}
   .card li:first-child{border-top:0}
   .card li::before{content:"";position:absolute;left:4px;top:17px;width:8px;height:8px;border-radius:50%;background:var(--accent)}
+  .card ol{padding-left:1.6rem;margin:0}
+  .card ol>li{padding-left:.25rem}
+  .card ol>li::before{display:none}
   .card ul ul{margin:6px 0 0}
   .card li li{font-size:15px;padding:5px 0 5px 24px;border-top:0;color:var(--muted)}
   .card li li::before{width:5px;height:5px;top:14px;background:var(--muted)}
@@ -126,20 +129,31 @@
 </head>
 <body>
 <div class="mhead">
-  <a class="mtitle" href="week01.html">Applied AI for Public Policy</a>
+  <a class="mtitle" href="week_mapping_12week.html">Applied AI for Public Policy</a>
   <details class="mnav">
     <summary>Menu</summary>
     <div class="mnav-box">
       <p class="mlbl">Weeks</p>
       <a href="week01.html">1 · What an AI agent is</a>
-      <a href="week02.html">2 · Directing the agent</a>
+      <a href="week02.html">2 · Git and version control</a>
+      <a href="week03.html">3 · Configuring the agent</a>
+      <a href="week04.html">4 · AI for data collection</a>
+      <a href="week05.html">5 · AI for data coding and model choice</a>
+      <a href="week06.html">6 · AI for visualization and publishing</a>
+      <a href="week07.html">7 · Hallucination and algorithmic bias</a>
+      <a href="week08.html">8 · Auditing a federal AI system</a>
+      <a href="week09.html">9 · Designing your final project</a>
+      <a href="week10.html">10 · AI governance</a>
+      <a href="week11.html">11 · Code review and replication</a>
+      <a href="week12.html">12 · Final presentations</a>
       <p class="mlbl">On this page</p>
       <a href="#opening">Opening</a>
-      <a href="#reading">Reading discussion</a>
+      <a href="#reading">Preparation</a>
       <a href="#concept">What an AI agent is</a>
-      <a href="#setup">Setup</a>
-      <a href="#redo">Redo the demo</a>
-      <a href="#wrap">Wrap</a>
+      <a href="#setup">Installation</a>
+      <a href="#redo">The first run</a>
+      <a href="#project-discussion">Project discussion and short memo</a>
+      <a href="#wrap">Assignments and next steps</a>
     </div>
   </details>
 </div>
@@ -147,179 +161,81 @@
 
   <!-- ================= LEFT NAV ================= -->
   <nav>
-    <a class="home" href="index.html">MPA 2479<br>Applied AI for Public Policy</a>
+    <a class="home" href="week_mapping_12week.html">MPA 2479<br>Applied AI for Public Policy</a>
     <div class="days">
       <div class="lbl">Weeks</div>
       <a href="week01.html" class="cur">1 · What an AI agent is</a>
-      <a href="week02.html">2 · Directing the agent</a>
-      <span class="off">3 · Define the problem</span>
-      <span class="off">4 · Collecting data</span>
-      <span class="off">5 · Coding text at scale</span>
-      <span class="off">6 · Analyze, visualize, publish</span>
-      <span class="off">7 · Facts and fairness</span>
-      <span class="off">8 · Audit a federal system</span>
-      <span class="off">9 · Project outcomes + proposal</span>
-      <span class="off">10 · The arenas of AI policy</span>
-      <span class="off">11 · Build and review</span>
-      <span class="off">12 · Presentations</span>
+      <a href="week02.html">2 · Git and version control</a>
+      <a href="week03.html">3 · Configuring the agent</a>
+      <a href="week04.html">4 · AI for data collection</a>
+      <a href="week05.html">5 · AI for data coding and model choice</a>
+      <a href="week06.html">6 · AI for visualization and publishing</a>
+      <a href="week07.html">7 · Hallucination and algorithmic bias</a>
+      <a href="week08.html">8 · Auditing a federal AI system</a>
+      <a href="week09.html">9 · Designing your final project</a>
+      <a href="week10.html">10 · AI governance</a>
+      <a href="week11.html">11 · Code review and replication</a>
+      <a href="week12.html">12 · Final presentations</a>
     </div>
     <div class="lbl">Today</div>
     <div class="toc">
       <a href="#opening">Opening</a>
-      <a href="#reading">Reading discussion</a>
+      <a href="#reading">Preparation</a>
       <a href="#concept">What an AI agent is</a>
-      <a href="#setup">Setup <span class="has">hands-on</span></a>
-      <a href="#redo">Redo the demo <span class="has">hands-on</span></a>
-      <a href="#wrap">Wrap</a>
+      <a href="#setup">Installation <span class="has">hands-on</span></a>
+      <a href="#redo">The first run <span class="has">hands-on</span></a>
+      <a href="#project-discussion">Project discussion and short memo</a>
+      <a href="#wrap">Assignments and next steps</a>
     </div>
   </nav>
 
   <!-- ================= CENTER CONTENT ================= -->
   <main>
     <div class="mobilenote">You are on a small screen. This page is designed for a laptop, with three columns and hands-on steps appearing beside the content. On a phone it collapses to one column and the hands-on steps move to the end of the page. Reading here is fine; for the exercises you need your laptop anyway.</div>
-    <p class="kicker">Week 1 · Thursday, September 10, 2026, 9:00 to 11:30 am · Shopping period</p>
-    <h1>What an AI Agent Is</h1>
+    <p class="kicker">Week 1 · Sept 10, 2026 · Thursday, 9:00–11:30 am · Getting started</p>
+    <h1>What an AI agent is</h1>
     <p class="byline" style="margin:2px 0 16px;color:var(--muted);font-size:15px">Han Zhang · page drafted with Claude (Anthropic)</p>
-    <p class="goal">Leave today having watched an AI agent do a policy analysis end to end, and with the tool installed on your own laptop. When a section has something to do, it appears in the panel on the right.</p>
+    <p class="goal">Recognize the eight steps of policy analysis and use a small data task to identify where AI might contribute. Prepare to discuss your own project in Week 2.</p>
 
     <!-- OPENING -->
     <section data-hands="none">
-    <h2 class="sec" id="opening">Opening</h2>
-
-    <div class="card">
-      <h3>This course</h3>
-      <ul>
-        <li>Every week has two parts: you <strong>build</strong> something with an AI agent, and you <strong>read and argue</strong> about how AI is changing public policy.</li>
-        <li>An <strong>agent</strong> is AI that writes and runs code on real data, inside a project on your computer.</li>
-        <li>You are not expected to write code from memory. You direct the agent; it writes and runs the code; you judge what comes back.</li>
-      </ul>
-    </div>
-    <div class="card demo">
-      <span class="tag">Live demo</span>
-      <h3>An agent doing a policy analysis</h3>
-      <ul>
-        <li>Question: what do residents of a city complain about, and where?</li>
-        <li>Data: the city's 311 service-request file, downloaded from its open data portal.</li>
-        <li>I hand the agent a single instruction and let it work:</li>
-      </ul>
-      <div class="quote">Using Python: load the 311 service-request file, clean the category and neighborhood fields, count requests by category and by neighborhood, and make one chart of the top complaint categories and one map or chart of requests by neighborhood. Save both as PNGs.</div>
-    </div>
-    <div class="card">
-      <h3>What just happened</h3>
-      <ul>
-        <li>The agent wrote the code and ran it.</li>
-        <li>It hit errors, read them, and fixed them.</li>
-        <li>It checked its own output.</li>
-        <li>It returned two charts for us to inspect.</li>
-        <li>My only inputs were the instruction at the start and my reading of the charts at the end.</li>
-      </ul>
-    </div>
-    <div class="card">
-      <h3>From analyst to director</h3>
-      <ul>
-        <li>The agent produced the neighborhood counts in about two minutes.</li>
-        <li>Whether those counts mean anything for policy is still a human call: 311 records measure who complains, not what is broken.</li>
-        <li>That division of labor runs through the whole course: the agent does the implementation, and you own the question and the judgment.</li>
-      </ul>
-    </div>
-    <div class="card">
-      <h3>Who this course is for</h3>
-      <ul>
-        <li>You have taken at least one course that used a programming language, ideally Python.</li>
-        <li>You can look at a script and roughly follow what it does, even if you could not write it from scratch.</li>
-        <li>You do <strong>not</strong> need a computer science background.</li>
-        <li>You need a laptop in every class. This is a hands-on course.</li>
-      </ul>
-    </div>
-    <div class="card">
-      <h3>One tool, on purpose</h3>
-      <ul>
-        <li>This course runs on one coding agent: <strong>Claude Code</strong>.</li>
-        <li>Every hands-on uses its exact commands, and one setup per person is the only way to support a full room.</li>
-        <li>What you learn transfers: the habits of directing, specifying, and checking work the same in any agent.</li>
-      </ul>
-    </div>
-    <div class="card">
-      <h3>The semester at a glance</h3>
-      <ul>
-        <li>Weeks 1–2: meet the agent and learn to direct it.</li>
-        <li>Weeks 3–7: walk the evidence steps at production depth: define your problem (Step 1), assemble the evidence (Steps 2a–2c: collect, construct, analyze and publish), then verify what the agent produced (Step 2½), a step this course adds to the path.</li>
-        <li>Weeks 8–10: apply the path to AI itself: score a real federal AI system against criteria (Steps 3–4), predict the outcomes of your own proposed tool (Step 5), and weigh and decide how AI should be governed (Steps 6–7).</li>
-        <li>Weeks 11–12: build, and tell your story (Step 8).</li>
-        <li>The first seven weeks are AI for policy: the agent works as your analyst. Weeks 8–10 are policy of AI: AI systems are the thing being governed.</li>
-        <li>By December you will have: a public web page with your analysis, an automated data pipeline, a policy brief, a fairness analysis, and an audit of a real government AI system.</li>
-      </ul>
-    </div>
-    <div class="card">
-      <h3>Shopping period</h3>
-      <ul>
-        <li>Weeks 1 and 2 have no deliverables. The add deadline is Tuesday, September 22.</li>
-        <li>Use these two weeks to decide whether this course is for you.</li>
-        <li>The first deliverable is in Week 3, and the workload from there is real: readings before class, a build in class, and a deliverable after most weeks.</li>
-      </ul>
-    </div>
-    <div class="card">
-      <h3>Today</h3>
-      <ul>
-        <li>First, we discuss the reading: the big picture of AI and government.</li>
-        <li>Then the concept: what an AI agent actually is.</li>
-        <li>Then setup: get the tool running on your laptop, with support in the room.</li>
-        <li>We close with you redoing today's demo yourself.</li>
-      </ul>
-    </div>
-    </section>
+<h2 class="sec" id="opening">Opening</h2>
+<div class="card"><h3>Today</h3><ul>
+  <li>Follow an agent through one small policy-data task: read a file, write and run code, inspect the result, and revise it.</li>
+  <li>Learn how to direct a task and review a proposed plan.</li>
+  <li>Install the tool using the setup guide; learn where the project files and outputs live.</li>
+</ul></div><div class="card"><h3>Work and discussion</h3><p>Use the hands-on task to develop an actual result or question. We introduce all eight steps in class and preview how you will use them for your own project from Week 2. The eightfold path is a framework we revisit as projects develop.</p></div><div class="card"><h3>The shared data task</h3><p>Weeks 1–3 use the <a href="https://ourworldindata.org/grapher/life-expectancy">Our World in Data life expectancy data</a>. Keep the data, script, and outputs between classes. In Week 3 you can practice configuration on these files while exploring your own project. Week 4 teaches data collection.</p></div><div class="card"><h3>Class format</h3><p>A typical session uses 10 minutes for previous observations, 25 for tool teaching and guided use, 75 for practice including a 10-minute break, 30 for project discussion, and 10 to record next steps. We adjust the balance to the task.</p></div>
+</section>
 
     <!-- READING DISCUSSION -->
     <section data-hands="none">
-    <h2 class="sec" id="reading">Reading discussion</h2>
-
-    <div class="card read">
-      <span class="tag">Read before class</span>
-      <h3>The eightfold path</h3>
-      <ul>
-        <li>Bardach &amp; Patashnik, <strong>"A Practical Guide for Policy Analysis"</strong>. Read the chapter that lays out the eightfold path: define the problem, assemble evidence, construct alternatives, select criteria, project outcomes, confront trade-offs, decide, tell your story.</li>
-        <li>It is the same textbook as the MPA core Policy Analysis course, so the framework will be familiar to you, or soon will be.</li>
-        <li>The eight steps are the spine of this course: the semester walks the path once, end to end, with an AI agent doing the implementation work.</li>
-        <li>Optional background on AI and government:
-          <ul>
-            <li>OECD, <em>Digital Government Outlook 2026</em>, AI chapter.</li>
-            <li>Stanford AI Index 2026, policy chapter.</li>
-            <li>Margetts &amp; Dorobantu, "Rethink Government with AI" (Nature, 2019).</li>
-          </ul>
-        </li>
-      </ul>
-      <p class="src">[Chapter and edition to confirm.]</p>
-    </div>
-    <div class="card">
-      <h3>Discussion (~25 min)</h3>
-      <ul>
-        <li>The vote: which of the eight steps do you think AI can help, and which not? Defend your pick. We record the answers and come back to them in Week 12.</li>
-        <li>Think about the job you want after this degree. Which of the eight steps does that job actually spend its weeks on?</li>
-        <li>What would you need to see before trusting an AI-produced number in a memo that goes out under your name? Keep your answer; Weeks 5 through 8 are about exactly this.</li>
-      </ul>
-    </div>
-    </section>
+<h2 class="sec" id="reading">Preparation</h2>
+<div class="card"><h3>Materials for this week</h3><ul>
+  <li>No reading assigned for Week 1 or Week 2. We introduce the eightfold path in class.</li>
+  <li>Keep the shared data and your first script. Bring one possible policy problem to discuss in Week 2.</li>
+</ul></div>
+</section>
 
     <!-- CONCEPT -->
     <section data-hands="none">
     <h2 class="sec" id="concept">What an AI agent is</h2>
 
     <div class="card">
-      <h3>Isn't this just ChatGPT?</h3>
+      <h3>An agent and a chat assistant</h3>
       <ul>
         <li>Underneath it is the same kind of model. The difference is the machine built around it.</li>
-        <li>Ask ChatGPT for the 311 analysis, and it hands you a block of code to run yourself.</li>
-        <li>Give the agent the same request, and it writes the code, runs it, hits an error, and fixes it, until the charts exist.</li>
-        <li>ChatGPT answers once and stops. The agent keeps working until the task is done.</li>
+        <li>A text-only interaction can give you code to run yourself.</li>
+        <li>An agent with file and execution tools can write that code, run it, inspect the output, and revise it.</li>
+        <li>Check which tools are available in the interface you are using, then inspect the files and results it produces.</li>
       </ul>
     </div>
     <div class="card">
-      <h3>It works in a folder, not a chat</h3>
+      <h3>The project folder</h3>
       <ul>
         <li>You pick one folder for your project, and the agent works inside it.</li>
         <li>Your data, your scripts, and your outputs are all in there together.</li>
-        <li>The agent only touches things in that folder, so it stays out of the rest of your computer.</li>
-        <li>Its notes stay in the folder, so next session it picks up where you left off instead of starting over.</li>
+        <li>The project folder organizes the work. Review the tool's permissions to understand which other files and commands it can access.</li>
+        <li>The files in the folder are what the agent reads to understand the project.</li>
       </ul>
     </div>
     <div class="card">
@@ -335,13 +251,13 @@
       <h3>Condition 2: the agent loop</h3>
       <ul>
         <li>A chatbot answers once. An agent works in a <strong>loop</strong> until the goal is met.</li>
-        <li>On the 311 charts the loop ran like this:
+        <li>On the life expectancy chart the loop ran like this:
           <ul>
-            <li>it read the file and found the column names,</li>
-            <li>it wrote code to clean and count the categories,</li>
-            <li>it ran the code and hit an error on inconsistent neighborhood names,</li>
+            <li>it read the CSV and found the column names,</li>
+            <li>it wrote code to select the five countries and the years 2000–2023,</li>
+            <li>it ran the code and hit an error on the country name column,</li>
             <li>it read the error and rewrote that step,</li>
-            <li>it ran again and produced the charts.</li>
+            <li>it ran again and produced the chart.</li>
           </ul>
         </li>
         <li>The loop pauses for your approval, and that pause is where your judgment enters.</li>
@@ -351,8 +267,9 @@
       <h3>Condition 3: running the code</h3>
       <ul>
         <li>Code that has not run is only a guess.</li>
-        <li>The agent runs its own code, reads what breaks, fixes it, and runs again, so you end up with a result that works.</li>
-        <li>Running its own code is what lets the agent finish the job.</li>
+        <li>The agent runs its own code and reads what breaks.</li>
+        <li>It fixes the code and runs it again.</li>
+        <li>Because it runs the code, what it hands you is a result rather than a proposal.</li>
       </ul>
     </div>
     <div class="card">
@@ -366,10 +283,11 @@
       <ul><li>Take away any one of the three, and the system falls back to a chatbot.</li></ul>
     </div>
     <div class="card">
-      <h3>One warning for the semester</h3>
+      <h3>Confident wrong answers</h3>
       <ul>
-        <li>These models are built to sound fluent, and fluent language can still be wrong.</li>
-        <li>The case to fear is the answer that is confident and wrong at once. A fabricated statistic in a policy memo looks exactly like a real one.</li>
+        <li>These models are built to sound fluent.</li>
+        <li>Fluent language can still be wrong.</li>
+        <li>The dangerous case is an answer that is wrong and stated with confidence. A fabricated statistic in a policy memo looks exactly like a real one.</li>
         <li>So you check every result the agent gives you, every time.</li>
         <li>The rule for the semester: <strong>an unverified number never goes into a memo.</strong></li>
       </ul>
@@ -378,78 +296,100 @@
 
     <!-- SETUP -->
     <section data-hands="setup">
-    <h2 class="sec" id="setup">Setup <span class="hastag">· do it on the right</span></h2>
+    <h2 class="sec" id="setup">Installation <span class="hastag">· do it on the right</span></h2>
 
     <div class="card">
       <h3>What the terminal is</h3>
       <ul>
         <li>The terminal is a text interface to your computer: you type a command, it prints the result.</li>
         <li>On a Mac it is the app called <strong>Terminal</strong>; on Windows it is <strong>PowerShell</strong>.</li>
-        <li>Agents live here because this is where programs are run.</li>
-        <li>You need very little of it: <code>cd folder</code> moves into a folder, <code>ls</code> lists what is there.</li>
+        <li>The agent runs in the terminal because the terminal is where programs are run.</li>
+        <li>You need very little of it:
+          <ul>
+            <li><code>cd folder</code> moves into a folder,</li>
+            <li><code>ls</code> lists what is in the folder.</li>
+          </ul>
+        </li>
         <li>Everything else you can ask the agent to type for you.</li>
       </ul>
     </div>
     <div class="card">
-      <h3>When something breaks</h3>
+      <h3>Errors during installation</h3>
       <ul>
-        <li>Something will break today. That is part of the course, on purpose.</li>
-        <li>When the agent runs a command that fails, it reads the error and fixes it on its own; you watch and steer.</li>
+        <li>Something will break today, and that is expected.</li>
+        <li>When a command the agent runs fails, the agent reads the error and fixes it. You watch and steer.</li>
         <li>When you are stuck yourself, tell the agent in plain words what happened.</li>
-        <li>Raise your hand the moment a step fails. Setup problems are not your fault and not a sign you are behind.</li>
+        <li>Raise your hand the moment a step fails.</li>
       </ul>
     </div>
     </section>
 
-    <!-- REDO THE DEMO -->
+    <!-- FIRST RUN -->
     <section data-hands="redo">
-    <h2 class="sec" id="redo">Redo the demo yourself <span class="hastag">· do it on the right</span></h2>
+    <h2 class="sec" id="redo">The first run <span class="hastag">· do it on the right</span></h2>
 
     <div class="card">
-      <h3>Same task, your machine</h3>
+      <h3>The same task on your machine</h3>
       <ul>
-        <li>You watched the agent do the 311 analysis this morning. Now you run the same task yourself.</li>
-        <li>The dataset and the exact instruction are on the right; the point is to see the loop happen on your own screen.</li>
-        <li>Watch what it does with the instruction: each place where it makes a choice you did not specify is a decision that should have been yours.</li>
+        <li>You watched the agent do the life expectancy analysis this morning. Now you run the same task yourself.</li>
+        <li>The dataset and the exact prompt are on the right.</li>
+        <li>The point is to watch the loop run on your own screen.</li>
+        <li>Watch for the places where the agent makes a choice you did not specify. Each of those is a decision that should have been yours.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>The approval prompt</h3>
+      <ul>
+        <li>The first time the agent wants to write a file or run a command, it stops and asks you to approve the action.</li>
+        <li>The prompt names the exact action: the file it will write, or the command it will run.</li>
+        <li>Read it before you answer. Approving is how the agent gets permission to act on your machine.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Three run modes</h3>
+      <ul>
+        <li>The run mode sets how much the agent does before it asks you:
+          <ul>
+            <li><strong>Normal mode</strong>: the agent asks you to approve each action.</li>
+            <li><strong>Auto-accept mode</strong>: the agent runs the actions without asking.</li>
+            <li><strong>Plan mode</strong>: the agent writes a plan and changes nothing until you approve or edit the plan.</li>
+          </ul>
+        </li>
+        <li>You switch modes with Shift+Tab, and the footer shows the mode you are in.</li>
+        <li>Normal mode is the default for this course. Plan mode is for a task with real choices in it.</li>
+        <li><a href="https://code.claude.com/docs/en/common-workflows">Claude Code documentation on plan mode and permission modes →</a></li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>The demo again in plan mode</h3>
+      <ul>
+        <li>Run the life expectancy task a second time, this time in plan mode.</li>
+        <li>The agent reads the file and writes out the steps it intends to take. Nothing has run yet.</li>
+        <li>Read the plan and find one choice you would have made differently.</li>
+        <li>A wrong plan costs one rewrite. A wrong execution costs an afternoon.</li>
       </ul>
     </div>
     <div class="card">
       <h3>If you finish early</h3>
       <ul>
-        <li>Try the same kind of task on a second dataset from the portal: building permits, restaurant inspections, or crime incidents.</li>
-        <li>Change the question, not just the file, and see whether the agent's choices still make sense.</li>
+        <li>Ask the agent to change the comparison countries or the time window.</li>
+        <li>Inspect the revised script and chart, and see whether the agent's choices still make sense.</li>
       </ul>
     </div>
     </section>
 
     <!-- WRAP -->
     <section data-hands="none">
-    <h2 class="sec" id="wrap">Wrap</h2>
-    <div class="card">
-      <h3>Where you are</h3>
-      <ul>
-        <li>You have seen what an agent is, and the tool runs on your laptop.</li>
-        <li>Next week: how to direct it, with three ways to run the agent, your first repository, and what a session costs.</li>
-      </ul>
-    </div>
-    <div class="card">
-      <h3>Deciding whether to stay</h3>
-      <ul>
-        <li>Every week of this course works the way today did: you build something with the agent.</li>
-        <li>If the terminal felt alien, that is normal and not disqualifying; it stops feeling alien around Week 3.</li>
-        <li>If you wanted a course about AI policy with no building, this is not that course: there are readings every week, and there is also something to build every week.</li>
-      </ul>
-    </div>
-    <div class="card">
-      <h3>Before you go</h3>
-      <ul>
-        <li>Show a neighbor the demo running on your machine.</li>
-        <li>If your setup is still broken, come to office hours before next Thursday. Do not start Week 2 with a broken environment.</li>
-        <li>Start thinking now about the policy domain and dataset you care about. In Week 3 you choose the question you will carry all semester.</li>
-        <li>For next week, read Dell'Acqua et al., "Navigating the Jagged Technological Frontier" (Harvard Business School Working Paper 24-013, 2023), and the executive summary of the UK Department for Business and Trade's "Evaluation of the M365 Copilot Pilot" (2025).</li>
-      </ul>
-    </div>
-    </section>
+<h2 class="sec" id="project-discussion">Project and policy discussion</h2>
+<div class="card"><h3>The eightfold path</h3><ol><li><strong>Define the problem.</strong> What is happening, to whom, and why does it call for a policy response?</li><li><strong>Assemble evidence.</strong> What do we know, and what evidence is missing?</li><li><strong>Construct alternatives.</strong> What policy options could the decision-maker choose?</li><li><strong>Select criteria.</strong> How should we compare those options?</li><li><strong>Project outcomes.</strong> What might happen under each option, and what assumptions support that judgment?</li><li><strong>Confront trade-offs.</strong> What does each option improve, and what does it give up?</li><li><strong>Decide.</strong> Which option does the evidence support?</li><li><strong>Tell the story.</strong> What does the intended audience need to understand?</li></ol><p>Use these as recurring questions. Projects can involve several steps together and return to earlier steps.</p></div><div class="card"><h3>A shared example and the next class</h3><ul>
+  <li>Introduce the eight steps through the life expectancy example. What policy problem do the trends suggest, and what evidence would help compare possible responses?</li>
+  <li>Preview Week 2: begin discussing your own project, define the problem, and try applying the steps. Start the short memo after that discussion.</li>
+</ul></div><div class="card"><h3>Short memos begin in Week 2</h3><p>Starting next week, discuss your own project and try using AI on one part of it. Begin a memo in class, continue the work afterward, and bring 1–2 observations back to the next discussion.</p></div>
+</section>
+<section data-hands="none">
+<h2 class="sec" id="wrap">Assignments and next steps</h2>
+<div class="card"><h3>Submission</h3><p>Nothing due. Installation, the first run, and an introduction to the eight steps happen in class. Bring a possible project problem to Week 2; no reading is assigned.</p></div><div class="card"><h3>Next step</h3><p>Week 2 begins with your own project idea and a basic problem definition. We will discuss it, try applying the steps, and begin the first short memo. <a href="week02.html">Week 2 page</a>.</p></div>
+</section>
 
   </main>
 
@@ -467,15 +407,16 @@
         <p>Open the terminal (Mac: Terminal; Windows: PowerShell) and run the line for your system.</p>
         <p>Mac:</p><div class="code">curl -fsSL https://claude.ai/install.sh | bash<span class="copy">copy</span></div>
         <p>Windows (PowerShell):</p><div class="code">irm https://claude.ai/install.ps1 | iex<span class="copy">copy</span></div>
+        <p><a href="https://code.claude.com/docs/en/setup">Official install instructions →</a></p>
       </div>
       <div class="exi">
         <span class="step">Step 2</span>
         <h4>Start it and sign in</h4>
-        <p>Type the tool's name and press Enter; it opens your browser to sign in.</p>
+        <p>Type <code>claude</code> and press Enter. It opens your browser so you can sign in.</p>
         <div class="code">claude<span class="copy">copy</span></div>
         <ul>
           <li>You are set when it prints a prompt and waits for you to type.</li>
-          <li>Raise your hand the moment a step fails; do not sit stuck for more than a few minutes.</li>
+          <li>Raise your hand the moment a step fails. Do not sit stuck for more than a few minutes.</li>
         </ul>
       </div>
       <a class="guidelink" href="setup_guide.html">Full setup guide: accounts, permission levels, and fixes →</a>
@@ -486,31 +427,45 @@
       <div class="exi">
         <span class="step">Step 1</span>
         <h4>Get the data</h4>
-        <p>Download the 311 file from Canvas (Week 1 → data) and put it in a new folder for this course.</p>
+        <p>Download the <a href="https://ourworldindata.org/grapher/life-expectancy.csv">Our World in Data life expectancy CSV</a> from the <a href="https://ourworldindata.org/grapher/life-expectancy">data page</a> and put it in a new folder for this course.</p>
         <div class="code">mkdir ai-policy
 cd ai-policy
 claude<span class="copy">copy</span></div>
       </div>
       <div class="exi">
         <span class="step">Step 2</span>
-        <h4>Hand it the instruction</h4>
-        <p>Paste the same instruction from the demo and watch the loop run:</p>
-        <div class="code">Using Python: load the 311 service-request file in this folder, clean the category and neighborhood fields, count requests by category and by neighborhood, and make one chart of the top complaint categories and one chart of requests by neighborhood. Save both as PNGs.<span class="copy">copy</span></div>
+        <h4>Send the prompt</h4>
+        <p>Paste the same prompt from the demo and watch the loop run:</p>
+        <div class="code">Using Python: load the life expectancy CSV in this folder and plot life expectancy from 2000 to 2023 for the United States, Canada, the United Kingdom, Germany, and Japan. Save the chart as a PNG. Also print the change since 2000 for each country and the gap between the United States and each of the others in 2023.<span class="copy">copy</span></div>
         <ul>
           <li>Let it write the code, run it, hit errors, and fix them.</li>
-          <li>Open the two PNGs at the end and ask: does this look right?</li>
+          <li>The first time it asks you to approve an action, read what it is asking to do before you answer.</li>
+          <li>Open the PNG at the end and ask: does this look right?</li>
+          <li>Check one plotted value against the Our World in Data page.</li>
         </ul>
       </div>
       <div class="exi">
-        <span class="step">Step 3 · if time</span>
-        <h4>Try a second dataset</h4>
-        <p>Pick another file from the portal links on Canvas (permits, inspections, or crime incidents) and write your own instruction for it.</p>
+        <span class="step">Step 3</span>
+        <h4>The same task in plan mode</h4>
+        <p>Press <strong>Shift+Tab</strong> until the footer shows plan mode, then send the prompt again:</p>
+        <div class="code">Using Python: load the life expectancy CSV in this folder and plot life expectancy from 2000 to 2023 for the United States, Canada, the United Kingdom, Germany, and Japan. Save the chart as a PNG. Also print the change since 2000 for each country and the gap between the United States and each of the others in 2023.<span class="copy">copy</span></div>
         <ul>
-          <li>Ask for something you actually want to know, not a copy of the 311 question.</li>
+          <li>The agent writes a plan and stops. Read it.</li>
+          <li>Name one choice in the plan you would have made differently, and tell the agent to change it.</li>
+          <li>Approve the plan and let it run.</li>
+        </ul>
+      </div>
+      <div class="exi">
+        <span class="step">Step 4 · if time</span>
+        <h4>Change the countries or the years</h4>
+        <p>Ask the agent to revise the same analysis:</p>
+        <div class="code">Redo the chart for France, Italy, South Korea, and the United States, and use the years 1990 to 2023.<span class="copy">copy</span></div>
+        <ul>
+          <li>Inspect the revised script and the new chart.</li>
           <li>Notice where the agent makes a choice you did not specify.</li>
         </ul>
       </div>
-      <div class="save">No account or setup still broken? Pair with a neighbor for this part, one machine and two people, and get your own fixed at office hours this week.</div>
+      <div class="save">If you have no account yet, or your setup is still broken, pair with a neighbor for this part: one machine, two people. Get your own setup fixed at office hours this week.</div>
     </div>
   </aside>
 
