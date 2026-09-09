@@ -22,7 +22,7 @@
   nav .days a{color:var(--muted);text-decoration:none;padding:3px 0;font-size:13px}
   nav .days a.cur{color:var(--fg);font-weight:700}
   nav .days span.off{color:#c8c7c2;padding:3px 0;font-size:13px}
-  nav .home{display:block;font-size:14px;font-weight:800;color:var(--fg);text-decoration:none;line-height:1.25;margin-bottom:18px}
+  nav .home{display:block;font-size:14px;font-weight:800;color:var(--fg);text-decoration:underline;text-underline-offset:3px;line-height:1.25;margin-bottom:18px}
   nav .home:hover{color:var(--accent)}
   nav .lbl{font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin:0 0 8px}
   nav .toc a{display:block;color:var(--fg);text-decoration:none;padding:6px 0 6px 12px;
@@ -32,6 +32,8 @@
   nav .toc .has{color:var(--ex);font-size:11px;margin-left:6px}
 
   main{padding:30px 32px 160px;min-width:0}
+  .course-back{margin:0 0 12px;font-size:14px}
+  .course-back a{color:var(--accent)}
   .kicker{font-size:13px;letter-spacing:.07em;text-transform:uppercase;color:var(--accent);font-weight:700;margin:0}
   h1{margin:4px 0 6px;font-size:32px}
   .goal{color:var(--muted);font-size:16px;margin:0 0 20px}
@@ -96,7 +98,7 @@
     .mhead{display:flex;align-items:center;justify-content:space-between;gap:12px;
            position:sticky;top:0;z-index:20;background:var(--bg);
            border-bottom:1px solid var(--line);padding:10px 16px}
-    .mtitle{font-size:14px;font-weight:800;color:var(--fg);text-decoration:none}
+    .mtitle{font-size:14px;font-weight:800;color:var(--fg);text-decoration:underline;text-underline-offset:3px}
     .mnav summary{list-style:none;cursor:pointer;font-size:13px;font-weight:700;color:var(--accent);
                   border:1px solid var(--line);border-radius:8px;padding:5px 12px;background:#fff}
     .mnav summary::-webkit-details-marker{display:none}
@@ -160,7 +162,7 @@
 
   <!-- ================= LEFT NAV ================= -->
   <nav>
-    <a class="home" href="week_mapping_12week.html">MPA 2479<br>Applied AI for Public Policy</a>
+    <a class="home" href="week_mapping_12week.html">&larr; MPA 2479<br>Applied AI for Public Policy</a>
     <div class="days">
       <div class="lbl">Weeks</div>
       <a href="week01.html" class="cur">1 · What an AI agent is</a>
@@ -188,8 +190,9 @@
 
   <!-- ================= CENTER CONTENT ================= -->
   <main>
+    <p class="course-back"><a href="week_mapping_12week.html">← 12-week course plan</a></p>
     <div class="mobilenote">You are on a small screen. This page is designed for a laptop, with three columns and hands-on steps appearing beside the content. On a phone it collapses to one column and the hands-on steps move to the end of the page. Reading here is fine; for the exercises you need your laptop anyway.</div>
-    <p class="kicker">Week 1 · Sept 10, 2026 · Thursday, 9:00–11:30 am</p>
+    <p class="kicker">Week 1 · Sept 10, 2026 · Thursday, 9:00–11:30 am · 280 Brook Street, Room 110</p>
     <h1>What an AI agent is</h1>
     <p class="byline" style="margin:2px 0 16px;color:var(--muted);font-size:15px">Page authors: <a href="https://hanzhang.xyz/">Han Zhang</a> and Codex (OpenAI)</p>
     <p class="goal">Set up an agentic AI tool and run a first policy-data task on your own computer. Analyze life expectancy data, make a chart, and check the results. Form an initial judgment about AI's usefulness across the eightfold path.</p>
@@ -198,7 +201,7 @@
     <section data-hands="none">
 <h2 class="sec" id="opening">Opening</h2>
 <div class="card"><h3>Setup and a first run</h3><ul>
-  <li>Install Claude Code using the setup guide, sign in, and open a project folder.</li>
+  <li>Install Codex or Claude Code using the setup guide, sign in, and open a project folder.</li>
   <li>Run a first policy-data task: read the life expectancy data, calculate comparisons, make a chart, and check the result.</li>
   <li>Learn how to direct a task and review a proposed plan.</li>
 </ul></div><div class="card"><h3>Work and discussion</h3><p>We introduce the eightfold path and use the life expectancy example to vote on where AI could help with policy analysis. We will return to these votes in Week 12. Your own project discussion begins in Week 2.</p></div><div class="card"><h3>The shared data task</h3><p>Weeks 1–3 use the <a href="https://ourworldindata.org/grapher/life-expectancy">Our World in Data life expectancy data</a>. Keep the data, script, and outputs between classes. In Week 3 you can practice configuration on these files while exploring your own project. Week 4 teaches data collection.</p></div><div class="card"><h3>Class format</h3><p>Start with a short demonstration, then set up the agentic AI tool and run the task yourself. After a break, discuss the eight policy-analysis steps and record the class vote.</p></div>
@@ -290,11 +293,31 @@
     <h2 class="sec" id="setup">Installation <span class="hastag">· do it on the right</span></h2>
 
     <div class="card">
+      <h3>GUI or terminal</h3>
+      <ul>
+        <li>Your agent has two forms on your computer. Both run on your machine and work on your own files. The difference is how you talk to it.</li>
+        <li><strong>App (GUI)</strong>: a normal window with a chat pane.
+          <ul>
+            <li>Strength: it installs like any other app, and everything is a click.</li>
+            <li>Weakness: it can only do what the window offers.</li>
+          </ul>
+        </li>
+        <li><strong>Terminal</strong>: the same agent, driven by typed commands.
+          <ul>
+            <li>Strength: it can do more complex work. Running the agent from a script, on a schedule, or on a server only works here.</li>
+            <li>Weakness: the first hour looks unfamiliar.</li>
+          </ul>
+        </li>
+        <li>Both forms run on the same models and read the same instructions files in your project folder. Only the window around the agent differs.</li>
+        <li>Either form works for this course. The steps on the right give the terminal commands first and the app steps after them.</li>
+      </ul>
+    </div>
+    <div class="card">
       <h3>What the terminal is</h3>
       <ul>
         <li>The terminal is a text interface to your computer: you type a command, it prints the result.</li>
         <li>On a Mac it is the app called <strong>Terminal</strong>; on Windows it is <strong>PowerShell</strong>.</li>
-        <li>The agent runs in the terminal because the terminal is where programs are run.</li>
+        <li>The terminal version of the agent runs there because the terminal is where programs are run.</li>
         <li>You need very little of it:
           <ul>
             <li><code>cd folder</code> moves into a folder,</li>
@@ -341,14 +364,27 @@
       <ul>
         <li>The run mode sets how much the agent does before it asks you:
           <ul>
-            <li><strong>Normal mode</strong>: the agent asks you to approve each action.</li>
-            <li><strong>Auto-accept mode</strong>: the agent runs the actions without asking.</li>
             <li><strong>Plan mode</strong>: the agent writes a plan and changes nothing until you approve or edit the plan.</li>
+            <li><strong>Ask-first mode</strong>: the agent asks you to approve each action.</li>
+            <li><strong>Auto-accept mode</strong>: the agent runs the actions without asking.</li>
           </ul>
         </li>
-        <li>You switch modes with Shift+Tab, and the footer shows the mode you are in.</li>
-        <li>Normal mode is the default for this course. Plan mode is for a task with real choices in it.</li>
+        <li>The mode names differ by tool:
+          <ul>
+            <li>Codex has three permission modes: Ask for approval (the default), Approve for me, and Full access. In the terminal, type <code>/permissions</code> to change the mode. Ask for a plan in the prompt when you want one before anything runs.</li>
+            <li>Claude Code in the terminal cycles plan mode, ask-first, and auto-accept with Shift+Tab, and the footer shows the mode you are in.</li>
+          </ul>
+        </li>
+        <li>The apps offer the same choice in their own interface:
+          <ul>
+            <li>In the ChatGPT desktop app and the Codex IDE extension, use the permissions control below the composer.</li>
+            <li>In the Claude Code desktop app you pick the permission mode in the selector next to the send button. The modes are Auto, Manual, Accept edits, and Plan.</li>
+          </ul>
+        </li>
+        <li>Ask-first mode is the default for this course. In the Claude Code desktop app that mode is called Manual. Plan mode is for a task with real choices in it.</li>
+        <li><a href="https://learn.chatgpt.com/codex/permission-modes">Codex documentation on permission modes →</a></li>
         <li><a href="https://code.claude.com/docs/en/common-workflows">Claude Code documentation on plan mode and permission modes →</a></li>
+        <li><a href="https://code.claude.com/docs/en/desktop-quickstart">Claude Code desktop app: choosing a permission mode →</a></li>
       </ul>
     </div>
     <div class="card">
@@ -397,23 +433,50 @@
     <div class="hands" data-for="setup">
       <div class="exi">
         <span class="step">Step 1</span>
-        <h4>Install Claude Code</h4>
+        <h4>Install Codex or Claude Code</h4>
+        <p>Either tool works. Codex is recommended because students can use it free; see the setup guide.</p>
+        <p>Each tool has a terminal version and an app version. Install one of them.</p>
+        <p><strong>Codex in the terminal</strong></p>
         <p>Open the terminal (Mac: Terminal; Windows: PowerShell) and run the line for your system.</p>
+        <p>Mac:</p><div class="code">curl -fsSL https://chatgpt.com/codex/install.sh | sh<span class="copy">copy</span></div>
+        <p>Windows (PowerShell):</p><div class="code">irm https://chatgpt.com/codex/install.ps1 | iex<span class="copy">copy</span></div>
+        <p><a href="https://developers.openai.com/codex/">Official Codex install instructions →</a></p>
+        <p><strong>Codex in an app</strong></p>
+        <ul>
+          <li>Codex app: download the ChatGPT app for Mac, Windows, or Linux. It includes Codex. <a href="https://learn.chatgpt.com/codex/app">Download page →</a></li>
+          <li>VS Code: install <a href="https://code.visualstudio.com/">VS Code</a>, open the Extensions panel on the left, search for <em>Codex</em>, and install the one published by OpenAI (id <code>openai.chatgpt</code>). A Codex icon appears in the sidebar. <a href="https://learn.chatgpt.com/codex/ide">Official IDE extension page →</a></li>
+          <li>Browser: sign in at <a href="https://chatgpt.com/codex">chatgpt.com/codex</a> and work there with no install.</li>
+        </ul>
+        <p><strong>Claude Code in the terminal</strong></p>
         <p>Mac:</p><div class="code">curl -fsSL https://claude.ai/install.sh | bash<span class="copy">copy</span></div>
         <p>Windows (PowerShell):</p><div class="code">irm https://claude.ai/install.ps1 | iex<span class="copy">copy</span></div>
-        <p><a href="https://code.claude.com/docs/en/setup">Official install instructions →</a></p>
+        <p><a href="https://code.claude.com/docs/en/setup">Official Claude Code install instructions →</a></p>
+        <p><strong>Claude Code in an app</strong></p>
+        <ul>
+          <li>Desktop app: download the installer for <a href="https://claude.ai/api/desktop/darwin/universal/dmg/latest/redirect">macOS</a> or <a href="https://claude.ai/api/desktop/win32/x64/setup/latest/redirect">Windows</a> and run it. The app includes Claude Code, so you do not need the terminal version too. A paid Claude subscription is required. <a href="https://code.claude.com/docs/en/desktop-quickstart">Official desktop app page →</a></li>
+          <li>Browser: sign in at <a href="https://claude.ai/code">claude.ai/code</a> and work there with no install.</li>
+        </ul>
       </div>
       <div class="exi">
         <span class="step">Step 2</span>
         <h4>Start it and sign in</h4>
-        <p>Type <code>claude</code> and press Enter. It opens your browser so you can sign in.</p>
-        <div class="code">claude<span class="copy">copy</span></div>
+        <p><strong>In the terminal</strong></p>
+        <p>Type the tool's name and press Enter. It opens your browser so you can sign in.</p>
+        <p>Codex:</p><div class="code">codex<span class="copy">copy</span></div>
+        <p>Claude Code:</p><div class="code">claude<span class="copy">copy</span></div>
+        <p><strong>In an app</strong></p>
         <ul>
-          <li>You are set when it prints a prompt and waits for you to type.</li>
+          <li>Codex app: open the app and sign in with your ChatGPT account.</li>
+          <li>VS Code: click the Codex icon in the sidebar and sign in with your ChatGPT account.</li>
+          <li>Claude Code desktop app: launch Claude, sign in with your Anthropic account, then click the <strong>Code</strong> tab at the top center.</li>
+        </ul>
+        <ul>
+          <li>You are set when the tool waits for you to type.</li>
           <li>Raise your hand the moment a step fails. Do not sit stuck for more than a few minutes.</li>
         </ul>
       </div>
-      <a class="guidelink" href="setup_guide.html">Full setup guide: accounts, permission levels, and fixes →</a>
+      <p><a class="guidelink" href="codex_setup_guide.html">Codex setup guide: free student credits, install, and fixes →</a></p>
+      <p><a class="guidelink" href="setup_guide.html">Setup guide for both tools: accounts, permission levels, and fixes →</a></p>
     </div>
 
     <!-- redo -->
@@ -422,9 +485,20 @@
         <span class="step">Step 1</span>
         <h4>Get the data</h4>
         <p>Download the <a href="https://ourworldindata.org/grapher/life-expectancy.csv">Our World in Data life expectancy CSV</a> from the <a href="https://ourworldindata.org/grapher/life-expectancy">data page</a> and put it in a new folder for this course.</p>
+        <p><strong>In the terminal</strong></p>
+        <p>Make the folder and move into it.</p>
         <div class="code">mkdir ai-policy
-cd ai-policy
-claude<span class="copy">copy</span></div>
+cd ai-policy<span class="copy">copy</span></div>
+        <p>Then start your tool in that folder.</p>
+        <p>Codex:</p><div class="code">codex<span class="copy">copy</span></div>
+        <p>Claude Code:</p><div class="code">claude<span class="copy">copy</span></div>
+        <p><strong>In an app</strong></p>
+        <p>Make the folder in Finder or File Explorer, then point the app at it.</p>
+        <ul>
+          <li>Codex app: open the folder from the app, so Codex can use the files in it. <a href="https://learn.chatgpt.com/codex/app">Documentation →</a></li>
+          <li>VS Code: open the folder in VS Code, then click the Codex icon in the sidebar.</li>
+          <li>Claude Code desktop app: in the <strong>Code</strong> tab, select <strong>Local</strong>, click <strong>Select folder</strong>, and choose the folder. <a href="https://code.claude.com/docs/en/desktop-quickstart">Documentation →</a></li>
+        </ul>
       </div>
       <div class="exi">
         <span class="step">Step 2</span>
@@ -441,7 +515,13 @@ claude<span class="copy">copy</span></div>
       <div class="exi">
         <span class="step">Step 3</span>
         <h4>The same task in plan mode</h4>
-        <p>Press <strong>Shift+Tab</strong> until the footer shows plan mode, then send the prompt again:</p>
+        <p>Switch to plan mode, then send the prompt again.</p>
+        <ul>
+          <li>Codex in the terminal: type <code>/permissions</code> and choose Ask for approval, then ask for the plan first in the prompt.</li>
+          <li>Codex in the ChatGPT desktop app: type <code>/plan</code>. <a href="https://learn.chatgpt.com/codex/permission-modes">Documentation →</a></li>
+          <li>Claude Code in the terminal: press <strong>Shift+Tab</strong> until the footer shows plan mode.</li>
+          <li>Claude Code in the desktop app: choose <strong>Plan</strong> in the permission mode selector next to the send button.</li>
+        </ul>
         <div class="code">Using Python: load the life expectancy CSV in this folder and plot life expectancy from 2000 to 2023 for the United States, Canada, the United Kingdom, Germany, and Japan. Save the chart as a PNG. Also print the change since 2000 for each country and the gap between the United States and each of the others in 2023.<span class="copy">copy</span></div>
         <ul>
           <li>The agent writes a plan and stops. Read it.</li>

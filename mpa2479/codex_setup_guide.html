@@ -298,7 +298,7 @@
     <span class="links">
       <a class="link" href="#account">access</a>
       <a class="link" href="#install">install</a>
-      <a class="link" href="#graphical">point &amp; click</a>
+      <a class="link" href="#graphical">the app</a>
       <a class="link" href="#levels">permissions</a>
       <a class="link" href="#first">first task</a>
       <a class="link" href="#stuck">stuck?</a>
@@ -352,7 +352,7 @@
             <td class="no">— none</td><td class="no">— you run it</td><td>your browser</td>
           </tr>
           <tr>
-            <td class="who">Codex, on your laptop<small>terminal or editor</small></td>
+            <td class="who">Codex, on your laptop<small>terminal or app</small></td>
             <td class="yes">✓ reads &amp; edits</td><td class="yes">✓ runs &amp; checks</td><td>your machine</td>
           </tr>
           <tr>
@@ -362,7 +362,7 @@
         </tbody>
       </table>
     </div>
-    <p class="cap">This guide sets up the middle row — Codex on your own laptop — and shows the other two as alternatives.</p>
+    <p class="cap">This guide sets up the middle row — Codex on your own laptop, in the terminal or in the app — and describes the other two rows.</p>
   </div>
 </section>
 
@@ -390,8 +390,8 @@
 <section id="install">
   <div class="wrap">
     <p class="sec-num">03 — Install</p>
-    <h2>The main way: Codex in the terminal</h2>
-    <p class="sub">The terminal is a plain text window where you type one line, press Enter, and the computer does it. It is already on your machine. You only need it to start Codex; after that you talk in plain English.</p>
+    <h2>Codex in the terminal</h2>
+    <p class="sub">Codex comes in two forms, the terminal program and the app, and either one works for this course. This section installs the terminal program; the next section installs the app. The terminal is a plain text window where you type one line, press Enter, and the computer does it. It is already on your machine. You only need it to start Codex; after that you talk in plain English.</p>
 
     <div class="tabs" role="tablist" aria-label="Choose your operating system">
       <button class="tab" role="tab" id="tab-mac" aria-selected="true" aria-controls="panel-mac">macOS</button>
@@ -493,9 +493,9 @@
 <!-- 4. Graphical -->
 <section id="graphical">
   <div class="wrap">
-    <p class="sec-num">04 — Alternatives</p>
-    <h2>If you would rather point and click</h2>
-    <p class="sub">The terminal is the main tool for this course, but the same Codex comes in two graphical forms. They follow a different logic — you click instead of type — so try them if the terminal is not for you.</p>
+    <p class="sec-num">04 — The app</p>
+    <h2>Codex in an app</h2>
+    <p class="sub">The same Codex comes in two app forms. You click instead of type, and the tasks in this course work the same way in either. Pick the form you prefer.</p>
 
     <h3>In your editor (VS Code)</h3>
     <p>This keeps your files in a sidebar and Codex in a panel beside them; changes are highlighted in the code and you approve them with a click.</p>
@@ -545,38 +545,38 @@
 <section id="levels">
   <div class="wrap">
     <p class="sec-num">05 — Staying in control</p>
-    <h2>The three permission levels</h2>
-    <p class="sub">Codex runs at one of three levels. You set it when you start, or change it mid-session from the approvals menu. The question behind all three: how much would you let a brand-new assistant do unsupervised?</p>
+    <h2>The three permission modes</h2>
+    <p class="sub">Codex runs in one of three permission modes. You set it when you start, or change it mid-session with the <code class="k">/permissions</code> command (<a class="inline" href="https://learn.chatgpt.com/codex/permission-modes" target="_blank" rel="noopener">OpenAI's permission modes page</a>). In the ChatGPT desktop app and the IDE extension, use the permissions control below the composer. The question behind all three: how much would you let a brand-new assistant do unsupervised?</p>
     <div class="levels">
       <div class="lv read">
         <div class="stripe"></div>
         <div class="body">
-          <p class="name">Read Only</p>
-          <p class="tagl">looks, never changes</p>
-          <p>Reads your files and answers questions, but edits nothing and runs nothing.</p>
-          <p class="best"><b>Best for</b> exploring unfamiliar code, or thinking through a plan first.</p>
+          <p class="name">Ask for approval <span style="font-weight:400;color:var(--ink-3);font-size:11px;">· default</span></p>
+          <p class="tagl">asks before it acts</p>
+          <p>Reads your files and answers questions. It asks you before every edit and every command.</p>
+          <p class="best"><b>Best for</b> exploring unfamiliar code, or reading the plan first. Start here.</p>
         </div>
       </div>
       <div class="lv auto">
         <div class="stripe"></div>
         <div class="body">
-          <p class="name">Auto <span style="font-weight:400;color:var(--ink-3);font-size:11px;">· default</span></p>
+          <p class="name">Approve for me</p>
           <p class="tagl">acts inside your folder</p>
           <p>Edits and runs inside your project without asking each time, but stops before touching the network or anything outside it.</p>
-          <p class="best"><b>Best for</b> everyday work on your own project. Start here.</p>
+          <p class="best"><b>Best for</b> everyday work on your own project once you trust it.</p>
         </div>
       </div>
       <div class="lv full">
         <div class="stripe"></div>
         <div class="body">
-          <p class="name">Full Access</p>
+          <p class="name">Full access</p>
           <p class="tagl">no guardrails</p>
           <p>Edits, runs, and reaches the network with no approval prompts. Powerful and easy to regret.</p>
           <p class="best"><b>Best for</b> rare, trusted tasks — and only when you know why you need it.</p>
         </div>
       </div>
     </div>
-    <p class="cap">Everyday default is Auto. When in doubt, drop to Read Only and read the plan first.</p>
+    <p class="cap">The default is Ask for approval. Move to Approve for me once you trust the agent on your own project.</p>
   </div>
 </section>
 
@@ -585,7 +585,7 @@
   <div class="wrap">
     <p class="sec-num">06 — Try it</p>
     <h2>Your first task</h2>
-    <p class="sub">Do not save it for a real project. Point it at a small folder you do not mind experimenting on, and ask for something concrete.</p>
+    <p class="sub">Do not save it for a real project. Point it at a small folder you do not mind experimenting on, and ask for something concrete. In the app, open the same folder and give the same request.</p>
     <div class="term">
       <div class="term-bar"><i></i><i></i><i></i><span>codex — your-project</span></div>
 <pre><span class="p">$ </span><span class="u">cd my-first-project</span>

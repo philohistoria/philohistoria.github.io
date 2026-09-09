@@ -227,7 +227,7 @@
   <div class="wrap">
     <p class="sec-num">02 — Pick a tool</p>
     <h2>Two agents, either one works</h2>
-    <p class="sub">Both run in your terminal and do the same job. This course does not require a specific one, so pick by what you can access, then use it all week.</p>
+    <p class="sub">Both do the same job. Each comes as a terminal program and as an app, and either form works. This course does not require a specific one, so pick by what you can access, then use it all week.</p>
     <div class="tools2">
       <div class="toolcard cc">
         <div class="top"></div>
@@ -273,7 +273,9 @@
   <div class="wrap">
     <p class="sec-num">03 — Install</p>
     <h2>Install it</h2>
-    <p class="sub">One line installs the tool, with nothing else needed. Choose your operating system, then run the line for the tool you picked.</p>
+    <p class="sub">There are two ways to install, and either one works: the terminal program or the app. The terminal install comes first, the app install after it.</p>
+    <h3>The terminal program</h3>
+    <p>One line installs the tool, with nothing else needed. Choose your operating system, then run the line for the tool you picked.</p>
 
     <div class="tabs" role="tablist" aria-label="Choose your operating system">
       <button class="tab" role="tab" id="tab-mac" aria-selected="true" aria-controls="panel-mac">macOS</button>
@@ -336,6 +338,35 @@
       </ol>
     </div>
 
+    <h3>The app</h3>
+    <p>Codex comes as an extension inside the VS Code editor, and Claude Code comes as a desktop app. Both open a project folder and take the same requests in plain English.</p>
+    <div class="cmdlabel cx">Codex</div>
+    <ol class="steps">
+      <li>
+        <div class="st-h">Install VS Code</div>
+        <p>Download it from <a class="inline" href="https://code.visualstudio.com" target="_blank" rel="noopener">code.visualstudio.com</a>. It is the same on Mac and Windows.</p>
+      </li>
+      <li>
+        <div class="st-h">Add the Codex extension</div>
+        <p>Open the Extensions panel on the left, search for <em>Codex</em>, and install the one published by OpenAI (id <code class="k">openai.chatgpt</code>). A Codex icon appears in the sidebar.</p>
+      </li>
+      <li>
+        <div class="st-h">Sign in</div>
+        <p>Click <strong>Continue with ChatGPT</strong>, using the same account as before. Then open your project folder and give it the same prompt you would type in the terminal.</p>
+      </li>
+    </ol>
+    <div class="cmdlabel cc">Claude Code</div>
+    <ol class="steps">
+      <li>
+        <div class="st-h">Download the desktop app</div>
+        <p>Get the Mac or Windows installer from the <a class="inline" href="https://code.claude.com/docs/en/desktop" target="_blank" rel="noopener">Claude Code desktop app page</a>. The app includes Claude Code, so installing the app is enough on its own.</p>
+      </li>
+      <li>
+        <div class="st-h">Sign in and open a project</div>
+        <p>Launch the app, sign in with your Anthropic account, and open your project folder. Give it the same prompt you would type in the terminal.</p>
+      </li>
+    </ol>
+
     <div class="note">
       <span class="tag">If you have seen "npm install" online</span>
       <p>Older guides install either tool with npm, which first needs Node.js. You do not need that path; both one-line installers above are self-contained and get you the same tool.</p>
@@ -354,6 +385,7 @@
         <thead><tr><th>Version</th><th>Runs on</th></tr></thead>
         <tbody>
           <tr><td class="who">Terminal (command line)</td><td class="yes">your computer</td></tr>
+          <tr><td class="who">Desktop app · Mac &amp; Windows</td><td class="yes">your computer</td></tr>
           <tr><td class="who">Web · claude.ai/code</td><td class="mid">the cloud</td></tr>
         </tbody>
       </table>
@@ -364,6 +396,7 @@
         <thead><tr><th>Version</th><th>Runs on</th></tr></thead>
         <tbody>
           <tr><td class="who">Terminal (command line)</td><td class="yes">your computer</td></tr>
+          <tr><td class="who">VS Code extension</td><td class="yes">your computer</td></tr>
           <tr><td class="who">Codex Cloud · chatgpt.com/codex</td><td class="mid">the cloud</td></tr>
         </tbody>
       </table>
@@ -385,13 +418,13 @@
       <div class="lv c"><div class="stripe"></div><div class="body"><p class="name">Auto-Accept</p><p>Same as Normal without the prompts. For trusted, repeat tasks.</p></div></div>
     </div>
 
-    <div class="toolhdr cx"><span class="dot"></span> Codex &nbsp;<span style="font-weight:400;color:var(--ink-3);font-size:13px;font-family:var(--mono)">set at launch or from the approvals menu</span></div>
+    <div class="toolhdr cx"><span class="dot"></span> Codex &nbsp;<span style="font-weight:400;color:var(--ink-3);font-size:13px;font-family:var(--mono)">set at launch or with the /permissions command</span></div>
     <div class="levels">
-      <div class="lv a"><div class="stripe"></div><div class="body"><p class="name">Read Only</p><p>Reads and answers; changes nothing. Good for exploring or planning.</p></div></div>
-      <div class="lv b"><div class="stripe"></div><div class="body"><p class="name">Auto · default</p><p>Edits and runs in your folder without asking; stops at the network.</p></div></div>
-      <div class="lv c"><div class="stripe"></div><div class="body"><p class="name">Full Access</p><p>Edits, runs, and reaches the network with no prompts. Rarely, with care.</p></div></div>
+      <div class="lv a"><div class="stripe"></div><div class="body"><p class="name">Ask for approval · default</p><p>Reads and answers; asks before every edit or command. Good for exploring or planning.</p></div></div>
+      <div class="lv b"><div class="stripe"></div><div class="body"><p class="name">Approve for me</p><p>Edits and runs in your folder without asking; stops at the network.</p></div></div>
+      <div class="lv c"><div class="stripe"></div><div class="body"><p class="name">Full access</p><p>Edits, runs, and reaches the network with no prompts. Rarely, with care.</p></div></div>
     </div>
-    <p class="cap">Start in the middle level for everyday work, and drop to look-only when you want to read the plan first.</p>
+    <p class="cap">Start in Ask for approval, and move to Approve for me for everyday work once you trust the agent. The apps offer the same levels in their own interface; see the <a class="inline" href="https://learn.chatgpt.com/codex/agent-approvals-security" target="_blank" rel="noopener">Codex approvals docs</a> and the <a class="inline" href="https://code.claude.com/docs/en/desktop" target="_blank" rel="noopener">Claude Code desktop app docs</a>.</p>
   </div>
 </section>
 
@@ -399,7 +432,7 @@
   <div class="wrap">
     <p class="sec-num">06 — Try it</p>
     <h2>Your first task</h2>
-    <p class="sub">Point it at a small folder you do not mind experimenting on, and ask for something concrete. Move into the folder, start the tool, and type your request.</p>
+    <p class="sub">Point it at a small folder you do not mind experimenting on, and ask for something concrete. In the terminal, move into the folder, start the tool, and type your request. In the app, open the same folder and give the same request.</p>
     <div class="term">
       <div class="term-bar"><i></i><i></i><i></i><span>your-project</span></div>
 <pre><span class="p">$ </span><span class="u">cd my-first-project</span>
