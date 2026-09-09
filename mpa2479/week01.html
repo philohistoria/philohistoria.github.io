@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
+<meta name="author" content="Han Zhang; Codex (OpenAI)">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Week 1: What an AI Agent Is</title>
 <style>
@@ -140,7 +141,7 @@
       <a href="week04.html">4 · AI for data collection</a>
       <a href="week05.html">5 · AI for data coding and model choice</a>
       <a href="week06.html">6 · AI for visualization and publishing</a>
-      <a href="week07.html">7 · Hallucination and algorithmic bias</a>
+      <a href="week07.html">7 · Algorithmic bias</a>
       <a href="week08.html">8 · Auditing a federal AI system</a>
       <a href="week09.html">9 · Designing your final project</a>
       <a href="week10.html">10 · AI governance</a>
@@ -148,12 +149,10 @@
       <a href="week12.html">12 · Final presentations</a>
       <p class="mlbl">On this page</p>
       <a href="#opening">Opening</a>
-      <a href="#reading">Preparation</a>
       <a href="#concept">What an AI agent is</a>
       <a href="#setup">Installation</a>
       <a href="#redo">The first run</a>
-      <a href="#project-discussion">Project discussion and short memo</a>
-      <a href="#wrap">Assignments and next steps</a>
+      <a href="#project-discussion">Project and policy discussion</a>
     </div>
   </details>
 </div>
@@ -170,7 +169,7 @@
       <a href="week04.html">4 · AI for data collection</a>
       <a href="week05.html">5 · AI for data coding and model choice</a>
       <a href="week06.html">6 · AI for visualization and publishing</a>
-      <a href="week07.html">7 · Hallucination and algorithmic bias</a>
+      <a href="week07.html">7 · Algorithmic bias</a>
       <a href="week08.html">8 · Auditing a federal AI system</a>
       <a href="week09.html">9 · Designing your final project</a>
       <a href="week10.html">10 · AI governance</a>
@@ -180,21 +179,19 @@
     <div class="lbl">Today</div>
     <div class="toc">
       <a href="#opening">Opening</a>
-      <a href="#reading">Preparation</a>
       <a href="#concept">What an AI agent is</a>
       <a href="#setup">Installation <span class="has">hands-on</span></a>
       <a href="#redo">The first run <span class="has">hands-on</span></a>
-      <a href="#project-discussion">Project discussion and short memo</a>
-      <a href="#wrap">Assignments and next steps</a>
+      <a href="#project-discussion">Project and policy discussion</a>
     </div>
   </nav>
 
   <!-- ================= CENTER CONTENT ================= -->
   <main>
     <div class="mobilenote">You are on a small screen. This page is designed for a laptop, with three columns and hands-on steps appearing beside the content. On a phone it collapses to one column and the hands-on steps move to the end of the page. Reading here is fine; for the exercises you need your laptop anyway.</div>
-    <p class="kicker">Week 1 · Sept 10, 2026 · Thursday, 9:00–11:30 am · Getting started</p>
+    <p class="kicker">Week 1 · Sept 10, 2026 · Thursday, 9:00–11:30 am</p>
     <h1>What an AI agent is</h1>
-    <p class="byline" style="margin:2px 0 16px;color:var(--muted);font-size:15px">Han Zhang · page drafted with Claude (Anthropic)</p>
+    <p class="byline" style="margin:2px 0 16px;color:var(--muted);font-size:15px">Page authors: <a href="https://hanzhang.xyz/">Han Zhang</a> and Codex (OpenAI)</p>
     <p class="goal">Recognize the eight steps of policy analysis and use a small data task to identify where AI might contribute. Prepare to discuss your own project in Week 2.</p>
 
     <!-- OPENING -->
@@ -203,18 +200,12 @@
 <div class="card"><h3>Today</h3><ul>
   <li>Follow an agent through one small policy-data task: read a file, write and run code, inspect the result, and revise it.</li>
   <li>Learn how to direct a task and review a proposed plan.</li>
-  <li>Install the tool using the setup guide; learn where the project files and outputs live.</li>
-</ul></div><div class="card"><h3>Work and discussion</h3><p>Use the hands-on task to develop an actual result or question. We introduce all eight steps in class and preview how you will use them for your own project from Week 2. The eightfold path is a framework we revisit as projects develop.</p></div><div class="card"><h3>The shared data task</h3><p>Weeks 1–3 use the <a href="https://ourworldindata.org/grapher/life-expectancy">Our World in Data life expectancy data</a>. Keep the data, script, and outputs between classes. In Week 3 you can practice configuration on these files while exploring your own project. Week 4 teaches data collection.</p></div><div class="card"><h3>Class format</h3><p>A typical session uses 10 minutes for previous observations, 25 for tool teaching and guided use, 75 for practice including a 10-minute break, 30 for project discussion, and 10 to record next steps. We adjust the balance to the task.</p></div>
+  <li>Install Claude Code using the setup guide; learn where the project files and outputs live.</li>
+</ul></div><div class="card"><h3>Work and discussion</h3><p>Use the hands-on task to develop an actual result or question. We introduce all eight steps in class and preview how you will use them for your own project from Week 2. The eightfold path is a framework we revisit as projects develop.</p></div><div class="card"><h3>The shared data task</h3><p>Weeks 1–3 use the <a href="https://ourworldindata.org/grapher/life-expectancy">Our World in Data life expectancy data</a>. Keep the data, script, and outputs between classes. In Week 3 you can practice configuration on these files while exploring your own project. Week 4 teaches data collection.</p></div><div class="card"><h3>Class format</h3><p>A typical session uses 10 minutes for previous observations, 25 for demonstration and guided use of agentic AI tools, 75 for practice including a 10-minute break, 30 for project discussion, and 10 to record next steps. We adjust the balance to the task.</p></div>
 </section>
 
     <!-- READING DISCUSSION -->
-    <section data-hands="none">
-<h2 class="sec" id="reading">Preparation</h2>
-<div class="card"><h3>Materials for this week</h3><ul>
-  <li>No reading assigned for Week 1 or Week 2. We introduce the eightfold path in class.</li>
-  <li>Keep the shared data and your first script. Bring one possible policy problem to discuss in Week 2.</li>
-</ul></div>
-</section>
+
 
     <!-- CONCEPT -->
     <section data-hands="none">
@@ -383,13 +374,10 @@
 <h2 class="sec" id="project-discussion">Project and policy discussion</h2>
 <div class="card"><h3>The eightfold path</h3><ol><li><strong>Define the problem.</strong> What is happening, to whom, and why does it call for a policy response?</li><li><strong>Assemble evidence.</strong> What do we know, and what evidence is missing?</li><li><strong>Construct alternatives.</strong> What policy options could the decision-maker choose?</li><li><strong>Select criteria.</strong> How should we compare those options?</li><li><strong>Project outcomes.</strong> What might happen under each option, and what assumptions support that judgment?</li><li><strong>Confront trade-offs.</strong> What does each option improve, and what does it give up?</li><li><strong>Decide.</strong> Which option does the evidence support?</li><li><strong>Tell the story.</strong> What does the intended audience need to understand?</li></ol><p>Use these as recurring questions. Projects can involve several steps together and return to earlier steps.</p></div><div class="card"><h3>A shared example and the next class</h3><ul>
   <li>Introduce the eight steps through the life expectancy example. What policy problem do the trends suggest, and what evidence would help compare possible responses?</li>
-  <li>Preview Week 2: begin discussing your own project, define the problem, and try applying the steps. Start the short memo after that discussion.</li>
-</ul></div><div class="card"><h3>Short memos begin in Week 2</h3><p>Starting next week, discuss your own project and try using AI on one part of it. Begin a memo in class, continue the work afterward, and bring 1–2 observations back to the next discussion.</p></div>
+  <li>In <a href="week02.html">Week 2</a>, begin discussing your own project, define the problem, and try applying the steps. Start the short memo after that discussion.</li>
+</ul></div>
 </section>
-<section data-hands="none">
-<h2 class="sec" id="wrap">Assignments and next steps</h2>
-<div class="card"><h3>Submission</h3><p>Nothing due. Installation, the first run, and an introduction to the eight steps happen in class. Bring a possible project problem to Week 2; no reading is assigned.</p></div><div class="card"><h3>Next step</h3><p>Week 2 begins with your own project idea and a basic problem definition. We will discuss it, try applying the steps, and begin the first short memo. <a href="week02.html">Week 2 page</a>.</p></div>
-</section>
+
 
   </main>
 
