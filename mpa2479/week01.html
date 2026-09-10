@@ -279,13 +279,16 @@
       <ul><li>Take away any one of the three, and the system falls back to a chatbot.</li></ul>
     </div>
     <div class="card">
-      <h3>Confident wrong answers</h3>
+      <h3>The model can be wrong</h3>
       <ul>
-        <li>These models are built to sound fluent.</li>
-        <li>Fluent language can still be wrong.</li>
-        <li>The dangerous case is an answer that is wrong and stated with confidence. A fabricated statistic in a policy memo looks exactly like a real one.</li>
-        <li>So you check every result the agent gives you, every time.</li>
-        <li>The rule for the semester: <strong>an unverified number never goes into a memo.</strong></li>
+        <li>The model is probabilistic. It can make errors, and it can fabricate a number, a source, or a result. This is called hallucination.</li>
+        <li>So, three rules for the semester:
+          <ul>
+            <li>Check the data source. Open the file or the page the number came from.</li>
+            <li>Check the intermediate outputs. Keep the script that produced the chart, and rerun it. Do not judge from the chart alone.</li>
+            <li>You are responsible for the result. The agent is not.</li>
+          </ul>
+        </li>
       </ul>
     </div>
     </section>
@@ -432,7 +435,7 @@
 <h2 class="sec" id="next">Next class</h2>
 <div class="card"><h3>Before <a href="week02.html">Week 2</a></h3><ul>
   <li>Define a policy problem you want to work on.</li>
-  <li>Treat it as the problem your final project will answer.</li>
+  <li>Treat it as the problem your final project will answer. The final project is a policy product, either a decision memo or a web page or app. Whichever form, it follows the eight steps.</li>
   <li>Bring it to class. We discuss it in class.</li>
   <li>Before then, use the agent as much as you can: on the life expectancy data, on your own problem, on anything. Note what worked and what did not.</li>
 </ul></div>
