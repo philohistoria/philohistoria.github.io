@@ -1,0 +1,474 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Week 6: AI for Visualization and Publishing</title>
+<style>
+  :root{
+    --bg:#fcfcfb; --fg:#1c1c1a; --muted:#6b6b66; --line:#e6e5e1;
+    --accent:#2f5d8a; --accent-weak:#eaf0f5; --ex:#b5651d; --ex-weak:#fbf1e7;
+    --code-bg:#f4f5f3; --card:#fff;
+    --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--sans)}
+  .layout{display:grid;grid-template-columns:180px minmax(0,1fr) 360px;max-width:1320px;margin:0 auto}
+  nav{position:sticky;top:0;align-self:start;height:100vh;overflow:auto;
+      padding:26px 14px;border-right:1px solid var(--line);font-size:14px}
+  nav .days{display:flex;flex-direction:column;gap:2px;margin-bottom:22px}
+  nav .days a{color:var(--muted);text-decoration:none;padding:3px 0;font-size:13px}
+  nav .days a.cur{color:var(--fg);font-weight:700}
+  nav .days span.off{color:#c8c7c2;padding:3px 0;font-size:13px}
+  nav .home{display:block;font-size:14px;font-weight:800;color:var(--fg);text-decoration:none;line-height:1.25;margin-bottom:18px}
+  nav .home:hover{color:var(--accent)}
+  nav .lbl{font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin:0 0 8px}
+  nav .toc a{display:block;color:var(--fg);text-decoration:none;padding:6px 0 6px 12px;
+             border-left:2px solid transparent;margin-left:-2px}
+  nav .toc a:hover{color:var(--accent)}
+  nav .toc a.active{color:var(--accent);border-left-color:var(--accent);font-weight:600}
+  nav .toc .has{color:var(--ex);font-size:11px;margin-left:6px}
+  main{padding:30px 32px 160px;min-width:0}
+  .course-back{margin:0 0 12px;font-size:14px}
+  .course-back a{color:var(--accent)}
+  .kicker{font-size:13px;letter-spacing:.07em;text-transform:uppercase;color:var(--accent);font-weight:700;margin:0}
+  h1{margin:4px 0 6px;font-size:32px}
+  .goal{color:var(--muted);font-size:16px;margin:0 0 20px}
+  h2.sec{font-size:28px;font-weight:700;color:var(--fg);line-height:1.2;
+         margin:52px 0 12px;padding-top:22px;border-top:1px solid var(--line)}
+  h2.sec .hastag{color:var(--ex);font-weight:600;font-size:14px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:14px;
+        padding:20px 24px;margin:16px 0;box-shadow:0 1px 2px rgba(0,0,0,.03)}
+  .card h3{margin:0 0 12px;font-size:21px;line-height:1.25}
+  .card ul{list-style:none;padding:0;margin:0}
+  .card li{font-size:17px;line-height:1.45;padding:9px 0 9px 26px;position:relative;border-top:1px solid var(--line)}
+  .card li:first-child{border-top:0}
+  .card li::before{content:"";position:absolute;left:4px;top:17px;width:8px;height:8px;border-radius:50%;background:var(--accent)}
+  .card ul ul{margin:6px 0 0}
+  .card li li{font-size:15px;padding:5px 0 5px 24px;border-top:0;color:var(--muted)}
+  .card li li::before{width:5px;height:5px;top:14px;background:var(--muted)}
+  .card.demo{border-left:4px solid var(--accent)}
+  .card.demo .tag{display:inline-block;font-size:12px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;
+                  color:var(--accent);margin-bottom:8px}
+  .card.read{border-left:4px solid #7a5ea6}
+  .card.read .tag{display:inline-block;font-size:12px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;
+                  color:#7a5ea6;margin-bottom:8px}
+  .quote{background:var(--code-bg);border-left:3px solid var(--accent);border-radius:0 8px 8px 0;
+         padding:12px 16px;margin:12px 0;font-style:italic;line-height:1.5}
+  code{background:var(--code-bg);padding:1px 5px;border-radius:4px;font-family:ui-monospace,Menlo,monospace;font-size:.85em}
+  strong{color:#111}
+  table{border-collapse:collapse;width:100%;margin:10px 0;font-size:16px}
+  th,td{border:1px solid var(--line);padding:8px 12px;text-align:left}
+  th{background:var(--accent-weak);font-size:14px}
+  .src{font-size:13px;color:var(--muted)} .src a{color:var(--accent)}
+  aside{position:sticky;top:0;align-self:start;height:100vh;overflow:auto;
+        border-left:1px solid var(--line);padding:26px 18px 60px;background:#fbfaf8}
+  aside .railhead{font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--ex)}
+  .hands{display:none} .hands.on{display:block}
+  .exi{border:1px solid #e8d3ba;background:var(--ex-weak);border-radius:10px;margin:10px 0;padding:12px 14px}
+  .exi .step{display:inline-block;font-size:10px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;
+             color:#fff;background:var(--ex);border-radius:20px;padding:2px 9px;margin-bottom:8px}
+  .exi h4{margin:0 0 6px;font-size:15px}
+  .exi ul{margin:6px 0;padding-left:18px;font-size:13.5px;line-height:1.5}
+  .exi li{margin:4px 0}
+  .exi p{font-size:13.5px;line-height:1.5;margin:6px 0}
+  .save{font-size:13px;color:var(--muted);background:#fff;border:1px solid var(--line);
+        border-radius:8px;padding:9px 12px;margin:10px 0}
+  .code{position:relative;background:#fff;border:1px solid #e8d3ba;border-radius:8px;
+        padding:9px 34px 9px 11px;font-family:ui-monospace,Menlo,monospace;font-size:12px;
+        white-space:pre-wrap;margin:8px 0;line-height:1.45}
+  .code .copy{position:absolute;top:6px;right:6px;font-size:10px;border:1px solid #e8d3ba;
+              background:#fff;border-radius:6px;padding:2px 7px;cursor:pointer;color:var(--ex)}
+  .guidelink{display:inline-block;margin-top:6px;font-size:13px;color:var(--ex);font-weight:600}
+    .mobilenote{display:none}
+  .mhead{display:none}
+  /* ---- tablet: two columns, top menu ---- */
+  @media(max-width:1080px){
+    .layout{grid-template-columns:minmax(0,1fr) 340px}
+    nav{display:none}
+    .mhead{display:flex;align-items:center;justify-content:space-between;gap:12px;
+           position:sticky;top:0;z-index:20;background:var(--bg);
+           border-bottom:1px solid var(--line);padding:10px 16px}
+    .mtitle{font-size:14px;font-weight:800;color:var(--fg);text-decoration:none}
+    .mnav summary{list-style:none;cursor:pointer;font-size:13px;font-weight:700;color:var(--accent);
+                  border:1px solid var(--line);border-radius:8px;padding:5px 12px;background:#fff}
+    .mnav summary::-webkit-details-marker{display:none}
+    .mnav{position:relative}
+    .mnav-box{position:absolute;right:0;top:36px;min-width:240px;background:#fff;
+              border:1px solid var(--line);border-radius:12px;box-shadow:0 8px 24px rgba(0,0,0,.10);
+              padding:10px 14px;z-index:30}
+    .mnav-box a{display:block;color:var(--fg);text-decoration:none;font-size:14px;padding:6px 0}
+    .mnav-box a:hover{color:var(--accent)}
+    .mlbl{font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin:8px 0 2px}
+    main{padding:20px 20px 120px}
+    h1{font-size:27px}
+    h2.sec{font-size:24px}
+    table{display:block;overflow-x:auto}
+  }
+  /* ---- phone: single column ---- */
+  @media(max-width:740px){
+    .layout{grid-template-columns:1fr}
+    main{padding:16px 14px 60px}
+    .mobilenote{display:block;background:var(--accent-weak);border:1px solid var(--line);
+                border-radius:10px;padding:10px 14px;margin:0 0 18px;font-size:13.5px;
+                line-height:1.5;color:var(--fg)}
+    h1{font-size:25px}
+    .card{padding:16px 16px}
+    .card li{font-size:16px}
+    aside{position:static;height:auto;border-left:0;border-top:1px solid var(--line)}
+    .hands{display:block !important;border-top:1px solid var(--line);padding-top:10px;margin-top:10px}
+    .hands[data-for="none"]{display:none !important}
+  }
+</style>
+</head>
+<body>
+<div class="mhead">
+  <a class="mtitle" href="week_mapping_12week.html">Applied AI for Public Policy</a>
+  <details class="mnav">
+    <summary>Menu</summary>
+    <div class="mnav-box">
+      <p class="mlbl">Weeks</p>
+      <a href="week01.html">1 · What an AI agent is</a>
+      <a href="week02.html">2 · Setting up and configuring the agent</a>
+      <a href="week03.html">3 · Starting the group project</a>
+      <a href="week04.html">4 · AI for data collection</a>
+      <a href="week05.html">5 · AI for data coding and model choice</a>
+      <a href="week06.html">6 · AI for visualization and publishing</a>
+      <a href="week07.html">7 · Algorithmic bias</a>
+      <a href="week08.html">8 · Auditing a federal AI system</a>
+      <a href="week09.html">9 · Designing your final project</a>
+      <a href="week10.html">10 · AI governance</a>
+      <a href="week11.html">11 · Code review and replication</a>
+      <a href="week12.html">12 · Final presentations</a>
+      <p class="mlbl">On this page</p>
+      <a href="#opening">Opening</a>
+      <a href="#charts">Charts for a non-technical reader</a>
+      <a href="#page">The results page</a>
+      <a href="#claims">Hallucination and source checks</a>
+      <a href="#deploy">Publishing on GitHub Pages</a>
+      <a href="#brief">Preliminary results</a>
+      <a href="#project-discussion">Project and policy discussion</a>
+      <a href="#wrap">Assignments and next steps</a>
+    </div>
+  </details>
+</div>
+<div class="layout">
+
+  <!-- ================= LEFT NAV ================= -->
+  <nav>
+    <a class="home" href="week_mapping_12week.html">MPA 2479<br>Applied AI for Public Policy</a>
+    <div class="days">
+      <div class="lbl">Weeks</div>
+      <a href="week01.html">1 · What an AI agent is</a>
+      <a href="week02.html">2 · Setting up and configuring the agent</a>
+      <a href="week03.html">3 · Starting the group project</a>
+      <a href="week04.html">4 · AI for data collection</a>
+      <a href="week05.html">5 · AI for data coding and model choice</a>
+      <a href="week06.html" class="cur">6 · AI for visualization and publishing</a>
+      <a href="week07.html">7 · Algorithmic bias</a>
+      <a href="week08.html">8 · Auditing a federal AI system</a>
+      <a href="week09.html">9 · Designing your final project</a>
+      <a href="week10.html">10 · AI governance</a>
+      <a href="week11.html">11 · Code review and replication</a>
+      <a href="week12.html">12 · Final presentations</a>
+    </div>
+    <div class="lbl">Today</div>
+    <div class="toc">
+      <a href="#opening">Opening</a>
+      <a href="#charts">Charts for a non-technical reader <span class="has">hands-on</span></a>
+      <a href="#page">The results page <span class="has">hands-on</span></a>
+      <a href="#claims">Hallucination and source checks <span class="has">hands-on</span></a>
+      <a href="#deploy">Publishing on GitHub Pages <span class="has">hands-on</span></a>
+      <a href="#brief">Preliminary results</a>
+      <a href="#project-discussion">Project and policy discussion</a>
+      <a href="#wrap">Assignments and next steps</a>
+    </div>
+  </nav>
+
+  <!-- ================= CENTER CONTENT ================= -->
+  <main>
+    <p class="course-back"><a href="week_mapping_12week.html">← 12-week course plan</a></p>
+    <div class="mobilenote">You are on a small screen. This page is designed for a laptop, with three columns and hands-on steps appearing beside the content. On a phone it collapses to one column and the hands-on steps move to the end of the page. Reading here is fine; for the exercises you need your laptop anyway.</div>
+    <p class="kicker">Week 6 · Oct 22, 2026 · Thursday, 9:00–11:30 am · 280 Brook Street, Room 110</p>
+    <h1>AI for visualization and publishing</h1>
+    <p class="byline" style="margin:2px 0 16px;color:var(--muted);font-size:15px">Authors: <a href="https://hanzhang.xyz/">Han Zhang</a> and Codex (OpenAI)</p>
+    <p class="goal">Produce a checked finding for a specific reader and explain its relevance to the policy choices being considered.</p>
+
+    <!-- OPENING -->
+    <section data-hands="none">
+<h2 class="sec" id="opening">Opening</h2>
+<div class="card"><h3>Today</h3><ul>
+  <li>Analyze the collected data and choose a figure that answers a specific question.</li>
+  <li>Recognize hallucination in AI-generated explanations. Check figures, captions, and source claims against the evidence.</li>
+  <li>Use the agent to build an HTML results page and publish it.</li>
+</ul></div><div class="card"><h3>Work and discussion</h3><p>Use the hands-on task to develop an actual result or question. We will discuss findings, alternatives, and communication. The eightfold path is a framework we revisit as projects develop.</p></div><div class="card"><h3>Class format</h3><p>A typical session uses 10 minutes for previous observations, 25 for demonstration and guided use of agentic AI tools, 75 for practice including a 10-minute break, 30 for project discussion, and 10 to record next steps. We adjust the balance to the task.</p></div>
+</section>
+
+    <!-- READING -->
+
+
+    <!-- CHARTS -->
+    <section data-hands="charts">
+    <h2 class="sec" id="charts">Charts for a non-technical reader <span class="hastag">· do it on the right</span></h2>
+    <div class="card">
+      <h3>The chart and the script</h3>
+      <ul>
+        <li>The chart is written by a script in <code>scripts/</code> and saved to <code>output/</code>.</li>
+        <li>Rerun the script to rebuild the chart from the current data.</li>
+        <li>Never edit a chart by hand in an image editor. A hand-edited chart cannot be reproduced.</li>
+        <li>Give your intended reader three things:
+          <ul>
+            <li>axes with units, so the numbers have meaning,</li>
+            <li>a caption in plain language saying what the chart shows,</li>
+            <li>the source and the date of the data.</li>
+          </ul>
+        </li>
+        <li>Ask the agent for the chart, then read the script it wrote. The choices are in the script: which rows were dropped, how categories were merged, what the denominator is.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>What you are charting</h3>
+      <ul>
+        <li>Use your project data, the <a href="https://ourworldindata.org/grapher/life-expectancy">Our World in Data life expectancy series</a>, or the Federal Register records you collected in Week 4.</li>
+        <li>If your Week 5 measure came from your own text, use that measure too.</li>
+        <li>One figure, with a caption in plain language stating the finding and the audience.</li>
+        <li>If you use a coded measure, explain its source and what the Week 5 evaluation established about its errors.</li>
+      </ul>
+    </div>
+    </section>
+
+    <!-- PAGE -->
+    <section data-hands="page">
+    <h2 class="sec" id="page">The results page <span class="hastag">· do it on the right</span></h2>
+    <div class="card">
+      <h3>An HTML results page</h3>
+      <ul>
+        <li>The build is one HTML page presenting this week's analysis. It has three parts:
+          <ul>
+            <li>your policy question, in one sentence,</li>
+            <li>one figure or one table taken from your pipeline's output,</li>
+            <li>one sentence saying what you found.</li>
+          </ul>
+        </li>
+        <li>Commit the page with the scripts and figure in your GitHub repository.</li>
+        <li>The figure on the page is the file the script wrote. Do not paste a screenshot.</li>
+        <li>If you finish early:
+          <ul>
+            <li>add one control that filters the chart, such as a geography selector or a year slider,</li>
+            <li>then add a second page for a second result, with a link between the two pages.</li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+    <div class="card demo">
+      <span class="tag">Live demo</span>
+      <h3>From a script to a page</h3>
+      <ul>
+        <li>Start in a mode that changes nothing, so the layout is agreed before anything is written.</li>
+        <li>Codex in the terminal: type <code>/permissions</code> and choose Ask for approval, then ask for the plan first in the prompt. Claude Code in the terminal: press Shift+Tab until the footer shows plan mode.</li>
+        <li>In the ChatGPT desktop app and the Codex IDE extension, use the permissions control below the composer, or type <code>/plan</code> in the desktop app.</li>
+        <li>In the Claude Code desktop app, choose the mode in the permission mode selector next to the send button. The options are Auto, Manual, Accept edits, and Plan.</li>
+        <li class="src">Codex IDE extension: <a href="https://developers.openai.com/codex/ide">developers.openai.com/codex/ide</a> · course <a href="codex_setup_guide.html">Codex setup guide</a></li>
+        <li class="src">Claude Code desktop app: <a href="https://code.claude.com/docs/en/desktop-quickstart">code.claude.com/docs/en/desktop-quickstart</a></li>
+      </ul>
+      <div class="quote">Propose a plan for a single HTML page in output/ that states one policy question, shows the chart file the script wrote, and ends with one sentence of findings. Tell me which files you will create.</div>
+      <ul>
+        <li>Read the plan. Check that the page reads the chart the script produced, and does not redraw it from numbers typed into the page.</li>
+        <li>Approve it, let it run, then open the file in a browser.</li>
+        <li>Commit the page and the chart together, so the version that produced the figure is recorded.</li>
+      </ul>
+    </div>
+    </section>
+
+    <section data-hands="claims">
+    <h2 class="sec" id="claims">Hallucination and source checks <span class="hastag">· do it on the right</span></h2>
+    <div class="card"><h3>Check the explanation before publishing</h3><ul>
+      <li><strong>Hallucination</strong> is AI-generated content that is false or unsupported by the available evidence. A fluent explanation can misstate a number, invent a source, or add a claim the analysis never tested.</li>
+      <li>Choose two claims from the agent’s explanation or caption. Trace each one to script output or an original source.</li>
+      <li>Check the year, units, denominator, and meaning of the claim. For a citation, open the source and locate the relevant passage.</li>
+      <li>Record whether the evidence supports the claim, contradicts it, or leaves it unresolved. Revise the explanation before it goes on the page.</li>
+    </ul></div>
+    </section>
+
+    <!-- DEPLOY -->
+    <section data-hands="deploy">
+    <h2 class="sec" id="deploy">Publishing on GitHub Pages <span class="hastag">· do it on the right</span></h2>
+    <div class="card">
+      <h3>From a page to a public URL</h3>
+      <ul>
+        <li>GitHub Pages publishes your HTML results page at a web address.</li>
+        <li>Anyone with the address can open the page. No login and no account are needed to read it.</li>
+        <li>Check the files that will be published. If you make the GitHub repository public, also review its tracked files and history.</li>
+        <li>Record the public link in the README of your GitHub repository.</li>
+        <li><a href="https://docs.github.com/en/pages/getting-started-with-github-pages/creating-a-github-pages-site">GitHub documentation on creating a GitHub Pages site &rarr;</a></li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>What the URL is for</h3>
+      <ul>
+        <li>A reader can inspect evidence that is published at an address they can open. The URL is where that inspection happens for your project.</li>
+        <li>The product you write next cites the page, so the reader can see the figure without you sending them a file.</li>
+        <li>Exchange addresses with another group and give each other feedback on the page in class.</li>
+        <li>Use the figure and explanation to develop the first version of your group’s policy product.</li>
+      </ul>
+    </div>
+    </section>
+
+    <!-- BRIEF -->
+    <section data-hands="none">
+<h2 class="sec" id="brief">Preliminary results</h2>
+<div class="card"><h3>From the exercise to the policy product</h3><ul>
+  <li>Use the HTML exercise to practice presenting a checked finding to a specific reader.</li>
+  <li>For your group project, develop a first product from the group’s own question, evidence, and intended audience.</li>
+  <li>Explain which policy alternatives the finding informs and what further evidence you need.</li>
+</ul></div>
+</section>
+
+    <!-- WRAP -->
+    <section data-hands="none">
+<h2 class="sec" id="project-discussion">Project and policy discussion</h2>
+<div class="card"><h3>Findings, alternatives, and communication</h3><ul>
+  <li>What does the result establish? What remains unresolved?</li>
+  <li>Which policy alternatives or evaluation criteria does it inform? What additional evidence would you need to project their outcomes?</li>
+  <li>Did AI help you analyze or communicate the result? Show a concrete example.</li>
+</ul></div>
+</section>
+<section data-hands="none">
+<h2 class="sec" id="wrap">Assignments and next steps</h2>
+<div class="card"><h3>Checkpoint 3: preliminary results · 5% · group</h3>
+<ul><li>One script-produced figure and the finding it supports.</li><li>A first version of the group’s policy product in the group GitHub repository.</li></ul>
+<p><b>Due Oct 29 before class.</b></p><p><b>Weekly memo · due Oct 29 before class.</b> Write 1–2 observations from your project or the class exercise: the policy-analysis step you attempted, how AI helped or fell short, and what you would do next. Aim for 150–200 words total. Describe what you actually tried and observed in your own words. Do not use AI to write the memo. Begin in class and submit to Canvas Discussions. See <a href="week_mapping_12week.html#assessment">assignments and grading</a>.</p></div>
+<p><a href="week07.html">Week 7 &rarr;</a></p>
+</section>
+
+  </main>
+
+  <!-- ================= RIGHT CONTEXTUAL HANDS-ON ================= -->
+  <aside>
+    <p class="railhead" id="railhead">Hands-on</p>
+    <div class="hands" data-for="none"></div>
+
+    <!-- charts -->
+    <div class="hands" data-for="charts">
+      <div class="exi">
+        <span class="step">Step 1</span>
+        <h4>Analyze your data</h4>
+        <p>Work in the local copy of your GitHub repository. Use project data, the life expectancy series, or the Federal Register records. Start in a mode that changes nothing.</p>
+        <ul>
+          <li>Codex in the terminal: type <code>/permissions</code> and choose Ask for approval. Claude Code in the terminal: press Shift+Tab until the footer shows plan mode.</li>
+          <li>In the ChatGPT desktop app and the Codex IDE extension, use the permissions control below the composer before you send the prompt.</li>
+          <li>In the Claude Code desktop app, choose Plan in the permission mode selector next to the send button.</li>
+        </ul>
+        <div class="code">Look at the files in data/ and the script that produced them. Propose an analysis that answers my policy question. State the time window, which rows you will drop, and what the denominator is.<span class="copy">copy</span></div>
+        <ul>
+          <li>Read the plan and change one choice you disagree with.</li>
+          <li>Approve it, then let the agent run it.</li>
+        </ul>
+      </div>
+      <div class="exi">
+        <span class="step">Step 2</span>
+        <h4>A chart with a caption</h4>
+        <div class="code">Write a script in scripts/ that produces one figure answering our policy question and saves it to output/. Label the axes with units. Print a caption based on the output. Additional charts are an extension.<span class="copy">copy</span></div>
+        <ul>
+          <li>Read the script before you look at the charts.</li>
+          <li>Rerun the script from a clean session and check the charts are rebuilt.</li>
+          <li>Commit the script and the charts.</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- page -->
+    <div class="hands" data-for="page">
+      <div class="exi">
+        <span class="step">Step 1</span>
+        <h4>Build the results page</h4>
+        <p>Build one HTML page with a question, a figure, and a short explanation of the finding.</p>
+        <div class="code">Create output/index.html. It states my policy question in one sentence at the top, shows one figure from output/, and ends with one sentence saying what I found. Use the image file the script wrote; do not redraw the chart.<span class="copy">copy</span></div>
+        <ul>
+          <li>Open the file in a browser and read it as a stranger would.</li>
+          <li>Fix the question sentence yourself if it is not what you mean.</li>
+          <li>Commit the page.</li>
+        </ul>
+      </div>
+      <div class="exi">
+        <span class="step">Step 2 · if you finish early</span>
+        <h4>One control, then a second page</h4>
+        <div class="code">Add one control to the page that filters the chart, either a geography selector or a year slider. Then create a second page for a second result, and put a link between the two pages.<span class="copy">copy</span></div>
+        <ul>
+          <li>Check that the filtered chart still matches the script's output.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="hands" data-for="claims">
+      <div class="exi"><span class="step">Step 1</span><h4>Choose two claims</h4>
+        <div class="code">List the factual claims in the explanation and caption on output/index.html. For each, give the file location and the source it cites.<span class="copy">copy</span></div>
+        <p>Choose two claims that matter to the finding.</p>
+      </div>
+      <div class="exi"><span class="step">Step 2</span><h4>Trace and revise</h4>
+        <div class="code">Trace these two claims to the script output or an original source. Rerun the relevant calculation when needed. Make a table with the claim, source location, evidence, and proposed revision. Flag missing evidence.<span class="copy">copy</span></div>
+        <ul><li>Open the source or output yourself and check the agent’s comparison.</li><li>Correct inaccurate wording and remove unsupported claims. Save the check with your work and update the HTML page before publishing.</li></ul>
+      </div>
+    </div>
+
+    <!-- deploy -->
+    <div class="hands" data-for="deploy">
+      <div class="exi">
+        <span class="step">Step 1</span>
+        <h4>Review the publication files</h4>
+        <div class="code">List every file in the tracked history. Tell me which ones contain data, and whether any of them should not be public.<span class="copy">copy</span></div>
+        <ul>
+          <li>If restricted data is tracked, stop and come find me before publishing.</li>
+        </ul>
+      </div>
+      <div class="exi">
+        <span class="step">Step 2</span>
+        <h4>Turn on GitHub Pages</h4>
+        <p>Follow the official steps for the GitHub repository settings:</p>
+        <p><a href="https://docs.github.com/en/pages/getting-started-with-github-pages/creating-a-github-pages-site">GitHub documentation on creating a GitHub Pages site &rarr;</a></p>
+        <ul>
+          <li>Open the address in a browser window where you are logged out.</li>
+          <li>Send the address to a neighbor and have them open it.</li>
+        </ul>
+      </div>
+      <div class="exi">
+        <span class="step">Step 3</span>
+        <h4>Record the link</h4>
+        <div class="code">Add the public URL to the README, with one line saying what the page shows and which script produced the figure. Then commit.<span class="copy">copy</span></div>
+      </div>
+      <div class="save">Add the working page link to the README of your GitHub repository.</div>
+    </div>
+  </aside>
+
+</div>
+
+<script>
+  const sections=[...document.querySelectorAll('main section')];
+  const panels=[...document.querySelectorAll('.hands')];
+  const railhead=document.getElementById('railhead');
+  function show(key){
+    panels.forEach(p=>p.classList.toggle('on',p.dataset.for===key));
+    railhead.style.display = key==='none' ? 'none' : '';
+  }
+  addEventListener('scroll',()=>{
+    let cur=sections[0];
+    sections.forEach(s=>{const t=s.getBoundingClientRect().top; if(t<window.innerHeight*0.35) cur=s;});
+    show(cur.dataset.hands);
+  },{passive:true});
+  show('none');
+  const links=[...document.querySelectorAll('.toc a')];
+  addEventListener('scroll',()=>{
+    let cur=null;
+    links.forEach(a=>{const el=document.querySelector(a.getAttribute('href'));
+      if(el && el.getBoundingClientRect().top<140)cur=a;});
+    links.forEach(a=>a.classList.toggle('active',a===cur));
+  },{passive:true});
+  document.addEventListener('click',e=>{
+    if(!e.target.classList.contains('copy'))return;
+    const x=e.target.parentNode.childNodes[0].textContent.trim();
+    navigator.clipboard.writeText(x).then(()=>{e.target.textContent='copied';
+      setTimeout(()=>e.target.textContent='copy',1200);});
+  });
+</script>
+</body>
+</html>

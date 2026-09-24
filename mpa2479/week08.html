@@ -1,0 +1,440 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Week 8: Auditing a Federal AI System</title>
+<style>
+  :root{
+    --bg:#fcfcfb; --fg:#1c1c1a; --muted:#6b6b66; --line:#e6e5e1;
+    --accent:#2f5d8a; --accent-weak:#eaf0f5; --ex:#b5651d; --ex-weak:#fbf1e7;
+    --code-bg:#f4f5f3; --card:#fff;
+    --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--sans)}
+  .layout{display:grid;grid-template-columns:180px minmax(0,1fr) 360px;max-width:1320px;margin:0 auto}
+  nav{position:sticky;top:0;align-self:start;height:100vh;overflow:auto;
+      padding:26px 14px;border-right:1px solid var(--line);font-size:14px}
+  nav .days{display:flex;flex-direction:column;gap:2px;margin-bottom:22px}
+  nav .days a{color:var(--muted);text-decoration:none;padding:3px 0;font-size:13px}
+  nav .days a.cur{color:var(--fg);font-weight:700}
+  nav .days span.off{color:#c8c7c2;padding:3px 0;font-size:13px}
+  nav .home{display:block;font-size:14px;font-weight:800;color:var(--fg);text-decoration:none;line-height:1.25;margin-bottom:18px}
+  nav .home:hover{color:var(--accent)}
+  nav .lbl{font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin:0 0 8px}
+  nav .toc a{display:block;color:var(--fg);text-decoration:none;padding:6px 0 6px 12px;
+             border-left:2px solid transparent;margin-left:-2px}
+  nav .toc a:hover{color:var(--accent)}
+  nav .toc a.active{color:var(--accent);border-left-color:var(--accent);font-weight:600}
+  nav .toc .has{color:var(--ex);font-size:11px;margin-left:6px}
+  main{padding:30px 32px 160px;min-width:0}
+  .course-back{margin:0 0 12px;font-size:14px}
+  .course-back a{color:var(--accent)}
+  .kicker{font-size:13px;letter-spacing:.07em;text-transform:uppercase;color:var(--accent);font-weight:700;margin:0}
+  h1{margin:4px 0 6px;font-size:32px}
+  .goal{color:var(--muted);font-size:16px;margin:0 0 20px}
+  h2.sec{font-size:28px;font-weight:700;color:var(--fg);line-height:1.2;
+         margin:52px 0 12px;padding-top:22px;border-top:1px solid var(--line)}
+  h2.sec .hastag{color:var(--ex);font-weight:600;font-size:14px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:14px;
+        padding:20px 24px;margin:16px 0;box-shadow:0 1px 2px rgba(0,0,0,.03)}
+  .card h3{margin:0 0 12px;font-size:21px;line-height:1.25}
+  .card ul{list-style:none;padding:0;margin:0}
+  .card li{font-size:17px;line-height:1.45;padding:9px 0 9px 26px;position:relative;border-top:1px solid var(--line)}
+  .card li:first-child{border-top:0}
+  .card li::before{content:"";position:absolute;left:4px;top:17px;width:8px;height:8px;border-radius:50%;background:var(--accent)}
+  .card ul ul{margin:6px 0 0}
+  .card li li{font-size:15px;padding:5px 0 5px 24px;border-top:0;color:var(--muted)}
+  .card li li::before{width:5px;height:5px;top:14px;background:var(--muted)}
+  .card.demo{border-left:4px solid var(--accent)}
+  .card.demo .tag{display:inline-block;font-size:12px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;
+                  color:var(--accent);margin-bottom:8px}
+  .card.read{border-left:4px solid #7a5ea6}
+  .card.read .tag{display:inline-block;font-size:12px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;
+                  color:#7a5ea6;margin-bottom:8px}
+  .quote{background:var(--code-bg);border-left:3px solid var(--accent);border-radius:0 8px 8px 0;
+         padding:12px 16px;margin:12px 0;font-style:italic;line-height:1.5}
+  code{background:var(--code-bg);padding:1px 5px;border-radius:4px;font-family:ui-monospace,Menlo,monospace;font-size:.85em}
+  strong{color:#111}
+  table{border-collapse:collapse;width:100%;margin:10px 0;font-size:16px}
+  th,td{border:1px solid var(--line);padding:8px 12px;text-align:left}
+  th{background:var(--accent-weak);font-size:14px}
+  .src{font-size:13px;color:var(--muted)} .src a{color:var(--accent)}
+  aside{position:sticky;top:0;align-self:start;height:100vh;overflow:auto;
+        border-left:1px solid var(--line);padding:26px 18px 60px;background:#fbfaf8}
+  aside .railhead{font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--ex)}
+  .hands{display:none} .hands.on{display:block}
+  .exi{border:1px solid #e8d3ba;background:var(--ex-weak);border-radius:10px;margin:10px 0;padding:12px 14px}
+  .exi .step{display:inline-block;font-size:10px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;
+             color:#fff;background:var(--ex);border-radius:20px;padding:2px 9px;margin-bottom:8px}
+  .exi h4{margin:0 0 6px;font-size:15px}
+  .exi ul{margin:6px 0;padding-left:18px;font-size:13.5px;line-height:1.5}
+  .exi li{margin:4px 0}
+  .exi p{font-size:13.5px;line-height:1.5;margin:6px 0}
+  .save{font-size:13px;color:var(--muted);background:#fff;border:1px solid var(--line);
+        border-radius:8px;padding:9px 12px;margin:10px 0}
+  .code{position:relative;background:#fff;border:1px solid #e8d3ba;border-radius:8px;
+        padding:9px 34px 9px 11px;font-family:ui-monospace,Menlo,monospace;font-size:12px;
+        white-space:pre-wrap;margin:8px 0;line-height:1.45}
+  .code .copy{position:absolute;top:6px;right:6px;font-size:10px;border:1px solid #e8d3ba;
+              background:#fff;border-radius:6px;padding:2px 7px;cursor:pointer;color:var(--ex)}
+  .guidelink{display:inline-block;margin-top:6px;font-size:13px;color:var(--ex);font-weight:600}
+    .mobilenote{display:none}
+  .mhead{display:none}
+  /* ---- tablet: two columns, top menu ---- */
+  @media(max-width:1080px){
+    .layout{grid-template-columns:minmax(0,1fr) 340px}
+    nav{display:none}
+    .mhead{display:flex;align-items:center;justify-content:space-between;gap:12px;
+           position:sticky;top:0;z-index:20;background:var(--bg);
+           border-bottom:1px solid var(--line);padding:10px 16px}
+    .mtitle{font-size:14px;font-weight:800;color:var(--fg);text-decoration:none}
+    .mnav summary{list-style:none;cursor:pointer;font-size:13px;font-weight:700;color:var(--accent);
+                  border:1px solid var(--line);border-radius:8px;padding:5px 12px;background:#fff}
+    .mnav summary::-webkit-details-marker{display:none}
+    .mnav{position:relative}
+    .mnav-box{position:absolute;right:0;top:36px;min-width:240px;background:#fff;
+              border:1px solid var(--line);border-radius:12px;box-shadow:0 8px 24px rgba(0,0,0,.10);
+              padding:10px 14px;z-index:30}
+    .mnav-box a{display:block;color:var(--fg);text-decoration:none;font-size:14px;padding:6px 0}
+    .mnav-box a:hover{color:var(--accent)}
+    .mlbl{font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin:8px 0 2px}
+    main{padding:20px 20px 120px}
+    h1{font-size:27px}
+    h2.sec{font-size:24px}
+    table{display:block;overflow-x:auto}
+  }
+  /* ---- phone: single column ---- */
+  @media(max-width:740px){
+    .layout{grid-template-columns:1fr}
+    main{padding:16px 14px 60px}
+    .mobilenote{display:block;background:var(--accent-weak);border:1px solid var(--line);
+                border-radius:10px;padding:10px 14px;margin:0 0 18px;font-size:13.5px;
+                line-height:1.5;color:var(--fg)}
+    h1{font-size:25px}
+    .card{padding:16px 16px}
+    .card li{font-size:16px}
+    aside{position:static;height:auto;border-left:0;border-top:1px solid var(--line)}
+    .hands{display:block !important;border-top:1px solid var(--line);padding-top:10px;margin-top:10px}
+    .hands[data-for="none"]{display:none !important}
+  }
+</style>
+</head>
+<body>
+<div class="mhead">
+  <a class="mtitle" href="week_mapping_12week.html">Applied AI for Public Policy</a>
+  <details class="mnav">
+    <summary>Menu</summary>
+    <div class="mnav-box">
+      <p class="mlbl">Weeks</p>
+      <a href="week01.html">1 · What an AI agent is</a>
+      <a href="week02.html">2 · Setting up and configuring the agent</a>
+      <a href="week03.html">3 · Starting the group project</a>
+      <a href="week04.html">4 · AI for data collection</a>
+      <a href="week05.html">5 · AI for data coding and model choice</a>
+      <a href="week06.html">6 · AI for visualization and publishing</a>
+      <a href="week07.html">7 · Algorithmic bias</a>
+      <a href="week08.html">8 · Auditing a federal AI system</a>
+      <a href="week09.html">9 · Designing your final project</a>
+      <a href="week10.html">10 · AI governance</a>
+      <a href="week11.html">11 · Code review and replication</a>
+      <a href="week12.html">12 · Final presentations</a>
+      <p class="mlbl">On this page</p>
+      <a href="#opening">Opening</a>
+      <a href="#reading">Readings</a>
+      <a href="#inventory">The federal AI use-case inventory</a>
+      <a href="#score">Scoring a federal system</a>
+      <a href="#jigsaw">Scorecard discussion</a>
+      <a href="#debates">Debate groups</a>
+      <a href="#project-discussion">Project and policy discussion</a>
+      <a href="#wrap">Assignments and next steps</a>
+    </div>
+  </details>
+</div>
+<div class="layout">
+
+  <!-- ================= LEFT NAV ================= -->
+  <nav>
+    <a class="home" href="week_mapping_12week.html">MPA 2479<br>Applied AI for Public Policy</a>
+    <div class="days">
+      <div class="lbl">Weeks</div>
+      <a href="week01.html">1 · What an AI agent is</a>
+      <a href="week02.html">2 · Setting up and configuring the agent</a>
+      <a href="week03.html">3 · Starting the group project</a>
+      <a href="week04.html">4 · AI for data collection</a>
+      <a href="week05.html">5 · AI for data coding and model choice</a>
+      <a href="week06.html">6 · AI for visualization and publishing</a>
+      <a href="week07.html">7 · Algorithmic bias</a>
+      <a href="week08.html" class="cur">8 · Auditing a federal AI system</a>
+      <a href="week09.html">9 · Designing your final project</a>
+      <a href="week10.html">10 · AI governance</a>
+      <a href="week11.html">11 · Code review and replication</a>
+      <a href="week12.html">12 · Final presentations</a>
+    </div>
+    <div class="lbl">Today</div>
+    <div class="toc">
+      <a href="#opening">Opening</a>
+      <a href="#reading">Readings</a>
+      <a href="#inventory">The federal AI use-case inventory <span class="has">hands-on</span></a>
+      <a href="#score">Scoring a federal system <span class="has">hands-on</span></a>
+      <a href="#jigsaw">Scorecard discussion</a>
+      <a href="#debates">Debate groups <span class="has">hands-on</span></a>
+      <a href="#project-discussion">Project and policy discussion</a>
+      <a href="#wrap">Assignments and next steps</a>
+    </div>
+  </nav>
+
+  <!-- ================= CENTER CONTENT ================= -->
+  <main>
+    <p class="course-back"><a href="week_mapping_12week.html">← 12-week course plan</a></p>
+    <div class="mobilenote">You are on a small screen. This page is designed for a laptop, with three columns and hands-on steps appearing beside the content. On a phone it collapses to one column and the hands-on steps move to the end of the page. Reading here is fine; for the exercises you need your laptop anyway.</div>
+    <p class="kicker">Week 8 · Nov 5, 2026 · Thursday, 9:00–11:30 am · 280 Brook Street, Room 110</p>
+    <h1>Auditing a federal AI system</h1>
+    <p class="byline" style="margin:2px 0 16px;color:var(--muted);font-size:15px">Authors: <a href="https://hanzhang.xyz/">Han Zhang</a> and Codex (OpenAI)</p>
+    <p class="goal">Assess a documented government AI case and explain which judgments the available evidence permits.</p>
+
+    <!-- OPENING -->
+    <section data-hands="none">
+<h2 class="sec" id="opening">Opening</h2>
+<div class="card"><h3>Today</h3><ul>
+  <li>Apply the collection and checking skills to a government AI case.</li>
+  <li>Read <a href="https://github.com/ombegov/2025-Federal-Agency-AI-Use-Case-Inventory">OMB's 2025 AI use-case inventory</a> alongside the April 2025 M-25-21 requirements.</li>
+  <li>Assess documented practices and identify information still needed to judge a system.</li>
+</ul></div><div class="card"><h3>Work and discussion</h3><p>Use the hands-on task to develop an actual result or question. We will discuss government AI: criteria and alternatives. The eightfold path is a framework we revisit as projects develop.</p></div><div class="card"><h3>Class format</h3><p>A typical session uses 10 minutes for previous observations, 25 for demonstration and guided use of agentic AI tools, 75 for practice including a 10-minute break, 30 for project discussion, and 10 to record next steps. We adjust the balance to the task.</p></div>
+</section>
+
+    <!-- READING -->
+    <section data-hands="none">
+<h2 class="sec" id="reading">Readings</h2>
+<div class="card"><h3>Assigned readings</h3><ul>
+  <li><a href="https://www.whitehouse.gov/wp-content/uploads/2025/02/M-25-21-Accelerating-Federal-Use-of-AI-through-Innovation-Governance-and-Public-Trust.pdf">OMB M-25-21 (April 2025)</a>, high-impact AI definition and minimum risk-management practices.</li>
+  <li>Engstrom, Ho, Sharkey &amp; Cuéllar, <a href="https://law.stanford.edu/wp-content/uploads/2020/02/ACUS-AI-Report.pdf"><i>Government by Algorithm</i> (2020)</a>, pp. 6–20.</li>
+</ul></div>
+</section>
+
+    <!-- INVENTORY -->
+    <section data-hands="inventory">
+    <h2 class="sec" id="inventory">The federal AI use-case inventory <span class="hastag">· do it on the right</span></h2>
+    <div class="card">
+      <h3>The government publishes a list of its own AI uses</h3>
+      <ul>
+        <li>OMB’s 2025 inventory consolidates agency reports of AI use cases into <a href="https://github.com/ombegov/2025-Federal-Agency-AI-Use-Case-Inventory">one published inventory</a> (<a href="https://raw.githubusercontent.com/ombegov/2025-Federal-Agency-AI-Use-Case-Inventory/main/Data/2025_individually_reported_AI_use_cases.csv">CSV</a>).</li>
+        <li>Record the version and row count of the inventory you use.</li>
+        <li>Use the data dictionary to identify the high-impact designation and the fields describing reported practices.</li>
+        <li>A field records what the agency reported. Supporting documentation may provide more evidence; some judgments will require information beyond the inventory.</li>
+        <li>For the selected system, follow any relevant agency documentation linked from its inventory entry.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>One system and its evidence</h3>
+      <ul>
+        <li>Download the inventory and select one system marked high-impact.</li>
+        <li>Keep the system’s identifier, agency, stated purpose, and high-impact explanation with your notes.</li>
+        <li>Keep the downloaded file and record its source URL and retrieval time, as in Week 4.</li>
+        <li>Use the report to understand agency cases and the published inventory to locate a system. Record what each source allows you to establish.</li>
+      </ul>
+    </div>
+    </section>
+
+    <!-- SCORE -->
+    <section data-hands="score">
+    <h2 class="sec" id="score">Scoring a federal system <span class="hastag">· do it on the right</span></h2>
+    <div class="card">
+      <h3>Course methods that help assess the evidence</h3>
+      <ul>
+        <li>Use these methods to inspect the evidence for the assigned M-25-21 practices.</li>
+      </ul>
+      <table>
+        <tr><th>Method</th><th>Earlier exercise</th></tr>
+        <tr><td>Compare predictions with a reference</td><td>Week 5, held-out human codes and a confusion matrix</td></tr>
+        <tr><td>Inspect the data source and collection process</td><td>Week 4, source records and the README</td></tr>
+        <tr><td>Trace claims to their evidence</td><td>Week 6, two claims checked before publication</td></tr>
+        <tr><td>Compare performance across groups</td><td>Week 7, the subgroup error audit</td></tr>
+      </table>
+      <ul>
+        <li>Use the assigned memo’s wording for each scorecard criterion and cite its section.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>What a score means</h3>
+      <ul>
+        <li>For each practice, record one of three verdicts:
+          <ul>
+            <li>evidence that the requirement is met,</li>
+            <li>evidence of a gap,</li>
+            <li>insufficient information to judge.</li>
+          </ul>
+        </li>
+        <li>Cite the inventory field or supporting document for every verdict. Apply the source checks from Week 6.</li>
+        <li>Where information is insufficient, state what is missing and what would help you assess the practice.</li>
+        <li>Keep each conclusion specific to the system and evidence you examined.</li>
+      </ul>
+    </div>
+    </section>
+
+    <!-- JIGSAW -->
+    <section data-hands="none">
+    <h2 class="sec" id="jigsaw">Scorecard discussion</h2>
+    <div class="card">
+      <h3>Compare the scorecards in class</h3>
+      <ul>
+        <li>Two minutes per group.</li>
+        <li>Say what the system does, which agency runs it, and why it is marked high-impact.</li>
+        <li>Give the one practice with the strongest evidence behind it, and the one practice where the public record says least.</li>
+        <li>Name the document or the inventory field you read for each of those two.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>What to listen for</h3>
+      <ul>
+        <li>Whether a documented gap recurs across systems, and where public information is insufficient.</li>
+        <li>Whether a reported practice ever came with a document you could open.</li>
+        <li>Which further evidence would help distinguish a reported practice from its implementation.</li>
+      </ul>
+    </div>
+    </section>
+
+    <!-- DEBATES -->
+    <section data-hands="debates">
+<h2 class="sec" id="debates">Debate groups <span class="hastag">· do it on the right</span></h2>
+<div class="card"><h3>Choose a Week 10 governance debate</h3><ul>
+  <li>Form a group and choose one of six areas: frontier-model risk; jurisdiction and regimes; geopolitics and chips; power and concentration; the information ecosystem; or labor and the economy.</li>
+  <li>Identify a concrete policy dispute, its actors, a sourced case, and one core reading.</li>
+  <li>In Week 10, present the case for 8–10 minutes and use it to compare policy alternatives in class.</li>
+  <li>Use the <a href="week10.html">Week 10 page</a> to find the shared reading and debate materials.</li>
+</ul></div>
+</section>
+
+    <!-- WRAP -->
+    <section data-hands="none">
+<h2 class="sec" id="project-discussion">Project and policy discussion</h2>
+<div class="card"><h3>Government AI: criteria and alternatives</h3><ul>
+  <li>What can the published inventory establish about this system? What would require further investigation?</li>
+  <li>What alternatives could the agency consider, and which criteria should govern that choice?</li>
+  <li>Where did the agent help collect or assess the evidence?</li>
+</ul></div>
+</section>
+<section data-hands="none">
+<h2 class="sec" id="wrap">Assignments and next steps</h2>
+<div class="card"><p><b>Weekly memo · due Nov 19 before class.</b> Write 1–2 observations from your project or the class exercise: the policy-analysis step you attempted, how AI helped or fell short, and what you would do next. Aim for 150–200 words total. Describe what you actually tried and observed in your own words. Do not use AI to write the memo. Begin in class and submit to Canvas Discussions. See <a href="week_mapping_12week.html#assessment">assignments and grading</a>.</p></div>
+<p><a href="week09.html">Week 9 &rarr;</a></p>
+</section>
+
+  </main>
+
+  <!-- ================= RIGHT CONTEXTUAL HANDS-ON ================= -->
+  <aside>
+    <p class="railhead" id="railhead">Hands-on</p>
+    <div class="hands" data-for="none"></div>
+
+    <!-- inventory -->
+    <div class="hands" data-for="inventory">
+      <div class="exi"><span class="step">Step 1</span><h4>Download the inventory</h4>
+        <p>Use a new folder in the local copy of your GitHub repository.</p>
+        <div class="code">Download https://raw.githubusercontent.com/ombegov/2025-Federal-Agency-AI-Use-Case-Inventory/main/Data/2025_individually_reported_AI_use_cases.csv into data/inventory/. Keep the raw file unchanged and record its URL, version, and retrieval time. Report the row count and column names.<span class="copy">copy</span></div>
+        <p>Check the source documentation and data dictionary.</p>
+      </div>
+      <div class="exi"><span class="step">Step 2</span><h4>Identify a high-impact system</h4>
+        <div class="code">Use the data dictionary to identify the high-impact flag. List the marked systems with their identifier, agency, name, purpose, and high-impact explanation. Save the table to output/high_impact.csv.<span class="copy">copy</span></div>
+        <p>Select one system for the scorecard. Keep its original inventory row and source link.</p>
+      </div>
+      <div class="exi"><span class="step">Optional source lookup</span><h4>Follow a relevant document</h4>
+        <p>If the chosen entry points to an agency document, open it for supporting evidence. Record an inaccessible page as a collection limitation.</p>
+      </div>
+    </div>
+
+    <!-- score -->
+    <div class="hands" data-for="score">
+      <div class="exi">
+        <span class="step">Step 1</span>
+        <h4>Review the selected system</h4>
+        <ul>
+          <li>Read the selected high-impact row and its explanation.</li>
+          <li>Check what supporting documentation is available.</li>
+          <li>Compare your system with cases chosen by other groups during the discussion.</li>
+        </ul>
+      </div>
+      <div class="exi">
+        <span class="step">Step 2</span>
+        <h4>Read the practices, then build the sheet</h4>
+        <p>Save the assigned M-25-21 PDF in <code>docs/</code> and open its high-impact AI practices. Then:</p>
+        <div class="code">Read the assigned high-impact AI practices in the M-25-21 PDF in docs/. Build a scorecard in output/ with each criterion, its memo section, relevant evidence from the selected system’s inventory entry, and a proposed verdict. Cite the inventory field or document location and flag missing information.<span class="copy">copy</span></div>
+        <ul>
+          <li>Check each proposed criterion and judgment against the memo and the cited evidence.</li>
+        </ul>
+      </div>
+      <div class="exi">
+        <span class="step">Step 3</span>
+        <h4>Fill in the verdicts</h4>
+        <ul>
+          <li>Use three verdicts: evidence that the requirement is met, evidence of a gap, or insufficient information to judge. Explain the evidence for each judgment.</li>
+          <li>Cite the inventory field or the document URL in every row.</li>
+          <li>Where you found nothing, write one sentence saying what a member of the public cannot learn about this system.</li>
+        </ul>
+      </div>
+      <div class="exi">
+        <span class="step">Step 4</span>
+        <h4>Check the agent's reading of the memo</h4>
+        <div class="code">Quote the exact sentence from M-25-21 that each row of my scorecard refers to, with its section number.<span class="copy">copy</span></div>
+        <ul>
+          <li>Check the quoted passage in the PDF and revise any mismatch. Apply the source-checking method from Week 6.</li>
+        </ul>
+      </div>
+      <div class="save">Discuss the completed scorecard in class, then commit the source records, script, and scorecard to your GitHub repository.</div>
+    </div>
+
+    <!-- debates -->
+    <div class="hands" data-for="debates">
+      <div class="exi">
+        <span class="step">Step 1</span>
+        <h4>Form the group and claim a debate</h4>
+        <ul>
+          <li>Form a group and choose a debate in class.</li>
+          <li>Write down the group members and the debate before you leave.</li>
+        </ul>
+      </div>
+      <div class="exi">
+        <span class="step">Step 2</span>
+        <h4>Find your case and your reading</h4>
+        <p>You may take a reading from the Week 10 list, or find your own with the agent:</p>
+        <div class="code">Find a reading relevant to our chosen AI policy dispute from a government body, a peer-reviewed journal, or a research institute. Give its title, author, publication date, and source link. Explain which policy alternatives it helps us compare.<span class="copy">copy</span></div>
+        <ul>
+          <li>Open the sources and check the proposed citations, using the Week 6 method.</li>
+        </ul>
+      </div>
+    </div>
+  </aside>
+
+</div>
+
+<script>
+  const sections=[...document.querySelectorAll('main section')];
+  const panels=[...document.querySelectorAll('.hands')];
+  const railhead=document.getElementById('railhead');
+  function show(key){
+    panels.forEach(p=>p.classList.toggle('on',p.dataset.for===key));
+    railhead.style.display = key==='none' ? 'none' : '';
+  }
+  addEventListener('scroll',()=>{
+    let cur=sections[0];
+    sections.forEach(s=>{const t=s.getBoundingClientRect().top; if(t<window.innerHeight*0.35) cur=s;});
+    show(cur.dataset.hands);
+  },{passive:true});
+  show('none');
+  const links=[...document.querySelectorAll('.toc a')];
+  addEventListener('scroll',()=>{
+    let cur=null;
+    links.forEach(a=>{const el=document.querySelector(a.getAttribute('href'));
+      if(el && el.getBoundingClientRect().top<140)cur=a;});
+    links.forEach(a=>a.classList.toggle('active',a===cur));
+  },{passive:true});
+  document.addEventListener('click',e=>{
+    if(!e.target.classList.contains('copy'))return;
+    const x=e.target.parentNode.childNodes[0].textContent.trim();
+    navigator.clipboard.writeText(x).then(()=>{e.target.textContent='copied';
+      setTimeout(()=>e.target.textContent='copy',1200);});
+  });
+</script>
+</body>
+</html>
