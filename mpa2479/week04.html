@@ -1,0 +1,744 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="author" content="Han Zhang; Codex (OpenAI)">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Week 4: AI for Data Collection</title>
+<style>
+  :root{
+    --bg:#fcfcfb; --fg:#1c1c1a; --muted:#6b6b66; --line:#e6e5e1;
+    --accent:#2f5d8a; --accent-weak:#eaf0f5; --ex:#b5651d; --ex-weak:#fbf1e7;
+    --code-bg:#f4f5f3; --card:#fff;
+    --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--sans)}
+  .layout{display:grid;grid-template-columns:180px minmax(0,1fr) 360px;max-width:1320px;margin:0 auto}
+  nav{position:sticky;top:0;align-self:start;height:100vh;overflow:auto;
+      padding:26px 14px;border-right:1px solid var(--line);font-size:14px}
+  nav .days{display:flex;flex-direction:column;gap:2px;margin-bottom:22px}
+  nav .days a{color:var(--muted);text-decoration:none;padding:3px 0;font-size:13px}
+  nav .days a.cur{color:var(--fg);font-weight:700}
+  nav .days span.off{color:#c8c7c2;padding:3px 0;font-size:13px}
+  nav .home{display:block;font-size:14px;font-weight:800;color:var(--fg);text-decoration:none;line-height:1.25;margin-bottom:18px}
+  nav .home:hover{color:var(--accent)}
+  nav .lbl{font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin:0 0 8px}
+  nav .toc a{display:block;color:var(--fg);text-decoration:none;padding:6px 0 6px 12px;
+             border-left:2px solid transparent;margin-left:-2px}
+  nav .toc a:hover{color:var(--accent)}
+  nav .toc a.active{color:var(--accent);border-left-color:var(--accent);font-weight:600}
+  nav .toc .has{color:var(--ex);font-size:11px;margin-left:6px}
+  main{padding:30px 32px 160px;min-width:0}
+  .course-back{margin:0 0 12px;font-size:14px}
+  .course-back a{color:var(--accent)}
+  .kicker{font-size:13px;letter-spacing:.07em;text-transform:uppercase;color:var(--accent);font-weight:700;margin:0}
+  h1{margin:4px 0 6px;font-size:32px}
+  .goal{color:var(--muted);font-size:16px;margin:0 0 20px}
+  h2.sec{font-size:28px;font-weight:700;color:var(--fg);line-height:1.2;
+         margin:52px 0 12px;padding-top:22px;border-top:1px solid var(--line)}
+  h2.sec .hastag{color:var(--ex);font-weight:600;font-size:14px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:14px;
+        padding:20px 24px;margin:16px 0;box-shadow:0 1px 2px rgba(0,0,0,.03)}
+  .card h3{margin:0 0 12px;font-size:21px;line-height:1.25}
+  .card ul{list-style:none;padding:0;margin:0}
+  .card li{font-size:17px;line-height:1.45;padding:9px 0 9px 26px;position:relative;border-top:1px solid var(--line)}
+  .card li:first-child{border-top:0}
+  .card li::before{content:"";position:absolute;left:4px;top:17px;width:8px;height:8px;border-radius:50%;background:var(--accent)}
+  .card ul ul{margin:6px 0 0}
+  .card li li{font-size:15px;padding:5px 0 5px 24px;border-top:0;color:var(--muted)}
+  .card li li::before{width:5px;height:5px;top:14px;background:var(--muted)}
+  .card.demo{border-left:4px solid var(--accent)}
+  .card.demo .tag{display:inline-block;font-size:12px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;
+                  color:var(--accent);margin-bottom:8px}
+  .card.read{border-left:4px solid #7a5ea6}
+  .card.read .tag{display:inline-block;font-size:12px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;
+                  color:#7a5ea6;margin-bottom:8px}
+  .quote{background:var(--code-bg);border-left:3px solid var(--accent);border-radius:0 8px 8px 0;
+         padding:12px 16px;margin:12px 0;font-style:italic;line-height:1.5}
+  code{background:var(--code-bg);padding:1px 5px;border-radius:4px;font-family:ui-monospace,Menlo,monospace;font-size:.85em}
+  strong{color:#111}
+  table{border-collapse:collapse;width:100%;margin:10px 0;font-size:16px}
+  th,td{border:1px solid var(--line);padding:8px 12px;text-align:left}
+  th{background:var(--accent-weak);font-size:14px}
+  .src{font-size:13px;color:var(--muted)} .src a{color:var(--accent)}
+  aside{position:sticky;top:0;align-self:start;height:100vh;overflow:auto;
+        border-left:1px solid var(--line);padding:26px 18px 60px;background:#fbfaf8}
+  aside .railhead{font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--ex)}
+  .hands{display:none} .hands.on{display:block}
+  .exi{border:1px solid #e8d3ba;background:var(--ex-weak);border-radius:10px;margin:10px 0;padding:12px 14px}
+  .exi .step{display:inline-block;font-size:10px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;
+             color:#fff;background:var(--ex);border-radius:20px;padding:2px 9px;margin-bottom:8px}
+  .exi h4{margin:0 0 6px;font-size:15px}
+  .exi ul{margin:6px 0;padding-left:18px;font-size:13.5px;line-height:1.5}
+  .exi li{margin:4px 0}
+  .exi p{font-size:13.5px;line-height:1.5;margin:6px 0}
+  .save{font-size:13px;color:var(--muted);background:#fff;border:1px solid var(--line);
+        border-radius:8px;padding:9px 12px;margin:10px 0}
+  .code{position:relative;background:#fff;border:1px solid #e8d3ba;border-radius:8px;
+        padding:9px 34px 9px 11px;font-family:ui-monospace,Menlo,monospace;font-size:12px;
+        white-space:pre-wrap;margin:8px 0;line-height:1.45}
+  .code .copy{position:absolute;top:6px;right:6px;font-size:10px;border:1px solid #e8d3ba;
+              background:#fff;border-radius:6px;padding:2px 7px;cursor:pointer;color:var(--ex)}
+  .guidelink{display:inline-block;margin-top:6px;font-size:13px;color:var(--ex);font-weight:600}
+    .mobilenote{display:none}
+  .mhead{display:none}
+  /* ---- tablet: two columns, top menu ---- */
+  @media(max-width:1080px){
+    .layout{grid-template-columns:minmax(0,1fr) 340px}
+    nav{display:none}
+    .mhead{display:flex;align-items:center;justify-content:space-between;gap:12px;
+           position:sticky;top:0;z-index:20;background:var(--bg);
+           border-bottom:1px solid var(--line);padding:10px 16px}
+    .mtitle{font-size:14px;font-weight:800;color:var(--fg);text-decoration:none}
+    .mnav summary{list-style:none;cursor:pointer;font-size:13px;font-weight:700;color:var(--accent);
+                  border:1px solid var(--line);border-radius:8px;padding:5px 12px;background:#fff}
+    .mnav summary::-webkit-details-marker{display:none}
+    .mnav{position:relative}
+    .mnav-box{position:absolute;right:0;top:36px;min-width:240px;background:#fff;
+              border:1px solid var(--line);border-radius:12px;box-shadow:0 8px 24px rgba(0,0,0,.10);
+              padding:10px 14px;z-index:30}
+    .mnav-box a{display:block;color:var(--fg);text-decoration:none;font-size:14px;padding:6px 0}
+    .mnav-box a:hover{color:var(--accent)}
+    .mlbl{font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin:8px 0 2px}
+    main{padding:20px 20px 120px}
+    h1{font-size:27px}
+    h2.sec{font-size:24px}
+    table{display:block;overflow-x:auto}
+  }
+  /* ---- phone: single column ---- */
+  @media(max-width:740px){
+    .layout{grid-template-columns:1fr}
+    main{padding:16px 14px 60px}
+    .mobilenote{display:block;background:var(--accent-weak);border:1px solid var(--line);
+                border-radius:10px;padding:10px 14px;margin:0 0 18px;font-size:13.5px;
+                line-height:1.5;color:var(--fg)}
+    h1{font-size:25px}
+    .card{padding:16px 16px}
+    .card li{font-size:16px}
+    aside{position:static;height:auto;border-left:0;border-top:1px solid var(--line)}
+    .hands{display:block !important;border-top:1px solid var(--line);padding-top:10px;margin-top:10px}
+    .hands[data-for="none"]{display:none !important}
+  }
+</style>
+</head>
+<body>
+<div class="mhead">
+  <a class="mtitle" href="week_mapping_12week.html">Applied AI for Public Policy</a>
+  <details class="mnav">
+    <summary>Menu</summary>
+    <div class="mnav-box">
+      <p class="mlbl">Weeks</p>
+      <a href="week01.html">1 · What an AI agent is</a>
+      <a href="week02.html">2 · Setting up and configuring the agent</a>
+      <a href="week03.html">3 · Parallel work and subagents</a>
+      <a href="week04.html">4 · AI for data collection</a>
+      <a href="week05.html">5 · AI for data coding and model choice</a>
+      <a href="week06.html">6 · AI for visualization and publishing</a>
+      <a href="week07.html">7 · Algorithmic bias</a>
+      <a href="week08.html">8 · Auditing a federal AI system</a>
+      <a href="week09.html">9 · Designing your final project</a>
+      <a href="week10.html">10 · AI governance</a>
+      <a href="week11.html">11 · Code review and replication</a>
+      <a href="week12.html">12 · Final presentations</a>
+      <p class="mlbl">On this page</p>
+      <a href="#opening">Opening</a>
+      <a href="#reading">Readings</a>
+      <a href="#api">APIs <span class="has">hands-on</span></a>
+      <a href="#scrape">Sources without an API <span class="has">hands-on</span></a>
+      <a href="#subagents">Several sources at once <span class="has">hands-on</span></a>
+      <a href="#project-discussion">Project and policy discussion</a>
+      <a href="#wrap">Assignments</a>
+    </div>
+  </details>
+</div>
+<div class="layout">
+
+  <!-- ================= LEFT NAV ================= -->
+  <nav>
+    <a class="home" href="week_mapping_12week.html">MPA 2479<br>Applied AI for Public Policy</a>
+    <div class="days">
+      <div class="lbl">Weeks</div>
+      <a href="week01.html">1 · What an AI agent is</a>
+      <a href="week02.html">2 · Setting up and configuring the agent</a>
+      <a href="week03.html">3 · Parallel work and subagents</a>
+      <a href="week04.html" class="cur">4 · AI for data collection</a>
+      <a href="week05.html">5 · AI for data coding and model choice</a>
+      <a href="week06.html">6 · AI for visualization and publishing</a>
+      <a href="week07.html">7 · Algorithmic bias</a>
+      <a href="week08.html">8 · Auditing a federal AI system</a>
+      <a href="week09.html">9 · Designing your final project</a>
+      <a href="week10.html">10 · AI governance</a>
+      <a href="week11.html">11 · Code review and replication</a>
+      <a href="week12.html">12 · Final presentations</a>
+    </div>
+    <div class="lbl">Today</div>
+    <div class="toc">
+      <a href="#opening">Opening</a>
+      <a href="#reading">Readings</a>
+      <a href="#api">APIs <span class="has">hands-on</span></a>
+      <a href="#scrape">Sources without an API <span class="has">hands-on</span></a>
+      <a href="#subagents">Several sources at once <span class="has">hands-on</span></a>
+      <a href="#project-discussion">Project and policy discussion</a>
+      <a href="#wrap">Assignments</a>
+    </div>
+  </nav>
+
+  <!-- ================= CENTER CONTENT ================= -->
+  <main>
+    <p class="course-back"><a href="week_mapping_12week.html">← 12-week course plan</a></p>
+    <div class="mobilenote">You are on a small screen. This page is designed for a laptop, with three columns and hands-on steps appearing beside the content. On a phone it collapses to one column and the hands-on steps move to the end of the page. Reading here is fine; for the exercises you need your laptop anyway.</div>
+    <p class="kicker">Week 4 · Oct 1, 2026 · Thursday, 9:00–11:30 am · 280 Brook Street, Room 110</p>
+    <h1>AI for data collection</h1>
+    <p class="byline" style="margin:2px 0 16px;color:var(--muted);font-size:15px">Page authors: <a href="https://hanzhang.xyz/">Han Zhang</a> and Codex (OpenAI)</p>
+    <p class="goal">Collect a documented dataset and explain how its coverage supports or changes the project question.</p>
+
+    <!-- OPENING -->
+    <section data-hands="none">
+<h2 class="sec" id="opening">Opening</h2>
+<div class="card"><h3>Today</h3><ul>
+  <li>Why a policy analyst would collect data.</li>
+  <li>APIs, with the Federal Register as the example.</li>
+  <li>Sources without an API: web scraping.</li>
+  <li>Collecting from several sources at once.</li>
+  <li>What your data leave out.</li>
+</ul></div><div class="card"><h3>Why collect data at all</h3><ul>
+  <li>Policy analysts usually work from tables that someone else published.</li>
+  <li>Last week's reading said the same. Most policy research reuses what others produced.</li>
+  <li>A published table may not fit your question. It may have the wrong years, the wrong places, or too little detail.</li>
+  <li>With an agent, you can collect the documents your question needs in one class session.</li>
+  <li>So the question changes. Are these data worth collecting, and what do they leave out?</li>
+</ul></div>
+</section>
+
+    <!-- READING -->
+    <section data-hands="none">
+<h2 class="sec" id="reading">Readings</h2>
+<div class="card"><h3>Datasheets for Datasets</h3><ul>
+  <li>Gebru et al., <a href="https://doi.org/10.1145/3458723">“Datasheets for Datasets” (2021)</a>. Read for what to write down about the data you collect.</li>
+</ul></div>
+</section>
+
+    <!-- API -->
+    <section data-hands="api">
+    <h2 class="sec" id="api">APIs <span class="hastag">· do it on the right</span></h2>
+    <div class="card">
+      <h3>What an API is</h3>
+      <ul>
+        <li>A government website is made for a person who reads one page at a time. A policy analysis often needs hundreds of documents at once.</li>
+        <li>An agency can also offer a second way to get the same documents, made for programs. This is an <strong>API</strong>, short for application programming interface.</li>
+        <li>A program sends the API a request. <strong>Parameters</strong> in the request say which documents you want, such as the agency, the dates, and the document type.</li>
+        <li>The documents come back with no page layout, in a form a script can read directly. Every document has the same fields, such as title and date.</li>
+        <li>Some APIs require a key. A key identifies you and limits how fast you may send requests.</li>
+        <li>Keep your key out of Git. The Federal Register API needs no key.</li>
+        <li>Many federal agencies offer an API. Many state agencies and city governments do not. <a href="#scrape">Sources without an API</a> covers what to do then.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>The Federal Register</h3>
+      <ul>
+        <li>The Federal Register is the U.S. government's daily journal.</li>
+        <li>Every federal agency publishes its proposed rules, final rules, and notices there.</li>
+        <li>A <strong>proposed rule</strong> is a draft that the public can comment on. A <strong>final rule</strong> is the version that takes effect.</li>
+        <li>A proposed rule usually lists a docket number and the date public comments close.</li>
+        <li>A policy question it can answer: what did the Environmental Protection Agency propose in 2025, and when could the public respond?</li>
+        <li>In 2025 the EPA published 242 proposed rules. On the website, that is 242 pages to open one at a time.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Start on the website</h3>
+      <ul>
+        <li>Open <a href="https://www.federalregister.gov/">federalregister.gov</a>. Search for proposed rules from the EPA in 2025.</li>
+        <li>Open one document. Find the title, the agency, the date, the summary, the docket number, and the comment deadline.</li>
+        <li>The API returns those same pieces for every matching document, with no page layout.</li>
+        <li>The website is for people. When a script asks the website for a page, it is sent to a block page.</li>
+        <li>The API answers the same script.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>The API documentation</h3>
+      <ul>
+        <li>The <a href="https://www.federalregister.gov/developers/documentation/api/v1">Federal Register API documentation</a> lists what you can ask for and the name of every parameter.</li>
+        <li>Agency names must be spelled the way the API spells them.</li>
+        <li>In the URL, each agency is written in lowercase with hyphens. The EPA is <code>environmental-protection-agency</code>. The Department of Education is <code>education-department</code>.</li>
+        <li>The <a href="https://www.federalregister.gov/api/v1/agencies">agency list</a> gives this form for every agency, in the field labeled <code>slug</code>.</li>
+        <li>Read the documentation before you ask the agent for anything. You need it to check the URL the agent builds.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Two example requests</h3>
+      <ul>
+        <li>Proposed rules from the Environmental Protection Agency, published in 2025:</li>
+      </ul>
+      <div class="code">https://www.federalregister.gov/api/v1/documents.json?conditions[agencies][]=environmental-protection-agency&amp;conditions[publication_date][year]=2025&amp;conditions[type][]=PRORULE&amp;per_page=5<span class="copy">copy</span></div>
+      <ul>
+        <li>Final rules from the Department of Education, published in 2024:</li>
+      </ul>
+      <div class="code">https://www.federalregister.gov/api/v1/documents.json?conditions[agencies][]=education-department&amp;conditions[publication_date][year]=2024&amp;conditions[type][]=RULE&amp;per_page=5<span class="copy">copy</span></div>
+      <ul>
+        <li>Everything before the question mark is the <strong>endpoint</strong>, the address of the API. It is the same in both.</li>
+        <li>Everything after it is the parameters. The two URLs differ in three of them: the agency, the year, and the type.</li>
+      </ul>
+      <table>
+        <tr><th>Parameter</th><th>What it sets</th><th>Values you can use</th></tr>
+        <tr><td><code>conditions[agencies][]</code></td><td>the agency</td><td>the agency, as written in the agency list: <code>environmental-protection-agency</code>, <code>education-department</code></td></tr>
+        <tr><td><code>conditions[publication_date][year]</code></td><td>the year of publication</td><td>a four-digit year, such as <code>2024</code></td></tr>
+        <tr><td><code>conditions[type][]</code></td><td>the kind of document</td><td><code>PRORULE</code> for a proposed rule, <code>RULE</code> for a final rule, <code>NOTICE</code> for a notice, <code>PRESDOCU</code> for a presidential document</td></tr>
+        <tr><td><code>per_page</code></td><td>how many documents one page shows</td><td>a number, such as <code>5</code></td></tr>
+      </table>
+      <ul>
+        <li>Copy the agency from the list. A guess such as <code>department-of-education</code> returns an error.</li>
+        <li>What comes back is in <strong>JSON</strong> format. It is built like a Python dictionary: each field name paired with its value.</li>
+        <li>Raw JSON is hard to read in a browser. To see its structure, paste it into a formatter such as <a href="https://jsonformatter.org/">jsonformatter.org</a>.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Your own example</h3>
+      <ul>
+        <li>Choose an agency that works on your policy topic, such as the Labor Department.</li>
+        <li>Open the <a href="https://www.federalregister.gov/api/v1/agencies">agency list</a>. Search the page for "Labor". In that agency's entry, the field labeled <code>slug</code> reads <code>labor-department</code>.</li>
+        <li>Start from either example URL above. Put <code>labor-department</code> in the agency parameter.</li>
+        <li>Pick a year. Pick a type from the table above: <code>PRORULE</code>, <code>RULE</code>, or <code>NOTICE</code>.</li>
+        <li>Reload. Run the same search on the website. The two counts should match.</li>
+        <li>You can also describe what you want and ask the agent to build the URL. Read every parameter before you run it.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>What you do when the agent writes the request</h3>
+      <ul>
+        <li>In a programming course, you would read the API documentation and write the code yourself.</li>
+        <li>Here you say what you want in plain words. The agent reads the documentation, writes the code, and runs it.</li>
+        <li>Your job is checking:
+          <ul>
+            <li>read the URL the agent built,</li>
+            <li>compare a few documents with the same pages on federalregister.gov,</li>
+            <li>check that the script stays under the source's request limit.</li>
+          </ul>
+        </li>
+        <li>This check matters. On a replication benchmark, agents scored about 96 on running an analysis.</li>
+        <li>The same agents scored about 31 on finding the data the analysis needed.</li>
+      </ul>
+      <p class="src">Nguyen et al., "ReplicatorBench" (2026), arXiv:2602.11354.</p>
+    </div>
+    <div class="card">
+      <h3>Every API works the same way</h3>
+      <table>
+        <tr><th>API</th><th>You send</th><th>You get back</th></tr>
+        <tr><td>Federal Register</td><td>an agency, a year, a document type</td><td>the matching documents</td></tr>
+        <tr><td>Regulations.gov</td><td>a docket number</td><td>the public comments on that proposed rule</td></tr>
+        <tr><td>a language model, such as Claude or GPT</td><td>a prompt</td><td>the model's answer</td></tr>
+      </table>
+      <ul>
+        <li>You send a request with parameters. Data come back.</li>
+        <li>In Week 5, you send the documents you collect today to the third row.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Keep the raw data</h3>
+      <ul>
+        <li>Save the response exactly as it came back, in <code>data/</code>. Never edit that file.</li>
+        <li>Next to it, write down:
+          <ul>
+            <li>the full request URL,</li>
+            <li>the parameters,</li>
+            <li>the date and time you collected it.</li>
+          </ul>
+        </li>
+        <li>Do all cleaning in a script. Then the clean table can always be rebuilt from the raw file.</li>
+        <li>This record of where the data came from is called <strong>provenance</strong>.</li>
+      </ul>
+    </div>
+    <div class="card demo">
+      <span class="tag">Live demo</span>
+      <h3>Collecting Federal Register documents</h3>
+      <ul>
+        <li>Collect up to 100 rules and proposed rules that one agency published in 2025.</li>
+        <li>Note how the API chose those 100: the sort order and the filters.</li>
+        <li>Make a table of the documents by month. Label it as the first 100, since the agency may have published more.</li>
+        <li>Change the agency and run it again.</li>
+        <li>Open a few documents on federalregister.gov. Compare the saved title, date, and abstract with the page.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Public sources with an API</h3>
+      <table>
+        <tr><th>Source</th><th>What is in it</th></tr>
+        <tr><td><a href="https://www.federalregister.gov/developers/documentation/api/v1">Federal Register</a></td><td>rules, proposed rules, and notices from federal agencies, with abstracts and links</td></tr>
+        <tr><td><a href="https://www.bls.gov/developers/">Bureau of Labor Statistics</a></td><td>employment, wages, and prices, by area and industry</td></tr>
+        <tr><td><a href="https://dev.socrata.com/">Socrata</a></td><td>the platform many city governments use to publish permits, inspections, and service requests</td></tr>
+        <tr><td><a href="https://data.gov/">data.gov</a></td><td>the federal catalog of datasets, for finding an agency's data</td></tr>
+        <tr><td><a href="https://api.usaspending.gov/">USAspending</a></td><td>federal contracts, grants, and other awards</td></tr>
+        <tr><td><a href="https://www.epa.gov/developers">EPA</a> and <a href="https://www.huduser.gov/portal/dataset/fmr-api.html">HUD</a></td><td>environmental monitoring and housing program data</td></tr>
+      </table>
+    </div>
+    <div class="card">
+      <h3>Does your source have an API?</h3>
+      <ul>
+        <li>Before collecting from any website, check how it publishes its data. Check in this order:
+          <ul>
+            <li>a ready-made download, such as a CSV file,</li>
+            <li>an API,</li>
+            <li>the web page itself.</li>
+          </ul>
+        </li>
+        <li>A download is the easiest route. The page itself is the last resort.</li>
+        <li>To find an API, search the web for the site's name and "API". Many sites also have a page called "Developers" or "Data".</li>
+        <li>If you find an API, open its documentation. Check what you can ask for and whether you need a key.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Most sources have no API</h3>
+      <ul>
+        <li>The Federal Register is the easy case. It has an API and needs no key.</li>
+        <li>Many state agencies and city governments offer neither an API nor a download. Their data are only on their web pages.</li>
+        <li>Your project's source may be one of these.</li>
+        <li>The agent can still collect from those pages. The next section shows how.</li>
+      </ul>
+    </div>
+    </section>
+
+    <!-- SCRAPE -->
+    <section data-hands="scrape">
+    <h2 class="sec" id="scrape">Sources without an API <span class="hastag">· do it on the right</span></h2>
+    <div class="card">
+      <h3>Reading a page directly</h3>
+      <ul>
+        <li>The simplest way is to ask the agent to read the page directly.
+          <ul>
+            <li>In Claude Code, the tool is called WebFetch.</li>
+            <li>In Codex, it is web search. Start Codex with <code>codex --search</code> to turn it on.</li>
+          </ul>
+        </li>
+        <li>You give it a URL and say what you want, such as "get the monthly unemployment table from this page and save it as a CSV."</li>
+        <li>What the agent gets back can be incomplete. In Claude Code, a second, smaller model reads the page and passes on only its answer. Long pages are cut off first.</li>
+        <li>Every page costs model tokens. In a test for this course, Codex used about 10,000 tokens to read one page.</li>
+        <li>Nothing is saved to rerun. There is no script and no copy of the page.</li>
+        <li>Use it to look at one page or a few.</li>
+        <li>For more pages, or for a collection you will repeat, the agent needs to write a script. That is web scraping.</li>
+      </ul>
+      <p class="src"><a href="https://code.claude.com/docs/en/tools-reference">Claude Code tools reference</a> · <a href="https://learn.chatgpt.com/docs/codex/cli">Codex CLI documentation</a></p>
+    </div>
+    <div class="card">
+      <h3>What web scraping is</h3>
+      <ul>
+        <li>Every web page is built from <strong>HTML</strong>, the code your browser turns into the page you see.</li>
+        <li><strong>Web scraping</strong> is a script that downloads a page's HTML and pulls out the pieces you want.</li>
+        <li>The pieces can be a table, a list of reports, dates, prices, or the text of each page.</li>
+        <li>People scrape when:
+          <ul>
+            <li>the site has no API,</li>
+            <li>its API leaves out what they need,</li>
+            <li>the site shows content to readers and offers no way to reuse it.</li>
+          </ul>
+        </li>
+        <li>The agent writes the script. Your job is to judge whether a page can be scraped, and to check what comes back.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Is a page easy to scrape?</h3>
+      <ul>
+        <li>Run four checks in your browser:
+          <ul>
+            <li>Can you see the content without logging in?</li>
+            <li>Does the content stay the same when you refresh?</li>
+            <li>Does page 2 look like page 1?</li>
+            <li>Right-click and choose View Page Source. Is the text you want in that code?</li>
+          </ul>
+        </li>
+        <li>The last check sorts pages into two kinds.</li>
+        <li>On a <strong>static</strong> page, the text you see is in the HTML the site sends. A script can read it directly.</li>
+        <li>On a <strong>dynamic</strong> page, the browser runs code that fills in the content after the page loads. The page source does not contain that content. Scraping it needs heavier tools.</li>
+      </ul>
+    </div>
+    <div class="card demo">
+      <span class="tag">Live demo</span>
+      <h3>Scraping a practice site</h3>
+      <ul>
+        <li><a href="https://books.toscrape.com/">Books to Scrape</a> is a site built for practice. It is public and static, and every page has the same layout.</li>
+        <li>One row is one book. The variables are title, price, and star rating.</li>
+        <li>The agent downloads pages 1 and 2, saves their HTML, and extracts the variables into one CSV.</li>
+        <li>To find more pages, click to page 2 and read the address bar. Page 2 is <code>catalogue/page-2.html</code>. Page 3 follows the same pattern.</li>
+        <li>The site has 50 pages. Collect only the pages your question needs.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>A site from our projects</h3>
+      <ul>
+        <li>One volunteer shares a site from their policy area that has no API.</li>
+        <li>Together we run the four checks on it.</li>
+        <li>Is the page static or dynamic? Does it need a login? Does page 2 look like page 1?</li>
+        <li>We open its robots.txt and read what it allows.</li>
+        <li>Could the agent scrape this site? What would you check in what it returns?</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>What can go wrong</h3>
+      <ul>
+        <li>Real sites are harder than the practice site:
+          <ul>
+            <li>some require a login,</li>
+            <li>some load their content dynamically,</li>
+            <li>some block automated requests,</li>
+            <li>some redesign their pages.</li>
+          </ul>
+        </li>
+        <li>After a redesign, the script may return nothing or the wrong part of the page.</li>
+        <li>Compare a few rows with the live page every time you rerun a scraper.</li>
+        <li>Scraping takes longer than you expect. If your project needs it, start now.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Rules for scraping</h3>
+      <ul>
+        <li>Read the site's <strong>robots.txt</strong>. Add <code>/robots.txt</code> to the site's address and open it, for example <a href="https://www.census.gov/robots.txt">census.gov/robots.txt</a>.</li>
+        <li>Its <code>Disallow</code> lines list pages that automated programs should not visit. The Census Bureau asks programs to stay out of its search results pages.</li>
+        <li>Read the site's terms of use. If they forbid automated collection, use another source.</li>
+        <li>Collect slowly. Pause between requests.</li>
+        <li>Do not collect sensitive personal data.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>When a request fails</h3><p class="src"><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status">HTTP status code reference</a></p>
+      <table>
+        <tr><th>Code</th><th>What happened</th><th>What to do</th></tr>
+        <tr><td><code>403</code></td><td>the server refused you</td><td>Read the site's terms. A refusal is often deliberate.</td></tr>
+        <tr><td><code>404</code></td><td>the address does not exist</td><td>Check the documentation for the current address.</td></tr>
+        <tr><td><code>429</code></td><td>too many requests, too fast</td><td>Slow down and retry later.</td></tr>
+        <tr><td><code>500</code></td><td>the server itself failed</td><td>Wait and try again.</td></tr>
+      </table>
+      <ul>
+        <li>The agent sees the code too. Ask it what the code means for this source.</li>
+        <li>If a source refuses you, write that down. Then look for the same numbers published elsewhere.</li>
+      </ul>
+    </div>
+    </section>
+
+    <!-- SUBAGENTS -->
+    <section data-hands="subagents">
+    <h2 class="sec" id="subagents">Several sources at once <span class="hastag">· do it on the right</span></h2>
+    <div class="card">
+      <h3>A script loop or subagents?</h3>
+      <ul>
+        <li>One question decides it. Are the steps the same for every piece?</li>
+        <li>Same steps, such as one API called for 20 agencies: use a loop in a script.</li>
+        <li>Different steps, such as five state websites with different layouts: use one subagent per source, as in <a href="week03.html#subagents">Week 3</a>.</li>
+        <li>Give every subagent the same questions:
+          <ul>
+            <li>how to collect the data,</li>
+            <li>which fields exist,</li>
+            <li>which years and places are covered,</li>
+            <li>what request limits apply.</li>
+          </ul>
+        </li>
+        <li>Compare their reports. Open the documentation links before you choose a source.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>A collection you will repeat is a Skill</h3>
+      <ul>
+        <li>Some collections repeat: this month's new rules, then next month's.</li>
+        <li>Turn the collection into a Skill, as in <a href="week02.html#skills">Week 2</a>. Next time it runs from one command.</li>
+        <li>A classmate can run the same Skill on their own machine.</li>
+      </ul>
+    </div>
+    </section>
+
+    <!-- WRAP -->
+    <section data-hands="none">
+<h2 class="sec" id="project-discussion">Project and policy discussion</h2>
+<div class="card"><h3>Your data and your question</h3><ul>
+  <li>We go around the room. Each person shows the data for their project to the class.</li>
+  <li>Do you already have the data you need? Or do you need to collect them?</li>
+  <li>After today, would you rethink that? An API or a scraper may let you collect more than you planned.</li>
+  <li>What could more data add to your analysis? What would still be missing?</li>
+</ul></div>
+</section>
+<section data-hands="none">
+<h2 class="sec" id="wrap">Assignments</h2>
+<div class="card"><p><b>Checkpoint 2: data collection · 5% · individual · due Oct 15 before class.</b> Adapt the classroom collection to your own project’s source. Submit through your GitHub repository: the collection script, the raw data or instructions for getting it, and a README that says how to rerun the collection. Keep the Federal Register abstracts. Week 5 uses them for text coding.</p>
+<p><b>Weekly memo · due Oct 15 before class.</b> Write 1–2 specific observations about using AI to find or collect data for your policy question. Did it help, partly help, or fail to help? Describe a source suggestion, collection problem, or data check, and explain what you learned about whether the data fit your question. Aim for 150–200 words total. Describe what you actually tried and observed in your own words. Do not use AI to write the memo. Begin in class and submit to Canvas Discussions. See <a href="week_mapping_12week.html#assessment">assignments and grading</a>.</p></div>
+</section>
+
+  </main>
+
+  <!-- ================= RIGHT CONTEXTUAL HANDS-ON ================= -->
+  <aside>
+    <p class="railhead" id="railhead">Hands-on</p>
+    <div class="hands" data-for="none"></div>
+
+    <!-- api -->
+    <div class="hands" data-for="api">
+      <div class="exi">
+        <span class="step">Step 1</span>
+        <h4>Look at one document</h4>
+        <p>On <a href="https://www.federalregister.gov/">federalregister.gov</a>, search for EPA proposed rules in 2025. Open one.</p>
+        <ul>
+          <li>Find the title, agency, date, summary, docket number, and comment deadline.</li>
+          <li>Note the number of results the search shows.</li>
+        </ul>
+      </div>
+      <div class="exi">
+        <span class="step">Step 2</span>
+        <h4>Run the two examples</h4>
+        <p>EPA proposed rules, 2025:</p>
+        <div class="code">https://www.federalregister.gov/api/v1/documents.json?conditions[agencies][]=environmental-protection-agency&amp;conditions[publication_date][year]=2025&amp;conditions[type][]=PRORULE&amp;per_page=5<span class="copy">copy</span></div>
+        <p>Department of Education final rules, 2024:</p>
+        <div class="code">https://www.federalregister.gov/api/v1/documents.json?conditions[agencies][]=education-department&amp;conditions[publication_date][year]=2024&amp;conditions[type][]=RULE&amp;per_page=5<span class="copy">copy</span></div>
+        <ul>
+          <li>If the text is hard to read, paste it into <a href="https://jsonformatter.org/">jsonformatter.org</a>.</li>
+          <li>Find <code>count</code> in each. Compare the EPA count with your website search.</li>
+          <li>Find the five documents under <code>results</code>.</li>
+          <li>Find the fields that match what you saw on the document page.</li>
+        </ul>
+      </div>
+      <div class="exi">
+        <span class="step">Step 3</span>
+        <h4>Build your own URL</h4>
+        <ul>
+          <li>Open the <a href="https://www.federalregister.gov/api/v1/agencies">agency list</a>. Search the page for an agency in your policy area.</li>
+          <li>In that agency's entry, copy the field labeled <code>slug</code>.</li>
+          <li>Start from the EPA URL. Replace <code>environmental-protection-agency</code> with what you copied. Pick a year.</li>
+          <li>Reload. Check the count against a website search with the same filters.</li>
+          <li>Change the type from <code>PRORULE</code>, proposed rules, to <code>RULE</code>, final rules. How does the count change?</li>
+        </ul>
+      </div>
+      <div class="exi">
+        <span class="step">Step 4</span>
+        <h4>Collect up to 100 documents</h4>
+        <div class="code">Write a script in scripts/ that collects up to 100 rules and proposed rules published in 2025 by [agency] from the Federal Register API. Keep the document number, date, agency, title, abstract, and link. Save the raw response unchanged in data/. Next to it, write the full request URL, the parameters, and the date and time. Tell me how many documents came back, how they were sorted, and how many have no abstract.<span class="copy">copy</span></div>
+        <ul>
+          <li>Read the URL it built. Say what each parameter does.</li>
+        </ul>
+      </div>
+      <div class="exi">
+        <span class="step">Step 5</span>
+        <h4>Check what came back</h4>
+        <div class="code">In a separate script, clean the raw file into a table. Make a chart of the documents by month in output/, labeled as the first 100 documents. Do not touch the raw file.<span class="copy">copy</span></div>
+        <ul>
+          <li>Open five documents on federalregister.gov. Compare the title, date, and abstract.</li>
+          <li>If the request failed, ask the agent to explain the error and the URL.</li>
+        </ul>
+      </div>
+      <div class="exi">
+        <span class="step">Step 6</span>
+        <h4>Run it again, then save</h4>
+        <ul>
+          <li>Run it again with another agency or year.</li>
+          <li>Write the README: the source, the parameters, what to install, and the command to rerun.</li>
+          <li>Commit and push.</li>
+        </ul>
+      </div>
+      <div class="exi">
+        <span class="step">Step 7</span>
+        <h4>Check a source you care about</h4>
+        <p>Pick a website in your policy area. Look for a download first. Then search the web for the site's name and "API". You can also ask the agent:</p>
+        <div class="code">Does [website] publish its data as a download or through an API? Give me the links to the download page or the API documentation. Tell me if you find neither.<span class="copy">copy</span></div>
+        <ul>
+          <li>Open the links yourself.</li>
+          <li>Write down which route the source offers. You will need it for Checkpoint 2.</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- scrape -->
+    <div class="hands" data-for="scrape">
+      <div class="exi">
+        <span class="step">Step 1</span>
+        <h4>Run the four checks on the practice site</h4>
+        <p>Open <a href="https://books.toscrape.com/">Books to Scrape</a>.</p>
+        <ul>
+          <li>Can you see the books without logging in?</li>
+          <li>Refresh. Does the page stay the same?</li>
+          <li>Click to page 2. Does it look like page 1?</li>
+          <li>Right-click and choose View Page Source. Find one book's title and price in the code.</li>
+        </ul>
+      </div>
+      <div class="exi">
+        <span class="step">Step 2</span>
+        <h4>Have the agent scrape two pages</h4>
+        <div class="code">Download the first two pages of https://books.toscrape.com/. Save each page's HTML unchanged in data/ with its URL and the date. Extract the title, price, and star rating of each book into one CSV, one row per book. Tell me how many books you found on each page.<span class="copy">copy</span></div>
+        <ul>
+          <li>Open the CSV. Compare three books with the page.</li>
+          <li>Find the address of page 3. Does it follow the same pattern?</li>
+        </ul>
+      </div>
+      <div class="exi">
+        <span class="step">Step 3</span>
+        <h4>Bring a site for the class</h4>
+        <ul>
+          <li>Find a site in your policy area that has no API.</li>
+          <li>Run the four checks on it.</li>
+          <li>Open its robots.txt.</li>
+          <li>Be ready to show it to the class.</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- subagents -->
+    <div class="hands" data-for="subagents">
+      <div class="exi">
+        <span class="step">Step 1</span>
+        <h4>Pick two sources</h4>
+        <ul>
+          <li>Pick two sources your project could use.</li>
+          <li>Decide what each subagent should report back.</li>
+        </ul>
+      </div>
+      <div class="exi">
+        <span class="step">Step 2</span>
+        <h4>One subagent per source</h4>
+        <div class="code">Use one subagent for [source A] and one for [source B]. Each reports how to collect the data, which fields exist, which years and places are covered, and any request limits. Use the same format for both, with links to the documentation. Report anything you could not find.<span class="copy">copy</span></div>
+      </div>
+      <div class="exi">
+        <span class="step">Step 3</span>
+        <h4>Compare the reports</h4>
+        <ul>
+          <li>Open the documentation links. Check the fields and coverage yourself.</li>
+          <li>Choose a source for your project. Write the reason in your README.</li>
+        </ul>
+      </div>
+      <div class="exi">
+        <span class="step">Step 4 · try more</span>
+        <h4>Make the collection a Skill</h4>
+        <div class="code">Write a Skill named federal-register-pull. It runs my saved collection script for an agency and a year that I name. It saves the raw response unchanged in data/, with the full request URL, the parameters, and the date and time. Then it reports how many documents came back and how many have no abstract.<span class="copy">copy</span></div>
+        <ul>
+          <li>Call the Skill by name with a new agency and year.</li>
+          <li>Open the note in <code>data/</code>. Check the URL, the parameters, and the date.</li>
+        </ul>
+      </div>
+    </div>
+
+  </aside>
+
+</div>
+
+<script>
+  const sections=[...document.querySelectorAll('main section')];
+  const panels=[...document.querySelectorAll('.hands')];
+  const railhead=document.getElementById('railhead');
+  function show(key){
+    panels.forEach(p=>p.classList.toggle('on',p.dataset.for===key));
+    railhead.style.display = key==='none' ? 'none' : '';
+  }
+  addEventListener('scroll',()=>{
+    let cur=sections[0];
+    sections.forEach(s=>{const t=s.getBoundingClientRect().top; if(t<window.innerHeight*0.35) cur=s;});
+    show(cur.dataset.hands);
+  },{passive:true});
+  show('none');
+  const links=[...document.querySelectorAll('.toc a')];
+  addEventListener('scroll',()=>{
+    let cur=null;
+    links.forEach(a=>{const el=document.querySelector(a.getAttribute('href'));
+      if(el && el.getBoundingClientRect().top<140)cur=a;});
+    links.forEach(a=>a.classList.toggle('active',a===cur));
+  },{passive:true});
+  document.addEventListener('click',e=>{
+    if(!e.target.classList.contains('copy'))return;
+    const x=e.target.parentNode.childNodes[0].textContent.trim();
+    navigator.clipboard.writeText(x).then(()=>{e.target.textContent='copied';
+      setTimeout(()=>e.target.textContent='copy',1200);});
+  });
+</script>
+</body>
+</html>
