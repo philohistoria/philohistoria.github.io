@@ -1,0 +1,608 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Week 5: AI for Data Coding and Model Choice</title>
+<style>
+  :root{
+    --bg:#fcfcfb; --fg:#1c1c1a; --muted:#6b6b66; --line:#e6e5e1;
+    --accent:#2f5d8a; --accent-weak:#eaf0f5; --ex:#b5651d; --ex-weak:#fbf1e7;
+    --code-bg:#f4f5f3; --card:#fff;
+    --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--sans)}
+  .layout{display:grid;grid-template-columns:180px minmax(0,1fr) 360px;max-width:1320px;margin:0 auto}
+  nav{position:sticky;top:0;align-self:start;height:100vh;overflow:auto;
+      padding:26px 14px;border-right:1px solid var(--line);font-size:14px}
+  nav .days{display:flex;flex-direction:column;gap:2px;margin-bottom:22px}
+  nav .days a{color:var(--muted);text-decoration:none;padding:3px 0;font-size:13px}
+  nav .days a.cur{color:var(--fg);font-weight:700}
+  nav .days span.off{color:#c8c7c2;padding:3px 0;font-size:13px}
+  nav .home{display:block;font-size:14px;font-weight:800;color:var(--fg);text-decoration:none;line-height:1.25;margin-bottom:18px}
+  nav .home:hover{color:var(--accent)}
+  nav .lbl{font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin:0 0 8px}
+  nav .toc a{display:block;color:var(--fg);text-decoration:none;padding:6px 0 6px 12px;
+             border-left:2px solid transparent;margin-left:-2px}
+  nav .toc a:hover{color:var(--accent)}
+  nav .toc a.active{color:var(--accent);border-left-color:var(--accent);font-weight:600}
+  nav .toc .has{color:var(--ex);font-size:11px;margin-left:6px}
+  main{padding:30px 32px 160px;min-width:0}
+  .course-back{margin:0 0 12px;font-size:14px}
+  .course-back a{color:var(--accent)}
+  .kicker{font-size:13px;letter-spacing:.07em;text-transform:uppercase;color:var(--accent);font-weight:700;margin:0}
+  h1{margin:4px 0 6px;font-size:32px}
+  .goal{color:var(--muted);font-size:16px;margin:0 0 20px}
+  h2.sec{font-size:28px;font-weight:700;color:var(--fg);line-height:1.2;
+         margin:52px 0 12px;padding-top:22px;border-top:1px solid var(--line)}
+  h2.sec .hastag{color:var(--ex);font-weight:600;font-size:14px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:14px;
+        padding:20px 24px;margin:16px 0;box-shadow:0 1px 2px rgba(0,0,0,.03)}
+  .card h3{margin:0 0 12px;font-size:21px;line-height:1.25}
+  .card ul{list-style:none;padding:0;margin:0}
+  .card li{font-size:17px;line-height:1.45;padding:9px 0 9px 26px;position:relative;border-top:1px solid var(--line)}
+  .card li:first-child{border-top:0}
+  .card li::before{content:"";position:absolute;left:4px;top:17px;width:8px;height:8px;border-radius:50%;background:var(--accent)}
+  .card ul ul{margin:6px 0 0}
+  .card li li{font-size:15px;padding:5px 0 5px 24px;border-top:0;color:var(--muted)}
+  .card li li::before{width:5px;height:5px;top:14px;background:var(--muted)}
+  .card.demo{border-left:4px solid var(--accent)}
+  .card.demo .tag{display:inline-block;font-size:12px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;
+                  color:var(--accent);margin-bottom:8px}
+  details.more{background:#fbfaf8;border:1px dashed #cfcdc6;border-radius:14px;padding:14px 24px;margin:16px 0}
+  details.more summary{cursor:pointer;font-size:18px;font-weight:700;color:var(--accent)}
+  details.more h4{margin:18px 0 6px;font-size:17px}
+  details.more p,details.more li{font-size:16px;line-height:1.5}
+  details.more ul{padding-left:20px}
+  .card.read{border-left:4px solid #7a5ea6}
+  .card.read .tag{display:inline-block;font-size:12px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;
+                  color:#7a5ea6;margin-bottom:8px}
+  .quote{background:var(--code-bg);border-left:3px solid var(--accent);border-radius:0 8px 8px 0;
+         padding:12px 16px;margin:12px 0;font-style:italic;line-height:1.5}
+  code{background:var(--code-bg);padding:1px 5px;border-radius:4px;font-family:ui-monospace,Menlo,monospace;font-size:.85em}
+  strong{color:#111}
+  table{border-collapse:collapse;width:100%;margin:10px 0;font-size:16px}
+  th,td{border:1px solid var(--line);padding:8px 12px;text-align:left}
+  th{background:var(--accent-weak);font-size:14px}
+  .src{font-size:13px;color:var(--muted)} .src a{color:var(--accent)}
+  aside{position:sticky;top:0;align-self:start;height:100vh;overflow:auto;
+        border-left:1px solid var(--line);padding:26px 18px 60px;background:#fbfaf8}
+  aside .railhead{font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--ex)}
+  .hands{display:none} .hands.on{display:block}
+  .exi{border:1px solid #e8d3ba;background:var(--ex-weak);border-radius:10px;margin:10px 0;padding:12px 14px}
+  .exi .step{display:inline-block;font-size:10px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;
+             color:#fff;background:var(--ex);border-radius:20px;padding:2px 9px;margin-bottom:8px}
+  .exi h4{margin:0 0 6px;font-size:15px}
+  .exi ul{margin:6px 0;padding-left:18px;font-size:13.5px;line-height:1.5}
+  .exi li{margin:4px 0}
+  .exi p{font-size:13.5px;line-height:1.5;margin:6px 0}
+  .save{font-size:13px;color:var(--muted);background:#fff;border:1px solid var(--line);
+        border-radius:8px;padding:9px 12px;margin:10px 0}
+  .code{position:relative;background:#fff;border:1px solid #e8d3ba;border-radius:8px;
+        padding:9px 34px 9px 11px;font-family:ui-monospace,Menlo,monospace;font-size:12px;
+        white-space:pre-wrap;margin:8px 0;line-height:1.45}
+  .code .copy{position:absolute;top:6px;right:6px;font-size:10px;border:1px solid #e8d3ba;
+              background:#fff;border-radius:6px;padding:2px 7px;cursor:pointer;color:var(--ex)}
+  .guidelink{display:inline-block;margin-top:6px;font-size:13px;color:var(--ex);font-weight:600}
+    .mobilenote{display:none}
+  .mhead{display:none}
+  /* ---- tablet: two columns, top menu ---- */
+  @media(max-width:1080px){
+    .layout{grid-template-columns:minmax(0,1fr) 340px}
+    nav{display:none}
+    .mhead{display:flex;align-items:center;justify-content:space-between;gap:12px;
+           position:sticky;top:0;z-index:20;background:var(--bg);
+           border-bottom:1px solid var(--line);padding:10px 16px}
+    .mtitle{font-size:14px;font-weight:800;color:var(--fg);text-decoration:none}
+    .mnav summary{list-style:none;cursor:pointer;font-size:13px;font-weight:700;color:var(--accent);
+                  border:1px solid var(--line);border-radius:8px;padding:5px 12px;background:#fff}
+    .mnav summary::-webkit-details-marker{display:none}
+    .mnav{position:relative}
+    .mnav-box{position:absolute;right:0;top:36px;min-width:240px;background:#fff;
+              border:1px solid var(--line);border-radius:12px;box-shadow:0 8px 24px rgba(0,0,0,.10);
+              padding:10px 14px;z-index:30}
+    .mnav-box a{display:block;color:var(--fg);text-decoration:none;font-size:14px;padding:6px 0}
+    .mnav-box a:hover{color:var(--accent)}
+    .mlbl{font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin:8px 0 2px}
+    main{padding:20px 20px 120px}
+    h1{font-size:27px}
+    h2.sec{font-size:24px}
+    table{display:block;overflow-x:auto}
+  }
+  /* ---- phone: single column ---- */
+  @media(max-width:740px){
+    .layout{grid-template-columns:1fr}
+    main{padding:16px 14px 60px}
+    .mobilenote{display:block;background:var(--accent-weak);border:1px solid var(--line);
+                border-radius:10px;padding:10px 14px;margin:0 0 18px;font-size:13.5px;
+                line-height:1.5;color:var(--fg)}
+    h1{font-size:25px}
+    .card{padding:16px 16px}
+    .card li{font-size:16px}
+    aside{position:static;height:auto;border-left:0;border-top:1px solid var(--line)}
+    .hands{display:block !important;border-top:1px solid var(--line);padding-top:10px;margin-top:10px}
+    .hands[data-for="none"]{display:none !important}
+  }
+</style>
+</head>
+<body>
+<div class="mhead">
+  <a class="mtitle" href="week_mapping_12week.html">Applied AI for Public Policy</a>
+  <details class="mnav">
+    <summary>Menu</summary>
+    <div class="mnav-box">
+      <p class="mlbl">Weeks</p>
+      <a href="week01.html">1 · What an AI agent is</a>
+      <a href="week02.html">2 · Setting up and configuring the agent</a>
+      <a href="week03.html">3 · Parallel work and subagents</a>
+      <a href="week04.html">4 · AI for data collection</a>
+      <a href="week05.html">5 · AI for data coding and model choice</a>
+      <a href="week06.html">6 · AI for visualization and publishing</a>
+      <a href="week07.html">7 · Algorithmic bias</a>
+      <a href="week08.html">8 · Auditing a federal AI system</a>
+      <a href="week09.html">9 · Designing your final project</a>
+      <a href="week10.html">10 · AI governance</a>
+      <a href="week11.html">11 · Code review and replication</a>
+      <a href="week12.html">12 · Final presentations</a>
+      <p class="mlbl">On this page</p>
+      <a href="#opening">Opening</a>
+      <a href="#reading">Readings</a>
+      <a href="#text-coding">What text coding is</a>
+      <a href="#codebook">Writing a codebook</a>
+      <a href="#why-computers">The scale problem</a>
+      <a href="#methods">How computers code text</a>
+      <a href="#pilot">Coding the pilot with the agent</a>
+      <a href="#scale">Scaling up with a script</a>
+      <a href="#validate">Validating with a held-out sample</a>
+      <a href="#model">Choosing the model</a>
+      <a href="#project-discussion">Project and policy discussion</a>
+      <a href="#wrap">Assignments</a>
+    </div>
+  </details>
+</div>
+<div class="layout">
+
+  <!-- ================= LEFT NAV ================= -->
+  <nav>
+    <a class="home" href="week_mapping_12week.html">MPA 2479<br>Applied AI for Public Policy</a>
+    <div class="days">
+      <div class="lbl">Weeks</div>
+      <a href="week01.html">1 · What an AI agent is</a>
+      <a href="week02.html">2 · Setting up and configuring the agent</a>
+      <a href="week03.html">3 · Parallel work and subagents</a>
+      <a href="week04.html">4 · AI for data collection</a>
+      <a href="week05.html" class="cur">5 · AI for data coding and model choice</a>
+      <a href="week06.html">6 · AI for visualization and publishing</a>
+      <a href="week07.html">7 · Algorithmic bias</a>
+      <a href="week08.html">8 · Auditing a federal AI system</a>
+      <a href="week09.html">9 · Designing your final project</a>
+      <a href="week10.html">10 · AI governance</a>
+      <a href="week11.html">11 · Code review and replication</a>
+      <a href="week12.html">12 · Final presentations</a>
+    </div>
+    <div class="lbl">Today</div>
+    <div class="toc">
+      <a href="#opening">Opening</a>
+      <a href="#reading">Readings</a>
+      <a href="#text-coding">What text coding is</a>
+      <a href="#codebook">Writing a codebook</a>
+      <a href="#why-computers">The scale problem</a>
+      <a href="#methods">How computers code text</a>
+      <a href="#pilot">Coding the pilot with the agent <span class="has">hands-on</span></a>
+      <a href="#scale">Scaling up with a script <span class="has">hands-on</span></a>
+      <a href="#validate">Validating with a held-out sample <span class="has">hands-on</span></a>
+      <a href="#model">Choosing the model <span class="has">hands-on</span></a>
+      <a href="#project-discussion">Project and policy discussion</a>
+      <a href="#wrap">Assignments</a>
+    </div>
+  </nav>
+
+  <!-- ================= CENTER CONTENT ================= -->
+  <main>
+    <p class="course-back"><a href="week_mapping_12week.html">← 12-week course plan</a></p>
+    <div class="mobilenote">You are on a small screen. This page is designed for a laptop, with three columns and hands-on steps appearing beside the content. On a phone it collapses to one column and the hands-on steps move to the end of the page. Reading here is fine; for the exercises you need your laptop anyway.</div>
+    <p class="kicker">Week 5 · Oct 15, 2026 · Thursday, 9:00–11:30 am · 280 Brook Street, Room 110</p>
+    <h1>AI for data coding and model choice</h1>
+    <p class="byline" style="margin:2px 0 16px;color:var(--muted);font-size:15px">Authors: <a href="https://hanzhang.xyz/">Han Zhang</a> and Codex (OpenAI)</p>
+    <p class="goal">Construct a measure, evaluate it on held-out human codes, and explain whether it is useful for the intended policy analysis.</p>
+
+    <!-- OPENING -->
+    <section data-hands="none">
+<h2 class="sec" id="opening">Opening</h2>
+<div class="card"><h3>Today</h3><ul>
+  <li>Learn what text coding is and how research and government use it.</li>
+  <li>Code 10 abstracts by hand with a given codebook, then revise the codebook.</li>
+  <li>See why coding at scale needs a computer, and how computers code text.</li>
+  <li>Ask the agent to code the same 10 abstracts, with zero-shot and few-shot prompts.</li>
+  <li>Write a script that codes abstracts through a model API.</li>
+  <li>Test the model on a held-out sample and compare it with the dictionary method.</li>
+  <li>Choose a model by its accuracy, its cost, and the rules for your data.</li>
+</ul></div><div class="card"><h3>From text to a measure</h3><p>Today, code text by hand, ask a model to code the same text, and check its codes against your own. Use the abstracts collected in Week 4 or suitable text from your individual project.</p></div>
+</section>
+
+    <!-- READING -->
+    <section data-hands="none">
+<h2 class="sec" id="reading">Readings</h2>
+<div class="card"><h3>Evaluating AI text annotation</h3><ul>
+  <li>Gilardi, Alizadeh &amp; Kubli, <a href="https://doi.org/10.1073/pnas.2305016120">“ChatGPT outperforms crowd workers for text-annotation tasks” (2023)</a>. Focus on how annotation performance is evaluated.</li>
+</ul></div>
+</section>
+
+    <!-- TEXT CODING -->
+    <section data-hands="none">
+<h2 class="sec" id="text-coding">What text coding is</h2>
+<div class="card"><h3>Turning text into a variable</h3><ul>
+  <li>Much policy information comes as text. Administrative records such as rules, public comments, court filings, and inspection notes are mostly text.</li>
+  <li>Surveys contain text too, whenever people answer a question in their own words.</li>
+  <li>Text coding turns that text into a variable. You read each document and assign it one value from a fixed set of categories.</li>
+  <li>A <strong>codebook</strong> is the written rule for that assignment. It names the variable, lists the categories, and defines each category with an example.</li>
+</ul></div>
+<div class="card"><h3>Text coding in research and government</h3><ul>
+  <li>Researchers code text to build the variables their analysis needs.
+    <ul>
+      <li>The <a href="https://manifesto-project.wzb.eu/">Manifesto Project</a> codes the election platforms of more than 1,400 parties since 1945. Coders assign each sentence to one of 56 policy categories, such as “Free Market Economy”. <a href="https://manifesto-project.wzb.eu/coding_schemes/mp_v4">The codebook is public.</a></li>
+      <li>The <a href="https://www.comparativeagendas.net/">Comparative Agendas Project</a> codes government activity in about 20 countries and regions into the same 21 policy topics. Researchers use it to compare what governments pay attention to.</li>
+    </ul>
+  </li>
+  <li>Governments code text to produce official statistics.
+    <ul>
+      <li>The American Community Survey asks people to describe their job in their own words. The Census Bureau codes each answer into one of about 570 <a href="https://www.census.gov/topics/employment/industry-occupation/about/occupation.html">occupation categories</a>. Different answers for the same job, such as “nurse”, “RN”, and “registered nurse”, must get the same code.</li>
+      <li>The <a href="https://www.bls.gov/iif/automated-coding.htm">Bureau of Labor Statistics</a> codes written descriptions of workplace injuries. Each case gets codes for the occupation, the injury, the part of the body, and what caused it.</li>
+    </ul>
+  </li>
+</ul></div>
+</section>
+
+    <!-- CODEBOOK -->
+    <section data-hands="none">
+    <h2 class="sec" id="codebook">Writing a codebook</h2>
+    <div class="card">
+      <h3>A draft codebook for federal rules</h3>
+      <ul>
+        <li>Today everyone codes the Federal Register abstracts collected in Week 4. Each of you chose a different agency, so the question must work for any agency.</li>
+        <li>The question for each abstract: does this rule add regulation, reduce it, or neither?</li>
+        <li>The Federal Register labels each document by type and agency. These labels do not answer the question. You need to read the abstract.</li>
+        <li>I wrote a first codebook with three categories.
+          <ul>
+            <li><strong>Stricter</strong>: the rule adds or tightens a requirement, limit, fee, or standard.</li>
+            <li><strong>Looser</strong>: the rule removes, delays, exempts, or eases a requirement.</li>
+            <li><strong>Technical</strong>: the rule corrects, clarifies, or extends a deadline without changing what anyone must do.</li>
+          </ul>
+        </li>
+        <li>This codebook is a first draft. In the exercise below, you test it on your own abstracts and improve it.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Exercise 1: Revising the draft codebook</h3>
+      <ul>
+        <li>Code 10 abstracts from your agency with this codebook.</li>
+        <li>If you were writing this codebook, how would you make it clearer? Rewrite it.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Exercise 2: A codebook for your own project</h3>
+      <ul>
+        <li>Pick text from your own project, such as state laws, incident reports, or public comments. Write a short codebook for one variable.</li>
+        <li>Swap with a classmate who does not know your topic. Your partner codes 5 of your documents using only the codebook. Do not explain anything while they code.</li>
+        <li>Compare their codes with yours. Where you disagree, find the part of the codebook that misled them.</li>
+        <li>A large language model reads your codebook the same way your partner did. It knows only what the codebook says.</li>
+      </ul>
+    </div>
+    </section>
+
+    <!-- WHY COMPUTERS -->
+    <section data-hands="none">
+<h2 class="sec" id="why-computers">The scale problem</h2>
+<div class="card"><h3>The volume of policy text</h3><ul>
+  <li>A federal agency can publish hundreds of rules in a year. In 2025 the EPA published 242 proposed rules.</li>
+  <li>In 2012 the Census Bureau reported that it assigns more than 2 million industry and occupation codes to survey answers every year (<a href="https://www.census.gov/content/dam/Census/library/working-papers/2012/demo/2012-io-coding-asa-paper-final.pdf">Thompson, Kornbau &amp; Vesely 2012</a>).</li>
+  <li>A public comment period can draw far more documents. The FCC received more than 22 million comments on net neutrality in 2017 (<a href="https://ag.ny.gov/sites/default/files/reports/oag-fakecommentsreport.pdf">New York Attorney General 2021</a>).</li>
+  <li>At that scale, hand coding takes too long. Researchers and agencies use computers to code the text.</li>
+</ul></div>
+</section>
+
+    <!-- METHODS -->
+    <section data-hands="none">
+<h2 class="sec" id="methods">How computers code text</h2>
+<div class="card"><h3>Three common approaches</h3><ul>
+  <li>The <strong>dictionary method</strong> uses keyword rules. You list keywords for each category. A document gets a category when it contains that category’s keywords.
+    <ul>
+      <li><a href="https://www.mercatus.org/research/policy-briefs/healthcare-regdata-quantifying-volume-healthcare-regulations">RegData</a> measures the amount of federal regulation by counting the words “shall”, “must”, “may not”, “required”, and “prohibited”.</li>
+    </ul>
+  </li>
+  <li><strong>Supervised machine learning</strong> trains a model on a large number of hand-coded documents.
+    <ul>
+      <li>The Bureau of Labor Statistics trained its injury coder on past cases that its staff had coded by hand. The model now assigns most of the codes.</li>
+      <li>The Census Bureau codes occupations the same way. Answers the model is unsure about go to staff coders.</li>
+      <li>This course does not teach supervised machine learning.</li>
+    </ul>
+  </li>
+  <li><strong>Large language models</strong> code text from a prompt. The prompt contains the codebook, the text, and a request for a category. There are two common ways to write the prompt.
+    <ul>
+      <li><strong>Zero-shot</strong>: the prompt contains only the codebook and the text. It needs no coded examples.</li>
+      <li><strong>Few-shot</strong>: the prompt also contains a handful of coded examples.</li>
+      <li>Agencies are now testing large language models for this work. In April 2026, Census Bureau researchers <a href="https://www.nationalacademies.org/cdn/materials/a1f3d288-7dd6-43e0-ad8a-d9cea21bdc4a">presented their work</a> on coding occupations with large language models.</li>
+    </ul>
+  </li>
+  <li>Today you code with a large language model and zero-shot prompts. A dictionary method serves as a simple comparison.</li>
+  <li>The reading by Gilardi and colleagues compares coding by ChatGPT with coding by crowd workers.</li>
+</ul></div>
+</section>
+
+    <!-- PILOT -->
+    <section data-hands="pilot">
+<h2 class="sec" id="pilot">Coding the pilot with the agent <span class="hastag">· do it on the right</span></h2>
+<div class="card"><h3>Coding the pilot abstracts</h3><ul>
+  <li>Ask the agent to code the 10 abstracts you coded by hand. The agent reads your codebook and each abstract, and returns one category per abstract.</li>
+  <li>Compare its codes with yours. Where they differ, read the abstract again.
+    <ul>
+      <li>The definition may be unclear.</li>
+      <li>The agent may have made a mistake.</li>
+      <li>You may have made a mistake.</li>
+    </ul>
+  </li>
+  <li>Revise the codebook and ask again.</li>
+  <li>If the agent codes these 10 abstracts poorly, a script will code hundreds of abstracts poorly. Fix the codebook first.</li>
+</ul></div>
+<div class="card"><h3>Zero-shot and few-shot</h3><ul>
+  <li>So far the agent has seen only your codebook. This is zero-shot coding.</li>
+  <li>For few-shot coding, add 2 or 3 coded abstracts to the codebook as examples. Choose abstracts from categories the agent got wrong.</li>
+  <li>Take the examples only from these 10 abstracts.</li>
+  <li>Keep both versions of the codebook. Later you test both on new abstracts.</li>
+</ul></div>
+</section>
+
+    <!-- SCALE -->
+    <section data-hands="scale">
+<h2 class="sec" id="scale">Scaling up with a script <span class="hastag">· do it on the right</span></h2>
+<div class="card"><h3>Model APIs</h3><ul>
+  <li>In Week 4 your script sent a request to the Federal Register API. The request named an agency and a year. The API sent back documents.</li>
+  <li>A model API works the same way. Your script sends a request, and the API sends back the model’s answer.</li>
+  <li>Here the request contains your codebook and one abstract. The answer is the model’s category for that abstract.</li>
+</ul></div>
+<div class="card"><h3>Commercial and open-source models</h3><ul>
+  <li><strong>Commercial models</strong> run on the company’s servers. You pay for each call, and your text goes to the company. Each company documents its API:
+    <ul>
+      <li><a href="https://platform.openai.com/docs">OpenAI API</a> (GPT models)</li>
+      <li><a href="https://docs.anthropic.com/">Anthropic API</a> (Claude models)</li>
+      <li><a href="https://ai.google.dev/gemini-api/docs">Google Gemini API</a></li>
+    </ul>
+  </li>
+  <li>A chat subscription such as ChatGPT Plus does not include API access. The API is billed separately.</li>
+  <li><strong>Open-source models</strong> can be downloaded and run by anyone.
+    <ul>
+      <li><a href="https://huggingface.co/models">Hugging Face</a> hosts most open-source models, such as Llama, Qwen, and Gemma.</li>
+      <li><a href="https://docs.ollama.com/">Ollama</a> runs these models on your own computer and gives them a local API. Your data stays on your computer.</li>
+      <li>They are free to run, but usually less capable than the best commercial models.</li>
+    </ul>
+  </li>
+  <li>Find the API documentation for the model you want to use. Give the link to the agent when it writes the script.</li>
+</ul></div>
+<div class="card"><h3>The coding script</h3><ul>
+  <li>The agent coded 10 abstracts inside the conversation. For hundreds of abstracts, every abstract should get exactly the same instructions.</li>
+  <li>Ask the agent to write a script. The script sends your codebook and one abstract at a time to a model through its API. It saves the category for each abstract in a table.</li>
+  <li>Each call to a commercial API costs money. You pay for the text you send and the text you get back. Ask the agent to estimate the cost before you run the script.</li>
+  <li>Record the exact model name and version. Companies update their models, and the same prompt can give different codes after an update.</li>
+</ul></div>
+</section>
+
+    <!-- VALIDATE -->
+    <section data-hands="validate">
+<h2 class="sec" id="validate">Validating with a held-out sample <span class="hastag">· do it on the right</span></h2>
+<div class="card"><h3>Held-out evaluation</h3><ul>
+  <li>Think of a student who memorizes last year’s exam answers. The student scores 100% on that exam and fails a new one.</li>
+  <li>Your codebook is in the same position. You revised it until the agent coded the 10 pilot abstracts well. A score on those 10 abstracts says little about new abstracts.</li>
+  <li>A fair test uses new abstracts that played no part in writing the codebook. These abstracts are the <strong>held-out sample</strong>.</li>
+  <li>Freeze the codebook. After this point you do not change it.</li>
+  <li>Pick 20 new abstracts. Code them by hand before you see any model codes.</li>
+  <li>Run the script on these 20 abstracts twice: once with the zero-shot codebook and once with the few-shot codebook.</li>
+  <li>Real projects hand-code more documents for this test. Twenty abstracts are enough to practice.</li>
+</ul></div>
+<div class="card"><h3>Confusion matrix</h3><ul>
+  <li>A <strong>confusion matrix</strong> compares the model’s codes with yours. It is a table with your codes as rows and the model’s codes as columns. Each cell counts abstracts.</li>
+</ul>
+<table>
+  <tr><th>Example (made-up numbers)</th><th>Model: Stricter</th><th>Model: Looser</th><th>Model: Technical</th></tr>
+  <tr><th>You: Stricter</th><td><b>6</b></td><td>1</td><td>0</td></tr>
+  <tr><th>You: Looser</th><td>0</td><td><b>7</b></td><td>1</td></tr>
+  <tr><th>You: Technical</th><td>2</td><td>0</td><td><b>3</b></td></tr>
+</table>
+<ul>
+  <li>Cells on the diagonal, in bold, are agreements. Here the model agrees with you on 16 of 20 abstracts. This share is the <strong>agreement rate</strong>.</li>
+  <li>The other cells show which category the model mistook for which. In this example, the model coded 2 of your Technical abstracts as Stricter.</li>
+  <li>Read the abstracts behind those cells. Decide which mistakes matter for your policy question.</li>
+  <li>There are other ways to summarize the same table. The box below explains the common ones.</li>
+</ul></div>
+<details class="more">
+<summary>More detail: other ways to compare codes</summary>
+
+<h4>When the agreement rate misleads</h4>
+<ul>
+  <li>Suppose 16 of your 20 abstracts are Technical.</li>
+  <li>A model that answers Technical every time agrees with you on 16 of 20 abstracts, or 80%.</li>
+  <li>That model never finds a Stricter or a Looser rule. A high agreement rate can hide a model that misses the rare categories.</li>
+</ul>
+
+<h4>Precision and recall</h4>
+<ul>
+  <li>Precision and recall describe one category at a time. Take Stricter in the example table above.</li>
+  <li><strong>Precision</strong>: of the abstracts the model coded Stricter, how many did you code Stricter? The model coded 8 abstracts Stricter, and 6 of them match yours. Precision is 6 of 8, or 75%.</li>
+  <li><strong>Recall</strong>: of the abstracts you coded Stricter, how many did the model find? You coded 7 abstracts Stricter, and the model found 6. Recall is 6 of 7, or 86%.</li>
+  <li>Which one matters depends on the policy question.
+    <ul>
+      <li>To find every rule that tightened regulation, you need high recall.</li>
+      <li>To report how many rules tightened regulation, you also need high precision.</li>
+    </ul>
+  </li>
+  <li>The <strong>F1 score</strong> combines precision and recall into one number. It is low when either one is low.</li>
+</ul>
+
+<h4>Agreement between two people</h4>
+<ul>
+  <li>When two people code the same documents, their agreement is called <strong>intercoder reliability</strong>.</li>
+  <li>Cohen’s kappa is the common measure. It counts agreement beyond what two coders would reach by chance.</li>
+  <li>A common rule of thumb: kappa of 0.6 or more is acceptable, and 0.8 or more is strong.</li>
+  <li>Exercise 2 tests the same thing. If two people cannot agree on a code, there is no answer against which to judge the model.</li>
+</ul>
+</details>
+<div class="card"><h3>Consistency checks</h3><ul>
+  <li>A good measure gives the same codes when nothing important changes. Check this in three ways.
+    <ul>
+      <li>Same model, same codebook: run the held-out sample twice. The two runs should give the same codes.</li>
+      <li>Different wording: your zero-shot and few-shot versions are two wordings of the same task. Small changes in wording can change the codes. This is called <strong>prompt sensitivity</strong>.</li>
+      <li>Different model: run the held-out sample with a model from another company, or with an open-source model.</li>
+    </ul>
+  </li>
+  <li>Compare the confusion matrices. If the codes change a lot, read the abstracts whose codes changed. The codebook may be unclear for those abstracts.</li>
+</ul></div>
+<div class="card"><h3>Dictionary baseline</h3><ul>
+  <li>The dictionary method gives a simple benchmark. If the language model cannot beat a list of keywords, it is not worth its cost.</li>
+  <li>Read the 10 pilot abstracts and list keywords for each category.
+    <ul>
+      <li>Looser: “withdraw”, “delay”, “rescind”.</li>
+      <li>Stricter: “require”, “establish”.</li>
+      <li>Technical: “correction”, “technical amendment”.</li>
+    </ul>
+  </li>
+  <li>Ask the agent to code the 20 held-out abstracts with your keyword lists.</li>
+  <li>Build the same confusion matrix and compare it with the language model’s.</li>
+</ul></div>
+</section>
+
+    <!-- MODEL -->
+    <section data-hands="model">
+<h2 class="sec" id="model">Choosing the model</h2>
+<div class="card"><h3>Accuracy, cost, and data rules</h3><ul>
+  <li>Compare the held-out results: zero-shot against few-shot, and each model you tried.</li>
+  <li>Look closely at the categories that matter most for your question.</li>
+  <li>Estimate the cost of coding your full collection.</li>
+  <li>Check whether your data may be sent to a company’s servers. Restricted data needs a local model or an approved arrangement.</li>
+  <li>Write down the chosen model, its version, the final codebook, and the held-out results.</li>
+</ul></div>
+</section>
+
+    <!-- WRAP -->
+    <section data-hands="none">
+<h2 class="sec" id="project-discussion">Project and policy discussion</h2>
+<div class="card"><h3>Measures and evaluation criteria</h3><ul>
+  <li>What does the coded variable measure, and how would it help answer your question or compare alternatives?</li>
+  <li>Which errors matter for that use? Does your validation support using these codes?</li>
+  <li>What did AI make easier, and what did defining and checking the measure still require?</li>
+</ul></div>
+</section>
+<section data-hands="none">
+<h2 class="sec" id="wrap">Assignments</h2>
+<div class="card"><p><b>Weekly memo · due Oct 22 before class.</b> Write 1–2 specific observations about using AI to code text. Did it help, partly help, or fail to help? Use an actual coding decision or disagreement to explain what worked, what needed correction, and whether the resulting variable is useful for your policy question. Aim for 150–200 words total. Describe what you actually tried and observed in your own words. Do not use AI to write the memo. Begin in class and submit to Canvas Discussions. See <a href="week_mapping_12week.html#assessment">assignments and grading</a>.</p></div>
+<p><a href="week06.html">Week 6 &rarr;</a></p>
+</section>
+
+  </main>
+
+  <!-- ================= RIGHT CONTEXTUAL HANDS-ON ================= -->
+  <aside>
+    <p class="railhead" id="railhead">Hands-on</p>
+    <div class="hands" data-for="none"></div>
+
+    <!-- pilot -->
+    <div class="hands" data-for="pilot">
+      <div class="exi">
+        <span class="step">Step 1</span>
+        <h4>Code the pilot with the agent</h4>
+        <div class="code">Read my codebook. Use it to code each of the 10 pilot abstracts. For each abstract, give the document number, the category, and a one-sentence reason.<span class="copy">copy</span></div>
+      </div>
+      <div class="exi">
+        <span class="step">Step 2</span>
+        <h4>Compare with your hand codes</h4>
+        <div class="code">Compare your codes with my hand codes. Show each disagreement with the abstract text and both codes.<span class="copy">copy</span></div>
+        <ul>
+          <li>Read each disagreement yourself and revise the codebook.</li>
+        </ul>
+      </div>
+      <div class="exi">
+        <span class="step">Step 3</span>
+        <h4>Make a few-shot version</h4>
+        <p>Copy the codebook. Add 2 or 3 pilot abstracts with their correct codes as examples. Ask the agent to code the 10 abstracts again with the new version.</p>
+      </div>
+    </div>
+
+    <!-- scale -->
+    <div class="hands" data-for="scale">
+      <div class="exi">
+        <span class="step">Step 1</span>
+        <h4>Write the script</h4>
+        <div class="code">Write a script that sends my codebook and one abstract at a time to a model through its API. Save the document number, the category, and the model name for each abstract in a table. Before running it, estimate the cost.<span class="copy">copy</span></div>
+      </div>
+      <div class="exi">
+        <span class="step">Step 2</span>
+        <h4>Test it on the pilot</h4>
+        <ul>
+          <li>Run the script on the 10 pilot abstracts.</li>
+          <li>Check that every abstract has a code and that the codes look like the agent’s codes.</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- validate -->
+    <div class="hands" data-for="validate">
+      <div class="exi">
+        <span class="step">Step 1</span>
+        <h4>Hand-code the held-out sample</h4>
+        <p>Freeze the codebook. Pick 20 new abstracts and code them by hand before running any model.</p>
+      </div>
+      <div class="exi">
+        <span class="step">Step 2</span>
+        <h4>Run both versions</h4>
+        <p>Run the script on the 20 abstracts with the zero-shot codebook, then with the few-shot codebook.</p>
+      </div>
+      <div class="exi">
+        <span class="step">Step 3</span>
+        <h4>Build the confusion matrices</h4>
+        <div class="code">Compare the model codes with my hand codes for the 20 held-out abstracts. For each codebook version, report the agreement rate and a confusion matrix with my codes as rows and the model codes as columns.<span class="copy">copy</span></div>
+      </div>
+      <div class="exi">
+        <span class="step">Step 4</span>
+        <h4>Run the dictionary method</h4>
+        <div class="code">Here are my keyword lists for each category. Code the 20 held-out abstracts with these lists. Report the agreement rate and a confusion matrix in the same format.<span class="copy">copy</span></div>
+      </div>
+    </div>
+
+    <!-- model -->
+    <div class="hands" data-for="model">
+      <div class="exi"><h4>Record the model choice</h4><p>Write a few sentences in the README: the chosen model, its version, the held-out results, the estimated cost, and whether the data may be sent to the company.</p></div>
+      <div class="exi"><h4>Optional: try an open-source model</h4><p>Follow the <a href="https://docs.ollama.com/">Ollama documentation</a> to run an open-source model on the same 20 abstracts. Compare its results with the commercial model’s.</p></div>
+    </div>
+  </aside>
+
+</div>
+
+<script>
+  const sections=[...document.querySelectorAll('main section')];
+  const panels=[...document.querySelectorAll('.hands')];
+  const railhead=document.getElementById('railhead');
+  function show(key){
+    panels.forEach(p=>p.classList.toggle('on',p.dataset.for===key));
+    railhead.style.display = key==='none' ? 'none' : '';
+  }
+  addEventListener('scroll',()=>{
+    let cur=sections[0];
+    sections.forEach(s=>{const t=s.getBoundingClientRect().top; if(t<window.innerHeight*0.35) cur=s;});
+    show(cur.dataset.hands);
+  },{passive:true});
+  show('none');
+  const links=[...document.querySelectorAll('.toc a')];
+  addEventListener('scroll',()=>{
+    let cur=null;
+    links.forEach(a=>{const el=document.querySelector(a.getAttribute('href'));
+      if(el && el.getBoundingClientRect().top<140)cur=a;});
+    links.forEach(a=>a.classList.toggle('active',a===cur));
+  },{passive:true});
+  document.addEventListener('click',e=>{
+    if(!e.target.classList.contains('copy'))return;
+    const x=e.target.parentNode.childNodes[0].textContent.trim();
+    navigator.clipboard.writeText(x).then(()=>{e.target.textContent='copied';
+      setTimeout(()=>e.target.textContent='copy',1200);});
+  });
+</script>
+</body>
+</html>

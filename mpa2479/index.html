@@ -422,17 +422,21 @@
 <td class="wknum"><span class="n"><a href="week05.html">Week 5</a></span><span class="d">Oct 15</span></td>
 <td><span class="topic">AI for data coding and model choice</span>
 <ul>
-  <li>Define a codebook for turning text into variables.</li>
-  <li>Pilot the codebook on a small sample; compare human and model codes and revise unclear categories.</li>
-  <li>Freeze the codebook before evaluating it on a separate human-coded sample.</li>
-  <li>Use a script and a model API for batch coding. Compare errors, a simple baseline, cost, and data-use requirements when choosing a model.</li>
+  <li>Learn what text coding is and how research and government use it.</li>
+  <li>Code 10 abstracts by hand with a given codebook, then revise the codebook.</li>
+  <li>See why coding at scale needs a computer, and how computers code text.</li>
+  <li>Ask the agent to code the same 10 abstracts, with zero-shot and few-shot prompts.</li>
+  <li>Write a script that codes abstracts through a model API.</li>
+  <li>Test the model on a held-out sample and compare it with the dictionary method.</li>
+  <li>Choose a model by its accuracy, its cost, and the rules for your data.</li>
 </ul></td>
 <td>
 <ul>
-  <li>Use the Federal Register abstracts collected in Week 4. Read 10 abstracts and draft categories for the policy action each document describes. Discuss unclear cases with a classmate.</li>
-  <li>Pilot the coding with AI, inspect disagreements, and revise the codebook. Freeze the rules, then hand-code 20 different abstracts before seeing their model labels.</li>
-  <li>Have the agent write and run a script to code those 20 abstracts through a model API. Compare the model with the human codes and a simple keyword baseline.</li>
-  <li>Inspect the confusion matrix and explain two disagreements. Try a larger batch or a second model as an extension.</li>
+  <li>Use the Federal Register abstracts collected in Week 4. Code 10 abstracts by hand: is each rule stricter, looser, or technical? Discuss abstracts that do not fit and revise the codebook.</li>
+  <li>Write a short codebook for text from your own project. A classmate who does not know your topic codes 5 documents with it.</li>
+  <li>Ask the agent to code the same 10 abstracts and compare its codes with yours. Make a few-shot version of the codebook.</li>
+  <li>Have the agent write a script that codes abstracts through a model API.</li>
+  <li>Freeze the codebook and hand-code 20 new abstracts. Run both codebook versions and the dictionary method on them, and compare the confusion matrices.</li>
 </ul></td>
 <td><span class="topic">Measures and evaluation criteria</span>
 <ul>
