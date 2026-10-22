@@ -152,6 +152,7 @@
       <a href="#codebook">Writing a codebook</a>
       <a href="#why-computers">The scale problem</a>
       <a href="#methods">How computers code text</a>
+      <a href="#topics">Topic models</a>
       <a href="#pilot">Coding the pilot with the agent</a>
       <a href="#scale">Scaling up with a script</a>
       <a href="#validate">Validating with a held-out sample</a>
@@ -189,6 +190,7 @@
       <a href="#codebook">Writing a codebook</a>
       <a href="#why-computers">The scale problem</a>
       <a href="#methods">How computers code text</a>
+      <a href="#topics">Topic models</a>
       <a href="#pilot">Coding the pilot with the agent <span class="has">hands-on</span></a>
       <a href="#scale">Scaling up with a script <span class="has">hands-on</span></a>
       <a href="#validate">Validating with a held-out sample <span class="has">hands-on</span></a>
@@ -226,6 +228,7 @@
 <h2 class="sec" id="reading">Readings</h2>
 <div class="card"><h3>Evaluating AI text annotation</h3><ul>
   <li>Gilardi, Alizadeh &amp; Kubli, <a href="https://doi.org/10.1073/pnas.2305016120">“ChatGPT outperforms crowd workers for text-annotation tasks” (2023)</a>. Focus on how annotation performance is evaluated.</li>
+  <li>Optional readings appear at the end of several sections below.</li>
 </ul></div>
 </section>
 
@@ -300,6 +303,47 @@
   <li>A public comment period can draw far more documents. The FCC received more than 22 million comments on net neutrality in 2017 (<a href="https://ag.ny.gov/sites/default/files/reports/oag-fakecommentsreport.pdf">New York Attorney General 2021</a>).</li>
   <li>At that scale, hand coding takes too long. Researchers and agencies use computers to code the text.</li>
 </ul></div>
+<div class="card"><h3>Two sources of difficulty</h3><ul>
+  <li>A coding task can be hard for two separate reasons.
+    <ul>
+      <li>Each document is hard for a person to code. Two careful people using the same codebook often disagree. Exercise 2 tested this.</li>
+      <li>There are too many documents for people to code.</li>
+    </ul>
+  </li>
+  <li>The two reasons combine into four cases.</li>
+</ul>
+<table>
+  <tr><th></th><th>Few documents</th><th>Many documents</th></tr>
+  <tr><th>Easy for a person</th>
+      <td>Code by hand. Example: the 10 abstracts you coded today.</td>
+      <td>The scale problem. A computer codes the documents, and people check a sample. Examples: occupation codes at the Census Bureau, the 22 million FCC comments.</td></tr>
+  <tr><th>Hard for a person</th>
+      <td>Trained coders code each document, and a second coder checks the codes. A computer adds little here. Example: coding court opinions by their legal reasoning.</td>
+      <td>The hardest case. A computer codes the documents, people code the uncertain ones, and you report the error. Example: finding hate speech among millions of social media posts.</td></tr>
+</table>
+<ul>
+  <li>A computer solves the scale problem. It does not make a hard document easier. If people disagree about a document, there is no correct code against which to check the computer.</li>
+  <li><a href="https://arxiv.org/abs/1703.04009">Davidson and colleagues (2017)</a> found that hate speech is hard to separate from other offensive language, for people and for computers.</li>
+</ul></div>
+<div class="card"><h3>When the text does not hold the answer</h3><ul>
+  <li>Some questions cannot be answered from the text at all.</li>
+  <li>Was this public comment written by AI? The answer depends on how the comment was written. The text itself may show no sign of it.
+    <ul>
+      <li>OpenAI released a tool to detect AI-written text in January 2023. It <a href="https://openai.com/index/new-ai-classifier-for-indicating-ai-written-text/">withdrew the tool in July 2023</a> because of its low accuracy.</li>
+      <li><a href="https://doi.org/10.1016/j.patter.2023.100779">Liang and colleagues (2023)</a> found that detectors of AI-written text labeled more than half of the essays by non-native English writers as AI-written.</li>
+    </ul>
+  </li>
+  <li>A better model does not help with such questions. The answer needs information from outside the text.</li>
+</ul></div>
+<div class="card"><h3>Coding a sample</h3><ul>
+  <li>Some questions ask for a share. For example, what share of the 2025 rules tightened regulation?</li>
+  <li>For a share, code a random sample by hand. With a random sample of 400 documents, the estimate is usually within 5 percentage points of the true share.</li>
+  <li>Other questions need a code for every document. For example, list every rule that loosened a requirement. These questions need the computer methods in the next section.</li>
+</ul></div>
+<div class="card read"><span class="tag">Optional reading</span><ul>
+  <li>Wang, Kennedy, Lazer &amp; Ramakrishnan, <a href="https://doi.org/10.1126/science.aaf6758">“Growing pains for global monitoring of societal events” (2016)</a>. The authors check a database of protest events coded by computer from news reports, and find many errors.</li>
+  <li>Egami, Hinck, Stewart &amp; Wei, <a href="https://arxiv.org/abs/2306.04746">“Using imperfect surrogates for downstream inference” (2023)</a>. Model codes with high accuracy can still bias the statistics computed from them. The paper shows how a hand-coded random sample corrects this.</li>
+</ul></div>
 </section>
 
     <!-- METHODS -->
@@ -327,6 +371,47 @@
   </li>
   <li>Today you code with a large language model and zero-shot prompts. A dictionary method serves as a simple comparison.</li>
   <li>The reading by Gilardi and colleagues compares coding by ChatGPT with coding by crowd workers.</li>
+</ul></div>
+<div class="card"><h3>Four principles</h3><ul>
+  <li>Grimmer and Stewart (2013) give four principles for coding text with computers.
+    <ul>
+      <li>Every model of language is wrong, but some are useful.</li>
+      <li>Computer methods help people read more text. They do not replace careful reading.</li>
+      <li>No method is best for every task.</li>
+      <li>Validate, validate, validate. Check every measure against careful human reading.</li>
+    </ul>
+  </li>
+  <li>The rest of today applies the fourth principle.</li>
+</ul></div>
+<div class="card read"><span class="tag">Optional reading</span><ul>
+  <li>Grimmer &amp; Stewart, <a href="https://doi.org/10.1093/pan/mps028">“Text as data: The promise and pitfalls of automatic content analysis methods for political texts” (2013)</a>. The source of the four principles.</li>
+  <li>Grimmer, Roberts &amp; Stewart, <a href="https://press.princeton.edu/books/ebook/9780691207995/text-as-data-0"><em>Text as Data: A New Framework for Machine Learning and the Social Sciences</em> (2022)</a>. A full textbook on these methods.</li>
+  <li>Baker, Bloom &amp; Davis, <a href="https://doi.org/10.1093/qje/qjw024">“Measuring economic policy uncertainty” (2016)</a>. The authors build an index of economic policy uncertainty by counting newspaper articles that contain a set of keywords. It is a dictionary method in wide policy use.</li>
+  <li>Ziems and colleagues, <a href="https://doi.org/10.1162/coli_a_00502">“Can large language models transform computational social science?” (2024)</a>. The authors test large language models on many coding tasks and report where they do well and where they fall short.</li>
+</ul></div>
+</section>
+
+    <!-- TOPIC MODELS -->
+    <section data-hands="none">
+<h2 class="sec" id="topics">Topic models</h2>
+<div class="card"><h3>Finding categories in the text</h3><ul>
+  <li>So far you started from a codebook with fixed categories. Sometimes you do not know the categories yet. For example, you may have thousands of public comments and no idea what they discuss.</li>
+  <li>A <strong>topic model</strong> finds groups of words that often appear together in the same documents. Each group is a topic. Each document gets a share of each topic.</li>
+  <li>The model does not name the topics. A researcher reads the top words and some documents for each topic, then names it.</li>
+  <li>Three common topic models:
+    <ul>
+      <li><strong>LDA</strong> (latent Dirichlet allocation) is the standard topic model.</li>
+      <li>The <strong>structural topic model</strong> lets topic shares vary with facts about each document, such as its date or the respondent’s party. Roberts and colleagues used it on open-ended survey answers.</li>
+      <li><strong>TopicGPT</strong> asks a large language model to read documents and propose topics. Each topic gets a name and a short description. The model then assigns each document to a topic.</li>
+    </ul>
+  </li>
+  <li>The topics can change when you rerun the model or change the number of topics.</li>
+  <li>Use a topic model to draft the categories of a codebook. Then code and validate as in the rest of this page.</li>
+</ul></div>
+<div class="card read"><span class="tag">Optional reading</span><ul>
+  <li>Blei, <a href="https://doi.org/10.1145/2133806.2133826">“Probabilistic topic models” (2012)</a>. A short introduction to LDA by one of its authors.</li>
+  <li>Roberts and colleagues, <a href="https://doi.org/10.1111/ajps.12103">“Structural topic models for open-ended survey responses” (2014)</a>.</li>
+  <li>Pham and colleagues, <a href="https://doi.org/10.18653/v1/2024.naacl-long.164">“TopicGPT: A prompt-based topic modeling framework” (2024)</a>.</li>
 </ul></div>
 </section>
 
