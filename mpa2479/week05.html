@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Week 5: AI for Data Coding and Model Choice</title>
+<title>Week 5: AI for Text Coding</title>
 <style>
   :root{
     --bg:#fcfcfb; --fg:#1c1c1a; --muted:#6b6b66; --line:#e6e5e1;
@@ -137,8 +137,8 @@
       <a href="week02.html">2 · Setting up and configuring the agent</a>
       <a href="week03.html">3 · Parallel work and subagents</a>
       <a href="week04.html">4 · AI for data collection</a>
-      <a href="week05.html">5 · AI for data coding and model choice</a>
-      <a href="week06.html">6 · AI for visualization and publishing</a>
+      <a href="week05.html">5 · AI for text coding</a>
+      <a href="week06.html">6 · AI for building websites</a>
       <a href="week07.html">7 · Algorithmic bias</a>
       <a href="week08.html">8 · Auditing a federal AI system</a>
       <a href="week09.html">9 · Designing your final project</a>
@@ -152,11 +152,11 @@
       <a href="#codebook">Writing a codebook</a>
       <a href="#why-computers">The scale problem</a>
       <a href="#methods">How computers code text</a>
+      <a href="#scale">Coding with a script</a>
+      <a href="#evalset">Held-out evaluation</a>
+      <a href="#metrics">Measuring errors</a>
+      <a href="#model">Choosing a coding method</a>
       <a href="#topics">Topic models</a>
-      <a href="#pilot">Coding the pilot with the agent</a>
-      <a href="#scale">Scaling up with a script</a>
-      <a href="#validate">Validating with a held-out sample</a>
-      <a href="#model">Choosing the model</a>
       <a href="#project-discussion">Project and policy discussion</a>
       <a href="#wrap">Assignments</a>
     </div>
@@ -173,8 +173,8 @@
       <a href="week02.html">2 · Setting up and configuring the agent</a>
       <a href="week03.html">3 · Parallel work and subagents</a>
       <a href="week04.html">4 · AI for data collection</a>
-      <a href="week05.html" class="cur">5 · AI for data coding and model choice</a>
-      <a href="week06.html">6 · AI for visualization and publishing</a>
+      <a href="week05.html" class="cur">5 · AI for text coding</a>
+      <a href="week06.html">6 · AI for building websites</a>
       <a href="week07.html">7 · Algorithmic bias</a>
       <a href="week08.html">8 · Auditing a federal AI system</a>
       <a href="week09.html">9 · Designing your final project</a>
@@ -190,11 +190,11 @@
       <a href="#codebook">Writing a codebook</a>
       <a href="#why-computers">The scale problem</a>
       <a href="#methods">How computers code text</a>
+      <a href="#scale">Coding with a script <span class="has">hands-on</span></a>
+      <a href="#evalset">Held-out evaluation <span class="has">hands-on</span></a>
+      <a href="#metrics">Measuring errors <span class="has">hands-on</span></a>
+      <a href="#model">Choosing a coding method <span class="has">hands-on</span></a>
       <a href="#topics">Topic models</a>
-      <a href="#pilot">Coding the pilot with the agent <span class="has">hands-on</span></a>
-      <a href="#scale">Scaling up with a script <span class="has">hands-on</span></a>
-      <a href="#validate">Validating with a held-out sample <span class="has">hands-on</span></a>
-      <a href="#model">Choosing the model <span class="has">hands-on</span></a>
       <a href="#project-discussion">Project and policy discussion</a>
       <a href="#wrap">Assignments</a>
     </div>
@@ -205,7 +205,7 @@
     <p class="course-back"><a href="week_mapping_12week.html">← 12-week course plan</a></p>
     <div class="mobilenote">You are on a small screen. This page is designed for a laptop, with three columns and hands-on steps appearing beside the content. On a phone it collapses to one column and the hands-on steps move to the end of the page. Reading here is fine; for the exercises you need your laptop anyway.</div>
     <p class="kicker">Week 5 · Oct 15, 2026 · Thursday, 9:00–11:30 am · 280 Brook Street, Room 110</p>
-    <h1>AI for data coding and model choice</h1>
+    <h1>AI for text coding</h1>
     <p class="byline" style="margin:2px 0 16px;color:var(--muted);font-size:15px">Authors: <a href="https://hanzhang.xyz/">Han Zhang</a> and Codex (OpenAI)</p>
     <p class="goal">Construct a measure, evaluate it on held-out human codes, and explain whether it is useful for the intended policy analysis.</p>
 
@@ -216,11 +216,11 @@
   <li>Learn what text coding is and how research and government use it.</li>
   <li>Code 10 abstracts by hand with a given codebook, then revise the codebook.</li>
   <li>See why coding at scale needs a computer, and how computers code text.</li>
-  <li>Ask the agent to code the same 10 abstracts, with zero-shot and few-shot prompts.</li>
-  <li>Write a script that codes abstracts through a model API.</li>
-  <li>Test the model on a held-out sample and compare it with the dictionary method.</li>
-  <li>Choose a model by its accuracy, its cost, and the rules for your data.</li>
-</ul></div><div class="card"><h3>From text to a measure</h3><p>Today, code text by hand, ask a model to code the same text, and check its codes against your own. Use the abstracts collected in Week 4 or suitable text from your individual project.</p></div>
+  <li>Write scripts that code the abstracts with a dictionary and with a language model.</li>
+  <li>Test every method on a held-out sample of hand-coded abstracts: accuracy, precision, recall, and F1.</li>
+  <li>Choose a coding method by its errors, its cost, and the rules for your data.</li>
+  <li>See how topic models help when you do not yet know the categories.</li>
+</ul></div><div class="card"><h3>From text to a measure</h3><p>Today, code text by hand, ask a computer to code the same text, and check its codes against your own. Use the abstracts collected in Week 4 or suitable text from your individual project.</p></div>
 </section>
 
     <!-- READING -->
@@ -369,7 +369,7 @@
       <li>Agencies are now testing large language models for this work. In April 2026, Census Bureau researchers <a href="https://www.nationalacademies.org/cdn/materials/a1f3d288-7dd6-43e0-ad8a-d9cea21bdc4a">presented their work</a> on coding occupations with large language models.</li>
     </ul>
   </li>
-  <li>Today you code with a large language model and zero-shot prompts. A dictionary method serves as a simple comparison.</li>
+  <li>Today you code with a dictionary and with a large language model.</li>
   <li>The reading by Gilardi and colleagues compares coding by ChatGPT with coding by crowd workers.</li>
 </ul></div>
 <div class="card"><h3>Four principles</h3><ul>
@@ -381,7 +381,7 @@
       <li>Validate, validate, validate. Check every measure against careful human reading.</li>
     </ul>
   </li>
-  <li>The rest of today applies the fourth principle.</li>
+  <li>The rest of today applies the fourth principle. Whatever method codes the text, you check its codes against hand codes in the same way.</li>
 </ul></div>
 <div class="card read"><span class="tag">Optional reading</span><ul>
   <li>Grimmer &amp; Stewart, <a href="https://doi.org/10.1093/pan/mps028">“Text as data: The promise and pitfalls of automatic content analysis methods for political texts” (2013)</a>. The source of the four principles.</li>
@@ -391,56 +391,9 @@
 </ul></div>
 </section>
 
-    <!-- TOPIC MODELS -->
-    <section data-hands="none">
-<h2 class="sec" id="topics">Topic models</h2>
-<div class="card"><h3>Finding categories in the text</h3><ul>
-  <li>So far you started from a codebook with fixed categories. Sometimes you do not know the categories yet. For example, you may have thousands of public comments and no idea what they discuss.</li>
-  <li>A <strong>topic model</strong> finds groups of words that often appear together in the same documents. Each group is a topic. Each document gets a share of each topic.</li>
-  <li>The model does not name the topics. A researcher reads the top words and some documents for each topic, then names it.</li>
-  <li>Three common topic models:
-    <ul>
-      <li><strong>LDA</strong> (latent Dirichlet allocation) is the standard topic model.</li>
-      <li>The <strong>structural topic model</strong> lets topic shares vary with facts about each document, such as its date or the respondent’s party. Roberts and colleagues used it on open-ended survey answers.</li>
-      <li><strong>TopicGPT</strong> asks a large language model to read documents and propose topics. Each topic gets a name and a short description. The model then assigns each document to a topic.</li>
-    </ul>
-  </li>
-  <li>The topics can change when you rerun the model or change the number of topics.</li>
-  <li>Use a topic model to draft the categories of a codebook. Then code and validate as in the rest of this page.</li>
-</ul></div>
-<div class="card read"><span class="tag">Optional reading</span><ul>
-  <li>Blei, <a href="https://doi.org/10.1145/2133806.2133826">“Probabilistic topic models” (2012)</a>. A short introduction to LDA by one of its authors.</li>
-  <li>Roberts and colleagues, <a href="https://doi.org/10.1111/ajps.12103">“Structural topic models for open-ended survey responses” (2014)</a>.</li>
-  <li>Pham and colleagues, <a href="https://doi.org/10.18653/v1/2024.naacl-long.164">“TopicGPT: A prompt-based topic modeling framework” (2024)</a>.</li>
-</ul></div>
-</section>
-
-    <!-- PILOT -->
-    <section data-hands="pilot">
-<h2 class="sec" id="pilot">Coding the pilot with the agent <span class="hastag">· do it on the right</span></h2>
-<div class="card"><h3>Coding the pilot abstracts</h3><ul>
-  <li>Ask the agent to code the 10 abstracts you coded by hand. The agent reads your codebook and each abstract, and returns one category per abstract.</li>
-  <li>Compare its codes with yours. Where they differ, read the abstract again.
-    <ul>
-      <li>The definition may be unclear.</li>
-      <li>The agent may have made a mistake.</li>
-      <li>You may have made a mistake.</li>
-    </ul>
-  </li>
-  <li>Revise the codebook and ask again.</li>
-  <li>If the agent codes these 10 abstracts poorly, a script will code hundreds of abstracts poorly. Fix the codebook first.</li>
-</ul></div>
-<div class="card"><h3>Zero-shot and few-shot</h3><ul>
-  <li>So far the agent has seen only your codebook. This is zero-shot coding.</li>
-  <li>For few-shot coding, add 2 or 3 coded abstracts to the codebook as examples. Choose abstracts from categories the agent got wrong.</li>
-  <li>Take the examples only from these 10 abstracts.</li>
-  <li>Keep both versions of the codebook. Later you test both on new abstracts.</li>
-</ul></div>
-</section>
-
     <!-- SCALE -->
     <section data-hands="scale">
-<h2 class="sec" id="scale">Scaling up with a script <span class="hastag">· do it on the right</span></h2>
+<h2 class="sec" id="scale">Coding with a script <span class="hastag">· do it on the right</span></h2>
 <div class="card"><h3>Model APIs</h3><ul>
   <li>In Week 4 your script sent a request to the Federal Register API. The request named an agency and a year. The API sent back documents.</li>
   <li>A model API works the same way. Your script sends a request, and the API sends back the model’s answer.</li>
@@ -464,106 +417,204 @@
   </li>
   <li>Find the API documentation for the model you want to use. Give the link to the agent when it writes the script.</li>
 </ul></div>
-<div class="card"><h3>The coding script</h3><ul>
-  <li>The agent coded 10 abstracts inside the conversation. For hundreds of abstracts, every abstract should get exactly the same instructions.</li>
-  <li>Ask the agent to write a script. The script sends your codebook and one abstract at a time to a model through its API. It saves the category for each abstract in a table.</li>
-  <li>Each call to a commercial API costs money. You pay for the text you send and the text you get back. Ask the agent to estimate the cost before you run the script.</li>
-  <li>Record the exact model name and version. Companies update their models, and the same prompt can give different codes after an update.</li>
-</ul></div>
-</section>
-
-    <!-- VALIDATE -->
-    <section data-hands="validate">
-<h2 class="sec" id="validate">Validating with a held-out sample <span class="hastag">· do it on the right</span></h2>
-<div class="card"><h3>Held-out evaluation</h3><ul>
-  <li>Think of a student who memorizes last year’s exam answers. The student scores 100% on that exam and fails a new one.</li>
-  <li>Your codebook is in the same position. You revised it until the agent coded the 10 pilot abstracts well. A score on those 10 abstracts says little about new abstracts.</li>
-  <li>A fair test uses new abstracts that played no part in writing the codebook. These abstracts are the <strong>held-out sample</strong>.</li>
-  <li>Freeze the codebook. After this point you do not change it.</li>
-  <li>Pick 20 new abstracts. Code them by hand before you see any model codes.</li>
-  <li>Run the script on these 20 abstracts twice: once with the zero-shot codebook and once with the few-shot codebook.</li>
-  <li>Real projects hand-code more documents for this test. Twenty abstracts are enough to practice.</li>
-</ul></div>
-<div class="card"><h3>Confusion matrix</h3><ul>
-  <li>A <strong>confusion matrix</strong> compares the model’s codes with yours. It is a table with your codes as rows and the model’s codes as columns. Each cell counts abstracts.</li>
-</ul>
-<table>
-  <tr><th>Example (made-up numbers)</th><th>Model: Stricter</th><th>Model: Looser</th><th>Model: Technical</th></tr>
-  <tr><th>You: Stricter</th><td><b>6</b></td><td>1</td><td>0</td></tr>
-  <tr><th>You: Looser</th><td>0</td><td><b>7</b></td><td>1</td></tr>
-  <tr><th>You: Technical</th><td>2</td><td>0</td><td><b>3</b></td></tr>
-</table>
-<ul>
-  <li>Cells on the diagonal, in bold, are agreements. Here the model agrees with you on 16 of 20 abstracts. This share is the <strong>agreement rate</strong>.</li>
-  <li>The other cells show which category the model mistook for which. In this example, the model coded 2 of your Technical abstracts as Stricter.</li>
-  <li>Read the abstracts behind those cells. Decide which mistakes matter for your policy question.</li>
-  <li>There are other ways to summarize the same table. The box below explains the common ones.</li>
-</ul></div>
-<details class="more">
-<summary>More detail: other ways to compare codes</summary>
-
-<h4>When the agreement rate misleads</h4>
-<ul>
-  <li>Suppose 16 of your 20 abstracts are Technical.</li>
-  <li>A model that answers Technical every time agrees with you on 16 of 20 abstracts, or 80%.</li>
-  <li>That model never finds a Stricter or a Looser rule. A high agreement rate can hide a model that misses the rare categories.</li>
-</ul>
-
-<h4>Precision and recall</h4>
-<ul>
-  <li>Precision and recall describe one category at a time. Take Stricter in the example table above.</li>
-  <li><strong>Precision</strong>: of the abstracts the model coded Stricter, how many did you code Stricter? The model coded 8 abstracts Stricter, and 6 of them match yours. Precision is 6 of 8, or 75%.</li>
-  <li><strong>Recall</strong>: of the abstracts you coded Stricter, how many did the model find? You coded 7 abstracts Stricter, and the model found 6. Recall is 6 of 7, or 86%.</li>
-  <li>Which one matters depends on the policy question.
-    <ul>
-      <li>To find every rule that tightened regulation, you need high recall.</li>
-      <li>To report how many rules tightened regulation, you also need high precision.</li>
-    </ul>
-  </li>
-  <li>The <strong>F1 score</strong> combines precision and recall into one number. It is low when either one is low.</li>
-</ul>
-
-<h4>Agreement between two people</h4>
-<ul>
-  <li>When two people code the same documents, their agreement is called <strong>intercoder reliability</strong>.</li>
-  <li>Cohen’s kappa is the common measure. It counts agreement beyond what two coders would reach by chance.</li>
-  <li>A common rule of thumb: kappa of 0.6 or more is acceptable, and 0.8 or more is strong.</li>
-  <li>Exercise 2 tests the same thing. If two people cannot agree on a code, there is no answer against which to judge the model.</li>
-</ul>
-</details>
-<div class="card"><h3>Consistency checks</h3><ul>
-  <li>A good measure gives the same codes when nothing important changes. Check this in three ways.
-    <ul>
-      <li>Same model, same codebook: run the held-out sample twice. The two runs should give the same codes.</li>
-      <li>Different wording: your zero-shot and few-shot versions are two wordings of the same task. Small changes in wording can change the codes. This is called <strong>prompt sensitivity</strong>.</li>
-      <li>Different model: run the held-out sample with a model from another company, or with an open-source model.</li>
-    </ul>
-  </li>
-  <li>Compare the confusion matrices. If the codes change a lot, read the abstracts whose codes changed. The codebook may be unclear for those abstracts.</li>
-</ul></div>
-<div class="card"><h3>Dictionary baseline</h3><ul>
-  <li>The dictionary method gives a simple benchmark. If the language model cannot beat a list of keywords, it is not worth its cost.</li>
-  <li>Read the 10 pilot abstracts and list keywords for each category.
+<div class="card"><h3>The coding scripts</h3><ul>
+  <li>Ask the agent to write two scripts. Each one codes every abstract and saves the category for each abstract in a table.</li>
+  <li>The <strong>dictionary script</strong> uses keyword lists. Read the 10 pilot abstracts and list keywords for each category.
     <ul>
       <li>Looser: “withdraw”, “delay”, “rescind”.</li>
       <li>Stricter: “require”, “establish”.</li>
       <li>Technical: “correction”, “technical amendment”.</li>
     </ul>
   </li>
-  <li>Ask the agent to code the 20 held-out abstracts with your keyword lists.</li>
-  <li>Build the same confusion matrix and compare it with the language model’s.</li>
+  <li>The <strong>language model script</strong> sends your codebook and one abstract at a time to a model through its API. Make two versions.
+    <ul>
+      <li>Zero-shot: the prompt contains your codebook only.</li>
+      <li>Few-shot: add 2 or 3 of the pilot abstracts, with your codes, as examples.</li>
+    </ul>
+  </li>
+  <li>Run the scripts on the 10 pilot abstracts and compare their codes with your hand codes. Where they differ, read the abstract again. Revise the codebook or the keyword lists.</li>
+  <li>Each call to a commercial API costs money. You pay for the text you send and the text you get back. Ask the agent to estimate the cost before you run the script.</li>
+  <li>Record the exact model name and version. Companies update their models, and the same prompt can give different codes after an update.</li>
+</ul></div>
+</section>
+
+    <!-- EVALUATION SET -->
+    <section data-hands="evalset">
+<h2 class="sec" id="evalset">Held-out evaluation <span class="hastag">· do it on the right</span></h2>
+<div class="card"><h3>Testing on new abstracts</h3><ul>
+  <li>Every method needs the same test, whether it is a dictionary, a supervised model, or a language model.</li>
+  <li>You revised the codebook and the keyword lists while looking at the 10 pilot abstracts. Each method’s score on those 10 abstracts is too high.</li>
+  <li>Test each method on new abstracts that you did not use to write the codebook. These abstracts are the <strong>held-out sample</strong>.</li>
+  <li>The steps:
+    <ul>
+      <li>Freeze the codebook, the prompts, and the keyword lists. After this point you do not change them.</li>
+      <li>Draw 20 new abstracts at random.</li>
+      <li>Code them by hand before you run any script.</li>
+      <li>Run each script on them and compare its codes with yours.</li>
+    </ul>
+  </li>
+  <li>Research projects hand-code about 100 to 300 documents for this test. Twenty abstracts are enough to practice.</li>
+</ul></div>
+</section>
+
+    <!-- METRICS -->
+    <section data-hands="metrics">
+<h2 class="sec" id="metrics">Measuring errors <span class="hastag">· do it on the right</span></h2>
+<div class="card"><h3>The confusion matrix</h3><ul>
+  <li>Take a classic example. A university has 10,000 students, and 10 of them have COVID. A test predicts who is infected.</li>
+  <li>A <strong>confusion matrix</strong> compares the predictions with the truth. Every student falls into one of four cells:
+    <ul>
+      <li><strong>True positive (TP)</strong>: an infected student whom the test calls infected.</li>
+      <li><strong>False negative (FN)</strong>: an infected student whom the test misses.</li>
+      <li><strong>False positive (FP)</strong>: a healthy student whom the test calls infected.</li>
+      <li><strong>True negative (TN)</strong>: a healthy student whom the test calls healthy.</li>
+    </ul>
+  </li>
+</ul>
+<table>
+  <tr><th></th><th>Test: infected</th><th>Test: healthy</th></tr>
+  <tr><th>Truth: infected</th><td>True positive (TP)</td><td>False negative (FN)</td></tr>
+  <tr><th>Truth: healthy</th><td>False positive (FP)</td><td>True negative (TN)</td></tr>
+</table>
+<ul>
+  <li>For text coding, the truth is your hand codes. The test is the codes from a script, such as the dictionary or the language model.</li>
+</ul></div>
+<div class="card"><h3>Accuracy</h3><ul>
+  <li><strong>Accuracy</strong> is the share of all cases that the test gets right.</li>
+  <li>Accuracy = (TP + TN) / (TP + FN + FP + TN).</li>
+</ul></div>
+<div class="card"><h3>Why accuracy misleads</h3><ul>
+  <li>Take a test that calls every student healthy.</li>
+</ul>
+<table>
+  <tr><th></th><th>Test: infected</th><th>Test: healthy</th></tr>
+  <tr><th>Truth: infected</th><td>0</td><td>10</td></tr>
+  <tr><th>Truth: healthy</th><td>0</td><td>9,990</td></tr>
+</table>
+<ul>
+  <li>Its accuracy is 9,990 / 10,000 = 99.9%.</li>
+  <li>It finds none of the 10 infected students.</li>
+  <li>When one category is rare, a test can reach high accuracy by never predicting it. This is called <strong>class imbalance</strong>.</li>
+  <li>The test that always predicts the most common category is the <strong>majority-class baseline</strong>. Compare each method’s accuracy with this baseline.</li>
+</ul></div>
+<div class="card"><h3>Precision and recall</h3><ul>
+  <li><strong>Precision</strong>: of the students the test calls infected, what share are infected?
+    <ul>
+      <li>Precision = TP / (TP + FP).</li>
+    </ul>
+  </li>
+  <li><strong>Recall</strong>: of the students who are infected, what share does the test find?
+    <ul>
+      <li>Recall = TP / (TP + FN).</li>
+    </ul>
+  </li>
+  <li>For the test that calls everyone healthy, recall is 0 / 10 = 0%. Its precision cannot be computed, because it never calls anyone infected.</li>
+</ul></div>
+<div class="card"><h3>The precision–recall trade-off</h3><ul>
+  <li>Test 1 calls 5 students infected, and all 5 are infected.</li>
+</ul>
+<table>
+  <tr><th>Test 1</th><th>Test: infected</th><th>Test: healthy</th></tr>
+  <tr><th>Truth: infected</th><td>5</td><td>5</td></tr>
+  <tr><th>Truth: healthy</th><td>0</td><td>9,990</td></tr>
+</table>
+<ul>
+  <li>Accuracy = (5 + 9,990) / 10,000 = 99.95%.</li>
+  <li>Precision = 5 / 5 = 100%. Every student it calls infected is infected.</li>
+  <li>Recall = 5 / 10 = 50%. It misses half the infected students.</li>
+</ul>
+<ul>
+  <li>Test 2 uses a lower bar for calling a student infected. It calls 13 students infected.</li>
+</ul>
+<table>
+  <tr><th>Test 2</th><th>Test: infected</th><th>Test: healthy</th></tr>
+  <tr><th>Truth: infected</th><td>9</td><td>1</td></tr>
+  <tr><th>Truth: healthy</th><td>4</td><td>9,986</td></tr>
+</table>
+<ul>
+  <li>Accuracy = (9 + 9,986) / 10,000 = 99.95%, the same as Test 1.</li>
+  <li>Precision = 9 / 13 = 69%.</li>
+  <li>Recall = 9 / 10 = 90%.</li>
+  <li>Raising recall usually lowers precision. This is the <strong>precision–recall trade-off</strong>.</li>
+  <li>Which one matters depends on the policy question.
+    <ul>
+      <li>To list every rule that loosened a requirement, you need high recall.</li>
+      <li>To report how many rules loosened a requirement, you also need high precision.</li>
+    </ul>
+  </li>
+  <li>In class: name a policy task where precision matters more, and one where recall matters more.</li>
+</ul></div>
+<div class="card"><h3>F1</h3><ul>
+  <li>The <strong>F1 score</strong> combines precision and recall into one number.</li>
+  <li>F1 = 2 × precision × recall / (precision + recall).</li>
+  <li>Test 1: 2 × 1.00 × 0.50 / (1.00 + 0.50) = 0.67.</li>
+  <li>Test 2: 2 × 0.69 × 0.90 / (0.69 + 0.90) = 0.78.</li>
+  <li>F1 is 1 for a perfect test and 0 for a useless one. It is low when either precision or recall is low.</li>
+  <li>A common target: F1 of 0.7 or more on the category you care about, before you code the full collection.</li>
+</ul></div>
+<div class="card"><h3>More than two categories</h3><ul>
+  <li>Your codebook has three categories. Compute precision and recall for each category separately. For each one, treat that category as “positive” and the other two as “negative”.</li>
+</ul>
+<table>
+  <tr><th>Example (made-up numbers)</th><th>Script: Stricter</th><th>Script: Looser</th><th>Script: Technical</th></tr>
+  <tr><th>You: Stricter</th><td><b>6</b></td><td>1</td><td>0</td></tr>
+  <tr><th>You: Looser</th><td>0</td><td><b>7</b></td><td>1</td></tr>
+  <tr><th>You: Technical</th><td>2</td><td>0</td><td><b>3</b></td></tr>
+</table>
+<ul>
+  <li>Cells on the diagonal, in bold, are agreements. Accuracy is 16 / 20 = 80%.</li>
+  <li>Precision for Stricter: the script coded 8 abstracts Stricter, and 6 of them match yours. Precision is 6 / 8 = 75%.</li>
+  <li>Recall for Stricter: you coded 7 abstracts Stricter, and the script found 6. Recall is 6 / 7 = 86%.</li>
+  <li>The off-diagonal cells show which category the script mistook for which. Read the abstracts behind those cells.</li>
 </ul></div>
 </section>
 
     <!-- MODEL -->
     <section data-hands="model">
-<h2 class="sec" id="model">Choosing the model</h2>
-<div class="card"><h3>Accuracy, cost, and data rules</h3><ul>
-  <li>Compare the held-out results: zero-shot against few-shot, and each model you tried.</li>
-  <li>Look closely at the categories that matter most for your question.</li>
+<h2 class="sec" id="model">Choosing a coding method <span class="hastag">· do it on the right</span></h2>
+<div class="card"><h3>Comparing the methods</h3><ul>
+  <li>Compare the held-out results of the dictionary, zero-shot, and few-shot coding. If you tried more than one language model, compare those too.</li>
+  <li>Look closely at precision and recall for the categories that matter most for your question.</li>
+  <li>The dictionary method gives a simple benchmark. If the language model cannot beat a list of keywords, it is not worth its cost.</li>
+</ul></div>
+<div class="card"><h3>Consistency checks</h3><ul>
+  <li>A good measure gives the same codes when nothing important changes. Check this in three ways.
+    <ul>
+      <li>Same script, same codebook: run the held-out sample twice. The two runs should give the same codes.</li>
+      <li>Different wording: your zero-shot and few-shot versions are two wordings of the same task. Small changes in wording can change the codes. This is called <strong>prompt sensitivity</strong>.</li>
+      <li>Different language model: run the held-out sample with a model from another company, or with an open-source model.</li>
+    </ul>
+  </li>
+  <li>If the codes change a lot, read the abstracts whose codes changed. The codebook may be unclear for those abstracts.</li>
+</ul></div>
+<div class="card"><h3>Cost and data rules</h3><ul>
   <li>Estimate the cost of coding your full collection.</li>
   <li>Check whether your data may be sent to a company’s servers. Restricted data needs a local model or an approved arrangement.</li>
-  <li>Write down the chosen model, its version, the final codebook, and the held-out results.</li>
+  <li>Write down the chosen method, the model name and version if you chose a language model, the final codebook, and the held-out results.</li>
+</ul></div>
+</section>
+
+    <!-- TOPIC MODELS -->
+    <section data-hands="none">
+<h2 class="sec" id="topics">Topic models</h2>
+<div class="card"><h3>Finding categories in the text</h3><ul>
+  <li>So far you started from a codebook with fixed categories. Sometimes you do not know the categories yet. For example, you may have thousands of public comments and no idea what they discuss.</li>
+  <li>A <strong>topic model</strong> finds groups of words that often appear together in the same documents. Each group is a topic. Each document gets a share of each topic.</li>
+  <li>The model does not name the topics. A researcher reads the top words and some documents for each topic, then names it.</li>
+  <li>Three common topic models:
+    <ul>
+      <li><strong>LDA</strong> (latent Dirichlet allocation) is the standard topic model.</li>
+      <li>The <strong>structural topic model</strong> lets topic shares vary with facts about each document, such as its date or the respondent’s party. Roberts and colleagues used it on open-ended survey answers.</li>
+      <li><strong>TopicGPT</strong> asks a large language model to read documents and propose topics. Each topic gets a name and a short description. The model then assigns each document to a topic.</li>
+    </ul>
+  </li>
+  <li>The topics can change when you rerun the model or change the number of topics.</li>
+  <li>Use a topic model to draft the categories of a codebook. Then code with a script and test on a held-out sample, as above.</li>
+</ul></div>
+<div class="card read"><span class="tag">Optional reading</span><ul>
+  <li>Blei, <a href="https://doi.org/10.1145/2133806.2133826">“Probabilistic topic models” (2012)</a>. A short introduction to LDA by one of its authors.</li>
+  <li>Roberts and colleagues, <a href="https://doi.org/10.1111/ajps.12103">“Structural topic models for open-ended survey responses” (2014)</a>.</li>
+  <li>Pham and colleagues, <a href="https://doi.org/10.18653/v1/2024.naacl-long.164">“TopicGPT: A prompt-based topic modeling framework” (2024)</a>.</li>
 </ul></div>
 </section>
 
@@ -578,7 +629,14 @@
 </section>
 <section data-hands="none">
 <h2 class="sec" id="wrap">Assignments</h2>
-<div class="card"><p><b>Weekly memo · due Oct 22 before class.</b> Write 1–2 specific observations about using AI to code text. Did it help, partly help, or fail to help? Use an actual coding decision or disagreement to explain what worked, what needed correction, and whether the resulting variable is useful for your policy question. Aim for 150–200 words total. Describe what you actually tried and observed in your own words. Do not use AI to write the memo. Begin in class and submit to Canvas Discussions. See <a href="week_mapping_12week.html#assessment">assignments and grading</a>.</p></div>
+<div class="card"><h3>Weekly memo · individual</h3><ul>
+  <li>Write 1–2 specific observations about coding text. Use an actual coding decision or disagreement to explain what worked, what needed correction, and whether the resulting variable is useful for your policy question.</li>
+  <li>If you have not finished the coding exercise, you may skip this memo and write one memo for Weeks 5 and 6 together, due Oct 29.</li>
+  <li>Aim for 150–200 words total.</li>
+  <li>Describe what you actually tried and observed in your own words. Do not use AI to write the memo.</li>
+  <li>Submit to Canvas Discussions. See <a href="week_mapping_12week.html#assessment">assignments and grading</a>.</li>
+</ul>
+<p><b>Due Oct 22 before class.</b></p></div>
 <p><a href="week06.html">Week 6 &rarr;</a></p>
 </section>
 
@@ -589,74 +647,76 @@
     <p class="railhead" id="railhead">Hands-on</p>
     <div class="hands" data-for="none"></div>
 
-    <!-- pilot -->
-    <div class="hands" data-for="pilot">
-      <div class="exi">
-        <span class="step">Step 1</span>
-        <h4>Code the pilot with the agent</h4>
-        <div class="code">Read my codebook. Use it to code each of the 10 pilot abstracts. For each abstract, give the document number, the category, and a one-sentence reason.<span class="copy">copy</span></div>
-      </div>
-      <div class="exi">
-        <span class="step">Step 2</span>
-        <h4>Compare with your hand codes</h4>
-        <div class="code">Compare your codes with my hand codes. Show each disagreement with the abstract text and both codes.<span class="copy">copy</span></div>
-        <ul>
-          <li>Read each disagreement yourself and revise the codebook.</li>
-        </ul>
-      </div>
-      <div class="exi">
-        <span class="step">Step 3</span>
-        <h4>Make a few-shot version</h4>
-        <p>Copy the codebook. Add 2 or 3 pilot abstracts with their correct codes as examples. Ask the agent to code the 10 abstracts again with the new version.</p>
-      </div>
-    </div>
-
     <!-- scale -->
     <div class="hands" data-for="scale">
       <div class="exi">
         <span class="step">Step 1</span>
-        <h4>Write the script</h4>
-        <div class="code">Write a script that sends my codebook and one abstract at a time to a model through its API. Save the document number, the category, and the model name for each abstract in a table. Before running it, estimate the cost.<span class="copy">copy</span></div>
+        <h4>The dictionary script</h4>
+        <div class="code">Write a script that codes each abstract with these keyword lists. Save the document number and the category for each abstract in a table.<span class="copy">copy</span></div>
       </div>
       <div class="exi">
         <span class="step">Step 2</span>
-        <h4>Test it on the pilot</h4>
+        <h4>The language model script</h4>
+        <div class="code">Write a script that sends my codebook and one abstract at a time to a model through its API. Save the document number, the category, and the model name for each abstract in a table. Before running it, estimate the cost.<span class="copy">copy</span></div>
+        <p>Then make a few-shot version: copy the codebook and add 2 or 3 pilot abstracts with your codes as examples.</p>
+      </div>
+      <div class="exi">
+        <span class="step">Step 3</span>
+        <h4>Test on the pilot</h4>
+        <div class="code">Run each script on the 10 pilot abstracts. Compare their codes with my hand codes. Show each disagreement with the abstract text and both codes.<span class="copy">copy</span></div>
         <ul>
-          <li>Run the script on the 10 pilot abstracts.</li>
-          <li>Check that every abstract has a code and that the codes look like the agent’s codes.</li>
+          <li>Read each disagreement yourself. Revise the codebook or the keyword lists.</li>
         </ul>
       </div>
     </div>
 
-    <!-- validate -->
-    <div class="hands" data-for="validate">
+    <!-- evaluation set -->
+    <div class="hands" data-for="evalset">
       <div class="exi">
         <span class="step">Step 1</span>
-        <h4>Hand-code the held-out sample</h4>
-        <p>Freeze the codebook. Pick 20 new abstracts and code them by hand before running any model.</p>
+        <h4>Draw the held-out sample</h4>
+        <div class="code">Draw a random sample of 20 abstracts that are not among my 10 pilot abstracts. Save their document numbers and text to a file in data/. Do not code them.<span class="copy">copy</span></div>
       </div>
       <div class="exi">
         <span class="step">Step 2</span>
-        <h4>Run both versions</h4>
-        <p>Run the script on the 20 abstracts with the zero-shot codebook, then with the few-shot codebook.</p>
+        <h4>Code it by hand</h4>
+        <p>Freeze the codebook, the prompts, and the keyword lists. Code the 20 abstracts by hand before running any script.</p>
       </div>
       <div class="exi">
         <span class="step">Step 3</span>
-        <h4>Build the confusion matrices</h4>
-        <div class="code">Compare the model codes with my hand codes for the 20 held-out abstracts. For each codebook version, report the agreement rate and a confusion matrix with my codes as rows and the model codes as columns.<span class="copy">copy</span></div>
+        <h4>Run every script</h4>
+        <p>Run the dictionary script, the zero-shot script, and the few-shot script on the 20 abstracts.</p>
       </div>
+    </div>
+
+    <!-- metrics -->
+    <div class="hands" data-for="metrics">
       <div class="exi">
-        <span class="step">Step 4</span>
-        <h4>Run the dictionary method</h4>
-        <div class="code">Here are my keyword lists for each category. Code the 20 held-out abstracts with these lists. Report the agreement rate and a confusion matrix in the same format.<span class="copy">copy</span></div>
+        <span class="step">Step 1</span>
+        <h4>Measure the errors</h4>
+        <div class="code">Compare the codes from each script with my hand codes for the 20 held-out abstracts. For each script, report a confusion matrix with my codes as rows and the script’s codes as columns. Then report accuracy, the accuracy of the majority-class baseline, and precision, recall, and F1 for each category. Show the calculation for each number.<span class="copy">copy</span></div>
+        <ul>
+          <li>Check one precision and one recall by hand from the confusion matrix.</li>
+          <li>Read the abstracts behind the off-diagonal cells.</li>
+        </ul>
       </div>
     </div>
 
     <!-- model -->
     <div class="hands" data-for="model">
-      <div class="exi"><h4>Record the model choice</h4><p>Write a few sentences in the README: the chosen model, its version, the held-out results, the estimated cost, and whether the data may be sent to the company.</p></div>
+      <div class="exi">
+        <span class="step">Step 1</span>
+        <h4>Run it again</h4>
+        <p>Run the language model script on the held-out sample a second time with the same codebook. Ask the agent to list every abstract whose code changed.</p>
+      </div>
+      <div class="exi">
+        <span class="step">Step 2</span>
+        <h4>Record the choice</h4>
+        <p>Write a few sentences in the README: the chosen method, the model name and version if it is a language model, the held-out results, the estimated cost, and whether the data may be sent to the company.</p>
+      </div>
       <div class="exi"><h4>Optional: try an open-source model</h4><p>Follow the <a href="https://docs.ollama.com/">Ollama documentation</a> to run an open-source model on the same 20 abstracts. Compare its results with the commercial model’s.</p></div>
     </div>
+
   </aside>
 
 </div>

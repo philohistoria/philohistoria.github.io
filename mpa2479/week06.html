@@ -1,0 +1,504 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Week 6: AI for Building Websites</title>
+<style>
+  :root{
+    --bg:#fcfcfb; --fg:#1c1c1a; --muted:#6b6b66; --line:#e6e5e1;
+    --accent:#2f5d8a; --accent-weak:#eaf0f5; --ex:#b5651d; --ex-weak:#fbf1e7;
+    --code-bg:#f4f5f3; --card:#fff;
+    --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--sans)}
+  .layout{display:grid;grid-template-columns:180px minmax(0,1fr) 360px;max-width:1320px;margin:0 auto}
+  nav{position:sticky;top:0;align-self:start;height:100vh;overflow:auto;
+      padding:26px 14px;border-right:1px solid var(--line);font-size:14px}
+  nav .days{display:flex;flex-direction:column;gap:2px;margin-bottom:22px}
+  nav .days a{color:var(--muted);text-decoration:none;padding:3px 0;font-size:13px}
+  nav .days a.cur{color:var(--fg);font-weight:700}
+  nav .days span.off{color:#c8c7c2;padding:3px 0;font-size:13px}
+  nav .home{display:block;font-size:14px;font-weight:800;color:var(--fg);text-decoration:none;line-height:1.25;margin-bottom:18px}
+  nav .home:hover{color:var(--accent)}
+  nav .lbl{font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin:0 0 8px}
+  nav .toc a{display:block;color:var(--fg);text-decoration:none;padding:6px 0 6px 12px;
+             border-left:2px solid transparent;margin-left:-2px}
+  nav .toc a:hover{color:var(--accent)}
+  nav .toc a.active{color:var(--accent);border-left-color:var(--accent);font-weight:600}
+  nav .toc .has{color:var(--ex);font-size:11px;margin-left:6px}
+  main{padding:30px 32px 160px;min-width:0}
+  .course-back{margin:0 0 12px;font-size:14px}
+  .course-back a{color:var(--accent)}
+  .kicker{font-size:13px;letter-spacing:.07em;text-transform:uppercase;color:var(--accent);font-weight:700;margin:0}
+  h1{margin:4px 0 6px;font-size:32px}
+  .goal{color:var(--muted);font-size:16px;margin:0 0 20px}
+  h2.sec{font-size:28px;font-weight:700;color:var(--fg);line-height:1.2;
+         margin:52px 0 12px;padding-top:22px;border-top:1px solid var(--line)}
+  h2.sec .hastag{color:var(--ex);font-weight:600;font-size:14px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:14px;
+        padding:20px 24px;margin:16px 0;box-shadow:0 1px 2px rgba(0,0,0,.03)}
+  .card h3{margin:0 0 12px;font-size:21px;line-height:1.25}
+  .card ul{list-style:none;padding:0;margin:0}
+  .card li{font-size:17px;line-height:1.45;padding:9px 0 9px 26px;position:relative;border-top:1px solid var(--line)}
+  .card li:first-child{border-top:0}
+  .card li::before{content:"";position:absolute;left:4px;top:17px;width:8px;height:8px;border-radius:50%;background:var(--accent)}
+  .card ul ul{margin:6px 0 0}
+  .card li li{font-size:15px;padding:5px 0 5px 24px;border-top:0;color:var(--muted)}
+  .card li li::before{width:5px;height:5px;top:14px;background:var(--muted)}
+  .card.demo{border-left:4px solid var(--accent)}
+  .card.demo .tag{display:inline-block;font-size:12px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;
+                  color:var(--accent);margin-bottom:8px}
+  .card.read{border-left:4px solid #7a5ea6}
+  .card.read .tag{display:inline-block;font-size:12px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;
+                  color:#7a5ea6;margin-bottom:8px}
+  .quote{background:var(--code-bg);border-left:3px solid var(--accent);border-radius:0 8px 8px 0;
+         padding:12px 16px;margin:12px 0;font-style:italic;line-height:1.5}
+  code{background:var(--code-bg);padding:1px 5px;border-radius:4px;font-family:ui-monospace,Menlo,monospace;font-size:.85em}
+  strong{color:#111}
+  table{border-collapse:collapse;width:100%;margin:10px 0;font-size:16px}
+  th,td{border:1px solid var(--line);padding:8px 12px;text-align:left}
+  th{background:var(--accent-weak);font-size:14px}
+  .src{font-size:13px;color:var(--muted)} .src a{color:var(--accent)}
+  aside{position:sticky;top:0;align-self:start;height:100vh;overflow:auto;
+        border-left:1px solid var(--line);padding:26px 18px 60px;background:#fbfaf8}
+  aside .railhead{font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--ex)}
+  .hands{display:none} .hands.on{display:block}
+  .exi{border:1px solid #e8d3ba;background:var(--ex-weak);border-radius:10px;margin:10px 0;padding:12px 14px}
+  .exi .step{display:inline-block;font-size:10px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;
+             color:#fff;background:var(--ex);border-radius:20px;padding:2px 9px;margin-bottom:8px}
+  .exi h4{margin:0 0 6px;font-size:15px}
+  .exi ul{margin:6px 0;padding-left:18px;font-size:13.5px;line-height:1.5}
+  .exi li{margin:4px 0}
+  .exi p{font-size:13.5px;line-height:1.5;margin:6px 0}
+  .save{font-size:13px;color:var(--muted);background:#fff;border:1px solid var(--line);
+        border-radius:8px;padding:9px 12px;margin:10px 0}
+  .code{position:relative;background:#fff;border:1px solid #e8d3ba;border-radius:8px;
+        padding:9px 34px 9px 11px;font-family:ui-monospace,Menlo,monospace;font-size:12px;
+        white-space:pre-wrap;margin:8px 0;line-height:1.45}
+  .code .copy{position:absolute;top:6px;right:6px;font-size:10px;border:1px solid #e8d3ba;
+              background:#fff;border-radius:6px;padding:2px 7px;cursor:pointer;color:var(--ex)}
+  .guidelink{display:inline-block;margin-top:6px;font-size:13px;color:var(--ex);font-weight:600}
+    .mobilenote{display:none}
+  .mhead{display:none}
+  /* ---- tablet: two columns, top menu ---- */
+  @media(max-width:1080px){
+    .layout{grid-template-columns:minmax(0,1fr) 340px}
+    nav{display:none}
+    .mhead{display:flex;align-items:center;justify-content:space-between;gap:12px;
+           position:sticky;top:0;z-index:20;background:var(--bg);
+           border-bottom:1px solid var(--line);padding:10px 16px}
+    .mtitle{font-size:14px;font-weight:800;color:var(--fg);text-decoration:none}
+    .mnav summary{list-style:none;cursor:pointer;font-size:13px;font-weight:700;color:var(--accent);
+                  border:1px solid var(--line);border-radius:8px;padding:5px 12px;background:#fff}
+    .mnav summary::-webkit-details-marker{display:none}
+    .mnav{position:relative}
+    .mnav-box{position:absolute;right:0;top:36px;min-width:240px;background:#fff;
+              border:1px solid var(--line);border-radius:12px;box-shadow:0 8px 24px rgba(0,0,0,.10);
+              padding:10px 14px;z-index:30}
+    .mnav-box a{display:block;color:var(--fg);text-decoration:none;font-size:14px;padding:6px 0}
+    .mnav-box a:hover{color:var(--accent)}
+    .mlbl{font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin:8px 0 2px}
+    main{padding:20px 20px 120px}
+    h1{font-size:27px}
+    h2.sec{font-size:24px}
+    table{display:block;overflow-x:auto}
+  }
+  /* ---- phone: single column ---- */
+  @media(max-width:740px){
+    .layout{grid-template-columns:1fr}
+    main{padding:16px 14px 60px}
+    .mobilenote{display:block;background:var(--accent-weak);border:1px solid var(--line);
+                border-radius:10px;padding:10px 14px;margin:0 0 18px;font-size:13.5px;
+                line-height:1.5;color:var(--fg)}
+    h1{font-size:25px}
+    .card{padding:16px 16px}
+    .card li{font-size:16px}
+    aside{position:static;height:auto;border-left:0;border-top:1px solid var(--line)}
+    .hands{display:block !important;border-top:1px solid var(--line);padding-top:10px;margin-top:10px}
+    .hands[data-for="none"]{display:none !important}
+  }
+</style>
+</head>
+<body>
+<div class="mhead">
+  <a class="mtitle" href="week_mapping_12week.html">Applied AI for Public Policy</a>
+  <details class="mnav">
+    <summary>Menu</summary>
+    <div class="mnav-box">
+      <p class="mlbl">Weeks</p>
+      <a href="week01.html">1 · What an AI agent is</a>
+      <a href="week02.html">2 · Setting up and configuring the agent</a>
+      <a href="week03.html">3 · Starting the group project</a>
+      <a href="week04.html">4 · AI for data collection</a>
+      <a href="week05.html">5 · AI for text coding</a>
+      <a href="week06.html">6 · AI for building websites</a>
+      <a href="week07.html">7 · Algorithmic bias</a>
+      <a href="week08.html">8 · Auditing a federal AI system</a>
+      <a href="week09.html">9 · Designing your final project</a>
+      <a href="week10.html">10 · AI governance</a>
+      <a href="week11.html">11 · Code review and replication</a>
+      <a href="week12.html">12 · Final presentations</a>
+      <p class="mlbl">On this page</p>
+      <a href="#opening">Opening</a>
+      <a href="#html">What a website is made of</a>
+      <a href="#hosting">Hosting and domain names</a>
+      <a href="#ghpages">GitHub Pages</a>
+      <a href="#design">Designing for a reader</a>
+      <a href="#page">Building your project site</a>
+      <a href="#deploy">Putting the site online</a>
+      <a href="#project-discussion">Project and policy discussion</a>
+      <a href="#wrap">Assignments and next steps</a>
+    </div>
+  </details>
+</div>
+<div class="layout">
+
+  <!-- ================= LEFT NAV ================= -->
+  <nav>
+    <a class="home" href="week_mapping_12week.html">MPA 2479<br>Applied AI for Public Policy</a>
+    <div class="days">
+      <div class="lbl">Weeks</div>
+      <a href="week01.html">1 · What an AI agent is</a>
+      <a href="week02.html">2 · Setting up and configuring the agent</a>
+      <a href="week03.html">3 · Starting the group project</a>
+      <a href="week04.html">4 · AI for data collection</a>
+      <a href="week05.html">5 · AI for text coding</a>
+      <a href="week06.html" class="cur">6 · AI for building websites</a>
+      <a href="week07.html">7 · Algorithmic bias</a>
+      <a href="week08.html">8 · Auditing a federal AI system</a>
+      <a href="week09.html">9 · Designing your final project</a>
+      <a href="week10.html">10 · AI governance</a>
+      <a href="week11.html">11 · Code review and replication</a>
+      <a href="week12.html">12 · Final presentations</a>
+    </div>
+    <div class="lbl">Today</div>
+    <div class="toc">
+      <a href="#opening">Opening</a>
+      <a href="#html">What a website is made of</a>
+      <a href="#hosting">Hosting and domain names</a>
+      <a href="#ghpages">GitHub Pages</a>
+      <a href="#design">Designing for a reader</a>
+      <a href="#page">Building your project site <span class="has">hands-on</span></a>
+      <a href="#deploy">Putting the site online <span class="has">hands-on</span></a>
+      <a href="#project-discussion">Project and policy discussion</a>
+      <a href="#wrap">Assignments and next steps</a>
+    </div>
+  </nav>
+
+  <!-- ================= CENTER CONTENT ================= -->
+  <main>
+    <p class="course-back"><a href="week_mapping_12week.html">← 12-week course plan</a></p>
+    <div class="mobilenote">You are on a small screen. This page is designed for a laptop, with three columns and hands-on steps appearing beside the content. On a phone it collapses to one column and the hands-on steps move to the end of the page. Reading here is fine; for the exercises you need your laptop anyway.</div>
+    <p class="kicker">Week 6 · Oct 22, 2026 · Thursday, 9:00–11:30 am · 280 Brook Street, Room 110</p>
+    <h1>AI for building websites</h1>
+    <p class="byline" style="margin:2px 0 16px;color:var(--muted);font-size:15px">Authors: <a href="https://hanzhang.xyz/">Han Zhang</a>, Codex (OpenAI), and Claude Code (Anthropic)</p>
+    <p class="goal">Build a website for the group project and put it online.</p>
+
+    <!-- OPENING -->
+    <section data-hands="none">
+<h2 class="sec" id="opening">Opening</h2>
+<div class="card"><h3>Today</h3><ul>
+  <li>Use the agent to build a website for your project and put it online with GitHub Pages.</li>
+</ul></div>
+</section>
+
+    <!-- READING -->
+
+
+
+    <!-- HTML -->
+    <section data-hands="none">
+    <h2 class="sec" id="html">What a website is made of</h2>
+    <div class="card">
+      <h3>HTML, CSS, and JavaScript</h3>
+      <ul>
+        <li>A website is a set of files. A web browser reads the files and displays them.</li>
+        <li><strong>HTML</strong> holds the content and its structure: headings, paragraphs, images, tables, and links. It is the only file type a website needs.</li>
+        <li><strong>CSS</strong> controls how the content looks: colors, fonts, and layout.</li>
+        <li><strong>JavaScript</strong> makes a page interactive, for example a menu that filters a chart.</li>
+        <li>CSS and JavaScript are optional. A page with HTML alone still works. It just looks plain.</li>
+        <li>A site can also include images and data files.</li>
+        <li>The agent writes these files. Your job is to read the result in a browser and ask for changes.</li>
+      </ul>
+    </div>
+    </section>
+
+    <!-- HOSTING -->
+    <section data-hands="none">
+    <h2 class="sec" id="hosting">Hosting and domain names</h2>
+    <div class="card">
+      <h3>Hosting</h3>
+      <ul>
+        <li>Open an HTML file on your own computer, and your browser displays it. Only you can see it.</li>
+        <li>For other people to see it, the files must sit on a computer that is always connected to the internet and has an address. That computer is a <strong>server</strong>. A service that keeps your files on its server is a <strong>host</strong>.</li>
+        <li>A <strong>static website</strong> sends every visitor the same files. Your project site is a static website.</li>
+        <li>A <strong>dynamic website</strong> runs a program on the server, for example to handle logins, forms, or a database. It needs more than a static host.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Domain names</h3>
+      <ul>
+        <li>A <strong>domain name</strong> is the address people type, such as <code>hanzhang.xyz</code>.</li>
+        <li>Most hosts give you a free address under their own domain, such as <code>username.github.io</code>.</li>
+        <li>An address of your own is bought separately from a domain registrar, for a yearly fee. You then point it to your host. Buying a domain and hosting the files are two separate steps.</li>
+      </ul>
+    </div>
+    </section>
+
+    <!-- GITHUB PAGES -->
+    <section data-hands="none">
+    <h2 class="sec" id="ghpages">GitHub Pages</h2>
+    <div class="card">
+      <h3>Three kinds of pages on GitHub</h3>
+      <ul>
+        <li>GitHub Pages is the simplest host for a course project. It is free, and it serves a website straight from a GitHub repository.</li>
+        <li>The <strong>repository page</strong> is the page GitHub makes for every repository, such as <a href="https://github.com/ngreifer/WeightIt">github.com/ngreifer/WeightIt</a>.
+          <ul>
+            <li>GitHub decides its layout: GitHub’s menus, the list of files, and the README below them.</li>
+            <li>An HTML file in the repository shows up here as code. Open an <code>index.html</code> on this page and you see its source, with no figures.</li>
+          </ul>
+        </li>
+        <li><strong>GitHub Pages</strong> turns the HTML files in a repository into a website. Visitors see your pages as you designed them, with no GitHub menus or file list. There are two kinds of GitHub Pages sites.
+          <ul>
+            <li>A <strong>project site</strong> comes from any repository. Its address is <code>username.github.io/repository</code>. Each repository can have one.</li>
+            <li>A <strong>user site</strong> comes from one special repository named <code>username.github.io</code>. Its address is <code>username.github.io</code>. Each account has one, and people use it as a personal homepage.</li>
+          </ul>
+        </li>
+      </ul>
+      <table>
+        <tr><th>Address</th><th>Kind</th><th>Repository</th></tr>
+        <tr><td><a href="https://github.com/ngreifer/WeightIt">github.com/ngreifer/WeightIt</a></td><td>Repository page</td><td><code>ngreifer/WeightIt</code></td></tr>
+        <tr><td><a href="https://ngreifer.github.io/WeightIt/">ngreifer.github.io/WeightIt</a></td><td>Project site</td><td><code>ngreifer/WeightIt</code></td></tr>
+        <tr><td><a href="https://ngreifer.github.io/cobalt/">ngreifer.github.io/cobalt</a></td><td>Project site</td><td><code>ngreifer/cobalt</code></td></tr>
+        <tr><td><a href="https://ngreifer.github.io/">ngreifer.github.io</a></td><td>User site</td><td><code>ngreifer/ngreifer.github.io</code></td></tr>
+      </table>
+      <ul>
+        <li>Open the first two addresses side by side. They come from the same repository.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Limits of GitHub Pages</h3>
+      <ul>
+        <li>It hosts static websites only. A site that needs logins, forms, or a database needs another host.</li>
+        <li>The site is public, even when the repository is private.</li>
+        <li>On a free GitHub plan, it works only for public repositories. A private repository needs a paid plan, such as GitHub Pro.</li>
+        <li>A site may be no larger than 1 GB. It has a soft limit of 100 GB of traffic per month.</li>
+        <li>GitHub asks that sites not be used for online businesses or for sensitive transactions such as passwords or credit card numbers.</li>
+        <li>A site that outgrows these limits moves to another host. This course does not need one.</li>
+        <li class="src"><a href="https://docs.github.com/en/pages/getting-started-with-github-pages/github-pages-limits">GitHub documentation: GitHub Pages limits &rarr;</a></li>
+      </ul>
+    </div>
+    </section>
+
+    <!-- DESIGN -->
+    <section data-hands="none">
+    <h2 class="sec" id="design">Designing for a reader</h2>
+    <div class="card">
+      <h3>Who reads the site</h3>
+      <ul>
+        <li>Decide who the reader is and what they need first. The <a href="https://designsystem.digital.gov/design-principles/">U.S. Web Design System</a>, used by federal agencies, puts this first among its design principles: “Start with real user needs.”</li>
+        <li>Put the question and the evidence at the top of the page.</li>
+        <li>Show the evidence as a figure or a table where you can. A reader takes in a chart faster than a long paragraph.</li>
+        <li>Write short sentences in plain words. Digital.gov keeps a <a href="https://digital.gov/guides/plain-language">plain language guide</a> for government websites.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Figures and tables</h3>
+      <ul>
+        <li>Each figure needs a title that states what it shows, axes with units, and the source and date of the data.</li>
+        <li>The figure on the page is the file your script wrote. Do not paste a screenshot.</li>
+        <li>The <a href="https://urbaninstitute.github.io/graphics-styleguide/">Urban Institute Data Visualization Style Guide</a> is one policy research organization’s rules for charts. The guide itself is a GitHub Pages site.</li>
+      </ul>
+    </div>
+    </section>
+
+    <!-- PAGE -->
+    <section data-hands="page">
+    <h2 class="sec" id="page">Building your project site <span class="hastag">· do it on the right</span></h2>
+    <div class="card">
+      <h3>A project site for your group</h3>
+      <ul>
+        <li>Build a project site from your group repository. You design it with the agent.</li>
+        <li>The home page has three parts:
+          <ul>
+            <li>your policy question, in one sentence,</li>
+            <li>your data source,</li>
+            <li>at least one figure or table that describes your data, such as the years, places, or number of records it covers.</li>
+          </ul>
+        </li>
+        <li>The site grows with the project. Add your results and the final product later.</li>
+      </ul>
+    </div>
+    <div class="card demo">
+      <span class="tag">Live demo</span>
+      <h3>Designing the site with the agent</h3>
+      <ul>
+        <li>Start in a mode that changes nothing, so the design is agreed before anything is written.</li>
+        <li>Codex in the terminal: type <code>/permissions</code> and choose Ask for approval, then ask for the plan first in the prompt. Claude Code in the terminal: press Shift+Tab until the footer shows plan mode.</li>
+        <li>In the ChatGPT desktop app and the Codex IDE extension, use the permissions control below the composer, or type <code>/plan</code> in the desktop app.</li>
+        <li>In the Claude Code desktop app, choose the mode in the permission mode selector next to the send button. The options are Auto, Manual, Accept edits, and Plan.</li>
+        <li class="src">Codex IDE extension: <a href="https://developers.openai.com/codex/ide">developers.openai.com/codex/ide</a> · course <a href="codex_setup_guide.html">Codex setup guide</a></li>
+        <li class="src">Claude Code desktop app: <a href="https://code.claude.com/docs/en/desktop-quickstart">code.claude.com/docs/en/desktop-quickstart</a></li>
+      </ul>
+      <div class="quote">Propose a plan for a project website in docs/. The home page states our policy question, names our data source, and shows one figure or table that describes our data. Tell me which files you will create.</div>
+      <ul>
+        <li>Read the plan.</li>
+        <li>Approve it, let it run, then open the home page in a browser.</li>
+        <li>Commit the site.</li>
+      </ul>
+    </div>
+    </section>
+
+
+    <!-- DEPLOY -->
+    <section data-hands="deploy">
+    <h2 class="sec" id="deploy">Putting the site online <span class="hastag">· do it on the right</span></h2>
+    <div class="card">
+      <h3>From a repository to a public address</h3>
+      <ul>
+        <li>In the repository settings, GitHub Pages serves the site from the repository’s main folder or from a folder named <code>docs/</code>. Your site lives in <code>docs/</code>.</li>
+        <li>Check the files in <code>docs/</code> before you turn it on. Anyone with the address can open them.</li>
+        <li>Record the address in the README of your GitHub repository.</li>
+        <li>Exchange addresses with another group and give each other feedback on the site in class.</li>
+        <li class="src"><a href="https://docs.github.com/en/pages/getting-started-with-github-pages/creating-a-github-pages-site">GitHub documentation on creating a GitHub Pages site &rarr;</a></li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>If you finish early</h3>
+      <ul>
+        <li>Build a user site for yourself in a repository named <code>username.github.io</code>.</li>
+        <li>If you own a domain name, point it to your site. Follow <a href="https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site">GitHub’s documentation on custom domains</a>.</li>
+      </ul>
+    </div>
+    </section>
+
+
+    <!-- WRAP -->
+    <section data-hands="none">
+<h2 class="sec" id="project-discussion">Project and policy discussion</h2>
+<div class="card"><h3>Your project site</h3><ul>
+  <li>Who is the reader of your site? What do they need to see first?</li>
+  <li>Which figure or table tells that reader the most about your data?</li>
+  <li>Did AI help you build the site? Show a concrete example.</li>
+</ul></div>
+</section>
+<section data-hands="none">
+<h2 class="sec" id="wrap">Assignments and next steps</h2>
+<div class="card"><h3>Checkpoint 3: project website · 5% · group</h3><ul>
+  <li>Your group’s project site is online at a GitHub Pages address.</li>
+  <li>The home page states your policy question and data source, and shows at least one figure or table that describes your data, made by a script.</li>
+  <li>The address is in the README of the group repository.</li>
+</ul>
+<p><b>Due Oct 29 before class.</b></p></div>
+<div class="card"><h3>Weekly memo · individual</h3><ul>
+  <li>Write 1–2 specific observations about coding text. Answer one or two of these questions:
+    <ul>
+      <li>Does text coding help you rethink your project?</li>
+      <li>If your project already involves text coding, how might AI change it? Or would AI not help?</li>
+      <li>Which method did best on your held-out sample? Which abstracts did it get wrong, and why?</li>
+    </ul>
+  </li>
+  <li>If you have not submitted the Week 5 memo yet, write one memo that covers both weeks.</li>
+  <li>Aim for 150–200 words total.</li>
+  <li>Describe what you actually tried and observed in your own words. Do not use AI to write the memo.</li>
+  <li>Submit to Canvas Discussions. See <a href="week_mapping_12week.html#assessment">assignments and grading</a>.</li>
+</ul>
+<p><b>Due Oct 29 before class.</b></p></div>
+<p><a href="week07.html">Week 7 &rarr;</a></p>
+</section>
+
+  </main>
+
+  <!-- ================= RIGHT CONTEXTUAL HANDS-ON ================= -->
+  <aside>
+    <p class="railhead" id="railhead">Hands-on</p>
+    <div class="hands" data-for="none"></div>
+
+
+    <!-- page -->
+    <div class="hands" data-for="page">
+      <div class="exi">
+        <span class="step">Step 1</span>
+        <h4>Compare the pages</h4>
+        <p>Open <a href="https://github.com/ngreifer/WeightIt">github.com/ngreifer/WeightIt</a> and <a href="https://ngreifer.github.io/WeightIt/">ngreifer.github.io/WeightIt</a> side by side.</p>
+      </div>
+      <div class="exi">
+        <span class="step">Step 2</span>
+        <h4>Build the project site</h4>
+        <div class="code">Build a project website in docs/. The home page states our policy question in one sentence, names our data source, and shows one figure or table that describes our data. Write a script that makes the figure or table and saves a copy in docs/.<span class="copy">copy</span></div>
+        <ul>
+          <li>Open docs/index.html in a browser and read it as a stranger would.</li>
+          <li>Fix the question sentence yourself if it is not what you mean.</li>
+          <li>Commit the site.</li>
+        </ul>
+      </div>
+      <div class="exi">
+        <span class="step">Step 3 · if you finish early</span>
+        <h4>A user site for yourself</h4>
+        <p>Create a repository named <code>username.github.io</code>, with your own GitHub username, and ask the agent to build a personal homepage in it.</p>
+      </div>
+    </div>
+
+
+    <!-- deploy -->
+    <div class="hands" data-for="deploy">
+      <div class="exi">
+        <span class="step">Step 1</span>
+        <h4>Review the files</h4>
+        <div class="code">List every file in docs/. Tell me which ones contain data, and whether any of them should not be public.<span class="copy">copy</span></div>
+        <ul>
+          <li>If restricted data is in docs/, stop and come find me before you turn on GitHub Pages.</li>
+        </ul>
+      </div>
+      <div class="exi">
+        <span class="step">Step 2</span>
+        <h4>Turn on GitHub Pages</h4>
+        <p>In the repository settings, serve the site from the <code>docs/</code> folder of the main branch. Follow the official steps:</p>
+        <p><a href="https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site">GitHub documentation on choosing the folder for a GitHub Pages site &rarr;</a></p>
+        <ul>
+          <li>Open the address in a browser window where you are logged out.</li>
+          <li>Send the address to a neighbor and have them open it.</li>
+        </ul>
+      </div>
+      <div class="exi">
+        <span class="step">Step 3</span>
+        <h4>Record the address</h4>
+        <div class="code">Add the website address to the README, with one line saying what the site shows. Then commit.<span class="copy">copy</span></div>
+      </div>
+    </div>
+  </aside>
+
+</div>
+
+<script>
+  const sections=[...document.querySelectorAll('main section')];
+  const panels=[...document.querySelectorAll('.hands')];
+  const railhead=document.getElementById('railhead');
+  function show(key){
+    panels.forEach(p=>p.classList.toggle('on',p.dataset.for===key));
+    railhead.style.display = key==='none' ? 'none' : '';
+  }
+  addEventListener('scroll',()=>{
+    let cur=sections[0];
+    sections.forEach(s=>{const t=s.getBoundingClientRect().top; if(t<window.innerHeight*0.35) cur=s;});
+    show(cur.dataset.hands);
+  },{passive:true});
+  show('none');
+  const links=[...document.querySelectorAll('.toc a')];
+  addEventListener('scroll',()=>{
+    let cur=null;
+    links.forEach(a=>{const el=document.querySelector(a.getAttribute('href'));
+      if(el && el.getBoundingClientRect().top<140)cur=a;});
+    links.forEach(a=>a.classList.toggle('active',a===cur));
+  },{passive:true});
+  document.addEventListener('click',e=>{
+    if(!e.target.classList.contains('copy'))return;
+    const x=e.target.parentNode.childNodes[0].textContent.trim();
+    navigator.clipboard.writeText(x).then(()=>{e.target.textContent='copied';
+      setTimeout(()=>e.target.textContent='copy',1200);});
+  });
+</script>
+</body>
+</html>
