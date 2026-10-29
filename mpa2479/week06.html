@@ -142,10 +142,10 @@
       <a href="week12.html">12 · Final presentations</a>
       <p class="mlbl">On this page</p>
       <a href="#opening">Opening</a>
+      <a href="#design">Designing your project site</a>
       <a href="#html">What a website is made of</a>
       <a href="#hosting">Hosting and domain names</a>
       <a href="#ghpages">GitHub Pages</a>
-      <a href="#design">Designing for a reader</a>
       <a href="#page">Building your project site</a>
       <a href="#deploy">Putting the site online</a>
       <a href="#project-discussion">Project and policy discussion</a>
@@ -176,10 +176,10 @@
     <div class="lbl">Today</div>
     <div class="toc">
       <a href="#opening">Opening</a>
+      <a href="#design">Designing your project site <span class="has">hands-on</span></a>
       <a href="#html">What a website is made of</a>
       <a href="#hosting">Hosting and domain names</a>
       <a href="#ghpages">GitHub Pages</a>
-      <a href="#design">Designing for a reader</a>
       <a href="#page">Building your project site <span class="has">hands-on</span></a>
       <a href="#deploy">Putting the site online <span class="has">hands-on</span></a>
       <a href="#project-discussion">Project and policy discussion</a>
@@ -200,12 +200,49 @@
     <section data-hands="none">
 <h2 class="sec" id="opening">Opening</h2>
 <div class="card"><h3>Today</h3><ul>
-  <li>Use the agent to build a website for your project and put it online with GitHub Pages.</li>
+  <li>Design a website for your project, build it with the agent, and put it online with GitHub Pages.</li>
 </ul></div>
 </section>
 
     <!-- READING -->
 
+
+
+    <!-- DESIGN -->
+    <section data-hands="design">
+    <h2 class="sec" id="design">Designing your project site <span class="hastag">· do it on the right</span></h2>
+    <div class="card">
+      <h3>Layout of the site</h3>
+      <ul>
+        <li>Decide what your project site looks like before you build it.</li>
+        <li>The site is a web page for readers of your policy work. It should not look like the README of your repository.</li>
+        <li>There are two ways to start:
+          <ul>
+            <li>sketch the home page yourself, on paper or on a screen,</li>
+            <li>find a website or a free template whose layout you like.</li>
+          </ul>
+        </li>
+        <li>Your group then builds the site from the sketch or the template.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Who reads the site</h3>
+      <ul>
+        <li>Decide who the reader is and what they need first. The <a href="https://designsystem.digital.gov/design-principles/">U.S. Web Design System</a>, used by federal agencies, puts this first among its design principles: “Start with real user needs.”</li>
+        <li>Put the question and the evidence at the top of the page.</li>
+        <li>Show the evidence as a figure or a table where you can. A reader takes in a chart faster than a long paragraph.</li>
+        <li>Write short sentences in plain words. Digital.gov keeps a <a href="https://digital.gov/guides/plain-language">plain language guide</a> for government websites.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Figures and tables</h3>
+      <ul>
+        <li>Each figure needs a title that states what it shows, axes with units, and the source and date of the data.</li>
+        <li>The figure on the page is the file your script wrote. Do not paste a screenshot.</li>
+        <li>The <a href="https://urbaninstitute.github.io/graphics-styleguide/">Urban Institute Data Visualization Style Guide</a> is one policy research organization’s rules for charts. The guide itself is a GitHub Pages site.</li>
+      </ul>
+    </div>
+    </section>
 
 
     <!-- HTML -->
@@ -292,35 +329,13 @@
     </div>
     </section>
 
-    <!-- DESIGN -->
-    <section data-hands="none">
-    <h2 class="sec" id="design">Designing for a reader</h2>
-    <div class="card">
-      <h3>Who reads the site</h3>
-      <ul>
-        <li>Decide who the reader is and what they need first. The <a href="https://designsystem.digital.gov/design-principles/">U.S. Web Design System</a>, used by federal agencies, puts this first among its design principles: “Start with real user needs.”</li>
-        <li>Put the question and the evidence at the top of the page.</li>
-        <li>Show the evidence as a figure or a table where you can. A reader takes in a chart faster than a long paragraph.</li>
-        <li>Write short sentences in plain words. Digital.gov keeps a <a href="https://digital.gov/guides/plain-language">plain language guide</a> for government websites.</li>
-      </ul>
-    </div>
-    <div class="card">
-      <h3>Figures and tables</h3>
-      <ul>
-        <li>Each figure needs a title that states what it shows, axes with units, and the source and date of the data.</li>
-        <li>The figure on the page is the file your script wrote. Do not paste a screenshot.</li>
-        <li>The <a href="https://urbaninstitute.github.io/graphics-styleguide/">Urban Institute Data Visualization Style Guide</a> is one policy research organization’s rules for charts. The guide itself is a GitHub Pages site.</li>
-      </ul>
-    </div>
-    </section>
-
     <!-- PAGE -->
     <section data-hands="page">
     <h2 class="sec" id="page">Building your project site <span class="hastag">· do it on the right</span></h2>
     <div class="card">
       <h3>A project site for your group</h3>
       <ul>
-        <li>Build a project site from your group repository. You design it with the agent.</li>
+        <li>Build a project site from your group repository. Follow your sketch or template.</li>
         <li>The home page has three parts:
           <ul>
             <li>your policy question, in one sentence,</li>
@@ -331,24 +346,6 @@
         <li>The site grows with the project. Add your results and the final product later.</li>
       </ul>
     </div>
-    <div class="card demo">
-      <span class="tag">Live demo</span>
-      <h3>Designing the site with the agent</h3>
-      <ul>
-        <li>Start in a mode that changes nothing, so the design is agreed before anything is written.</li>
-        <li>Codex in the terminal: type <code>/permissions</code> and choose Ask for approval, then ask for the plan first in the prompt. Claude Code in the terminal: press Shift+Tab until the footer shows plan mode.</li>
-        <li>In the ChatGPT desktop app and the Codex IDE extension, use the permissions control below the composer, or type <code>/plan</code> in the desktop app.</li>
-        <li>In the Claude Code desktop app, choose the mode in the permission mode selector next to the send button. The options are Auto, Manual, Accept edits, and Plan.</li>
-        <li class="src">Codex IDE extension: <a href="https://developers.openai.com/codex/ide">developers.openai.com/codex/ide</a> · course <a href="codex_setup_guide.html">Codex setup guide</a></li>
-        <li class="src">Claude Code desktop app: <a href="https://code.claude.com/docs/en/desktop-quickstart">code.claude.com/docs/en/desktop-quickstart</a></li>
-      </ul>
-      <div class="quote">Propose a plan for a project website in docs/. The home page states our policy question, names our data source, and shows one figure or table that describes our data. Tell me which files you will create.</div>
-      <ul>
-        <li>Read the plan.</li>
-        <li>Approve it, let it run, then open the home page in a browser.</li>
-        <li>Commit the site.</li>
-      </ul>
-    </div>
     </section>
 
 
@@ -356,10 +353,10 @@
     <section data-hands="deploy">
     <h2 class="sec" id="deploy">Putting the site online <span class="hastag">· do it on the right</span></h2>
     <div class="card">
-      <h3>From a repository to a public address</h3>
+      <h3>Publishing with GitHub Pages</h3>
       <ul>
-        <li>In the repository settings, GitHub Pages serves the site from the repository’s main folder or from a folder named <code>docs/</code>. Your site lives in <code>docs/</code>.</li>
-        <li>Check the files in <code>docs/</code> before you turn it on. Anyone with the address can open them.</li>
+        <li>In the repository settings, GitHub Pages serves the site from the repository’s main folder or from a folder named <code>docs/</code>. Choose the folder that holds your website files.</li>
+        <li>Check the files in that folder before you turn it on. Anyone with the address can open them.</li>
         <li>Record the address in the README of your GitHub repository.</li>
         <li>Exchange addresses with another group and give each other feedback on the site in class.</li>
         <li class="src"><a href="https://docs.github.com/en/pages/getting-started-with-github-pages/creating-a-github-pages-site">GitHub documentation on creating a GitHub Pages site &rarr;</a></li>
@@ -386,26 +383,6 @@
 </section>
 <section data-hands="none">
 <h2 class="sec" id="wrap">Assignments and next steps</h2>
-<div class="card"><h3>Checkpoint 3: project website · 5% · group</h3><ul>
-  <li>Your group’s project site is online at a GitHub Pages address.</li>
-  <li>The home page states your policy question and data source, and shows at least one figure or table that describes your data, made by a script.</li>
-  <li>The address is in the README of the group repository.</li>
-</ul>
-<p><b>Due Oct 29 before class.</b></p></div>
-<div class="card"><h3>Weekly memo · individual</h3><ul>
-  <li>Write 1–2 specific observations about coding text. Answer one or two of these questions:
-    <ul>
-      <li>Does text coding help you rethink your project?</li>
-      <li>If your project already involves text coding, how might AI change it? Or would AI not help?</li>
-      <li>Which method did best on your held-out sample? Which abstracts did it get wrong, and why?</li>
-    </ul>
-  </li>
-  <li>If you have not submitted the Week 5 memo yet, write one memo that covers both weeks.</li>
-  <li>Aim for 150–200 words total.</li>
-  <li>Describe what you actually tried and observed in your own words. Do not use AI to write the memo.</li>
-  <li>Submit to Canvas Discussions. See <a href="week_mapping_12week.html#assessment">assignments and grading</a>.</li>
-</ul>
-<p><b>Due Oct 29 before class.</b></p></div>
 <p><a href="week07.html">Week 7 &rarr;</a></p>
 </section>
 
@@ -417,6 +394,23 @@
     <div class="hands" data-for="none"></div>
 
 
+    <!-- design -->
+    <div class="hands" data-for="design">
+      <div class="exi">
+        <span class="step">Step 1</span>
+        <h4>Name the reader</h4>
+        <p>As a group, decide who reads your site and what they need to see first.</p>
+      </div>
+      <div class="exi">
+        <span class="step">Step 2</span>
+        <h4>Sketch the home page or find a template</h4>
+        <ul>
+          <li>Sketch: draw what the reader sees first, which sections follow, and where the figure or table goes.</li>
+          <li>Template: find a website or a free template whose layout fits your project. Save its address.</li>
+        </ul>
+      </div>
+    </div>
+
     <!-- page -->
     <div class="hands" data-for="page">
       <div class="exi">
@@ -427,9 +421,10 @@
       <div class="exi">
         <span class="step">Step 2</span>
         <h4>Build the project site</h4>
-        <div class="code">Build a project website in docs/. The home page states our policy question in one sentence, names our data source, and shows one figure or table that describes our data. Write a script that makes the figure or table and saves a copy in docs/.<span class="copy">copy</span></div>
+        <div class="code">Build a project website in this repository. Follow the layout in our sketch [or: the template at LINK]. The home page states our policy question in one sentence, names our data source, and shows one figure or table that describes our data. Write a script that makes the figure or table and saves a copy with the website files.<span class="copy">copy</span></div>
         <ul>
-          <li>Open docs/index.html in a browser and read it as a stranger would.</li>
+          <li>Attach a photo of your sketch, or replace LINK with the template address.</li>
+          <li>Open the home page in a browser and read it as a stranger would.</li>
           <li>Fix the question sentence yourself if it is not what you mean.</li>
           <li>Commit the site.</li>
         </ul>
@@ -447,15 +442,15 @@
       <div class="exi">
         <span class="step">Step 1</span>
         <h4>Review the files</h4>
-        <div class="code">List every file in docs/. Tell me which ones contain data, and whether any of them should not be public.<span class="copy">copy</span></div>
+        <div class="code">List every file in the folder that GitHub Pages will publish. Tell me which ones contain data, and whether any of them should not be public.<span class="copy">copy</span></div>
         <ul>
-          <li>If restricted data is in docs/, stop and come find me before you turn on GitHub Pages.</li>
+          <li>If restricted data is in that folder, stop and come find me before you turn on GitHub Pages.</li>
         </ul>
       </div>
       <div class="exi">
         <span class="step">Step 2</span>
         <h4>Turn on GitHub Pages</h4>
-        <p>In the repository settings, serve the site from the <code>docs/</code> folder of the main branch. Follow the official steps:</p>
+        <p>In the repository settings, serve the site from the folder that holds your website, on the main branch. Follow the official steps:</p>
         <p><a href="https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site">GitHub documentation on choosing the folder for a GitHub Pages site &rarr;</a></p>
         <ul>
           <li>Open the address in a browser window where you are logged out.</li>
