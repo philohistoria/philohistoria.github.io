@@ -136,9 +136,9 @@
       <a href="week06.html">6 · AI for building websites</a>
       <a href="week07.html">7 · Algorithmic bias</a>
       <a href="week08.html">8 · Auditing a federal AI system</a>
-      <a href="week09.html">9 · Designing your final project</a>
+      <a href="week09.html">9 · Open-source AI models</a>
       <a href="week10.html">10 · AI governance</a>
-      <a href="week11.html">11 · Code review and replication</a>
+      <a href="week11.html">11 · Collaboration and replication</a>
       <a href="week12.html">12 · Final presentations</a>
       <p class="mlbl">On this page</p>
       <a href="#opening">Opening</a>
@@ -166,9 +166,9 @@
       <a href="week06.html">6 · AI for building websites</a>
       <a href="week07.html" class="cur">7 · Algorithmic bias</a>
       <a href="week08.html">8 · Auditing a federal AI system</a>
-      <a href="week09.html">9 · Designing your final project</a>
+      <a href="week09.html">9 · Open-source AI models</a>
       <a href="week10.html">10 · AI governance</a>
-      <a href="week11.html">11 · Code review and replication</a>
+      <a href="week11.html">11 · Collaboration and replication</a>
       <a href="week12.html">12 · Final presentations</a>
     </div>
     <div class="lbl">Today</div>
@@ -278,7 +278,7 @@
       </ul>
     </div>
     <div class="card read">
-      <span class="tag">Reading in class</span>
+      <span class="tag">Read before Nov 5</span>
       <h3>Two articles on COMPAS</h3>
       <ul>
         <li>Angwin et al., <a href="https://www.propublica.org/article/machine-bias-risk-assessments-in-criminal-sentencing">“Machine Bias” (ProPublica, 2016)</a>.</li>
@@ -336,9 +336,23 @@
     <div class="card">
       <h3>Base rates and the two criteria</h3>
       <ul>
-        <li>You have now computed both numbers. ProPublica compared false positive rates. Northpointe compared precision.</li>
-        <li>When the base rate differs between groups, a score cannot make both numbers equal across groups.</li>
-        <li>You have to choose which number matters for the decision.</li>
+        <li>Here are the two numbers from the class data (6,172 defendants; Medium or High counts as flagged):</li>
+      </ul>
+      <table>
+        <tr><th></th><th>Black defendants</th><th>White defendants</th></tr>
+        <tr><td>Base rate: share arrested again within two years</td><td>52%</td><td>39%</td></tr>
+        <tr><td>Share flagged Medium or High</td><td>58%</td><td>33%</td></tr>
+        <tr><td>Precision: among those flagged, share arrested again</td><td>65%</td><td>60%</td></tr>
+        <tr><td>False positive rate: among those not arrested again, share flagged</td><td>42%</td><td>22%</td></tr>
+      </table>
+      <ul>
+        <li>Northpointe looked at precision. It is similar for the two groups, 65% and 60%. A Medium or High label means about the same chance of a new arrest for a Black or a white defendant. By this measure, Northpointe called the score fair.</li>
+        <li>ProPublica looked at the false positive rate. Among defendants who were not arrested again, 42% of Black defendants were flagged, against 22% of white defendants. By this measure, ProPublica called the score unfair.</li>
+        <li>Both calculations are correct. They measure different things.</li>
+        <li>The two groups have different base rates, 52% and 39%. To keep precision similar, the score flags a larger share of Black defendants, 58% against 33%. More of the Black defendants who were not arrested again are then flagged too. That raises their false positive rate.</li>
+        <li>Lowering that false positive rate would mean flagging fewer Black defendants. Precision would then no longer be equal.</li>
+        <li>When base rates differ and the score is not perfect, both numbers cannot be equal across groups at the same time. You have to choose which one matters for the decision.</li>
+        <li>Your own numbers may differ slightly from those in the ProPublica article, which used a different sample.</li>
         <li class="src"><a href="https://arxiv.org/abs/1609.05807">Kleinberg, Mullainathan, and Raghavan (2016)</a> and <a href="https://doi.org/10.1089/big.2016.0047">Chouldechova (2017)</a> proved this result.</li>
       </ul>
     </div>
@@ -366,19 +380,22 @@
 </section>
 <section data-hands="none">
 <h2 class="sec" id="wrap">Assignments and next steps</h2>
-<div class="card"><h3>Weekly memo · individual</h3><ul>
-  <li>Write 1–2 observations about possible errors in your project. Answer one or two of these questions:
+<div class="card"><h3>Reading · due Nov 5 before class</h3><ul>
+  <li>Read these four readings. We will discuss them in class. Together they are about 25 pages.</li>
+  <li>Two articles on COMPAS:
     <ul>
-      <li>Where could your project make errors? Examples are a coded variable, a prediction, or a policy proposal.</li>
-      <li>Could those errors fall more often on one group? Which group?</li>
-      <li>How would you check? Name the groups, the rate you would compare, and the data you would need.</li>
+      <li>Angwin et al., <a href="https://www.propublica.org/article/machine-bias-risk-assessments-in-criminal-sentencing">“Machine Bias” (ProPublica, 2016)</a>. About 10 pages.</li>
+      <li>Corbett-Davies, Pierson, Feller &amp; Goel, <a href="https://www.cs.yale.edu/homes/jf/Feller.pdf">the response to ProPublica (Washington Post, 2016)</a>. 5 pages.</li>
     </ul>
   </li>
-  <li>Aim for 150–200 words total.</li>
-  <li>Describe what you actually tried and observed in your own words. Do not use AI to write the memo.</li>
-  <li>Submit to Canvas Discussions. See <a href="week_mapping_12week.html#assessment">assignments and grading</a>.</li>
-</ul>
-<p><b>Due Nov 5 before class.</b></p></div>
+  <li>Two readings on AI in the federal government:
+    <ul>
+      <li><a href="https://www.whitehouse.gov/wp-content/uploads/2025/02/M-25-21-Accelerating-Federal-Use-of-AI-through-Innovation-Governance-and-Public-Trust.pdf">The White House AI memo</a>, issued by the Office of Management and Budget (<i>Accelerating Federal Use of AI through Innovation, Governance, and Public Trust</i>, M-25-21, April 2025), pp. 14–17 and 21–23: the definition of high-impact AI, the minimum risk-management practices, the uses presumed to be high-impact, and the list of risk factors.</li>
+      <li>Engstrom, Ho, Sharkey &amp; Cuéllar, <a href="https://law.stanford.edu/wp-content/uploads/2020/02/ACUS-AI-Report.pdf"><i>Government by Algorithm</i> (2020)</a>, pp. 6–8, the executive summary.</li>
+    </ul>
+  </li>
+  <li>As you read the COMPAS articles, find the fairness criterion that each one uses.</li>
+</ul></div>
 <p><a href="week08.html">Week 8 &rarr;</a></p>
 </section>
 

@@ -1,0 +1,715 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Week 8: Auditing a Federal AI System</title>
+<style>
+  :root{
+    --bg:#fcfcfb; --fg:#1c1c1a; --muted:#6b6b66; --line:#e6e5e1;
+    --accent:#2f5d8a; --accent-weak:#eaf0f5; --ex:#b5651d; --ex-weak:#fbf1e7;
+    --code-bg:#f4f5f3; --card:#fff;
+    --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--sans)}
+  .layout{display:grid;grid-template-columns:180px minmax(0,1fr) 360px;max-width:1320px;margin:0 auto}
+  nav{position:sticky;top:0;align-self:start;height:100vh;overflow:auto;
+      padding:26px 14px;border-right:1px solid var(--line);font-size:14px}
+  nav .days{display:flex;flex-direction:column;gap:2px;margin-bottom:22px}
+  nav .days a{color:var(--muted);text-decoration:none;padding:3px 0;font-size:13px}
+  nav .days a.cur{color:var(--fg);font-weight:700}
+  nav .days span.off{color:#c8c7c2;padding:3px 0;font-size:13px}
+  nav .home{display:block;font-size:14px;font-weight:800;color:var(--fg);text-decoration:none;line-height:1.25;margin-bottom:18px}
+  nav .home:hover{color:var(--accent)}
+  nav .lbl{font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin:0 0 8px}
+  nav .toc a{display:block;color:var(--fg);text-decoration:none;padding:6px 0 6px 12px;
+             border-left:2px solid transparent;margin-left:-2px}
+  nav .toc a:hover{color:var(--accent)}
+  nav .toc a.active{color:var(--accent);border-left-color:var(--accent);font-weight:600}
+  nav .toc .has{color:var(--ex);font-size:11px;margin-left:6px}
+  main{padding:30px 32px 160px;min-width:0}
+  .course-back{margin:0 0 12px;font-size:14px}
+  .course-back a{color:var(--accent)}
+  .kicker{font-size:13px;letter-spacing:.07em;text-transform:uppercase;color:var(--accent);font-weight:700;margin:0}
+  h1{margin:4px 0 6px;font-size:32px}
+  .goal{color:var(--muted);font-size:16px;margin:0 0 20px}
+  h2.sec{font-size:28px;font-weight:700;color:var(--fg);line-height:1.2;
+         margin:52px 0 12px;padding-top:22px;border-top:1px solid var(--line)}
+  h2.sec .hastag{color:var(--ex);font-weight:600;font-size:14px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:14px;
+        padding:20px 24px;margin:16px 0;box-shadow:0 1px 2px rgba(0,0,0,.03)}
+  .card h3{margin:0 0 12px;font-size:21px;line-height:1.25}
+  .card ul{list-style:none;padding:0;margin:0}
+  .card li{font-size:17px;line-height:1.45;padding:9px 0 9px 26px;position:relative;border-top:1px solid var(--line)}
+  .card li:first-child{border-top:0}
+  .card li::before{content:"";position:absolute;left:4px;top:17px;width:8px;height:8px;border-radius:50%;background:var(--accent)}
+  .card ul ul{margin:6px 0 0}
+  .card li li{font-size:15px;padding:5px 0 5px 24px;border-top:0;color:var(--muted)}
+  .card li li::before{width:5px;height:5px;top:14px;background:var(--muted)}
+  .card.demo{border-left:4px solid var(--accent)}
+  .card.demo .tag{display:inline-block;font-size:12px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;
+                  color:var(--accent);margin-bottom:8px}
+  .card.read{border-left:4px solid #7a5ea6}
+  .card.read .tag{display:inline-block;font-size:12px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;
+                  color:#7a5ea6;margin-bottom:8px}
+  .quote{background:var(--code-bg);border-left:3px solid var(--accent);border-radius:0 8px 8px 0;
+         padding:12px 16px;margin:12px 0;font-style:italic;line-height:1.5}
+  code{background:var(--code-bg);padding:1px 5px;border-radius:4px;font-family:ui-monospace,Menlo,monospace;font-size:.85em}
+  strong{color:#111}
+  table{border-collapse:collapse;width:100%;margin:10px 0;font-size:16px}
+  th,td{border:1px solid var(--line);padding:8px 12px;text-align:left}
+  th{background:var(--accent-weak);font-size:14px}
+  .src{font-size:13px;color:var(--muted)} .src a{color:var(--accent)}
+  aside{position:sticky;top:0;align-self:start;height:100vh;overflow:auto;
+        border-left:1px solid var(--line);padding:26px 18px 60px;background:#fbfaf8}
+  aside .railhead{font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--ex)}
+  .hands{display:none} .hands.on{display:block}
+  .exi{border:1px solid #e8d3ba;background:var(--ex-weak);border-radius:10px;margin:10px 0;padding:12px 14px}
+  .exi .step{display:inline-block;font-size:10px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;
+             color:#fff;background:var(--ex);border-radius:20px;padding:2px 9px;margin-bottom:8px}
+  .exi h4{margin:0 0 6px;font-size:15px}
+  .exi ul{margin:6px 0;padding-left:18px;font-size:13.5px;line-height:1.5}
+  .exi li{margin:4px 0}
+  .exi p{font-size:13.5px;line-height:1.5;margin:6px 0}
+  .save{font-size:13px;color:var(--muted);background:#fff;border:1px solid var(--line);
+        border-radius:8px;padding:9px 12px;margin:10px 0}
+  .code{position:relative;background:#fff;border:1px solid #e8d3ba;border-radius:8px;
+        padding:9px 34px 9px 11px;font-family:ui-monospace,Menlo,monospace;font-size:12px;
+        white-space:pre-wrap;margin:8px 0;line-height:1.45}
+  .code .copy{position:absolute;top:6px;right:6px;font-size:10px;border:1px solid #e8d3ba;
+              background:#fff;border-radius:6px;padding:2px 7px;cursor:pointer;color:var(--ex)}
+  .guidelink{display:inline-block;margin-top:6px;font-size:13px;color:var(--ex);font-weight:600}
+    .mobilenote{display:none}
+  .mhead{display:none}
+  /* ---- tablet: two columns, top menu ---- */
+  @media(max-width:1080px){
+    .layout{grid-template-columns:minmax(0,1fr) 340px}
+    nav{display:none}
+    .mhead{display:flex;align-items:center;justify-content:space-between;gap:12px;
+           position:sticky;top:0;z-index:20;background:var(--bg);
+           border-bottom:1px solid var(--line);padding:10px 16px}
+    .mtitle{font-size:14px;font-weight:800;color:var(--fg);text-decoration:none}
+    .mnav summary{list-style:none;cursor:pointer;font-size:13px;font-weight:700;color:var(--accent);
+                  border:1px solid var(--line);border-radius:8px;padding:5px 12px;background:#fff}
+    .mnav summary::-webkit-details-marker{display:none}
+    .mnav{position:relative}
+    .mnav-box{position:absolute;right:0;top:36px;min-width:240px;background:#fff;
+              border:1px solid var(--line);border-radius:12px;box-shadow:0 8px 24px rgba(0,0,0,.10);
+              padding:10px 14px;z-index:30}
+    .mnav-box a{display:block;color:var(--fg);text-decoration:none;font-size:14px;padding:6px 0}
+    .mnav-box a:hover{color:var(--accent)}
+    .mlbl{font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin:8px 0 2px}
+    main{padding:20px 20px 120px}
+    h1{font-size:27px}
+    h2.sec{font-size:24px}
+    table{display:block;overflow-x:auto}
+  }
+  /* ---- phone: single column ---- */
+  @media(max-width:740px){
+    .layout{grid-template-columns:1fr}
+    main{padding:16px 14px 60px}
+    .mobilenote{display:block;background:var(--accent-weak);border:1px solid var(--line);
+                border-radius:10px;padding:10px 14px;margin:0 0 18px;font-size:13.5px;
+                line-height:1.5;color:var(--fg)}
+    h1{font-size:25px}
+    .card{padding:16px 16px}
+    .card li{font-size:16px}
+    aside{position:static;height:auto;border-left:0;border-top:1px solid var(--line)}
+    .hands{display:block !important;border-top:1px solid var(--line);padding-top:10px;margin-top:10px}
+    .hands[data-for="none"]{display:none !important}
+  }
+</style>
+</head>
+<body>
+<div class="mhead">
+  <a class="mtitle" href="week_mapping_12week.html">Applied AI for Public Policy</a>
+  <details class="mnav">
+    <summary>Menu</summary>
+    <div class="mnav-box">
+      <p class="mlbl">Weeks</p>
+      <a href="week01.html">1 · What an AI agent is</a>
+      <a href="week02.html">2 · Setting up and configuring the agent</a>
+      <a href="week03.html">3 · Starting the group project</a>
+      <a href="week04.html">4 · AI for data collection</a>
+      <a href="week05.html">5 · AI for text coding</a>
+      <a href="week06.html">6 · AI for building websites</a>
+      <a href="week07.html">7 · Algorithmic bias</a>
+      <a href="week08.html">8 · Auditing a federal AI system</a>
+      <a href="week09.html">9 · Open-source AI models</a>
+      <a href="week10.html">10 · AI governance</a>
+      <a href="week11.html">11 · Collaboration and replication</a>
+      <a href="week12.html">12 · Final presentations</a>
+      <p class="mlbl">On this page</p>
+      <a href="#opening">Opening</a>
+      <a href="#reading">Readings</a>
+      <a href="#inventory">The White House AI memo</a>
+      <a href="#overview">Exercise 1: Description and classification of federal AI systems</a>
+      <a href="#risks">Risks of government AI</a>
+      <a href="#rules">Federal rules for high-impact AI</a>
+      <a href="#score">Exercise 2: Audit of one high-impact system</a>
+      <a href="#findings">Comparing audit findings</a>
+      <a href="#debates">AI governance presentations</a>
+      <a href="#project-discussion">Project and policy discussion</a>
+      <a href="#wrap">Assignments and next steps</a>
+    </div>
+  </details>
+</div>
+<div class="layout">
+
+  <!-- ================= LEFT NAV ================= -->
+  <nav>
+    <a class="home" href="week_mapping_12week.html">MPA 2479<br>Applied AI for Public Policy</a>
+    <div class="days">
+      <div class="lbl">Weeks</div>
+      <a href="week01.html">1 · What an AI agent is</a>
+      <a href="week02.html">2 · Setting up and configuring the agent</a>
+      <a href="week03.html">3 · Starting the group project</a>
+      <a href="week04.html">4 · AI for data collection</a>
+      <a href="week05.html">5 · AI for text coding</a>
+      <a href="week06.html">6 · AI for building websites</a>
+      <a href="week07.html">7 · Algorithmic bias</a>
+      <a href="week08.html" class="cur">8 · Auditing a federal AI system</a>
+      <a href="week09.html">9 · Open-source AI models</a>
+      <a href="week10.html">10 · AI governance</a>
+      <a href="week11.html">11 · Collaboration and replication</a>
+      <a href="week12.html">12 · Final presentations</a>
+    </div>
+    <div class="lbl">Today</div>
+    <div class="toc">
+      <a href="#opening">Opening</a>
+      <a href="#reading">Readings</a>
+      <a href="#inventory">The White House AI memo</a>
+      <a href="#overview">Exercise 1: Description and classification of federal AI systems <span class="has">hands-on</span></a>
+      <a href="#risks">Risks of government AI</a>
+      <a href="#rules">Federal rules for high-impact AI</a>
+      <a href="#score">Exercise 2: Audit of one high-impact system <span class="has">hands-on</span></a>
+      <a href="#findings">Comparing audit findings</a>
+      <a href="#debates">AI governance presentations <span class="has">hands-on</span></a>
+      <a href="#project-discussion">Project and policy discussion</a>
+      <a href="#wrap">Assignments and next steps</a>
+    </div>
+  </nav>
+
+  <!-- ================= CENTER CONTENT ================= -->
+  <main>
+    <p class="course-back"><a href="week_mapping_12week.html">← 12-week course plan</a></p>
+    <div class="mobilenote">You are on a small screen. This page is designed for a laptop, with three columns and hands-on steps appearing beside the content. On a phone it collapses to one column and the hands-on steps move to the end of the page. Reading here is fine; for the exercises you need your laptop anyway.</div>
+    <p class="kicker">Week 8 · Nov 5, 2026 · Thursday, 9:00–11:30 am · 280 Brook Street, Room 110</p>
+    <h1>Auditing a federal AI system</h1>
+    <p class="byline" style="margin:2px 0 16px;color:var(--muted);font-size:15px">Authors: <a href="https://hanzhang.xyz/">Han Zhang</a> and Codex (OpenAI)</p>
+    <p class="goal">Describe how federal agencies use AI. Check whether one system meets the federal rules for AI that affects people’s rights or safety, and identify what the public record cannot show.</p>
+
+    <!-- OPENING -->
+    <section data-hands="none">
+<h2 class="sec" id="opening">Opening</h2>
+<div class="card"><h3>Today</h3><ul>
+  <li>The White House AI memo and the public list of federal AI systems.</li>
+  <li>Exercise 1: description and classification of federal AI systems.</li>
+  <li>Risks of government AI and the federal rules for high-impact AI.</li>
+  <li>Exercise 2: an audit of one high-impact system.</li>
+  <li>Comparing audit findings.</li>
+  <li>Pairs for the Week 10 presentations.</li>
+</ul></div>
+<div class="card"><h3>Deliverables</h3><ul>
+  <li>By the end of class, your repository holds:
+    <ul>
+      <li>a summary of the federal AI systems: count tables and charts, such as in <code>output/inventory_summary/</code>,</li>
+      <li>your codebook and your codes for the 31 systems,</li>
+      <li>a short note in your README on how your codes compare with a classmate’s,</li>
+      <li>an audit table for one high-impact system, with the evidence and your judgment for each required practice, such as <code>output/audit_table.csv</code>.</li>
+    </ul>
+  </li>
+  <li>In class, you also report on your system and choose your Week 10 partner and topic.</li>
+</ul></div>
+</section>
+
+    <!-- READING -->
+    <section data-hands="none">
+<h2 class="sec" id="reading">Readings</h2>
+<div class="card"><h3>Assigned readings</h3><ul>
+  <li><a href="https://www.whitehouse.gov/wp-content/uploads/2025/02/M-25-21-Accelerating-Federal-Use-of-AI-through-Innovation-Governance-and-Public-Trust.pdf">The White House AI memo</a>, issued by the Office of Management and Budget (<i>Accelerating Federal Use of AI through Innovation, Governance, and Public Trust</i>, M-25-21, April 2025), pp. 14–17 and 21–23. These pages cover:
+    <ul>
+      <li>the definition of high-impact AI,</li>
+      <li>the minimum risk-management practices,</li>
+      <li>the uses presumed to be high-impact,</li>
+      <li>the list of risk factors.</li>
+    </ul>
+  </li>
+  <li>Engstrom, Ho, Sharkey &amp; Cuéllar, <a href="https://law.stanford.edu/wp-content/uploads/2020/02/ACUS-AI-Report.pdf"><i>Government by Algorithm</i> (2020)</a>, pp. 6–8, the executive summary.</li>
+</ul></div>
+</section>
+
+    <!-- FEDERAL AI -->
+    <section data-hands="none">
+    <h2 class="sec" id="inventory">The White House AI memo</h2>
+    <div class="card">
+      <h3>The White House AI memo</h3>
+      <ul>
+        <li>In April 2025, the White House sent federal agencies a memo on their use of AI.</li>
+        <li>The memo came from the Office of Management and Budget (OMB). OMB is the White House office that oversees the budgets and management of federal agencies.</li>
+        <li>Its title is <a href="https://www.whitehouse.gov/wp-content/uploads/2025/02/M-25-21-Accelerating-Federal-Use-of-AI-through-Innovation-Governance-and-Public-Trust.pdf"><i>Accelerating Federal Use of AI through Innovation, Governance, and Public Trust</i></a>.</li>
+        <li>The memo tells agencies how to adopt AI and which safeguards some AI systems need.</li>
+        <li>It also requires each agency to publish a list of its AI systems every year (p. 12).</li>
+        <li>This page calls it the White House AI memo. Its official number is M-25-21.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Definition of AI in the White House memo</h3>
+      <ul>
+        <li>AI includes (p. 18):
+          <ul>
+            <li>machine learning, including deep learning, supervised, unsupervised, and reinforcement learning,</li>
+            <li>generative AI,</li>
+            <li>statistical models that predict from data, such as a risk score.</li>
+          </ul>
+        </li>
+        <li>Simple models count too. The memo says a model’s size, type, or amount of training data does not exclude it.</li>
+        <li>A system counts whether or not a person reviews its output.</li>
+        <li>AI does not include:
+          <ul>
+            <li>systems that follow only rules written by people, such as a scoring formula with weights set by hand,</li>
+            <li>software that repeats a person’s steps exactly, called robotic process automation,</li>
+            <li>common commercial products with AI built in, such as a word processor or a map app.</li>
+          </ul>
+        </li>
+        <li>The Department of Defense and the intelligence agencies do not list individual systems (pp. 12 and 25).</li>
+        <li>Each agency decides which of its systems to list. The list shows what agencies reported. It cannot show what they left out.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Public disclosure of federal AI</h3>
+      <ul>
+        <li>OMB combines the agency lists into <a href="https://github.com/ombegov/2025-Federal-Agency-AI-Use-Case-Inventory">one public list on GitHub</a>.</li>
+        <li>The list is in the <a href="https://github.com/ombegov/2025-Federal-Agency-AI-Use-Case-Inventory/tree/main/Data">Data folder</a> of that repository, with one row per system. Use the file <code>2025_individually_reported_AI_use_cases</code>.
+          <ul>
+            <li>The <code>.xlsx</code> version opens in Excel. Use it to look through the rows.</li>
+            <li>The <code>.csv</code> version is for the agent.</li>
+          </ul>
+        </li>
+        <li>As of April 13, 2026, the list has 3,611 systems.</li>
+        <li>Agencies marked 445 of them high-impact. A later section explains this label.</li>
+        <li>OMB calls each entry a <strong>use case</strong> and the list an <strong>inventory</strong>.</li>
+        <li>The <a href="https://github.com/ombegov/2025-Federal-Agency-AI-Use-Case-Inventory/blob/main/Validation/data_dictionary.md">data dictionary</a> describes each column of the inventory.</li>
+      </ul>
+    </div>
+    </section>
+
+    <!-- EXERCISE 1 -->
+    <section data-hands="overview">
+    <h2 class="sec" id="overview">Exercise 1: Description and classification of federal AI systems <span class="hastag">· do it on the right</span></h2>
+    <div class="card">
+      <h3>Counts by agency, topic area, and stage</h3>
+      <ul>
+        <li>Which agencies use AI, and for what? Start with the whole list.</li>
+        <li>Use your agent to count the systems three ways, with a table and a bar chart for each:
+          <ul>
+            <li>by agency,</li>
+            <li>by topic area, the list’s own grouping of what each system is used for,</li>
+            <li>by stage of development, such as pilot or deployed.</li>
+          </ul>
+        </li>
+        <li>Many rows leave the topic area or the stage of development blank. Decide how to report those rows.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Classification of what the systems do</h3>
+      <ul>
+        <li>The topic area says little about what a system does to people.</li>
+        <li>Each row also has a short text, written by the agency, on the problem the system solves.</li>
+        <li>Use that text to classify the systems yourself, with the text-coding method from Week 5. Possible categories:
+          <ul>
+            <li>decisions or scores about individual people, such as benefits, enforcement, or immigration,</li>
+            <li>internal agency work, such as translation or document processing,</li>
+            <li>science and research,</li>
+            <li>other.</li>
+          </ul>
+        </li>
+        <li>Write your own codebook. You may change these categories.</li>
+        <li>Everyone codes the same 31 systems: the first deployed system listed for each agency. This way you can compare results.</li>
+        <li>Then compare your codes with a classmate’s.</li>
+        <li>Recall Week 5. The codebook, the wording of the prompt, and the choice of model all changed the codes you got. The same holds here.</li>
+        <li>For each system you coded differently, read its text. Find the choice behind the difference.</li>
+      </ul>
+    </div>
+    </section>
+
+    <!-- RISKS -->
+    <section data-hands="none">
+    <h2 class="sec" id="risks">Risks of government AI</h2>
+    <div class="card">
+      <h3>Example: disability benefit reviews</h3>
+      <ul>
+        <li>The Social Security Administration pays disability benefits.</li>
+        <li>It uses a computer model to pick which people to review.</li>
+        <li>The model looks for people whose health may have improved.</li>
+        <li>A review can end a person’s benefits.</li>
+        <li>If the model is wrong, people can lose benefits they need.</li>
+        <li>The agency reports this model, the “Continuing Disability Review Model”, in the public list of federal AI systems.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Example: child-welfare screening in Allegheny County</h3>
+      <ul>
+        <li>Local governments use such models too.</li>
+        <li>Allegheny County, Pennsylvania, runs a hotline for reports of child abuse and neglect.</li>
+        <li>Since 2016, a model has scored each call. Staff use the score to decide which families to investigate.</li>
+        <li>Virginia Eubanks studied this model in <i>Automating Inequality</i> (2018), chapter 4.</li>
+        <li>She argues that the model’s data come mostly from public services. Families who use those services, who are mostly poor, therefore look riskier to the model.</li>
+        <li>This is a county system. It does not appear in the federal list.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Consequences of errors</h3>
+      <ul>
+        <li>COMPAS, from Week 7, is a risk score used in criminal justice. Week 7 showed that its errors differed across groups.</li>
+        <li>Federal systems such as the disability review model also shape decisions about people’s benefits, rights, or safety.</li>
+        <li>When such a system is wrong, the cost falls on the people the decision is about.</li>
+        <li>For this reason, the White House AI memo sets extra rules for these systems. The next section describes them.</li>
+      </ul>
+    </div>
+    </section>
+
+    <!-- RULES -->
+    <section data-hands="none">
+    <h2 class="sec" id="rules">Federal rules for high-impact AI</h2>
+    <div class="card">
+      <h3>Definition of high-impact AI</h3>
+      <ul>
+        <li>The memo sets extra rules for AI that affects people’s rights or safety.</li>
+        <li>The memo calls such AI <strong>high-impact</strong>.</li>
+        <li>In the memo’s words, AI is high-impact “when its output serves as a principal basis for decisions or actions that have a legal, material, binding, or significant effect on rights or safety” (p. 14).</li>
+        <li>Section 6 lists uses that the memo presumes to be high-impact (pp. 21–22).</li>
+        <li>One of them is a risk assessment about individuals in law enforcement. COMPAS, from Week 7, is that kind of tool.</li>
+        <li>Each agency decides for itself whether its system is high-impact.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Required risk-management practices</h3>
+      <ul>
+        <li>High-impact AI must come with safeguards. Section 4(b) of the memo lists seven of them (pp. 15–17):
+          <ul>
+            <li>testing before the system is used,</li>
+            <li>an assessment of the system’s effects on people, called an AI impact assessment,</li>
+            <li>ongoing monitoring of how well the system works and of any harm it causes,</li>
+            <li>training and assessment for the staff who operate the system,</li>
+            <li>human oversight, intervention, and accountability,</li>
+            <li>remedies or appeals for the people affected,</li>
+            <li>feedback from end users and the public.</li>
+          </ul>
+        </li>
+        <li>The memo calls these seven safeguards the <strong>minimum risk-management practices</strong>.</li>
+        <li>For each deployed high-impact system, the inventory reports what the agency says it did for each practice.</li>
+      </ul>
+    </div>
+    </section>
+
+    <!-- AUDIT -->
+    <section data-hands="score">
+    <h2 class="sec" id="score">Exercise 2: Audit of one high-impact system <span class="hastag">· do it on the right</span></h2>
+    <div class="card">
+      <h3>What an audit is</h3>
+      <ul>
+        <li>The White House AI memo requires seven practices for every high-impact system.</li>
+        <li>The public list reports, for each deployed high-impact system, what the agency says it did for each practice.</li>
+        <li>An <strong>audit</strong> checks one system against these requirements. For each practice, it asks two questions:
+          <ul>
+            <li>What does the agency report?</li>
+            <li>Is there a document that lets the public verify it?</li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Example: an audit of the disability review model</h3>
+      <ul>
+        <li>This example audits the Social Security Administration’s disability review model, described above under <a href="#risks">Risks of government AI</a>.</li>
+        <li>The public list has one row for this model. To find it, open the <code>.xlsx</code> file in the <a href="https://github.com/ombegov/2025-Federal-Agency-AI-Use-Case-Inventory/tree/main/Data">Data folder</a> and search for “Continuing Disability Review Model”.</li>
+        <li>The middle column below shows what SSA wrote in that row. The last column shows the instructor’s judgment, based on that row alone.</li>
+      </ul>
+      <table>
+        <tr><th>Required practice (memo section)</th><th>What SSA wrote in the list</th><th>Instructor’s judgment</th></tr>
+        <tr><td>Testing before use, 4(b)(i)</td><td>Yes</td><td>Not enough information</td></tr>
+        <tr><td>AI impact assessment, 4(b)(ii)</td><td>Yes. Reviewed by the agency’s Chief AI Officer. The stated impacts are more accurate reviews and payments.</td><td>Not enough information. The stated impacts cover only benefits to the program.</td></tr>
+        <tr><td>Ongoing monitoring, 4(b)(iii)</td><td>Yes, monitoring established</td><td>Not enough information</td></tr>
+        <tr><td>Training for staff, 4(b)(iv)</td><td>Training established</td><td>Not enough information</td></tr>
+        <tr><td>Fail-safe and human oversight, 4(b)(v)</td><td>Yes</td><td>Not enough information</td></tr>
+        <tr><td>Appeals for people affected, 4(b)(vi)</td><td>Appeal process established</td><td>Not enough information</td></tr>
+        <tr><td>Feedback from users and the public, 4(b)(vii)</td><td>“Other”, with no detail</td><td>Not enough information</td></tr>
+      </table>
+      <ul>
+        <li>SSA reports that it meets every practice.</li>
+        <li>The row links no document. The privacy impact assessment and code fields are empty.</li>
+        <li>The impact assessment describes what the model does for SSA. It says nothing about risks to the people whose benefits are reviewed.</li>
+        <li>The conclusion: the public can see only the agency’s own answers. Nothing in the public record lets anyone verify them.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Your audit</h3>
+      <ul>
+        <li>Audit a different system in the same way.</li>
+        <li>Choose a deployed system that its agency marked high-impact.</li>
+        <li>Many such systems leave the practice columns blank. Record that as a finding.</li>
+        <li>If your system’s row links to documents, open them. They may let you judge a practice as met, or show a gap.</li>
+        <li>Make the same table: one row per practice, with what the agency reports, any document, and your own judgment.</li>
+        <li>Your judgment is one of three: the requirement is met, there is a gap, or there is not enough information to judge.</li>
+        <li>Where information is missing, say what document would settle the question.</li>
+      </ul>
+    </div>
+    </section>
+
+    <!-- FINDINGS -->
+    <section data-hands="none">
+    <h2 class="sec" id="findings">Comparing audit findings</h2>
+    <div class="card">
+      <h3>Findings across systems</h3>
+      <ul>
+        <li>Each student speaks for two minutes about their system. Cover these points:
+          <ul>
+            <li>what the system does and which agency runs it,</li>
+            <li>why it meets the high-impact definition,</li>
+            <li>the practice with the strongest evidence behind it,</li>
+            <li>the practice where the public record says least,</li>
+            <li>the document or inventory column you read for each of those two practices.</li>
+          </ul>
+        </li>
+        <li>Then compare the systems. Discuss these questions:
+          <ul>
+            <li>Does a documented gap recur across systems?</li>
+            <li>Where is public information insufficient?</li>
+            <li>Did a reported practice ever come with a document you could open?</li>
+            <li>What further evidence would show that an agency carries out a practice it reports?</li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Limits of the public record</h3>
+      <ul>
+        <li>Many rows may end with “not enough information to judge”.</li>
+        <li>That result is itself a finding. It describes what the public can learn about government AI.</li>
+        <li>It raises policy questions:
+          <ul>
+            <li>Should agencies publish more about their high-impact systems?</li>
+            <li>Should someone outside the agency audit these systems? Who?</li>
+            <li>What would each option cost, and what would it reveal?</li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+    </section>
+
+    <!-- DEBATES -->
+    <section data-hands="debates">
+<h2 class="sec" id="debates">AI governance presentations <span class="hastag">· do it on the right</span></h2>
+<div class="card"><h3>Topics</h3><ul>
+  <li>In Week 10, each pair presents one topic in AI governance.</li>
+  <li>The <a href="week10.html">Week 10 page</a> lists six suggested topics:
+    <ul>
+      <li>frontier-model risk,</li>
+      <li>jurisdiction and regimes,</li>
+      <li>geopolitics and chips,</li>
+      <li>power and concentration,</li>
+      <li>the information ecosystem,</li>
+      <li>labor and the economy.</li>
+    </ul>
+  </li>
+  <li>Open-source AI models, the Week 9 topic, is also a possible topic.</li>
+  <li>A pair may choose its own topic if it concerns AI governance.</li>
+</ul></div>
+<div class="card"><h3>Format</h3><ul>
+  <li>The six students form three pairs.</li>
+  <li>Each pair presents for 12–15 minutes in Week 10.</li>
+  <li>Each presentation covers six points:
+    <ul>
+      <li>a concrete policy dispute,</li>
+      <li>its actors,</li>
+      <li>a sourced case,</li>
+      <li>one core reading,</li>
+      <li>a comparison of at least two policy alternatives,</li>
+      <li>a recommendation for a named decision-maker.</li>
+    </ul>
+  </li>
+  <li>The <a href="week10.html">Week 10 page</a> has the shared reading and the readings for the suggested topics.</li>
+</ul></div>
+</section>
+
+    <!-- WRAP -->
+    <section data-hands="none">
+<h2 class="sec" id="project-discussion">Project and policy discussion</h2>
+<div class="card"><h3>Policy alternatives for government AI</h3><ul>
+  <li>What can the published inventory show about your system?</li>
+  <li>What would require further investigation?</li>
+  <li>Which AI systems might an agency leave off the list? How could you find out?</li>
+  <li>What alternatives could the agency consider?</li>
+  <li>Which criteria should govern that choice?</li>
+  <li>Where did the agent help you collect or check the evidence?</li>
+</ul></div>
+</section>
+<section data-hands="none">
+<h2 class="sec" id="wrap">Assignments and next steps</h2>
+<div class="card"><h3>Checkpoint 3: project website · 5%</h3><ul>
+  <li>Put your project website online with GitHub Pages.</li>
+  <li>The website presents your project proposal. It covers the first four steps of policy analysis:
+    <ul>
+      <li>the policy problem and its audience,</li>
+      <li>the data source, with one figure or table that describes the data,</li>
+      <li>the policy alternatives you will compare,</li>
+      <li>the criteria you will use to judge them.</li>
+    </ul>
+  </li>
+  <li>Add the website address to the README of your repository.</li>
+</ul>
+<p><b>Due Nov 19 before class.</b></p></div>
+<div class="card"><h3>Week 9: Open-source AI models · Nov 12</h3><ul>
+  <li>In Week 9 you run an open-source model on your own computer with Ollama.</li>
+  <li>Install Ollama before class. Follow the <a href="https://docs.ollama.com/">Ollama documentation</a>. This is setup only. Nothing is submitted.</li>
+</ul></div>
+<p><a href="week09.html">Week 9 &rarr;</a></p>
+</section>
+
+  </main>
+
+  <!-- ================= RIGHT CONTEXTUAL HANDS-ON ================= -->
+  <aside>
+    <p class="railhead" id="railhead">Hands-on</p>
+    <div class="hands" data-for="none"></div>
+
+    <!-- overview -->
+    <div class="hands" data-for="overview">
+      <div class="exi"><span class="step">Step 1</span><h4>Download the list</h4>
+        <ul>
+          <li>Download the CSV file of the list from the <a href="https://github.com/ombegov/2025-Federal-Agency-AI-Use-Case-Inventory/tree/main/Data">Data folder</a> into your repository.</li>
+          <li>Keep the raw file unchanged.</li>
+          <li>Record where and when you downloaded it.</li>
+        </ul>
+      </div>
+      <div class="exi"><span class="step">Step 2</span><h4>Count the systems</h4>
+        <ul>
+          <li>Use your agent to count the systems by agency, by topic area, and by stage of development.</li>
+          <li>Make a table and a bar chart for each.</li>
+          <li>The <a href="https://github.com/ombegov/2025-Federal-Agency-AI-Use-Case-Inventory/blob/main/Validation/data_dictionary.md">data dictionary</a> explains each column.</li>
+          <li>Find out how your agent treated blank cells.</li>
+          <li>Check one count by hand in the <code>.xlsx</code> file.</li>
+        </ul>
+      </div>
+      <div class="exi"><span class="step">Step 3</span><h4>Write a codebook</h4>
+        <ul>
+          <li>Read the <code>problem_solved</code> text of a few systems.</li>
+          <li>Write a codebook: each category, its definition, and one example.</li>
+        </ul>
+      </div>
+      <div class="exi"><span class="step">Step 4</span><h4>Code 31 systems</h4>
+        <ul>
+          <li>For each agency, take the first system in the file whose stage of development is “Deployed”. This gives 31 systems. Everyone uses the same 31.</li>
+          <li>Code their <code>problem_solved</code> text with a model, as in Week 5.</li>
+          <li>Hand-code ten of them yourself. Compare your codes with the model’s.</li>
+        </ul>
+      </div>
+      <div class="exi"><span class="step">Step 5</span><h4>Compare with a classmate</h4>
+        <ul>
+          <li>Compare your codes for the 31 systems with a classmate’s.</li>
+          <li>For each system you coded differently, read its text.</li>
+          <li>Decide whether the difference comes from the codebook, the prompt, or the model.</li>
+          <li>Write what you found in your README.</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- score -->
+    <div class="hands" data-for="score">
+      <div class="exi"><span class="step">Step 1</span><h4>Find the high-impact systems</h4>
+        <ul>
+          <li>Use your agent to list the systems that their agency marked high-impact.</li>
+          <li>Include each system’s agency, stage of development, and stated purpose.</li>
+          <li>Choose one deployed system to audit, other than the SSA model in the example.</li>
+          <li>Many deployed high-impact systems leave the practice columns blank. An audit of such a system is useful too.</li>
+        </ul>
+      </div>
+      <div class="exi"><span class="step">Step 2</span><h4>Read your system’s entry</h4>
+        <ul>
+          <li>Read every column of your system’s row. Use the data dictionary for the meaning of each column.</li>
+          <li>Find the columns that report the required practices. Their names begin with <code>hi_</code>. Seven of them match the seven practices. Two more give detail on the impact assessment.</li>
+          <li>An answer can say that a practice is in progress, or that the agency’s Chief AI Officer waived it.</li>
+          <li>Note any links to agency documents.</li>
+        </ul>
+      </div>
+      <div class="exi"><span class="step">Optional</span><h4>Follow a linked document</h4>
+        <p>If your entry links to an agency document, open it for more evidence. If a page will not open, record that as a limitation.</p>
+      </div>
+      <div class="exi"><span class="step">Step 3</span><h4>Build the audit table</h4>
+        <ul>
+          <li>Save the <a href="https://www.whitehouse.gov/wp-content/uploads/2025/02/M-25-21-Accelerating-Federal-Use-of-AI-through-Innovation-Governance-and-Public-Trust.pdf">White House AI memo</a> PDF in your repository.</li>
+          <li>With your agent, make a table with one row per required practice.</li>
+          <li>In each row, give the practice, its section in the memo, what the list reports, and a judgment: met, gap, or not enough information.</li>
+          <li>Where nothing is reported, say so. Do not let the agent fill the gap with a guess.</li>
+        </ul>
+      </div>
+      <div class="exi"><span class="step">Step 4</span><h4>Make your own judgments</h4>
+        <ul>
+          <li>Read each row against the evidence it cites.</li>
+          <li>Keep, change, or reject each judgment the agent proposed.</li>
+          <li>Where nothing is reported, write one sentence on what the public cannot learn about this system.</li>
+        </ul>
+      </div>
+      <div class="exi"><span class="step">Step 5</span><h4>Check the agent’s reading of the memo</h4>
+        <ul>
+          <li>Check the table in a new conversation or with a subagent, as in Week 3.</li>
+          <li>Each row should match a sentence in the memo.</li>
+          <li>Find each sentence in the PDF yourself.</li>
+        </ul>
+      </div>
+      <div class="save">After the discussion, commit your scripts, the source records, and the audit table.</div>
+    </div>
+
+    <!-- debates -->
+    <div class="hands" data-for="debates">
+      <div class="exi"><span class="step">Step 1</span><h4>Form a pair and choose a topic</h4>
+        <ul>
+          <li>Form a pair in class.</li>
+          <li>Choose a topic with your partner.</li>
+          <li>Before you leave class, write down the pair and its topic.</li>
+        </ul>
+      </div>
+      <div class="exi"><span class="step">Step 2</span><h4>Find your case and your reading</h4>
+        <ul>
+          <li>Take a reading from the <a href="week10.html">Week 10 page</a>, or find one with your agent.</li>
+          <li>Use a source from a government body, a peer-reviewed journal, or a research institute.</li>
+          <li>Open each source yourself. Check its title, author, date, and link.</li>
+        </ul>
+      </div>
+    </div>
+  </aside>
+
+</div>
+
+<script>
+  const sections=[...document.querySelectorAll('main section')];
+  const panels=[...document.querySelectorAll('.hands')];
+  const railhead=document.getElementById('railhead');
+  function show(key){
+    panels.forEach(p=>p.classList.toggle('on',p.dataset.for===key));
+    railhead.style.display = key==='none' ? 'none' : '';
+  }
+  addEventListener('scroll',()=>{
+    let cur=sections[0];
+    sections.forEach(s=>{const t=s.getBoundingClientRect().top; if(t<window.innerHeight*0.35) cur=s;});
+    show(cur.dataset.hands);
+  },{passive:true});
+  show('none');
+  const links=[...document.querySelectorAll('.toc a')];
+  addEventListener('scroll',()=>{
+    let cur=null;
+    links.forEach(a=>{const el=document.querySelector(a.getAttribute('href'));
+      if(el && el.getBoundingClientRect().top<140)cur=a;});
+    links.forEach(a=>a.classList.toggle('active',a===cur));
+  },{passive:true});
+  document.addEventListener('click',e=>{
+    if(!e.target.classList.contains('copy'))return;
+    const x=e.target.parentNode.childNodes[0].textContent.trim();
+    navigator.clipboard.writeText(x).then(()=>{e.target.textContent='copied';
+      setTimeout(()=>e.target.textContent='copy',1200);});
+  });
+</script>
+</body>
+</html>
