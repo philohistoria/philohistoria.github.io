@@ -1,0 +1,655 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="author" content="Han Zhang; Codex (OpenAI)">
+<title>Week 11: Collaboration and Replication</title>
+<style>
+  :root{
+    --bg:#fcfcfb; --fg:#1c1c1a; --muted:#6b6b66; --line:#e6e5e1;
+    --accent:#2f5d8a; --accent-weak:#eaf0f5; --ex:#b5651d; --ex-weak:#fbf1e7;
+    --code-bg:#f4f5f3; --card:#fff;
+    --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--sans)}
+  .layout{display:grid;grid-template-columns:180px minmax(0,1fr) 360px;max-width:1320px;margin:0 auto}
+  nav{position:sticky;top:0;align-self:start;height:100vh;overflow:auto;
+      padding:26px 14px;border-right:1px solid var(--line);font-size:14px}
+  nav .days{display:flex;flex-direction:column;gap:2px;margin-bottom:22px}
+  nav .days a{color:var(--muted);text-decoration:none;padding:3px 0;font-size:13px}
+  nav .days a.cur{color:var(--fg);font-weight:700}
+  nav .days span.off{color:#c8c7c2;padding:3px 0;font-size:13px}
+  nav .home{display:block;font-size:14px;font-weight:800;color:var(--fg);text-decoration:none;line-height:1.25;margin-bottom:18px}
+  nav .home:hover{color:var(--accent)}
+  nav .lbl{font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin:0 0 8px}
+  nav .toc a{display:block;color:var(--fg);text-decoration:none;padding:6px 0 6px 12px;
+             border-left:2px solid transparent;margin-left:-2px}
+  nav .toc a:hover{color:var(--accent)}
+  nav .toc a.active{color:var(--accent);border-left-color:var(--accent);font-weight:600}
+  nav .toc .has{color:var(--ex);font-size:11px;margin-left:6px}
+  main{padding:30px 32px 160px;min-width:0}
+  .course-back{margin:0 0 12px;font-size:14px}
+  .course-back a{color:var(--accent)}
+  .kicker{font-size:13px;letter-spacing:.07em;text-transform:uppercase;color:var(--accent);font-weight:700;margin:0}
+  h1{margin:4px 0 6px;font-size:32px}
+  .goal{color:var(--muted);font-size:16px;margin:0 0 20px}
+  h2.sec{font-size:28px;font-weight:700;color:var(--fg);line-height:1.2;
+         margin:52px 0 12px;padding-top:22px;border-top:1px solid var(--line)}
+  h2.sec .hastag{color:var(--ex);font-weight:600;font-size:14px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:14px;
+        padding:20px 24px;margin:16px 0;box-shadow:0 1px 2px rgba(0,0,0,.03)}
+  .card h3{margin:0 0 12px;font-size:21px;line-height:1.25}
+  .card ul{list-style:none;padding:0;margin:0}
+  .card li{font-size:17px;line-height:1.45;padding:9px 0 9px 26px;position:relative;border-top:1px solid var(--line)}
+  .card li:first-child{border-top:0}
+  .card li::before{content:"";position:absolute;left:4px;top:17px;width:8px;height:8px;border-radius:50%;background:var(--accent)}
+  .card ul ul{margin:6px 0 0}
+  .card li li{font-size:15px;padding:5px 0 5px 24px;border-top:0;color:var(--muted)}
+  .card li li::before{width:5px;height:5px;top:14px;background:var(--muted)}
+  .card.demo{border-left:4px solid var(--accent)}
+  .card.demo .tag{display:inline-block;font-size:12px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;
+                  color:var(--accent);margin-bottom:8px}
+  .card.read{border-left:4px solid #7a5ea6}
+  .card.read .tag{display:inline-block;font-size:12px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;
+                  color:#7a5ea6;margin-bottom:8px}
+  .quote{background:var(--code-bg);border-left:3px solid var(--accent);border-radius:0 8px 8px 0;
+         padding:12px 16px;margin:12px 0;font-style:italic;line-height:1.5}
+  code{background:var(--code-bg);padding:1px 5px;border-radius:4px;font-family:ui-monospace,Menlo,monospace;font-size:.85em}
+  strong{color:#111}
+  table{border-collapse:collapse;width:100%;margin:10px 0;font-size:16px}
+  th,td{border:1px solid var(--line);padding:8px 12px;text-align:left}
+  th{background:var(--accent-weak);font-size:14px}
+  .src{font-size:13px;color:var(--muted)} .src a{color:var(--accent)}
+  aside{position:sticky;top:0;align-self:start;height:100vh;overflow:auto;
+        border-left:1px solid var(--line);padding:26px 18px 60px;background:#fbfaf8}
+  aside .railhead{font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--ex)}
+  .hands{display:none} .hands.on{display:block}
+  .exi{border:1px solid #e8d3ba;background:var(--ex-weak);border-radius:10px;margin:10px 0;padding:12px 14px}
+  .exi .step{display:inline-block;font-size:10px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;
+             color:#fff;background:var(--ex);border-radius:20px;padding:2px 9px;margin-bottom:8px}
+  .exi h4{margin:0 0 6px;font-size:15px}
+  .exi ul{margin:6px 0;padding-left:18px;font-size:13.5px;line-height:1.5}
+  .exi li{margin:4px 0}
+  .exi p{font-size:13.5px;line-height:1.5;margin:6px 0}
+  .save{font-size:13px;color:var(--muted);background:#fff;border:1px solid var(--line);
+        border-radius:8px;padding:9px 12px;margin:10px 0}
+  .code{position:relative;background:#fff;border:1px solid #e8d3ba;border-radius:8px;
+        padding:9px 34px 9px 11px;font-family:ui-monospace,Menlo,monospace;font-size:12px;
+        white-space:pre-wrap;margin:8px 0;line-height:1.45}
+  .code .copy{position:absolute;top:6px;right:6px;font-size:10px;border:1px solid #e8d3ba;
+              background:#fff;border-radius:6px;padding:2px 7px;cursor:pointer;color:var(--ex)}
+  .guidelink{display:inline-block;margin-top:6px;font-size:13px;color:var(--ex);font-weight:600}
+    .mobilenote{display:none}
+  .mhead{display:none}
+  /* ---- tablet: two columns, top menu ---- */
+  @media(max-width:1080px){
+    .layout{grid-template-columns:minmax(0,1fr) 340px}
+    nav{display:none}
+    .mhead{display:flex;align-items:center;justify-content:space-between;gap:12px;
+           position:sticky;top:0;z-index:20;background:var(--bg);
+           border-bottom:1px solid var(--line);padding:10px 16px}
+    .mtitle{font-size:14px;font-weight:800;color:var(--fg);text-decoration:none}
+    .mnav summary{list-style:none;cursor:pointer;font-size:13px;font-weight:700;color:var(--accent);
+                  border:1px solid var(--line);border-radius:8px;padding:5px 12px;background:#fff}
+    .mnav summary::-webkit-details-marker{display:none}
+    .mnav{position:relative}
+    .mnav-box{position:absolute;right:0;top:36px;min-width:240px;background:#fff;
+              border:1px solid var(--line);border-radius:12px;box-shadow:0 8px 24px rgba(0,0,0,.10);
+              padding:10px 14px;z-index:30}
+    .mnav-box a{display:block;color:var(--fg);text-decoration:none;font-size:14px;padding:6px 0}
+    .mnav-box a:hover{color:var(--accent)}
+    .mlbl{font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin:8px 0 2px}
+    main{padding:20px 20px 120px}
+    h1{font-size:27px}
+    h2.sec{font-size:24px}
+    table{display:block;overflow-x:auto}
+  }
+  /* ---- phone: single column ---- */
+  @media(max-width:740px){
+    .layout{grid-template-columns:1fr}
+    main{padding:16px 14px 60px}
+    .mobilenote{display:block;background:var(--accent-weak);border:1px solid var(--line);
+                border-radius:10px;padding:10px 14px;margin:0 0 18px;font-size:13.5px;
+                line-height:1.5;color:var(--fg)}
+    h1{font-size:25px}
+    .card{padding:16px 16px}
+    .card li{font-size:16px}
+    aside{position:static;height:auto;border-left:0;border-top:1px solid var(--line)}
+    .hands{display:block !important;border-top:1px solid var(--line);padding-top:10px;margin-top:10px}
+    .hands[data-for="none"]{display:none !important}
+  }
+</style>
+</head>
+<body>
+<div class="mhead">
+  <a class="mtitle" href="week_mapping_12week.html">Applied AI for Public Policy</a>
+  <details class="mnav">
+    <summary>Menu</summary>
+    <div class="mnav-box">
+      <p class="mlbl">Weeks</p>
+      <a href="week01.html">1 · What an AI agent is</a>
+      <a href="week02.html">2 · Setting up and configuring the agent</a>
+      <a href="week03.html">3 · Starting the group project</a>
+      <a href="week04.html">4 · AI for data collection</a>
+      <a href="week05.html">5 · AI for text coding</a>
+      <a href="week06.html">6 · AI for building websites</a>
+      <a href="week07.html">7 · Algorithmic bias</a>
+      <a href="week08.html">8 · Auditing a federal AI system</a>
+      <a href="week09.html">9 · Open-source AI models</a>
+      <a href="week10.html">10 · AI governance</a>
+      <a href="week11.html">11 · Collaboration and replication</a>
+      <a href="week12.html">12 · Final presentations</a>
+      <p class="mlbl">On this page</p>
+      <a href="#opening">Opening</a>
+      <a href="#sharing">Sharing a project</a>
+      <a href="#review">Review of a partner’s website</a>
+      <a href="#replication">Replication</a>
+      <a href="#task">Delegating a task</a>
+      <a href="#project-discussion">Project and policy discussion</a>
+      <a href="#wrap">Assignments and next steps</a>
+    </div>
+  </details>
+</div>
+<div class="layout">
+
+  <!-- ================= LEFT NAV ================= -->
+  <nav>
+    <a class="home" href="week_mapping_12week.html">MPA 2479<br>Applied AI for Public Policy</a>
+    <div class="days">
+      <div class="lbl">Weeks</div>
+      <a href="week01.html">1 · What an AI agent is</a>
+      <a href="week02.html">2 · Setting up and configuring the agent</a>
+      <a href="week03.html">3 · Starting the group project</a>
+      <a href="week04.html">4 · AI for data collection</a>
+      <a href="week05.html">5 · AI for text coding</a>
+      <a href="week06.html">6 · AI for building websites</a>
+      <a href="week07.html">7 · Algorithmic bias</a>
+      <a href="week08.html">8 · Auditing a federal AI system</a>
+      <a href="week09.html">9 · Open-source AI models</a>
+      <a href="week10.html">10 · AI governance</a>
+      <a href="week11.html" class="cur">11 · Collaboration and replication</a>
+      <a href="week12.html">12 · Final presentations</a>
+    </div>
+    <div class="lbl">Today</div>
+    <div class="toc">
+      <a href="#opening">Opening</a>
+      <a href="#sharing">Sharing a project <span class="has">hands-on</span></a>
+      <a href="#review">Review of a partner’s website <span class="has">hands-on</span></a>
+      <a href="#replication">Replication <span class="has">hands-on</span></a>
+      <a href="#task">Delegating a task <span class="has">hands-on</span></a>
+      <a href="#project-discussion">Project and policy discussion</a>
+      <a href="#wrap">Assignments and next steps</a>
+    </div>
+  </nav>
+
+  <!-- ================= CENTER CONTENT ================= -->
+  <main>
+    <p class="course-back"><a href="week_mapping_12week.html">← 12-week course plan</a></p>
+    <div class="mobilenote">You are on a small screen. This page is designed for a laptop, with three columns and hands-on steps appearing beside the content. On a phone it collapses to one column and the hands-on steps move to the end of the page. Reading here is fine; for the exercises you need your laptop anyway.</div>
+    <p class="kicker">Week 11 · Dec 3, 2026 · Thursday, 9:00–11:30 am · 280 Brook Street, Room 110</p>
+    <h1>Collaboration and replication</h1>
+    <p class="byline" style="margin:2px 0 16px;color:var(--muted);font-size:15px">Authors: <a href="https://hanzhang.xyz/">Han Zhang</a> and Codex (OpenAI)</p>
+    <p class="goal">Swap projects with a partner. Review each other’s website, rerun each other’s analysis, and do one task in each other’s project.</p>
+
+    <!-- OPENING -->
+    <section data-hands="none">
+<h2 class="sec" id="opening">Opening</h2>
+<div class="card"><h3>Today</h3><ul>
+  <li>You work with one classmate. The class forms three pairs.</li>
+  <li>You work in your partner’s project while your partner works in yours.</li>
+  <li>Today’s topics:
+    <ul>
+      <li>giving your partner your project files and getting their changes back,</li>
+      <li>reading your partner’s website and repository and giving written feedback,</li>
+      <li>rerunning your partner’s analysis to see whether you get the same results (replication),</li>
+      <li>doing one small task in your partner’s project from their written instructions.</li>
+    </ul>
+  </li>
+  <li>You report what you found in your <a href="week12.html">Week 12 final presentation</a>.</li>
+</ul></div>
+</section>
+
+    <!-- SHARING -->
+    <section data-hands="share">
+<h2 class="sec" id="sharing">Sharing a project <span class="hastag">· do it on the right</span></h2>
+<div class="card"><h3>Ways to share a project</h3><ul>
+  <li>Your partner needs your files on their computer.</li>
+  <li>You need their changes back in your project.</li>
+  <li>There are three common ways to do this:
+    <ul>
+      <li>sending a copy, as a zip file or an email attachment,</li>
+      <li>a shared cloud folder, such as Dropbox, Google Drive, or OneDrive,</li>
+      <li>GitHub.</li>
+    </ul>
+  </li>
+</ul>
+<table>
+  <tr><th></th><th>Sending a copy</th><th>Shared cloud folder</th><th>GitHub</th></tr>
+  <tr><th>How you share</th>
+    <td>Compress the project folder into a zip file. Send it by email or as a file link.</td>
+    <td>Keep the project folder inside the service’s synced folder. Share the folder with your partner and give edit access.</td>
+    <td>Give your partner access to your repository. Your partner downloads a copy to their computer.</td></tr>
+  <tr><th>How work comes back</th>
+    <td>Your partner sends back the changed files. You copy them into your folder by hand.</td>
+    <td>Your partner’s edits sync to your computer automatically.</td>
+    <td>Your partner sends their changes as a request. You read the changes and decide whether to add them.</td></tr>
+  <tr><th>Strengths</th>
+    <td>The simplest method. It needs no new tool.</td>
+    <td>Edits sync on their own. You need no new tool if you already use the service.</td>
+    <td>Every change is recorded in a commit. You review each change line by line before it enters your project.</td></tr>
+  <tr><th>Weaknesses</th>
+    <td>The two copies drift apart as soon as either of you edits one. Combining them is done by hand.</td>
+    <td>Two people editing the same file at once can create conflicted copies or overwrite each other’s edits. Earlier versions are kept for a limited time.</td>
+    <td>It takes the most steps. Files listed in <code>.gitignore</code> are not on GitHub. Your partner needs the data another way.</td></tr>
+</table>
+<ul>
+  <li>Choose the method with your partner.</li>
+  <li>Each of you can use a different method for your own project.</li>
+</ul></div>
+<div class="card"><h3>Sending a copy</h3><ul>
+  <li>The simplest way to share is to send your partner a copy of your project folder.</li>
+  <li>A zip file packs a whole folder into one compressed file. Windows and macOS both make one from the right-click menu.</li>
+  <li>The zip holds every file in the folder. That includes the files you listed in <code>.gitignore</code>, such as API keys and restricted data. Remove them before you send the zip.</li>
+  <li>Commit your project before you send it.</li>
+  <li>When the changed files come back, copy them in. Read the diff before you commit again.</li>
+  <li class="src"><a href="https://support.microsoft.com/en-us/windows/experience/storage-filemanagement/zip-and-unzip-files">Windows: Zip and unzip files &rarr;</a></li>
+  <li class="src"><a href="https://support.apple.com/guide/mac-help/zip-and-unzip-files-and-folders-on-mac-mchlp2528/mac">macOS: Zip and unzip files and folders &rarr;</a></li>
+</ul></div>
+<div class="card"><h3>Shared cloud folders</h3><ul>
+  <li>If you share a Dropbox, Google Drive, or OneDrive folder with your partner, you both see the same files.</li>
+  <li>The service keeps the folder on your computer in sync with a copy online.</li>
+  <li>Suppose you and your partner edit the same file at the same time. The service cannot combine the two edits.
+    <ul>
+      <li>Dropbox, for example, saves the second version as a separate file, called a “conflicted copy.”</li>
+      <li>Someone then compares the two files by hand.</li>
+    </ul>
+  </li>
+  <li>Two agents can also overwrite each other’s edits, as Week 3 explained.</li>
+  <li>Each service keeps earlier versions of a file for a limited time. On a free Dropbox Basic account the limit is 30 days.</li>
+  <li>If your project folder is also a Git repository, your partner’s edits show up in your diff. Read the diff before you commit.</li>
+  <li class="src">Sharing a folder: <a href="https://help.dropbox.com/share/shared-folder-faq">Dropbox</a> · <a href="https://support.google.com/drive/answer/7166529">Google Drive</a> · <a href="https://support.microsoft.com/en-us/onedrive/share-files-and-folders-in-microsoft-onedrive">OneDrive</a></li>
+  <li class="src">Earlier versions: <a href="https://help.dropbox.com/delete-restore/version-history-overview">Dropbox</a> · <a href="https://support.google.com/drive/answer/2409045">Google Drive</a> · <a href="https://support.microsoft.com/en-us/onedrive/restore-a-previous-version-of-a-file-stored-in-onedrive">OneDrive</a> · <a href="https://help.dropbox.com/organize/conflicted-copy">Dropbox: What’s a conflicted copy?</a></li>
+</ul></div>
+<div class="card"><h3>Collaboration on GitHub</h3><ul>
+  <li>GitHub records every change in a commit. You can read each of your partner’s changes before it enters your project.</li>
+  <li>First, your partner needs permission to work in your repository.
+    <ul>
+      <li>You invite them the same way you invited philohistoria in Week 3.</li>
+      <li>A person you invite is called a <strong>collaborator</strong>. A collaborator can push to your repository.</li>
+    </ul>
+  </li>
+  <li>Next, your partner needs your files on their computer. Downloading a copy of a repository, with its full commit history, is called <strong>cloning</strong>.</li>
+  <li>Your partner keeps their edits apart from your version until you have checked them. They work on a separate line of commits in the same repository, called a <strong>branch</strong>.
+    <ul>
+      <li>Every repository starts with one branch, usually called <code>main</code>.</li>
+      <li>Commits on another branch leave <code>main</code> unchanged.</li>
+    </ul>
+  </li>
+  <li>When the work is done, your partner asks you to add their commits to <code>main</code>. This request is called a <strong>pull request</strong>.
+    <ul>
+      <li>GitHub shows you the diff.</li>
+      <li>You can comment on specific lines, request changes, or approve.</li>
+    </ul>
+  </li>
+  <li>If you accept the changes, GitHub adds the branch’s commits to <code>main</code>. This is called <strong>merging</strong>.</li>
+  <li>Reading another person’s change before you accept it is called <strong>code review</strong>.</li>
+  <li class="src"><a href="https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/repository-access-and-collaboration/inviting-collaborators-to-a-personal-repository">Inviting collaborators</a> · <a href="https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository">Cloning a repository</a> · <a href="https://docs.github.com/en/get-started/using-github/github-flow">GitHub flow</a> · <a href="https://docs.github.com/en/pull-requests/get-started/about-pull-requests">About pull requests</a> · <a href="https://docs.github.com/en/pull-requests/how-tos/review-pull-requests/reviewing-proposed-changes-in-a-pull-request">Reviewing a pull request</a></li>
+</ul></div>
+<div class="card"><h3>Instructions for a collaborator’s agent</h3><ul>
+  <li>When your partner opens your project, their agent knows nothing about it.</li>
+  <li>The agent reads two files first:
+    <ul>
+      <li>the project instructions file, <code>AGENTS.md</code> for Codex or <code>CLAUDE.md</code> for Claude Code,</li>
+      <li>the README.</li>
+    </ul>
+  </li>
+  <li>If you and your partner use different tools, ask the agent which instructions file it loaded.</li>
+  <li>Your global instructions and your memory stay on your computer. Your partner’s agent never sees them.</li>
+  <li>Write the decisions your partner needs into those two shared files. Examples:
+    <ul>
+      <li>the period the data cover,</li>
+      <li>how each key variable is defined,</li>
+      <li>which files must not change.</li>
+    </ul>
+  </li>
+  <li>Do not let two agents edit the same file at once. While your partner works in your project, leave the files their task touches alone.</li>
+  <li class="src"><a href="https://learn.chatgpt.com/docs/agent-configuration/agents-md">Codex documentation on <code>AGENTS.md</code></a> · <a href="https://code.claude.com/docs/en/memory">Claude Code documentation on <code>CLAUDE.md</code> and <code>AGENTS.md</code></a></li>
+</ul></div>
+</section>
+
+    <!-- REVIEW -->
+    <section data-hands="review">
+<h2 class="sec" id="review">Review of a partner’s website <span class="hastag">· do it on the right</span></h2>
+<div class="card"><h3>Website and repository</h3><ul>
+  <li>A reader of your website should find the same policy question, data and figure in your repository.</li>
+  <li>Today your partner reads your website and your repository. You read theirs.</li>
+  <li>Your website is your GitHub Pages site. It was due before this class as Checkpoint 3 (5%).</li>
+  <li>The website presents your project proposal:
+    <ul>
+      <li>the policy problem and its audience,</li>
+      <li>the data source, with one figure or table that describes the data,</li>
+      <li>the policy alternatives you will compare,</li>
+      <li>the criteria you will use to judge them.</li>
+    </ul>
+  </li>
+  <li>Your repository holds the files behind the website:
+    <ul>
+      <li>the README,</li>
+      <li>the data,</li>
+      <li>the scripts,</li>
+      <li>the instructions file (AGENTS.md or CLAUDE.md).</li>
+    </ul>
+  </li>
+</ul></div>
+<div class="card"><h3>Checking the website against the repository</h3><ul>
+  <li>Check three things:
+    <ul>
+      <li>The data source named on the website is recorded in the repository.</li>
+      <li>The figure on the website comes from a script in the repository.</li>
+      <li>The README and the website state the same policy question.</li>
+    </ul>
+  </li>
+  <li>In this part you only read. You rerun your partner’s code in the next part, <a href="#replication">Replication</a>.</li>
+</ul></div>
+<div class="card"><h3>Feedback on the policy analysis</h3><ul>
+  <li>The author uses your feedback to revise the project. Write it down.</li>
+  <li>Comment on the four parts of the proposal:
+    <ul>
+      <li>Problem: is it stated in one sentence, with its audience?</li>
+      <li>Data: does the source fit the question?</li>
+      <li>Alternatives: are there at least two, and could a decision-maker adopt each one?</li>
+      <li>Criteria: can the data show how each alternative does on each criterion?</li>
+    </ul>
+  </li>
+</ul></div>
+<div class="card"><h3>GitHub issues</h3><ul>
+  <li>You can post your written feedback as a note on your partner’s repository.</li>
+  <li>The note has a title and a description. On GitHub, this kind of note is called an <strong>issue</strong>.</li>
+  <li>Issues are listed in the Issues tab of the repository.</li>
+  <li>The owner can reply to an issue and close it once the problem is fixed.</li>
+  <li class="src"><a href="https://docs.github.com/en/issues/tracking-your-work-with-issues/using-issues/creating-an-issue">GitHub documentation on creating an issue &rarr;</a></li>
+</ul></div>
+</section>
+
+    <!-- REPLICATION -->
+    <section data-hands="replication">
+<h2 class="sec" id="replication">Replication <span class="hastag">· do it on the right</span></h2>
+<div class="card"><h3>The purpose of replication</h3><ul>
+  <li>Another analyst should be able to get your results from your files alone.</li>
+  <li>Today your partner tries this with your project. You try it with theirs.</li>
+  <li>Rerunning another analyst’s work from their files and checking that you get the same results is called <strong>replication</strong>.</li>
+</ul></div>
+<div class="card"><h3>Reading another person’s code</h3><ul>
+  <li>Before you run anything, find out what the project is meant to produce.</li>
+  <li>Open your partner’s project. Read three things first:
+    <ul>
+      <li>the README,</li>
+      <li>the scripts that produce the results,</li>
+      <li>the data documentation.</li>
+    </ul>
+  </li>
+  <li>Note three things:
+    <ul>
+      <li>the policy question,</li>
+      <li>the outputs the project should produce,</li>
+      <li>the commands the README tells you to run.</li>
+    </ul>
+  </li>
+</ul></div>
+<div class="card"><h3>Summarizing a project with the agent</h3><ul>
+  <li>You can ask the agent to summarize your partner’s project:</li>
+</ul>
+<div class="quote">Read this project. Describe the policy question, the expected outputs, and the steps needed to reproduce the results. Identify the scripts and sources supporting the main finding.</div>
+<ul>
+  <li>A summary can name a script or a step that does not exist.</li>
+  <li>Check the summary against the files. Open each file it cites.</li>
+</ul></div>
+<div class="card"><h3>Rerunning a project</h3><ul>
+  <li>Next, run the project the way the README describes.</li>
+  <li>Follow the README in order.
+    <ul>
+      <li>In the terminal, type each command yourself.</li>
+      <li>In the app, ask the agent to run the documented commands and show the output.</li>
+    </ul>
+  </li>
+  <li>Record three things:
+    <ul>
+      <li>what ran,</li>
+      <li>what failed,</li>
+      <li>what information you had to infer.</li>
+    </ul>
+  </li>
+</ul></div>
+<div class="card"><h3>Diagnosing a failed rerun</h3><ul>
+  <li>When a command fails, write down the command and its error message.</li>
+  <li>Check for these common causes:
+    <ul>
+      <li>a file missing from the project,</li>
+      <li>a file path that works only on the owner’s computer,</li>
+      <li>a step the README does not mention,</li>
+      <li>an error in the code.</li>
+    </ul>
+  </li>
+  <li>Explain the fix needed in the code or in the written instructions.</li>
+</ul></div>
+<div class="card"><h3>Checking findings against outputs</h3><ul>
+  <li>Compare your figures and tables with the findings your partner reports.</li>
+  <li>Where a number differs, find the first step where your output and theirs start to differ.</li>
+</ul></div>
+<div class="card"><h3>Evidence and policy conclusions</h3><ul>
+  <li>Identify which findings the evidence supports.</li>
+  <li>Identify which claims need further analysis.</li>
+  <li>Check how the findings inform each part of the policy analysis:
+    <ul>
+      <li>the policy alternatives,</li>
+      <li>the criteria,</li>
+      <li>the recommendation.</li>
+    </ul>
+  </li>
+  <li>Suggest one useful revision to the analysis or to how it is explained for the intended audience.</li>
+</ul></div>
+</section>
+
+    <!-- TASK -->
+    <section data-hands="task">
+<h2 class="sec" id="task">Delegating a task <span class="hastag">· do it on the right</span></h2>
+<div class="card"><h3>Working from written instructions</h3><ul>
+  <li>Today your partner does one task in your project. You do one task in theirs.</li>
+  <li>In each project, the <strong>owner</strong> is the student whose project it is. The <strong>helper</strong> is the partner who does the task.</li>
+  <li>The helper’s agent knows only what three of the owner’s files say:
+    <ul>
+      <li>the instructions file,</li>
+      <li>the README,</li>
+      <li>the task description.</li>
+    </ul>
+  </li>
+  <li>In Week 5 your partner coded your documents using only your codebook. This task works the same way.</li>
+  <li>Each place where the helper gets stuck or has to guess shows a gap in those files.</li>
+</ul></div>
+<div class="card"><h3>Task descriptions</h3><ul>
+  <li>Choose a task your project needs anyway. Examples:
+    <ul>
+      <li>a figure,</li>
+      <li>one data-cleaning step,</li>
+      <li>checking a source,</li>
+      <li>a section of your website.</li>
+    </ul>
+  </li>
+  <li>The owner writes down four things about the task:
+    <ul>
+      <li>what to do,</li>
+      <li>which files to use,</li>
+      <li>which files not to touch,</li>
+      <li>what finished looks like.</li>
+    </ul>
+  </li>
+  <li>This written request is called a <strong>task description</strong>.</li>
+  <li>Save the task description as a file in your project, for example <code>TASK.md</code>.</li>
+</ul></div>
+<div class="card"><h3>Carrying out a delegated task</h3><ul>
+  <li>The helper’s agent works from the owner’s instructions file, README, and task description only.</li>
+  <li>The helper writes down every point where they got stuck or had to guess.</li>
+  <li>The helper saves questions for the discussion after the work is done.</li>
+</ul></div>
+<div class="card"><h3>Reviewing a collaborator’s work</h3><ul>
+  <li>When the task is done, the two partners go through it together, with the list of guesses.</li>
+  <li>The helper returns the work through the sharing method you chose:
+    <ul>
+      <li>a copy: send back the changed files,</li>
+      <li>a shared cloud folder: the edits are already there, so tell the owner which files changed,</li>
+      <li>GitHub: push a branch and open a pull request.</li>
+    </ul>
+  </li>
+  <li>The owner reads the change and decides whether to accept it.</li>
+  <li>On GitHub, the owner merges the pull request or closes it.</li>
+  <li>To reject a change in your own folder, ask the agent to restore the last committed version of the file.</li>
+</ul></div>
+<div class="card"><h3>Revising the instructions file and README</h3><ul>
+  <li>Each guess the helper made points to a gap in the owner’s files.</li>
+  <li>The owner answers each guess in the instructions file or the README.</li>
+  <li>Commit and push the revised files.</li>
+</ul></div>
+</section>
+
+    <!-- WRAP -->
+    <section data-hands="none">
+<h2 class="sec" id="project-discussion">Project and policy discussion</h2>
+<div class="card"><h3>Replication and collaboration</h3><ul>
+  <li>Could your partner reproduce your main result from your files alone?</li>
+  <li>Which of your policy conclusions did your partner find weakly supported by the evidence?</li>
+  <li>What did your partner’s agent guess about your project? What did those guesses show about your instructions file?</li>
+  <li>What did the agent help diagnose or repair? What did it miss?</li>
+  <li>Several analysts in a government office revise the same analysis. Who should review a change before it enters the official version?</li>
+</ul></div>
+</section>
+<section data-hands="none">
+<h2 class="sec" id="wrap">Assignments and next steps</h2>
+<div class="card"><p><b>Weekly memo · due Dec 10 before class.</b> Write 1–2 observations from your project or the classroom case: the policy-analysis step you attempted, how AI helped or fell short, and what you would do next. Aim for 150–200 words total. Describe what you actually tried and observed in your own words. Do not use AI to write the memo. Begin in class and submit to Canvas Discussions. See <a href="week_mapping_12week.html#short-memos">memo grading</a>.</p></div>
+<div class="card"><h3>Week 12: Final presentations · Dec 10</h3><p>In your <a href="week12.html">final presentation</a>, include two things from today:</p><ul>
+  <li>what your partner’s replication found,</li>
+  <li>what the task changed in your project.</li>
+</ul></div>
+</section>
+
+</main>
+
+  <!-- ================= RIGHT CONTEXTUAL HANDS-ON ================= -->
+  <aside>
+    <p class="railhead" id="railhead">Hands-on</p>
+    <div class="hands" data-for="none"></div>
+    <div class="hands" data-for="share">
+      <div class="exi"><span class="step">Step 1</span><h4>Choose a sharing method</h4><p>Agree with your partner on a method for each project. Read the official documentation for that method, linked in the cards.</p></div>
+      <div class="exi"><span class="step">Step 2</span><h4>Read your project as a newcomer would</h4><p>In your own project, ask your agent:</p>
+        <div class="code">Read this project as a newcomer would. Use only the instructions file and the README. Tell me what the project does, how to reproduce its results, and which questions these two files leave unanswered. Do not change any files.<span class="copy">copy</span></div>
+        <ul>
+          <li>Answer the most important questions in the README or the instructions file.</li>
+          <li>Commit the changes.</li>
+        </ul></div>
+      <div class="exi"><span class="step">Step 3</span><h4>Share your project</h4><ul>
+        <li>A copy: remove API keys and restricted data, then send the zip file.</li>
+        <li>A shared cloud folder: share the project folder with your partner and give edit access.</li>
+        <li>GitHub: invite your partner under Settings → Collaborators. Your partner accepts the invitation.</li>
+      </ul></div>
+    </div>
+    <div class="hands" data-for="review">
+      <div class="exi"><span class="step">Step 1</span><h4>Exchange links</h4><p>Give your partner two links: your website and your repository.</p></div>
+      <div class="exi"><span class="step">Step 2</span><h4>Read the website</h4><p>Read it as a stranger would. Note the policy question, the data source, the figure, the alternatives, and the criteria.</p></div>
+      <div class="exi"><span class="step">Step 3</span><h4>Ask the agent to compare the website and the repository</h4>
+        <div class="code">Read my classmate's project website at SITE_URL and their GitHub repository at REPO_URL. In the repository, read the README, the data files, the scripts, and the instructions file (AGENTS.md or CLAUDE.md). Do not run any code. List every place where the website and the repository disagree. Check three things: whether the data source named on the website is recorded in the repository, whether each figure on the website is made by a script in the repository, and whether the README and the website state the same policy question. For each mismatch, name the web page and the file.<span class="copy">copy</span></div>
+        <ul>
+          <li>Replace SITE_URL and REPO_URL with your partner’s links.</li>
+          <li>Open each file the agent names. Check every claim against the file before you use it.</li>
+          <li>If the agent cannot open an address, check that part yourself in the browser.</li>
+        </ul></div>
+      <div class="exi"><span class="step">Step 4</span><h4>Write the feedback</h4><ul>
+        <li>List the mismatches you confirmed.</li>
+        <li>Add your comments on the problem, data, alternatives, and criteria.</li>
+        <li>One option is to post the feedback as an issue on your partner’s repository.</li>
+      </ul></div>
+    </div>
+    <div class="hands" data-for="replication">
+      <div class="exi"><span class="step">Step 1</span><h4>Open your partner’s project</h4><ul>
+        <li>A copy: unzip it into a new folder.</li>
+        <li>A shared cloud folder: open the shared folder.</li>
+        <li>GitHub: clone the repository into a new folder. In the terminal, run <code>git clone</code>. In the app, open the new folder as the project and ask the agent to clone the repository into it.</li>
+      </ul></div>
+      <div class="exi"><span class="step">Step 2</span><h4>Summarize the project</h4>
+        <div class="code">Read this project. Describe the policy question, the expected outputs, and the steps needed to reproduce the results. Identify the scripts and sources supporting the main finding. Do not change any files.<span class="copy">copy</span></div>
+        <p>Open each file the summary cites.</p></div>
+      <div class="exi"><span class="step">Step 3</span><h4>Run the commands in the README</h4>
+        <div class="code">Run the commands documented in the README, in order. Show me each command and its output. If a command fails, stop and explain the error. Do not edit any files to make a command work.<span class="copy">copy</span></div>
+        <ul>
+          <li>When a command fails, record the step and the error.</li>
+          <li>Note any information you had to infer.</li>
+        </ul></div>
+      <div class="exi"><span class="step">Step 4</span><h4>Check the findings and conclusions</h4><ul>
+        <li>Compare the reproduced outputs with the reported findings.</li>
+        <li>Check the evidence behind the policy alternatives and the recommendation.</li>
+        <li>Identify one claim or comparison that needs revision.</li>
+      </ul></div>
+      <div class="exi"><span class="step">Step 5</span><h4>Write notes for your partner</h4><p>Write short notes and give them to your partner. Cover five points:</p><ul>
+        <li>what ran,</li>
+        <li>what failed, with the error,</li>
+        <li>what you had to infer,</li>
+        <li>which conclusions the evidence supports,</li>
+        <li>one suggested revision.</li>
+      </ul></div>
+      <div class="exi"><span class="step">Step 6</span><h4>Fix your own project</h4><p>Read the notes your partner wrote about your project. Fix the code or documentation they point to. Rerun the affected analysis and commit the changes.</p></div>
+    </div>
+    <div class="hands" data-for="task">
+      <div class="exi"><span class="step">Step 1 · owner</span><h4>Write the task description</h4><p>In your own project, ask your agent for a draft:</p>
+        <div class="code">Read this project’s instructions file and README. Draft a task description for a classmate who has never seen this project. The task is: [describe the task]. State what to do, which files to use, which files not to touch, and what finished looks like. Save it as TASK.md. Do not change any other file.<span class="copy">copy</span></div>
+        <p>Edit the draft yourself. Share it with your partner by your chosen method.</p></div>
+      <div class="exi"><span class="step">Step 2 · helper</span><h4>Ask the agent for a plan</h4><p>In your partner’s project, start a new session and ask your agent:</p>
+        <div class="code">Read the instructions file, the README, and TASK.md in this project. Before you edit anything, state your plan: which files you will read, which files you will change, and how you will check that the task is finished. List anything these files leave unclear.<span class="copy">copy</span></div>
+        <p>Read the plan before you let the agent start. On GitHub, ask the agent to create a branch for the task first.</p></div>
+      <div class="exi"><span class="step">Step 3 · helper</span><h4>Do the task</h4>
+        <div class="code">Do the task in TASK.md. Keep a list of every point where the instructions file, README, or task description did not tell you what to do, and what you assumed. Show me the list when you finish.<span class="copy">copy</span></div>
+        <p>Add your own points to the list: where you got stuck and where you had to guess.</p></div>
+      <div class="exi"><span class="step">Step 4 · both</span><h4>Discuss the guesses and return the work</h4><ul>
+        <li>Go through the list of guesses together.</li>
+        <li>Return the work by your chosen method. On GitHub, ask the agent to commit on the branch and push it. Then <a href="https://docs.github.com/articles/creating-a-pull-request">open a pull request</a> and paste the list of guesses into its description.</li>
+      </ul></div>
+      <div class="exi"><span class="step">Step 5 · owner</span><h4>Review your partner’s changes</h4>
+        <div class="code">My partner changed this project for the task in TASK.md. Show me the diff, file by file. For each change, check whether it follows the task description and the instructions file. Do not commit anything.<span class="copy">copy</span></div>
+        <p>On GitHub, <a href="https://docs.github.com/en/pull-requests/how-tos/review-pull-requests/reviewing-proposed-changes-in-a-pull-request">review the pull request</a> on its page. Decide whether to accept the change.</p></div>
+      <div class="exi"><span class="step">Step 6 · owner</span><h4>Fill the gaps in your files</h4>
+        <div class="code">My partner got stuck or guessed at these points: [paste the list]. For each point, propose an addition to the instructions file or the README that would have answered it. Show me the proposed text before you edit.<span class="copy">copy</span></div>
+        <p>Accept the additions you agree with. Commit and push.</p></div>
+    </div>
+  </aside>
+
+</div>
+
+<script>
+  const sections=[...document.querySelectorAll('main section')];
+  const panels=[...document.querySelectorAll('.hands')];
+  const railhead=document.getElementById('railhead');
+  function show(key){
+    panels.forEach(p=>p.classList.toggle('on',p.dataset.for===key));
+    railhead.style.display = key==='none' ? 'none' : '';
+  }
+  addEventListener('scroll',()=>{
+    let cur=sections[0];
+    sections.forEach(s=>{const t=s.getBoundingClientRect().top; if(t<window.innerHeight*0.35) cur=s;});
+    show(cur.dataset.hands);
+  },{passive:true});
+  show('none');
+  const links=[...document.querySelectorAll('.toc a')];
+  addEventListener('scroll',()=>{
+    let cur=null;
+    links.forEach(a=>{const el=document.querySelector(a.getAttribute('href'));
+      if(el && el.getBoundingClientRect().top<140)cur=a;});
+    links.forEach(a=>a.classList.toggle('active',a===cur));
+  },{passive:true});
+  document.addEventListener('click',e=>{
+    if(!e.target.classList.contains('copy'))return;
+    const x=e.target.parentNode.childNodes[0].textContent.trim();
+    navigator.clipboard.writeText(x).then(()=>{e.target.textContent='copied';
+      setTimeout(()=>e.target.textContent='copy',1200);});
+  });
+</script>
+</body>
+</html>
